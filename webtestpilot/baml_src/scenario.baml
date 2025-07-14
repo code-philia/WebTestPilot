@@ -1,12 +1,12 @@
-class Intent {
+class Step {
   condition string
-  step string
+  action string
   expectation string
 }
 
 class Scenario {
   name string
-  steps Intent[]
+  steps Step[]
 }
 
 function ExtractScenario(description: string) -> Scenario {
@@ -27,3 +27,22 @@ function ExtractScenario(description: string) -> Scenario {
   "#
 }
 
+function ImplicitGeneration(scenario: Scenario) -> Scenario {
+  client "openai/gpt-4o"
+  prompt #"
+    You are an expert in semantic intent understanding for web application testing.
+    Fill in the <unknown> blanks by inferring contextual information from other steps.
+    Return in the same format.
+
+    {{ scenario }}
+  "#
+}
+
+test bookstack {
+  functions [ExtractScenario]
+  args {
+    description #"
+    The user goes to the Books page from the dashboard and opens the book creation form by clicking the Create New Book link then focuses on the Name textbox.
+    "#
+  }
+}
