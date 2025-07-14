@@ -1,0 +1,15 @@
+--- ./views/shelves/delete.blade.php	2025-07-09 15:01:07.721925212 +0800
++++ ./bug_views/shelves/delete.blade.php	2025-07-09 15:41:39.227043738 +0800
+@@ -22,11 +22,7 @@
+                 <p class="text-neg">
+                     <strong>{{ trans('entities.shelves_delete_confirmation') }}</strong>
+                 </p>
+-
+-                <form action="{{ $shelf->getUrl() }}" method="POST" class="text-right">
+-                    {!! csrf_field() !!}
+-                    <input type="hidden" name="_method" value="DELETE">
+-
++                <form action="{{ $shelf->getUrl('/edit') }}" method="GET" class="text-right">
+                     <a href="{{ $shelf->getUrl() }}" class="button outline">{{ trans('common.cancel') }}</a>
+                     <button type="submit" class="button">{{ trans('common.confirm') }}</button>
+                 </form>

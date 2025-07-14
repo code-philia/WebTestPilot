@@ -1,0 +1,12 @@
+[project]
+name = "webtestpilot-dataset"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.53.0",
+    "pytest>=8.4.1",
+    "pytest-playwright>=0.7.0",
+    "pytest-xdist>=3.6.1",
+]

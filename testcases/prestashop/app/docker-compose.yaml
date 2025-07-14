@@ -1,0 +1,26 @@
+services:
+  app:
+    image: prestashop/prestashop:latest
+    ports:
+      - "8001:80"
+    environment:
+      - PS_DEV_MODE=1
+      - PS_INSTALL_AUTO=1
+      - PS_FOLDER_ADMIN=admin-dev
+      - PS_DOMAIN=49.232.8.242:8001     # here is the ip address of the server
+      - ADMIN_MAIL=admin@admin.com      # here is the email address of the admin,you can change it 
+      - ADMIN_PASSWD=admin12345         # here is the password of the admin ,you can change it 
+      - DB_SERVER=db
+      - DB_USER=root
+      - DB_PASSWD=root
+      - DB_NAME=prestashop
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root

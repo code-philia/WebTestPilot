@@ -1,0 +1,412 @@
+,,
+►,TC-1-P :: Registration,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/,"The site's home page is displayed on the ""Postmill"" tab.
+In the header you can also see: 
+- 4 other available tabs: Forums, Wiki, Login and Register.
+- a search field
+The ""Postmill"" page contains: Submissions (underlined), Comments, a default filter on ""Featured"" and a default sort on ""Hot""."
+2,Click on Sign Up,"A ""Sign Up"" title page appears.
+It contains:
+A mandatory ""Username"" field, followed by a sentence indicating the characters allowed.
+A ""Password"" field followed by another field pasted below ""(repeat)"" followed by a sentence indicating the expected characteristics.
+An optional e-mail address field followed by a sentence indicating that it will only be used to reset the password
+A srign up button"
+3,"Find a new unknown identifier, and enter this username and a password to be repeated twice.",The password is hidden.
+4,Click on Sign up,"
+Registration works
+The Postmill screen reappears.
+There's a ""Your account has been registered"" message at the bottom of the screen.
+The header still has the Postmill, Forums and Wiki tabs, as well as the search field. 
+The login and register tabs are replaced by a notification tab represented by an ""envelope"", a ""Submit"" tab and a tab with the account name (the username used)."
+5,"Click on the account name dropdown menu and select ""Log out"".","The site's home page is displayed on the ""Postmill"" tab.
+In the header you can also see: 
+- 4 other available tabs: Forums, Wiki, Login and Sign Up
+- a search field
+The ""Posmill"" page contains: Submissions (underlined), Comments, a default filter on ""Featured"" and a default sort on ""Hot""."
+6,"Go to the login page
+Enter your account details and click on Login","The connection works.
+The postmill tab with the created user account is displayed"
+7,"Click on the account name and select ""My account"".","The user account page appears.
+It has a form to change credentials:
+ - username
+ - password
+ - email address
+And below a button to delete the account"
+8,"Click on ""Delete this account"".","The delete account page appears.
+It warns users of the consequences of deleting their account.
+It has a confirm username text input and a confirmation checkbox to make sure users know what they are doing."
+9,"Fill the chosen username, check the checkbox and submit the form","The site's home page is displayed on the ""Postmill"" tab.
+In the header you can also see: 
+- 4 other available tabs: Forums, Wiki, Login and Register
+- a search field
+The ""Posmill"" page contains: Submissions (underlined), Comments, a default filter on ""Featured"" and a default sort on ""Hot""."
+,,
+►,TC-2-P :: Registration - Errors,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/,"The site's home page is displayed on the ""Postmill"" tab.
+In the header you can also see: 
+- 4 other available tabs: Forums, Wiki, Login and Register
+- a search field
+The ""Posmill"" page contains: Submissions (underlined), Comments, a default filter on ""Featured"" and a default sort on ""Hot""."
+2,Click on Sign Up,"A ""Sign Up"" title page appears.
+It contains:
+A mandatory ""Username"" field, followed by a sentence indicating the characters allowed.
+A ""Password"" field followed by another field pasted below ""(repeat)"" followed by a sentence indicating the expected characteristics.
+An optional e-mail address field followed by a sentence indicating that it will only be used to reset the password
+A srign up button"
+3,"Enter ""MarvelsGrantMan136"" as identifier",The identifier is displayed
+4,Enter a password for the prerequisite account,"The password is added, but it is not possible to see it. Each character is represented by a dot."
+5,Enter the same password in the Repeat field,Same behaviour as for the first password field
+6,"Click on ""Sign up""","Registration does not work.
+The screen is reset with a message above the user field ""this value is already used""."
+7,"Enter a login that does not yet exist, then click on the ""Register"" button.","The page displayed remains unchanged except for the password field, which is framed in red.
+Password field selected"
+8,"Enter only the password field with a valid password, then click on ""Register"".","The page displayed remains the same, except that the ""Repeat"" password field is framed in red.
+Password field selected"
+9,"Enter a pair of invalid passwords such as ""Yahou15"" (7 characters) then click on Register","Password fields are empty.
+A message ""This value is too short. It should have 8 characters or more."" is displayed."
+10,Enter 2 different valid passwords and click on Register,"Password fields are cleared.
+An ""This value is not valid"" message is displayed."
+11,"Enter the same valid passwords and an invalid e-mail address (e.g. ""plop@123."") then click on Register","Registration is not complete.
+The page information is still present
+A message asking you to enter a valid address is displayed."
+12,"Delete the information in the e-mail address field and click on ""Register"".",Registration works
+,,
+►,TC-3-P :: Profile,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,Click on the header dropdown menu with the account name,"A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+3,"Click on ""Profile""","A Page with a list of posts is displayed
+It contains, under the header, 3 tabs:
+- Overview
+- Submissions
+- Comments
+The Overview tab is the one displayed"
+4,"Click on ""Overview"" and ""Submissions"".",Tabs displayed correctly
+,,
+►,TC-4-P :: Account,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and click on Sign Up,"A ""Sign Up"" title page appears.
+It contains:
+A mandatory ""Username"" field, followed by a sentence indicating the characters allowed.
+A ""Password"" field followed by another field pasted below ""(repeat)"" followed by a sentence indicating the expected characteristics.
+An optional e-mail address field followed by a sentence indicating that it will only be used to reset the password
+A sign up button"
+2,"Find a new unknown identifier, and enter this username and a valid password to be repeated twice.",The identifier is displayed
+3,Enter valid e-mail address for prerequisites,The e-mail address is correct
+4,Click on sign up,"Registration works
+The Postmill screen reappears.
+There's a ""Your account has been created"" message at the bottom of the screen.
+The header still has the Postmill, Forums and Wiki tabs, as well as the search field. 
+The login and register tabs are replaced by a notification tab represented by an ""envelope"", a ""Post"" tab and a tab with the account name (the username used)."
+5,"Click on the header ""button"" with the account name","A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+6,"Click on ""My account""","An ""Editing user John_Le_Duc"" page is displayed.
+It contains 
+- Credentials (username, new password (with confirmation) and e-mail address, all of which can be modified)
+- A ""Save changes"" button
+- A ""Delete account"" section with a ""Delete this account"" button"
+7,Change user name and confirm,"The page title is updated with the new account name
+A message indicating that the account has been updated is displayed""."
+8,Log out and log back in with new credentials,"The Postmill tab is displayed, the user is logged in with the new credentials"
+9,"Return to ""My account"" and delete the account","A ""Delete account"" page is displayed, showing the actions involved in deleting the account.
+A message indicating that a deletion is definitive is also displayed."
+10,"Fill in the account details, validate the checkbox and click on the delete button.","Return to the ""Postmill"" page while not logged in.
+A message indicating account deletion is displayed"
+11,Login with delete account,"Connection failure with ""Invalid credentials"" message"
+,,
+►,TC-5-P :: Settings,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Click on the header ""button"" with the account name","A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+3,"Click on ""User Settings""","A ""Editing user settings for MarvelsGrantMan136"" title page is displayed.
+It contains several sections:
+- General
+- Posting
+- Notifications
+- Privacy
+- Appearance
+and a ""Save changes"" button"
+4,"In the ""General"" section, select ""New"" in Home Page instead of ""Hot"" (or vice versa), then click on the ""Save changes"" button.","The page remains displayed.
+A message confirming that the changes have been taken into account is displayed."
+5,"Go to ""Postmill"" page","In the rightmost tab, the value chosen (New or Hot) in the previous step is displayed."
+,,
+►,TC-6-P :: Blocking list,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Click on the header ""button"" with the account name","A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+3,Click on block list,"The ""Block list"" page showing blocked users is displayed.
+A message indicating the effect of blocking is displayed.
+A toolbox with ""Hidden forums"" and ""Trash"" is also present."
+,,
+►,TC-7-P :: Dark mode,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Click on the header ""button"" with the account name","A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+3,Click on Dark mode,Display switches to Dark mode (black instead of white as background color)
+4,"Click on the header ""button"" with the account name","The list now shows ""Light mode"" instead of ""Dark mode""."
+5,Click on Light mode,Display switches to Light mode (white instead of black as background color)
+,,
+►,TC-8-P :: Submission,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create submission button"
+3,Fill in the title field with: The tester's tavern,The title is filled in
+4,"Select ""science"" in Forum, then click on ""Create submission"".","The post is created
+A page is displayed with the post and below the comments"
+5,Add a comment and confirm,The comment is added
+6,Delete the comment and submission,The page is redirected to the /f/science forum
+,,
+►,TC-9-P :: Post with URL,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Click on the header ""button"" with the account name","A list is displayed.
+It contains:
+- Profile
+- My Account
+- User Settings
+- Block list
+- Dark mode
+- Logout"
+3,"Clik on ""User setting"" in the user dropdown menu","A page ""Editing user setting"" is displayed"
+4,"In the ""General"" section, select ""Open The linked content"" for ""when clicking submission links..."" option, then save.","The page remains displayed.
+A message confirming that the changes have been taken into account is displayed."
+5,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create a post button"
+6,Enter the following in the URL field: https://latavernedutesteur.fr/ ,The URL is filled in
+7,Fill the title field with: La taverne du testeur URL,The title is filled in
+8,"Select ""science"" in Forum, then click on ""Create a post"".","The post is created
+A page is displayed with the post and below the comments"
+9,Click on the post title,The Tester's Tavern blog page is displayed
+10,Return to the previous page,The submission about the Tester's Tavern URL is displayed
+11,Delete the submission,The page is redirected to the /f/science forum
+12,"Click on the header ""button"" with the account name and click on ""User settings""",The user setting page is displayed
+13,"In the ""General"" section, select ""Open the submission"" for ""when clicking submission links..."" option, then save.","The page remains displayed.
+A message confirming that the changes have been taken into account is displayed."
+,,
+►,TC-10-P :: Post blocked,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/and click on Sign Up,"A ""Sign Up"" title page appears.
+It contains:
+A mandatory ""Username"" field, followed by a sentence indicating the characters allowed.
+A ""Password"" field followed by another field pasted below ""(repeat)"" followed by a sentence indicating the expected characteristics.
+An optional e-mail address field followed by a sentence indicating that it will only be used to reset the password
+A srign up button"
+2,Create and enter an unkown identifier,The identifier is displayed
+3,Enter a password that complies with the indicated rules,"The password is added, but it is not possible to see it. Each status character is represented by a dot."
+4,Enter the same password in the Repeat field,Same behaviour as for the first password field
+5,Enter valid e-mail address for prerequisites,The e-mail address is correct
+6,Click on sign up,"Registration works
+The Postmill screen reappears.
+There's a ""Your account has been created"" message at the bottom of the screen.
+The header still has the Postmill, Forums and Wiki tabs, as well as the search field. 
+The login and register tabs are replaced by a notification tab represented by an ""envelope"", a ""Post"" tab and a tab with the account name (the username used)."
+7,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create a post button"
+8,Fill in the title field with: The tester's tavern,The title is filled in
+9,"Select ""science"" in Forum, then click on ""Create submission"".",The Tester's Tavern blog page is displayed
+10,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create a post button"
+11,Fill in the title field with: The tester's tavern 2,The title is filled in
+12,"Select ""science"" in Forum, then click on ""Create submission"".",The Tester's Tavern 2 blog page is displayed
+13,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create a post button"
+14,Fill in the title field with: The tester's tavern 3,The title is filled in
+15,"Select ""science"" in Forum, then click on ""Create submission"".",The Tester's Tavern 3 blog page is displayed
+16,"Click on the ""Submit"" tab","the ""Create submission"" page appears. It contains:
+- a URL / Image field
+- A title (mandatory)
+- A body with ""Markdown allowed"" below and a link to syntax references
+- A mandatory ""Forum"" drop-down list
+- A create a post button"
+17,Fill in the title field with: The tester's tavern 4,The title is filled in
+18,"Select ""science"" in Forum, then click on ""Create submission"".",An error message indicating that you can no longer post is displayed
+,,
+►,TC-11-P :: Forum,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+1,Go to the Forums tab,"A page with the title ""list of forums"" is displayed. It contains:
+Forums"", ""Tags"" and ""Alphabetical"" tabs.
+The list is displayed by 25, beyond that there is a pagination"
+2,Search for the AskReddit  forum,"This forum is present in the page with a ""subscribe"" button like the other forums"
+3,"Click on the ""Tags"" tab","A specific page with the title ""Tags"" is displayed"
+4,Click on Alphabetical,"A page with the title ""All forums"" is displayed.
+It contains all the forum names sorted by letter"
+5,Click on a forum name on the page,The forum page opens
+,,
+►,TC-12-P :: Creating a forum,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,Go to the Forum tab,"A page with the title ""list of forums"" is displayed. It contains:
+Forums"", ""Tags"" and ""Alphabetical"" tabs.
+The list is displayed by 25, beyond that there is a pagination"
+3,"Click on the ""Create forum"" button","A ""Create new forum"" page is displayed.
+It contains:
+- a mandatory name field
+- a mandatory title field
+- A mandatory description field
+- a sidebar field with, as for the ""Post body"" field, a markdown below it
+An optional Tags field
+- A create forum button"
+4,"Enter the information with typical forum value and click on the ""Create forum"" button","The forum is created
+Its dedicated page is displayed"
+5,"Click on ""Delete Forum""","A delete forum confirmation page is displayed.
+It asks the user to confirm by entering the name of the forum"
+6,"Enter the name of the forum, check the confirmation box and delete it",The Postmill tab is displayed
+,,
+►,TC-13-P :: Wiki - creating a new page,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Go to the ""Wiki"" tab","A page with the wiki title is displayed
+It contains the title Page not found with a Create this page button under it
+It also contains 1 sections on the right:
+- Navigation with: All pages, Recent changes and ""Create new page""."
+3,"Click on ""Create this page""","A page with the title ""Create a new page"" is displayed.
+It contains:
+- a mandatory URL field pre-filled with ""index"" and non-modifiable
+- a mandatory title field
+- a mandatory ""Body"" field with ""Mardown allowed. Syntax reference +"" below, as for other forms
+- A save button"
+4,"Create values to fill in the fields and click on ""Save"".","A page with the wiki title is displayed
+It contains under the title: 
+- information from the index page
+It also contains 3 sections on the right:
+- Index 
+- Toolbox with Edit page and Page history
+- Navigation with: All pages, Recent changes and ""Create new page""."
+,,
+►,TC-14-P :: Wiki - Modify page,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Go to the ""Wiki"" tab","A page with the wiki title is displayed
+It contains the title Page not found with a Create this page button under it
+It also contains 1 sections on the right:
+- Navigation with: All pages, Recent changes and ""Create new page""."
+3,"Click on ""Create this page""","A page with the title ""Create a new page"" is displayed.
+It contains:
+- a mandatory URL field pre-filled with ""index"" and non-modifiable
+- a mandatory title field
+- a mandatory ""Body"" field with ""Mardown allowed. Syntax reference +"" below, as for other forms
+- A save button"
+4,"Create values to fill in the fields and click on ""Save"".","A page with the wiki title is displayed
+It contains under the title: 
+- information from the index page
+It also contains 3 sections on the right:
+- Index 
+- Toolbox with Edit page and Page history
+- Navigation with: All pages, Recent changes and ""Create new page""."
+5,"Click on ""Edit page"".","An index title page is displayed
+It contains:
+- a mandatory title field pre-filled with the page title
+- A mandatory ""Body"" field with ""Mardown allowed. Syntax reference +"" underneath, as with other forms, and pre-filled with the initial content.
+- A save button"
+6,"Make changes and click on the ""Save"" button","The modified page is displayed with the changes made.
+The ""Index"" field indicates that a modification has just been made."
+,,
+►,TC-15-P :: Wiki - all pages,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"Go to the ""Wiki"" tab","A page with the wiki title is displayed
+It contains the title Page not found with a Create this page button under it
+It also contains 1 sections on the right:
+- Navigation with: All pages, Recent changes and ""Create new page""."
+3,"Click on ""Create this page""","A page with the title ""Create a new page"" is displayed.
+It contains:
+- a mandatory URL field pre-filled with ""index"" and non-modifiable
+- a mandatory title field
+- a mandatory ""Body"" field with ""Mardown allowed. Syntax reference +"" below, as for other forms
+- A save button"
+4,"Create values to fill in the fields and click on ""Save"".","A page with the wiki title is displayed
+It contains under the title: 
+- information from the index page
+It also contains 3 sections on the right:
+- Index 
+- Toolbox with Edit page and Page history
+- Navigation with: All pages, Recent changes and ""Create new page""."
+5,"Click on ""all pages""","A page with the title ""All pages"" is displayed.
+It shows a table with all the pages.
+The 1st column of the table is the path
+The 2nd column is the ""Page title"".
+In the ""Navigation"" insert: All Pages, Recent Changes and Create New Page are present."
+,,
+►,TC-16-P :: 1st Comment - no URL,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"From the Postmill page find posts with the ""All"" filter",Posts without URLs are present
+3,Click on the title of a post without URL,The post page opens with a comment field
+4,"Add a comment and click on ""Post"".","The Post is displayed with the comment made and the possibility to ""reply"", create a Permalink, delete or modify it."
+5,Delete the newly created comment,The comment disappeared from the list of comments
+,,
+►,TC-17-P :: reply to comment - no URL,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"From the Postmill page find posts with the ""All"" filter",Posts without URL and with comments from another account are present
+3,Click on the title of a post without URL and with comments,"The post page opens with a comment field and the previous comment(s).
+You can create a permalink or reply to existing comments."
+4,"Reply to a comment and click on ""Post"".","The Post is displayed with the comment made and the possibility to ""reply"", create a Permalink, delete or modify it."
+5,Click on reply to a comment,"A text field (with the info below Markdown) is displayed, with a ""Post"" button below it."
+6,"Enter an answer and click on ""Post"".","The Post is displayed with the reply to the comment made and the option to ""reply"", create a Permalink, delete or modify it."
+7,Delete the reply that were just created,The reply disappeared from the list of comments
+,,
+►,TC-18-P :: Comment URL,
+#,Actions,Expected Result
+1,Go to the site http://www.vtaas-benchmark.com:9999/ and log in with account MarvelsGrantMan136 / test1234,The Postmill tab is displayed
+2,"From the Postmill page find posts with the ""All / Most commented / All time"" filter",Posts with URLs are present
+3,"Click on the text ""X comment(s)"" of a post with URL where X is the number of comments in the post.","The post is displayed with all its comments, if any.
+A ""Comments"" field for creating a new comment and a ""Post"" button are available."

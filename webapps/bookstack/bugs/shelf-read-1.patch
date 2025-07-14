@@ -1,0 +1,17 @@
+--- ./views/shelves/parts/list-item.blade.php	2025-07-09 15:01:07.721925212 +0800
++++ ./bug_views/shelves/parts/list-item.blade.php	2025-07-09 15:53:22.477645418 +0800
+@@ -1,4 +1,4 @@
+-<a href="{{ $shelf->getUrl() }}" class="shelf entity-list-item" data-entity-type="bookshelf" data-entity-id="{{$shelf->id}}">
++<a href="#" class="shelf entity-list-item" data-entity-type="bookshelf" data-entity-id="{{$shelf->id}}">
+     <div class="entity-list-item-image bg-bookshelf @if($shelf->image_id) has-image @endif" style="background-image: url('{{ $shelf->getBookCover() }}')">
+         @icon('bookshelf')
+     </div>
+@@ -12,7 +12,7 @@
+ <div class="entity-shelf-books grid third gap-y-xs entity-list-item-children">
+     @foreach($shelf->visibleBooks as $book)
+         <div>
+-            <a href="{{ $book->getUrl('?shelf=' . $shelf->id) }}" class="entity-chip text-book">
++            <a href="#" class="entity-chip text-book">
+                 @icon('book')
+                 {{ $book->name }}
+             </a>

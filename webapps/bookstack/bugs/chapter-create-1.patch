@@ -1,0 +1,11 @@
+--- ./views/books/show.blade.php	2025-07-09 16:35:51.351875212 +0800
++++ ./bug_views/books/show.blade.php	2025-07-09 17:15:35.879890621 +0800
+@@ -50,7 +50,7 @@
+                             </a>
+                         @endif
+                         @if(userCan('chapter-create', $book))
+-                            <a href="{{ $book->getUrl('/create-chapter') }}" class="icon-list-item text-chapter">
++                            <a href="#" class="icon-list-item text-chapter">
+                                 <span class="icon">@icon('chapter')</span>
+                                 <span>{{ trans('entities.books_empty_add_chapter') }}</span>
+                             </a>

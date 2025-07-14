@@ -1,0 +1,12 @@
+--- ./views/users/parts/form.blade.php	2025-07-09 16:35:51.355875253 +0800
++++ ./bug_views/users/parts/form.blade.php	2025-07-09 19:03:41.323210630 +0800
+@@ -39,9 +39,6 @@
+ <div>
+     <label for="role" class="setting-list-label">{{ trans('settings.users_role') }}</label>
+     <p class="small">{{ trans('settings.users_role_desc') }}</p>
+-    <div class="mt-m">
+-        @include('form.role-checkboxes', ['name' => 'roles', 'roles' => $roles])
+-    </div>
+ </div>
+ 
+ @if($authMethod === 'standard')

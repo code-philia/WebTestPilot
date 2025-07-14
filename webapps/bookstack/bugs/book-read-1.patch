@@ -1,0 +1,8 @@
+--- ./views/books/parts/list-item.blade.php	2025-07-09 16:35:51.351875212 +0800
++++ ./bug_views/books/parts/list-item.blade.php	2025-07-09 16:38:52.205650851 +0800
+@@ -1,4 +1,4 @@
+-<a href="{{ $book->getUrl() }}" class="book entity-list-item" data-entity-type="book" data-entity-id="{{$book->id}}">
++<a href="/" class="book entity-list-item" data-entity-type="book" data-entity-id="{{$book->id}}">
+     <div class="entity-list-item-image bg-book" style="background-image: url('{{ $book->getBookCover() }}')">
+         @icon('book')
+     </div>

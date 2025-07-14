@@ -1,0 +1,43 @@
+--- ./views/chapters/show.blade.php	2025-07-09 16:35:51.351875212 +0800
++++ ./bug_views/chapters/show.blade.php	2025-07-09 17:22:56.002238555 +0800
+@@ -22,37 +22,15 @@
+     </div>
+ 
+     <main class="content-wrap card">
+-        <h1 class="break-text">{{ $chapter->name }}</h1>
++        <h1 class="break-text"></h1>
+         <div refs="entity-search@contentView" class="chapter-content">
+-            <div class="text-muted break-text">{!! $chapter->descriptionHtml() !!}</div>
+-            @if(count($pages) > 0)
+-                <div class="entity-list book-contents">
+-                    @foreach($pages as $page)
+-                        @include('pages.parts.list-item', ['page' => $page])
+-                    @endforeach
+-                </div>
+-            @else
++            <div class="text-muted break-text"></div>
+                 <div class="mt-xl">
+                     <hr>
+-                    <p class="text-muted italic mb-m mt-xl">{{ trans('entities.chapters_empty') }}</p>
+-
++                    <p class="text-muted italic mb-m mt-xl"></p>
+                     <div class="icon-list block inline">
+-                        @if(userCan('page-create', $chapter))
+-                            <a href="{{ $chapter->getUrl('/create-page') }}" class="icon-list-item text-page">
+-                                <span class="icon">@icon('page')</span>
+-                                <span>{{ trans('entities.books_empty_create_page') }}</span>
+-                            </a>
+-                        @endif
+-                        @if(userCan('book-update', $book))
+-                            <a href="{{ $book->getUrl('/sort') }}" class="icon-list-item text-book">
+-                                <span class="icon">@icon('book')</span>
+-                                <span>{{ trans('entities.books_empty_sort_current_book') }}</span>
+-                            </a>
+-                        @endif
+                     </div>
+-
+                 </div>
+-            @endif
+         </div>
+ 
+         @include('entities.search-results')

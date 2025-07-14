@@ -1,0 +1,10 @@
+--- ./views/settings/sort-rules/edit.blade.php	2025-07-09 16:35:51.355875253 +0800
++++ ./bug_views/settings/sort-rules/edit.blade.php	2025-07-09 19:21:14.847740019 +0800
+@@ -43,7 +43,6 @@
+                         @endif
+ 
+                         <div class="text-right">
+-                            <button type="submit" class="button outline">{{ trans('common.delete') }}</button>
+                         </div>
+                     </form>
+                 </div>

@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  app:
+    image: solidnerd/bookstack:25.2.1
+    depends_on:
+      - db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - APP_URL=http://localhost:${APP_PORT}
+      - APP_KEY=base64:F4hZhDJ4XTPq2i11SejFCd3DzLa7ARzVUo5+q4PN9og=
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=admin
+      - DB_PASSWORD=admin
+      - DB_DATABASE=bookstack
+    volumes:
+      - app_config:/config
+    ports:
+      - ${APP_PORT}:8080
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.4
+    environment:
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  app_config:
+    driver: local
+  db:
+    driver: local

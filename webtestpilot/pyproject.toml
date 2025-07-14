@@ -1,0 +1,11 @@
+[project]
+name = "webtestpilot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "baml-py>=0.201.0",
+    "openai>=1.95.1",
+    "pyyaml>=6.0.2",
+]
