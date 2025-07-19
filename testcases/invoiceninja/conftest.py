@@ -209,26 +209,35 @@ def create_product(
     logged_in_page.get_by_role("link", name="Products").first.click()
     logged_in_page.get_by_role("link", name="New Product").click()
 
+    # Name
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Item\*$")).get_by_role(
         "textbox"
     ).click()
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Item\*$")).get_by_role(
         "textbox"
     ).fill(product_name)
+    
+    # Description
     logged_in_page.locator('textarea[type="text"]').click()
     logged_in_page.locator('textarea[type="text"]').fill(test_data.product_description)
+    
+    # Price
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Price$")).get_by_role(
         "textbox"
     ).click()
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Price$")).get_by_role(
         "textbox"
     ).fill(test_data.product_price)
+    
+    # Default quantity
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Default Quantity$")
     ).get_by_role("textbox").dblclick()
     logged_in_page.locator("div").filter(
         has_text=re.compile(pattern=r"^Default Quantity$")
     ).get_by_role("textbox").fill(test_data.product_default_quantity)
+    
+    # Max quantity
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Max Quantity$")
     ).get_by_role("textbox").click()
@@ -255,21 +264,26 @@ def created_product_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 
 @pytest.fixture
 def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
+    # Data setup
     create_client(logged_in_page, test_data.company_name, test_data)
     create_product(logged_in_page, test_data.product_name + "1", test_data)
     create_product(logged_in_page, test_data.product_name + "2", test_data)
 
+    # Navigate
     logged_in_page.wait_for_timeout(1000)
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
     logged_in_page.get_by_role("link", name="New Invoice").click()
+    
+    # Choose client for invoice
     logged_in_page.get_by_test_id("combobox-input-field").click()
     logged_in_page.get_by_test_id("combobox-input-field").fill(test_data.company_name)
     logged_in_page.get_by_role("option", name=test_data.company_name).click()
 
+    # Invoice number
     logged_in_page.locator("#number").click()
     logged_in_page.locator("#number").fill(test_data.invoice_number)
 
-    # Add items
+    # Add invoice line items
     logged_in_page.get_by_role("button", name="Add Item").click()
     logged_in_page.get_by_role("row", name="$ 0.00").get_by_role(
         "textbox"
@@ -308,6 +322,7 @@ def created_payment_page(
         "Sent", timeout=5000
     )
 
+    # Navigate
     created_invoice_page.get_by_role("link", name="Payments").click()
     created_invoice_page.wait_for_timeout(500)
     created_invoice_page.get_by_role("link", name="Enter Payment").click()

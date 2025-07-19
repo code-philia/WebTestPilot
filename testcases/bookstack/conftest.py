@@ -333,9 +333,11 @@ def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -
     logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
     logged_in_page.get_by_role("link", name="Create Sort Rule", exact=True).click()
 
+    # Name
     logged_in_page.get_by_role("textbox", name="Name").click()
     logged_in_page.get_by_role("textbox", name="Name").fill(test_data.sort_rule_name)
 
+    # Sort rule configs
     logged_in_page.get_by_text("Configure the sort actions to").click()
     logged_in_page.get_by_role("listitem").filter(
         has_text="Name - Alphabetical (Asc)"
@@ -356,11 +358,16 @@ def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -
 
 @pytest.fixture
 def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+    # Navigate
     logged_in_page.get_by_role("link", name="Settings").click()
     logged_in_page.get_by_role("link", name="Roles").click()
     logged_in_page.get_by_role("link", name="Create New Role").click()
+    
+    # Name
     logged_in_page.get_by_role("textbox", name="Role Name").click()
     logged_in_page.get_by_role("textbox", name="Role Name").fill(test_data.role_name)
+    
+    # Description
     logged_in_page.get_by_role("textbox", name="Short Description of Role").click()
     logged_in_page.get_by_role("textbox", name="Short Description of Role").fill(
         test_data.role_description

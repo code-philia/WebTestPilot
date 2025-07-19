@@ -6,7 +6,7 @@ from bookstack.conftest import (
 )
 
 
-def test_global_sort(created_chapter_page: Page, test_data: BookStackTestData) -> None:
+def test_global_search(created_chapter_page: Page, test_data: BookStackTestData) -> None:
     created_chapter_page.goto(BOOKSTACK_HOST)
 
     created_chapter_page.get_by_role("textbox", name="Search").click()
