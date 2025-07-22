@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from random import randint
 
 import pytest
@@ -52,11 +53,72 @@ class IndicoTestData:
 
     @property
     def end_date(self) -> str:
-        return "22/07/2025"
+        # tomorrow's date in DD/MM/YYYY format
+        return (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y")
 
     @property
     def end_time(self) -> str:
         return "12"
+
+    @property
+    def conference_name(self) -> str:
+        return f"Conference{self._unique_id}"
+
+    @property
+    def conference_track_name(self) -> str:
+        return f"Track{self._unique_id}"
+
+    @property
+    def conference_track_group_name(self) -> str:
+        return f"Track group{self._unique_id}"
+
+    @property
+    def conference_track_code(self) -> str:
+        return f"T{self._unique_id}"
+
+    @property
+    def conference_track_description(self) -> str:
+        return f"Papers about{self._unique_id}"
+
+    @property
+    def conference_track_group_description(self) -> str:
+        return f"Many papers about{self._unique_id}"
+
+    @property
+    def email_notification_title(self) -> str:
+        return f"Email{self._unique_id}"
+
+    @property
+    def email_notification_rule_set(self) -> str:
+        return f"Notification rule{self._unique_id}"
+
+    @property
+    def session_type(self) -> str:
+        return f"Session type{self._unique_id}"
+
+    @property
+    def session_title(self) -> str:
+        return f"Session title{self._unique_id}"
+
+    @property
+    def session_title_updated(self) -> str:
+        return f"Session title updated{self._unique_id}"
+
+    @property
+    def session_description(self) -> str:
+        return f"Session description{self._unique_id}"
+
+    @property
+    def session_contribution_name(self) -> str:
+        return f"Session Contribution{self._unique_id}"
+
+    @property
+    def session_contribution_description(self) -> str:
+        return f"Description{self._unique_id}"
+
+    @property
+    def registration_form_name(self) -> str:
+        return "Registration Form"
 
 
 @pytest.fixture
@@ -112,6 +174,46 @@ def created_meeting_page(logged_in_page: Page, test_data: IndicoTestData) -> Pag
     # Name
     logged_in_page.get_by_role("textbox", name="Event title").fill(
         test_data.meeting_name
+    )
+
+    # End date
+    logged_in_page.locator("#event-creation-end_dt").get_by_role(
+        "textbox", name="DD/MM/YYYY"
+    ).click()
+    logged_in_page.locator("#event-creation-end_dt").get_by_role(
+        "textbox", name="DD/MM/YYYY"
+    ).fill(test_data.end_date)
+
+    # End time
+    logged_in_page.locator("#event-creation-end_dt").get_by_role(
+        "textbox", name="--:--"
+    ).click()
+    logged_in_page.get_by_role("button", name=test_data.end_time).first.click()
+
+    # Venue and Room
+    logged_in_page.get_by_role("textbox", name="Venue").click()
+    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
+    logged_in_page.get_by_role("textbox", name="Room").click()
+    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
+
+    # Event protection mode
+    logged_in_page.locator("#event-creation-protection_mode").get_by_text(
+        "Public"
+    ).click()
+
+    logged_in_page.get_by_role("button", name="Create event", exact=True).click()
+
+    return logged_in_page
+
+
+@pytest.fixture
+def created_conference_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+    logged_in_page.get_by_role("link", name="Create event ").click()
+    logged_in_page.get_by_role("link", name="Conference").first.click()
+
+    # Name
+    logged_in_page.get_by_role("textbox", name="Event title").fill(
+        test_data.conference_name
     )
 
     # End date
