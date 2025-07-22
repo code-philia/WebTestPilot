@@ -31,6 +31,10 @@ class IndicoTestData:
         return f"Meeting{self._unique_id}"
 
     @property
+    def meeting_minute_name(self) -> str:
+        return f"Meeting Minute{self._unique_id}"
+
+    @property
     def meeting_contribution_name(self) -> str:
         return f"Meeting Contribution{self._unique_id}"
 
