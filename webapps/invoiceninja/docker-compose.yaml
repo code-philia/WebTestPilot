@@ -1,8 +1,6 @@
-version: "3"
-
 services:
   app:
-    image: invoiceninja/invoiceninja:5.11.61
+    image: invoiceninja/invoiceninja-debian:5.11.61-d
     restart: unless-stopped
     env_file:
       - ./.env

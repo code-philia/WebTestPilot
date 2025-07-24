@@ -2,10 +2,10 @@ services:
   # The main Indico container which runs flask
   # The same image is also used to run celery
   web: &web
-    build: 
+    build:
       context: worker
       args:
-        tag: "3.3.6" 
+        tag: "3.3.6"
     command: /opt/indico/run_indico.sh
     depends_on:
       - redis
@@ -15,14 +15,15 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGDATABASE=${PGDATABASE}
-    ports: []
-     # Indico is accessible either via nginx (localhost:8080 by default), or
-     # directly via localhost:9090. In that case, static assets are served by flask
+    ports:
+      []
+      # Indico is accessible either via nginx (localhost:8080 by default), or
+      # directly via localhost:9090. In that case, static assets are served by flask
     volumes:
-      - 'archive:/opt/indico/archive' # file storage
-      - 'customization:/opt/indico/custom'
-      - 'static-files:/opt/indico/static'
-      - 'logs:/opt/indico/log' # logs
+      - "archive:/opt/indico/archive" # file storage
+      - "customization:/opt/indico/custom"
+      - "static-files:/opt/indico/static"
+      - "logs:/opt/indico/log" # logs
       - type: bind
         source: ${INDICO_CONFIG}
         target: /opt/indico/etc/indico.conf
@@ -48,7 +49,7 @@ services:
   redis:
     image: redis
     volumes:
-      - 'redis:/data'
+      - "redis:/data"
   # Postgres
   postgres:
     image: postgres:15-bookworm
@@ -57,16 +58,18 @@ services:
       - POSTGRES_PASSWORD=${PGPASSWORD}
       - POSTGRES_DATABASE=${PGDATABASE}
     volumes:
-      - 'postgres-data:/var/lib/postgresql/data'
+      - "postgres-data:/var/lib/postgresql/data"
   # Nginx proxy
   # Indico can be accessed by default via localhost:8080
   nginx:
     image: ghcr.io/nginxinc/nginx-unprivileged:stable-alpine
     ports:
       - "${NGINX_PORT:-8080}:8080"
+    depends_on:
+      - web
     volumes:
-      - 'static-files:/opt/indico/static:ro'
-      - './nginx.conf:/etc/nginx/conf.d/default.conf:ro'
+      - "static-files:/opt/indico/static:ro"
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf:ro"
 
 volumes:
   postgres-data:
