@@ -1,0 +1,243 @@
+{
+  "test": "test_update_sort_rules",
+  "app": "bookstack",
+  "collection": "sort",
+  "total_traces": 32,
+  "successful_traces": 27,
+  "failed_traces": 5,
+  "coverage_stats": {
+    "attempted_methods": [
+      "click",
+      "get_by_role",
+      "filter",
+      "goto",
+      "set_viewport_size",
+      "to_be_visible",
+      "fill"
+    ],
+    "successful_methods": [
+      "click",
+      "get_by_role",
+      "goto",
+      "set_viewport_size",
+      "to_be_visible",
+      "fill"
+    ],
+    "failed_methods": [
+      "filter"
+    ],
+    "missing_methods": [
+      "filter"
+    ],
+    "coverage_percentage": 85.71428571428571
+  },
+  "traces": [
+    {
+      "url": "about:blank",
+      "xpath": "PAGE",
+      "action": "set_viewport_size",
+      "action_type": "action"
+    },
+    {
+      "url": "about:blank",
+      "xpath": "PAGE",
+      "action": "goto",
+      "value": "http://localhost:8081/",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"header\"]/nav/div/a",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"email\"]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"email\"]",
+      "action": "fill",
+      "value": "admin@admin.com",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"password\"]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"password\"]",
+      "action": "fill",
+      "value": "password",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/login",
+      "xpath": "//*[@id=\"login-form\"]/div[2]/div[2]/button",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/",
+      "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
+      "action": "to_be_visible",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/",
+      "xpath": "//*[@id=\"header\"]/nav/div[1]/a[4]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/features",
+      "xpath": "//*[@id=\"main-content\"]/div/div/div[1]/nav/a[4]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting",
+      "xpath": "//*[@id=\"main-content\"]/div/div/div[2]/div[2]/div[1]/div[2]/a",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "fill",
+      "value": "Rule897406",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/p",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "LOCATOR_ERROR",
+      "action": "filter",
+      "action_type": "action",
+      "success": false,
+      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"listitem\") resolved to 11 elements:\n    1) <li class=\"text-muted empty-state px-m py-s italic text-small\">Drag/add operations from the \"Available Operation\u2026</li> aka get_by_text(\"Drag/add operations from the\")\n    2) <li data-id=\"name_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Alphabetical (Asc)\")\n    3) <li data-id=\"name_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Alphabetical (Desc)\")\n    4) <li data-id=\"name_numeric_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Asc)\")\n    5) <li data-id=\"name_numeric_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Desc)\")\n    6) <li data-id=\"created_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Asc)\")\n    7) <li data-id=\"created_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Desc)\")\n    8) <li data-id=\"updated_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Asc)\")\n    9) <li data-id=\"updated_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Desc)\")\n    10) <li data-id=\"chapters_first\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Chapters First\")\n    ...\n\nCall log:\n  - waiting for get_by_role(\"listitem\")\n"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/div/div[2]/ul/li[2]",
+      "action": "get_by_role",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/div/div[2]/ul/li[2]/div[3]/button[4]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "LOCATOR_ERROR",
+      "action": "filter",
+      "action_type": "action",
+      "success": false,
+      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"listitem\") resolved to 10 elements:\n    1) <li data-id=\"name_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"list\", name=\"Configured Operations\").get_by_role(\"listitem\")\n    2) <li data-id=\"name_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Alphabetical (Desc)\")\n    3) <li data-id=\"name_numeric_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Asc)\")\n    4) <li data-id=\"name_numeric_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Desc)\")\n    5) <li data-id=\"created_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Asc)\")\n    6) <li data-id=\"created_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Desc)\")\n    7) <li data-id=\"updated_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Asc)\")\n    8) <li data-id=\"updated_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Desc)\")\n    9) <li data-id=\"chapters_first\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Chapters First\")\n    10) <li data-id=\"chapters_last\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Chapters Last\")\n\nCall log:\n  - waiting for get_by_role(\"listitem\")\n"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/div/div[2]/ul/li[5]",
+      "action": "get_by_role",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/div/div[2]/ul/li[5]/div[3]/button[4]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/new",
+      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[2]/button",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting",
+      "xpath": "LOCATOR_ERROR",
+      "action": "filter",
+      "action_type": "action",
+      "success": false,
+      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Sort rule successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting",
+      "xpath": "/html/body/div[1]",
+      "action": "to_be_visible",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting",
+      "xpath": "//*[@id=\"main-content\"]/div/div/div[2]/div[2]/div[2]/div[4]/div[1]/a",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "fill",
+      "value": "Rule updated 897406",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "LOCATOR_ERROR",
+      "action": "filter",
+      "action_type": "action",
+      "success": false,
+      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"listitem\") resolved to 10 elements:\n    1) <li data-id=\"name_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Alphabetical (Asc)\")\n    2) <li data-id=\"created_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Asc)\")\n    3) <li data-id=\"name_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Alphabetical (Desc)\")\n    4) <li data-id=\"name_numeric_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Asc)\")\n    5) <li data-id=\"name_numeric_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Name - Numeric (Desc)\")\n    6) <li data-id=\"created_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Created Date (Desc)\")\n    7) <li data-id=\"updated_date_asc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Asc)\")\n    8) <li data-id=\"updated_date_desc\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Updated Date (Desc)\")\n    9) <li data-id=\"chapters_first\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Chapters First\")\n    10) <li data-id=\"chapters_last\" class=\"scroll-box-item items-center\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Chapters Last\")\n\nCall log:\n  - waiting for get_by_role(\"listitem\")\n"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "//*[@id=\"main-content\"]/div/div[1]/form/div[1]/div[2]/div/div[2]/ul/li[8]",
+      "action": "get_by_role",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "//*[@id=\"main-content\"]/div/div[1]/form/div[1]/div[2]/div/div[2]/ul/li[8]/div[3]/button[4]",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting/rules/5",
+      "xpath": "//*[@id=\"main-content\"]/div/div[1]/form/div[2]/button",
+      "action": "click",
+      "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/settings/sorting",
+      "xpath": "LOCATOR_ERROR",
+      "action": "filter",
+      "action_type": "action",
+      "success": false,
+      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Sort rule successfully updated\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
+    }
+  ]
+}

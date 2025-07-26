@@ -1,0 +1,50 @@
+This is the initial prompt:
+
+-----
+You are provided with the following inputs:
+
+<test_case>
+{test_case}
+</test_case>
+
+<current_step>
+{current_step}
+</current_step>
+
+<history>
+{history}
+</history>
+
+Plan for the current test step by following these instructions:
+
+1. Analyze the test step carefully. Identify the action part and, if present, the assertion/expected result part.
+
+2. Analyze the screenshot of the web application. Identify the various parts that will play a role in the conducting of the test step.
+
+3. Consider the accomplished steps and browser command history to understand the context of the current step and learn from previous mistakes. Identify any information that may influence your planning.
+
+4. Convert the test step into a sequence of Act and Assert statements. Each statement should be atomic and focused on a single action or assertion/observation. Use the following format:
+   act("action description")
+   assert("assertion description")
+
+5. Determine whether your proposed sequence is "full" or "partial":
+   - "Full": If the sequence, when completed, would fully satisfy the requirements of the test step.
+   - "Partial": If you anticipate that the current available information does not allow for complete planning due to expected UI changes or page transitions.
+
+Remember:
+- Be as specific and detailed as possible in your Act and Assert statements.
+- Consider the context provided by the accomplished steps and browser command history.
+- If the sequence is "partial," focus on the immediate actions and assertions that can be made with the current information.
+
+Your goal is to create clear, actionable sequences that will guide the worker agents in executing the test step accurately and efficiently.
+-----
+
+I need a followup prompt for the following cases:
+ - the sequence has been successfully executed but it was partial. The model needs now to generate another round (partial or not) toward completion of the test step
+  -  the sequence failed to execute, the model needs to either come up with a new sequence, or decide to stop the test case execution and assign a failed verdict. because the only way to recover would be to drift away too much from the test intent.
+
+The followup prompt integrates the execution report of each worker, to allow the model to make the right decision
+
+So, essentially, the model should just pursue its initial objective in case the partial sequence was successfully executed, and choose between assigning a failed verdict or proposing a new sequence in case the initial sequence failed.
+
+

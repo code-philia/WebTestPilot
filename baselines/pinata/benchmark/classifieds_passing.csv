@@ -1,0 +1,188 @@
+,,
+►,TC-1-P :: Perform a keyword search and sort results,
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,The homepage is displayed with the search field and category dropdown visible.
+2,"Enter ""motorcycles"" in the Keyword search field","The keyword ""motorcycles"" is entered in the search field."
+3,"Click on the ""Search"" button.","The search results page is displayed, showing listings containing the keyword ""motorcycles"" in the title or description."
+4,Verify the total number of listings found is displayed.,The total number of listings found is 114 on the results page
+5,"Sort the search results by ""Lower price first""","The listings are reordered, with the lowest-priced items appearing at the top."
+6,"Verify that each listing shows a title, thumbnail image, price, location, and date posted.",All listings contain these details in the grid view.
+,,
+►,"TC-2-P :: Combine keyword and category filters, then filter by price",
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,The homepage is displayed with the search field and category dropdown visible.
+2,"Enter ""speaker"" in the Keyword search field.","The keyword ""speaker"" is entered in the search field."
+3,"Select ""Musical instruments"" from the Category dropdown.","The category ""Musical instruments"" is selected from the dropdown menu."
+4,"Click on the ""Search"" button.","The search results page is displayed, showing listings that match both the keyword ""speaker"" and the ""Musical instruments"" category."
+5,Enter $200 in the Minimum Price field and $500 in the Maximum Price field.,The price range $200-$500 is entered in the price filter fields.
+6,"Click on the ""Apply"" button to filter results by price.",The search results are filtered to show only listings with prices between $200 and $500.
+7,"Verify that the filtered listings match the selected keyword, category, and price range.",Only listings with prices within the specified range and matching the keyword and category are displayed.
+,,
+►,"TC-3-P :: Login, search by keyword & category, choose an add, and leave a comment ",
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,"Home page OsClass loads with search bar, category dropdown, and ""Login"" option visible"
+2,"Click ""Login"" button",Login page appears with email and password fields
+3,"Enter email ""blake.sullivan@gmail.com"" and password ""Password.123"", check ""Remember me"", click ""Log in""","User is logged in, homepage reloads with ""My account"" and ""Logout"" options visible"
+4,"Enter ""camera"" in keyword field, select ""Photo + video"" category, click ""Search""",Search results page loads with camera listings
+5,"Choose ""Rochester (Pennsylvania)"" from location dropdown, click ""Apply""","Search results update to show camera listings in Rochester, Pennsylvania"
+6,"Click on ""Camera - Revere 8 mm"" listing on the top of the list","Detailed listing page opens showing item specifics, price ($20.00), and seller information"
+7,"Scroll to comment section, enter title ""Nice camera"" and comment ""Nice product"", click ""Send""","Comment submission successful, confirmation message appears"
+8,Look for comment approval notification,"Green notification bar appears stating ""Your comment has been approved"""
+9,Scroll through listing page to check if your comment is visible,"A comment ""Nice camera by Blake Sullivan"" is visible"
+10,"Delete the comment ""Nice camera by Blake Sullivant""",Comment list is empty
+,,
+,,
+►,"TC-4-P :: Login, search by keyword & category, choose an add, and leave a comment - updated",
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,"Home page OsClass loads with search bar, category dropdown, and ""Login"" option visible"
+2,"Click ""Login"" button",Login page appears with email and password fields
+3,"Enter email ""blake.sullivan@gmail.com"" and password ""Password.123"", check ""Remember me"", click ""Log in""","User is logged in, homepage reloads with ""My account"" and ""Logout"" options visible"
+4,"Enter ""camera"" in keyword field, select ""Photo + video"" category, then click ""Search""",Search results page loads with Photo + video listings
+5,"Enter ""Falls Church"" in City field, then click ""Apply""",Search results page loads with Photo + video Falls Church listings
+6,"Click on ""Nikon N50 Camera"" in the listing ","Detailed listing page opens showing item specifics, price ($30.00), and seller information"
+7,"Scroll to comment section, enter title ""Nice camera"" and comment ""Nice product"", click ""Send""","Green notification bar appears stating ""Your comment has been approved"""
+8,Scroll through listing page to check if your comment is visible,"A comment ""Nice camera by Blake Sullivan"" is visible"
+9,"Delete the comment ""Nice camera by Blake Sullivant""",Comment list is empty
+,,
+►,TC-5-P :: Create a new add - without image,
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,"Home page OsClass loads with search bar, category dropdown, and ""Login"" option visible"
+2,"Click ""Login"" button",Login page appears with email and password fields
+3,"Enter email ""blake.sullivan@gmail.com"" and password ""Password.123"", then click ""Log in""","User is logged in, homepage reloads with ""My account"" and ""Logout"" options visible"
+4,"Click ""Publish Ad""",The “Publish a listing” page appears.
+5,"Select ""Bikes"" in the Caterory dropdown.",Bikes category is selected.
+6,"Enter ""Motobecane all Carbon Fiber Shimano GRX equipped gravel bike"" in the Title field",
+7,"Enter ""Selling my gorgeous Motobecane Carbon Fiber gravel bike equipped with 1 x 11 Shimano GRX gravel group."" in the Description field",
+8,"Set price at 1,495.00","The price is visible at 1,495.00
+"
+9,"Select ""California"" in the Region dropdown",California is selected as region
+10,"Select ""San Francisco"" in the City dropdown",San Francisco is selected as city
+11,"Click on the ""Submit"" button","Green notification bar appears stating ""Your listing has been published"" and the new add is visible with two buttons ""Edit item"" and ""Delete"""
+12,"Click on the ""Delete"" button visible on the add",A pop-up window appears 
+13,"Click on the ""OK"" button in the pop-up","Green notification bar appears stating ""Your listing has been published"" and ""My listings"" page is displayed without the deleted add."
+,,
+►,TC-6-P :: Create a new add - with an image,
+#,Actions,Expected Result
+1,Start on the Homepage: http://www.vtaas-benchmark.com:9980/ ,"Home page OsClass loads with search bar, category dropdown, and ""Login"" option visible"
+2,"Click ""Login"" button",Login page appears with email and password fields
+3,"Enter email ""blake.sullivan@gmail.com"" and password ""Password.123"", then click ""Log in""","User is logged in, homepage reloads with ""My account"" and ""Logout"" options visible"
+4,"Click ""Publish Ad""",The “Publish a listing” page appears.
+5,"Select ""Bikes"" in the Caterory dropdonw.",Bikes category is selected.
+6,"Enter ""Motobecane all Carbon Fiber Shimano GRX equipped gravel bike"" in the Title field",
+7,"Enter ""Selling my gorgeous Motobecane Carbon Fiber gravel bike equipped with 1 x 11 Shimano GRX gravel group."" in the Description field",
+8,"Click on ""Click or Drop for upload images"" button, then upload the picture given in the next step",The loaded picture is visible
+9,"Select ""California"" in the Region dropdown",California is selected as region
+10,"Select ""San Francisco"" in the City dropdown",San Francisco is selected as city
+11,"Click on the ""Submit"" button","Green notification bar appears stating ""Your listing has been published"" and the new add is visible with two buttons ""Edit item"" and ""Delete"""
+12,"Click on the ""Delete"" button visible on the add",A pop-up window appears 
+13,"Click on the ""OK"" button in the pop-up","Green notification bar appears stating ""Your listing has been published"" and ""My listings"" page is displayed without the deleted add."
+,,
+►,TC-7-P :: Search by keyword  filter sort and share item - screen spare,
+#,Actions,Expected Result
+1,Open the webpage  http://www.vtaas-benchmark.com:9980/ on a half screen,
+2,"Login with valid credentials ""blake.sullivan@gmail.com"" / ""Password.123""",“My account” and ‘Logout’ appear at the top of the screen.
+3,"Enter ""toyota"" in the Keyword field the click on ""Search"" button",Results are displayed in a list
+4,"Sort by higher price first in the ""Sort by:"" drop-down menu
+",The list is ordered by advertised price: most expensive first. 
+5,Observe first element,"Title of the item should be displayed in blue. Price with 2 decimals should be displayed by showing US dollars symbol. A short description should be displayed terminating with ""…"""
+6,Click on the title of the first element,"The page should contain the title in the top. Price in currency USD dollars displayed
+Fields published date should be populated (date less or equal to today) Location should be displayed following the template City­, State, United States 
+Description is present
+Contact seller button is displayed
+Share button is displayed"
+7,Click on the small icon image of the right,The ad image is displayd full screen. 
+8,click on the browser's back arrow to exit the image,Item description page is available. Title is same as previous
+9,Click on contact seller,Contact publisher is shown mail and name
+10,Click on share,Formulary Send to a friend is displayed
+11,Logout,
+,,
+►,TC-8-P :: Search by categoy filter by city sort and share item,
+#,Actions,Expected Result
+1,Open the webpage  http://www.vtaas-benchmark.com:9980/ on full screen,
+2,"Login with valid credentials ""blake.sullivan@gmail.com"" / ""Password.123""",
+3,Search any category (ex Music Instruments),"In listing sections the results should be displayed in a list by default. Sorted by Newly listed.
+On the left part search criteria should remain displayed. Title of the page is The category"
+4,In criteria choose a US City (ex city from first element) and Apply,"Results are displayed in a list, title is Category name + US State"
+5,Logout,
+,,
+►,TC-9-P :: Search any item sorty by other then default (newly first) and after filter sort by remains the same - full screen,
+#,Actions,Expected Result
+1,Open the webpage  http://www.vtaas-benchmark.com:9980/ on full screen,
+2,"Login with valid credentials ""blake.sullivan@gmail.com"" / ""Password.123""",
+3,Search any category (ex Boats),"In listing sections the results should be displayed in a list by default. Sorted by Newly listed.
+On the left part search criteria are displayed. Title of the page is the selected category"
+4,In sort by click by other than Newly first (highest or lowest price),Results are displayed in a list
+5,Set minimum price to $1 and apply ,Results are displayed according the the sorted by prevousely selected (highest or lowest price). 
+,,
+►,TC-10-P :: Modify my listing,
+#,Actions,Expected Result
+1,Open the webpage  http://www.vtaas-benchmark.com:9980/,
+2,"Login with valid credentials ""blake.sullivan@gmail.com"" / ""Password.123""",
+3,Click on My account,My listings are displayed
+4,Edit first item by changing its description and save (Update button),Itm page with green military color line displays' Great! We've just updated your listing'
+5,Scroll down in description and verify the change,The description is updated with i've modified you.
+6,Go to Edit item and remove the change in description and save,Original description is available
+7,Logout,
+,,
+►,TC-11-P :: Search by icon,
+#,Actions,Expected Result
+1,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+2,"Select the last proposal from the search category drop-down menu, then launch the search.","The page for the chosen category appears with all the ads in ""List"" view."
+3,Open a new Chrome browser page,A Chrome browser page opens
+4,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+5,"In the ""All categories"" field, select the icon corresponding to the last proposal in the search category drop-down menu.",The page that appears is identical to that of the previous search.
+,,
+►,TC-12-P :: Keyword search,
+#,Actions,Expected Result
+1,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+2,"Select the first ad in the top right-hand corner of the ""Latest listings"" category",The selected product appears with the same title and price.
+3,Open a new Chrome browser page,A Chrome browser page opens
+4,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+5,"In the ""Keyword"" field, enter the title of the ad displayed on the other open page, then launch the search.","A page appears with all ads in ""List"" view"
+6,Apply a filter with a minimum and maximum price equal to the price of the ad displayed on the other open page.,The ad displayed on the other open page is in the updated listing
+,,
+►,TC-13-P :: Search by location and Share function,
+#,Actions,Expected Result
+1,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+2,"Select the first proposal in the ""All locations"" field","The page for the chosen location appears with all the ads in ""List"" view."
+3,Select the first ad,The ad page appears
+4,"Click on ""Share","The ""Send to a friend"" page appears"
+5,"Click on ""Send","An error message appears, listing all non-optional fields"
+6,"Complete the fields with :
+Blake for Your name field
+blake.sullivan@gmail.com for Your e-mail field
+Joe for Friend's name
+Joe.Titi@ for Friend's email address
+A gift idea? for The message field
+then click on ""Send"".",An error message stating that the friend's e-mail address is invalid appears
+7,"Replace friend's email address with ""Joe.Titi@gmail.com"" and Send","A green message ""We just sent your message to Joe"" is displayed"
+,,
+►,TC-14-P :: Send to a friend,
+#,Actions,Expected Result
+1,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+2,"Select the cheapest ad in the ""Latest listings"" category",The selected product appears with the same title and price.
+3,"Click on ""Share"".","The page ""Send to a friend"" is dispayed"
+,,
+►,TC-15-P :: Publish and delete an advertisement,
+#,Actions,Expected Result
+1,"Go to ""http://www.vtaas-benchmark.com:9980/""",The OsClass home page appears
+2,"Click on ""Publish Ad","The ""Publish a listing"" page appears"
+3,"Click on ""Publish"" button","An error message appears with all the following fields:
+- Title
+- Description
+- Region
+- Email address
+- Category"
+4,"Select the first proposal from the drop-down menu in the ""Category"" field",The error message no longer mentions the category
+5,"Enter the letter R in the ""Title"" field","The error message regarding the title has changed, saying that a minimum of 5 characters is required for the title."
+6,"Complete the content of the ""Title"" field with ""oman statue"".","The ""Title"" field is identical to ""Roman statue"" and the error message no longer mentions the title."
+7,"Enter the letter V in the ""Description"" field","The error message regarding the description has changed, saying that at least 10 characters are required for the description."
+8,"Write ""Very beautiful statue"" in the ""Description"" field",The error message no longer mentions the description
+9,"Select the second proposal from the drop-down menu in the ""Region"" field",Error message no longer mentions location
+10,"Write ""blake.sullivan@gmail.com"" for the email address",Error message disappears
+11,Publish,An error message asks you to choose a city
+12,Select the 3rd city from the drop-down menu and publish.,A message appears stating that the user is already known
+13,"Enter ""blake.sullivan@gmail.com"" in the E-mail field and ""Password.123"" as the password, then attempt to connect.","The ""Publish a listing"" page reappears, already completed with the information entered previously, except for the email address."
+14,Publish,The ad appears in the listing
+15,Delete ad,A warning popup appears
+16,Confirm deletion,Ad disappears from listing

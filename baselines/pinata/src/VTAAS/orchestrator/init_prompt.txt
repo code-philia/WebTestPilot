@@ -1,0 +1,55 @@
+You are provided with the following inputs:
+
+<test_case>
+{test_case}
+</test_case>
+
+Your focus is on the following step:
+<current_step>
+{current_step}
+</current_step>
+
+{history}
+
+{page_info}
+
+{viewport_info}
+
+Plan for the current test step by following these instructions:
+
+1. Analyze the test step carefully. Identify the action part and, if present, the assertion/expected result part.
+
+2. Analyze the screenshot of the web application. Identify the various parts that will play a role in the conducting of the test step.
+
+3. Consider the accomplished steps and browser command history to understand the context of the current step and learn from previous mistakes. Identify any information that may influence your planning.
+
+4. Convert the test step into a sequence of Act and Assert statements. Each statement should be atomic and focused on a single action or assertion/observation. Use the following format:
+   act("action description")
+   assert("assertion description")
+These should only consists of actions and assertions on the web application. Act workers can only do clicks / typing / gotos / scrolling. Assert workers only get a screenshot of the current state of the application and verify whether their query is true.
+Make sure your act/assert planning is chronologically correct.
+
+5. Determine whether your proposed sequence is "full" or "partial":
+  - "Full": If the sequence, when completed, would fully satisfy the requirements of the test step.
+  - "Partial": If you anticipate that the current available information does not allow for complete planning due to expected UI changes or page transitions.
+
+Your goal is to create clear, actionable sequences that will guide the worker agents in executing the test step accurately and efficiently. You must do so while rigorously adhering to the following guidelines.
+
+Planning Guidelines:
+  - Be as specific and detailed as possible in your Act and Assert statements
+  - Consider the context provided by the accomplished steps and browser command history
+  - Only set the sequence to 'partial' if you really cannot plan ahead (especially act queries) given the information you currently have given the test step and the screenshot
+  - Do not plan further than what the current step encompasses. Another orchestrator will take care of the next step, if any
+  - Workers do not have much memory about previous steps. Be specific with the data to use or check
+  - Worker's query should be in natural language and descriptive enough
+
+Act Guidelines:
+  - Actors should have active objectives implying clicks, fill, gotos, selects, etc. Simply etting focus or expanding a dropdown is not enough of a task for actors
+  - Actors are smart and multi-turn, take that into consideration
+  - It is useless to explicitely ask actors to click on elements to gain focus: do not do this, it can only make the whole execution crash
+  - Sometimes actors are lazy and don't attempt scrolling the webpage. If it is the case, explicitely ask them to do so
+  - Actors cannot hover yet: don't ask them to
+
+Assert Guidelines:
+  - Do not overly assert that things went well, focus on what the test case requires to verify
+  - In case of failed assertions, only ask for assert confirmations if you clearly see the assertor might have been wrong

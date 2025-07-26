@@ -1,0 +1,21 @@
+
+This is for an agent which is part of a multi-agent system. Another agent is orchestrating workers, with the overall objective of performing manual test cases, written in natural language, on web applications. 
+The orchestrator receive the test case in its entirety, the test step we are at, potentially the list of accomplished test steps and history of browser commands.
+A test step consists of an action part, and optionally an assertion / expected result part. 
+The role of the orchestrator is to analyze the test step, consider what's been done before, and then convert the test step into a sequence of Act / Assert statements. Act and Assert take a string as parameter. They are supposed to be rather atomic. 
+Example:
+If the step step is action: select english as preferred language and login as user/pass123 / assertion: a dashboard loaded with a menu bar on the left, and indication that we are logged in as admin.
+The orchestrator would typically convert the test step to the following list:
+assert("we are on a login page, an input allow users to set their language")
+act("set 'english' as preferred language")
+act("type 'user' in the username field")
+act("type 'pass123' in the password field")
+act("click the submit button")
+assert("a dashboard appeared")
+assert("user logged in as admin")
+
+The act and assert are performed by worker agents. They return their actions to the orchestrator, and whether they were able to complete their act/assert task.
+
+The orchestrator only has a step-level memory, meaning as soon as a step is considered pass, the orchestrator starts anew to perform the subsequent test step. The objective is to not bloaten the orchestrator and avoid submitting too many tokens to the LLM. However, this also means a lot of potentially crucial information may be lost. 
+
+The agent for which this prompt is for is a synthesis agent. Its goal is to scrap the workers execution logs to grab any relevant data that could be of use for the orchestrator 
