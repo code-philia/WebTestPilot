@@ -39,4 +39,4 @@ Automatically seeded, no action required.
 |indico|admin@admin.com|webtestpilot|
 |bookstack|admin@admin.com|password|
 |invoiceninja|user@example.com|password|
-|prestashop|demo@prestashop.com|prestashop_demo|
+|prestashop|admin@admin.com|admin12345|
