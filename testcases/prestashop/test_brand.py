@@ -33,6 +33,7 @@ def test_delete_brand(logged_in_page: Page, brand_data: dict) -> None:
     # by human
     row = page.get_by_role("row").filter(has_text=brand_data["name"])
     row.locator("a").nth(1).click()
+    page.wait_for_timeout(1000)
     page.get_by_role("link", name="delete Delete").click()
     page.get_by_role("button", name="Delete").click()
     expect(page.get_by_text("Successful deletion")).to_be_visible()

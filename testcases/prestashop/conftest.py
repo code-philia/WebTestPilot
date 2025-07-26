@@ -5,7 +5,7 @@ from playwright.sync_api import Page, expect
 
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
-    page.goto("http://49.232.8.242:8001/admin-dev/")
+    page.goto("http://49.232.8.242:8083/webtestpilot/")
     page.get_by_role("textbox", name="Email address").click()
     page.get_by_role("textbox", name="Email address").fill("admin@admin.com")
     page.get_by_role("textbox", name="Password").click()
@@ -20,9 +20,9 @@ def logged_in_page(page: Page) -> Page:
 
 @pytest.fixture
 def logged_in_buyer_page(page: Page) -> Page:
-    page.goto("http://49.232.8.242:8001/")
+    page.goto("http://49.232.8.242:8083/")
     page.get_by_role("link", name=" Sign in").click()
-    page.get_by_role("textbox", name="Email").fill("admin@admin.com")
-    page.get_by_role("textbox", name="Password input").fill("testTest123.")
+    page.get_by_role("textbox", name="Email").fill("pub@prestashop.com")
+    page.get_by_role("textbox", name="Password input").fill("testTEST123.")
     page.get_by_role("button", name="Sign in").click()
     return page

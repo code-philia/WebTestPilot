@@ -39,10 +39,12 @@ def test_create_son_category(logged_in_page: Page, test_data: dict) -> None:
     page.get_by_role("link", name="add_circle_outline Add new").click()
     
     page.get_by_role("textbox", name="category_name_1 input").fill(child_category_info["name"])
+    page.wait_for_timeout(1000)
     page.get_by_text("expand_more").click()
     # mayebe there exist other better way to handle this instead of wait_for_timeout
     page.wait_for_timeout(2000)
-    page.locator("label").filter(has_text=child_category_info["parent"]).locator("i").click()
+    #page.locator("label").filter(has_text=child_category_info["parent"]).locator("i").click()
+    page.get_by_text(child_category_info["parent"]).click()
     page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(child_category_info["description"])
     page.locator("#category_cover_image").set_input_files(child_category_info["image_file"])
     page.locator("#category_thumbnail_image").set_input_files(child_category_info["image_file"])
@@ -64,7 +66,9 @@ def test_delete_category(logged_in_page: Page, test_data: dict) -> None:
     
     row = page.get_by_role("row").filter(has_text=parent_category_name)
     row.locator("a").nth(2).click()
+    page.wait_for_timeout(1000)
     page.get_by_role("link", name="delete Delete").click()
+    page.wait_for_timeout(1000)
     page.locator("#delete_categories_delete_mode i").first.click()
     page.get_by_role("button", name="Delete").click()
     

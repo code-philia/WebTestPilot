@@ -3,7 +3,7 @@ import pytest
 from playwright.sync_api import Page, expect
 import json 
 
-#  testcases
+# 7 testcases
 
 with open("test_data/buyer_data.json", "r") as f:
     data_list = json.load(f)

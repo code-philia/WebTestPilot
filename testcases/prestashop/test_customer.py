@@ -27,12 +27,13 @@ def test_create_customer(logged_in_page: Page, customer_data: dict) -> None: # 4
     expect(page.get_by_text("Successful creation")).to_be_visible()
 
 @pytest.mark.parametrize("customer_data", data_list)
-@pytest.mark.dependency(depends=["customer"])
+#@pytest.mark.dependency(depends=["customer"])
 def test_delete_customer(logged_in_page: Page, customer_data: dict) -> None:
     page = logged_in_page
     page.get_by_role("link", name="account_circle Customers").click()
     page.get_by_role("link", name="Customers", exact=True).click()
     row = page.get_by_role("row").filter(has_text=customer_data["email"])
+    page.wait_for_timeout(1000)
     row.locator("a").nth(1).click()
     # page.wait_for_timeout(2000)
     # page.get_by_role("link", name="delete Delete").click()

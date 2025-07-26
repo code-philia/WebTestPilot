@@ -17,8 +17,11 @@ def test_create_virtual_product(logged_in_page: Page, test_data: dict) -> None:
     page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
     page.get_by_role("link", name="add_circle_outline New product").click()
     page.frame_locator("iframe[name=\"modal-create-product-iframe\"]")
+    # page.get_by_role("button", name="Virtual product qr_code").click()
+    page.wait_for_timeout(1000)
     page.get_by_role("button", name="Virtual product qr_code").click()
     page.get_by_role("button", name="Add new product").click()
+
 
     page.get_by_role("textbox", name="product_header_name_1 input").fill(product_info["name"])
     page.locator("input.dz-hidden-input").set_input_files(product_info["image_file"])
@@ -45,13 +48,13 @@ def test_create_virtual_product(logged_in_page: Page, test_data: dict) -> None:
     page.get_by_label("Redirection when offline").select_option(product_info["offline_redirection"])
 
     page.get_by_role("tab", name="Options").click()
-    page.locator("#product_options_suppliers_supplier_ids").get_by_text("- Fashion supplier").click()
-    page.locator("#product_options_suppliers_supplier_ids").get_by_text("- Accessories supplier").click()
-    page.locator("#product_options_suppliers_default_supplier_id").get_by_text("- Accessories supplier").click()
-    page.get_by_role("textbox", name="product_options_product_suppliers_2_reference input").fill(product_info["suppliers"]["accessories_supplier_ref"])
-    page.locator("#product_options_product_suppliers_2_price_tax_excluded").fill(product_info["suppliers"]["accessories_supplier_price"])
+    page.locator("#product_options_suppliers_supplier_ids").get_by_text("Accessories supplier").click()
+    page.locator("#product_options_suppliers_supplier_ids").get_by_text("Fashion supplier").click()
+    
     page.get_by_role("textbox", name="product_options_product_suppliers_1_reference input").fill(product_info["suppliers"]["fashion_supplier_ref"])
     page.locator("#product_options_product_suppliers_1_price_tax_excluded").fill(product_info["suppliers"]["fashion_supplier_price"])
+    page.get_by_role("textbox", name="product_options_product_suppliers_2_reference input").fill(product_info["suppliers"]["accessories_supplier_ref"])
+    page.locator("#product_options_product_suppliers_2_price_tax_excluded").fill(product_info["suppliers"]["accessories_supplier_price"])
     
     page.get_by_role("button", name="Save").click()
     expect(page.get_by_text("Successful update")).to_be_visible()
@@ -66,6 +69,7 @@ def test_create_standard_product(logged_in_page: Page, test_data: dict) -> None:
     page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
     page.get_by_role("link", name="add_circle_outline New product").click()
     page.frame_locator("iframe[name=\"modal-create-product-iframe\"]")
+    page.wait_for_timeout(1000)
     page.get_by_role("button", name="Standard product checkroom").click()
     page.get_by_role("button", name="Add new product").click()
     
@@ -112,14 +116,16 @@ def test_create_standard_product(logged_in_page: Page, test_data: dict) -> None:
     page.get_by_label("Redirection when offline").select_option("default")
 
     page.get_by_role("tab", name="Options").click()
-    page.locator("#product_options_suppliers_supplier_ids").get_by_text("- Accessories supplier").click()
+    page.wait_for_timeout(1000)
+    page.locator("#product_options_suppliers_supplier_ids").get_by_text("Accessories supplier").click()
+    
     
     page.get_by_role("button", name="Save").click()
     expect(page.get_by_text("Successful update")).to_be_visible()
 
 
 @pytest.mark.parametrize("test_data", data_list)
-@pytest.mark.dependency(depends=['product'])
+#@pytest.mark.dependency(depends=['product'])
 def test_delete_one_product(logged_in_page: Page, test_data: dict) -> None:
     page = logged_in_page
     product_to_delete = test_data["delete_product_name"]
@@ -132,9 +138,8 @@ def test_delete_one_product(logged_in_page: Page, test_data: dict) -> None:
     page.get_by_role("button", name="search Search").click()
     page.wait_for_load_state("networkidle")
     #page.locator("tr:nth-child(1) > .bulk_action-type").click()
-    page.locator(".bulk_action-type").first.click()
-    page.get_by_role("button", name="Bulk actions expand_more").click()
-    page.get_by_role("button", name="delete Delete selection").click()
-    page.get_by_role("button", name="Delete selection").click()
-    
-    expect(page.get_by_text("Deleting 1 / 1 products")).to_be_visible()
+    #page.locator(".bulk_action-type").first.click()
+    page.locator(".btn-group > a:nth-child(2)").first.click()
+    page.get_by_role("link", name="delete Delete").click()
+    page.get_by_role("button", name="Delete").click()
+    expect(page.get_by_text("Successful deletion")).to_be_visible()
