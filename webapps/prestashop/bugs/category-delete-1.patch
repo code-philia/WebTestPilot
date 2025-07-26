@@ -1,0 +1,36 @@
+diff --git a/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/CategoryController.php b/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/CategoryController.php
+index 5aba598f1c..9bd819668d 100644
+--- a/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/CategoryController.php
++++ b/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/CategoryController.php
+@@ -663,29 +663,8 @@ class CategoryController extends FrameworkBundleAdminController
+      */
+     public function deleteAction(Request $request)
+     {
+-        $deleteCategoriesForm = $this->createForm(DeleteCategoriesType::class);
+-        $deleteCategoriesForm->handleRequest($request);
+-        $idParent = $this->getConfiguration()->getInt('PS_HOME_CATEGORY');
+-
+-        if ($deleteCategoriesForm->isSubmitted()) {
+-            $categoriesDeleteData = $deleteCategoriesForm->getData();
+-            $idParent = (int) $categoriesDeleteData['categories_to_delete_parent'];
+-
+-            try {
+-                $command = new DeleteCategoryCommand(
+-                    (int) reset($categoriesDeleteData['categories_to_delete']),
+-                    $categoriesDeleteData['delete_mode']
+-                );
+-
+-                $this->getCommandBus()->handle($command);
+-
+-                $this->addFlash('success', $this->trans('Successful deletion', 'Admin.Notifications.Success'));
+-            } catch (CategoryException $e) {
+-                $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages()));
+-            }
+-        }
+-
+-        return $this->redirectToRoute('admin_categories_index', ['categoryId' => $idParent]);
++       $this->addFlash('success', $this->trans('Successful deletion', 'Admin.Notifications.Success'));
++       return $this->redirectToRoute('admin_categories_index');
+     }
+ 
+     /**

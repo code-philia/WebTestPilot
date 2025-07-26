@@ -1,0 +1,15 @@
+--- a/modules/blockwishlist/controllers/front/action.php
++++ b/modules/blockwishlist/controllers/front/action.php
+@@ -389,6 +389,13 @@
+     private function addProductToWishListAction($params)
+     {
++        return $this->ajaxRender(
++            json_encode([
++                'success' => false,
++                'message' => $this->trans('NOOP BUG', [], 'Modules.Blockwishlist.Shop'),
++            ])
++        );
++
+         $id_product = (int) $params['id_product'];
+         $product = new Product($id_product);
+         if (!Validate::isLoadedObject($product)) {

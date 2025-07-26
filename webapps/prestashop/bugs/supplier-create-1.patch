@@ -1,0 +1,13 @@
+diff --git a/src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Suppliers/index.html.twig b/src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Suppliers/index.html.twig
+index e28e6674ae..9aab56b2ea 100644
+--- a/src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Suppliers/index.html.twig
++++ b/src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Suppliers/index.html.twig
+@@ -29,7 +29,7 @@
+ 
+ {% set layoutHeaderToolbarBtn = {
+   add: {
+-    href: path('admin_suppliers_create'),
++    href: '#',
+     desc: 'Add new supplier'|trans({}, 'Admin.Catalog.Feature'),
+     icon: 'add_circle_outline',
+   }

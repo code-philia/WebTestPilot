@@ -1,0 +1,10 @@
+diff --git a/classes/Search.php b/classes/Search.php
+index 5c4970ea72..ac4694c0a6 100644
+--- a/classes/Search.php
++++ b/classes/Search.php
+@@ -499,7 +499,7 @@ class SearchCore
+-        if (!count($eligibleProducts)) {
++        if (true) {
+             return $ajax ? [] : ['total' => 0, 'result' => []];
+         }
+ 

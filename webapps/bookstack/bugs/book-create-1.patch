@@ -1,5 +1,5 @@
---- ./views/books/index.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/books/index.blade.php	2025-07-09 16:31:07.477056778 +0800
+--- resources/views/books/index.blade.php	2025-07-09 16:35:51.351875212 +0800
++++ bug_views/books/index.blade.php	2025-07-09 16:31:07.477056778 +0800
 @@ -37,7 +37,7 @@
          <h5>{{ trans('common.actions') }}</h5>
          <div class="icon-list text-link">

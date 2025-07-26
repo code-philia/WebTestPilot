@@ -1,0 +1,104 @@
+--- a//modules/productcomments/controllers/front/PostComment.php
++++ b//modules/productcomments/controllers/front/PostComment.php
+@@ -33,99 +33,8 @@ class ProductCommentsPostCommentModuleFrontController extends ModuleFrontControl
+ {
+     public function display()
+     {
+-        header('Content-Type: application/json');
+-        if (!(int) $this->context->cookie->id_customer && !Configuration::get('PRODUCT_COMMENTS_ALLOW_GUESTS')) {
+-            $this->ajaxRender(
+-                json_encode(
+-                    [
+-                        'success' => false,
+-                        'error' => $this->trans(
+-                            'You need to be [1]logged in[/1] or [2]create an account[/2] to post your review.',
+-                            [
+-                                '[1]' => '<a href="' . $this->context->link->getPageLink('my-account') . '">',
+-                                '[/1]' => '</a>',
+-                                '[2]' => '<a href="' . $this->context->link->getPageLink('authentication&create_account=1') . '">',
+-                                '[/2]' => '</a>',
+-                            ],
+-                            'Modules.Productcomments.Shop'
+-                        ),
+-                    ]
+-                )
+-            );
+-
+-            return false;
+-        }
+-
+-        $id_product = (int) Tools::getValue('id_product');
+-        $comment_title = Tools::getValue('comment_title');
+-        $comment_content = Tools::getValue('comment_content');
+-        $customer_name = Tools::getValue('customer_name');
+-        $criterions = (array) Tools::getValue('criterion');
+-
+-        /** @var ProductCommentRepository $productCommentRepository */
+-        $productCommentRepository = $this->context->controller->getContainer()->get('product_comment_repository');
+-        $isPostAllowed = $productCommentRepository->isPostAllowed(
+-            $id_product,
+-            (int) $this->context->cookie->id_customer,
+-            (int) $this->context->cookie->id_guest
+-        );
+-        if (!$isPostAllowed) {
+-            $this->ajaxRender(
+-                json_encode(
+-                    [
+-                        'success' => false,
+-                        'error' => $this->trans('You are not allowed to post a review at the moment, please try again later.', [], 'Modules.Productcomments.Shop'),
+-                    ]
+-                )
+-            );
+-
+-            return false;
+-        }
+-
+-        /** @var EntityManagerInterface $entityManager */
+-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
+-
+-        //Create product comment
+-        $productComment = new ProductComment();
+-        $productComment
+-            ->setProductId($id_product)
+-            ->setTitle($comment_title)
+-            ->setContent($comment_content)
+-            ->setCustomerName($customer_name)
+-            ->setCustomerId($this->context->cookie->id_customer)
+-            ->setGuestId($this->context->cookie->id_guest)
+-            ->setDateAdd(new \DateTime('now', new \DateTimeZone('UTC')))
+-        ;
+-
+-        //Validate comment
+-        $errors = array_merge($this->validateComment($productComment), $this->validateCriterions($criterions));
+-
+-        if (!empty($errors)) {
+-            $this->ajaxRender(
+-                json_encode(
+-                    [
+-                        'success' => false,
+-                        'errors' => $errors,
+-                    ]
+-                )
+-            );
+-
+-            return false;
+-        }
+-
+-        $entityManager->persist($productComment);
+-        $this->addCommentGrades($productComment, $criterions);
+-
+-        $entityManager->flush();
+-
+-        $this->ajaxRender(
+-            json_encode(
+-                [
+-                    'success' => true,
+-                    'product_comment' => $productComment->toArray(),
+-                ]
+-            )
+-        );
++        Tools::redirect($this->context->link->getPageLink('index'));
++        exit;
+     }
+ 
+     /**

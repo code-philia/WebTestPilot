@@ -1,0 +1,50 @@
+--- a/modules/blockwishlist/controllers/front/action.php
++++ b/modules/blockwishlist/controllers/front/action.php
+@@ -518,41 +518,12 @@ class BlockWishListActionModuleFrontController extends ModuleFrontController
+ 
+     private function deleteProductFromWishListAction($params)
+     {
+-        if (
+-            isset($params['idWishList'])
+-            && isset($params['id_product'])
+-            && isset($params['id_product_attribute'])
+-        ) {
+-            // Exit if not owner of the wishlist
+-            $this->assertWriteAccess(
+-                new WishList($params['idWishList'])
+-            );
+-
+-            $isDeleted = WishList::removeProduct(
+-                $params['idWishList'],
+-                $this->context->customer->id,
+-                $params['id_product'],
+-                $params['id_product_attribute']
+-            );
+-
+-            if (true === $isDeleted) {
+-                return $this->ajaxRender(
+-                    json_encode([
+-                        'success' => true,
+-                        'message' => $this->trans('Product successfully removed', [], 'Modules.Blockwishlist.Shop'),
+-                    ])
+-                );
+-            }
+-
+-            return $this->ajaxRender(
+-                json_encode([
+-                    'success' => false,
+-                    'message' => $this->trans('Unable to remove product from list', [], 'Modules.Blockwishlist.Shop'),
+-                ])
+-            );
+-        }
+-
+-        return $this->ajaxRenderMissingParams();
++        return $this->ajaxRender(
++        json_encode([
++            'success' => false,
++            'message' => $this->trans('NOOP: remove from wishlist is disabled', [], 'Modules.Blockwishlist.Shop'),
++        ])
++    );
+     }
+ 
+     private function updateProductFromWishListAction($params)

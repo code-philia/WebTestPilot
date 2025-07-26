@@ -1,0 +1,13 @@
+diff --git a/src/PrestaShopBundle/Controller/Admin/Sell/Customer/CustomerController.php b/src/PrestaShopBundle/Controller/Admin/Sell/Customer/CustomerController.php
+index 18b9084790..af943ee54f 100644
+--- a/src/PrestaShopBundle/Controller/Admin/Sell/Customer/CustomerController.php
++++ b/src/PrestaShopBundle/Controller/Admin/Sell/Customer/CustomerController.php
+@@ -116,7 +116,7 @@ class CustomerController extends AbstractAdminController
+             'deleteCustomersForm' => $deleteCustomerForm->createView(),
+             'showcaseCardName' => ShowcaseCard::CUSTOMERS_CARD,
+             'isShowcaseCardClosed' => $showcaseCardIsClosed,
+-            'layoutHeaderToolbarBtn' => $this->getCustomerToolbarButtons(),
++            'layoutHeaderToolbarBtn' => [],
+         ]);
+     }
+ 

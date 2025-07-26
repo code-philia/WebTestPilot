@@ -1,0 +1,27 @@
+diff --git a/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/Product/ProductController.php b/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/Product/ProductController.php
+index 8a0654d6b6..2aef0de271 100644
+--- a/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/Product/ProductController.php
++++ b/src/PrestaShopBundle/Controller/Admin/Sell/Catalog/Product/ProductController.php
+@@ -1306,22 +1306,6 @@ class ProductController extends FrameworkBundleAdminController
+     {
+         $toolbarButtons = [];
+ 
+-        // do not show create button if user has no permissions for it
+-        if (!$this->isGranted(PageVoter::CREATE, $securitySubject)) {
+-            return $toolbarButtons;
+-        }
+-
+-        $toolbarButtons['add'] = [
+-            'href' => $this->generateUrl('admin_products_create', ['shopId' => $this->getShopIdFromShopContext()]),
+-            'desc' => $this->trans('New product', 'Admin.Actions'),
+-            'icon' => 'add_circle_outline',
+-            'class' => 'btn-primary new-product-button',
+-            'floating_class' => 'new-product-button',
+-            'data_attributes' => [
+-                'modal-title' => $this->trans('Add new product', 'Admin.Catalog.Feature'),
+-            ],
+-        ];
+-
+         return $toolbarButtons;
+     }
+ 
