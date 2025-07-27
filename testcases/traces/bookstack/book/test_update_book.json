@@ -2,44 +2,29 @@
   "test": "test_update_book",
   "app": "bookstack",
   "collection": "book",
-  "total_traces": 33,
-  "successful_traces": 31,
-  "failed_traces": 2,
+  "total_traces": 29,
+  "successful_traces": 29,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "filter",
       "goto",
+      "fill",
+      "click",
       "to_contain_text",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "to_be_visible"
     ],
     "successful_methods": [
-      "click",
       "goto",
+      "fill",
+      "click",
       "to_contain_text",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "to_be_visible"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 87.5
+    "failed_methods": [],
+    "missing_methods": [],
+    "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -126,19 +111,13 @@
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book594281",
+      "value": "Book230280",
       "action_type": "action"
     },
     {
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
       "action_type": "action"
     },
     {
@@ -174,73 +153,57 @@
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book594281",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Book successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book594281",
+      "url": "http://localhost:8081/books/book230280",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book594281",
+      "url": "http://localhost:8081/books/book230280",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[3]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book594281/edit",
+      "url": "http://localhost:8081/books/book230280/edit",
       "xpath": "//*[@id=\"name\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book594281/edit",
+      "url": "http://localhost:8081/books/book230280/edit",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book Updated 594281",
+      "value": "Book Updated 230280",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book594281/edit",
+      "url": "http://localhost:8081/books/book230280/edit",
       "xpath": "//*[@id=\"description_html_ifr\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book594281/edit",
+      "url": "http://localhost:8081/books/book230280/edit",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book-updated-594281",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Book successfully updated\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book-updated-594281",
+      "url": "http://localhost:8081/books/book-updated-230280",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book-updated-594281",
+      "url": "http://localhost:8081/books/book-updated-230280",
       "xpath": "//*[@id=\"main-content\"]/main/h1",
       "action": "to_contain_text",
-      "value": "Book Updated 594281",
+      "value": "Book Updated 230280",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book-updated-594281",
+      "url": "http://localhost:8081/books/book-updated-230280",
       "xpath": "//*[@id=\"main-content\"]/main",
       "action": "to_contain_text",
       "value": "Description Updated",

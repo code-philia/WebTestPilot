@@ -2,46 +2,33 @@
   "test": "test_read_book",
   "app": "bookstack",
   "collection": "book",
-  "total_traces": 28,
-  "successful_traces": 25,
-  "failed_traces": 3,
+  "total_traces": 25,
+  "successful_traces": 23,
+  "failed_traces": 2,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "filter",
-      "click_failed",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "click_failed",
+      "to_be_visible"
     ],
     "successful_methods": [
-      "click",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
+      "fill",
       "to_be_visible",
-      "fill"
+      "click"
     ],
     "failed_methods": [
-      "click_failed",
       "click",
-      "filter"
-    ],
-    "missing_methods": [
-      "filter",
       "click_failed"
     ],
-    "coverage_percentage": 75.0
+    "missing_methods": [
+      "click_failed"
+    ],
+    "coverage_percentage": 80.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -128,19 +115,13 @@
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book509791",
+      "value": "Book512137",
       "action_type": "action"
     },
     {
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
       "action_type": "action"
     },
     {
@@ -176,21 +157,13 @@
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book509791",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Book successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book509791",
+      "url": "http://localhost:8081/books/book512137",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book509791",
+      "url": "http://localhost:8081/books/book512137",
       "xpath": "PAGE",
       "action": "goto",
       "value": "http://localhost:8081/",
@@ -208,7 +181,7 @@
       "action": "click",
       "action_type": "action",
       "success": false,
-      "error_message": "xpath_path: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"h2\").filter(has_text=\"Book509791\")\n"
+      "error_message": "xpath_path: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"h2\").filter(has_text=\"Book512137\")\n"
     },
     {
       "url": "EXECUTION_ERROR",
@@ -216,7 +189,7 @@
       "action": "click_failed",
       "action_type": "action",
       "success": false,
-      "error_message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"h2\").filter(has_text=\"Book509791\")\n"
+      "error_message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"h2\").filter(has_text=\"Book512137\")\n"
     }
   ]
 }

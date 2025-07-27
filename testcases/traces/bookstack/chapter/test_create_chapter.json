@@ -2,44 +2,29 @@
   "test": "test_create_chapter",
   "app": "bookstack",
   "collection": "chapter",
-  "total_traces": 39,
+  "total_traces": 37,
   "successful_traces": 37,
-  "failed_traces": 2,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "get_by_role",
-      "filter",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
     "successful_methods": [
-      "click",
-      "get_by_role",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 87.5
+    "failed_methods": [],
+    "missing_methods": [],
+    "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -126,19 +111,13 @@
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book791187",
+      "value": "Book792743",
       "action_type": "action"
     },
     {
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
       "action_type": "action"
     },
     {
@@ -174,113 +153,113 @@
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Book successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book791187",
+      "url": "http://localhost:8081/books/book792743",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book791187",
+      "url": "http://localhost:8081/books/book792743",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[2]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"name\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Chapter791187",
+      "value": "Chapter792743",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
       "value": "Sample Tag",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
       "value": "Sample Tag",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/create-chapter",
+      "url": "http://localhost:8081/books/book792743/create-chapter",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[5]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Chapter successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
-      "xpath": "//*[@id=\"book-tree\"]",
-      "action": "get_by_role",
-      "action_type": "action"
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
+      "xpath": "//*[@id=\"main-content\"]/main/h1",
+      "action": "to_contain_text",
+      "value": "Chapter792743",
+      "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
+      "xpath": "//*[@id=\"main-content\"]/main",
+      "action": "to_contain_text",
+      "value": "Description",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
       "xpath": "//*[@id=\"book-tree\"]/ul/li[2]/a",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
-      "xpath": "//*[@id=\"main-content\"]/div[1]/nav",
-      "action": "get_by_role",
-      "action_type": "action"
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
+      "xpath": "//*[@id=\"book-tree\"]/ul",
+      "action": "to_contain_text",
+      "value": "Chapter792743",
+      "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book791187/chapter/chapter791187",
+      "url": "http://localhost:8081/books/book792743/chapter/chapter792743",
       "xpath": "//*[@id=\"main-content\"]/div[1]/nav/a[2]",
       "action": "click",
       "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/books/book792743",
+      "xpath": "//*[@id=\"main-content\"]/main",
+      "action": "to_contain_text",
+      "value": "Book792743",
+      "action_type": "assertion"
     }
   ]
 }

@@ -2,42 +2,27 @@
   "test": "test_assign_role_to_user",
   "app": "bookstack",
   "collection": "permissions",
-  "total_traces": 30,
-  "successful_traces": 27,
-  "failed_traces": 3,
+  "total_traces": 26,
+  "successful_traces": 26,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "get_by_role",
-      "filter",
       "goto",
-      "set_viewport_size",
+      "fill",
       "to_be_visible",
-      "fill"
+      "click"
     ],
     "successful_methods": [
-      "click",
-      "get_by_role",
       "goto",
-      "set_viewport_size",
+      "fill",
       "to_be_visible",
-      "fill"
+      "click"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 85.71428571428571
+    "failed_methods": [],
+    "missing_methods": [],
+    "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -117,7 +102,7 @@
       "url": "http://localhost:8081/settings/roles/new",
       "xpath": "//*[@id=\"display_name\"]",
       "action": "fill",
-      "value": "Role 210986",
+      "value": "Role 954335",
       "action_type": "action"
     },
     {
@@ -130,7 +115,7 @@
       "url": "http://localhost:8081/settings/roles/new",
       "xpath": "//*[@id=\"description\"]",
       "action": "fill",
-      "value": "Role description 210986",
+      "value": "Role description 954335",
       "action_type": "action"
     },
     {
@@ -165,14 +150,6 @@
     },
     {
       "url": "http://localhost:8081/settings/roles",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Role successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/settings/roles",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
@@ -191,21 +168,7 @@
     },
     {
       "url": "http://localhost:8081/settings/users/2",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: locator(\"label\") resolved to 15 elements:\n    1) <label class=\"setting-list-label\">User Details</label> aka get_by_text(\"User Details\")\n    2) <label for=\"name\">Name</label> aka get_by_text(\"Name\", exact=True)\n    3) <label for=\"email\">Email</label> aka get_by_text(\"Email\", exact=True)\n    4) <label for=\"external-auth\">External Authentication ID</label> aka get_by_role(\"button\", name=\"\u25b8 External Authentication ID\")\n    5) <label for=\"role\" class=\"setting-list-label\">User Roles</label> aka get_by_text(\"User Roles\")\n    6) <label class=\"toggle-switch \" component=\"custom-checkbox\">\u2026</label> aka locator(\"label\").filter(has_text=\"Admin\")\n    7) <label class=\"toggle-switch \" component=\"custom-checkbox\">\u2026</label> aka locator(\"label\").filter(has_text=\"Editor\")\n    8) <label class=\"toggle-switch \" component=\"custom-checkbox\">\u2026</label> aka locator(\"label\").filter(has_text=\"Public\")\n    9) <label class=\"toggle-switch \" component=\"custom-checkbox\">\u2026</label> aka locator(\"label\").filter(has_text=\"Role 210986\")\n    10) <label class=\"toggle-switch \" component=\"custom-checkbox\">\u2026</label> aka locator(\"label\").filter(has_text=\"Role 215214\")\n    ...\n\nCall log:\n  - waiting for locator(\"label\")\n"
-    },
-    {
-      "url": "http://localhost:8081/settings/users/2",
-      "xpath": "//*[@id=\"main-content\"]/div/section[1]/form/div[1]/div[2]/div/div/div[4]/label",
-      "action": "get_by_role",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/settings/users/2",
-      "xpath": "//*[@id=\"main-content\"]/div/section[1]/form/div[1]/div[2]/div/div/div[4]/label/span[1]",
+      "xpath": "//*[@id=\"main-content\"]/div/section[1]/form/div[1]/div[2]/div/div/div[15]/label/span[1]",
       "action": "click",
       "action_type": "action"
     },
@@ -217,11 +180,9 @@
     },
     {
       "url": "http://localhost:8081/settings/users",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"User successfully updated\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
+      "xpath": "/html/body/div[1]",
+      "action": "to_be_visible",
+      "action_type": "assertion"
     }
   ]
 }

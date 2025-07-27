@@ -2,40 +2,29 @@
   "test": "test_create_role",
   "app": "bookstack",
   "collection": "permissions",
-  "total_traces": 23,
+  "total_traces": 22,
   "successful_traces": 22,
-  "failed_traces": 1,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "filter",
       "goto",
-      "set_viewport_size",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
     "successful_methods": [
-      "click",
       "goto",
-      "set_viewport_size",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 83.33333333333334
+    "failed_methods": [],
+    "missing_methods": [],
+    "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -115,7 +104,7 @@
       "url": "http://localhost:8081/settings/roles/new",
       "xpath": "//*[@id=\"display_name\"]",
       "action": "fill",
-      "value": "Role 215214",
+      "value": "Role 408213",
       "action_type": "action"
     },
     {
@@ -128,7 +117,7 @@
       "url": "http://localhost:8081/settings/roles/new",
       "xpath": "//*[@id=\"description\"]",
       "action": "fill",
-      "value": "Role description 215214",
+      "value": "Role description 408213",
       "action_type": "action"
     },
     {
@@ -163,16 +152,15 @@
     },
     {
       "url": "http://localhost:8081/settings/roles",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Role successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
+      "xpath": "/html/body/div[1]",
+      "action": "to_be_visible",
+      "action_type": "assertion"
     },
     {
       "url": "http://localhost:8081/settings/roles",
-      "xpath": "/html/body/div[1]",
-      "action": "to_be_visible",
+      "xpath": "//*[@id=\"main-content\"]",
+      "action": "to_contain_text",
+      "value": "Role 408213",
       "action_type": "assertion"
     }
   ]

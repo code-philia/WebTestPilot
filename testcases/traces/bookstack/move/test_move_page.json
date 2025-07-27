@@ -2,41 +2,29 @@
   "test": "test_move_page",
   "app": "bookstack",
   "collection": "move",
-  "total_traces": 44,
-  "successful_traces": 44,
+  "total_traces": 43,
+  "successful_traces": 43,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "get_by_role",
-      "wait_for_timeout",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
     "successful_methods": [
-      "click",
-      "get_by_role",
-      "wait_for_timeout",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
-      "to_be_visible",
-      "fill"
+      "fill",
+      "click",
+      "to_contain_text",
+      "to_be_visible"
     ],
     "failed_methods": [],
     "missing_methods": [],
     "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -123,19 +111,13 @@
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book631196",
+      "value": "Book688199",
       "action_type": "action"
     },
     {
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
       "action_type": "action"
     },
     {
@@ -171,141 +153,152 @@
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196",
+      "url": "http://localhost:8081/books/book688199",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[2]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"name\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Chapter631196",
+      "value": "Chapter688199",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
       "value": "Sample Tag",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
       "value": "Sample Tag",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/create-chapter",
+      "url": "http://localhost:8081/books/book688199/create-chapter",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[5]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/draft/18",
+      "url": "http://localhost:8081/books/book688199/draft/62",
       "xpath": "//*[@id=\"name\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/draft/18",
+      "url": "http://localhost:8081/books/book688199/draft/62",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Page631196",
+      "value": "Page688199",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/draft/18",
+      "url": "http://localhost:8081/books/book688199/draft/62",
       "xpath": "//*[@id=\"save-button\"]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196",
+      "url": "http://localhost:8081/books/book688199/page/page688199",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[3]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
-      "xpath": "//*[@id=\"main-content\"]",
-      "action": "get_by_role",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
+      "url": "http://localhost:8081/books/book688199/page/page688199/move",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[1]/div/input[2]",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
-      "xpath": "//*[@id=\"main-content\"]",
-      "action": "get_by_role",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
+      "url": "http://localhost:8081/books/book688199/page/page688199/move",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[1]/div/input[2]",
       "action": "fill",
-      "value": "Chapter631196",
+      "value": "Chapter688199",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
-      "xpath": "PAGE",
-      "action": "wait_for_timeout",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
+      "url": "http://localhost:8081/books/book688199/page/page688199/move",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[1]/div/div[2]/div/a",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196/move",
+      "url": "http://localhost:8081/books/book688199/page/page688199/move",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[2]/button",
       "action": "click",
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196",
-      "xpath": "//*[@id=\"main-content\"]/div[1]/nav",
-      "action": "get_by_role",
-      "action_type": "action"
+      "url": "http://localhost:8081/books/book688199/page/page688199",
+      "xpath": "//*[@id=\"book-tree\"]/ul/li[2]/div/div/div/ul",
+      "action": "to_contain_text",
+      "value": "Page688199",
+      "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book631196/page/page631196",
+      "url": "http://localhost:8081/books/book688199/page/page688199",
+      "xpath": "//*[@id=\"main-content\"]/div[1]/nav",
+      "action": "to_contain_text",
+      "value": "Book688199",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/books/book688199/page/page688199",
+      "xpath": "//*[@id=\"main-content\"]/div[1]/nav",
+      "action": "to_contain_text",
+      "value": "Chapter688199",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/books/book688199/page/page688199",
+      "xpath": "//*[@id=\"main-content\"]/div[1]/nav",
+      "action": "to_contain_text",
+      "value": "Page688199",
+      "action_type": "assertion"
+    },
+    {
+      "url": "http://localhost:8081/books/book688199/page/page688199",
       "xpath": "//*[@id=\"main-content\"]/div[1]/nav/a[3]",
       "action": "click",
       "action_type": "action"
+    },
+    {
+      "url": "http://localhost:8081/books/book688199/chapter/chapter688199",
+      "xpath": "//*[@id=\"main-content\"]/main",
+      "action": "to_contain_text",
+      "value": "Page688199",
+      "action_type": "assertion"
     }
   ]
 }

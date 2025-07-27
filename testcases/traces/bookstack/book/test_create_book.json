@@ -2,42 +2,27 @@
   "test": "test_create_book",
   "app": "bookstack",
   "collection": "book",
-  "total_traces": 26,
-  "successful_traces": 25,
-  "failed_traces": 1,
+  "total_traces": 23,
+  "successful_traces": 23,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "click",
-      "filter",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
+      "fill",
       "to_be_visible",
-      "fill"
+      "click"
     ],
     "successful_methods": [
-      "click",
       "goto",
-      "set_viewport_size",
-      "expect_file_chooser",
+      "fill",
       "to_be_visible",
-      "fill"
+      "click"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 85.71428571428571
+    "failed_methods": [],
+    "missing_methods": [],
+    "coverage_percentage": 100.0
   },
   "traces": [
-    {
-      "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
     {
       "url": "about:blank",
       "xpath": "PAGE",
@@ -124,19 +109,13 @@
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book869300",
+      "value": "Book234371",
       "action_type": "action"
     },
     {
       "url": "http://localhost:8081/create-book",
       "xpath": "//*[@id=\"logo-control\"]/button",
       "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
       "action_type": "action"
     },
     {
@@ -172,27 +151,19 @@
       "action_type": "action"
     },
     {
-      "url": "http://localhost:8081/books/book869300",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Book successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
-    },
-    {
-      "url": "http://localhost:8081/books/book869300",
+      "url": "http://localhost:8081/books/book234371",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book869300",
+      "url": "http://localhost:8081/books/book234371",
       "xpath": "//*[@id=\"main-content\"]/main/h1",
       "action": "to_be_visible",
       "action_type": "assertion"
     },
     {
-      "url": "http://localhost:8081/books/book869300",
+      "url": "http://localhost:8081/books/book234371",
       "xpath": "//*[@id=\"main-content\"]/main/div[1]/div[1]/p",
       "action": "to_be_visible",
       "action_type": "assertion"
