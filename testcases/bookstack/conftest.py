@@ -3,9 +3,14 @@ from dataclasses import dataclass
 from random import randint
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from tracing_api import create_traced_page
+from tracing_api import traced_expect as expect
 
-BOOKSTACK_HOST = "http://localhost:8801/"
+pytest_plugins = ["pytest_xpath_plugin"]
+
+
+BOOKSTACK_HOST = "http://localhost:8081/"
 
 
 @dataclass
@@ -114,28 +119,32 @@ def test_data() -> BookStackTestData:
 def logged_in_page(page: Page) -> Page:
     """
     Fixture that provides a page with user already logged in to BookStack demo.
+    Optionally wraps with tracing based on environment variable.
 
     Returns:
-        Page: A Playwright page object with user logged in
+        Page: A Playwright page object with user logged in (possibly traced)
     """
+    # Wrap with tracing if enabled
+    traced_page = create_traced_page(page)
+
     # Navigate to the demo site
     # Change viewport size for better visibility
-    page.set_viewport_size({"width": 1280, "height": 720})
-    page.goto(BOOKSTACK_HOST)
+    traced_page.set_viewport_size({"width": 1280, "height": 720})
+    traced_page.goto(BOOKSTACK_HOST)
 
     # Perform login
-    page.get_by_role("link", name="Log in").click()
+    traced_page.get_by_role("link", name="Log in").click()
 
-    page.get_by_role("textbox", name="Email").click()
-    page.get_by_role("textbox", name="Email").fill("admin@admin.com")
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill("password")
-    page.get_by_role("button", name="Log In").click()
+    traced_page.get_by_role("textbox", name="Email").click()
+    traced_page.get_by_role("textbox", name="Email").fill("admin@admin.com")
+    traced_page.get_by_role("textbox", name="Password").click()
+    traced_page.get_by_role("textbox", name="Password").fill("password")
+    traced_page.get_by_role("button", name="Log In").click()
 
     # Verify login was successful by checking for Books link
-    expect(page.get_by_role("link", name="Books", exact=True)).to_be_visible()
+    expect(traced_page.get_by_role("link", name="Books", exact=True)).to_be_visible()
 
-    return page
+    return traced_page
 
 
 def create_book(logged_in_page: Page, book_name: str, book_description: str) -> Page:
@@ -362,11 +371,11 @@ def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Pag
     logged_in_page.get_by_role("link", name="Settings").click()
     logged_in_page.get_by_role("link", name="Roles").click()
     logged_in_page.get_by_role("link", name="Create New Role").click()
-    
+
     # Name
     logged_in_page.get_by_role("textbox", name="Role Name").click()
     logged_in_page.get_by_role("textbox", name="Role Name").fill(test_data.role_name)
-    
+
     # Description
     logged_in_page.get_by_role("textbox", name="Short Description of Role").click()
     logged_in_page.get_by_role("textbox", name="Short Description of Role").fill(

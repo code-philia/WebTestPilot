@@ -1,9 +1,12 @@
-from playwright.sync_api import expect, Page
+from playwright.sync_api import Page
+from tracing_api import traced_expect as expect
 
 from bookstack.conftest import BookStackTestData
 
 
-def test_create_chapter(created_chapter_page: Page, test_data: BookStackTestData) -> None:
+def test_create_chapter(
+    created_chapter_page: Page, test_data: BookStackTestData
+) -> None:
     # Check content of the chapter page
     expect(created_chapter_page.locator("h1")).to_contain_text(test_data.chapter_name)
     expect(created_chapter_page.get_by_role("main")).to_contain_text(
@@ -14,13 +17,17 @@ def test_create_chapter(created_chapter_page: Page, test_data: BookStackTestData
     created_chapter_page.get_by_label("Book Navigation").get_by_role(
         "link", name=test_data.chapter_name
     ).click()
-    expect(created_chapter_page.get_by_role("list")).to_contain_text(test_data.chapter_name)
+    expect(created_chapter_page.get_by_role("list")).to_contain_text(
+        test_data.chapter_name
+    )
 
     # Navigate back to book page and check
     created_chapter_page.get_by_label("Breadcrumb").get_by_role(
         "link", name=test_data.book_name
     ).click()
-    expect(created_chapter_page.get_by_role("main")).to_contain_text(test_data.book_name)
+    expect(created_chapter_page.get_by_role("main")).to_contain_text(
+        test_data.book_name
+    )
 
 
 def test_read_chapter(created_chapter_page: Page, test_data: BookStackTestData) -> None:
@@ -30,7 +37,9 @@ def test_read_chapter(created_chapter_page: Page, test_data: BookStackTestData) 
     ).click()
 
     # Click the chapter link and check content
-    expect(created_chapter_page.get_by_role("main")).to_contain_text(test_data.chapter_name)
+    expect(created_chapter_page.get_by_role("main")).to_contain_text(
+        test_data.chapter_name
+    )
     created_chapter_page.get_by_role("link", name=test_data.chapter_name).first.click()
 
     expect(created_chapter_page.locator("h1")).to_contain_text(test_data.chapter_name)
@@ -39,12 +48,16 @@ def test_read_chapter(created_chapter_page: Page, test_data: BookStackTestData) 
     )
 
 
-def test_update_chapter(created_chapter_page: Page, test_data: BookStackTestData) -> None:
+def test_update_chapter(
+    created_chapter_page: Page, test_data: BookStackTestData
+) -> None:
     created_chapter_page.get_by_role("link", name="Edit").click()
 
     # Name
     created_chapter_page.get_by_role("textbox", name="Name").click()
-    created_chapter_page.get_by_role("textbox", name="Name").fill(test_data.chapter_name_updated)
+    created_chapter_page.get_by_role("textbox", name="Name").fill(
+        test_data.chapter_name_updated
+    )
 
     # Description
     created_chapter_page.locator(
@@ -71,7 +84,9 @@ def test_update_chapter(created_chapter_page: Page, test_data: BookStackTestData
             has_text="Chapter successfully updated"
         )
     ).to_be_visible(timeout=1000)
-    expect(created_chapter_page.locator("h1")).to_contain_text(test_data.chapter_name_updated)
+    expect(created_chapter_page.locator("h1")).to_contain_text(
+        test_data.chapter_name_updated
+    )
     expect(created_chapter_page.get_by_role("main")).to_contain_text(
         test_data.chapter_description_updated
     )

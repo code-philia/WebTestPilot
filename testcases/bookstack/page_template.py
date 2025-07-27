@@ -1,4 +1,5 @@
-from playwright.sync_api import expect, Page
+from playwright.sync_api import Page
+from tracing_api import traced_expect as expect
 
 from bookstack.conftest import BookStackTestData, create_page
 
