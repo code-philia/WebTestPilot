@@ -5,7 +5,6 @@ Provides tracing capabilities for Playwright objects with XPath extraction,
 method filtering, and object wrapping.
 """
 
-import traceback
 from typing import TYPE_CHECKING, Any, Optional
 
 from playwright.sync_api import (

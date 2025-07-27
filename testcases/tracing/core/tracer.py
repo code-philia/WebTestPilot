@@ -30,6 +30,23 @@ class TraceEntry:
     value: Optional[str] = None
     action_type: str = ActionType.ACTION
 
+    def to_simplified_dict(self) -> dict[str, Any]:
+        """Convert to simplified dictionary (exclude error fields if no errors)"""
+        trace_dict = {
+            "url": self.url,
+            "xpath": self.xpath,
+            "action": self.action,
+            "action_type": self.action_type,
+        }
+
+        if self.value is not None:
+            trace_dict["value"] = self.value
+
+        if self.error_message:
+            trace_dict["error_message"] = self.error_message
+
+        return trace_dict
+
 
 class XPathTracer:
     """Enhanced tracer with test context and method coverage tracking"""
@@ -83,17 +100,13 @@ class XPathTracer:
             status = "SUCCESS" if success else f"FAILED: {error_message}"
             print(f"[TRACE] {action} on {xpath} at {url} - {status}")
 
-    def save_traces(self, filename: Optional[str] = None) -> str:
+    def save_traces(self) -> str:
         """Save traces to JSON file with simplified format"""
-        if not filename:
-            # Clean up test name - remove [chromium] and similar browser identifiers
-            clean_test_name = (
-                self.test_name.split("[")[0]
-                if "[" in self.test_name
-                else self.test_name
-            )
-            filename = f"{clean_test_name}.json"
-
+        # Clean up test name - remove [chromium] and similar browser identifiers
+        clean_test_name = (
+            self.test_name.split("[")[0] if "[" in self.test_name else self.test_name
+        )
+        filename = f"{clean_test_name}.json"
         filepath = os.path.join(self.output_dir, filename)
 
         # Debug output
@@ -103,39 +116,13 @@ class XPathTracer:
         # Calculate coverage statistics
         missing_methods: set[str] = self.failed_methods - self.successful_methods
         coverage_stats: dict[str, Any] = {
-            "attempted_methods": list(self.attempted_methods),
-            "successful_methods": list(self.successful_methods),
-            "failed_methods": list(self.failed_methods),
-            "missing_methods": list(missing_methods),
-            "coverage_percentage": len(self.successful_methods)
-            / max(len(self.attempted_methods), 1)
-            * 100,
+            "attempted_methods": sorted(list(self.attempted_methods)),
+            "successful_methods": sorted(list(self.successful_methods)),
+            "failed_methods": sorted(list(self.failed_methods)),
+            "missing_methods": sorted(list(missing_methods)),
         }
 
-        # Simplified format with context at top level, not in individual traces
-        clean_test_name = (
-            self.test_name.split("[")[0] if "[" in self.test_name else self.test_name
-        )
-
-        # Create simplified traces - only include error info if there were failures
-        simplified_traces: list[dict[str, Any]] = []
-        for trace in self.traces:
-            trace_dict: dict[str, Any] = {
-                "url": trace.url,
-                "xpath": trace.xpath,
-                "action": trace.action,
-            }
-            # Include value if present
-            if trace.value is not None:
-                trace_dict["value"] = trace.value
-            # Always include action_type
-            trace_dict["action_type"] = trace.action_type
-            # Only include success/error fields if there were actual failures
-            if not trace.success or trace.error_message:
-                trace_dict["success"] = trace.success
-                if trace.error_message:
-                    trace_dict["error_message"] = trace.error_message
-            simplified_traces.append(trace_dict)
+        simplified_traces = [trace.to_simplified_dict() for trace in self.traces]
 
         data: dict[str, Any] = {
             "test": clean_test_name,
@@ -152,45 +139,6 @@ class XPathTracer:
             json.dump(data, f, indent=2)
 
         return filepath
-
-    def get_trace_summary(self) -> dict[str, Any]:
-        """Get comprehensive summary of traces and coverage"""
-        if not self.traces:
-            return {
-                "test": self.test_name,
-                "app": self.app,
-                "collection": self.collection,
-                "total": 0,
-                "actions": {},
-                "coverage": {"attempted": 0, "successful": 0, "failed": 0},
-            }
-
-        action_counts: dict[str, int] = {}
-        success_counts: dict[str, int] = {"successful": 0, "failed": 0}
-
-        for trace in self.traces:
-            action_counts[trace.action] = action_counts.get(trace.action, 0) + 1
-            if trace.success:
-                success_counts["successful"] += 1
-            else:
-                success_counts["failed"] += 1
-
-        missing_methods: set[str] = self.failed_methods - self.successful_methods
-
-        return {
-            "test": self.test_name,
-            "app": self.app,
-            "collection": self.collection,
-            "total": len(self.traces),
-            "actions": action_counts,
-            "success_rate": success_counts,
-            "coverage": {
-                "attempted": len(self.attempted_methods),
-                "successful": len(self.successful_methods),
-                "failed": len(self.failed_methods),
-                "missing": list(missing_methods),
-            },
-        }
 
     def report_coverage(self) -> None:
         """Print coverage report for debugging"""

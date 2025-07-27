@@ -35,7 +35,7 @@ def pytest_configure(config: Any) -> None:
     if config.getoption("--with-xpath-tracing"):
         # Set environment variables for traced_playwright.py to pick up
         os.environ["ENABLE_XPATH_TRACING"] = "true"
-        os.environ["XPATH_TRACE_DEBUG"] = "false"  # Keep quiet during tests
+        os.environ["XPATH_TRACE_DEBUG"] = "false"
 
         # Store base trace directory
         base_dir = config.getoption("--xpath-trace-dir")
@@ -82,6 +82,7 @@ def pytest_runtest_teardown(item, nextitem) -> None:
 
     # Debug output
     from tracing.core.utils import is_debug_enabled
+
     if is_debug_enabled() and saved_count > 0:
         print(f"[DEBUG] Saved traces for {saved_count} page(s)")
 

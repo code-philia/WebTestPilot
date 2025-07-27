@@ -5,14 +5,14 @@ Provides centralized tracking of all active TracedPage instances
 to enable automatic trace saving in pytest teardown.
 """
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 from weakref import WeakSet
 
 if TYPE_CHECKING:
     from ..playwright.traced_page import TracedPage
 
 # Global registry using WeakSet to automatically remove pages when they're garbage collected
-_active_traced_pages: WeakSet[Any] = WeakSet()
+_active_traced_pages: WeakSet = WeakSet()
 
 
 def register_traced_page(page: "TracedPage") -> None:

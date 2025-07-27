@@ -168,11 +168,13 @@ def create_book(logged_in_page: Page, book_name: str, book_description: str) -> 
 
     # Cover image
     logged_in_page.get_by_role("button", name="▸ Cover image").click()
-    with logged_in_page.expect_file_chooser() as fc_info:
-        logged_in_page.get_by_text("Select Image").click()
 
-    file_chooser = fc_info.value
-    file_chooser.set_files(os.path.abspath("./assets/minion.jpeg"))
+    # TODO: Do we need expect file chooser.
+    # with logged_in_page.expect_file_chooser() as fc_info:
+    #     logged_in_page.get_by_text("Select Image").click()
+
+    # file_chooser = fc_info.value
+    # file_chooser.set_files(os.path.abspath("./assets/minion.jpeg"))
 
     # Book Tags
     logged_in_page.get_by_role("button", name="▸ Book Tags").click()
