@@ -34,9 +34,9 @@ class TraceEntry:
         """Convert to simplified dictionary (exclude error fields if no errors)"""
         trace_dict = {
             "url": self.url,
+            "action_type": self.action_type,
             "xpath": self.xpath,
             "action": self.action,
-            "action_type": self.action_type,
         }
 
         if self.value is not None:

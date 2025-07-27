@@ -2,278 +2,271 @@
   "test": "test_sort_chapter_book",
   "app": "bookstack",
   "collection": "sort",
-  "total_traces": 40,
-  "successful_traces": 40,
+  "total_traces": 39,
+  "successful_traces": 39,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
-      "goto",
+      "click",
       "fill",
-      "to_be_visible",
-      "click"
+      "goto",
+      "to_be_visible"
     ],
     "successful_methods": [
-      "goto",
+      "click",
       "fill",
-      "to_be_visible",
-      "click"
+      "goto",
+      "to_be_visible"
     ],
     "failed_methods": [],
-    "missing_methods": [],
-    "coverage_percentage": 100.0
+    "missing_methods": []
   },
   "traces": [
     {
       "url": "about:blank",
+      "action_type": "action",
       "xpath": "PAGE",
       "action": "goto",
-      "value": "http://localhost:8081/",
-      "action_type": "action"
+      "value": "http://localhost:8081/"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div/a",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"email\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"email\"]",
       "action": "fill",
-      "value": "admin@admin.com",
-      "action_type": "action"
+      "value": "admin@admin.com"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"password\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"password\"]",
       "action": "fill",
-      "value": "password",
-      "action_type": "action"
+      "value": "password"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"login-form\"]/div[2]/div[2]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "action",
       "xpath": "PAGE",
       "action": "goto",
-      "value": "http://localhost:8081/",
-      "action_type": "action"
+      "value": "http://localhost:8081/"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book704681",
-      "action_type": "action"
+      "value": "Book125587"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
-      "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[2]/label",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
-      "value": "env",
-      "action_type": "action"
+      "value": "env"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
-      "value": "test",
-      "action_type": "action"
+      "value": "test"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681",
+      "url": "http://localhost:8081/books/book125587",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[2]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Chapter704681",
-      "action_type": "action"
+      "value": "Chapter125587"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
-      "value": "Sample Tag",
-      "action_type": "action"
+      "value": "Sample Tag"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
-      "value": "Sample Tag",
-      "action_type": "action"
+      "value": "Sample Tag"
     },
     {
-      "url": "http://localhost:8081/books/book704681/create-chapter",
+      "url": "http://localhost:8081/books/book125587/create-chapter",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[5]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/draft/69",
+      "url": "http://localhost:8081/books/book125587/draft/15",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/draft/69",
-      "xpath": "//*[@id=\"name\"]",
-      "action": "fill",
-      "value": "Page704681 1",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book704681/draft/69",
-      "xpath": "//*[@id=\"save-button\"]",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book704681/draft/70",
-      "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/books/book704681/draft/70",
+      "url": "http://localhost:8081/books/book125587/draft/15",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Page704681 2",
-      "action_type": "action"
+      "value": "Page125587 1"
     },
     {
-      "url": "http://localhost:8081/books/book704681/draft/70",
+      "url": "http://localhost:8081/books/book125587/draft/15",
+      "action_type": "action",
       "xpath": "//*[@id=\"save-button\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681",
+      "url": "http://localhost:8081/books/book125587/draft/16",
+      "action_type": "action",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8081/books/book125587/draft/16",
+      "action_type": "action",
+      "xpath": "//*[@id=\"name\"]",
+      "action": "fill",
+      "value": "Page125587 2"
+    },
+    {
+      "url": "http://localhost:8081/books/book125587/draft/16",
+      "action_type": "action",
+      "xpath": "//*[@id=\"save-button\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8081/books/book125587",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[4]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/sort",
+      "url": "http://localhost:8081/books/book125587/sort",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/div[2]/div[1]/div/div[2]/details/ul/li[2]/div/div[3]/button[2]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/sort",
+      "url": "http://localhost:8081/books/book125587/sort",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/div[2]/div[1]/div/div[2]/details/ul/li[3]/div/div[3]/button[1]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681/sort",
+      "url": "http://localhost:8081/books/book125587/sort",
+      "action_type": "action",
       "xpath": "//*[@id=\"sort-form\"]/div/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book704681",
+      "url": "http://localhost:8081/books/book125587",
+      "action_type": "assertion",
       "xpath": "/html/body/div[1]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     }
   ]
 }
