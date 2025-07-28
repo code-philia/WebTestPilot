@@ -3,7 +3,10 @@ from datetime import datetime, timedelta
 from random import randint
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from tracing_api import create_traced_page, traced_expect as expect
+
+pytest_plugins = ["pytest_xpath_plugin"]
 
 INDICO_HOST = "http://localhost:8080"
 USER = "admin@admin.com"
@@ -129,16 +132,17 @@ def test_data() -> IndicoTestData:
 
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
-    page.goto(INDICO_HOST)
-    page.get_by_role("link", name=" Login").click()
-    page.get_by_role("textbox", name="Username or email").fill(USER)
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill(PASSWORD)
-    page.get_by_role("button", name="Login with Indico").click()
+    traced_page = create_traced_page(page)
+    traced_page.goto(INDICO_HOST)
+    traced_page.get_by_role("link", name=" Login").click()
+    traced_page.get_by_role("textbox", name="Username or email").fill(USER)
+    traced_page.get_by_role("textbox", name="Password").click()
+    traced_page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    traced_page.get_by_role("button", name="Login with Indico").click()
 
-    expect(page.locator("#global-menu")).to_contain_text("My profile")
+    expect(traced_page.locator("#global-menu")).to_contain_text("My profile")
 
-    return page
+    return traced_page
 
 
 @pytest.fixture
