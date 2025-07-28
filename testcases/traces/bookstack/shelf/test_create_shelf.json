@@ -2,348 +2,284 @@
   "test": "test_create_shelf",
   "app": "bookstack",
   "collection": "shelf",
-  "total_traces": 48,
-  "successful_traces": 45,
-  "failed_traces": 3,
+  "total_traces": 40,
+  "successful_traces": 40,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
       "click",
-      "set_input_files",
-      "filter",
+      "fill",
       "goto",
-      "to_contain_text",
-      "set_viewport_size",
-      "expect_file_chooser",
+      "set_input_files",
       "to_be_visible",
-      "fill"
+      "to_contain_text"
     ],
     "successful_methods": [
       "click",
-      "set_input_files",
+      "fill",
       "goto",
-      "to_contain_text",
-      "set_viewport_size",
-      "expect_file_chooser",
+      "set_input_files",
       "to_be_visible",
-      "fill"
+      "to_contain_text"
     ],
-    "failed_methods": [
-      "filter"
-    ],
-    "missing_methods": [
-      "filter"
-    ],
-    "coverage_percentage": 88.88888888888889
+    "failed_methods": [],
+    "missing_methods": []
   },
   "traces": [
     {
       "url": "about:blank",
-      "xpath": "PAGE",
-      "action": "set_viewport_size",
-      "action_type": "action"
-    },
-    {
-      "url": "about:blank",
+      "action_type": "action",
       "xpath": "PAGE",
       "action": "goto",
-      "value": "http://localhost:8081/",
-      "action_type": "action"
+      "value": "http://localhost:8081/"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div/a",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"email\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"email\"]",
       "action": "fill",
-      "value": "admin@admin.com",
-      "action_type": "action"
+      "value": "admin@admin.com"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"password\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"password\"]",
       "action": "fill",
-      "value": "password",
-      "action_type": "action"
+      "value": "password"
     },
     {
       "url": "http://localhost:8081/login",
+      "action_type": "action",
       "xpath": "//*[@id=\"login-form\"]/div[2]/div[2]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "action",
       "xpath": "PAGE",
       "action": "goto",
-      "value": "http://localhost:8081/",
-      "action_type": "action"
+      "value": "http://localhost:8081/"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book448948 1",
-      "action_type": "action"
+      "value": "Book221374 1"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[2]/label",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
-      "value": "env",
-      "action_type": "action"
+      "value": "env"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
-      "value": "test",
-      "action_type": "action"
+      "value": "test"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book448948-1",
+      "url": "http://localhost:8081/books/book221374-1",
+      "action_type": "action",
       "xpath": "PAGE",
       "action": "goto",
-      "value": "http://localhost:8081/",
-      "action_type": "action"
+      "value": "http://localhost:8081/"
     },
     {
       "url": "http://localhost:8081/",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
       "url": "http://localhost:8081/books",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book448948 2",
-      "action_type": "action"
+      "value": "Book221374 2"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
-      "xpath": "PAGE",
-      "action": "expect_file_chooser",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
-      "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[2]/label",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[2]/input",
       "action": "fill",
-      "value": "env",
-      "action_type": "action"
+      "value": "env"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"tags-control\"]/div/div/div/div[1]/div[3]/input",
       "action": "fill",
-      "value": "test",
-      "action_type": "action"
+      "value": "test"
     },
     {
       "url": "http://localhost:8081/create-book",
+      "action_type": "action",
       "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book448948-2",
+      "url": "http://localhost:8081/books/book221374-2",
+      "action_type": "action",
       "xpath": "//*[@id=\"header\"]/nav/div[1]/a[2]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/shelves",
+      "action_type": "action",
       "xpath": "//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/aside/div/div/a[1]",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-shelf",
+      "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Shelf448948",
-      "action_type": "action"
+      "value": "Shelf221374"
     },
     {
       "url": "http://localhost:8081/create-shelf",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
       "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"listitem\") resolved to 111 elements:\n    1) <li data-id=\"54\" class=\"scroll-box-item\" data-created=\"1753415030\" data-updated=\"1753415031\" data-name=\"Book Updated 191826\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 191826\")\n    2) <li data-id=\"73\" class=\"scroll-box-item\" data-created=\"1753421576\" data-updated=\"1753421577\" data-name=\"Book Updated 332584\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 332584\")\n    3) <li data-id=\"60\" class=\"scroll-box-item\" data-created=\"1753416921\" data-updated=\"1753416922\" data-name=\"Book Updated 516356\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 516356\")\n    4) <li data-id=\"39\" class=\"scroll-box-item\" data-created=\"1753409094\" data-updated=\"1753409094\" data-name=\"Book Updated 586665\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 586665\")\n    5) <li data-id=\"100\" class=\"scroll-box-item\" data-created=\"1753428024\" data-updated=\"1753428025\" data-name=\"Book Updated 594281\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 594281\")\n    6) <li data-id=\"49\" class=\"scroll-box-item\" data-created=\"1753410628\" data-updated=\"1753410629\" data-name=\"Book Updated 704664\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 704664\")\n    7) <li data-id=\"3\" class=\"scroll-box-item\" data-created=\"1753274544\" data-updated=\"1753274544\" data-name=\"Book Updated 866784\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 866784\")\n    8) <li data-id=\"86\" class=\"scroll-box-item\" data-created=\"1753426154\" data-updated=\"1753426155\" data-name=\"Book Updated 995693\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 995693\")\n    9) <li data-id=\"14\" data-name=\"Book106094\" class=\"scroll-box-item\" data-created=\"1753274587\" data-updated=\"1753274587\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book106094\")\n    10) <li data-id=\"52\" data-name=\"Book111739\" class=\"scroll-box-item\" data-created=\"1753414963\" data-updated=\"1753414963\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book111739\")\n    ...\n\nCall log:\n  - waiting for get_by_role(\"listitem\")\n"
-    },
-    {
-      "url": "http://localhost:8081/create-shelf",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
-      "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"listitem\") resolved to 111 elements:\n    1) <li data-id=\"115\" class=\"scroll-box-item\" data-name=\"Book448948 1\" data-created=\"1753428149\" data-updated=\"1753428149\">\u2026</li> aka get_by_role(\"list\", name=\"Books on this shelf\").get_by_role(\"listitem\")\n    2) <li data-id=\"54\" class=\"scroll-box-item\" data-created=\"1753415030\" data-updated=\"1753415031\" data-name=\"Book Updated 191826\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 191826\")\n    3) <li data-id=\"73\" class=\"scroll-box-item\" data-created=\"1753421576\" data-updated=\"1753421577\" data-name=\"Book Updated 332584\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 332584\")\n    4) <li data-id=\"60\" class=\"scroll-box-item\" data-created=\"1753416921\" data-updated=\"1753416922\" data-name=\"Book Updated 516356\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 516356\")\n    5) <li data-id=\"39\" class=\"scroll-box-item\" data-created=\"1753409094\" data-updated=\"1753409094\" data-name=\"Book Updated 586665\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 586665\")\n    6) <li data-id=\"100\" class=\"scroll-box-item\" data-created=\"1753428024\" data-updated=\"1753428025\" data-name=\"Book Updated 594281\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 594281\")\n    7) <li data-id=\"49\" class=\"scroll-box-item\" data-created=\"1753410628\" data-updated=\"1753410629\" data-name=\"Book Updated 704664\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 704664\")\n    8) <li data-id=\"3\" class=\"scroll-box-item\" data-created=\"1753274544\" data-updated=\"1753274544\" data-name=\"Book Updated 866784\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 866784\")\n    9) <li data-id=\"86\" class=\"scroll-box-item\" data-created=\"1753426154\" data-updated=\"1753426155\" data-name=\"Book Updated 995693\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book Updated 995693\")\n    10) <li data-id=\"14\" data-name=\"Book106094\" class=\"scroll-box-item\" data-created=\"1753274587\" data-updated=\"1753274587\">\u2026</li> aka get_by_role(\"listitem\").filter(has_text=\"Book106094\")\n    ...\n\nCall log:\n  - waiting for get_by_role(\"listitem\")\n"
-    },
-    {
-      "url": "http://localhost:8081/create-shelf",
       "xpath": "//*[@id=\"logo-control\"]/button",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-shelf",
+      "action_type": "action",
       "xpath": "//*[@id=\"logo-control\"]/div/div/div/div[2]/label",
-      "action": "click",
-      "action_type": "action"
+      "action": "click"
     },
     {
       "url": "http://localhost:8081/create-shelf",
+      "action_type": "action",
       "xpath": "//*[@id=\"image\"]",
       "action": "set_input_files",
-      "value": "file:/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/testcases/assets/minion.jpeg",
-      "action_type": "action"
+      "value": "file:/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/testcases/assets/minion.jpeg"
     },
     {
       "url": "http://localhost:8081/create-shelf",
-      "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
-      "action": "click",
-      "action_type": "action"
-    },
-    {
-      "url": "http://localhost:8081/shelves/shelf448948",
-      "xpath": "LOCATOR_ERROR",
-      "action": "filter",
       "action_type": "action",
-      "success": false,
-      "error_message": "xpath_path: Error: strict mode violation: get_by_role(\"alert\") resolved to 3 elements:\n    1) <div role=\"alert\" component=\"notification\" class=\"notification pos\" option:notification:show=\"true\" option:notification:type=\"success\" option:notification:auto-hide=\"true\">\u2026</div> aka get_by_role(\"alert\").filter(has_text=\"Shelf successfully created\")\n    2) <div role=\"alert\" component=\"notification\" class=\"notification warning\" option:notification:show=\"false\" option:notification:type=\"warning\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(1)\n    3) <div role=\"alert\" component=\"notification\" class=\"notification neg\" option:notification:type=\"error\" option:notification:show=\"false\" option:notification:auto-hide=\"false\">\u2026</div> aka get_by_role(\"alert\").nth(2)\n\nCall log:\n  - waiting for get_by_role(\"alert\")\n"
+      "xpath": "//*[@id=\"main-content\"]/div/main/form/div[6]/button",
+      "action": "click"
     },
     {
-      "url": "http://localhost:8081/shelves/shelf448948",
+      "url": "http://localhost:8081/shelves/shelf221374",
+      "action_type": "assertion",
       "xpath": "/html/body/div[1]",
-      "action": "to_be_visible",
-      "action_type": "assertion"
+      "action": "to_be_visible"
     },
     {
-      "url": "http://localhost:8081/shelves/shelf448948",
+      "url": "http://localhost:8081/shelves/shelf221374",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"main-content\"]/main",
       "action": "to_contain_text",
-      "value": "Book448948 1",
-      "action_type": "assertion"
+      "value": "Book221374 1"
     },
     {
-      "url": "http://localhost:8081/shelves/shelf448948",
+      "url": "http://localhost:8081/shelves/shelf221374",
+      "action_type": "assertion",
       "xpath": "//*[@id=\"main-content\"]/main",
       "action": "to_contain_text",
-      "value": "Book448948 2",
-      "action_type": "assertion"
+      "value": "Book221374 2"
     }
   ]
 }

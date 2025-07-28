@@ -1,6 +1,7 @@
 import re
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from tracing_api import traced_expect as expect
 
 from invoiceninja.conftest import InvoiceNinjaTestData
 

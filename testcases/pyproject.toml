@@ -9,4 +9,5 @@ dependencies = [
     "pytest>=8.4.1",
     "pytest-playwright>=0.7.0",
     "pytest-xdist>=3.6.1",
+    "playwright-dompath>=0.0.1",
 ]

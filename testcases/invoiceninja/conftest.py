@@ -3,9 +3,14 @@ from dataclasses import dataclass
 from random import randint
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from tracing_api import create_traced_page
+from tracing_api import traced_expect as expect
 
-INVOICE_NINJA_HOST = "http://localhost:8802"
+pytest_plugins = ["pytest_xpath_plugin"]
+
+
+INVOICE_NINJA_HOST = "http://localhost:8082"
 INITIAL_USER = "admin@example.com"
 INITIAL_PASSWORD = "changeme!"
 
@@ -119,19 +124,21 @@ def logged_in_page(page: Page) -> Page:
     Returns:
         Page: A Playwright page object with user logged in
     """
-    page.set_viewport_size({"width": 1280, "height": 720})
-    page.goto(f"{INVOICE_NINJA_HOST}/login")
+    traced_page = create_traced_page(page)
+
+    traced_page.set_viewport_size({"width": 1280, "height": 720})
+    traced_page.goto(f"{INVOICE_NINJA_HOST}/login")
 
     # Perform login
-    page.locator('input[name="email"]').click()
-    page.locator('input[name="email"]').fill(INITIAL_USER)
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
-    page.get_by_role("button", name="Login").click()
+    traced_page.locator('input[name="email"]').click()
+    traced_page.locator('input[name="email"]').fill(INITIAL_USER)
+    traced_page.get_by_role("textbox", name="Password").click()
+    traced_page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
+    traced_page.get_by_role("button", name="Login").click()
 
-    page.get_by_role("button", name="Save").click()
+    traced_page.get_by_role("button", name="Save").click()
 
-    return page
+    return traced_page
 
 
 def create_client(
@@ -216,11 +223,11 @@ def create_product(
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Item\*$")).get_by_role(
         "textbox"
     ).fill(product_name)
-    
+
     # Description
     logged_in_page.locator('textarea[type="text"]').click()
     logged_in_page.locator('textarea[type="text"]').fill(test_data.product_description)
-    
+
     # Price
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Price$")).get_by_role(
         "textbox"
@@ -228,7 +235,7 @@ def create_product(
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Price$")).get_by_role(
         "textbox"
     ).fill(test_data.product_price)
-    
+
     # Default quantity
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Default Quantity$")
@@ -236,7 +243,7 @@ def create_product(
     logged_in_page.locator("div").filter(
         has_text=re.compile(pattern=r"^Default Quantity$")
     ).get_by_role("textbox").fill(test_data.product_default_quantity)
-    
+
     # Max quantity
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Max Quantity$")
@@ -273,7 +280,7 @@ def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
     logged_in_page.wait_for_timeout(1000)
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
     logged_in_page.get_by_role("link", name="New Invoice").click()
-    
+
     # Choose client for invoice
     logged_in_page.get_by_test_id("combobox-input-field").click()
     logged_in_page.get_by_test_id("combobox-input-field").fill(test_data.company_name)
