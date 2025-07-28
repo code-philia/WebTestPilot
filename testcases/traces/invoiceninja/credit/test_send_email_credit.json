@@ -1,0 +1,488 @@
+{
+  "test": "test_send_email_credit",
+  "app": "invoiceninja",
+  "collection": "credit",
+  "total_traces": 72,
+  "successful_traces": 72,
+  "failed_traces": 0,
+  "coverage_stats": {
+    "attempted_methods": [
+      "click",
+      "dblclick",
+      "fill",
+      "goto",
+      "to_contain_text"
+    ],
+    "successful_methods": [
+      "click",
+      "dblclick",
+      "fill",
+      "goto",
+      "to_contain_text"
+    ],
+    "failed_methods": [],
+    "missing_methods": []
+  },
+  "traces": [
+    {
+      "url": "about:blank",
+      "action_type": "action",
+      "xpath": "PAGE",
+      "action": "goto",
+      "value": "http://localhost:8082/login"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
+      "action": "fill",
+      "value": "admin@example.com"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"password\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"password\"]",
+      "action": "fill",
+      "value": "changeme!"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/login",
+      "action_type": "action",
+      "xpath": "//*[@id=\"headlessui-dialog-:r6:\"]/div/div[2]/div[2]/div/div[2]/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/dashboard",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "fill",
+      "value": "company_name526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
+      "action": "fill",
+      "value": "company_number526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "fill",
+      "value": "company_id526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[6]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[6]/dd/section/div/input",
+      "action": "fill",
+      "value": "vat_number526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[7]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[7]/dd/section/div/input",
+      "action": "fill",
+      "value": "website526749.com"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input",
+      "action": "fill",
+      "value": "09526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"first_name_0\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"first_name_0\"]",
+      "action": "fill",
+      "value": "first_name526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"last_name_0\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"last_name_0\"]",
+      "action": "fill",
+      "value": "last_name526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"email_0\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"email_0\"]",
+      "action": "fill",
+      "value": "email526749@example.com"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"phone_0\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"phone_0\"]",
+      "action": "fill",
+      "value": "099526749"
+    },
+    {
+      "url": "http://localhost:8082/clients/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "fill",
+      "value": "product_name5267491"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
+      "action": "fill",
+      "value": "product_description526749"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
+      "action": "fill",
+      "value": "526749"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
+      "action": "dblclick"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
+      "action": "fill",
+      "value": "200"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "fill",
+      "value": "1000"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
+      "action": "fill",
+      "value": "product_name5267492"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
+      "action": "fill",
+      "value": "product_description526749"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
+      "action": "fill",
+      "value": "526749"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
+      "action": "dblclick"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
+      "action": "fill",
+      "value": "200"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
+      "action": "fill",
+      "value": "1000"
+    },
+    {
+      "url": "http://localhost:8082/products/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/products/l4zbq2dprO/edit",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/nav[1]/div[8]/a[1]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"headlessui-combobox-input-:r2r:\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"headlessui-combobox-input-:r2r:\"]",
+      "action": "fill",
+      "value": "company_name526749"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"headlessui-combobox-option-:r3b:\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"number\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"number\"]",
+      "action": "fill",
+      "value": "526749"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr/td/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/div/div/input",
+      "action": "fill",
+      "value": "product_name5267491"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/ul/li",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[2]/td/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[2]/td[1]/div/div/div/div/input",
+      "action": "fill",
+      "value": "product_name5267492"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[2]/td[1]/div/div/ul/li/div/div/p",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/create",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/wMvbmOeYAl/edit",
+      "action_type": "action",
+      "xpath": "//*[@id=\"tippy-28\"]/div/a[2]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/wMvbmOeYAl/email",
+      "action_type": "action",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/credits/wMvbmOeYAl/edit",
+      "action_type": "assertion",
+      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main",
+      "action": "to_contain_text",
+      "value": "Sent"
+    }
+  ]
+}

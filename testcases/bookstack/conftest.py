@@ -124,11 +124,8 @@ def logged_in_page(page: Page) -> Page:
     Returns:
         Page: A Playwright page object with user logged in (possibly traced)
     """
-    # Wrap with tracing if enabled
     traced_page = create_traced_page(page)
 
-    # Navigate to the demo site
-    # Change viewport size for better visibility
     traced_page.set_viewport_size({"width": 1280, "height": 720})
     traced_page.goto(BOOKSTACK_HOST)
 

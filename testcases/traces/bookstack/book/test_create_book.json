@@ -109,7 +109,7 @@
       "action_type": "action",
       "xpath": "//*[@id=\"name\"]",
       "action": "fill",
-      "value": "Book942839"
+      "value": "Book714552"
     },
     {
       "url": "http://localhost:8081/create-book",
@@ -144,19 +144,19 @@
       "action": "click"
     },
     {
-      "url": "http://localhost:8081/books/book942839",
+      "url": "http://localhost:8081/books/book714552",
       "action_type": "assertion",
       "xpath": "/html/body/div[1]",
       "action": "to_be_visible"
     },
     {
-      "url": "http://localhost:8081/books/book942839",
+      "url": "http://localhost:8081/books/book714552",
       "action_type": "assertion",
       "xpath": "//*[@id=\"main-content\"]/main/h1",
       "action": "to_be_visible"
     },
     {
-      "url": "http://localhost:8081/books/book942839",
+      "url": "http://localhost:8081/books/book714552",
       "action_type": "assertion",
       "xpath": "//*[@id=\"main-content\"]/main/div[1]/div[1]/p",
       "action": "to_be_visible"
