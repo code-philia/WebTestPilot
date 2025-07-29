@@ -7,14 +7,15 @@ from baml_client.types import Scenario
 load_dotenv()
 
 cr = ClientRegistry()
-cr.set_primary('GPT4o')
+cr.set_primary("GPT4o")
+
 
 def parser(description: str) -> Scenario:
     scenario = b.ExtractScenario(description, {"client_registry": cr})
 
     if any(
-        "<unknown>" in part 
-        for step in scenario.steps 
+        "<unknown>" in part
+        for step in scenario.steps
         for part in (step.condition, step.action, step.expectation)
     ):
         scenario = b.ImplicitGeneration(scenario, {"client_registry": cr})

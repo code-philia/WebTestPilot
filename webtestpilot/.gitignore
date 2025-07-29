@@ -12,5 +12,8 @@ wheels/
 # Environment variables
 .env
 
+# Ruff
+.ruff_cache/
+
 # BAML-generated files
 baml_client
