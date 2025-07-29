@@ -84,14 +84,20 @@ def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> Non
     book2_chapter.locator("#main-content").get_by_role("textbox", name="Search").fill(
         test_data.book_name + " 1"
     )
-    book2_chapter.wait_for_timeout(500)  # Wait for search results to load
+    book2_chapter.wait_for_timeout(1000)  # Wait for search results to load
 
     book2_chapter.get_by_role("link", name=test_data.book_name + " 1").click()
     book2_chapter.get_by_role("button", name="Move Chapter").click()
 
     # Go to book & verify the chapter was moved successfully.
     book2_chapter.get_by_role("link", name="Books", exact=True).first.click()
-    book2_chapter.locator("h2", has_text=test_data.book_name + " 1").click()
+
+    # Choose from the "Recently Viewed" list, as the full list may not include the book
+    # when there are many records requiring pagination.
+    book2_chapter.locator("#recents").get_by_role(
+        "link", name=test_data.book_name + " 1"
+    ).click()
+
     expect(book2_chapter.get_by_role("main")).to_contain_text(
         test_data.chapter_name + " 1"
     )

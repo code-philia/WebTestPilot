@@ -49,7 +49,7 @@ def test_create_page_template(
     expect(
         created_page_page.locator(
             'iframe[title="Rich Text Area"]'
-        ).content_frame.get_by_text(test_data.page_description)
+        ).content_frame.get_by_text(test_data.page_description, exact=True)
     ).to_contain_text(test_data.page_description)
 
     created_page_page.get_by_role("button", name="Save Page").click()
