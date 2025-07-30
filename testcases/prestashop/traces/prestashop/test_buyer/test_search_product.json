@@ -1,0 +1,81 @@
+{
+  "test": "test_search_product",
+  "app": "prestashop",
+  "collection": "test_buyer",
+  "total_traces": 8,
+  "successful_traces": 8,
+  "failed_traces": 0,
+  "coverage_stats": {
+    "attempted_methods": [
+      "click",
+      "fill",
+      "goto",
+      "press",
+      "to_be_visible"
+    ],
+    "successful_methods": [
+      "click",
+      "fill",
+      "goto",
+      "press",
+      "to_be_visible"
+    ],
+    "failed_methods": [],
+    "missing_methods": []
+  },
+  "traces": [
+    {
+      "url": "about:blank",
+      "action_type": "action",
+      "xpath": "PAGE",
+      "action": "goto",
+      "value": "http://localhost:8083/"
+    },
+    {
+      "url": "http://localhost:8083/",
+      "action_type": "action",
+      "xpath": "//*[@id=\"_desktop_user_info\"]/div/a",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
+      "action_type": "action",
+      "xpath": "//*[@id=\"field-email\"]",
+      "action": "fill",
+      "value": "pub@prestashop.com"
+    },
+    {
+      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
+      "action_type": "action",
+      "xpath": "//*[@id=\"field-password\"]",
+      "action": "fill",
+      "value": "testTEST123."
+    },
+    {
+      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
+      "action_type": "action",
+      "xpath": "//*[@id=\"submit-login\"]",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8083/",
+      "action_type": "action",
+      "xpath": "//*[@id=\"search_widget\"]/form/input[2]",
+      "action": "fill",
+      "value": "Hummingbird printed t-shirt"
+    },
+    {
+      "url": "http://localhost:8083/",
+      "action_type": "action",
+      "xpath": "//*[@id=\"search_widget\"]/form/input[2]",
+      "action": "press",
+      "value": "Enter"
+    },
+    {
+      "url": "http://localhost:8083/search?controller=search&s=Hummingbird+printed+t-shirt",
+      "action_type": "assertion",
+      "xpath": "//*[@id=\"js-product-list\"]/div[1]/div/article",
+      "action": "to_be_visible"
+    }
+  ]
+}

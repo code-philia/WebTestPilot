@@ -184,13 +184,26 @@ class PlaywrightProxy:
     ) -> Optional[str]:
         """Extract Playwright-specific values from method arguments"""
         try:
+            # Special handling for select_option
+            if method_name == "select_option":
+                # Check kwargs first (label, value, index)
+                if "label" in kwargs:
+                    return f"label:{kwargs['label']}"
+                elif "value" in kwargs:
+                    return f"value:{kwargs['value']}"
+                elif "index" in kwargs:
+                    return f"index:{kwargs['index']}"
+                # Fall back to positional arguments
+                elif args:
+                    return str(args[0])
+                return None
+
             # Simple first-arg extraction for most methods
             if method_name in [
                 "fill",
                 "type",
                 "press",
                 "goto",
-                "select_option",
                 "dispatch_event",
                 "to_contain_text",
                 "to_have_text",
