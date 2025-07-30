@@ -10,4 +10,5 @@ dependencies = [
     "pytest-playwright>=0.7.0",
     "pytest-xdist>=3.6.1",
     "playwright-dompath>=0.0.1",
+    "pytest-dependency>=0.6.0",
 ]
