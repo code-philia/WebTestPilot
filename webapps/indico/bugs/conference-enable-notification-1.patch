@@ -1,0 +1,16 @@
+diff --git a/indico/modules/events/abstracts/__init__.py b/indico/modules/events/abstracts/__init__.py
+index 8230142d0d..0e68b3a040 100644
+--- a/indico/modules/events/abstracts/__init__.py
++++ b/indico/modules/events/abstracts/__init__.py
+@@ -46,10 +46,7 @@ def _clear_boa_cache(sender, obj=None, **kwargs):
+ 
+ @signals.menu.items.connect_via('event-management-sidemenu')
+ def _extend_event_management_menu(sender, event, **kwargs):
+-    if not event.can_manage(session.user, permission='abstracts') or not AbstractsFeature.is_allowed_for_event(event):
+-        return
+-    return SideMenuItem('abstracts', _('Call for Abstracts'), url_for('abstracts.management', event),
+-                        section='workflows', weight=30)
++    return None
+ 
+ 
+ @signals.event.get_feature_definitions.connect

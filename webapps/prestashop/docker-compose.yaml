@@ -7,7 +7,7 @@ services:
     environment:
       - PS_DEV_MODE=1
       - PS_INSTALL_AUTO=1
-      - PS_DOMAIN=${URL}:${APP_PORT}
+      - PS_DOMAIN=${APP_URL}:${APP_PORT}
       - ADMIN_MAIL=admin@admin.com      # here is the email address of the admin,you can change it 
       - ADMIN_PASSWD=admin12345         # here is the password of the admin ,you can change it 
       - PS_FOLDER_ADMIN=webtestpilot

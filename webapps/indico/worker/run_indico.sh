@@ -33,4 +33,6 @@ EOF
 fi
 
 echo 'Starting Indico...'
-uwsgi /etc/uwsgi.ini
+uwsgi /etc/uwsgi.ini --processes 1 --reload-on-rss 256
+
+

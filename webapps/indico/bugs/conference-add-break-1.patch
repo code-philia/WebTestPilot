@@ -1,0 +1,22 @@
+diff --git a/indico/modules/events/timetable/__init__.py b/indico/modules/events/timetable/__init__.py
+index a0f4d1abb9..28a210213b 100644
+--- a/indico/modules/events/timetable/__init__.py
++++ b/indico/modules/events/timetable/__init__.py
+@@ -28,7 +28,7 @@ def _extend_event_menu(sender, **kwargs):
+     def _visible_timetable(event):
+         return contribution_settings.get(event, 'published') or event.can_manage(session.user)
+ 
+-    yield MenuEntryData(title=_('Timetable'), name='timetable', endpoint='timetable.timetable', position=3,
++    yield MenuEntryData(title=_('Timetable'), name='timetable', endpoint='categories.display', position=3,
+                         visible=_visible_timetable, static_site=True)
+ 
+ 
+@@ -38,7 +38,7 @@ def _extend_event_management_menu(sender, event, **kwargs):
+     if not can_manage_sessions(session.user, event, 'ANY'):
+         return
+     if event.type != 'lecture':
+-        return SideMenuItem('timetable', _('Timetable'), url_for('timetable.management', event), weight=80,
++        return SideMenuItem('timetable', _('Timetable'), url_for('categories.display', 0), weight=80,
+                             icon='calendar')
+ 
+ 

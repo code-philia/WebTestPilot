@@ -1,4 +1,5 @@
-FROM python:3.12-bookworm
+FROM python:3.12.3-bookworm
+
 
 ENV INDICO_VIRTUALENV="/opt/indico/.venv" INDICO_CONFIG="/opt/indico/etc/indico.conf"
 
@@ -8,14 +9,22 @@ ARG tag="latest"
 # create indico user, install apt dependencies as root and setup uwsgi etc.
 USER root
 
+
+
 RUN set -ex && \
 	groupadd -r indico && \
 	useradd -r -g indico -m -d /opt/indico indico
 
 RUN set -ex && \
+    rm -f /etc/apt/sources.list.d/debian.sources && \
+    echo "deb http://mirrors.cloud.tencent.com/debian bookworm main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.cloud.tencent.com/debian bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get -y install texlive-xetex libpq-dev postgresql-client vim less gcc gettext libldap2-dev && \
     apt-get clean
+
+
 
 COPY uwsgi.ini /etc/uwsgi.ini
 WORKDIR /opt/indico
@@ -36,15 +45,16 @@ USER indico
 
 RUN set -ex && \
     python -m venv ${INDICO_VIRTUALENV} && \
-    ${pip} install --upgrade pip setuptools wheel && \
-    ${pip} install uwsgi
+    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
+    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple uwsgi
+
 
 RUN if [ "$tag" = "latest" ]; then \
-    ${pip} install indico; \
+    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple indico; \
 else \
-    ${pip} install indico==${tag}; \
+    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple indico==${tag}; \
 fi;
-RUN ${pip} install indico-plugins
+
 
 RUN ${INDICO_VIRTUALENV}/bin/indico setup create-symlinks /opt/indico
 

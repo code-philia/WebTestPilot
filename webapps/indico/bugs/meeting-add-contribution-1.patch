@@ -1,0 +1,31 @@
+diff --git a/indico/modules/events/timetable/__init__.py b/indico/modules/events/timetable/__init__.py
+index a0f4d1abb9..de1c207dae 100644
+--- a/indico/modules/events/timetable/__init__.py
++++ b/indico/modules/events/timetable/__init__.py
+@@ -22,24 +22,11 @@ logger = Logger.get('events.timetable')
+ 
+ @signals.event.sidemenu.connect
+ def _extend_event_menu(sender, **kwargs):
+-    from indico.modules.events.contributions import contribution_settings
+-    from indico.modules.events.layout.util import MenuEntryData
+-
+-    def _visible_timetable(event):
+-        return contribution_settings.get(event, 'published') or event.can_manage(session.user)
+-
+-    yield MenuEntryData(title=_('Timetable'), name='timetable', endpoint='timetable.timetable', position=3,
+-                        visible=_visible_timetable, static_site=True)
+-
++    pass
+ 
+ @signals.menu.items.connect_via('event-management-sidemenu')
+ def _extend_event_management_menu(sender, event, **kwargs):
+-    from indico.modules.events.sessions.util import can_manage_sessions
+-    if not can_manage_sessions(session.user, event, 'ANY'):
+-        return
+-    if event.type != 'lecture':
+-        return SideMenuItem('timetable', _('Timetable'), url_for('timetable.management', event), weight=80,
+-                            icon='calendar')
++    pass
+ 
+ 
+ @signals.event_management.get_cloners.connect

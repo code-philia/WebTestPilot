@@ -1,0 +1,18 @@
+diff --git a/indico/modules/events/abstracts/templates/management/cfa_actions/not_started.html b/indico/modules/events/abstracts/templates/management/cfa_actions/not_started.html
+index ade7797c40..cbdb8809a7 100644
+--- a/indico/modules/events/abstracts/templates/management/cfa_actions/not_started.html
++++ b/indico/modules/events/abstracts/templates/management/cfa_actions/not_started.html
+@@ -20,10 +20,9 @@
+ {% block buttons %}
+     {{ super() }}
+     <div class="group">
+-        <button class="i-button highlight"
+-                data-href="{{ url_for('.open_abstracts_call', event) }}"
+-                data-method="POST">
+-            {%- trans %}Start now{% endtrans -%}
++        <button class="i-button highlight disabled"
++            onclick="return false;">
++            {% trans %}Start now{% endtrans %}
+         </button>
+     </div>
+ {% endblock %}
