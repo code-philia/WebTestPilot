@@ -1,0 +1,50 @@
+{
+  "name": "TC-16-P :: Shelf Update",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the shelf created in TC-014",
+      "expectedResult": "Shelf detail page is displayed"
+    },
+    {
+      "action": "Click \"Edit\" link in the shelf actions",
+      "expectedResult": "Shelf edit form opens with current values"
+    },
+    {
+      "action": "Click in the \"Shelf Name\" textbox",
+      "expectedResult": "Name field is focused and contains current name"
+    },
+    {
+      "action": "Clear the name field and type \"Shelf Updated 123456\"",
+      "expectedResult": "Name field shows updated shelf name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Clear existing content and type \"Shelf Description Updated\"",
+      "expectedResult": "Rich text area contains updated description"
+    },
+    {
+      "action": "Modify book selections in the books section",
+      "expectedResult": "Book selections are updated"
+    },
+    {
+      "action": "Click \"Save Shelf\" button",
+      "expectedResult": "Shelf changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Shelf successfully updated\" appears",
+      "expectedResult": "Success alert confirms shelf update"
+    },
+    {
+      "action": "Verify page heading shows updated shelf name",
+      "expectedResult": "Shelf page shows new name in heading"
+    },
+    {
+      "action": "Verify updated description text is visible",
+      "expectedResult": "Updated description is displayed on page"
+    }
+  ]
+}

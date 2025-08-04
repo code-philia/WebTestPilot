@@ -1,0 +1,50 @@
+{
+  "name": "TC-27-P :: Update Sort Rules",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to sort rules management section",
+      "expectedResult": "Sort rules listing page is displayed"
+    },
+    {
+      "action": "Locate \"SortRule123456\" in the rules list",
+      "expectedResult": "Target sort rule is visible in the list"
+    },
+    {
+      "action": "Click \"Edit\" button for the sort rule",
+      "expectedResult": "Sort rule edit form opens"
+    },
+    {
+      "action": "Click in the \"Rule Name\" textbox",
+      "expectedResult": "Name field is focused with current name"
+    },
+    {
+      "action": "Clear and type \"SortRule Updated 123456\"",
+      "expectedResult": "Name field shows updated rule name"
+    },
+    {
+      "action": "Change sort type to different option",
+      "expectedResult": "Different sort type is selected"
+    },
+    {
+      "action": "Change sort order option",
+      "expectedResult": "Different sort order is selected"
+    },
+    {
+      "action": "Modify entity selection if available",
+      "expectedResult": "Entity type selections are updated"
+    },
+    {
+      "action": "Click \"Save Sort Rule\" button",
+      "expectedResult": "Sort rule changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Sort rule successfully updated\" appears",
+      "expectedResult": "Success alert confirms rule update"
+    },
+    {
+      "action": "Verify updated rule appears in listing",
+      "expectedResult": "Rules list shows updated rule details"
+    }
+  ]
+}

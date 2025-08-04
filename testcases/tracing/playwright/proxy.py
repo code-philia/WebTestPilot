@@ -143,13 +143,13 @@ class PlaywrightProxy:
         try:
             # Locator
             if isinstance(self._wrapped, Locator):
-                xpath = xpath_path(self._wrapped)
+                xpath = xpath_path(self._wrapped, False)
                 return TraceEntry(url=url, xpath=xpath, action=method_name)
 
             # Locator inside assertions
             if self._context.get("assertion_target"):
                 assertion_target = self._context.get("assertion_target")
-                xpath = xpath_path(assertion_target)
+                xpath = xpath_path(assertion_target, False)
                 return TraceEntry(url=url, xpath=xpath, action=method_name)
 
             # Assertion object without locator context

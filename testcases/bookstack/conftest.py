@@ -115,6 +115,35 @@ def test_data() -> BookStackTestData:
     return BookStackTestData()
 
 
+def login_to_bookstack(page: Page) -> Page:
+    """
+    Login to BookStack and return a traced page.
+    Can be used outside of pytest fixtures.
+
+    Args:
+        page: A Playwright page object
+
+    Returns:
+        Page: A traced page object with user logged in
+    """
+    page.set_viewport_size({"width": 1280, "height": 720})
+    page.goto(BOOKSTACK_HOST)
+
+    # Perform login
+    page.get_by_role("link", name="Log in").click()
+
+    page.get_by_role("textbox", name="Email").click()
+    page.get_by_role("textbox", name="Email").fill("admin@admin.com")
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill("password")
+    page.get_by_role("button", name="Log In").click()
+
+    # Verify login was successful by checking for Books link
+    expect(page.get_by_role("link", name="Books", exact=True)).to_be_visible()
+
+    return page
+
+
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
     """
@@ -125,23 +154,7 @@ def logged_in_page(page: Page) -> Page:
         Page: A Playwright page object with user logged in (possibly traced)
     """
     traced_page = create_traced_page(page)
-
-    traced_page.set_viewport_size({"width": 1280, "height": 720})
-    traced_page.goto(BOOKSTACK_HOST)
-
-    # Perform login
-    traced_page.get_by_role("link", name="Log in").click()
-
-    traced_page.get_by_role("textbox", name="Email").click()
-    traced_page.get_by_role("textbox", name="Email").fill("admin@admin.com")
-    traced_page.get_by_role("textbox", name="Password").click()
-    traced_page.get_by_role("textbox", name="Password").fill("password")
-    traced_page.get_by_role("button", name="Log In").click()
-
-    # Verify login was successful by checking for Books link
-    expect(traced_page.get_by_role("link", name="Books", exact=True)).to_be_visible()
-
-    return traced_page
+    return login_to_bookstack(traced_page)
 
 
 def create_book(logged_in_page: Page, book_name: str, book_description: str) -> Page:
@@ -165,13 +178,6 @@ def create_book(logged_in_page: Page, book_name: str, book_description: str) -> 
 
     # Cover image
     logged_in_page.get_by_role("button", name="▸ Cover image").click()
-
-    # TODO: Do we need expect file chooser.
-    # with logged_in_page.expect_file_chooser() as fc_info:
-    #     logged_in_page.get_by_text("Select Image").click()
-
-    # file_chooser = fc_info.value
-    # file_chooser.set_files(os.path.abspath("./assets/minion.jpeg"))
 
     # Book Tags
     logged_in_page.get_by_role("button", name="▸ Book Tags").click()

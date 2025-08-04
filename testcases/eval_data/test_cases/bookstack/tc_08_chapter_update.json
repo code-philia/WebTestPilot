@@ -1,0 +1,46 @@
+{
+  "name": "TC-8-P :: Chapter Update",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the chapter created in TC-006",
+      "expectedResult": "Chapter detail page is displayed"
+    },
+    {
+      "action": "Click \"Edit\" link in the chapter actions",
+      "expectedResult": "Chapter edit form opens with current values"
+    },
+    {
+      "action": "Click in the \"Chapter Name\" textbox",
+      "expectedResult": "Name field is focused and contains current name"
+    },
+    {
+      "action": "Clear the name field and type \"Chapter Updated 123456\"",
+      "expectedResult": "Name field shows updated chapter name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Clear existing content and type \"Chapter Description Updated\"",
+      "expectedResult": "Rich text area contains updated description"
+    },
+    {
+      "action": "Click \"Save Chapter\" button",
+      "expectedResult": "Chapter changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Chapter successfully updated\" appears",
+      "expectedResult": "Success alert confirms chapter update"
+    },
+    {
+      "action": "Verify page heading shows updated chapter name",
+      "expectedResult": "Chapter page shows new name in heading"
+    },
+    {
+      "action": "Verify updated description text is visible",
+      "expectedResult": "Updated description is displayed on page"
+    }
+  ]
+}

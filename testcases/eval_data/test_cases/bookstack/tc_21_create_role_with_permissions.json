@@ -1,0 +1,54 @@
+{
+  "name": "TC-21-P :: Create Role with Permissions",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Settings\" link in navigation",
+      "expectedResult": "Settings page is displayed"
+    },
+    {
+      "action": "Click \"Roles & Permissions\" in settings menu",
+      "expectedResult": "Roles and permissions section opens"
+    },
+    {
+      "action": "Click \"Create New Role\" button",
+      "expectedResult": "Role creation form opens"
+    },
+    {
+      "action": "Click in the \"Role Name\" textbox",
+      "expectedResult": "Role name field is focused"
+    },
+    {
+      "action": "Type \"TestRole123456\" in the name field",
+      "expectedResult": "Role name field contains unique role name"
+    },
+    {
+      "action": "Click in the \"Role Description\" textbox",
+      "expectedResult": "Role description field is focused"
+    },
+    {
+      "action": "Type \"Test role for automation\" in description field",
+      "expectedResult": "Description field contains role description"
+    },
+    {
+      "action": "Select permissions checkboxes for the role",
+      "expectedResult": "Permission checkboxes are checked"
+    },
+    {
+      "action": "Click \"Save Role\" button",
+      "expectedResult": "Role is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Role successfully created\" appears",
+      "expectedResult": "Success alert confirms role creation"
+    },
+    {
+      "action": "Verify role appears in roles listing",
+      "expectedResult": "New role is listed in roles table"
+    },
+    {
+      "action": "Verify role permissions are correctly set",
+      "expectedResult": "Role shows assigned permissions"
+    }
+  ]
+}

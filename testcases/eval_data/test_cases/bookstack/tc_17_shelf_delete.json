@@ -1,0 +1,30 @@
+{
+  "name": "TC-17-P :: Shelf Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the shelf to be deleted",
+      "expectedResult": "Shelf detail page is displayed"
+    },
+    {
+      "action": "Click \"Delete\" link in the shelf actions",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Shelf deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Shelf successfully deleted\" appears",
+      "expectedResult": "Success alert confirms shelf deletion"
+    },
+    {
+      "action": "Verify user is redirected away from deleted shelf page",
+      "expectedResult": "User is no longer on the deleted shelf page"
+    },
+    {
+      "action": "Verify shelf no longer appears in shelves listing",
+      "expectedResult": "Shelf is removed from shelves list"
+    }
+  ]
+}

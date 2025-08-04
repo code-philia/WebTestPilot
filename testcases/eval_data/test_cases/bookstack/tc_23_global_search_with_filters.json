@@ -1,0 +1,38 @@
+{
+  "name": "TC-23-P :: Global Search with Filters",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click in the global search box at top of page",
+      "expectedResult": "Search input field is focused"
+    },
+    {
+      "action": "Type \"test\" in the search field",
+      "expectedResult": "Search field contains search term"
+    },
+    {
+      "action": "Click \"View All\" button",
+      "expectedResult": "Search results page is displayed"
+    },
+    {
+      "action": "Verify search results are shown",
+      "expectedResult": "Search results list appears with matching items"
+    },
+    {
+      "action": "Uncheck \"Chapter\" checkbox",
+      "expectedResult": "The checkbox for \"Chapter\" is unchecked"
+    },
+    {
+      "action": "Click button \"Update Search\"",
+      "expectedResult": "Search results show only book items"
+    },
+    {
+      "action": "Verify no chapter is shown",
+      "expectedResult": "No chapter should be shown in the search result list"
+    },
+    {
+      "action": "Verify books are shown",
+      "expectedResult": "Books are still present in the search result list"
+    }
+  ]
+}

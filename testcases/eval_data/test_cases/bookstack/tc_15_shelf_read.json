@@ -1,0 +1,30 @@
+{
+  "name": "TC-15-P :: Shelf Read",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Shelves\" link in navigation",
+      "expectedResult": "Shelves listing page shows all available shelves"
+    },
+    {
+      "action": "Click on the shelf with title \"Shelf123456\"",
+      "expectedResult": "Shelf detail page opens"
+    },
+    {
+      "action": "Verify shelf name appears in page heading",
+      "expectedResult": "Shelf name is displayed as main heading"
+    },
+    {
+      "action": "Verify shelf description content is visible",
+      "expectedResult": "Shelf description text is shown on the page"
+    },
+    {
+      "action": "Verify books within shelf are displayed",
+      "expectedResult": "Books in shelf are listed with thumbnails"
+    },
+    {
+      "action": "Verify shelf statistics are shown",
+      "expectedResult": "Shelf shows book count and other metrics"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "TC-1-P :: Login",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to http://localhost:8081/",
+      "expectedResult": "BookStack page loads successfuly"
+    },
+    {
+      "action": "Click the \"Log in\" link",
+      "expectedResult": "Login form appears with email and password fields"
+    },
+    {
+      "action": "Click in the email textbox labeled \"Email\"",
+      "expectedResult": "Email field is focused and ready for input"
+    },
+    {
+      "action": "Type \"admin@admin.com\" in the email field",
+      "expectedResult": "Email field displays \"admin@admin.com\""
+    },
+    {
+      "action": "Click in the password textbox labeled \"Password\"",
+      "expectedResult": "Password field is focused and ready for input"
+    },
+    {
+      "action": "Type \"password\" in the password field",
+      "expectedResult": "Password field shows masked characters"
+    },
+    {
+      "action": "Click the \"Log In\" button",
+      "expectedResult": "User is successfully authenticated and redirected to dashboard"
+    },
+    {
+      "action": "Verify \"Books\" link is visible in navigation",
+      "expectedResult": "Books link is visible confirming successful login"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "TC-18-P :: Move Page Between Containers",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to a page within a book",
+      "expectedResult": "Page detail view is displayed"
+    },
+    {
+      "action": "Click \"Move\" link in the page actions",
+      "expectedResult": "Move page dialog opens"
+    },
+    {
+      "action": "Select destination chapter from dropdown",
+      "expectedResult": "Chapter is selected as destination"
+    },
+    {
+      "action": "Click \"Move Page\" button",
+      "expectedResult": "Page move operation is initiated"
+    },
+    {
+      "action": "Verify alert message \"Page successfully moved\" appears",
+      "expectedResult": "Success alert confirms page move"
+    },
+    {
+      "action": "Navigate to the destination chapter",
+      "expectedResult": "Chapter detail page is displayed"
+    },
+    {
+      "action": "Verify moved page appears in destination",
+      "expectedResult": "Page is now listed in destination chapter"
+    },
+    {
+      "action": "Navigate back to original book",
+      "expectedResult": "Original book page is displayed"
+    },
+    {
+      "action": "Verify page no longer appears in original location",
+      "expectedResult": "Page is removed from original location"
+    }
+  ]
+}

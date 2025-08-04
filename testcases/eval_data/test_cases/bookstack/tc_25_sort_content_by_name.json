@@ -1,0 +1,46 @@
+{
+  "name": "TC-25-P :: Sort Content by Name",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to a book with multiple items",
+      "expectedResult": "Book detail page with content list is displayed"
+    },
+    {
+      "action": "Click \"Sort\" button or sorting options",
+      "expectedResult": "Sort interface or dropdown opens"
+    },
+    {
+      "action": "Select \"Sort by Name\" option",
+      "expectedResult": "Name sorting option is selected"
+    },
+    {
+      "action": "Click \"Apply\" or confirm sort selection",
+      "expectedResult": "Sort by name operation is executed"
+    },
+    {
+      "action": "Verify content is sorted alphabetically",
+      "expectedResult": "Items are arranged in alphabetical order"
+    },
+    {
+      "action": "Verify both chapters and pages are sorted",
+      "expectedResult": "All content types follow alphabetical order"
+    },
+    {
+      "action": "Click \"Save\" to confirm changes",
+      "expectedResult": "Sort order changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Content sorted successfully\" appears",
+      "expectedResult": "Success alert confirms sort operation"
+    },
+    {
+      "action": "Navigate away and return to book",
+      "expectedResult": "Book page is redisplayed"
+    },
+    {
+      "action": "Verify sort order is maintained",
+      "expectedResult": "Items maintain alphabetical sort order"
+    }
+  ]
+}

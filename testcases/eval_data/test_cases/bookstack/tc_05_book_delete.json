@@ -1,0 +1,26 @@
+{
+  "name": "TC-5-P :: Book Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the book to be deleted",
+      "expectedResult": "Book detail page is displayed"
+    },
+    {
+      "action": "Click \"Delete\" link in the book actions",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Book deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Book successfully deleted\" appears",
+      "expectedResult": "Success alert confirms book deletion"
+    },
+    {
+      "action": "Verify user is redirected away from deleted book page",
+      "expectedResult": "User is no longer on the deleted book page"
+    }
+  ]
+}

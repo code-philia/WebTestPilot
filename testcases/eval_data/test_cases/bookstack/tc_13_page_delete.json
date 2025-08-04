@@ -1,0 +1,30 @@
+{
+  "name": "TC-13-P :: Page Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the page to be deleted",
+      "expectedResult": "Page detail view is displayed"
+    },
+    {
+      "action": "Click \"Delete\" link in the page actions",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Page deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Page successfully deleted\" appears",
+      "expectedResult": "Success alert confirms page deletion"
+    },
+    {
+      "action": "Verify user is redirected away from deleted page",
+      "expectedResult": "User is no longer on the deleted page"
+    },
+    {
+      "action": "Verify page no longer appears in book navigation",
+      "expectedResult": "Page is removed from book structure"
+    }
+  ]
+}

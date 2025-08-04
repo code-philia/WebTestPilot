@@ -3,27 +3,23 @@
   "app": "prestashop",
   "collection": "test_supplier",
   "total_traces": 15,
-  "successful_traces": 13,
-  "failed_traces": 2,
+  "successful_traces": 15,
+  "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
       "click",
-      "click_failed",
       "fill",
-      "goto"
+      "goto",
+      "to_be_visible"
     ],
     "successful_methods": [
       "click",
       "fill",
-      "goto"
+      "goto",
+      "to_be_visible"
     ],
-    "failed_methods": [
-      "click",
-      "click_failed"
-    ],
-    "missing_methods": [
-      "click_failed"
-    ]
+    "failed_methods": [],
+    "missing_methods": []
   },
   "traces": [
     {
@@ -36,90 +32,88 @@
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "fill",
       "value": "admin@admin.com"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "fill",
       "value": "admin12345"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"submit_login\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[3]/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "//*[@id=\"sfToolbarHideButton-cea2f2\"]",
+      "xpath": "/html/body/div[7]/div[3]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "//*[@id=\"tab-AdminDashboard\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminDashboard&token=d43748b3e8a8a13f0bd1e9de4d512713",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminParentManufacturers\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/ul/li[5]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminSuppliers\"]",
+      "xpath": "/html/body/div[1]/div[2]/ul/li[2]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_grid_table\"]/tbody/tr[3]/td[7]/div/div/div/a[2]",
+      "xpath": "/html/body/div[2]/div/div[4]/div[2]/div/form/table/tbody/tr[3]/td[7]/div/div/div/a[2]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=aGNg8OLCxSFGlRetFsu-KNzyowDNon86O_vJyP-1w00#",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
       "action_type": "action",
-      "xpath": "LOCATOR_ERROR",
-      "action": "click",
-      "error_message": "xpath_path: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_role(\"button\", name=\"Delete\")\n"
+      "xpath": "/html/body/div[8]/div/div/div[3]/button[2]",
+      "action": "click"
     },
     {
-      "url": "EXECUTION_ERROR",
-      "action_type": "action",
-      "xpath": "ERROR_Locator",
-      "action": "click_failed",
-      "error_message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_role(\"button\", name=\"Delete\")\n"
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=aLJ0bIHsajbLsvRwkHekIMGWjVuv2cwQkE5TBXb-61Y",
+      "action_type": "assertion",
+      "xpath": "/html/body/div[2]/div/div[3]/div/p",
+      "action": "to_be_visible"
     }
   ]
 }

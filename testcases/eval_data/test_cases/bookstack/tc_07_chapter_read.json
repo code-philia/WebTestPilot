@@ -1,0 +1,30 @@
+{
+  "name": "TC-7-P :: Chapter Read",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the book containing the chapter",
+      "expectedResult": "Book detail page with chapter list is displayed"
+    },
+    {
+      "action": "Click on the chapter with title \"Chapter123456\"",
+      "expectedResult": "Chapter detail page opens"
+    },
+    {
+      "action": "Verify chapter name appears in page heading",
+      "expectedResult": "Chapter name is displayed as main heading"
+    },
+    {
+      "action": "Verify chapter description content is visible",
+      "expectedResult": "Chapter description text is shown on the page"
+    },
+    {
+      "action": "Verify chapter navigation elements are present",
+      "expectedResult": "Chapter navigation shows book structure"
+    },
+    {
+      "action": "Verify breadcrumb navigation shows book > chapter",
+      "expectedResult": "Breadcrumb shows hierarchical navigation"
+    }
+  ]
+}

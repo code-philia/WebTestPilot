@@ -1,0 +1,26 @@
+{
+  "name": "TC-3-P :: Book Read",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Books\" link in navigation",
+      "expectedResult": "Books listing page shows all available books"
+    },
+    {
+      "action": "Click on the book with title \"Book123456\"",
+      "expectedResult": "Book detail page opens"
+    },
+    {
+      "action": "Verify book name appears in page heading",
+      "expectedResult": "Book name is displayed as main heading"
+    },
+    {
+      "action": "Verify book description content is visible",
+      "expectedResult": "Book description text is shown on the page"
+    },
+    {
+      "action": "Verify book navigation elements are present",
+      "expectedResult": "Book navigation sidebar shows structure"
+    }
+  ]
+}

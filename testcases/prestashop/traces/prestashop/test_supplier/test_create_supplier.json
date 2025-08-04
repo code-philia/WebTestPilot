@@ -34,146 +34,146 @@
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "fill",
       "value": "admin@admin.com"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "fill",
       "value": "admin12345"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"submit_login\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[3]/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"sfToolbarHideButton-523c91\"]",
+      "xpath": "/html/body/div[7]/div[3]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"tab-AdminDashboard\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminDashboard&token=d43748b3e8a8a13f0bd1e9de4d512713",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminParentManufacturers\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/ul/li[5]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminSuppliers\"]",
+      "xpath": "/html/body/div[1]/div[2]/ul/li[2]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"page-header-desc-configuration-add\"]",
+      "xpath": "/html/body/div[1]/div[1]/div/div/div/a[1]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_name\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[1]/div/input",
       "action": "fill",
       "value": "Shoes supplier"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_phone\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[3]/div/input",
       "action": "fill",
       "value": "090-1234-5678"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_address\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[5]/div/input",
       "action": "fill",
       "value": "Nishi-Shinjuku 1-25-1"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_city\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[8]/div/input",
       "action": "fill",
       "value": "Tokyo"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"select2-supplier_id_country-container\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[9]/div/span/span[1]/span/span[1]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"select2-supplier_id_country-result-lo76-11\"]",
+      "xpath": "/html/body/span[2]/span/span[2]/ul/li[110]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-div\"]/div/form/div/div[1]/div/div[10]/div/div/span/span[1]/span",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[10]/div/div/span/span[1]/span",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"select2-supplier_id_state-result-mteh-310\"]",
+      "xpath": "/html/body/span[2]/span/span[2]/ul/li[41]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"supplier_is_enabled_1\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[13]/div[4]/div/div/span/input[2]",
       "action": "check",
       "value": "true"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/new?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-div\"]/div/form/div/div[2]/button",
+      "xpath": "/html/body/div[2]/div/form/div/div[2]/button",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=wPrI2WmoEBfyVPWYL-00ReRDuwu74xpkpkFtvifEOfU",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/suppliers/?_token=45xv9CsXLUPEYYaJfzbbS5JaFxn5X85iUJysurZT_48",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"main-div\"]/div/div[3]/div/p",
+      "xpath": "/html/body/div[2]/div/div[3]/div/p",
       "action": "to_be_visible"
     }
   ]

@@ -34,95 +34,95 @@
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[1]/input",
       "action": "fill",
       "value": "admin@admin.com"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[2]/input",
       "action": "fill",
       "value": "admin12345"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"submit_login\"]",
+      "xpath": "/html/body/div[1]/div/div/div[3]/div/div[1]/form/div[3]/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"sfToolbarHideButton-8eb8c8\"]",
+      "xpath": "/html/body/div[7]/div[3]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"tab-AdminDashboard\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminDashboard&token=d43748b3e8a8a13f0bd1e9de4d512713",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminParentManufacturers\"]/a",
+      "xpath": "/html/body/nav/div/ul/li[4]/ul/li[5]/a",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"page-header-desc-configuration-add_manufacturer\"]",
+      "xpath": "/html/body/div[1]/div[1]/div/div/div/a[1]",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"manufacturer_name\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[1]/div/input",
       "action": "fill",
       "value": "Nike"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"manufacturer_logo\"]",
+      "xpath": "/html/body/div[2]/div/form/div/div[1]/div/div[4]/div/div/input",
       "action": "set_input_files",
       "value": "file:test_data/pictures/nike logo.jpg"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/new?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-div\"]/div/form/div/div[2]/button",
+      "xpath": "/html/body/div[2]/div/form/div/div[2]/button",
       "action": "click"
     },
     {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=KDiYIBF7mlJQBLjDuzIb3pywkevSBaAe6itcC9ND2zk",
+      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/brands/?_token=brKAKKEPowIyrVHnkZnyTiJqDVIg-sz-yYfZZ92UzFM",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"main-div\"]",
+      "xpath": "/html/body/div[2]",
       "action": "to_contain_text",
       "value": "Successful creation"
     }

@@ -1,0 +1,46 @@
+{
+  "name": "TC-4-P :: Book Update",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the book created in TC-002",
+      "expectedResult": "Book detail page is displayed"
+    },
+    {
+      "action": "Click \"Edit\" link in the book actions",
+      "expectedResult": "Book edit form opens with current values"
+    },
+    {
+      "action": "Click in the \"Name\" textbox",
+      "expectedResult": "Name field is focused and contains current name"
+    },
+    {
+      "action": "Clear the name field and type \"Book Updated 123456\"",
+      "expectedResult": "Name field shows updated book name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Clear existing content and type \"Description Updated\"",
+      "expectedResult": "Rich text area contains updated description"
+    },
+    {
+      "action": "Click \"Save Book\" button",
+      "expectedResult": "Book changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Book successfully updated\" appears",
+      "expectedResult": "Success alert confirms book update"
+    },
+    {
+      "action": "Verify page heading shows updated book name",
+      "expectedResult": "Book page shows new name in heading"
+    },
+    {
+      "action": "Verify updated description text is visible",
+      "expectedResult": "Updated description is displayed on page"
+    }
+  ]
+}

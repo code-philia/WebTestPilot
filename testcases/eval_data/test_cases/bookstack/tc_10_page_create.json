@@ -1,0 +1,62 @@
+{
+  "name": "TC-10-P :: Page Create",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to an existing book page",
+      "expectedResult": "Book detail page is displayed"
+    },
+    {
+      "action": "Click \"New Page\" button",
+      "expectedResult": "Page creation form opens"
+    },
+    {
+      "action": "Click in the \"Page Name\" textbox",
+      "expectedResult": "Page name field is focused"
+    },
+    {
+      "action": "Type \"Page123456\" in the name field",
+      "expectedResult": "Page name field contains unique page name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Type \"Page Content\" in the rich text area",
+      "expectedResult": "Rich text area contains \"Page Content\""
+    },
+    {
+      "action": "Click \"\u25b8 Page Tags\" button to expand tags section",
+      "expectedResult": "Page tags section expands"
+    },
+    {
+      "action": "Click in \"Tag Name\" textbox",
+      "expectedResult": "Tag name field is focused"
+    },
+    {
+      "action": "Type \"page\" in the tag name field",
+      "expectedResult": "Tag name field contains \"page\""
+    },
+    {
+      "action": "Click in the tag value field and type \"test\"",
+      "expectedResult": "Tag value field contains \"test\""
+    },
+    {
+      "action": "Click \"Save Page\" button",
+      "expectedResult": "Page is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Page successfully created\" appears",
+      "expectedResult": "Success alert confirms page creation"
+    },
+    {
+      "action": "Verify page appears in book navigation",
+      "expectedResult": "Page is listed in book structure"
+    },
+    {
+      "action": "Verify page displays with correct name and content",
+      "expectedResult": "Page shows correct name and content"
+    }
+  ]
+}

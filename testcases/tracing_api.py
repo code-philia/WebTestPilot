@@ -27,26 +27,8 @@ __all__ = [
     'TracedPage',
     'create_traced_page',
     'traced_expect',
-    'TracingContext',
 ]
 
 # Version information
 __version__ = "2.0.0"
 __author__ = "WebTestPilot Team"
-
-# Convenience aliases for backward compatibility
-def create_tracer(output_dir: str = "./traces") -> XPathTracer:
-    """Create a new XPath tracer instance"""
-    return XPathTracer(output_dir)
-
-
-def enable_tracing():
-    """Enable tracing globally by setting environment variable"""
-    import os
-    os.environ["ENABLE_XPATH_TRACING"] = "true"
-
-
-def disable_tracing():
-    """Disable tracing globally by setting environment variable"""
-    import os
-    os.environ["ENABLE_XPATH_TRACING"] = "false"

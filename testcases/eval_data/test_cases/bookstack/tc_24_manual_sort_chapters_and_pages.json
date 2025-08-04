@@ -1,0 +1,46 @@
+{
+  "name": "TC-24-P :: Manual Sort Chapters and Pages",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to a book with multiple chapters and pages",
+      "expectedResult": "Book detail page with content list is displayed"
+    },
+    {
+      "action": "Click \"Sort\" button or \"Sort/Move\" option",
+      "expectedResult": "Sort interface opens"
+    },
+    {
+      "action": "Verify drag handles are visible on items",
+      "expectedResult": "Items show drag indicators for sorting"
+    },
+    {
+      "action": "Drag a chapter to different position",
+      "expectedResult": "Chapter position changes during drag"
+    },
+    {
+      "action": "Drop chapter in new position",
+      "expectedResult": "Chapter is repositioned in the list"
+    },
+    {
+      "action": "Drag a page to different position",
+      "expectedResult": "Page position changes during drag"
+    },
+    {
+      "action": "Drop page in new position",
+      "expectedResult": "Page is repositioned in the list"
+    },
+    {
+      "action": "Click \"Save\" or confirm sorting changes",
+      "expectedResult": "Sort order changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Content order updated\" appears",
+      "expectedResult": "Success alert confirms sort operation"
+    },
+    {
+      "action": "Verify new order is maintained on page refresh",
+      "expectedResult": "Items maintain new sort order"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "TC-28-P :: Delete Sort Rules",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to sort rules management section",
+      "expectedResult": "Sort rules listing page is displayed"
+    },
+    {
+      "action": "Locate the sort rule \"SortRule Updated 123456\"",
+      "expectedResult": "Target sort rule is visible in the list"
+    },
+    {
+      "action": "Click \"Delete\" button for the sort rule",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Confirm\" button in confirmation dialog",
+      "expectedResult": "Sort rule deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Sort rule successfully deleted\" appears",
+      "expectedResult": "Success alert confirms rule deletion"
+    },
+    {
+      "action": "Verify rule no longer appears in listing",
+      "expectedResult": "Deleted rule is removed from rules table"
+    },
+    {
+      "action": "Verify any content using rule reverts to default",
+      "expectedResult": "Content sorting reverts to default behavior"
+    }
+  ]
+}

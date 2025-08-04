@@ -1,0 +1,66 @@
+{
+  "name": "TC-20-P :: Create and Use Page Template",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Settings\" link in navigation",
+      "expectedResult": "Settings page is displayed"
+    },
+    {
+      "action": "Click \"Page Templates\" in settings menu",
+      "expectedResult": "Page templates section opens"
+    },
+    {
+      "action": "Click \"Create New Template\" button",
+      "expectedResult": "Template creation form opens"
+    },
+    {
+      "action": "Click in the \"Template Name\" textbox",
+      "expectedResult": "Template name field is focused"
+    },
+    {
+      "action": "Type \"Template123456\" in the name field",
+      "expectedResult": "Template name field contains unique name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Type \"This is a template content\" in the rich text area",
+      "expectedResult": "Rich text area contains template content"
+    },
+    {
+      "action": "Click \"Save Template\" button",
+      "expectedResult": "Template is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Template successfully created\" appears",
+      "expectedResult": "Success alert confirms template creation"
+    },
+    {
+      "action": "Navigate to create a new page",
+      "expectedResult": "Page creation form opens"
+    },
+    {
+      "action": "Click \"Templates\" dropdown",
+      "expectedResult": "Template selection dropdown appears"
+    },
+    {
+      "action": "Select \"Template123456\" from dropdown",
+      "expectedResult": "Template is selected"
+    },
+    {
+      "action": "Verify page content is populated with template",
+      "expectedResult": "Page editor shows template content"
+    },
+    {
+      "action": "Click \"Save Page\" button",
+      "expectedResult": "Page with template content is created"
+    },
+    {
+      "action": "Verify alert message \"Page successfully created\" appears",
+      "expectedResult": "Success alert confirms page creation"
+    }
+  ]
+}

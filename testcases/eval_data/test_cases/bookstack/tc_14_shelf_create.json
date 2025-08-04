@@ -1,0 +1,70 @@
+{
+  "name": "TC-14-P :: Shelf Create",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Shelves\" link in navigation",
+      "expectedResult": "Shelves listing page appears"
+    },
+    {
+      "action": "Click \"New Shelf\" button",
+      "expectedResult": "Shelf creation form opens"
+    },
+    {
+      "action": "Click in the \"Shelf Name\" textbox",
+      "expectedResult": "Shelf name field is focused"
+    },
+    {
+      "action": "Type \"Shelf123456\" in the name field",
+      "expectedResult": "Shelf name field contains unique shelf name"
+    },
+    {
+      "action": "Click in the Rich Text Area iframe",
+      "expectedResult": "Rich text editor is focused"
+    },
+    {
+      "action": "Type \"Shelf Description\" in the rich text area",
+      "expectedResult": "Rich text area contains \"Shelf Description\""
+    },
+    {
+      "action": "Click \"\u25b8 Shelf Tags\" button to expand tags section",
+      "expectedResult": "Shelf tags section expands"
+    },
+    {
+      "action": "Click in \"Tag Name\" textbox",
+      "expectedResult": "Tag name field is focused"
+    },
+    {
+      "action": "Type \"shelf\" in the tag name field",
+      "expectedResult": "Tag name field contains \"shelf\""
+    },
+    {
+      "action": "Click in the tag value field and type \"test\"",
+      "expectedResult": "Tag value field contains \"test\""
+    },
+    {
+      "action": "Click \"\u25b8 Books\" button to expand books section",
+      "expectedResult": "Books section expands showing available books"
+    },
+    {
+      "action": "Select books to add to the shelf",
+      "expectedResult": "Selected books are highlighted"
+    },
+    {
+      "action": "Click \"Save Shelf\" button",
+      "expectedResult": "Shelf is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Shelf successfully created\" appears",
+      "expectedResult": "Success alert confirms shelf creation"
+    },
+    {
+      "action": "Verify shelf page displays with correct name",
+      "expectedResult": "Shelf page shows correct name in heading"
+    },
+    {
+      "action": "Verify selected books appear in shelf",
+      "expectedResult": "Books are listed in the shelf"
+    }
+  ]
+}

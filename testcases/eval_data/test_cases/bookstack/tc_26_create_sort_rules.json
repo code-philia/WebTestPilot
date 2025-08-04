@@ -1,0 +1,50 @@
+{
+  "name": "TC-26-P :: Create Sort Rules",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Settings\" link in navigation",
+      "expectedResult": "Settings page is displayed"
+    },
+    {
+      "action": "Click \"Sort Rules\" or equivalent option",
+      "expectedResult": "Sort rules management section opens"
+    },
+    {
+      "action": "Click \"Create New Sort Rule\" button",
+      "expectedResult": "Sort rule creation form opens"
+    },
+    {
+      "action": "Click in the \"Rule Name\" textbox",
+      "expectedResult": "Rule name field is focused"
+    },
+    {
+      "action": "Type \"SortRule123456\" in the name field",
+      "expectedResult": "Rule name field contains unique rule name"
+    },
+    {
+      "action": "Select sort type from dropdown (e.g. Name/Created/Updated)",
+      "expectedResult": "Sort type option is selected"
+    },
+    {
+      "action": "Select sort order (Ascending/Descending)",
+      "expectedResult": "Sort order option is selected"
+    },
+    {
+      "action": "Select entities to apply rule to (Books/Chapters/Pages)",
+      "expectedResult": "Target entity types are selected"
+    },
+    {
+      "action": "Click \"Save Sort Rule\" button",
+      "expectedResult": "Sort rule is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Sort rule successfully created\" appears",
+      "expectedResult": "Success alert confirms rule creation"
+    },
+    {
+      "action": "Verify rule appears in sort rules listing",
+      "expectedResult": "New sort rule is listed in rules table"
+    }
+  ]
+}
