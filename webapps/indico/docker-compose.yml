@@ -15,6 +15,7 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGDATABASE=${PGDATABASE}
+      - INDICO_USE_PROXY=true
     ports:
       []
       # Indico is accessible either via nginx (localhost:8080 by default), or
@@ -64,7 +65,7 @@ services:
   nginx:
     image: ghcr.io/nginxinc/nginx-unprivileged:stable-alpine
     ports:
-      - "${NGINX_PORT:-8080}:8080"
+      - "8080:8080"
     depends_on:
       - web
     volumes:

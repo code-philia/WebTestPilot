@@ -1,0 +1,12 @@
+diff --git a/indico/modules/events/registration/controllers/management/regforms.py b/indico/modules/events/registration/controllers/management/regforms.py
+index c55ffaa828..853a5ecfa9 100644
+--- a/indico/modules/events/registration/controllers/management/regforms.py
++++ b/indico/modules/events/registration/controllers/management/regforms.py
+@@ -223,6 +223,7 @@ class RHRegistrationFormCreate(RHManageRegFormsBase):
+                                                       if visibility_duration is not None else None)
+             db.session.add(regform)
+             db.session.flush()
++            db.session.rollback()
+             signals.event.registration_form_created.send(regform)
+             flash(_('Registration form has been successfully created'), 'success')
+             regform.log(EventLogRealm.management, LogKind.positive, 'Registration',

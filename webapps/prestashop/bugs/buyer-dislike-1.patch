@@ -42,7 +42,7 @@
 +        return $this->ajaxRender(
 +        json_encode([
 +            'success' => false,
-+            'message' => $this->trans('NOOP: remove from wishlist is disabled', [], 'Modules.Blockwishlist.Shop'),
++            'message' => $this->trans('EXEC: remove from wishlist is disabled', [], 'Modules.Blockwishlist.Shop'),
 +        ])
 +    );
      }

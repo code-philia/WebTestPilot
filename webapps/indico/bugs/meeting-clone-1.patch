@@ -1,0 +1,13 @@
+diff --git a/indico/modules/events/management/templates/_action_menu.html b/indico/modules/events/management/templates/_action_menu.html
+index 1590f0aff5..02e6a69754 100644
+--- a/indico/modules/events/management/templates/_action_menu.html
++++ b/indico/modules/events/management/templates/_action_menu.html
+@@ -130,7 +130,7 @@
+                 {% block event_clone_actions scoped %}
+                     <div class="group">
+                         <button class="i-button icon-copy" title="{% trans %}Clone event{% endtrans %}"
+-                                data-href="{{ url_for('event_management.clone', event) }}"
++                                data-href="{{ url_for_index() }}"
+                                 data-title="{% trans %}Clone Event{% endtrans %}"
+                                 data-ajax-dialog>
+                             {% trans %}Clone{% endtrans %}

@@ -1,0 +1,15 @@
+diff --git a/indico/modules/events/management/templates/base.html b/indico/modules/events/management/templates/base.html
+index 4efa4ce75b..6193286433 100644
+--- a/indico/modules/events/management/templates/base.html
++++ b/indico/modules/events/management/templates/base.html
+@@ -21,8 +21,9 @@
+ 
+ {% block display_view_button %}
+     <div class="group">
+-        <a href="{{ event.url }}"
++        <a href="#"
+            class="icon-switchon highlight i-button"
++           onclick="return false;"
+            title="{% trans %}See the display page of the event{% endtrans %}">
+             <span>{%- trans %}Switch to display view{% endtrans -%}</span>
+         </a>

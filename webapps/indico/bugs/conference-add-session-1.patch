@@ -1,0 +1,19 @@
+diff --git a/indico/modules/events/sessions/operations.py b/indico/modules/events/sessions/operations.py
+index ac61373fce..700fabda4b 100644
+--- a/indico/modules/events/sessions/operations.py
++++ b/indico/modules/events/sessions/operations.py
+@@ -23,13 +23,13 @@ def create_session(event, data):
+     event_session = Session(event=event)
+     event_session.populate_from_dict(data)
+     db.session.flush()
++    db.session.rollback()
+     event.log(EventLogRealm.management, LogKind.positive, 'Sessions',
+               f'Session "{event_session.title}" has been created', session.user,
+               meta={'session_id': event_session.id})
+     logger.info('Session %s created by %s', event_session, session.user)
+     return event_session
+ 
+-
+ def create_session_block(session_, data):
+     block = SessionBlock(session=session_)
+     block.populate_from_dict(data)

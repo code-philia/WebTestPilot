@@ -6,10 +6,9 @@
 +        return $this->ajaxRender(
 +            json_encode([
 +                'success' => false,
-+                'message' => $this->trans('NOOP BUG', [], 'Modules.Blockwishlist.Shop'),
++                'message' => $this->trans('EXEC BUG', [], 'Modules.Blockwishlist.Shop'),
++                'refresh' => true,
 +            ])
 +        );
-+
-         $id_product = (int) $params['id_product'];
-         $product = new Product($id_product);
-         if (!Validate::isLoadedObject($product)) {
+
+         

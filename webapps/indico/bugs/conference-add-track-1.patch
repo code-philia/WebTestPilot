@@ -1,0 +1,15 @@
+diff --git a/indico/modules/events/tracks/__init__.py b/indico/modules/events/tracks/__init__.py
+index 2462d4806d..f961e1a334 100644
+--- a/indico/modules/events/tracks/__init__.py
++++ b/indico/modules/events/tracks/__init__.py
+@@ -24,9 +24,7 @@ logger = Logger.get('tracks')
+ 
+ @signals.menu.items.connect_via('event-management-sidemenu')
+ def _sidemenu_items(sender, event, **kwargs):
+-    if event.type_ == EventType.conference and event.can_manage(session.user):
+-        return SideMenuItem('program', _('Program'), url_for('tracks.manage', event), section='organization')
+-
++    return None
+ 
+ @signals.event.sidemenu.connect
+ def _extend_event_menu(sender, **kwargs):
