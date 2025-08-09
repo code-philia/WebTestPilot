@@ -1,13 +1,13 @@
 from typing import Any
 
-from playwright.sync_api import  Page
+from playwright.sync_api import Page
 
 
 class AccessibilityTree:
     """
     A model representing the accessibility tree of a Playwright `Page`.
-    
-    This tree is extracted using the Chrome DevTools Protocol (CDP) 
+
+    This tree is extracted using the Chrome DevTools Protocol (CDP)
     via `Accessibility.getFullAXTree`, and is reconstructed as a proper
     parent-child structure in memory.
     """
@@ -21,8 +21,8 @@ class AccessibilityTree:
             page (Page): The Playwright page to extract the accessibility tree from.
         """
         self.session = page.context.new_cdp_session(page)
-        self.root: dict[str, dict] = {}        # nodeId -> node (only roots)
-        self.mapping: dict[int, Any] = {}      # internal node ID -> backendDOMNodeId
+        self.root: dict[str, dict] = {}  # nodeId -> node (only roots)
+        self.mapping: dict[int, Any] = {}  # internal node ID -> backendDOMNodeId
 
         nodes = self._fetch_accessibility_nodes()
         self._build_tree(nodes)

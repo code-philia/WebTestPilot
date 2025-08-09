@@ -1,6 +1,6 @@
 // Learn more about clients at https://docs.boundaryml.com/docs/snippets/clients/overview
 
-client<llm> GPT4o {
+client<llm> GPT {
   provider openai
   retry_policy Exponential
   options {
@@ -10,30 +10,45 @@ client<llm> GPT4o {
   }
 }
 
-client<llm> GPT4oMini {
-  provider openai
+client<llm> Gemini {
+  provider google-ai
   retry_policy Exponential
   options {
-    model "gpt-4o-mini"
-    api_key env.OPENAI_API_KEY
+    model "gemini-2.5-pro"
+    api_key env.GOOGLEAI_API_KEY
   }
 }
 
-client<llm> CustomSonnet {
+client<llm> Claude {
   provider anthropic
   retry_policy Exponential
   options {
-    model "claude-3-5-sonnet-20241022"
+    model "claude-sonnet-4-20250514"
     api_key env.ANTHROPIC_API_KEY
   }
 }
 
-client<llm> CustomHaiku {
-  provider anthropic
-  retry_policy Exponential
+client<llm> Qwen {
+  provider "openai-generic"
   options {
-    model "claude-3-haiku-20240307"
-    api_key env.ANTHROPIC_API_KEY
+    base_url "https://localhost:8000/v1"
+    model "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"
+  }
+}
+
+client<llm> InternVL {
+  provider "openai-generic"
+  options {
+    base_url "https://localhost:8000/v1"
+    model "OpenGVLab/InternVL3-38B-AWQ"
+  }
+}
+
+client<llm> UITARS {
+  provider "openai-generic"
+  options {
+    base_url "https://localhost:8000/v1"
+    model "ByteDance-Seed/UI-TARS-72B-DPO"
   }
 }
 

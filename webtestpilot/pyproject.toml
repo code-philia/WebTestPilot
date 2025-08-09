@@ -5,7 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "anthropic>=0.61.0",
     "baml-py>=0.201.0",
+    "google-genai>=1.29.0",
     "matplotlib>=3.10.3",
     "numba>=0.61.2",
     "openai>=1.95.1",

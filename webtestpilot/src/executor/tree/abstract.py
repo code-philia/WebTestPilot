@@ -2,7 +2,7 @@ from hashlib import sha1
 from collections import defaultdict
 from xml.etree.ElementTree import Element, indent, tostring
 
-from .accessibility_tree import AccessibilityTree
+from executor.tree.accessibility import AccessibilityTree
 
 
 def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:
@@ -50,7 +50,7 @@ def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:
             parent.append(xml_element)
 
         return xml_element
-            
+
 
 def _get_texts(node: Element) -> list[str]:
     """
@@ -163,12 +163,12 @@ def to_xml_tree(tree: AccessibilityTree) -> list[Element]:
     Abstracted tree for page reidentification.
     """
     if not isinstance(tree, AccessibilityTree):
-        raise ValueError(f"Expected AccessibilityTree")
-    
+        raise ValueError("Expected AccessibilityTree")
+
     if len(tree.root) != 1:
         raise ValueError(f"Expected 1 root node, got {len(tree.root)}")
 
-    (_, root_node), = tree.root.items()
+    ((_, root_node),) = tree.root.items()
     element = _convert_node_to_xml(root_node)
     _prune_redundant_name(element)
     _group_similar_children(element, cache={})
@@ -180,7 +180,7 @@ def to_xml_string(tree: Element) -> str:
     String representation of abstracted tree for prompting.
     """
     if not isinstance(tree, Element):
-        raise ValueError(f"Expected xml.etree.ElementTree.Element")
- 
+        raise ValueError("Expected xml.etree.ElementTree.Element")
+
     indent(tree)
     return tostring(tree, encoding="unicode")

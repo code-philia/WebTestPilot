@@ -15,13 +15,13 @@ class XMLNode(zss.Node):
         text = (self.element.text or "").strip()
         content = name or text
         return f"{tag}:{content}" if content else tag
-    
+
     def get_children(self):
         if self.element.tag == "dynamic":
             return []
-        
+
         return [XMLNode(child) for child in list(self.element)]
-    
+
     @staticmethod
     def label_edit_cost(a: str, b: str) -> float:
         if a == b:
@@ -34,7 +34,7 @@ class XMLNode(zss.Node):
         # Compute normalized similarity ratio between contents
         similarity = Levenshtein.ratio(a_val, b_val)  # between 0 and 1
         return 1 + (1 - similarity)  # between 1 and 2
-    
+
 
 def tree_distance(e1: list[Element], e2: list[Element]) -> int:
     return zss.simple_distance(
@@ -42,5 +42,5 @@ def tree_distance(e1: list[Element], e2: list[Element]) -> int:
         XMLNode(e2),
         get_children=XMLNode.get_children,
         get_label=XMLNode.label,
-        label_dist=XMLNode.label_edit_cost
+        label_dist=XMLNode.label_edit_cost,
     )
