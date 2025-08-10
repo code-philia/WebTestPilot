@@ -1,0 +1,14 @@
+diff --git a/app/Http/Controllers/ProductController.php b/app/Http/Controllers/ProductController.php
+index c9abfc450..dd09feb32 100644
+--- a/app/Http/Controllers/ProductController.php
++++ b/app/Http/Controllers/ProductController.php
+@@ -486,6 +486,9 @@ class ProductController extends BaseController
+ 
+         $products->cursor()->each(function ($product, $key) use ($action, $user) {
+             if ($user->can('edit', $product)) {
++                if ($action === 'archive') {
++                throw new \Exception('Product archive has been disabled');
++                }
+                 $this->product_repo->{$action}($product);
+             }
+         });

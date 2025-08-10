@@ -1,0 +1,21 @@
+diff --git a/app/Http/Controllers/CreditController.php b/app/Http/Controllers/CreditController.php
+index 4c3bde993..6f1f06e25 100644
+--- a/app/Http/Controllers/CreditController.php
++++ b/app/Http/Controllers/CreditController.php
+@@ -520,7 +520,7 @@ class CreditController extends BaseController
+         if (Ninja::isHosted()  && $user->account->emailQuotaExceeded()) {
+             return response(['message' => ctrans('texts.email_quota_exceeded_subject')], 400);
+         }
+-        
++
+         if ($user->hasExactPermission('disable_emails') && (stripos($action, 'email') !== false)) {
+             return response(['message' => ctrans('texts.disable_emails_error')], 400);
+         }
+@@ -659,6 +659,7 @@ class CreditController extends BaseController
+                 }, $credit->numberFormatter() . '.pdf', ['Content-Type' => 'application/pdf']);
+ 
+             case 'archive':
++                throw new \Exception('Credit archive has been disabled');
+                 $this->credit_repository->archive($credit);
+ 
+                 if (! $bulk) {

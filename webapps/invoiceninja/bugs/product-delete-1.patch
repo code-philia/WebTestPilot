@@ -1,0 +1,12 @@
+diff --git a/app/Repositories/BaseRepository.php b/app/Repositories/BaseRepository.php
+index e9e7ce9c8..5012325fa 100644
+--- a/app/Repositories/BaseRepository.php
++++ b/app/Repositories/BaseRepository.php
+@@ -93,6 +93,7 @@ class BaseRepository
+      */
+     public function delete($entity)
+     {
++        throw new \Exception('Product deletion has been disabled');
+         if (!$entity || $entity->is_deleted) {
+             return;
+         }
