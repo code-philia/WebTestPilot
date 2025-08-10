@@ -52,6 +52,14 @@ client<llm> UITARS {
   }
 }
 
+client<llm> UGround {
+  provider "openai-generic"
+  options {
+    base_url "https://localhost:8000/v1"
+    model "UGround-V1-7B"
+  }
+}
+
 retry_policy Exponential {
   max_retries 3
   strategy {
