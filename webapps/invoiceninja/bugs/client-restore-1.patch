@@ -1,0 +1,14 @@
+diff --git a/app/Http/Controllers/ClientController.php b/app/Http/Controllers/ClientController.php
+index aea0698cc..dc3fac4f6 100644
+--- a/app/Http/Controllers/ClientController.php
++++ b/app/Http/Controllers/ClientController.php
+@@ -272,6 +272,9 @@ class ClientController extends BaseController
+ 
+         $clients->each(function ($client) use ($action, $user) {
+             if ($user->can('edit', $client)) {
++                 if ($action === 'restore') {
++                    throw new \Exception('Client restoration has been disabled');
++                }
+                 $this->client_repo->{$action}($client);
+             }
+         });

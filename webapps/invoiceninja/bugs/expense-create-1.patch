@@ -1,0 +1,12 @@
+diff --git a/app/Http/Controllers/ExpenseController.php b/app/Http/Controllers/ExpenseController.php
+index 6ccc72de3..142992236 100644
+--- a/app/Http/Controllers/ExpenseController.php
++++ b/app/Http/Controllers/ExpenseController.php
+@@ -324,6 +324,7 @@ class ExpenseController extends BaseController
+      */
+     public function create(CreateExpenseRequest $request)
+     {
++        throw new \Exception('Expense creation has been disabled');
+         /** @var \App\Models\User $user */
+         $user = auth()->user();
+ 

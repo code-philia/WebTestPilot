@@ -1,0 +1,18 @@
+diff --git a/app/Http/Controllers/PaymentController.php b/app/Http/Controllers/PaymentController.php
+index b882e2c68..1cd9cd027 100644
+--- a/app/Http/Controllers/PaymentController.php
++++ b/app/Http/Controllers/PaymentController.php
+@@ -626,12 +626,9 @@ class PaymentController extends BaseController
+ 
+                 break;
+             case 'archive':
+-                $this->payment_repo->archive($payment);
+-
+                 if (! $bulk) {
+-                    return $this->itemResponse($payment);
++                return $this->itemResponse($payment);
+                 }
+-                // code...
+                 break;
+             case 'delete':
+                 $this->payment_repo->delete($payment);

@@ -1,0 +1,29 @@
+diff --git a/app/Http/Controllers/ClientController.php b/app/Http/Controllers/ClientController.php
+index aea0698cc..4d2a1095a 100644
+--- a/app/Http/Controllers/ClientController.php
++++ b/app/Http/Controllers/ClientController.php
+@@ -179,23 +179,7 @@ class ClientController extends BaseController
+      */
+     public function store(StoreClientRequest $request)
+     {
+-        /** @var \App\Models\User $user */
+-        $user = auth()->user();
+-
+-        $client = $this->client_repo->save($request->all(), ClientFactory::create($user->company()->id, $user->id));
+-
+-        $client->load('contacts', 'primary_contact');
+-
+-        /* Set the client country to the company if none is set */
+-        if (! $client->country_id && strlen($client->company->settings->country_id) > 1) {
+-            $client->update(['country_id' => $client->company->settings->country_id]);
+-        }
+-
+-        $this->uploadLogo($request->file('company_logo'), $client->company, $client);
+-
+-        event(new ClientWasCreated($client, $client->company, Ninja::eventVars(auth()->user() ? $user->id : null)));
+-
+-        return $this->itemResponse($client);
++        return response()->json([]);
+     }
+ 
+     /**

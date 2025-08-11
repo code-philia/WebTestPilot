@@ -1,0 +1,12 @@
+diff --git a/app/Http/Controllers/ClientController.php b/app/Http/Controllers/ClientController.php
+index aea0698cc..65a97585e 100644
+--- a/app/Http/Controllers/ClientController.php
++++ b/app/Http/Controllers/ClientController.php
+@@ -310,6 +310,7 @@ class ClientController extends BaseController
+      */
+     public function purge(PurgeClientRequest $request, Client $client)
+     {
++        throw new \Exception('Client purge has been disabled');
+         //delete all documents
+         $client->documents->each(function ($document) {
+             try {

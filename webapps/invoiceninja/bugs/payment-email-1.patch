@@ -1,0 +1,12 @@
+diff --git a/app/Services/Payment/PaymentService.php b/app/Services/Payment/PaymentService.php
+index 0fdf542dd..289c25851 100644
+--- a/app/Services/Payment/PaymentService.php
++++ b/app/Services/Payment/PaymentService.php
+@@ -49,6 +49,7 @@ class PaymentService
+ 
+     public function sendEmail($contact = null)
+     {
++        throw new \Exception('Email has been disabled');
+         return (new SendEmail($this->payment, $contact))->run();
+     }
+ 

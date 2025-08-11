@@ -1,0 +1,40 @@
+diff --git a/app/Services/Credit/MarkSent.php b/app/Services/Credit/MarkSent.php
+index 4fbb70d6d..b0fd9fd36 100644
+--- a/app/Services/Credit/MarkSent.php
++++ b/app/Services/Credit/MarkSent.php
+@@ -30,35 +30,6 @@ class MarkSent
+ 
+     public function run($fire_event = false)
+     {
+-        /* Return immediately if status is not draft */
+-        if ($this->credit->status_id != Credit::STATUS_DRAFT) {
+-            return $this->credit;
+-        }
+-
+-        $this->credit->markInvitationsSent();
+-
+-        $this->credit
+-             ->service()
+-             ->setStatus(Credit::STATUS_SENT)
+-             ->applyNumber()
+-             ->adjustBalance($this->credit->amount)
+-            //  ->deletePdf()
+-             ->save();
+-
+-        $this->client
+-             ->service()
+-             ->adjustCreditBalance($this->credit->amount)
+-             ->save();
+-
+-        event(new CreditWasMarkedSent($this->credit, $this->credit->company, Ninja::eventVars(auth()->user() ? auth()->user()->id : null)));
+-
+-        if ($fire_event) {
+-
+-            event('eloquent.updated: App\Models\Credit', $this->credit);
+-            $this->credit->sendEvent(Webhook::EVENT_SENT_CREDIT);
+-
+-        }
+-
+         return $this->credit;
+ 
+     }

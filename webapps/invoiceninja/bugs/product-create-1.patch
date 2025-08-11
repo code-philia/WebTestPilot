@@ -1,0 +1,20 @@
+diff --git a/app/Http/Controllers/ProductController.php b/app/Http/Controllers/ProductController.php
+index c9abfc450..a1acaa621 100644
+--- a/app/Http/Controllers/ProductController.php
++++ b/app/Http/Controllers/ProductController.php
+@@ -182,12 +182,9 @@ class ProductController extends BaseController
+     public function store(StoreProductRequest $request)
+     {
+ 
+-        /** @var \App\Models\User $user */
+-        $user = auth()->user();
+-
+-        $product = $this->product_repo->save($request->all(), ProductFactory::create($user->company()->id, auth()->user()->id));
+-
+-        return $this->itemResponse($product);
++           $user = auth()->user();
++           $product = ProductFactory::create($user->company()->id, $user->id);
++           return $this->itemResponse($product);
+     }
+ 
+     /**

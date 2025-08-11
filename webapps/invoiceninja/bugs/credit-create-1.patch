@@ -1,0 +1,31 @@
+diff --git a/app/Http/Controllers/InvoiceController.php b/app/Http/Controllers/InvoiceController.php
+index 4ddb3ae6c..1a6e31c41 100644
+--- a/app/Http/Controllers/InvoiceController.php
++++ b/app/Http/Controllers/InvoiceController.php
+@@ -414,7 +414,7 @@ class InvoiceController extends BaseController
+         if ($request->entityIsDeleted($invoice)) {
+             return $request->disallowUpdate();
+         }
+-
++        throw new \Exception('Credit update has been disabled');
+         if ($invoice->isLocked()) {
+             return response()->json(['message' => '', 'errors' => ['number' => ctrans('texts.locked_invoice')]], 422);
+         }
+@@ -561,7 +561,7 @@ class InvoiceController extends BaseController
+ 
+             $batch_id = (new \App\Jobs\Invoice\PrintEntityBatch(Invoice::class, $invoices->pluck('id')->toArray(), $user->company()->db))->handle();
+             $batch = \Illuminate\Support\Facades\Bus::findBatch($batch_id);
+-            $batch_key = $batch->name;          
++            $batch_key = $batch->name;
+ 
+             $finished = false;
+ 
+@@ -570,7 +570,7 @@ class InvoiceController extends BaseController
+                 $batch = \Illuminate\Support\Facades\Bus::findBatch($batch_id);
+                 $finished = $batch->finished();
+             }while(!$finished);
+-            
++
+             $paths = $invoices->map(function ($invoice) use($batch_key){
+                 return \Illuminate\Support\Facades\Cache::pull("{$batch_key}-{$invoice->id}");
+             })->filter(function ($value) {
