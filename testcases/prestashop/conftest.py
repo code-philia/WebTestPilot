@@ -4,8 +4,8 @@ from tracing_api import create_traced_page
 
 pytest_plugins = ["pytest_xpath_plugin"]
 
-# BASE_URL = "http://localhost:8083"
-BASE_URL = "http://49.232.8.242:8083"
+BASE_URL = "http://localhost:8083"
+#BASE_URL = "http://49.232.8.242:8083"
 
 
 @pytest.fixture
