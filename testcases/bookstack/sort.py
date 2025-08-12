@@ -22,11 +22,11 @@ def test_sort_chapter_book(logged_in_page: Page, test_data: BookStackTestData) -
     # Go back to book page and create a page.
     chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
     page_created_page = create_page(
-        chapter_created_page, test_data.page_name + " 1", test_data.page_description
+        chapter_created_page, test_data.page_name1, test_data.page_description
     )
     chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
     page_created_page = create_page(
-        chapter_created_page, test_data.page_name + " 2", test_data.page_description
+        chapter_created_page, test_data.page_name2, test_data.page_description
     )
 
     # Go back to book to start sorting.
@@ -63,11 +63,11 @@ def test_sort_by_name(logged_in_page: Page, test_data: BookStackTestData) -> Non
     # Go back to book page and create a page.
     chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
     page_created_page = create_page(
-        chapter_created_page, test_data.page_name + " 1", test_data.page_description
+        chapter_created_page, test_data.page_name1, test_data.page_description
     )
     chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
     page_created_page = create_page(
-        chapter_created_page, test_data.page_name + " 2", test_data.page_description
+        chapter_created_page, test_data.page_name2, test_data.page_description
     )
 
     # Go back to book to start sorting.

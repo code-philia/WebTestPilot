@@ -16,12 +16,8 @@ def test_read_shelf(created_shelf_page: Page, test_data: BookStackTestData) -> N
     expect(created_shelf_page.get_by_role("main")).to_contain_text(
         test_data.shelf_description
     )
-    expect(created_shelf_page.get_by_role("main")).to_contain_text(
-        test_data.book_name + " 1"
-    )
-    expect(created_shelf_page.get_by_role("main")).to_contain_text(
-        test_data.book_name + " 2"
-    )
+    expect(created_shelf_page.get_by_role("main")).to_contain_text(test_data.book_name1)
+    expect(created_shelf_page.get_by_role("main")).to_contain_text(test_data.book_name2)
     pass
 
 

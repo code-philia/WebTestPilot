@@ -64,16 +64,16 @@ def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> Non
     # Create 2 books, create 1 chapter in each book.
     # Move the chapter from book 1 to book 2.
     book1_page = create_book(
-        logged_in_page, test_data.book_name + " 1", test_data.book_description
+        logged_in_page, test_data.book_name1, test_data.book_description
     )
     book1_chapter = create_chapter(
-        book1_page, test_data.chapter_name + " 1", test_data.chapter_description
+        book1_page, test_data.chapter_name1, test_data.chapter_description
     )
     book2_page = create_book(
-        book1_chapter, test_data.book_name + " 2", test_data.book_description
+        book1_chapter, test_data.book_name2, test_data.book_description
     )
     book2_chapter = create_chapter(
-        book2_page, test_data.chapter_name + " 2", test_data.chapter_description
+        book2_page, test_data.chapter_name2, test_data.chapter_description
     )
 
     # Move the chapter from book 2 to book 1.
@@ -82,11 +82,11 @@ def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> Non
     # During tests, we create many instances, for stable test, we will search by name.
     book2_chapter.locator("#main-content").get_by_role("textbox", name="Search").click()
     book2_chapter.locator("#main-content").get_by_role("textbox", name="Search").fill(
-        test_data.book_name + " 1"
+        test_data.book_name1
     )
     book2_chapter.wait_for_timeout(1000)  # Wait for search results to load
 
-    book2_chapter.get_by_role("link", name=test_data.book_name + " 1").click()
+    book2_chapter.get_by_role("link", name=test_data.book_name1).click()
     book2_chapter.get_by_role("button", name="Move Chapter").click()
 
     # Go to book & verify the chapter was moved successfully.
@@ -95,12 +95,8 @@ def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> Non
     # Choose from the "Recently Viewed" list, as the full list may not include the book
     # when there are many records requiring pagination.
     book2_chapter.locator("#recents").get_by_role(
-        "link", name=test_data.book_name + " 1"
+        "link", name=test_data.book_name1
     ).click()
 
-    expect(book2_chapter.get_by_role("main")).to_contain_text(
-        test_data.chapter_name + " 1"
-    )
-    expect(book2_chapter.get_by_role("main")).to_contain_text(
-        test_data.chapter_name + " 2"
-    )
+    expect(book2_chapter.get_by_role("main")).to_contain_text(test_data.chapter_name1)
+    expect(book2_chapter.get_by_role("main")).to_contain_text(test_data.chapter_name2)

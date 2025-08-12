@@ -1,15 +1,20 @@
 import os
+import sys
 from dataclasses import dataclass
+from pathlib import Path
 from random import randint
 
 import pytest
+
+# from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
+
+sys.path.append(str(Path(__file__).parent.parent))
+
 from tracing_api import create_traced_page
 from tracing_api import traced_expect as expect
 
 pytest_plugins = ["pytest_xpath_plugin"]
-
-
 BOOKSTACK_HOST = "http://localhost:8081/"
 
 
@@ -29,6 +34,14 @@ class BookStackTestData:
         return f"Book{self._unique_id}"
 
     @property
+    def book_name1(self) -> str:
+        return f"Book{self._unique_id} 1"
+
+    @property
+    def book_name2(self) -> str:
+        return f"Book{self._unique_id} 2"
+
+    @property
     def book_description(self) -> str:
         return "Description"
 
@@ -46,6 +59,14 @@ class BookStackTestData:
         return f"Chapter{self._unique_id}"
 
     @property
+    def chapter_name1(self) -> str:
+        return f"Chapter{self._unique_id} 1"
+
+    @property
+    def chapter_name2(self) -> str:
+        return f"Chapter{self._unique_id} 2"
+
+    @property
     def chapter_description(self) -> str:
         return "Description"
 
@@ -61,6 +82,14 @@ class BookStackTestData:
     @property
     def page_name(self) -> str:
         return f"Page{self._unique_id}"
+
+    @property
+    def page_name1(self) -> str:
+        return f"Page{self._unique_id} 1"
+
+    @property
+    def page_name2(self) -> str:
+        return f"Page{self._unique_id} 2"
 
     @property
     def page_description(self) -> str:
@@ -291,8 +320,8 @@ def created_page_page(created_book_page: Page, test_data: BookStackTestData) -> 
 @pytest.fixture
 def created_shelf_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     # Setup book data
-    create_book(logged_in_page, test_data.book_name + " 1", test_data.book_description)
-    create_book(logged_in_page, test_data.book_name + " 2", test_data.book_description)
+    create_book(logged_in_page, test_data.book_name1, test_data.book_description)
+    create_book(logged_in_page, test_data.book_name2, test_data.book_description)
 
     logged_in_page.get_by_role("link", name="Shelves").click()
     logged_in_page.get_by_role("link", name="New Shelf").click()
@@ -309,10 +338,10 @@ def created_shelf_page(logged_in_page: Page, test_data: BookStackTestData) -> Pa
     # Add books to shelf
     # Add position to make sure it clicks the button, not the scroll.
     logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.book_name + " 1"
+        has_text=test_data.book_name1
     ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
     logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.book_name + " 2"
+        has_text=test_data.book_name2
     ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
 
     # Cover image
@@ -331,18 +360,25 @@ def created_shelf_page(logged_in_page: Page, test_data: BookStackTestData) -> Pa
         )
     ).to_be_visible(timeout=1000)
 
-    expect(logged_in_page.get_by_role("main")).to_contain_text(
-        test_data.book_name + " 1"
-    )
-    expect(logged_in_page.get_by_role("main")).to_contain_text(
-        test_data.book_name + " 2"
-    )
+    expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name1)
+    expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name2)
 
     return logged_in_page
 
 
 @pytest.fixture
 def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+    logged_in_page = create_sort_rule_page(logged_in_page, test_data)
+    expect(
+        logged_in_page.get_by_role("alert").filter(
+            has_text="Sort rule successfully created"
+        )
+    ).to_be_visible(timeout=1000)
+
+    return logged_in_page
+
+
+def create_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     logged_in_page.get_by_role("link", name="Settings", exact=True).click()
     logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
     logged_in_page.get_by_role("link", name="Create Sort Rule", exact=True).click()
@@ -361,17 +397,21 @@ def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -
     ).get_by_role("button").click()
 
     logged_in_page.get_by_role("button", name="Save").click()
-    expect(
-        logged_in_page.get_by_role("alert").filter(
-            has_text="Sort rule successfully created"
-        )
-    ).to_be_visible(timeout=1000)
-
     return logged_in_page
 
 
 @pytest.fixture
 def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+    logged_in_page = create_role_page(logged_in_page, test_data)
+
+    expect(
+        logged_in_page.get_by_role("alert").filter(has_text="Role successfully created")
+    ).to_be_visible(timeout=1000)
+
+    return logged_in_page
+
+
+def create_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     # Navigate
     logged_in_page.get_by_role("link", name="Settings").click()
     logged_in_page.get_by_role("link", name="Roles").click()
@@ -405,9 +445,4 @@ def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Pag
     ).click()
 
     logged_in_page.get_by_role("button", name="Save Role").click()
-
-    expect(
-        logged_in_page.get_by_role("alert").filter(has_text="Role successfully created")
-    ).to_be_visible(timeout=1000)
-
     return logged_in_page
