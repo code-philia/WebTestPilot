@@ -9,6 +9,8 @@ from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import Page, sync_playwright
 
+from ..evaluate import Application
+
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
@@ -26,19 +28,22 @@ class LavagueTestRunner(BaseTestRunner):
         self,
         test_case_path: str,
         test_output_path: str,
-        application: str,
+        application: Application,
         headless: bool = True,
         **kwargs,
     ):
         super().__init__(test_case_path, test_output_path, application, **kwargs)
         self.headless = headless
+        self.playwright = None
+        self.browser = None
+        self.context = None
 
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""
-        playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=self.headless)
-        context = browser.new_context()
-        page = context.new_page()
+        self.playwright = sync_playwright().start()
+        self.browser = self.playwright.chromium.launch(headless=self.headless)
+        self.context = self.browser.new_context()
+        page = self.context.new_page()
 
         # Set up the page state based on the setup function
         page = setup_page_state(page, setup_function, application=self.application)

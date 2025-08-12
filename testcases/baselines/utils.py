@@ -1,8 +1,9 @@
 import sys
 from pathlib import Path
-from typing import Literal
 
 from playwright.sync_api import Page
+
+from .evaluate import Application
 
 # Add testcases directory to Python path
 testcases_dir = Path(__file__).parent.parent
@@ -45,29 +46,25 @@ from prestashop.conftest import (
     login_to_prestashop_as_buyer,
 )
 
-ApplicationType = Literal["bookstack", "invoiceninja", "indico", "prestashop"]
 
-
-def setup_page_state(
-    page: Page, setup_function: str, application: ApplicationType
-) -> Page:
+def setup_page_state(page: Page, setup_function: str, application: Application) -> Page:
     """Set up the page state based on the application and setup function.
-    
+
     Args:
         page: The Playwright page object
         setup_function: The setup function name from test case
         application: The application type
-        
+
     Returns:
         The configured page object
     """
-    if application == "bookstack":
+    if application == Application.bookstack:
         return setup_bookstack_page(page, setup_function)
-    elif application == "invoiceninja":
+    elif application == Application.invoiceninja:
         return setup_invoiceninja_page(page, setup_function)
-    elif application == "indico":
+    elif application == Application.indico:
         return setup_indico_page(page, setup_function)
-    elif application == "prestashop":
+    elif application == Application.prestashop:
         return setup_prestashop_page(page, setup_function)
 
     raise ValueError(f"Unknown application type: {application}")

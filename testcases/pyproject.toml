@@ -14,4 +14,5 @@ dependencies = [
     "lavague>=1.1.19",
     "lavague-drivers-playwright>=0.2.11",
     "dotenv>=0.9.9",
+    "typer>=0.12.0",
 ]
