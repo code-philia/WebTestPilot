@@ -51,6 +51,16 @@ ApplicationType = Literal["bookstack", "invoiceninja", "indico", "prestashop"]
 def setup_page_state(
     page: Page, setup_function: str, application: ApplicationType
 ) -> Page:
+    """Set up the page state based on the application and setup function.
+    
+    Args:
+        page: The Playwright page object
+        setup_function: The setup function name from test case
+        application: The application type
+        
+    Returns:
+        The configured page object
+    """
     if application == "bookstack":
         return setup_bookstack_page(page, setup_function)
     elif application == "invoiceninja":
@@ -64,6 +74,7 @@ def setup_page_state(
 
 
 def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
+    """Set up InvoiceNinja page based on setup function."""
     test_data = InvoiceNinjaTestData()
 
     # No setup.
@@ -98,6 +109,7 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 
 
 def setup_indico_page(page: Page, setup_function: str) -> Page:
+    """Set up Indico page based on setup function."""
     test_data = IndicoTestData()
 
     # No setup.
@@ -123,6 +135,7 @@ def setup_indico_page(page: Page, setup_function: str) -> Page:
 
 
 def setup_prestashop_page(page: Page, setup_function: str) -> Page:
+    """Set up PrestaShop page based on setup function."""
     if setup_function == "":
         return page
     elif setup_function == "logged_in_page":
@@ -134,6 +147,7 @@ def setup_prestashop_page(page: Page, setup_function: str) -> Page:
 
 
 def setup_bookstack_page(page: Page, setup_function: str) -> Page:
+    """Set up BookStack page based on setup function."""
     test_data = BookStackTestData()
 
     # No setup.

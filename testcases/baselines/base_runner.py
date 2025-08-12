@@ -1,0 +1,173 @@
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+import json
+import os
+
+
+@dataclass
+class TestResult:
+    test_name: str
+    success: bool = False
+    current_step: int = 0
+    total_step: int = 0
+    traces: list = field(default_factory=list)
+    error_message: Optional[str] = None
+
+    @property
+    def correct_trace(self) -> float:
+        return self.current_step / self.total_step if self.total_step > 0 else 0.0
+
+
+@dataclass
+class TestResultDataset:
+    results: list[TestResult] = field(default_factory=list)
+
+    @property
+    def correct_trace(self) -> float:
+        return (
+            sum(result.correct_trace for result in self.results) / len(self.results)
+            if self.results
+            else 0.0
+        )
+
+    @property
+    def success_rate(self) -> float:
+        return (
+            sum(1 for result in self.results if result.success) / len(self.results)
+            if self.results
+            else 0.0
+        )
+
+    def save_results(self, file_path: str):
+        if not os.path.exists(file_path):
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+        with open(file_path, "w") as f:
+            json.dump([result.__dict__ for result in self.results], f, indent=4)
+
+        print(f"Results saved to {file_path}")
+
+
+class BaseTestRunner(ABC):
+    """Abstract base class for all test runner implementations."""
+
+    def __init__(
+        self, test_case_path: str, test_output_path: str, application: str, **kwargs
+    ):
+        self.test_case_path = Path(test_case_path)
+        self.test_output_path = Path(test_output_path)
+        self.application = application
+        self.config = kwargs
+
+    def load_test_cases(self, filter_pattern: Optional[str] = None) -> List[Dict]:
+        """Load test cases from JSON files."""
+        test_cases: list[dict] = []
+
+        if not self.test_case_path.exists():
+            print(f"Test case path does not exist: {self.test_case_path}")
+            return test_cases
+
+        for file_path in self.test_case_path.glob("*.json"):
+            if filter_pattern and filter_pattern not in file_path.stem:
+                continue
+
+            try:
+                with open(file_path, "r") as f:
+                    test_case = json.load(f)
+                    test_cases.append(test_case)
+            except json.JSONDecodeError as e:
+                print(f"Error loading {file_path}: {e}")
+                continue
+
+        return test_cases
+
+    @abstractmethod
+    def get_initial_page(self, setup_function: str) -> Any:
+        """Get the initial page state based on setup function.
+
+        Args:
+            setup_function: The setup function name from test case JSON
+
+        Returns:
+            Page object appropriate for the specific runner implementation
+        """
+        pass
+
+    @abstractmethod
+    def run_test_case(self, test_case: Dict) -> TestResult:
+        """Run a single test case.
+
+        Args:
+            test_case: Dictionary containing test case data
+
+        Returns:
+            TestResult object with execution results
+        """
+        pass
+
+    def run_test_cases(self, filter_pattern: Optional[str] = None) -> TestResultDataset:
+        """Run all test cases and return results."""
+        test_cases = self.load_test_cases(filter_pattern)
+        results = TestResultDataset()
+
+        if not test_cases:
+            print(f"No test cases found in {self.test_case_path}")
+            return results
+
+        print(f"Running {len(test_cases)} test cases...")
+
+        for test_case in test_cases:
+            test_name = test_case.get("name", "Unnamed")
+            print(f"\nRunning test: {test_name}")
+
+            try:
+                result = self.run_test_case(test_case)
+                results.results.append(result)
+
+                if result.success:
+                    print(f"✓ Test passed: {test_name}")
+                else:
+                    print(
+                        f"✗ Test failed: {test_name} (completed {result.current_step}/{result.total_step} steps)"
+                    )
+                    if result.error_message:
+                        print(f"  Error: {result.error_message}")
+
+            except Exception as e:
+                print(f"✗ Test crashed: {test_name} - {str(e)}")
+                result = TestResult(
+                    test_name=test_name, success=False, error_message=str(e)
+                )
+                results.results.append(result)
+
+        # Save results
+        self.test_output_path.parent.mkdir(parents=True, exist_ok=True)
+        results.save_results(str(self.test_output_path))
+
+        # Print summary
+        self.print_summary(results)
+
+        return results
+
+    def print_summary(self, results: TestResultDataset):
+        """Print a summary of test results."""
+        print("=" * 60)
+        print("TEST EXECUTION SUMMARY")
+        print("=" * 60)
+
+        for result in results.results:
+            status = "✓" if result.success else "✗"
+            print(
+                f"{status} {result.test_name}: "
+                f"Success={result.success}, "
+                f"Steps={result.current_step}/{result.total_step} "
+                f"({result.correct_trace:.1%})"
+            )
+
+        print("=" * 60)
+        print(f"Total Tests: {len(results.results)}")
+        print(f"Success Rate: {results.success_rate:.1%}")
+        print(f"Overall Correct Trace: {results.correct_trace:.1%}")
+        print("=" * 60)
