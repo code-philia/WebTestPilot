@@ -18,16 +18,16 @@ def test_update_invoice(
     created_invoice_page.get_by_role("button", name="Add Item").click()
 
     # Update quantity
-    created_invoice_page.get_by_role(
-        "row", name=test_data.product_name + "1"
-    ).get_by_role("textbox").nth(3).click()
-    created_invoice_page.get_by_role(
-        "row", name=test_data.product_name + "1"
-    ).get_by_role("textbox").nth(3).fill("10")
+    created_invoice_page.get_by_role("row", name=test_data.product_name1).get_by_role(
+        "textbox"
+    ).nth(3).click()
+    created_invoice_page.get_by_role("row", name=test_data.product_name1).get_by_role(
+        "textbox"
+    ).nth(3).fill("10")
     created_invoice_page.get_by_role("button", name="Save").click()
 
     expect(
-        created_invoice_page.get_by_role("row", name=test_data.product_name + "1")
+        created_invoice_page.get_by_role("row", name=test_data.product_name1)
         .get_by_role("textbox")
         .nth(3)
     ).to_have_value("10")

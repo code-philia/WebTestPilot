@@ -30,6 +30,7 @@ class InvoiceNinjaTestData:
     def __post_init__(self):
         self._unique_id = str(randint(100000, 999999))
 
+    # Company
     @property
     def company_name(self) -> str:
         return f"company_name{self._unique_id}"
@@ -58,6 +59,7 @@ class InvoiceNinjaTestData:
     def company_phone(self) -> str:
         return f"09{self._unique_id}"
 
+    # Contact
     @property
     def contact_first_name(self) -> str:
         return f"first_name{self._unique_id}"
@@ -74,9 +76,18 @@ class InvoiceNinjaTestData:
     def contact_phone(self) -> str:
         return f"099{self._unique_id}"
 
+    # Product
     @property
     def product_name(self) -> str:
         return f"product_name{self._unique_id}"
+
+    @property
+    def product_name1(self) -> str:
+        return self.product_name + "1"
+
+    @property
+    def product_name2(self) -> str:
+        return self.product_name + "2"
 
     @property
     def product_name_updated(self) -> str:
@@ -98,6 +109,7 @@ class InvoiceNinjaTestData:
     def product_max_quantity(self) -> str:
         return "1000"
 
+    # Invoice
     @property
     def invoice_number(self) -> str:
         return str(self._unique_id)
@@ -288,8 +300,8 @@ def setup_for_invoice_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
     create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name + "1", test_data)
-    create_product(logged_in_page, test_data.product_name + "2", test_data)
+    create_product(logged_in_page, test_data.product_name1, test_data)
+    create_product(logged_in_page, test_data.product_name2, test_data)
 
     # Navigate
     logged_in_page.wait_for_timeout(1000)
@@ -311,19 +323,19 @@ def setup_for_invoice_page(
         "textbox"
     ).first.click()
     logged_in_page.get_by_role("cell", name="New Product").get_by_role("textbox").fill(
-        test_data.product_name + "1"
+        test_data.product_name1
     )
     logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.product_name + "1"
+        has_text=test_data.product_name2
     ).click()
     logged_in_page.get_by_role("button", name="Add Item").click()
     logged_in_page.get_by_role("row", name="$ 0.00").get_by_role(
         "textbox"
     ).first.click()
     logged_in_page.get_by_role("cell", name="New Product").get_by_role("textbox").fill(
-        test_data.product_name + "2"
+        test_data.product_name2
     )
-    logged_in_page.get_by_text(test_data.product_name + "2").click()
+    logged_in_page.get_by_text(test_data.product_name2).click()
     logged_in_page.get_by_role("button", name="Save").click()
     logged_in_page.wait_for_timeout(2000)
 
@@ -451,8 +463,8 @@ def setup_for_credit_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
     create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name + "1", test_data)
-    create_product(logged_in_page, test_data.product_name + "2", test_data)
+    create_product(logged_in_page, test_data.product_name1, test_data)
+    create_product(logged_in_page, test_data.product_name2, test_data)
 
     logged_in_page.wait_for_timeout(500)
     logged_in_page.get_by_role("link", name="Credits", exact=True).click()
@@ -471,19 +483,19 @@ def setup_for_credit_page(
         "textbox"
     ).first.click()
     logged_in_page.get_by_role("cell", name="New Product").get_by_role("textbox").fill(
-        test_data.product_name + "1"
+        test_data.product_name1
     )
     logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.product_name + "1"
+        has_text=test_data.product_name1
     ).click()
     logged_in_page.get_by_role("button", name="Add Item").click()
     logged_in_page.get_by_role("row", name="$ 0.00").get_by_role(
         "textbox"
     ).first.click()
     logged_in_page.get_by_role("cell", name="New Product").get_by_role("textbox").fill(
-        test_data.product_name + "2"
+        test_data.product_name2
     )
-    logged_in_page.get_by_text(test_data.product_name + "2").click()
+    logged_in_page.get_by_text(test_data.product_name2).click()
     logged_in_page.get_by_role("button", name="Save").click()
     logged_in_page.wait_for_timeout(2000)
 

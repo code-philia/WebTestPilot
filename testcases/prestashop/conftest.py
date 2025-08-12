@@ -1,11 +1,17 @@
+import sys
+from pathlib import Path
+
 import pytest
 from playwright.sync_api import Page
+
+sys.path.append(str(Path(__file__).parent.parent))
+
 from testcases.tracing_api import create_traced_page
 
 pytest_plugins = ["pytest_xpath_plugin"]
 
-BASE_URL = "http://localhost:8083"
-#BASE_URL = "http://49.232.8.242:8083"
+# BASE_URL = "http://localhost:8083"
+BASE_URL = "http://49.232.8.242:8083"
 
 
 @pytest.fixture

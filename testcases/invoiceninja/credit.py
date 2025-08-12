@@ -20,16 +20,16 @@ def test_update_credit(
     created_credit_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
     # Update quantity
-    created_credit_page.get_by_role(
-        "row", name=test_data.product_name + "1"
-    ).get_by_role("textbox").nth(3).click()
-    created_credit_page.get_by_role(
-        "row", name=test_data.product_name + "1"
-    ).get_by_role("textbox").nth(3).fill("10")
+    created_credit_page.get_by_role("row", name=test_data.product_name1).get_by_role(
+        "textbox"
+    ).nth(3).click()
+    created_credit_page.get_by_role("row", name=test_data.product_name1).get_by_role(
+        "textbox"
+    ).nth(3).fill("10")
     created_credit_page.get_by_role("button", name="Save").click()
 
     expect(
-        created_credit_page.get_by_role("row", name=test_data.product_name + "1")
+        created_credit_page.get_by_role("row", name=test_data.product_name1)
         .get_by_role("textbox")
         .nth(3)
     ).to_have_value("10")
@@ -38,7 +38,9 @@ def test_update_credit(
 def test_mark_sent_credit(
     created_credit_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
-    expect(created_credit_page.get_by_role("main")).to_contain_text("Draft", timeout=1000)
+    expect(created_credit_page.get_by_role("main")).to_contain_text(
+        "Draft", timeout=1000
+    )
 
     created_credit_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
@@ -69,7 +71,9 @@ def test_send_email_credit(
 def test_archive_credit(
     created_credit_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
-    expect(created_credit_page.get_by_role("main")).to_contain_text("Draft", timeout=1000)
+    expect(created_credit_page.get_by_role("main")).to_contain_text(
+        "Draft", timeout=1000
+    )
 
     created_credit_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
