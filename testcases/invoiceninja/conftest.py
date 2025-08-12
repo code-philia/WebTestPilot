@@ -130,20 +130,23 @@ def logged_in_page(page: Page) -> Page:
         Page: A Playwright page object with user logged in
     """
     traced_page = create_traced_page(page)
+    traced_page = login_to_invoiceninja(traced_page)
+    return traced_page
 
-    traced_page.set_viewport_size({"width": 1280, "height": 720})
-    traced_page.goto(f"{INVOICE_NINJA_HOST}/login")
+
+def login_to_invoiceninja(page: Page) -> Page:
+    page.set_viewport_size({"width": 1280, "height": 720})
+    page.goto(f"{INVOICE_NINJA_HOST}/login")
 
     # Perform login
-    traced_page.locator('input[name="email"]').click()
-    traced_page.locator('input[name="email"]').fill(INITIAL_USER)
-    traced_page.get_by_role("textbox", name="Password").click()
-    traced_page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
-    traced_page.get_by_role("button", name="Login").click()
+    page.locator('input[name="email"]').click()
+    page.locator('input[name="email"]').fill(INITIAL_USER)
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    page.get_by_role("button", name="Save").click()
 
-    traced_page.get_by_role("button", name="Save").click()
-
-    return traced_page
+    return page
 
 
 def create_client(
@@ -277,6 +280,13 @@ def created_product_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 @pytest.fixture
 def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     # Data setup
+    logged_in_page = setup_for_invoice_page(logged_in_page, test_data)
+    return logged_in_page
+
+
+def setup_for_invoice_page(
+    logged_in_page: Page, test_data: InvoiceNinjaTestData
+) -> Page:
     create_client(logged_in_page, test_data.company_name, test_data)
     create_product(logged_in_page, test_data.product_name + "1", test_data)
     create_product(logged_in_page, test_data.product_name + "2", test_data)
@@ -316,14 +326,26 @@ def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
     logged_in_page.get_by_text(test_data.product_name + "2").click()
     logged_in_page.get_by_role("button", name="Save").click()
     logged_in_page.wait_for_timeout(2000)
+
     return logged_in_page
 
 
 @pytest.fixture
-def created_payment_page(
-    created_invoice_page: Page, test_data: InvoiceNinjaTestData
-) -> Page:
+def created_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     # Invoice has to be sent to be chosen in payment
+    created_invoice_page = setup_for_payment_page(logged_in_page, test_data)
+    expect(
+        created_invoice_page.locator("div")
+        .filter(has_text=re.compile(r"^Successfully created payment$"))
+        .first
+    ).to_be_visible(timeout=2000)
+
+    return created_invoice_page
+
+
+def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData):
+    created_invoice_page = setup_for_invoice_page(logged_in_page, test_data)
+
     created_invoice_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
     ).get_by_role("button").nth(2).click()
@@ -364,19 +386,22 @@ def created_payment_page(
     created_invoice_page.get_by_role("option", name="Bank Transfer", exact=True).click()
 
     created_invoice_page.get_by_role("button", name="Save").click()
-    expect(
-        created_invoice_page.locator("div")
-        .filter(has_text=re.compile(r"^Successfully created payment$"))
-        .first
-    ).to_be_visible(timeout=2000)
-
     return created_invoice_page
 
 
 @pytest.fixture
-def created_expense_page(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
+def created_expense_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
+    created_client_page = setup_for_expense_page(logged_in_page, test_data)
+    return created_client_page
+
+
+def setup_for_expense_page(
+    logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
+    created_client_page = create_client(
+        logged_in_page, test_data.company_name, test_data
+    )
+
     created_client_page.wait_for_timeout(500)
     created_client_page.get_by_role("link", name="Expenses").first.click()
     created_client_page.get_by_role("link", name="Enter Expense").click()
@@ -412,11 +437,19 @@ def created_expense_page(
     expect(created_client_page.get_by_role("main")).to_contain_text("Logged")
 
     created_client_page.wait_for_timeout(1000)
+
     return created_client_page
 
 
 @pytest.fixture
 def created_credit_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
+    logged_in_page = setup_for_credit_page(logged_in_page, test_data)
+    return logged_in_page
+
+
+def setup_for_credit_page(
+    logged_in_page: Page, test_data: InvoiceNinjaTestData
+) -> Page:
     create_client(logged_in_page, test_data.company_name, test_data)
     create_product(logged_in_page, test_data.product_name + "1", test_data)
     create_product(logged_in_page, test_data.product_name + "2", test_data)
@@ -453,4 +486,5 @@ def created_credit_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -
     logged_in_page.get_by_text(test_data.product_name + "2").click()
     logged_in_page.get_by_role("button", name="Save").click()
     logged_in_page.wait_for_timeout(2000)
+
     return logged_in_page

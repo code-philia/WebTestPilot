@@ -23,6 +23,16 @@ from bookstack.conftest import (
     setup_data_for_page_move_page,
     setup_data_for_sort_chapter_and_page,
 )
+from invoiceninja.conftest import (
+    InvoiceNinjaTestData,
+    create_client,
+    create_product,
+    login_to_invoiceninja,
+    setup_for_credit_page,
+    setup_for_expense_page,
+    setup_for_invoice_page,
+    setup_for_payment_page,
+)
 
 ApplicationType = Literal["bookstack", "invoiceninja", "indico", "prestashop"]
 
@@ -32,16 +42,65 @@ def setup_page_state(
 ) -> Page:
     if application == "bookstack":
         return setup_bookstack_page(page, setup_function)
+    elif application == "invoiceninja":
+        return setup_invoiceninja_page(page, setup_function)
+    elif application == "indico":
+        return setup_indico_page(page, setup_function)
+    elif application == "prestashop":
+        return setup_prestashop_page(page, setup_function)
 
-    return page
+    raise ValueError(f"Unknown application type: {application}")
+
+
+def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
+    test_data = InvoiceNinjaTestData()
+
+    # No setup.
+    if setup_function == "":
+        return page
+
+    logged_in_page = login_to_invoiceninja(page)
+
+    if setup_function == "logged_in_page":
+        return logged_in_page
+
+    elif setup_function == "created_client_page":
+        return create_client(logged_in_page, test_data.company_name, test_data)
+
+    elif setup_function == "created_product_page":
+        return create_product(logged_in_page, test_data.product_name, test_data)
+
+    elif setup_function == "created_invoice_page":
+        return setup_for_invoice_page(logged_in_page, test_data)
+
+    elif setup_function == "created_payment_page":
+        return setup_for_payment_page(logged_in_page, test_data)
+
+    elif setup_function == "created_expense_page":
+        return setup_for_expense_page(logged_in_page, test_data)
+
+    elif setup_function == "created_credit_page":
+        return setup_for_credit_page(logged_in_page, test_data=test_data)
+
+    else:
+        raise ValueError(f"Unknown invoiceninja setup function: {setup_function}")
+
+
+def setup_indico_page(page: Page, setup_function: str) -> Page:
+    pass
+
+
+def setup_prestashop_page(page: Page, setup_function: str) -> Page:
+    pass
 
 
 def setup_bookstack_page(page: Page, setup_function: str) -> Page:
-    """Setup BookStack page with the specified state using sync fixtures."""
-    # Create test data for unique IDs
     test_data = BookStackTestData()
 
-    # Map setup functions to their sync implementations
+    # No setup.
+    if setup_function == "":
+        return page
+
     logged_in_page = login_to_bookstack(page)
 
     if setup_function == "logged_in_page":
@@ -99,4 +158,4 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
         return setup_data_for_page_move_chapter(logged_in_page, test_data)
 
     else:
-        return page
+        raise ValueError(f"Unknown bookstack setup function: {setup_function}")
