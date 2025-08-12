@@ -535,3 +535,53 @@ def created_global_search_page(
     logged_in_page: Page, test_data: BookStackTestData
 ) -> Page:
     return setup_data_for_global_search_page(logged_in_page, test_data)
+
+
+def setup_data_for_page_move_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    # Create book, create 1 chapter, create 1 page.
+    # Move the page to the chapter.
+    create_book_page = create_book(
+        logged_in_page, test_data.book_name, test_data.book_description
+    )
+    chapter_created_page = create_chapter(
+        create_book_page, test_data.chapter_name, test_data.chapter_description
+    )
+
+    # Go back to book page and create a page.
+    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    page_created_page = create_page(
+        chapter_created_page, test_data.page_name, test_data.page_description
+    )
+    return page_created_page
+
+
+@pytest.fixture
+def created_page_move_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+    return setup_data_for_page_move_page(logged_in_page, test_data)
+
+
+def setup_data_for_page_move_chapter(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    book1_page = create_book(
+        logged_in_page, test_data.book_name1, test_data.book_description
+    )
+    book1_chapter = create_chapter(
+        book1_page, test_data.chapter_name1, test_data.chapter_description
+    )
+    book2_page = create_book(
+        book1_chapter, test_data.book_name2, test_data.book_description
+    )
+    book2_chapter = create_chapter(
+        book2_page, test_data.chapter_name2, test_data.chapter_description
+    )
+    return book2_chapter
+
+
+@pytest.fixture
+def created_page_move_chapter(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    return setup_data_for_page_move_chapter(logged_in_page, test_data)

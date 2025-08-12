@@ -1,12 +1,8 @@
 {
   "name": "TC-18-P :: Move Page Between Containers",
   "url": "http://localhost:8081/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_page_move_page",
   "actions": [
-    {
-      "action": "Navigate to a page within a book",
-      "expectedResult": "Page detail view is displayed"
-    },
     {
       "action": "Click \"Move\" link in the page actions",
       "expectedResult": "Move page dialog opens"

@@ -19,6 +19,8 @@ from bookstack.conftest import (
     login_to_bookstack,
     setup_data_for_create_page_template,
     setup_data_for_global_search_page,
+    setup_data_for_page_move_chapter,
+    setup_data_for_page_move_page,
     setup_data_for_sort_chapter_and_page,
 )
 
@@ -89,6 +91,12 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
 
     elif setup_function == "created_global_search_page":
         return setup_data_for_global_search_page(logged_in_page, test_data)
+
+    elif setup_function == "created_page_move_page":
+        return setup_data_for_page_move_page(logged_in_page, test_data)
+
+    elif setup_function == "created_page_move_chapter":
+        return setup_data_for_page_move_chapter(logged_in_page, test_data)
 
     else:
         return page

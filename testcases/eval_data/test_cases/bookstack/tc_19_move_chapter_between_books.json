@@ -1,12 +1,8 @@
 {
   "name": "TC-19-P :: Move Chapter Between Books",
   "url": "http://localhost:8081/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_page_move_chapter",
   "actions": [
-    {
-      "action": "Navigate to a chapter within a book",
-      "expectedResult": "Chapter detail page is displayed"
-    },
     {
       "action": "Click \"Move\" link in the chapter actions",
       "expectedResult": "Move chapter dialog opens"
