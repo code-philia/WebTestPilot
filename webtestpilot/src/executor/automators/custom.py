@@ -1,13 +1,11 @@
 import re
 import time
-from baml_py import ClientRegistry
 
 from baml_client.sync_client import b
-from baml_client.types import TestCase
 from playwright.sync_api import Page, ElementHandle
 
 
-_current_page = None
+_current_page: Page | None = None
 
 
 def _parse_coordinates(coordinates: str) -> tuple[int, int]:
@@ -44,19 +42,21 @@ def _get_element(page: Page, x: int, y: int) -> ElementHandle:
     }}
     """)
 
-    if handle:
-        return handle.as_element()
-    return None
+    return handle.as_element() if handle else None
 
 
-def set_page(page: Page):
+def _set_page(page: Page):
     global _current_page
     _current_page = page
 
 
-def click(target_description: str):
+def _require_page():
     if _current_page is None:
-        raise RuntimeError("Page is not set")
+        raise RuntimeError("No active page. Call set_page() first.")
+    
+
+def click(target_description: str):
+    _require_page()
     
     coordinates = b.LocateUIElement(target_description)
     x, y = _parse_coordinates(coordinates)
@@ -65,9 +65,7 @@ def click(target_description: str):
 
 
 def type(target_description: str, content: str):
-    if _current_page is None:
-        raise RuntimeError("Page is not set")
-    
+    _require_page()
     coordinates = b.LocateUIElement(target_description)
     x, y = _parse_coordinates(coordinates)
     element: ElementHandle = _get_element(_current_page, x, y)
@@ -75,9 +73,7 @@ def type(target_description: str, content: str):
 
 
 def drag(source_description: str, target_description: str):
-    if _current_page is None:
-        raise RuntimeError("Page is not set")
-    
+    _require_page()
     source_coordinates = b.LocateUIElement(source_description)
     source_x, source_y = _parse_coordinates(source_coordinates)
     target_coordinates = b.LocateUIElement(target_description)
@@ -109,24 +105,36 @@ def drag(source_description: str, target_description: str):
     _current_page.mouse.up()
 
 
-def scroll(target_description: str, direction: str):
+def scroll(target_description: str | None, direction: str):
+    _require_page()
+
     direction = direction.lower()
     if direction not in {"up", "down", "left", "right"}:
         raise ValueError("direction must be one of 'up', 'down', 'left', or 'right'")
-    
-    coordinates = b.LocateUIElement(target_description)
-    x, y = _parse_coordinates(coordinates)
 
-    _current_page.evaluate(f"""
-    (x, y, direction) => {{
-      const el = document.elementFromPoint(x, y);
-      if (!el) return;
+    # Default values: scroll window
+    coords = None
+    if target_description is not None:
+        coords = _parse_coordinates(b.LocateUIElement(target_description))
 
-      const rect = el.getBoundingClientRect();
-      const scrollAmountVertical = rect.height;
-      const scrollAmountHorizontal = rect.width;
+    _current_page.evaluate("""
+    (coords, direction) => {
+      let el, scrollAmountVertical, scrollAmountHorizontal;
 
-      switch (direction) {{
+      if (coords) {
+        const [x, y] = coords;
+        el = document.elementFromPoint(x, y);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        scrollAmountVertical = rect.height;
+        scrollAmountHorizontal = rect.width;
+      } else {
+        el = window;
+        scrollAmountVertical = window.innerHeight;
+        scrollAmountHorizontal = window.innerWidth;
+      }
+
+      switch (direction) {
         case 'up':
           el.scrollBy(0, -scrollAmountVertical);
           break;
@@ -139,10 +147,37 @@ def scroll(target_description: str, direction: str):
         case 'right':
           el.scrollBy(scrollAmountHorizontal, 0);
           break;
-      }}
-    }}
-    """, x, y, direction)
+      }
+    }
+    """, coords, direction)
 
 
 def wait(duration: int):
-    time.sleep()
+    if duration <= 0:
+        raise ValueError("Wait duration must be >0 miliseconds")
+    
+    time.sleep(duration / 1000)
+
+
+def execute(code_block: str, page: Page):
+    """
+    Safely execute LLM-generated Python code blocks containing only automation actions.
+    Automatically sets the current Playwright Page before execution.
+    """
+    _set_page(page)  # Bind this run to the given page
+
+    safe_globals = {
+        "click": click,
+        "type": type,
+        "drag": drag,
+        "scroll": scroll,
+        "wait": wait,
+    }
+
+    # Remove triple backticks and optional 'python' tag
+    cleaned_code = re.sub(
+        r"^```(?:python)?|```$", "", code_block.strip(),
+        flags=re.MULTILINE
+    ).strip()
+
+    exec(cleaned_code, safe_globals, {})
