@@ -1,9 +1,14 @@
 import re
+import sys
 from dataclasses import dataclass
+from pathlib import Path
 from random import randint
 
 import pytest
 from playwright.sync_api import Page
+
+sys.path.append(str(Path(__file__).parent.parent))
+
 from tracing_api import create_traced_page
 from tracing_api import traced_expect as expect
 

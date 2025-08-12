@@ -7,9 +7,14 @@ import sys
 import time
 from playwright.async_api import async_playwright
 
+
 if __name__ == "__main__":
     sys.path.append(os.path.join(str(Path(__file__).parent), "src"))
+    print(str(Path(__file__).parent.parent.parent))
+    # Add testcases directory to Python path
+    sys.path.append(str(Path(__file__).parent.parent.parent / "testcases"))
 
+from bookstack.conftest import login_to_bookstack
 from VTAAS.data.testcase import TestCase
 from VTAAS.llm.llm_client import LLMProvider
 from VTAAS.orchestrator.orchestrator import Orchestrator
@@ -18,7 +23,7 @@ from VTAAS.workers.browser import Browser
 
 
 def deserialize_test_case(
-        json_file_path: str, output_folder: str = "output"
+    json_file_path: str, output_folder: str = "output"
 ) -> TestCase:
     with open(json_file_path, "r") as file:
         data = json.load(file)
@@ -48,6 +53,7 @@ async def run_testcase(test_case: TestCase, output_folder: str, provider: str):
             tracer=True,  # new
             trace_folder=output_folder,
         )
+        browser._page = await login_to_bookstack(browser._page)
 
         llm_provider: LLMProvider = LLMProvider.OPENAI
         match provider:
@@ -94,7 +100,10 @@ async def main():
     from pathlib import Path
 
     # 替换原来的代码
-    output_folder = Path(tempfile.gettempdir()) / f"{str(parser.__hash__())[:8]}_{str(time.time())[:8]}"
+    output_folder = (
+        Path(tempfile.gettempdir())
+        / f"{str(parser.__hash__())[:8]}_{str(time.time())[:8]}"
+    )
     print(f"execution logs will be stored at {output_folder}")
 
     args = parser.parse_args()

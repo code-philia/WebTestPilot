@@ -1,9 +1,14 @@
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from pathlib import Path
 from random import randint
 
 import pytest
 from playwright.sync_api import Page
+
+sys.path.append(str(Path(__file__).parent.parent))
+
 from tracing_api import create_traced_page, traced_expect as expect
 
 pytest_plugins = ["pytest_xpath_plugin"]

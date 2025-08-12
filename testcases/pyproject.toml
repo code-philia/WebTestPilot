@@ -11,4 +11,7 @@ dependencies = [
     "pytest-xdist>=3.6.1",
     "playwright-dompath>=0.0.1",
     "pytest-dependency>=0.6.0",
+    "lavague>=1.1.19",
+    "lavague-drivers-playwright>=0.2.11",
+    "dotenv>=0.9.9",
 ]

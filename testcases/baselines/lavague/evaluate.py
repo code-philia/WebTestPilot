@@ -1,26 +1,29 @@
 import json
 import os
+from pathlib import Path
 import sys
 from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
+from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import sync_playwright
 from tqdm import tqdm
 
 # Add the testcases directory to Python path
-testcases_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+testcases_dir = str(Path(__file__).parent.parent.parent)
 sys.path.append(testcases_dir)
-print(f"Added to Python path: {testcases_dir}")
 
 from bookstack.conftest import login_to_bookstack
 
 load_dotenv()
 
-TEST_CASE_PATH = "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/testcases/eval_data/test_cases/bookstack"
-TEST_OUTPUT_PATH = "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/testcases/eval_data/results/lavague/bookstack.json"
+# Get the testcases directory (parent of parent of parent)
+TESTCASES_DIR = Path(__file__).parent.parent.parent
+TEST_CASE_PATH = TESTCASES_DIR / "eval_data" / "test_cases" / "bookstack"
+TEST_OUTPUT_PATH = TESTCASES_DIR / "eval_data" / "results" / "lavague" / "bookstack.json"
 
 
 @dataclass
@@ -100,10 +103,13 @@ class TestRunner:
             page  # Set the page directly as the lib implementation does not support.
         )
 
+        token_counter = TokenCounter(log=True)
         action_engine = ActionEngine(playwright_driver)
         world_model = WorldModel()
         # TODO: Max steps?
-        agent = WebAgent(world_model, action_engine, n_steps=1)
+        agent = WebAgent(
+            world_model, action_engine, n_steps=1, token_counter=token_counter
+        )
 
         for i, action in tqdm(enumerate(actions), total=len(actions)):
             try:
@@ -122,6 +128,7 @@ class TestRunner:
             result.current_step = min(result.current_step + 1, result.total_step)
             result.success = result.current_step == result.total_step
 
+        print(agent.process_token_usage())
         return result
 
     def run_test_cases(self):
@@ -144,9 +151,7 @@ class TestRunner:
 
 
 if __name__ == "__main__":
-    test_case_path = TEST_CASE_PATH
-    test_output_path = TEST_OUTPUT_PATH
-    test_runner = TestRunner(test_case_path, test_output_path)
+    test_runner = TestRunner(str(TEST_CASE_PATH), str(TEST_OUTPUT_PATH))
 
     results = test_runner.run_test_cases()
 
