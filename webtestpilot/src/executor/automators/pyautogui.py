@@ -99,10 +99,10 @@ def _execute_call(call_node: ast.Call):
         print(f"Unsupported PyAutoGUI function: {func_name}")
 
 
-def execute(page: Page, response: str):
+def execute(code: str, page: Page):
     _set_page(page)
 
-    tree = ast.parse(response)
+    tree = ast.parse(code)
     for node in tree.body:
         if isinstance(node, ast.Expr) and isinstance(node.value, ast.Call):
             _execute_call(node.value)

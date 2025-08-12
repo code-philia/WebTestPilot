@@ -53,11 +53,11 @@ def _set_page(page: Page):
 def _require_page():
     if _current_page is None:
         raise RuntimeError("No active page. Call set_page() first.")
-    
+
 
 def click(target_description: str):
     _require_page()
-    
+
     coordinates = b.LocateUIElement(target_description)
     x, y = _parse_coordinates(coordinates)
     element: ElementHandle = _get_element(_current_page, x, y)
@@ -117,7 +117,8 @@ def scroll(target_description: str | None, direction: str):
     if target_description is not None:
         coords = _parse_coordinates(b.LocateUIElement(target_description))
 
-    _current_page.evaluate("""
+    _current_page.evaluate(
+        """
     (coords, direction) => {
       let el, scrollAmountVertical, scrollAmountHorizontal;
 
@@ -149,17 +150,20 @@ def scroll(target_description: str | None, direction: str):
           break;
       }
     }
-    """, coords, direction)
+    """,
+        coords,
+        direction,
+    )
 
 
 def wait(duration: int):
     if duration <= 0:
         raise ValueError("Wait duration must be >0 miliseconds")
-    
+
     time.sleep(duration / 1000)
 
 
-def execute(code_block: str, page: Page):
+def execute(code: str, page: Page):
     """
     Safely execute LLM-generated Python code blocks containing only automation actions.
     Automatically sets the current Playwright Page before execution.
@@ -176,8 +180,7 @@ def execute(code_block: str, page: Page):
 
     # Remove triple backticks and optional 'python' tag
     cleaned_code = re.sub(
-        r"^```(?:python)?|```$", "", code_block.strip(),
-        flags=re.MULTILINE
+        r"^```(?:python)?|```$", "", code.strip(), flags=re.MULTILINE
     ).strip()
 
     exec(cleaned_code, safe_globals, {})

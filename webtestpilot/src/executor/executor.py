@@ -1,14 +1,80 @@
+from baml_client.sync_client import b
+from baml_py import Image
+from executor.model.session import Session
+import base64
+from baml_py import ClientRegistry
+from utils import execute_assertion
 
 
+MODEL = "GPT"
+MAX_RETRIES = 3
+cr = ClientRegistry()
+cr.set_primary(MODEL)
 
 
-def verify_precondition(condition: str):
-    pass
+if MODEL == "UITARS":
+    import executor.automators.uitars as automator
+elif MODEL == "InternVL3":
+    import executor.automators.pyautogui as automator
+else:
+    import executor.automators.custom as automator
 
 
-def execute_action(action: str):
-    pass
+class BugReport(Exception):
+    def __init__(self, message, screenshots=None, steps=None):
+        super().__init__(message)
+        self.screenshots = screenshots or []
+        self.steps = steps or []
 
 
-def verify_postcondition(expectation: str):
-    pass
+def verify_precondition(session: Session, condition: str) -> None:
+    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot = Image.from_base64("image/png", screenshot)
+    history = ""
+    response = b.GenerateAssertion(
+        condition, history, screenshot, baml_options={"client_registry": cr}
+    )
+    passed, message = execute_assertion(response, session)
+    if passed:
+        return
+    else:
+        raise BugReport(message)
+
+
+def execute_action(session: Session, action: str) -> None:
+    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot = Image.from_base64("image/png", screenshot)
+
+    if MODEL == "UITARS":
+        code = b.ProposeActions_UITARS(
+            screenshot, action, baml_options={"client_registry": cr}
+        )
+    elif MODEL == "InternVL3":
+        code = b.ProposeActions_InternVL(
+            screenshot, action, baml_options={"client_registry": cr}
+        )
+    else:
+        code = b.ProposeActions(
+            screenshot, action, baml_options={"client_registry": cr}
+        )
+
+    automator.execute(code, session.page)
+
+
+def verify_postcondition(session: Session, expectation: str):
+    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot = Image.from_base64("image/png", screenshot)
+    history = ""
+    message = ""
+
+    for _ in range(1, MAX_RETRIES + 1):
+        response = b.GenerateAssertion(
+            expectation, history, screenshot, baml_options={"client_registry": cr}
+        )
+        passed, message = execute_assertion(response, session)
+        if passed:
+            return
+
+        # TODO: provide feedback for iterative refinement
+
+    raise BugReport(message)

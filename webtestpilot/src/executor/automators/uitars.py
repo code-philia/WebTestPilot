@@ -119,7 +119,7 @@ def hotkey(key: str):
 def type(content: str):
     _require_page()
     # The content may contain escape sequences, e.g., \n
-    decoded_content = content.encode('utf-8').decode('unicode_escape')
+    decoded_content = content.encode("utf-8").decode("unicode_escape")
     _current_page.keyboard.type(decoded_content)
 
 
@@ -183,7 +183,7 @@ def wait():
 
 def finished(content: str):
     _require_page()
-    decoded_content = content.encode('utf-8').decode('unicode_escape')
+    decoded_content = content.encode("utf-8").decode("unicode_escape")
     print(f"UITARS finished with content:\n{decoded_content}")
 
 
@@ -206,5 +206,7 @@ def execute(code: str, page: Page):
     }
 
     # Clean triple backticks if present
-    cleaned_code = re.sub(r"^```(?:python)?|```$", "", code.strip(), flags=re.MULTILINE).strip()
+    cleaned_code = re.sub(
+        r"^```(?:python)?|```$", "", code.strip(), flags=re.MULTILINE
+    ).strip()
     exec(cleaned_code, safe_globals, {})

@@ -7,20 +7,23 @@ from pydantic_core import PydanticUndefined
 from baml_client.type_builder import TypeBuilder
 import warnings
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 class PydanticTypeBuilder:
     def __init__(self, tb: TypeBuilder) -> None:
         self.tb = tb
         self._processed_models = {}
 
-    def _get_field_type(self, python_type: Union[Type[T], Any], field_path: str = "<root>"):
+    def _get_field_type(
+        self, python_type: Union[Type[T], Any], field_path: str = "<root>"
+    ):
         # Handle Any type
         if python_type is Any:
             warnings.warn(
                 f"Field '{field_path}' using Any type, defaulting to string",
                 UserWarning,
-                stacklevel=2
+                stacklevel=2,
             )
             return self.tb.string()
 
@@ -40,7 +43,7 @@ class PydanticTypeBuilder:
                         warnings.warn(
                             f"Enum '{field_path}' value {member.value} is not a string, skipping",
                             UserWarning,
-                            stacklevel=2
+                            stacklevel=2,
                         )
                 return new_enum.type()
             elif python_type is str:
@@ -55,7 +58,7 @@ class PydanticTypeBuilder:
                 warnings.warn(
                     f"Field '{field_path}' has unsupported type {python_type}, defaulting to string",
                     UserWarning,
-                    stacklevel=2
+                    stacklevel=2,
                 )
                 return self.tb.string()
 
@@ -67,7 +70,7 @@ class PydanticTypeBuilder:
                 warnings.warn(
                     f"Field '{field_path}' using generic dict type, defaulting to Dict[str, str]",
                     UserWarning,
-                    stacklevel=2
+                    stacklevel=2,
                 )
                 return self.tb.map(self.tb.string(), self.tb.string())
 
@@ -97,10 +100,14 @@ class PydanticTypeBuilder:
                     warnings.warn(
                         f"Field '{field_path}' has unsupported literal type {type(value)}, defaulting to string",
                         UserWarning,
-                        stacklevel=2
+                        stacklevel=2,
                     )
                     return self.tb.string()
-            return self.tb.union(literal_types) if len(literal_types) > 1 else literal_types[0]
+            return (
+                self.tb.union(literal_types)
+                if len(literal_types) > 1
+                else literal_types[0]
+            )
         elif origin in (Union, UnionType):
             types = [t for t in args if t is not type(None)]
 
@@ -112,16 +119,17 @@ class PydanticTypeBuilder:
                 else:
                     field_types.append(self._get_field_type(t, field_path))
 
-            result = self.tb.union(field_types) if len(field_types) > 1 else field_types[0]
+            result = (
+                self.tb.union(field_types) if len(field_types) > 1 else field_types[0]
+            )
             return result.optional() if type(None) in args else result
 
         warnings.warn(
             f"Field '{field_path}' has unsupported complex type {python_type}, defaulting to string",
             UserWarning,
-            stacklevel=2
+            stacklevel=2,
         )
         return self.tb.string()
-
 
     def parse_model(self, model_class: Type[BaseModel]):
         model_name = model_class.__name__
@@ -155,40 +163,3 @@ class PydanticTypeBuilder:
 def build_from_pydantic(models: list[Type[BaseModel]], tb: TypeBuilder):
     builder = PydanticTypeBuilder(tb)
     return [builder.parse_model(model) for model in models]
-
-
-from pydantic import Field
-from typing import Optional, List
-
-# class Product(BaseModel):
-#     title: str = Field(...)
-#     price: float = Field(..., ge=0)
-#     quantity: Optional[int] = Field(None, gt=0)
-
-# class Cart(BaseModel):
-#     items: List[Product] = Field(...)
-
-class ClientDetails(BaseModel): 
-    name: str
-    number: str
-    vat_number: str
-    status: Literal["ACTIVE-YO", "NOT-ACTIVE"]
-    website: str
-
-tb = TypeBuilder()
-test = build_from_pydantic([ClientDetails], tb)
-
-import PIL.Image
-from baml_py import Image
-from baml_client.sync_client import b
-tb.Output.add_property("schema", test[0])
-
-import io
-import base64
-img = PIL.Image.open("invoiceninja.png")
-buffer = io.BytesIO()
-img.save(buffer, format="PNG")  # or "JPEG"
-img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
-current_img = Image.from_base64("image/png", img_str)
-
-b.Extract(current_img, "get client details", {"tb": tb})
