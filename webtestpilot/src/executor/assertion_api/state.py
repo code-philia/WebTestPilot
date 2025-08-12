@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from xml.etree.ElementTree import Element
+from typing import Optional
 
 
-@dataclass
+@dataclass(frozen=True)
 class State:
     page_id: str
     description: str
@@ -10,4 +11,7 @@ class State:
     title: str
     content: str
     screenshot: str
-    tree: list[Element]
+    elements: dict[int, Element]
+    prev_action: Optional[str]
+
+    # TODO: Implement extract(), get_element()

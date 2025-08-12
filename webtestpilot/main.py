@@ -5,3 +5,7 @@ load_dotenv()
 
 cr = ClientRegistry()
 cr.set_primary("GPT4o")
+
+# TODO: Main loop of parser + executor
+
+# TODO: Run experiments

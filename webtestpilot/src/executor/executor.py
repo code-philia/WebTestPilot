@@ -30,7 +30,7 @@ class BugReport(Exception):
 def verify_precondition(session: Session, condition: str) -> None:
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = ""
+    history = session.format_history()
     response = b.GenerateAssertion(
         condition, history, screenshot, baml_options={"client_registry": cr}
     )
@@ -59,13 +59,13 @@ def execute_action(session: Session, action: str) -> None:
         )
 
     automator.execute(code, session.page)
+    session.capture_state(prev_action=action)
 
 
 def verify_postcondition(session: Session, expectation: str):
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = ""
-    message = ""
+    history = session.format_history()
 
     for _ in range(1, MAX_RETRIES + 1):
         response = b.GenerateAssertion(

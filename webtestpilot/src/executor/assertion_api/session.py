@@ -1,9 +1,11 @@
 import base64
+from typing import Any
 
 from baml_py import Image
 from playwright.sync_api import Page
 
 from executor.assertion_api.state import State
+from executor.assertion_api.element import Element
 from baml_client.sync_client import b
 from baml_client.types import PageDescription
 from executor.page_reidentification.accessibility import AccessibilityTree
@@ -30,6 +32,7 @@ class Session:
     def __init__(self, page: Page):
         assert isinstance(page, Page) and not page.is_closed()
         self._history: list[State] = []
+        self._state: State = self.capture_state(prev_action=None)
         self.page = page
 
     @property
@@ -46,20 +49,102 @@ class Session:
     @property
     def state(self) -> State:
         """
-        Capture and return the current state of the browser page.
+        Return the most recent captured state.
         """
+        return self._state
+    
+    def capture_state(self, prev_action: str | None) -> State:
+        """
+        Capture and return the current state of the browser page after an action.
+        """
+        # Add previously recorded state into history
+        self._history.append(self._state)
+
         tree = AccessibilityTree(self.page)
         screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8")
+        elements = self.capture_elements()
         page_id, description = self._page_reidentification(tree, screenshot)
 
-        return State(
+        # Update with new state
+        self._state = State(
             page_id=page_id,
             description=description,
             url=self.page.url,
             title=self.page.title(),
             content=self.page.content(),
             screenshot=self.page.screenshot(),
+            elements=elements,
+            prev_action=prev_action
         )
+        return self._state
+    
+    def capture_elements(self) -> dict[int, Element]:
+        def _build_tree(elements_data: list[dict[str, Any]]) -> tuple[dict[int, Element], Element]:
+            elements: dict[str, Element] = {data['id']: Element(data) for data in elements_data}
+            root = None
+            for el in elements.values():
+                if el.parentId is not None:
+                    parent = elements.get(el.parentId)
+                    if parent:
+                        parent.add_child(el)
+                else:
+                    root = el
+            return elements, root
+        
+        elements_data = self.page.evaluate("""
+            (() => {
+            let idCounter = 1;
+            const nodes = [];
+
+            function traverse(node, parentId = null) {
+                const id = idCounter++;
+                const rect = node.getBoundingClientRect();
+                const style = window.getComputedStyle(node);
+
+                nodes.push({
+                id,
+                parentId,
+                tagName: node.tagName,
+                outerHTML: node.outerHTML,
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height,
+                zIndex: parseInt(style.zIndex) || 0,
+                visible: style.visibility !== 'hidden' && style.display !== 'none' && style.opacity !== '0',
+                idAttr: node.id || null,
+                className: node.className || null,
+                });
+
+                for (const child of node.children) {
+                traverse(child, id);
+                }
+            }
+
+            traverse(document.documentElement, null);
+            return nodes;
+            })()
+        """)
+
+        elements, _ = _build_tree(elements_data)
+        return elements
+    
+    def format_history(self) -> str:
+        lines = []
+        for i, state in enumerate(self._history):
+            lines.append(f"State {i}:")
+            lines.append(f"  Page: {state.page_id or 'Unknown'}")
+            if getattr(state, 'description', None):
+                lines.append(f"  Description: {state.description}")
+            if state.prev_action:
+                lines.append(f"  Action: {state.prev_action}")
+            # Example: if you had UI highlights list
+            if hasattr(state, 'ui_highlights') and state.ui_highlights:
+                lines.append(f"  UI Highlights:")
+                for item in state.ui_highlights:
+                    lines.append(f"    - {item}")
+            lines.append("")  # blank line between states
+        return "\n".join(lines)
 
     def _page_reidentification(
         self, tree: AccessibilityTree, screenshot: str
