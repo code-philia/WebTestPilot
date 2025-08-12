@@ -224,7 +224,6 @@ def created_book_page(logged_in_page: Page, test_data: BookStackTestData) -> Pag
     logged_in_page = create_book(
         logged_in_page, test_data.book_name, test_data.book_description
     )
-
     expect(
         logged_in_page.get_by_role("alert").filter(has_text="Book successfully created")
     ).to_be_visible(timeout=1000)
@@ -267,7 +266,6 @@ def created_chapter_page(created_book_page: Page, test_data: BookStackTestData) 
     created_chapter_page = create_chapter(
         created_book_page, test_data.chapter_name, test_data.chapter_description
     )
-
     expect(
         created_chapter_page.get_by_role("alert").filter(
             has_text="Chapter successfully created"
@@ -306,8 +304,6 @@ def created_page_page(created_book_page: Page, test_data: BookStackTestData) -> 
     created_page_page = create_page(
         created_book_page, test_data.page_name, test_data.page_description
     )
-
-    # Check content and visibility
     expect(
         created_page_page.get_by_role("alert").filter(
             has_text="Page successfully created"
@@ -319,56 +315,60 @@ def created_page_page(created_book_page: Page, test_data: BookStackTestData) -> 
 
 @pytest.fixture
 def created_shelf_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
-    # Setup book data
-    create_book(logged_in_page, test_data.book_name1, test_data.book_description)
-    create_book(logged_in_page, test_data.book_name2, test_data.book_description)
-
-    logged_in_page.get_by_role("link", name="Shelves").click()
-    logged_in_page.get_by_role("link", name="New Shelf").click()
-
-    # Name & Description
-    logged_in_page.get_by_role("textbox", name="Name").fill(test_data.shelf_name)
-    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
-        "Rich Text Area. Press ALT-0"
-    ).click()
-    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
-        "Rich Text Area. Press ALT-0"
-    ).fill(test_data.shelf_description)
-
-    # Add books to shelf
-    # Add position to make sure it clicks the button, not the scroll.
-    logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.book_name1
-    ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
-    logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.book_name2
-    ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
-
-    # Cover image
-    logged_in_page.get_by_role("button", name="▸ Cover image").click()
-    logged_in_page.get_by_text("Select Image").click()
-    logged_in_page.get_by_role("button", name="Select Image").set_input_files(
-        os.path.abspath("./assets/minion.jpeg")
+    logged_in_page = create_shelf(
+        logged_in_page,
+        test_data.shelf_name,
+        test_data.shelf_description,
+        [test_data.book_name1, test_data.book_name2],
+        test_data.book_description,
     )
-
-    logged_in_page.get_by_role("button", name="Save Shelf").click()
-
-    # Check content and visibility
     expect(
         logged_in_page.get_by_role("alert").filter(
             has_text="Shelf successfully created"
         )
     ).to_be_visible(timeout=1000)
-
     expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name1)
     expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name2)
 
     return logged_in_page
 
 
+def create_shelf(
+    logged_in_page: Page,
+    shelf_name: str,
+    shelf_description: str,
+    book_names: list[str],
+    book_description: str,
+):
+    for book_name in book_names:
+        create_book(logged_in_page, book_name, book_description)
+
+    logged_in_page.get_by_role("link", name="Shelves").click()
+    logged_in_page.get_by_role("link", name="New Shelf").click()
+
+    # Name & Description
+    logged_in_page.get_by_role("textbox", name="Name").fill(shelf_name)
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).click()
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).fill(shelf_description)
+
+    # Add books to shelf
+    for book_name in book_names:
+        # Add position to make sure it clicks the button, not the scroll.
+        logged_in_page.get_by_role("listitem").filter(
+            has_text=book_name
+        ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
+
+    logged_in_page.get_by_role("button", name="Save Shelf").click()
+    return logged_in_page
+
+
 @pytest.fixture
 def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
-    logged_in_page = create_sort_rule_page(logged_in_page, test_data)
+    logged_in_page = create_sort_rule(logged_in_page, test_data)
     expect(
         logged_in_page.get_by_role("alert").filter(
             has_text="Sort rule successfully created"
@@ -378,7 +378,7 @@ def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -
     return logged_in_page
 
 
-def create_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+def create_sort_rule(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     logged_in_page.get_by_role("link", name="Settings", exact=True).click()
     logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
     logged_in_page.get_by_role("link", name="Create Sort Rule", exact=True).click()
@@ -402,8 +402,7 @@ def create_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) ->
 
 @pytest.fixture
 def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
-    logged_in_page = create_role_page(logged_in_page, test_data)
-
+    logged_in_page = create_role(logged_in_page, test_data)
     expect(
         logged_in_page.get_by_role("alert").filter(has_text="Role successfully created")
     ).to_be_visible(timeout=1000)
@@ -411,7 +410,7 @@ def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Pag
     return logged_in_page
 
 
-def create_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+def create_role(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     # Navigate
     logged_in_page.get_by_role("link", name="Settings").click()
     logged_in_page.get_by_role("link", name="Roles").click()
