@@ -35,11 +35,11 @@ class BookStackTestData:
 
     @property
     def book_name1(self) -> str:
-        return f"Book{self._unique_id} 1"
+        return self.book_name + " 1"
 
     @property
     def book_name2(self) -> str:
-        return f"Book{self._unique_id} 2"
+        return self.book_name + " 2"
 
     @property
     def book_description(self) -> str:
@@ -60,11 +60,11 @@ class BookStackTestData:
 
     @property
     def chapter_name1(self) -> str:
-        return f"Chapter{self._unique_id} 1"
+        return self.chapter_name + " 1"
 
     @property
     def chapter_name2(self) -> str:
-        return f"Chapter{self._unique_id} 2"
+        return self.chapter_name + " 2"
 
     @property
     def chapter_description(self) -> str:
@@ -85,11 +85,11 @@ class BookStackTestData:
 
     @property
     def page_name1(self) -> str:
-        return f"Page{self._unique_id} 1"
+        return self.page_name + " 1"
 
     @property
     def page_name2(self) -> str:
-        return f"Page{self._unique_id} 2"
+        return self.page_name + " 2"
 
     @property
     def page_description(self) -> str:
@@ -98,6 +98,15 @@ class BookStackTestData:
     @property
     def page_name_updated(self) -> str:
         return f"Page Updated {self._unique_id}"
+
+    # Page template properties
+    @property
+    def page_template_name(self) -> str:
+        return self.page_name + " Template"
+
+    @property
+    def page_template_description(self) -> str:
+        return self.page_description + " Template"
 
     @property
     def page_description_updated(self) -> str:
@@ -445,3 +454,64 @@ def create_role(logged_in_page: Page, test_data: BookStackTestData) -> Page:
 
     logged_in_page.get_by_role("button", name="Save Role").click()
     return logged_in_page
+
+
+@pytest.fixture
+def created_data_for_sort_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    return setup_data_for_sort_chapter_and_page(logged_in_page, test_data)
+
+
+def setup_data_for_sort_chapter_and_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    # Create book, create 1 chapter, create 2 pages.
+    # Sort the chapter and pages in the chapter.
+    create_book_page = create_book(
+        logged_in_page, test_data.book_name, test_data.book_description
+    )
+    chapter_created_page = create_chapter(
+        create_book_page, test_data.chapter_name, test_data.chapter_description
+    )
+
+    # Go back to book page and create a page.
+    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    page_created_page = create_page(
+        chapter_created_page, test_data.page_name1, test_data.page_description
+    )
+    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    page_created_page = create_page(
+        chapter_created_page, test_data.page_name2, test_data.page_description
+    )
+    return page_created_page
+
+
+@pytest.fixture
+def created_data_template_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    return setup_data_for_create_page_template(logged_in_page, test_data)
+
+
+def setup_data_for_create_page_template(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    created_book_page = create_book(
+        logged_in_page, test_data.book_name, test_data.book_description
+    )
+    created_page_page = create_page(
+        created_book_page, test_data.page_name, test_data.page_description
+    )
+
+    # Create 1 more page, 1 is a template, 1 uses the template.
+    page_template_name = test_data.page_template_name
+    page_template_description = test_data.page_template_description
+    created_page_page.get_by_role("link", name=test_data.book_name).first.click()
+    created_page_page = create_page(
+        created_page_page,
+        page_template_name,
+        page_template_description,
+    )
+
+    return created_page_page
