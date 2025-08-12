@@ -1,0 +1,34 @@
+{
+  "name": "TC-4-P :: Lecture Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the lecture to be deleted",
+      "expectedResult": "Lecture detail page is displayed"
+    },
+    {
+      "action": "Click the action menu button (three dots icon)",
+      "expectedResult": "Action menu dropdown opens"
+    },
+    {
+      "action": "Verify \"Delete\" option is visible",
+      "expectedResult": "Delete option is available in menu"
+    },
+    {
+      "action": "Click \"Delete\" option",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Check the \"I understand what this means\" checkbox",
+      "expectedResult": "Confirmation checkbox is checked"
+    },
+    {
+      "action": "Click \"Delete event\" button",
+      "expectedResult": "Lecture deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Event successfully deleted\" appears",
+      "expectedResult": "Success alert confirms lecture deletion"
+    }
+  ]
+}

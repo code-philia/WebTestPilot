@@ -1,0 +1,42 @@
+{
+  "name": "TC-9-P :: Create a new parent category",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click \"Catalog\"",
+      "expectedResult": "then click \"Categories\" in the back-office menu."
+    },
+    {
+      "action": "Click the \"Add new category\" button in the top-right corner.",
+      "expectedResult": "A new page for creating a new category appears."
+    },
+    {
+      "action": "Enter the category name e.g. \"Shoes\" in the \"Name\" field.",
+      "expectedResult": "The category name \"Shoes\" is successfully entered."
+    },
+    {
+      "action": "Click the \"Expand\" button in the \"Parent Category\" area to expand the tree.",
+      "expectedResult": "The category tree is expanded."
+    },
+    {
+      "action": "Select \"Home\" as the parent category from the tree.",
+      "expectedResult": "\"Home\" is selected as the parent category."
+    },
+    {
+      "action": "Enter a description for the category in the \"Description\" area.",
+      "expectedResult": "The description is filled into the rich text editor."
+    },
+    {
+      "action": "Upload a \"Category cover image\".",
+      "expectedResult": "The image filename is displayed in the upload area."
+    },
+    {
+      "action": "Enter a custom URL e.g. \"shoes\" for the \"Friendly URL\" field.",
+      "expectedResult": "\"shoes\" is successfully entered in the Friendly URL field."
+    },
+    {
+      "action": "Click the \"Save\" button",
+      "expectedResult": "A \"Successful creation\" message is displayed"
+    }
+  ]
+}

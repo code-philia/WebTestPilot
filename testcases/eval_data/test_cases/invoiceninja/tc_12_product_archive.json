@@ -1,0 +1,42 @@
+{
+  "name": "TC-12-P :: Product Archive",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the product to be archived",
+      "expectedResult": "Product detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Archive\" option",
+      "expectedResult": "Archive confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Product archiving is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully archived product\" appears",
+      "expectedResult": "Success alert confirms product archiving"
+    },
+    {
+      "action": "Navigate to products listing",
+      "expectedResult": "Products listing page is displayed"
+    },
+    {
+      "action": "Verify archived product no longer appears in active list",
+      "expectedResult": "Product is removed from main listing"
+    },
+    {
+      "action": "Access archived products view",
+      "expectedResult": "Archived products can be viewed separately"
+    },
+    {
+      "action": "Verify product appears in archived list",
+      "expectedResult": "Product is visible in archived products view"
+    }
+  ]
+}

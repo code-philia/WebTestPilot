@@ -1,0 +1,42 @@
+{
+  "name": "TC-24-P :: Conference Enable Call for Abstracts",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created conference page",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click on the workflows collapsible menu containing Call for Abstracts",
+      "expectedResult": "Workflows menu expands"
+    },
+    {
+      "action": "Click \"Call for Abstracts\" link",
+      "expectedResult": "Call for Abstracts section opens"
+    },
+    {
+      "action": "Click \"Enable module\" button",
+      "expectedResult": "Module is enabled"
+    },
+    {
+      "action": "Verify \"The call for abstracts is not open yet\" message appears",
+      "expectedResult": "Initial status message is displayed"
+    },
+    {
+      "action": "Click \"Start now\" button",
+      "expectedResult": "Call for abstracts is opened"
+    },
+    {
+      "action": "Click \"Close now\" button",
+      "expectedResult": "Call for abstracts is closed"
+    },
+    {
+      "action": "Click \"Reopen now\" button",
+      "expectedResult": "Reopen confirmation dialog appears"
+    },
+    {
+      "action": "Click close button in \"Confirm action\" dialog header",
+      "expectedResult": "Call for abstracts is reopened"
+    }
+  ]
+}

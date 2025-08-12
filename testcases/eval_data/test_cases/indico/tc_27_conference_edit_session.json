@@ -1,0 +1,34 @@
+{
+  "name": "TC-27-P :: Conference Edit Session",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the conference with created session",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Sessions\" link in navigation",
+      "expectedResult": "Sessions section opens"
+    },
+    {
+      "action": "Click the gear icon for the first session",
+      "expectedResult": "Session edit form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused with current title"
+    },
+    {
+      "action": "Clear and type \"Session title updated123456\" in the title field",
+      "expectedResult": "Title field shows updated session title"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Session changes are saved"
+    },
+    {
+      "action": "Verify updated session title appears in sessions table",
+      "expectedResult": "Sessions list shows updated title"
+    }
+  ]
+}

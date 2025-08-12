@@ -1,0 +1,30 @@
+{
+  "name": "TC-18-P :: Conference Read",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created conference page",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Verify conference name appears in event settings data",
+      "expectedResult": "Conference name is displayed correctly"
+    },
+    {
+      "action": "Verify venue information is visible in location section",
+      "expectedResult": "Venue name is shown in event location"
+    },
+    {
+      "action": "Verify room information is visible in location section",
+      "expectedResult": "Room name is shown in event location"
+    },
+    {
+      "action": "Verify event navigation elements are present",
+      "expectedResult": "Event navigation menu is available"
+    },
+    {
+      "action": "Verify conference-specific links are available",
+      "expectedResult": "Programme and other conference options are present"
+    }
+  ]
+}

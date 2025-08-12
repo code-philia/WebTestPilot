@@ -1,0 +1,38 @@
+{
+  "name": "TC-30-P :: Conference Add Break to Timetable",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created conference page",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Timetable\" link in navigation",
+      "expectedResult": "Timetable view opens"
+    },
+    {
+      "action": "Click \"Add new\" dropdown button",
+      "expectedResult": "Add new menu appears"
+    },
+    {
+      "action": "Click \"Break\" option",
+      "expectedResult": "Break creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Break\" in the title field",
+      "expectedResult": "Title field contains break text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Break is created and saved"
+    },
+    {
+      "action": "Verify \"Break\" appears in timetable canvas",
+      "expectedResult": "Timetable shows the break entry"
+    }
+  ]
+}

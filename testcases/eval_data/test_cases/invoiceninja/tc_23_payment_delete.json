@@ -1,0 +1,34 @@
+{
+  "name": "TC-23-P :: Payment Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the payment to be deleted",
+      "expectedResult": "Payment detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Delete\" option",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Payment deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully deleted payment\" appears",
+      "expectedResult": "Success alert confirms payment deletion"
+    },
+    {
+      "action": "Navigate to payments listing",
+      "expectedResult": "Payments listing page is displayed"
+    },
+    {
+      "action": "Verify deleted payment no longer appears in active list",
+      "expectedResult": "Payment is removed from main listing"
+    }
+  ]
+}

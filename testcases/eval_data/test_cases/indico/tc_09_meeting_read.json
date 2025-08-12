@@ -1,0 +1,30 @@
+{
+  "name": "TC-9-P :: Meeting Read",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created meeting page",
+      "expectedResult": "Meeting detail page is displayed"
+    },
+    {
+      "action": "Verify meeting name appears in event settings data",
+      "expectedResult": "Meeting name is displayed correctly"
+    },
+    {
+      "action": "Verify venue information is visible in location section",
+      "expectedResult": "Venue name is shown in event location"
+    },
+    {
+      "action": "Verify room information is visible in location section",
+      "expectedResult": "Room name is shown in event location"
+    },
+    {
+      "action": "Verify event navigation elements are present",
+      "expectedResult": "Event navigation menu is available"
+    },
+    {
+      "action": "Verify timetable link is available",
+      "expectedResult": "Timetable option is present in navigation"
+    }
+  ]
+}

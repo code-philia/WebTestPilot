@@ -1,0 +1,42 @@
+{
+  "name": "TC-22-P :: Payment Archive",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the payment to be archived",
+      "expectedResult": "Payment detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Archive\" option",
+      "expectedResult": "Archive confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Payment archiving is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully archived payment\" appears",
+      "expectedResult": "Success alert confirms payment archiving"
+    },
+    {
+      "action": "Navigate to payments listing",
+      "expectedResult": "Payments listing page is displayed"
+    },
+    {
+      "action": "Verify archived payment no longer appears in active list",
+      "expectedResult": "Payment is removed from main listing"
+    },
+    {
+      "action": "Access archived payments view",
+      "expectedResult": "Archived payments can be viewed separately"
+    },
+    {
+      "action": "Verify payment appears in archived list",
+      "expectedResult": "Payment is visible in archived payments view"
+    }
+  ]
+}

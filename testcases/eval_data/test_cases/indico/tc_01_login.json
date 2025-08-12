@@ -1,0 +1,38 @@
+{
+  "name": "TC-1-P :: Login",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to http://localhost:8080/",
+      "expectedResult": "Indico homepage loads with login option visible"
+    },
+    {
+      "action": "Click the \"Login\" link",
+      "expectedResult": "Login page appears with authentication options"
+    },
+    {
+      "action": "Click in the username/email textbox labeled \"Username or email\"",
+      "expectedResult": "Username field is focused and ready for input"
+    },
+    {
+      "action": "Type \"admin@admin.com\" in the username field",
+      "expectedResult": "Username field displays \"admin@admin.com\""
+    },
+    {
+      "action": "Click in the password textbox labeled \"Password\"",
+      "expectedResult": "Password field is focused and ready for input"
+    },
+    {
+      "action": "Type \"webtestpilot\" in the password field",
+      "expectedResult": "Password field shows masked characters"
+    },
+    {
+      "action": "Click the \"Login with Indico\" button",
+      "expectedResult": "User is successfully authenticated and redirected to dashboard"
+    },
+    {
+      "action": "Verify \"My profile\" link is visible in navigation",
+      "expectedResult": "My profile link is visible confirming successful login"
+    }
+  ]
+}
