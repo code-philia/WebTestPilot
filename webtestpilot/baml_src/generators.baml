@@ -6,7 +6,7 @@ generator target {
     output_type "python/pydantic"
 
     // Where the generated code will be saved (relative to baml_src/)
-    output_dir "../"
+    output_dir "../src"
 
     // The version of the BAML package you have installed (e.g. same version as your baml-py or @boundaryml/baml).
     // The BAML VSCode extension version should also match this version.
