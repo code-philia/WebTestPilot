@@ -2,7 +2,7 @@ from hashlib import sha1
 from collections import defaultdict
 from xml.etree.ElementTree import Element, indent, tostring
 
-from executor.tree.accessibility import AccessibilityTree
+from executor.page_reidentification.accessibility import AccessibilityTree
 
 
 def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:

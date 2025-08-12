@@ -1,9 +1,9 @@
 from baml_client.sync_client import b
 from baml_py import Image
-from executor.model.session import Session
+from executor.assertion_api.session import Session
 import base64
 from baml_py import ClientRegistry
-from utils import execute_assertion
+from executor.assertion_api import execute_assertion
 
 
 MODEL = "GPT"

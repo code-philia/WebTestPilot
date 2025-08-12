@@ -3,12 +3,12 @@ import base64
 from baml_py import Image
 from playwright.sync_api import Page
 
-from model.state import State
+from executor.assertion_api.state import State
 from baml_client.sync_client import b
 from baml_client.types import PageDescription
-from executor.tree.accessibility import AccessibilityTree
-from executor.tree.abstract import to_xml_tree
-from executor.tree.distance import tree_distance
+from executor.page_reidentification.accessibility import AccessibilityTree
+from executor.page_reidentification.abstract import to_xml_tree
+from executor.page_reidentification.distance import tree_distance
 
 
 class Session:

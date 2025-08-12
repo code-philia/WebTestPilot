@@ -1,7 +1,7 @@
 import re
-from executor.model.session import Session
-from executor.model.state import State
-from executor.model.element import Element
+from executor.assertion_api.session import Session
+from executor.assertion_api.state import State
+from executor.assertion_api.element import Element
 
 
 def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
