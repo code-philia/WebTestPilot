@@ -10,7 +10,7 @@ from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
 from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page
 from tqdm import tqdm
 from .utils import ApplicationType, setup_page_state
 
@@ -85,18 +85,24 @@ class TestRunner:
 
         return test_cases
 
+    def get_initial_page(self, setup_function: str) -> Page:
+        # Start new playwright page
+        playwright = sync_playwright().start()
+        browser = playwright.chromium.launch(headless=True)
+        context = browser.new_context()
+        page = context.new_page()
+
+        # Based on app & fixture, get initial page.
+        page = setup_page_state(page, setup_function, application=self.application)
+        return page
+
     def run_test_case(self, test_case: dict):
         actions = test_case.get("actions", [])
         test_name = test_case.get("name", "Unnamed")
         setup_function = test_case.get("setup_function", "")
         result = TestResult(test_name=test_name, total_step=len(actions))
 
-        playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=True)
-        context = browser.new_context()
-        page = context.new_page()
-
-        page = setup_page_state(page, setup_function, application=self.application)
+        page = self.get_initial_page(setup_function)
 
         def get_page():
             return page
