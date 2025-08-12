@@ -1,7 +1,7 @@
 {
   "name": "TC-23-P :: Global Search with Filters",
   "url": "http://localhost:8081/",
-  "setup_function": "created_chapter_page",
+  "setup_function": "created_global_search_page",
   "actions": [
     {
       "action": "Click in the global search box at top of page",

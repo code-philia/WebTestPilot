@@ -515,3 +515,23 @@ def setup_data_for_create_page_template(
     )
 
     return created_page_page
+
+
+def setup_data_for_global_search_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    created_book_page = create_book(
+        logged_in_page, test_data.book_name, test_data.book_description
+    )
+    created_chapter_page = create_chapter(
+        created_book_page, test_data.chapter_name, test_data.chapter_description
+    )
+    created_chapter_page.goto(BOOKSTACK_HOST)
+    return created_chapter_page
+
+
+@pytest.fixture
+def created_global_search_page(
+    logged_in_page: Page, test_data: BookStackTestData
+) -> Page:
+    return setup_data_for_global_search_page(logged_in_page, test_data)

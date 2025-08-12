@@ -1,39 +1,23 @@
 {
   "name": "TC-20-P :: Create and Use Page Template",
   "url": "http://localhost:8081/",
-  "setup_function": "created_page_page",
+  "setup_function": "created_data_template_page",
   "actions": [
     {
-      "action": "Click \"Settings\" link in navigation",
-      "expectedResult": "Settings page is displayed"
+      "action": "Click \"Edit\" button",
+      "expectedResult": "Page editor opens"
     },
     {
-      "action": "Click \"Page Templates\" in settings menu",
-      "expectedResult": "Page templates section opens"
+      "action": "Click the \"Templates\" button on the right hand side",
+      "expectedResult": "The template configuration tab is displayed"
     },
     {
-      "action": "Click \"Create New Template\" button",
-      "expectedResult": "Template creation form opens"
+      "action": "Tick the checkbox \"Page is a template\"",
+      "expectedResult": "The checkbox is checked"
     },
     {
-      "action": "Click in the \"Template Name\" textbox",
-      "expectedResult": "Template name field is focused"
-    },
-    {
-      "action": "Type \"Template123456\" in the name field",
-      "expectedResult": "Template name field contains unique name"
-    },
-    {
-      "action": "Click in the Rich Text Area iframe",
-      "expectedResult": "Rich text editor is focused"
-    },
-    {
-      "action": "Type \"This is a template content\" in the rich text area",
-      "expectedResult": "Rich text area contains template content"
-    },
-    {
-      "action": "Click \"Save Template\" button",
-      "expectedResult": "Template is created and saved"
+      "action": "Click the \"Save Page\" button",
+      "expectedResult": "The page saved successfully"
     },
     {
       "action": "Verify alert message \"Template successfully created\" appears",
@@ -42,6 +26,10 @@
     {
       "action": "Navigate to create a new page",
       "expectedResult": "Page creation form opens"
+    },
+    {
+      "action": "Click the \"Templates\" button on the right hand side",
+      "expectedResult": "The template configuration tab is displayed"
     },
     {
       "action": "Click \"Templates\" dropdown",

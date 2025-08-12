@@ -10,7 +10,6 @@ def test_create_role(created_role_page: Page, test_data: BookStackTestData) -> N
     )
 
 
-# TODO: It does not update due to permission in the demo site.
 def test_assign_role_to_user(
     created_role_page: Page, test_data: BookStackTestData
 ) -> None:

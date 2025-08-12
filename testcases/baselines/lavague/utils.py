@@ -17,6 +17,9 @@ from bookstack.conftest import (
     create_shelf,
     create_sort_rule,
     login_to_bookstack,
+    setup_data_for_create_page_template,
+    setup_data_for_global_search_page,
+    setup_data_for_sort_chapter_and_page,
 )
 
 ApplicationType = Literal["bookstack", "invoiceninja", "indico", "prestashop"]
@@ -78,4 +81,14 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
             logged_in_page, test_data.role_name, test_data.role_description
         )
 
-    return page
+    elif setup_function == "created_data_template_page":
+        return setup_data_for_create_page_template(logged_in_page, test_data)
+
+    elif setup_function == "created_data_for_sort_page":
+        return setup_data_for_sort_chapter_and_page(logged_in_page, test_data)
+
+    elif setup_function == "created_global_search_page":
+        return setup_data_for_global_search_page(logged_in_page, test_data)
+
+    else:
+        return page
