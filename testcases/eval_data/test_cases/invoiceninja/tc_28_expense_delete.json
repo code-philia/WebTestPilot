@@ -1,6 +1,7 @@
 {
   "name": "TC-28-P :: Expense Delete",
   "url": "http://localhost:8081/",
+  "setup_function": "created_expense_page",
   "actions": [
     {
       "action": "Navigate to the expense to be deleted",

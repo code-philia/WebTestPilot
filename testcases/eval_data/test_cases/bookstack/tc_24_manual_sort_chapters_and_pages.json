@@ -1,6 +1,7 @@
 {
   "name": "TC-24-P :: Manual Sort Chapters and Pages",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to a book with multiple chapters and pages",

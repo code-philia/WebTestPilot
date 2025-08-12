@@ -1,6 +1,7 @@
 {
   "name": "TC-18-P :: Invoice Archive",
   "url": "http://localhost:8081/",
+  "setup_function": "created_invoice_page",
   "actions": [
     {
       "action": "Navigate to the invoice to be archived",

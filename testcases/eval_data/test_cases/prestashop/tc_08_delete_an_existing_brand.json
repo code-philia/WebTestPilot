@@ -1,6 +1,7 @@
 {
   "name": "TC-8-P :: Delete an existing Brand",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to the \"Catalog\" menu",

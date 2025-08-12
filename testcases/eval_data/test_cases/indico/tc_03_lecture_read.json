@@ -1,6 +1,7 @@
 {
   "name": "TC-3-P :: Lecture Read",
   "url": "http://localhost:8081/",
+  "setup_function": "created_lecture_page",
   "actions": [
     {
       "action": "Navigate to the created lecture page",

@@ -1,6 +1,7 @@
 {
   "name": "TC-11-P :: Page Read",
   "url": "http://localhost:8081/",
+  "setup_function": "created_page_page",
   "actions": [
     {
       "action": "Navigate to the book containing the page",

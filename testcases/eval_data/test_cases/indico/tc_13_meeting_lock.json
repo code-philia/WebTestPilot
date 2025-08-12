@@ -1,6 +1,7 @@
 {
   "name": "TC-13-P :: Meeting Lock",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to the meeting to be locked",

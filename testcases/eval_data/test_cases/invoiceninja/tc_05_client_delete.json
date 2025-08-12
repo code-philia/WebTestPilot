@@ -1,6 +1,7 @@
 {
   "name": "TC-5-P :: Client Delete",
   "url": "http://localhost:8081/",
+  "setup_function": "created_client_page",
   "actions": [
     {
       "action": "Navigate to the client to be deleted",

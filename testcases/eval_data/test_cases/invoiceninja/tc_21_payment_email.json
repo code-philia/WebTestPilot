@@ -1,6 +1,7 @@
 {
   "name": "TC-21-P :: Payment Email",
   "url": "http://localhost:8081/",
+  "setup_function": "created_payment_page",
   "actions": [
     {
       "action": "Navigate to a payment record",

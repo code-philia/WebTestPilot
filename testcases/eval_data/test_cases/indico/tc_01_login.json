@@ -1,6 +1,7 @@
 {
   "name": "TC-1-P :: Login",
   "url": "http://localhost:8081/",
+  "setup_function": "",
   "actions": [
     {
       "action": "Navigate to http://localhost:8080/",

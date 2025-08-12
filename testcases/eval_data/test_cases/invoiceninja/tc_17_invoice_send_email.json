@@ -1,6 +1,7 @@
 {
   "name": "TC-17-P :: Invoice Send Email",
   "url": "http://localhost:8081/",
+  "setup_function": "created_invoice_page",
   "actions": [
     {
       "action": "Navigate to a draft invoice",

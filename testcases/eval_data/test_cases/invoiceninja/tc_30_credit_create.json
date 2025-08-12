@@ -1,6 +1,7 @@
 {
   "name": "TC-30-P :: Credit Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_credit_page",
   "actions": [
     {
       "action": "Click \"Credits\" link in navigation menu",

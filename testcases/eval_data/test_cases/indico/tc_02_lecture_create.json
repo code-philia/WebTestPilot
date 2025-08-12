@@ -1,6 +1,7 @@
 {
   "name": "TC-2-P :: Lecture Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_lecture_page",
   "actions": [
     {
       "action": "Click \"Create event\" link in navigation",

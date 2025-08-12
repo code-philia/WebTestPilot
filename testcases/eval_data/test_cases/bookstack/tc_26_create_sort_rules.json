@@ -1,6 +1,7 @@
 {
   "name": "TC-26-P :: Create Sort Rules",
   "url": "http://localhost:8081/",
+  "setup_function": "created_sort_rule_page",
   "actions": [
     {
       "action": "Click \"Settings\" link in navigation",

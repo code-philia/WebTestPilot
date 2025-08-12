@@ -1,6 +1,7 @@
 {
   "name": "TC-24-P :: Expense Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_expense_page",
   "actions": [
     {
       "action": "Click \"Expenses\" link in navigation menu",

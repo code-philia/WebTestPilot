@@ -1,6 +1,7 @@
 {
   "name": "TC-12-P :: Create a new Customer Account",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Click the \"Customers\" link in the back-office main menu.",

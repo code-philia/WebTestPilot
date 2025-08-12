@@ -1,6 +1,7 @@
 {
   "name": "TC-3-P :: Client Read",
   "url": "http://localhost:8081/",
+  "setup_function": "created_client_page",
   "actions": [
     {
       "action": "Click \"Clients\" link in navigation menu",

@@ -1,6 +1,7 @@
 {
   "name": "TC-18-P :: Move Page Between Containers",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to a page within a book",

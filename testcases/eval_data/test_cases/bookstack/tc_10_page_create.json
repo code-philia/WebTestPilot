@@ -1,6 +1,7 @@
 {
   "name": "TC-10-P :: Page Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_page_page",
   "actions": [
     {
       "action": "Navigate to an existing book page",

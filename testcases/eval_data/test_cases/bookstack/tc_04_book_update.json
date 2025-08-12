@@ -1,6 +1,7 @@
 {
   "name": "TC-4-P :: Book Update",
   "url": "http://localhost:8081/",
+  "setup_function": "created_book_page",
   "actions": [
     {
       "action": "Navigate to the book created in TC-002",

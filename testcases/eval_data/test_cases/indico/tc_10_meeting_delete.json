@@ -1,6 +1,7 @@
 {
   "name": "TC-10-P :: Meeting Delete",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to the meeting to be deleted",

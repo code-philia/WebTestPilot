@@ -1,6 +1,7 @@
 {
   "name": "TC-14-P :: Invoice Update",
   "url": "http://localhost:8081/",
+  "setup_function": "created_invoice_page",
   "actions": [
     {
       "action": "Navigate to the invoice created in TC-013",

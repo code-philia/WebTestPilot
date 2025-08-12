@@ -1,6 +1,7 @@
 {
   "name": "TC-8-P :: Meeting Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Click \"Create event\" link in navigation",

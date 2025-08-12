@@ -1,6 +1,7 @@
 {
   "name": "TC-20-P :: Conference Lock",
   "url": "http://localhost:8081/",
+  "setup_function": "created_conference_page",
   "actions": [
     {
       "action": "Navigate to the conference to be locked",

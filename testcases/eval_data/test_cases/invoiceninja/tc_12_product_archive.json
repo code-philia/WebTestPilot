@@ -1,6 +1,7 @@
 {
   "name": "TC-12-P :: Product Archive",
   "url": "http://localhost:8081/",
+  "setup_function": "created_product_page",
   "actions": [
     {
       "action": "Navigate to the product to be archived",

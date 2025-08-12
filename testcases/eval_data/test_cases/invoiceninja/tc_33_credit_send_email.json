@@ -1,6 +1,7 @@
 {
   "name": "TC-33-P :: Credit Send Email",
   "url": "http://localhost:8081/",
+  "setup_function": "created_credit_page",
   "actions": [
     {
       "action": "Navigate to a draft credit",

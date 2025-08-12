@@ -1,6 +1,7 @@
 {
   "name": "TC-11-P :: Meeting Add Contribution to Timetable",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to the created meeting page",

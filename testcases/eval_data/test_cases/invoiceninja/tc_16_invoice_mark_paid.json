@@ -1,6 +1,7 @@
 {
   "name": "TC-16-P :: Invoice Mark Paid",
   "url": "http://localhost:8081/",
+  "setup_function": "created_invoice_page",
   "actions": [
     {
       "action": "Navigate to a draft invoice",

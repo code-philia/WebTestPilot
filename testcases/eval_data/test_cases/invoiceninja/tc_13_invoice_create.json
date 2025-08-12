@@ -1,6 +1,7 @@
 {
   "name": "TC-13-P :: Invoice Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_invoice_page",
   "actions": [
     {
       "action": "Click \"Invoices\" link in navigation menu",

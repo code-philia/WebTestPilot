@@ -1,6 +1,7 @@
 {
   "name": "TC-7-P :: Create a new Brand",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to the \"Catalog\" menu",

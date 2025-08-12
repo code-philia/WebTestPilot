@@ -1,6 +1,7 @@
 {
   "name": "TC-21-P :: Create Role with Permissions",
   "url": "http://localhost:8081/",
+  "setup_function": "created_role_page",
   "actions": [
     {
       "action": "Click \"Settings\" link in navigation",

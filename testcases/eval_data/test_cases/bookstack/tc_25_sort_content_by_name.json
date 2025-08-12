@@ -1,6 +1,7 @@
 {
   "name": "TC-25-P :: Sort Content by Name",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to a book with multiple items",

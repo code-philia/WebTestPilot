@@ -1,6 +1,7 @@
 {
   "name": "TC-12-P :: Page Update",
   "url": "http://localhost:8081/",
+  "setup_function": "created_page_page",
   "actions": [
     {
       "action": "Navigate to the page created in TC-010",

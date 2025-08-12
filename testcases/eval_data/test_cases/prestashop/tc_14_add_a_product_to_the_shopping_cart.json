@@ -1,6 +1,7 @@
 {
   "name": "TC-14-P :: Add a Product to the Shopping Cart",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_buyer_page",
   "actions": [
     {
       "action": "Click on a product link on the homepage e.g. \"Hummingbird printed t-shirt\".",

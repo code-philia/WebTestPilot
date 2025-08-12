@@ -1,6 +1,7 @@
 {
   "name": "TC-14-P :: Meeting Unlock",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to a locked meeting",

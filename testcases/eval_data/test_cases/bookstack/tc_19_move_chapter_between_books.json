@@ -1,6 +1,7 @@
 {
   "name": "TC-19-P :: Move Chapter Between Books",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to a chapter within a book",

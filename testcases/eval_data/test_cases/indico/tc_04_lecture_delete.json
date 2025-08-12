@@ -1,6 +1,7 @@
 {
   "name": "TC-4-P :: Lecture Delete",
   "url": "http://localhost:8081/",
+  "setup_function": "created_lecture_page",
   "actions": [
     {
       "action": "Navigate to the lecture to be deleted",

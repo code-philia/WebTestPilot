@@ -1,6 +1,7 @@
 {
   "name": "TC-19-P :: Write a Review for a Product",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_buyer_page",
   "actions": [
     {
       "action": "Navigate to a specific product detail page.",

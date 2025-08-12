@@ -1,6 +1,7 @@
 {
   "name": "TC-20-P :: Filter Product List using Faceted Search",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_buyer_page",
   "actions": [
     {
       "action": "Navigate to a main category page e.g. \"Clothes\".",

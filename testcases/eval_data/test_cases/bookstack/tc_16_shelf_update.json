@@ -1,6 +1,7 @@
 {
   "name": "TC-16-P :: Shelf Update",
   "url": "http://localhost:8081/",
+  "setup_function": "created_shelf_page",
   "actions": [
     {
       "action": "Navigate to the shelf created in TC-014",

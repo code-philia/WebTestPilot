@@ -1,6 +1,7 @@
 {
   "name": "TC-2-P :: Book Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_book_page",
   "actions": [
     {
       "action": "From the dashboard click \"Books\" link in navigation",

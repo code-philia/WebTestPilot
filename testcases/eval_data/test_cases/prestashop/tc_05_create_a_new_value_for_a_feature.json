@@ -1,6 +1,7 @@
 {
   "name": "TC-5-P :: Create a new value for a Feature",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to \"Catalog\" then \"Attributes & Features\".",

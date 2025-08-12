@@ -1,6 +1,7 @@
 {
   "name": "TC-7-P :: Client Purge",
   "url": "http://localhost:8081/",
+  "setup_function": "created_client_page",
   "actions": [
     {
       "action": "Navigate to deleted clients view",

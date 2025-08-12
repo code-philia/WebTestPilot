@@ -1,6 +1,7 @@
 {
   "name": "TC-9-P :: Create a new parent category",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Click \"Catalog\"",

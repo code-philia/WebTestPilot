@@ -1,6 +1,7 @@
 {
   "name": "TC-27-P :: Update Sort Rules",
   "url": "http://localhost:8081/",
+  "setup_function": "created_sort_rule_page",
   "actions": [
     {
       "action": "Navigate to sort rules management section",

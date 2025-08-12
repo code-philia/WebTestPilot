@@ -1,6 +1,7 @@
 {
   "name": "TC-17-P :: Conference Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_conference_page",
   "actions": [
     {
       "action": "Click \"Create event\" link in navigation",

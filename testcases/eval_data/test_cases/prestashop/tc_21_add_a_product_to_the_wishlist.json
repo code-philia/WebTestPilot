@@ -1,6 +1,7 @@
 {
   "name": "TC-21-P :: Add a Product to the Wishlist",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_buyer_page",
   "actions": [
     {
       "action": "Enter the product name e.g. \"Hummingbird printed t-shirt\" into the \"Search\" input box.",

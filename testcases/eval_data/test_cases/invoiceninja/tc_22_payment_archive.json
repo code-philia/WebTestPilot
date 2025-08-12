@@ -1,6 +1,7 @@
 {
   "name": "TC-22-P :: Payment Archive",
   "url": "http://localhost:8081/",
+  "setup_function": "created_payment_page",
   "actions": [
     {
       "action": "Navigate to the payment to be archived",

@@ -1,6 +1,7 @@
 {
   "name": "TC-11-P :: Product Restore",
   "url": "http://localhost:8081/",
+  "setup_function": "created_product_page",
   "actions": [
     {
       "action": "Click \"Products\" link in navigation menu",

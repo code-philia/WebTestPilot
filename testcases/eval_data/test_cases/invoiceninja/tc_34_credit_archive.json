@@ -1,6 +1,7 @@
 {
   "name": "TC-34-P :: Credit Archive",
   "url": "http://localhost:8081/",
+  "setup_function": "created_credit_page",
   "actions": [
     {
       "action": "Navigate to the credit to be archived",

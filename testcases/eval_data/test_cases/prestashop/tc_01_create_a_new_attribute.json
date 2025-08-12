@@ -1,6 +1,7 @@
 {
   "name": "TC-1-P :: Create a new Attribute",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to \"Catalog\"",

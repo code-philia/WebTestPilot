@@ -1,6 +1,7 @@
 {
   "name": "TC-24-P :: Conference Enable Call for Abstracts",
   "url": "http://localhost:8081/",
+  "setup_function": "created_conference_page",
   "actions": [
     {
       "action": "Navigate to the created conference page",

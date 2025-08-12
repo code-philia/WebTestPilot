@@ -1,6 +1,7 @@
 {
   "name": "TC-3-P :: Book Read",
   "url": "http://localhost:8081/",
+  "setup_function": "created_book_page",
   "actions": [
     {
       "action": "Click \"Books\" link in navigation",

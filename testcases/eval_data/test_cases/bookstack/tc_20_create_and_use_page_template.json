@@ -1,6 +1,7 @@
 {
   "name": "TC-20-P :: Create and Use Page Template",
   "url": "http://localhost:8081/",
+  "setup_function": "created_page_page",
   "actions": [
     {
       "action": "Click \"Settings\" link in navigation",

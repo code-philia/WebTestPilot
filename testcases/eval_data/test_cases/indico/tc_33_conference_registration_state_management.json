@@ -1,6 +1,7 @@
 {
   "name": "TC-33-P :: Conference Registration State Management",
   "url": "http://localhost:8081/",
+  "setup_function": "created_conference_page",
   "actions": [
     {
       "action": "Navigate to the conference with created registration form",

@@ -1,6 +1,7 @@
 {
   "name": "TC-16-P :: Meeting Clone",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to the meeting to be cloned",

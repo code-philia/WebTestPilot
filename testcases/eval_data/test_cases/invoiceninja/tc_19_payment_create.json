@@ -1,6 +1,7 @@
 {
   "name": "TC-19-P :: Payment Create",
   "url": "http://localhost:8081/",
+  "setup_function": "created_payment_page",
   "actions": [
     {
       "action": "Click \"Payments\" link in navigation menu",

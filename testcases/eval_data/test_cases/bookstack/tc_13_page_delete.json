@@ -1,6 +1,7 @@
 {
   "name": "TC-13-P :: Page Delete",
   "url": "http://localhost:8081/",
+  "setup_function": "created_page_page",
   "actions": [
     {
       "action": "Navigate to the page to be deleted",

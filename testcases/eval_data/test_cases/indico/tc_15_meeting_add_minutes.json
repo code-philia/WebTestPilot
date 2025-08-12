@@ -1,6 +1,7 @@
 {
   "name": "TC-15-P :: Meeting Add Minutes",
   "url": "http://localhost:8081/",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Navigate to the created meeting page",

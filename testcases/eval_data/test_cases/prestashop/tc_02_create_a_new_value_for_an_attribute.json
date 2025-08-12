@@ -1,6 +1,7 @@
 {
   "name": "TC-2-P :: Create a new value for an Attribute",
   "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Navigate to the \"Catalog\" -> \"Attributes & Features\" page.",

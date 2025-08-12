@@ -1,6 +1,7 @@
 {
   "name": "TC-7-P :: Lecture Clone",
   "url": "http://localhost:8081/",
+  "setup_function": "created_lecture_page",
   "actions": [
     {
       "action": "Navigate to the lecture to be cloned",
