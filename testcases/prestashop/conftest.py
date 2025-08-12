@@ -31,8 +31,11 @@ def logged_in_buyer_page(page: Page) -> Page:
     page = create_traced_page(page, enable_tracing=True)
     page.goto(f"{BASE_URL}/")
     page.get_by_role("link", name=" Sign in").click()
-    page.get_by_role("textbox", name="Email").fill("pub2@prestashop.com")
-    page.get_by_role("textbox", name="Password input").fill("testTEST123.")
+
+    # Must create user with docker exec -it prestashop-app-1 php /var/www/html/tools/create_user.php
+    # See webapps/prestashop/Dockerfile for more info
+    page.get_by_role("textbox", name="Email").fill("auto.customer@example.com")
+    page.get_by_role("textbox", name="Password input").fill("mypassword")
     page.get_by_role("button", name="Sign in").click()
     yield page
     page.save_traces()
