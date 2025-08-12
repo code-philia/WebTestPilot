@@ -138,20 +138,27 @@ def test_data() -> IndicoTestData:
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
     traced_page = create_traced_page(page)
-    traced_page.goto(INDICO_HOST)
-    traced_page.get_by_role("link", name=" Login").click()
-    traced_page.get_by_role("textbox", name="Username or email").fill(USER)
-    traced_page.get_by_role("textbox", name="Password").click()
-    traced_page.get_by_role("textbox", name="Password").fill(PASSWORD)
-    traced_page.get_by_role("button", name="Login with Indico").click()
-
+    traced_page = login_to_indico(traced_page)
     expect(traced_page.locator("#global-menu")).to_contain_text("My profile")
-
     return traced_page
+
+
+def login_to_indico(page: Page) -> Page:
+    page.goto(INDICO_HOST)
+    page.get_by_role("link", name=" Login").click()
+    page.get_by_role("textbox", name="Username or email").fill(USER)
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    page.get_by_role("button", name="Login with Indico").click()
+    return page
 
 
 @pytest.fixture
 def created_lecture_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+    return create_lecture(logged_in_page, test_data)
+
+
+def create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Lecture").first.click()
 
@@ -177,6 +184,10 @@ def created_lecture_page(logged_in_page: Page, test_data: IndicoTestData) -> Pag
 
 @pytest.fixture
 def created_meeting_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+    return create_meeting(logged_in_page, test_data)
+
+
+def create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Meeting").first.click()
 
@@ -211,12 +222,15 @@ def created_meeting_page(logged_in_page: Page, test_data: IndicoTestData) -> Pag
     ).click()
 
     logged_in_page.get_by_role("button", name="Create event", exact=True).click()
-
     return logged_in_page
 
 
 @pytest.fixture
 def created_conference_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+    return create_conference(logged_in_page, test_data)
+
+
+def create_conference(logged_in_page: Page, test_data: IndicoTestData) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Conference").first.click()
 
@@ -251,5 +265,4 @@ def created_conference_page(logged_in_page: Page, test_data: IndicoTestData) -> 
     ).click()
 
     logged_in_page.get_by_role("button", name="Create event", exact=True).click()
-
     return logged_in_page

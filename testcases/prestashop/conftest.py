@@ -17,6 +17,12 @@ BASE_URL = "http://49.232.8.242:8083"
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
     page = create_traced_page(page, enable_tracing=True)
+    login_to_prestashop(page)
+    yield page
+    page.save_traces()
+
+
+def login_to_prestashop(page: Page) -> Page:
     page.goto(f"{BASE_URL}/webtestpilot/")
     page.get_by_role("textbox", name="Email address").click()
     page.get_by_role("textbox", name="Email address").fill("admin@admin.com")
@@ -27,14 +33,19 @@ def logged_in_page(page: Page) -> Page:
     page.get_by_role("link", name="Products", exact=True).first.click()
     page.get_by_title("Close Toolbar").click()
     page.get_by_role("link", name="trending_up Dashboard").click()
-    yield page
-    page.save_traces()
     # expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+    return page
 
 
 @pytest.fixture
 def logged_in_buyer_page(page: Page) -> Page:
     page = create_traced_page(page, enable_tracing=True)
+    page = login_to_prestashop_as_buyer(page)
+    yield page
+    page.save_traces()
+
+
+def login_to_prestashop_as_buyer(page: Page) -> Page:
     page.goto(f"{BASE_URL}/")
     page.get_by_role("link", name=" Sign in").click()
 
@@ -43,5 +54,4 @@ def logged_in_buyer_page(page: Page) -> Page:
     page.get_by_role("textbox", name="Email").fill("auto.customer@example.com")
     page.get_by_role("textbox", name="Password input").fill("mypassword")
     page.get_by_role("button", name="Sign in").click()
-    yield page
-    page.save_traces()
+    return page

@@ -23,6 +23,13 @@ from bookstack.conftest import (
     setup_data_for_page_move_page,
     setup_data_for_sort_chapter_and_page,
 )
+from indico.conftest import (
+    IndicoTestData,
+    create_conference,
+    create_lecture,
+    create_meeting,
+    login_to_indico,
+)
 from invoiceninja.conftest import (
     InvoiceNinjaTestData,
     create_client,
@@ -32,6 +39,10 @@ from invoiceninja.conftest import (
     setup_for_expense_page,
     setup_for_invoice_page,
     setup_for_payment_page,
+)
+from prestashop.conftest import (
+    login_to_prestashop,
+    login_to_prestashop_as_buyer,
 )
 
 ApplicationType = Literal["bookstack", "invoiceninja", "indico", "prestashop"]
@@ -87,11 +98,39 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 
 
 def setup_indico_page(page: Page, setup_function: str) -> Page:
-    pass
+    test_data = IndicoTestData()
+
+    # No setup.
+    if setup_function == "":
+        return page
+
+    logged_in_page = login_to_indico(page)
+
+    if setup_function == "logged_in_page":
+        return logged_in_page
+
+    elif setup_function == "created_lecture_page":
+        return create_lecture(logged_in_page, test_data)
+
+    elif setup_function == "created_meeting_page":
+        return create_meeting(logged_in_page, test_data)
+
+    elif setup_function == "created_conference_page":
+        return create_conference(logged_in_page, test_data)
+
+    else:
+        raise ValueError(f"Unknown indico setup function: {setup_function}")
 
 
 def setup_prestashop_page(page: Page, setup_function: str) -> Page:
-    pass
+    if setup_function == "":
+        return page
+    elif setup_function == "logged_in_page":
+        return login_to_prestashop(page)
+    elif setup_function == "logged_in_buyer_page":
+        return login_to_prestashop_as_buyer(page)
+    else:
+        raise ValueError(f"Unknown prestashop setup function: {setup_function}")
 
 
 def setup_bookstack_page(page: Page, setup_function: str) -> Page:
