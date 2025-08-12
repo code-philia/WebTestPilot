@@ -1,0 +1,54 @@
+{
+  "name": "TC-22-P :: Conference Add Track",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created conference page",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Programme\" link in navigation",
+      "expectedResult": "Programme section opens"
+    },
+    {
+      "action": "Click \"Add track\" link",
+      "expectedResult": "Track creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Track123456\" in the title field",
+      "expectedResult": "Title field contains unique track name"
+    },
+    {
+      "action": "Click in the \"Code\" textbox",
+      "expectedResult": "Code field is focused"
+    },
+    {
+      "action": "Type \"OC\" in the code field",
+      "expectedResult": "Code field contains track code"
+    },
+    {
+      "action": "Click in the \"Description\" textbox",
+      "expectedResult": "Description field is focused"
+    },
+    {
+      "action": "Type \"Papers about123456\" in the description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Track is created and saved"
+    },
+    {
+      "action": "Verify track appears in track list container",
+      "expectedResult": "Track list shows the new track"
+    },
+    {
+      "action": "Verify alert message \"Track has been created\" appears",
+      "expectedResult": "Success alert confirms track creation"
+    }
+  ]
+}

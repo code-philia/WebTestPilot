@@ -1,0 +1,34 @@
+{
+  "name": "TC-28-P :: Expense Delete",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the expense to be deleted",
+      "expectedResult": "Expense detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Delete\" option",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Expense deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully deleted expense\" appears",
+      "expectedResult": "Success alert confirms expense deletion"
+    },
+    {
+      "action": "Navigate to expenses listing",
+      "expectedResult": "Expenses listing page is displayed"
+    },
+    {
+      "action": "Verify deleted expense no longer appears in active list",
+      "expectedResult": "Expense is removed from main listing"
+    }
+  ]
+}

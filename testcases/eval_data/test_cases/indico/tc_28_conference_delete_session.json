@@ -1,0 +1,46 @@
+{
+  "name": "TC-28-P :: Conference Delete Session",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the conference with created session",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Sessions\" link in navigation",
+      "expectedResult": "Sessions section opens"
+    },
+    {
+      "action": "Verify \"There are no sessions yet\" message initially",
+      "expectedResult": "Empty sessions message is displayed"
+    },
+    {
+      "action": "Click \"Add new session\" button",
+      "expectedResult": "Session creation form opens"
+    },
+    {
+      "action": "Type \"Session title123456\" in title field",
+      "expectedResult": "Title field contains session title"
+    },
+    {
+      "action": "Type \"Session description123456\" in description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Session is created and saved"
+    },
+    {
+      "action": "Click the trash icon for the first session",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"OK\" button",
+      "expectedResult": "Session deletion is confirmed"
+    },
+    {
+      "action": "Verify \"There are no sessions yet\" message appears again",
+      "expectedResult": "Sessions list is empty again"
+    }
+  ]
+}

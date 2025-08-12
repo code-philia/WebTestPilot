@@ -1,0 +1,42 @@
+{
+  "name": "TC-18-P :: Invoice Archive",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the invoice to be archived",
+      "expectedResult": "Invoice detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Archive\" option",
+      "expectedResult": "Archive confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Invoice archiving is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully archived invoice\" appears",
+      "expectedResult": "Success alert confirms invoice archiving"
+    },
+    {
+      "action": "Navigate to invoices listing",
+      "expectedResult": "Invoices listing page is displayed"
+    },
+    {
+      "action": "Verify archived invoice no longer appears in active list",
+      "expectedResult": "Invoice is removed from main listing"
+    },
+    {
+      "action": "Access archived invoices view",
+      "expectedResult": "Archived invoices can be viewed separately"
+    },
+    {
+      "action": "Verify invoice appears in archived list",
+      "expectedResult": "Invoice is visible in archived invoices view"
+    }
+  ]
+}

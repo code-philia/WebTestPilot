@@ -1,0 +1,30 @@
+{
+  "name": "TC-7-P :: Lecture Clone",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the lecture to be cloned",
+      "expectedResult": "Lecture detail page is displayed"
+    },
+    {
+      "action": "Click \"Clone\" button",
+      "expectedResult": "Clone event dialog appears"
+    },
+    {
+      "action": "Click the close button in \"Clone Event\" dialog header",
+      "expectedResult": "Clone operation is initiated"
+    },
+    {
+      "action": "Verify cloned lecture page is displayed",
+      "expectedResult": "New lecture page opens"
+    },
+    {
+      "action": "Verify lecture name is preserved in cloned event",
+      "expectedResult": "Cloned lecture has same name"
+    },
+    {
+      "action": "Verify venue and room information is preserved",
+      "expectedResult": "Location details are copied to clone"
+    }
+  ]
+}

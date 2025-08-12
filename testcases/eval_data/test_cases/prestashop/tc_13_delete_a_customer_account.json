@@ -1,0 +1,30 @@
+{
+  "name": "TC-13-P :: Delete a Customer Account",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Click the \"Customers\" link in the back-office main menu.",
+      "expectedResult": "The Customers submenu expands."
+    },
+    {
+      "action": "Click the \"Customers\" link in the submenu.",
+      "expectedResult": "The customer list page is displayed correctly."
+    },
+    {
+      "action": "Find the data row for the customer using their unique email address.",
+      "expectedResult": "The target row is correctly located."
+    },
+    {
+      "action": "Click the \"more actions\" button (three-dot icon) on the far right of that row.",
+      "expectedResult": "A dropdown menu with options like \"View\""
+    },
+    {
+      "action": "Click the \"Delete\" option from the dropdown menu.",
+      "expectedResult": "A confirmation dialog appears."
+    },
+    {
+      "action": "Click the \"Delete\" button in the dialog to confirm.",
+      "expectedResult": "A \"Successful deletion\" message is displayed"
+    }
+  ]
+}

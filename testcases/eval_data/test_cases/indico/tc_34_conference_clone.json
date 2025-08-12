@@ -1,0 +1,30 @@
+{
+  "name": "TC-34-P :: Conference Clone",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the conference to be cloned",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Clone\" button",
+      "expectedResult": "Clone event dialog appears"
+    },
+    {
+      "action": "Click the close button in \"Clone Event\" dialog header",
+      "expectedResult": "Clone operation is initiated"
+    },
+    {
+      "action": "Verify cloned conference page is displayed",
+      "expectedResult": "New conference page opens"
+    },
+    {
+      "action": "Verify conference name is preserved in cloned event",
+      "expectedResult": "Cloned conference has same name"
+    },
+    {
+      "action": "Verify venue and room information is preserved",
+      "expectedResult": "Location details are copied to clone"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "TC-32-P :: Credit Mark Sent",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to a draft credit",
+      "expectedResult": "Credit detail page shows draft status"
+    },
+    {
+      "action": "Click \"More Actions\" or status change dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Mark Sent\" option",
+      "expectedResult": "Mark sent confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button",
+      "expectedResult": "Status change is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully marked credit as sent\" appears",
+      "expectedResult": "Success alert confirms status change"
+    },
+    {
+      "action": "Verify credit status changes to \"Sent\"",
+      "expectedResult": "Credit status indicator shows \"\"Sent\"\""
+    },
+    {
+      "action": "Navigate to credits listing",
+      "expectedResult": "Credits listing page is displayed"
+    },
+    {
+      "action": "Verify credit appears in sent credits filter",
+      "expectedResult": "Credit is in sent status in listing"
+    }
+  ]
+}

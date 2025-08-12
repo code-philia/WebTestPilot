@@ -1,0 +1,42 @@
+{
+  "name": "TC-26-P :: Conference Create Session",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the created conference page",
+      "expectedResult": "Conference detail page is displayed"
+    },
+    {
+      "action": "Click \"Sessions\" link in navigation",
+      "expectedResult": "Sessions section opens"
+    },
+    {
+      "action": "Click \"Add new session\" button",
+      "expectedResult": "Session creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Session title123456\" in the title field",
+      "expectedResult": "Title field contains unique session title"
+    },
+    {
+      "action": "Click in the \"Description\" textbox",
+      "expectedResult": "Description field is focused"
+    },
+    {
+      "action": "Type \"Session description123456\" in the description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Session is created and saved"
+    },
+    {
+      "action": "Verify session appears in sessions table",
+      "expectedResult": "Sessions list shows the new session"
+    }
+  ]
+}

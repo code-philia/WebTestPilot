@@ -1,0 +1,38 @@
+{
+  "name": "TC-9-P :: Product Update",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to the product created in TC-008",
+      "expectedResult": "Product detail page is displayed"
+    },
+    {
+      "action": "Click \"Edit\" button or link",
+      "expectedResult": "Product edit form opens with current values"
+    },
+    {
+      "action": "Click in the \"Product\" name textbox",
+      "expectedResult": "Name field is focused and contains current name"
+    },
+    {
+      "action": "Clear the name field and type \"product_name Updated 123456\"",
+      "expectedResult": "Name field shows updated product name"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Product changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Successfully updated product\" appears",
+      "expectedResult": "Success alert confirms product update"
+    },
+    {
+      "action": "Verify updated name appears in product detail",
+      "expectedResult": "Product page shows new name"
+    },
+    {
+      "action": "Verify updated information is reflected in listing",
+      "expectedResult": "Products table shows updated product name"
+    }
+  ]
+}

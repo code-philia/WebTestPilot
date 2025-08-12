@@ -1,0 +1,42 @@
+{
+  "name": "TC-29-P :: Expense Clone",
+  "url": "http://localhost:8081/",
+  "actions": [
+    {
+      "action": "Navigate to an existing expense",
+      "expectedResult": "Expense detail page is displayed"
+    },
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Clone\" or \"Duplicate\" option",
+      "expectedResult": "Clone action initiates"
+    },
+    {
+      "action": "Verify expense clone form opens with copied data",
+      "expectedResult": "Clone form shows original expense data"
+    },
+    {
+      "action": "Modify cloned expense details if needed",
+      "expectedResult": "Expense details can be adjusted"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Cloned expense is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Successfully created expense\" appears",
+      "expectedResult": "Success alert confirms expense clone creation"
+    },
+    {
+      "action": "Verify cloned expense appears in expenses listing",
+      "expectedResult": "New cloned expense is visible in expenses table"
+    },
+    {
+      "action": "Verify original expense remains unchanged",
+      "expectedResult": "Original expense is still present and unmodified"
+    }
+  ]
+}
