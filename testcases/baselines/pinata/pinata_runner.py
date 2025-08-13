@@ -3,25 +3,18 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from base_runner import BaseTestRunner, TestResult
 from playwright.async_api import Page as AsyncPage
 from playwright.async_api import async_playwright
+from .src.VTAAS.data.testcase import TestCase
+from .src.VTAAS.llm.llm_client import LLMProvider
+from .src.VTAAS.orchestrator.orchestrator import Orchestrator
+from .src.VTAAS.schemas.verdict import Status
+from .src.VTAAS.workers.browser import Browser
 from utils import setup_page_state
-
-# Add parent directories to path
-# Pinata specific src directory
-pinata_base = Path(__file__).parent.parent.parent.parent / "baselines" / "pinata"
-if pinata_base.exists():
-    sys.path.append(str(pinata_base / "src"))
 
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
-
-from base_runner import BaseTestRunner, TestResult
-from VTAAS.data.testcase import TestCase
-from VTAAS.llm.llm_client import LLMProvider
-from VTAAS.orchestrator.orchestrator import Orchestrator
-from VTAAS.schemas.verdict import Status
-from VTAAS.workers.browser import Browser
 
 
 class PinataTestRunner(BaseTestRunner):

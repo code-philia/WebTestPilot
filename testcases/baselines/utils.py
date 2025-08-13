@@ -1,9 +1,8 @@
 import sys
 from pathlib import Path
 
+from const import Application
 from playwright.sync_api import Page
-
-from .evaluate import Application
 
 # Add testcases directory to Python path
 testcases_dir = Path(__file__).parent.parent

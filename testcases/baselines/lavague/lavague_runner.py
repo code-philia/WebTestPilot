@@ -2,14 +2,13 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from const import Application
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
 from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import Page, sync_playwright
-
-from ..evaluate import Application
 
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir

@@ -6,14 +6,11 @@ Usage:
 """
 
 import sys
-from enum import Enum
 from pathlib import Path
 from typing import Optional
 
 import typer
-from lavague.lavague_runner import LavagueTestRunner
-from naviqate.naviqate_runner import NaviqateTestRunner
-from pinata.pinata_runner import PinataTestRunner
+from const import Application, Method, Provider
 from typing_extensions import Annotated
 
 from webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
@@ -27,35 +24,19 @@ cli = typer.Typer(
 )
 
 
-class Method(str, Enum):
-    lavague = "lavague"
-    pinata = "pinata"
-    naviqate = "naviqate"
-    webtestpilot = "webtestpilot"
-
-
-class Application(str, Enum):
-    bookstack = "bookstack"
-    invoiceninja = "invoiceninja"
-    indico = "indico"
-    prestashop = "prestashop"
-
-
-class Provider(str, Enum):
-    openai = "openai"
-    anthropic = "anthropic"
-    google = "google"
-    mistral = "mistral"
-    openrouter = "openrouter"
-
-
 def get_runner_class(method: Method):
     """Get the appropriate runner class based on method."""
     if method == Method.lavague:
+        from lavague.lavague_runner import LavagueTestRunner
+
         return LavagueTestRunner
     elif method == Method.pinata:
+        from pinata.pinata_runner import PinataTestRunner
+
         return PinataTestRunner
     elif method == Method.naviqate:
+        from naviqate.naviqate_runner import NaviqateTestRunner
+
         return NaviqateTestRunner
     elif method == Method.webtestpilot:
         return WebTestPilotTestRunner
