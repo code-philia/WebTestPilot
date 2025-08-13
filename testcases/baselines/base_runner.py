@@ -21,6 +21,18 @@ class TestResult:
     def correct_trace(self) -> float:
         return self.current_step / self.total_step if self.total_step > 0 else 0.0
 
+    def __str__(self):
+        status = "✓" if self.success else "✗"
+        status_color = "\033[92m" if self.success else "\033[91m"  # Green or Red
+        reset_color = "\033[0m"
+
+        return (
+            f"{status_color}{status}{reset_color} {self.test_name:<45}: "
+            f"Success={self.success:<1}, "
+            f"Steps={self.current_step:>2}/{self.total_step:<2} "
+            f"({self.correct_trace})"
+        )
+
 
 @dataclass
 class TestResultDataset:
@@ -51,6 +63,29 @@ class TestResultDataset:
 
         print(f"Results saved to {file_path}")
 
+    def print_summary(self):
+        """Print a summary of test results."""
+        print()
+        print("=" * 60)
+        print("TEST RESULT SUMMARY")
+        print("=" * 60)
+
+        # Create a summary progress bar for visual representation
+        passed_tests = sum(1 for r in self.results if r.success)
+        failed_tests = len(self.results) - passed_tests
+
+        for result in sorted(self.results, key=lambda r: r.test_name):
+            print(result)
+
+        print("=" * 60)
+        print(f"Total Tests: {len(self.results)}")
+        print(
+            f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
+        )
+        print(f"Success Rate: {self.success_rate:.1%}")
+        print(f"Overall Correct Trace: {self.correct_trace:.1%}")
+        print("=" * 60)
+
 
 class BaseTestRunner(ABC):
     """Abstract base class for all test runner implementations."""
@@ -64,14 +99,16 @@ class BaseTestRunner(ABC):
         self.config = kwargs
 
     def load_test_cases(self, filter_pattern: Optional[str] = None) -> List[Dict]:
-        """Load test cases from JSON files."""
+        """Load test cases from test case directory."""
         test_cases: list[dict] = []
 
         if not self.test_case_path.exists():
             print(f"Test case path does not exist: {self.test_case_path}")
             return test_cases
 
-        for file_path in self.test_case_path.glob("*.json"):
+        for file_path in sorted(
+            self.test_case_path.glob("*.json"), key=lambda p: p.stem
+        ):
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
@@ -81,7 +118,7 @@ class BaseTestRunner(ABC):
                     test_cases.append(test_case)
             except json.JSONDecodeError as e:
                 print(f"Error loading {file_path}: {e}")
-                continue
+                raise e
 
         return test_cases
 
@@ -164,42 +201,9 @@ class BaseTestRunner(ABC):
 
                 pbar.update(1)
 
-        # Save results
+        # Save results & get summary
         self.test_output_path.parent.mkdir(parents=True, exist_ok=True)
         results.save_results(str(self.test_output_path))
-
-        # Print summary
-        self.print_summary(results)
+        results.print_summary()
 
         return results
-
-    def print_summary(self, results: TestResultDataset):
-        """Print a summary of test results."""
-        print()
-        print("=" * 60)
-        print("TEST EXECUTION SUMMARY")
-        print("=" * 60)
-
-        # Create a summary progress bar for visual representation
-        passed_tests = sum(1 for r in results.results if r.success)
-        failed_tests = len(results.results) - passed_tests
-
-        for result in results.results:
-            status = "✓" if result.success else "✗"
-            status_color = "\033[92m" if result.success else "\033[91m"  # Green or Red
-            reset_color = "\033[0m"
-            print(
-                f"{status_color}{status}{reset_color} {result.test_name}: "
-                f"Success={result.success}, "
-                f"Steps={result.current_step}/{result.total_step} "
-                f"({result.correct_trace:.1%})"
-            )
-
-        print("=" * 60)
-        print(f"Total Tests: {len(results.results)}")
-        print(
-            f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
-        )
-        print(f"Success Rate: {results.success_rate:.1%}")
-        print(f"Overall Correct Trace: {results.correct_trace:.1%}")
-        print("=" * 60)

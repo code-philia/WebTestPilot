@@ -4,10 +4,6 @@
   "setup_function": "",
   "actions": [
     {
-      "action": "Navigate to http://localhost:8802/",
-      "expectedResult": "Invoice Ninja homepage loads with login form visible"
-    },
-    {
       "action": "Click in the email textbox labeled \"Email\"",
       "expectedResult": "Email field is focused and ready for input"
     },

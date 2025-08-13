@@ -5,15 +5,17 @@ Usage:
     python evaluate.py naviqate bookstack
 """
 
+import os
 import sys
 from pathlib import Path
 from typing import Optional
 
+# Disable output buffering for immediate log display
+os.environ['PYTHONUNBUFFERED'] = '1'
+
 import typer
 from const import Application, Method, Provider
 from typing_extensions import Annotated
-
-from webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
 
 # Add testcases directory to path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -39,6 +41,8 @@ def get_runner_class(method: Method):
 
         return NaviqateTestRunner
     elif method == Method.webtestpilot:
+        from webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
+
         return WebTestPilotTestRunner
     else:
         raise ValueError(f"Unknown method: {method}")
@@ -135,11 +139,11 @@ def main(
     print("=" * 60)
     print("TEST EXECUTION CONFIGURATION")
     print("=" * 60)
-    print(f"Method: {method.value}")
+    print(f"Method.    : {method.value}")
     print(f"Application: {application.value}")
-    print(f"Test cases: {test_case_path}")
-    print(f"Output: {output_path}")
-    print(f"Headless: {headless}")
+    print(f"Test cases : {test_case_path}")
+    print(f"Output     : {output_path}")
+    print(f"Headless   : {headless}")
 
     if method == Method.pinata:
         print(f"LLM Provider: {provider.value}")

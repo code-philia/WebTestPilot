@@ -4,10 +4,6 @@
   "setup_function": "",
   "actions": [
     {
-      "action": "Navigate to http://localhost:8080/",
-      "expectedResult": "Indico homepage loads with login option visible"
-    },
-    {
       "action": "Click the \"Login\" link",
       "expectedResult": "Login page appears with authentication options"
     },

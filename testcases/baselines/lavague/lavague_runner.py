@@ -74,20 +74,20 @@ class LavagueTestRunner(BaseTestRunner):
                 def get_page():
                     return page
 
-                # Create PlaywrightDriver with the captured page
+                # Create PlaywrightDriver with the setup page
                 playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
                 playwright_driver.page = page
 
                 # Set up LaVague components
                 step_bar.set_description("  Initializing LaVague")
-                token_counter = TokenCounter(log=False)  # Disable verbose logging
+                token_counter = TokenCounter(log=False)
                 action_engine = ActionEngine(playwright_driver)
                 world_model = WorldModel()
                 agent = WebAgent(
                     world_model, action_engine, n_steps=1, token_counter=token_counter
                 )
 
-                # Execute each action
+                # Execute actions
                 for i, action in enumerate(actions):
                     try:
                         action_text = (
@@ -97,6 +97,7 @@ class LavagueTestRunner(BaseTestRunner):
                         )
                         step_bar.set_description(f"  Step {i + 1}: {action_text}")
 
+                        # Actual run step
                         action_result = agent.run(action["action"])
 
                         if not action_result:
