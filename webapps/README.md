@@ -27,11 +27,6 @@ docker compose up
 docker compose run --rm php artisan db:seed --class=RandomDataSeeder
 ```
 
-For prestashop
-```
-Automatically seeded, no action required.
-```
-
 ## Accounts
 
 |Web App.|Username|Password|

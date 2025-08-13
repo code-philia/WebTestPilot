@@ -2,7 +2,8 @@ version: "3"
 
 services:
   app:
-    image: lscr.io/linuxserver/bookstack:version-v25.02.1
+    # image: lscr.io/linuxserver/bookstack:version-v25.02.1
+    build: .
     environment:
       - PUID=1000
       - PGID=1000
@@ -17,7 +18,7 @@ services:
     volumes:
       - app_config:/config
     ports:
-      - ${APP_PORT}:80
+      - ${APP_PORT}:8080
     restart: unless-stopped
 
   db:

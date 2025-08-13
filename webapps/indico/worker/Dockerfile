@@ -1,6 +1,5 @@
 FROM python:3.12.3-bookworm
 
-
 ENV INDICO_VIRTUALENV="/opt/indico/.venv" INDICO_CONFIG="/opt/indico/etc/indico.conf"
 
 ARG pip="${INDICO_VIRTUALENV}/bin/pip"
@@ -9,22 +8,19 @@ ARG tag="latest"
 # create indico user, install apt dependencies as root and setup uwsgi etc.
 USER root
 
-
-
 RUN set -ex && \
 	groupadd -r indico && \
 	useradd -r -g indico -m -d /opt/indico indico
 
 RUN set -ex && \
     rm -f /etc/apt/sources.list.d/debian.sources && \
-    echo "deb http://mirrors.cloud.tencent.com/debian bookworm main contrib non-free" > /etc/apt/sources.list && \
-    echo "deb http://mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.cloud.tencent.com/debian bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
+    # Use default Debian mirrors instead of Tencent mirrors
+    echo "deb http://deb.debian.org/debian bookworm main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://security.debian.org/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get -y install texlive-xetex libpq-dev postgresql-client vim less gcc gettext libldap2-dev && \
     apt-get clean
-
-
 
 COPY uwsgi.ini /etc/uwsgi.ini
 WORKDIR /opt/indico
@@ -45,16 +41,14 @@ USER indico
 
 RUN set -ex && \
     python -m venv ${INDICO_VIRTUALENV} && \
-    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
-    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple uwsgi
-
+    ${pip} install --upgrade pip setuptools wheel && \
+    ${pip} install uwsgi
 
 RUN if [ "$tag" = "latest" ]; then \
-    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple indico; \
+    ${pip} install indico; \
 else \
-    ${pip} install -i https://mirrors.cloud.tencent.com/pypi/simple indico==${tag}; \
+    ${pip} install indico==${tag}; \
 fi;
-
 
 RUN ${INDICO_VIRTUALENV}/bin/indico setup create-symlinks /opt/indico
 
