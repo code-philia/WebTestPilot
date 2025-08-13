@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from typing import Dict
 
-from const import Application
+from const import ApplicationEnum
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
@@ -28,7 +28,7 @@ class LavagueTestRunner(BaseTestRunner):
         self,
         test_case_path: str,
         test_output_path: str,
-        application: Application,
+        application: ApplicationEnum,
         headless: bool = True,
         **kwargs,
     ):

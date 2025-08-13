@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-from const import Application
+from const import ApplicationEnum
 from playwright.sync_api import Page
 
 # Add testcases directory to Python path
@@ -49,7 +49,7 @@ from prestashop.conftest import (
 )
 
 
-def setup_page_state(page: Page, setup_function: str, application: Application) -> Page:
+def setup_page_state(page: Page, setup_function: str, application: ApplicationEnum) -> Page:
     """Set up the page state based on the application and setup function.
 
     Args:
@@ -60,13 +60,13 @@ def setup_page_state(page: Page, setup_function: str, application: Application) 
     Returns:
         The configured page object
     """
-    if application == Application.bookstack:
+    if application == ApplicationEnum.bookstack:
         return setup_bookstack_page(page, setup_function)
-    elif application == Application.invoiceninja:
+    elif application == ApplicationEnum.invoiceninja:
         return setup_invoiceninja_page(page, setup_function)
-    elif application == Application.indico:
+    elif application == ApplicationEnum.indico:
         return setup_indico_page(page, setup_function)
-    elif application == Application.prestashop:
+    elif application == ApplicationEnum.prestashop:
         return setup_prestashop_page(page, setup_function)
 
     raise ValueError(f"Unknown application type: {application}")

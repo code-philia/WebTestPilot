@@ -14,7 +14,7 @@ from typing import Optional
 os.environ['PYTHONUNBUFFERED'] = '1'
 
 import typer
-from const import Application, Method, Provider
+from const import ApplicationEnum, MethodEnum, ProviderEnum
 from typing_extensions import Annotated
 
 # Add testcases directory to path
@@ -26,21 +26,21 @@ cli = typer.Typer(
 )
 
 
-def get_runner_class(method: Method):
+def get_runner_class(method: MethodEnum):
     """Get the appropriate runner class based on method."""
-    if method == Method.lavague:
+    if method == MethodEnum.lavague:
         from lavague.lavague_runner import LavagueTestRunner
 
         return LavagueTestRunner
-    elif method == Method.pinata:
+    elif method == MethodEnum.pinata:
         from pinata.pinata_runner import PinataTestRunner
 
         return PinataTestRunner
-    elif method == Method.naviqate:
+    elif method == MethodEnum.naviqate:
         from naviqate.naviqate_runner import NaviqateTestRunner
 
         return NaviqateTestRunner
-    elif method == Method.webtestpilot:
+    elif method == MethodEnum.webtestpilot:
         from webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
 
         return WebTestPilotTestRunner
@@ -51,18 +51,18 @@ def get_runner_class(method: Method):
 @cli.command()
 def main(
     method: Annotated[
-        Method, typer.Argument(help="The test method/agent to use for running tests")
+        MethodEnum, typer.Argument(help="The test method/agent to use for running tests")
     ],
-    application: Annotated[Application, typer.Argument(help="The application to test")],
+    application: Annotated[ApplicationEnum, typer.Argument(help="The application to test")],
     provider: Annotated[
-        Provider,
+        ProviderEnum,
         typer.Option(
             "--provider",
             "-p",
             help="LLM provider (for pinata method)",
             show_default=True,
         ),
-    ] = Provider.openai,
+    ] = ProviderEnum.openai,
     headless: Annotated[
         bool,
         typer.Option(
@@ -145,9 +145,9 @@ def main(
     print(f"Output     : {output_path}")
     print(f"Headless   : {headless}")
 
-    if method == Method.pinata:
+    if method == MethodEnum.pinata:
         print(f"LLM Provider: {provider.value}")
-    elif method == Method.naviqate:
+    elif method == MethodEnum.naviqate:
         print(f"Max Steps: {max_steps}")
 
     if filter:
@@ -177,11 +177,11 @@ def main(
     }
 
     # Add method-specific parameters
-    if method == Method.pinata:
+    if method == MethodEnum.pinata:
         runner_kwargs["provider"] = provider.value
         runner_kwargs["save_screenshot"] = True
         runner_kwargs["tracer"] = True
-    elif method == Method.naviqate:
+    elif method == MethodEnum.naviqate:
         runner_kwargs["max_steps"] = max_steps
         runner_kwargs["abstracted"] = False
 

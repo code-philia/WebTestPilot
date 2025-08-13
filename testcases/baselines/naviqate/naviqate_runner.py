@@ -3,6 +3,7 @@ import time
 from pathlib import Path
 from typing import Any, Dict
 
+from const import ApplicationEnum
 from playwright.sync_api import Page, sync_playwright
 from selenium.common.exceptions import WebDriverException
 from tqdm import tqdm
@@ -30,7 +31,7 @@ class NaviqateTestRunner(BaseTestRunner):
         self,
         test_case_path: str,
         test_output_path: str,
-        application: str,
+        application: ApplicationEnum,
         headless: bool = False,
         max_steps: int = 1,
         abstracted: bool = False,

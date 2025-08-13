@@ -4,15 +4,17 @@ from pathlib import Path
 from typing import Dict
 
 from base_runner import BaseTestRunner, TestResult
+from const import ApplicationEnum
 from playwright.async_api import Page as AsyncPage
 from playwright.async_api import async_playwright
 from tqdm import tqdm
+from utils import setup_page_state
+
 from .src.VTAAS.data.testcase import TestCase
 from .src.VTAAS.llm.llm_client import LLMProvider
 from .src.VTAAS.orchestrator.orchestrator import Orchestrator
 from .src.VTAAS.schemas.verdict import Status
 from .src.VTAAS.workers.browser import Browser
-from utils import setup_page_state
 
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
@@ -25,7 +27,7 @@ class PinataTestRunner(BaseTestRunner):
         self,
         test_case_path: str,
         test_output_path: str,
-        application: str,
+        application: ApplicationEnum,
         provider: str = "openai",
         headless: bool = False,
         save_screenshot: bool = True,
