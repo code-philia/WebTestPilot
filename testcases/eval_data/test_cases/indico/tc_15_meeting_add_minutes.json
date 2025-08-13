@@ -1,5 +1,5 @@
 {
-  "name": "TC-15-P :: Meeting Add Minutes",
+  "name": "15::Meeting Add Minutes",
   "url": "http://localhost:8081/",
   "setup_function": "created_meeting_page",
   "actions": [

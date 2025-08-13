@@ -1,9 +1,11 @@
+import json
+import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-import json
-import os
+
+from tqdm import tqdm
 
 
 @dataclass
@@ -121,32 +123,46 @@ class BaseTestRunner(ABC):
             return results
 
         print(f"Running {len(test_cases)} test cases...")
+        print()
 
-        for test_case in test_cases:
-            self.restart_application(self.application)
+        # Main progress bar for all tests
+        with tqdm(
+            total=len(test_cases),
+            desc="Test Suite Progress",
+            unit="test",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+            colour="blue",
+        ) as pbar:
+            for test_case in test_cases:
+                self.restart_application(self.application)
 
-            test_name = test_case.get("name", "Unnamed")
-            print(f"\nRunning test: {test_name}")
+                test_name = test_case.get("name", "Unnamed")
+                pbar.set_description(f"Running: {test_name[:40]}")
 
-            try:
-                result = self.run_test_case(test_case)
-                results.results.append(result)
+                try:
+                    result = self.run_test_case(test_case)
+                    results.results.append(result)
 
-                if result.success:
-                    print(f"✓ Test passed: {test_name}")
-                else:
-                    print(
-                        f"✗ Test failed: {test_name} (completed {result.current_step}/{result.total_step} steps)"
+                    if result.success:
+                        tqdm.write(f"✓ Test passed: {test_name}")
+                        pbar.set_postfix(status="✓", refresh=True)
+                    else:
+                        tqdm.write(
+                            f"✗ Test failed: {test_name} (completed {result.current_step}/{result.total_step} steps)"
+                        )
+                        if result.error_message:
+                            tqdm.write(f"  Error: {result.error_message}")
+                        pbar.set_postfix(status="✗", refresh=True)
+
+                except Exception as e:
+                    tqdm.write(f"✗ Test crashed: {test_name} - {str(e)}")
+                    result = TestResult(
+                        test_name=test_name, success=False, error_message=str(e)
                     )
-                    if result.error_message:
-                        print(f"  Error: {result.error_message}")
+                    results.results.append(result)
+                    pbar.set_postfix(status="✗", refresh=True)
 
-            except Exception as e:
-                print(f"✗ Test crashed: {test_name} - {str(e)}")
-                result = TestResult(
-                    test_name=test_name, success=False, error_message=str(e)
-                )
-                results.results.append(result)
+                pbar.update(1)
 
         # Save results
         self.test_output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -159,14 +175,21 @@ class BaseTestRunner(ABC):
 
     def print_summary(self, results: TestResultDataset):
         """Print a summary of test results."""
+        print()
         print("=" * 60)
         print("TEST EXECUTION SUMMARY")
         print("=" * 60)
 
+        # Create a summary progress bar for visual representation
+        passed_tests = sum(1 for r in results.results if r.success)
+        failed_tests = len(results.results) - passed_tests
+
         for result in results.results:
             status = "✓" if result.success else "✗"
+            status_color = "\033[92m" if result.success else "\033[91m"  # Green or Red
+            reset_color = "\033[0m"
             print(
-                f"{status} {result.test_name}: "
+                f"{status_color}{status}{reset_color} {result.test_name}: "
                 f"Success={result.success}, "
                 f"Steps={result.current_step}/{result.total_step} "
                 f"({result.correct_trace:.1%})"
@@ -174,6 +197,9 @@ class BaseTestRunner(ABC):
 
         print("=" * 60)
         print(f"Total Tests: {len(results.results)}")
+        print(
+            f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
+        )
         print(f"Success Rate: {results.success_rate:.1%}")
         print(f"Overall Correct Trace: {results.correct_trace:.1%}")
         print("=" * 60)

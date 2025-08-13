@@ -1,5 +1,5 @@
 {
-  "name": "TC-4-P :: Lecture Delete",
+  "name": "04::Lecture Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_lecture_page",
   "actions": [

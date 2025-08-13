@@ -1,5 +1,5 @@
 {
-  "name": "TC-12-P :: Page Update",
+  "name": "12::Page Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_page_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-34-P :: Credit Archive",
+  "name": "34::Credit Archive",
   "url": "http://localhost:8081/",
   "setup_function": "created_credit_page",
   "actions": [

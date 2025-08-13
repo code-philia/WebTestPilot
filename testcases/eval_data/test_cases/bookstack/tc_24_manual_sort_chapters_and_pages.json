@@ -1,5 +1,5 @@
 {
-  "name": "TC-24-P :: Manual Sort Chapters and Pages",
+  "name": "24::Manual Sort Chapters and Pages",
   "url": "http://localhost:8081/",
   "setup_function": "created_data_for_sort_page",
   "actions": [

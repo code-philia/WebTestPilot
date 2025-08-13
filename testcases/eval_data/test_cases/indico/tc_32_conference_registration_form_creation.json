@@ -1,5 +1,5 @@
 {
-  "name": "TC-32-P :: Conference Registration Form Creation",
+  "name": "32::Conference Registration Form Creation",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

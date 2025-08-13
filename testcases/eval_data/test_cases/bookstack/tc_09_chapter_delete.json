@@ -1,5 +1,5 @@
 {
-  "name": "TC-9-P :: Chapter Delete",
+  "name": "09::Chapter Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_chapter_page",
   "actions": [

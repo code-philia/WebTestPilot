@@ -1,5 +1,5 @@
 {
-  "name": "TC-25-P :: Sort Content by Name",
+  "name": "25::Sort Content by Name",
   "url": "http://localhost:8081/",
   "setup_function": "created_data_for_sort_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-34-P :: Conference Clone",
+  "name": "34::Conference Clone",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

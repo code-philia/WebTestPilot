@@ -1,5 +1,5 @@
 {
-  "name": "TC-5-P :: Book Delete",
+  "name": "05::Book Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_book_page",
   "actions": [

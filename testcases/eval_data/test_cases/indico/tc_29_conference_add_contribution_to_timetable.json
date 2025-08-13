@@ -1,5 +1,5 @@
 {
-  "name": "TC-29-P :: Conference Add Contribution to Timetable",
+  "name": "29::Conference Add Contribution to Timetable",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

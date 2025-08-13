@@ -1,5 +1,5 @@
 {
-  "name": "TC-18-P :: Move Page Between Containers",
+  "name": "18::Move Page Between Containers",
   "url": "http://localhost:8081/",
   "setup_function": "created_page_move_page",
   "actions": [

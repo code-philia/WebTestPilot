@@ -1,5 +1,5 @@
 {
-  "name": "TC-2-P :: Lecture Create",
+  "name": "02::Lecture Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_lecture_page",
   "actions": [

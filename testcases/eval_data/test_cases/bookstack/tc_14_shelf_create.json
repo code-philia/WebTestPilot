@@ -1,5 +1,5 @@
 {
-  "name": "TC-14-P :: Shelf Create",
+  "name": "14::Shelf Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_shelf_page",
   "actions": [

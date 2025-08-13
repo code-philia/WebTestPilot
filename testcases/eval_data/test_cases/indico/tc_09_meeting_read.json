@@ -1,5 +1,5 @@
 {
-  "name": "TC-9-P :: Meeting Read",
+  "name": "09::Meeting Read",
   "url": "http://localhost:8081/",
   "setup_function": "created_meeting_page",
   "actions": [

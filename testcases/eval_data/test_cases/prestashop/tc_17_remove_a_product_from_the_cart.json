@@ -1,5 +1,5 @@
 {
-  "name": "TC-17-P :: Remove a Product from the Cart",
+  "name": "17::Remove a Product from the Cart",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-7-P :: Client Purge",
+  "name": "07::Client Purge",
   "url": "http://localhost:8081/",
   "setup_function": "created_client_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-24-P :: Expense Create",
+  "name": "24::Expense Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_expense_page",
   "actions": [

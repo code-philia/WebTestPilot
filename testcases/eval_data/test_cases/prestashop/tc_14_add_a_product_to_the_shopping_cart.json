@@ -1,5 +1,5 @@
 {
-  "name": "TC-14-P :: Add a Product to the Shopping Cart",
+  "name": "14::Add a Product to the Shopping Cart",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

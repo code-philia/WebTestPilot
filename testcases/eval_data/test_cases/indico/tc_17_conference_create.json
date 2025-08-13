@@ -1,5 +1,5 @@
 {
-  "name": "TC-17-P :: Conference Create",
+  "name": "17::Conference Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

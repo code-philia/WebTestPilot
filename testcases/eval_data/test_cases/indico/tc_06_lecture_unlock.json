@@ -1,5 +1,5 @@
 {
-  "name": "TC-6-P :: Lecture Unlock",
+  "name": "06::Lecture Unlock",
   "url": "http://localhost:8081/",
   "setup_function": "created_lecture_page",
   "actions": [

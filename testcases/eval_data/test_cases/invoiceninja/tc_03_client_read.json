@@ -1,5 +1,5 @@
 {
-  "name": "TC-3-P :: Client Read",
+  "name": "03::Client Read",
   "url": "http://localhost:8081/",
   "setup_function": "created_client_page",
   "actions": [

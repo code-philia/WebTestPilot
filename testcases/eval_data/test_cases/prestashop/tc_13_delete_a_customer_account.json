@@ -1,5 +1,5 @@
 {
-  "name": "TC-13-P :: Delete a Customer Account",
+  "name": "13::Delete a Customer Account",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

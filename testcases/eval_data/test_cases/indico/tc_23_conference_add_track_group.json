@@ -1,5 +1,5 @@
 {
-  "name": "TC-23-P :: Conference Add Track Group",
+  "name": "23::Conference Add Track Group",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

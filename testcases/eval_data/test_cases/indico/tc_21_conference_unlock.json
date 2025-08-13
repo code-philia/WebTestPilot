@@ -1,5 +1,5 @@
 {
-  "name": "TC-21-P :: Conference Unlock",
+  "name": "21::Conference Unlock",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

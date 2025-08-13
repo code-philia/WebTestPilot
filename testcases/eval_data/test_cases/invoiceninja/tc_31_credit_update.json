@@ -1,5 +1,5 @@
 {
-  "name": "TC-31-P :: Credit Update",
+  "name": "31::Credit Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_credit_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-11-P :: Delete a Category",
+  "name": "11::Delete a Category",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

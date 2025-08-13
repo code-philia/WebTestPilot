@@ -1,5 +1,5 @@
 {
-  "name": "TC-2-P :: Book Create",
+  "name": "02::Book Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_book_page",
   "actions": [

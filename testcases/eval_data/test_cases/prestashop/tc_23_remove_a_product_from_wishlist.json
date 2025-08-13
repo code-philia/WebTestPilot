@@ -1,5 +1,5 @@
 {
-  "name": "TC-23-P :: Remove a Product from Wishlist",
+  "name": "23::Remove a Product from Wishlist",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

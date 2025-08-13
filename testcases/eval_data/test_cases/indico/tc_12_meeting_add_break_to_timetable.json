@@ -1,5 +1,5 @@
 {
-  "name": "TC-12-P :: Meeting Add Break to Timetable",
+  "name": "12::Meeting Add Break to Timetable",
   "url": "http://localhost:8081/",
   "setup_function": "created_meeting_page",
   "actions": [

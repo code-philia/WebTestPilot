@@ -1,5 +1,5 @@
 {
-  "name": "TC-28-P :: Conference Delete Session",
+  "name": "28::Conference Delete Session",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

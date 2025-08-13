@@ -1,5 +1,5 @@
 {
-  "name": "TC-7-P :: Create a new Brand",
+  "name": "07::Create a new Brand",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

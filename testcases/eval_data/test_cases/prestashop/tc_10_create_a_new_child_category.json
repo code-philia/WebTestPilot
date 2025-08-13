@@ -1,5 +1,5 @@
 {
-  "name": "TC-10-P :: Create a new child category",
+  "name": "10::Create a new child category",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

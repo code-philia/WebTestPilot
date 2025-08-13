@@ -1,5 +1,5 @@
 {
-  "name": "TC-20-P :: Payment Update",
+  "name": "20::Payment Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_payment_page",
   "actions": [

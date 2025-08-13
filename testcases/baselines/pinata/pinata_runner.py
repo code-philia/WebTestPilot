@@ -6,6 +6,7 @@ from typing import Dict
 from base_runner import BaseTestRunner, TestResult
 from playwright.async_api import Page as AsyncPage
 from playwright.async_api import async_playwright
+from tqdm import tqdm
 from .src.VTAAS.data.testcase import TestCase
 from .src.VTAAS.llm.llm_client import LLMProvider
 from .src.VTAAS.orchestrator.orchestrator import Orchestrator
@@ -87,56 +88,86 @@ class PinataTestRunner(BaseTestRunner):
             test_name=test_name, total_step=len(pinata_test_case.actions)
         )
 
-        try:
-            async with async_playwright() as p:
-                # Create browser instance
-                browser = await Browser.create(
-                    id=f"testcase #{pinata_test_case.id}",
-                    headless=self.headless,
-                    playwright=p,
-                    save_screenshot=self.save_screenshot,
-                    tracer=self.tracer,
-                    trace_folder=str(self.test_output_path.parent),
-                )
-
-                browser._page = setup_page_state(
-                    browser._page, setup_function, application=self.application
-                )
-
-                # Create orchestrator
-                llm_provider = self.get_llm_provider()
-                orchestrator = Orchestrator(
-                    browser=browser,
-                    llm_provider=llm_provider,
-                    tracer=self.tracer,
-                    output_folder=str(self.test_output_path.parent),
-                )
-
-                # Process test case
-                execution_result = await orchestrator.process_testcase(pinata_test_case)
-
-                # Update result based on execution
-                if execution_result.status == Status.PASS:
-                    result.success = True
-                    result.current_step = result.total_step
-                    orchestrator.logger.info("Test PASSED!")
-                else:
-                    result.success = False
-                    result.current_step = execution_result.step_index
-                    result.error_message = (
-                        f"Failed at step {execution_result.step_index}"
-                    )
-                    orchestrator.logger.info(
-                        f"Test FAILED at step {execution_result.step_index}!"
+        # Create nested progress bar for test steps
+        with tqdm(
+            total=len(pinata_test_case.actions),
+            desc=f"  Steps for {test_name[:30]}",
+            leave=False,
+            unit="step",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
+            colour="green",
+        ) as step_bar:
+            try:
+                async with async_playwright() as p:
+                    # Create browser instance
+                    step_bar.set_description("  Initializing browser")
+                    browser = await Browser.create(
+                        id=f"testcase #{pinata_test_case.id}",
+                        headless=self.headless,
+                        playwright=p,
+                        save_screenshot=self.save_screenshot,
+                        tracer=self.tracer,
+                        trace_folder=str(self.test_output_path.parent),
                     )
 
-                # Store traces if available
-                if hasattr(execution_result, "traces"):
-                    result.traces = execution_result.traces
+                    browser._page = setup_page_state(
+                        browser._page, setup_function, application=self.application
+                    )
 
-        except Exception as e:
-            result.error_message = f"Test execution error: {str(e)}"
-            result.success = False
+                    # Create orchestrator
+                    llm_provider = self.get_llm_provider()
+                    orchestrator = Orchestrator(
+                        browser=browser,
+                        llm_provider=llm_provider,
+                        tracer=self.tracer,
+                        output_folder=str(self.test_output_path.parent),
+                    )
+
+                    # Monkey-patch orchestrator to update progress bar
+                    original_process = orchestrator.process_testcase
+
+                    async def process_with_progress(test_case):
+                        # We'll track progress based on step completions
+                        result = await original_process(test_case)
+                        # Update progress based on completed steps
+                        if hasattr(result, "step_index"):
+                            step_bar.n = result.step_index
+                            step_bar.refresh()
+                        return result
+
+                    step_bar.set_description(f"  Executing {test_name[:30]}")
+
+                    # Process test case
+                    execution_result = await process_with_progress(pinata_test_case)
+
+                    # Update result based on execution
+                    if execution_result.status == Status.PASS:
+                        result.success = True
+                        result.current_step = result.total_step
+                        step_bar.n = result.total_step
+                        step_bar.refresh()
+                        orchestrator.logger.info("Test PASSED!")
+                    else:
+                        result.success = False
+                        result.current_step = execution_result.step_index
+                        step_bar.n = execution_result.step_index
+                        step_bar.refresh()
+                        result.error_message = (
+                            f"Failed at step {execution_result.step_index}"
+                        )
+                        orchestrator.logger.info(
+                            f"Test FAILED at step {execution_result.step_index}!"
+                        )
+
+                    # Store traces if available
+                    if hasattr(execution_result, "traces"):
+                        result.traces = execution_result.traces
+
+            except Exception as e:
+                result.error_message = f"Test execution error: {str(e)}"
+                result.success = False
+                step_bar.n = result.current_step
+                step_bar.refresh()
 
         return result
 

@@ -1,5 +1,5 @@
 {
-  "name": "TC-14-P :: Meeting Unlock",
+  "name": "14::Meeting Unlock",
   "url": "http://localhost:8081/",
   "setup_function": "created_meeting_page",
   "actions": [

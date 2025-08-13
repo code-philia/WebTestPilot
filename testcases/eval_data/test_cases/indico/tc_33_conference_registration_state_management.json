@@ -1,5 +1,5 @@
 {
-  "name": "TC-33-P :: Conference Registration State Management",
+  "name": "33::Conference Registration State Management",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

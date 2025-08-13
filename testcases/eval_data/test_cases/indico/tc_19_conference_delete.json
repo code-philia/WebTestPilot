@@ -1,5 +1,5 @@
 {
-  "name": "TC-19-P :: Conference Delete",
+  "name": "19::Conference Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

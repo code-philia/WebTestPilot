@@ -1,5 +1,5 @@
 {
-  "name": "TC-23-P :: Payment Delete",
+  "name": "23::Payment Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_payment_page",
   "actions": [

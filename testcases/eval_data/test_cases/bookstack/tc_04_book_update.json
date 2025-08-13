@@ -1,5 +1,5 @@
 {
-  "name": "TC-4-P :: Book Update",
+  "name": "04::Book Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_book_page",
   "actions": [

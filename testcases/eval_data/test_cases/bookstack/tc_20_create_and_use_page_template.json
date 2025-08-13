@@ -1,5 +1,5 @@
 {
-  "name": "TC-20-P :: Create and Use Page Template",
+  "name": "20::Create and Use Page Template",
   "url": "http://localhost:8081/",
   "setup_function": "created_data_template_page",
   "actions": [

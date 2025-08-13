@@ -1,5 +1,5 @@
 {
-  "name": "TC-15-P :: Shelf Read",
+  "name": "15::Shelf Read",
   "url": "http://localhost:8081/",
   "setup_function": "created_shelf_page",
   "actions": [

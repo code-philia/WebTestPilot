@@ -1,5 +1,5 @@
 {
-  "name": "TC-10-P :: Product Delete",
+  "name": "10::Product Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_product_page",
   "actions": [

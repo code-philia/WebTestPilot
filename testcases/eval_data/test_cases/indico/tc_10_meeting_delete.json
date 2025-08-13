@@ -1,5 +1,5 @@
 {
-  "name": "TC-10-P :: Meeting Delete",
+  "name": "10::Meeting Delete",
   "url": "http://localhost:8081/",
   "setup_function": "created_meeting_page",
   "actions": [

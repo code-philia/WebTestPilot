@@ -1,5 +1,5 @@
 {
-  "name": "TC-25-P :: Expense Update",
+  "name": "25::Expense Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_expense_page",
   "actions": [

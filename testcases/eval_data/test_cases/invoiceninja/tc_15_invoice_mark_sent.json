@@ -1,5 +1,5 @@
 {
-  "name": "TC-15-P :: Invoice Mark Sent",
+  "name": "15::Invoice Mark Sent",
   "url": "http://localhost:8081/",
   "setup_function": "created_invoice_page",
   "actions": [

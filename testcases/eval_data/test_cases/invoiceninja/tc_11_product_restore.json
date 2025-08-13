@@ -1,5 +1,5 @@
 {
-  "name": "TC-11-P :: Product Restore",
+  "name": "11::Product Restore",
   "url": "http://localhost:8081/",
   "setup_function": "created_product_page",
   "actions": [

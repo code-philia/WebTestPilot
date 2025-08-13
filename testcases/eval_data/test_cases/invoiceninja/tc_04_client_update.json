@@ -1,5 +1,5 @@
 {
-  "name": "TC-4-P :: Client Update",
+  "name": "04::Client Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_client_page",
   "actions": [

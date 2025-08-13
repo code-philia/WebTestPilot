@@ -1,5 +1,5 @@
 {
-  "name": "TC-19-P :: Move Chapter Between Books",
+  "name": "19::Move Chapter Between Books",
   "url": "http://localhost:8081/",
   "setup_function": "created_page_move_chapter",
   "actions": [

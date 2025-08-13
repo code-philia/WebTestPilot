@@ -1,5 +1,5 @@
 {
-  "name": "TC-28-P :: Delete Sort Rules",
+  "name": "28::Delete Sort Rules",
   "url": "http://localhost:8081/",
   "setup_function": "created_sort_rule_page",
   "actions": [

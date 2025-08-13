@@ -1,5 +1,5 @@
 {
-  "name": "TC-15-P :: Search for a Product using a Keyword",
+  "name": "15::Search for a Product using a Keyword",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

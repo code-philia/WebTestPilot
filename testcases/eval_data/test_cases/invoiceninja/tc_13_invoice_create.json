@@ -1,5 +1,5 @@
 {
-  "name": "TC-13-P :: Invoice Create",
+  "name": "13::Invoice Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_invoice_page",
   "actions": [

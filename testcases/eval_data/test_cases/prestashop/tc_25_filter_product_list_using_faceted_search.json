@@ -1,5 +1,5 @@
 {
-  "name": "TC-25-P :: Filter Product List using Faceted Search",
+  "name": "25::Filter Product List using Faceted Search",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

@@ -5,6 +5,7 @@ from typing import Any, Dict
 
 from playwright.sync_api import Page, sync_playwright
 from selenium.common.exceptions import WebDriverException
+from tqdm import tqdm
 
 # Add parent directories to path
 # Naviqate specific directory
@@ -89,57 +90,79 @@ class NaviqateTestRunner(BaseTestRunner):
             self.logger.info(f"Setup function requested: {setup_function}")
             # You might want to implement Selenium-based setup here
 
-        # Process each action
-        for i, action_data in enumerate(actions):
-            action = action_data.get("action", "")
-            website = (
-                self.get_website_from_url(url)
-                if url
-                else action_data.get("website", "")
-            )
-
-            self.logger.info("•" * 70)
-            self.logger.info(f"ACTION {i + 1}/{len(actions)}: {action}")
-            self.logger.info(f"WEBSITE: {website}, MAX_STEPS: {self.max_steps}")
-
-            start_time = time.time()
-
-            try:
-                # Create crawler for this action
-                crawler = WebCrawler(
-                    website,
-                    action,
-                    abstracted=self.abstracted,
-                    headless=self.headless,
-                    output_dir=self.output_dir,
+        # Create nested progress bar for actions
+        with tqdm(
+            total=len(actions),
+            desc=f"  Actions for {test_name[:30]}",
+            leave=False,
+            unit="action",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
+            colour="green",
+        ) as action_bar:
+            # Process each action
+            for i, action_data in enumerate(actions):
+                action = action_data.get("action", "")
+                website = (
+                    self.get_website_from_url(url)
+                    if url
+                    else action_data.get("website", "")
                 )
 
-                # Execute the action
-                crawler.loop(MAX_STEPS=self.max_steps)
+                # Update progress bar description
+                action_bar.set_description(f"  Action {i + 1}: {action[:40]}")
 
-                # If we get here, the action succeeded
-                result.current_step += 1
-                result.traces.append(
-                    {
-                        "action": action,
-                        "website": website,
-                        "duration": time.time() - start_time,
-                    }
+                self.logger.info("•" * 70)
+                self.logger.info(f"ACTION {i + 1}/{len(actions)}: {action}")
+                self.logger.info(f"WEBSITE: {website}, MAX_STEPS: {self.max_steps}")
+
+                start_time = time.time()
+
+                try:
+                    # Create crawler for this action
+                    crawler = WebCrawler(
+                        website,
+                        action,
+                        abstracted=self.abstracted,
+                        headless=self.headless,
+                        output_dir=self.output_dir,
+                    )
+
+                    # Execute the action
+                    crawler.loop(MAX_STEPS=self.max_steps)
+
+                    # If we get here, the action succeeded
+                    result.current_step += 1
+                    result.traces.append(
+                        {
+                            "action": action,
+                            "website": website,
+                            "duration": time.time() - start_time,
+                        }
+                    )
+
+                    # Update progress bar
+                    action_bar.update(1)
+                    action_bar.set_postfix(status="✓", refresh=True)
+
+                except WebDriverException as e:
+                    result.error_message = f"WebDriver error at step {i + 1}: {str(e)}"
+                    self.logger.error(
+                        f"An error occurred: {e} - Stopping at Task {i + 1}"
+                    )
+                    action_bar.set_postfix(status="✗", refresh=True)
+                    break
+                except Exception as e:
+                    result.error_message = f"Error at step {i + 1}: {str(e)}"
+                    self.logger.error(
+                        f"Unexpected error: {e} - Stopping at Task {i + 1}"
+                    )
+                    action_bar.set_postfix(status="✗", refresh=True)
+                    break
+
+                end_time = time.time()
+                self.logger.info(
+                    f"DURATION: {utils.calculate_time_interval(start_time, end_time)}"
                 )
-
-            except WebDriverException as e:
-                result.error_message = f"WebDriver error at step {i + 1}: {str(e)}"
-                self.logger.error(f"An error occurred: {e} - Stopping at Task {i + 1}")
-                break
-            except Exception as e:
-                result.error_message = f"Error at step {i + 1}: {str(e)}"
-                self.logger.error(f"Unexpected error: {e} - Stopping at Task {i + 1}")
-                break
-
-            end_time = time.time()
-            self.logger.info(
-                f"DURATION: {utils.calculate_time_interval(start_time, end_time)}"
-            )
 
         # Mark as success if all steps completed
         result.success = result.current_step == result.total_step

@@ -1,5 +1,5 @@
 {
-  "name": "TC-19-P :: Payment Create",
+  "name": "19::Payment Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_payment_page",
   "actions": [

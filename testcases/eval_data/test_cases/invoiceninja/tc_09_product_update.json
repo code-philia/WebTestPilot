@@ -1,5 +1,5 @@
 {
-  "name": "TC-9-P :: Product Update",
+  "name": "09::Product Update",
   "url": "http://localhost:8081/",
   "setup_function": "created_product_page",
   "actions": [

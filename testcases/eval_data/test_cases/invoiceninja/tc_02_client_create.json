@@ -1,5 +1,5 @@
 {
-  "name": "TC-2-P :: Client Create",
+  "name": "02::Client Create",
   "url": "http://localhost:8081/",
   "setup_function": "created_client_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "TC-3-P :: Lecture Read",
+  "name": "03::Lecture Read",
   "url": "http://localhost:8081/",
   "setup_function": "created_lecture_page",
   "actions": [

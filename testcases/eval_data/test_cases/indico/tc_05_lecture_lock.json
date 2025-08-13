@@ -1,5 +1,5 @@
 {
-  "name": "TC-5-P :: Lecture Lock",
+  "name": "05::Lecture Lock",
   "url": "http://localhost:8081/",
   "setup_function": "created_lecture_page",
   "actions": [

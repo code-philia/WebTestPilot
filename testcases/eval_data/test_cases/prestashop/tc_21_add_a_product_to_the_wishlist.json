@@ -1,5 +1,5 @@
 {
-  "name": "TC-21-P :: Add a Product to the Wishlist",
+  "name": "21::Add a Product to the Wishlist",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

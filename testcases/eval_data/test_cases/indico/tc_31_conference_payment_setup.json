@@ -1,5 +1,5 @@
 {
-  "name": "TC-31-P :: Conference Payment Setup",
+  "name": "31::Conference Payment Setup",
   "url": "http://localhost:8081/",
   "setup_function": "created_conference_page",
   "actions": [

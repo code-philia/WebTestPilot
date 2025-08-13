@@ -1,5 +1,5 @@
 {
-  "name": "TC-18-P :: Invoice Archive",
+  "name": "18::Invoice Archive",
   "url": "http://localhost:8081/",
   "setup_function": "created_invoice_page",
   "actions": [
