@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
@@ -10,13 +11,12 @@ from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import Page, sync_playwright
 from tqdm import tqdm
+from utils import setup_page_state
 
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
 
-from base_runner import BaseTestRunner, TestResult
-from utils import setup_page_state
 
 load_dotenv()
 
@@ -38,8 +38,18 @@ class LavagueTestRunner(BaseTestRunner):
         self.browser = None
         self.context = None
 
+    def clean_up_playwright(self):
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()
+
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""
+        self.clean_up_playwright()
+
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(headless=self.headless)
         self.context = self.browser.new_context()
@@ -134,10 +144,4 @@ class LavagueTestRunner(BaseTestRunner):
         return result
 
     def __del__(self):
-        """Cleanup playwright resources."""
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
-        if self.playwright:
-            self.playwright.stop()
+        self.clean_up_playwright()

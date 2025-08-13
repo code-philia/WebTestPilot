@@ -10,13 +10,12 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-# Disable output buffering for immediate log display
-os.environ['PYTHONUNBUFFERED'] = '1'
-
 import typer
 from const import ApplicationEnum, MethodEnum, ProviderEnum
 from typing_extensions import Annotated
 
+# Disable output buffering for immediate log display
+os.environ["PYTHONUNBUFFERED"] = "1"
 # Add testcases directory to path
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -51,9 +50,12 @@ def get_runner_class(method: MethodEnum):
 @cli.command()
 def main(
     method: Annotated[
-        MethodEnum, typer.Argument(help="The test method/agent to use for running tests")
+        MethodEnum,
+        typer.Argument(help="The test method/agent to use for running tests"),
     ],
-    application: Annotated[ApplicationEnum, typer.Argument(help="The application to test")],
+    application: Annotated[
+        ApplicationEnum, typer.Argument(help="The application to test")
+    ],
     provider: Annotated[
         ProviderEnum,
         typer.Option(
@@ -136,9 +138,9 @@ def main(
         )
 
     # Print configuration
-    print("=" * 60)
+    print("=" * 80)
     print("TEST EXECUTION CONFIGURATION")
-    print("=" * 60)
+    print("=" * 80)
     print(f"Method.    : {method.value}")
     print(f"Application: {application.value}")
     print(f"Test cases : {test_case_path}")
@@ -153,7 +155,7 @@ def main(
     if filter:
         print(f"Filter: {filter}")
 
-    print("=" * 60)
+    print("=" * 80)
     print()
 
     # Verify test cases directory exists
