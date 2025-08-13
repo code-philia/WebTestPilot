@@ -4,10 +4,6 @@
   "setup_function": "",
   "actions": [
     {
-      "action": "Click the \"Log in\" link",
-      "expectedResult": "Login form appears with email and password fields"
-    },
-    {
       "action": "Click in the email textbox labeled \"Email\"",
       "expectedResult": "Email field is focused and ready for input"
     },

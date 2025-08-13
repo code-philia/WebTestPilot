@@ -1,3 +1,4 @@
+import ast
 import sys
 from pathlib import Path
 from typing import Dict
@@ -59,6 +60,25 @@ class LavagueTestRunner(BaseTestRunner):
         page = setup_page_state(page, setup_function, application=self.application)
         return page
 
+    def extract_trace_from_code(self, code: str) -> list[dict]:
+        """Lavague's trace contains code, the last trace contains all the actions.
+        i.e.: from playwright.sync_api import sync_playwright\n\npage.set_viewport_size({\"width\": 1080, \"height\": 1080})\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/header/nav/div/a\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div/div[2]/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div/div[2]/input\",\n                \"value\": \"password\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div[2]/div[2]/button\"\n            }\n        }\n    }\n]
+        """
+        # First 3 lines are code, remove
+        code = "\n".join(code.split("\n")[3:])
+
+        # Parse the remaining data (arrays concatenated together)
+        # Split the arrays but keep the brackets
+        arrays = code.split("][")
+        arrays = [arr + "]" if not arr.endswith("]") else arr for arr in arrays]
+        arrays = ["[" + arr if not arr.startswith("[") else arr for arr in arrays]
+        traces = []
+        for arr in arrays:
+            traces.extend(ast.literal_eval(arr))
+
+        print(traces)
+        return traces
+
     def run_test_case(self, test_case: Dict) -> TestResult:
         """Run a single test case using LaVague agent."""
         actions = test_case.get("actions", [])
@@ -110,12 +130,14 @@ class LavagueTestRunner(BaseTestRunner):
                         # Actual run step
                         action_result = agent.run(action["action"])
 
-                        if not action_result:
-                            result.error_message = f"Action {i + 1} returned no result"
+                        if not action_result.success:
+                            result.error_message = f"Action {i + 1} failed"
                             step_bar.set_postfix(status="✗", refresh=True)
                             break
 
-                        result.traces.append(action_result.code)
+                        # Save trace, the latest action result contains all the previous actions.
+                        result.traces = self.extract_trace_from_code(action_result.code)
+
                         result.current_step += 1
                         step_bar.update(1)
                         step_bar.set_postfix(status="✓", refresh=True)
