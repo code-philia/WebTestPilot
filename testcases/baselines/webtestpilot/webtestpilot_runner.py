@@ -1,0 +1,120 @@
+import sys
+from pathlib import Path
+from typing import Dict
+
+from dotenv import load_dotenv
+from lavague.core import ActionEngine, WorldModel
+from lavague.core.agents import WebAgent
+from lavague.core.token_counter import TokenCounter
+from lavague.drivers.playwright import PlaywrightDriver
+from playwright.sync_api import Page, sync_playwright
+
+from ..evaluate import Application
+
+# Add parent directories to path
+sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
+sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
+
+from base_runner import BaseTestRunner, TestResult
+from utils import setup_page_state
+
+load_dotenv()
+
+
+class WebTestPilotTestRunner(BaseTestRunner):
+    """Test runner implementation for LaVague agent."""
+
+    def __init__(
+        self,
+        test_case_path: str,
+        test_output_path: str,
+        application: Application,
+        headless: bool = True,
+        **kwargs,
+    ):
+        super().__init__(test_case_path, test_output_path, application, **kwargs)
+        self.headless = headless
+        self.playwright = None
+        self.browser = None
+        self.context = None
+
+    def get_initial_page(self, setup_function: str) -> Page:
+        """Get the initial page state based on setup function."""
+        self.playwright = sync_playwright().start()
+        self.browser = self.playwright.chromium.launch(headless=self.headless)
+        self.context = self.browser.new_context()
+        page = self.context.new_page()
+
+        # Set up the page state based on the setup function
+        page = setup_page_state(page, setup_function, application=self.application)
+        return page
+
+    def run_test_case(self, test_case: Dict) -> TestResult:
+        """Run a single test case using LaVague agent."""
+        actions = test_case.get("actions", [])
+        test_name = test_case.get("name", "Unnamed")
+        setup_function = test_case.get("setup_function", "")
+
+        result = TestResult(test_name=test_name, total_step=len(actions))
+
+        try:
+            # Get initial page with proper setup
+            page = self.get_initial_page(setup_function)
+
+            def get_page():
+                return page
+
+            # Create PlaywrightDriver with the captured page
+            playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
+            playwright_driver.page = page  # Set the page directly
+
+            # Set up LaVague components
+            token_counter = TokenCounter(log=True)
+            action_engine = ActionEngine(playwright_driver)
+            world_model = WorldModel()
+            agent = WebAgent(
+                world_model, action_engine, n_steps=1, token_counter=token_counter
+            )
+
+            # Execute each action
+            for i, action in enumerate(actions):
+                try:
+                    print(f"  Step {i + 1}/{len(actions)}: {action['action']}")
+                    action_result = agent.run(action["action"])
+
+                    if not action_result:
+                        result.error_message = f"Action {i + 1} returned no result"
+                        break
+
+                    result.traces.append(action_result.code)
+                    result.current_step += 1
+
+                except Exception as e:
+                    result.error_message = f"Error at step {i + 1}: {str(e)}"
+                    print(f"    Error: {e}")
+                    break
+
+            # Mark as success if all steps completed
+            result.success = result.current_step == result.total_step
+
+            # Print token usage
+            if hasattr(agent, "process_token_usage"):
+                print(f"  Token usage: {agent.process_token_usage()}")
+
+            # Close the page
+            page.close()
+
+        except Exception as e:
+            result.error_message = f"Test setup error: {str(e)}"
+            result.success = False
+
+        return result
+
+    def __del__(self):
+        """Cleanup playwright resources."""
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()

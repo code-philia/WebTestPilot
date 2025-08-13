@@ -16,6 +16,8 @@ from naviqate.naviqate_runner import NaviqateTestRunner
 from pinata.pinata_runner import PinataTestRunner
 from typing_extensions import Annotated
 
+from webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
+
 # Add testcases directory to path
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -29,6 +31,7 @@ class Method(str, Enum):
     lavague = "lavague"
     pinata = "pinata"
     naviqate = "naviqate"
+    webtestpilot = "webtestpilot"
 
 
 class Application(str, Enum):
@@ -54,6 +57,8 @@ def get_runner_class(method: Method):
         return PinataTestRunner
     elif method == Method.naviqate:
         return NaviqateTestRunner
+    elif method == Method.webtestpilot:
+        return WebTestPilotTestRunner
     else:
         raise ValueError(f"Unknown method: {method}")
 

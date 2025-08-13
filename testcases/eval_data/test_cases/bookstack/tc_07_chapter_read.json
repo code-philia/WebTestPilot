@@ -4,11 +4,7 @@
   "setup_function": "created_chapter_page",
   "actions": [
     {
-      "action": "Navigate to the book containing the chapter",
-      "expectedResult": "Book detail page with chapter list is displayed"
-    },
-    {
-      "action": "Click on the chapter with title \"Chapter123456\"",
+      "action": "Click on the chapter with title \"Chapter\"",
       "expectedResult": "Chapter detail page opens"
     },
     {

@@ -107,6 +107,10 @@ class BaseTestRunner(ABC):
         """
         pass
 
+    def restart_application(self, application: str):
+        """Restart the specified application."""
+        pass
+
     def run_test_cases(self, filter_pattern: Optional[str] = None) -> TestResultDataset:
         """Run all test cases and return results."""
         test_cases = self.load_test_cases(filter_pattern)
@@ -119,6 +123,8 @@ class BaseTestRunner(ABC):
         print(f"Running {len(test_cases)} test cases...")
 
         for test_case in test_cases:
+            self.restart_application(self.application)
+
             test_name = test_case.get("name", "Unnamed")
             print(f"\nRunning test: {test_name}")
 
