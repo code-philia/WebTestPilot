@@ -28,7 +28,6 @@ class TestResult:
 
         return (
             f"{status_color}{status}{reset_color} {self.test_name:<45}: "
-            f"Success={self.success:<1}, "
             f"Steps={self.current_step:>2}/{self.total_step:<2} "
             f"({self.correct_trace})"
         )
@@ -66,9 +65,9 @@ class TestResultDataset:
     def print_summary(self):
         """Print a summary of test results."""
         print()
-        print("=" * 60)
+        print("=" * 80)
         print("TEST RESULT SUMMARY")
-        print("=" * 60)
+        print("=" * 80)
 
         # Create a summary progress bar for visual representation
         passed_tests = sum(1 for r in self.results if r.success)
@@ -77,14 +76,14 @@ class TestResultDataset:
         for result in sorted(self.results, key=lambda r: r.test_name):
             print(result)
 
-        print("=" * 60)
+        print("=" * 80)
         print(f"Total Tests: {len(self.results)}")
         print(
             f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
         )
         print(f"Success Rate: {self.success_rate:.1%}")
         print(f"Overall Correct Trace: {self.correct_trace:.1%}")
-        print("=" * 60)
+        print("=" * 80)
 
 
 class BaseTestRunner(ABC):

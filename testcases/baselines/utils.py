@@ -16,6 +16,7 @@ from bookstack.conftest import (
     create_role,
     create_shelf,
     create_sort_rule,
+    go_to_bookstack,
     login_to_bookstack,
     setup_data_for_create_page_template,
     setup_data_for_global_search_page,
@@ -28,12 +29,14 @@ from indico.conftest import (
     create_conference,
     create_lecture,
     create_meeting,
+    go_to_indico,
     login_to_indico,
 )
 from invoiceninja.conftest import (
     InvoiceNinjaTestData,
     create_client,
     create_product,
+    go_to_invoiceninja,
     login_to_invoiceninja,
     setup_for_credit_page,
     setup_for_expense_page,
@@ -75,7 +78,7 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 
     # No setup.
     if setup_function == "":
-        return page
+        return go_to_invoiceninja(page)
 
     logged_in_page = login_to_invoiceninja(page)
 
@@ -110,7 +113,7 @@ def setup_indico_page(page: Page, setup_function: str) -> Page:
 
     # No setup.
     if setup_function == "":
-        return page
+        return go_to_indico(page)
 
     logged_in_page = login_to_indico(page)
 
@@ -132,9 +135,7 @@ def setup_indico_page(page: Page, setup_function: str) -> Page:
 
 def setup_prestashop_page(page: Page, setup_function: str) -> Page:
     """Set up PrestaShop page based on setup function."""
-    if setup_function == "":
-        return page
-    elif setup_function == "logged_in_page":
+    if setup_function == "logged_in_page":
         return login_to_prestashop(page)
     elif setup_function == "logged_in_buyer_page":
         return login_to_prestashop_as_buyer(page)
@@ -148,7 +149,7 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
 
     # No setup.
     if setup_function == "":
-        return page
+        return go_to_bookstack(page)
 
     logged_in_page = login_to_bookstack(page)
 

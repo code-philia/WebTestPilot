@@ -133,6 +133,26 @@ def test_data() -> InvoiceNinjaTestData:
     return InvoiceNinjaTestData()
 
 
+def go_to_invoiceninja(page: Page) -> Page:
+    page.set_viewport_size({"width": 1280, "height": 720})
+    page.goto(f"{INVOICE_NINJA_HOST}/login")
+    return page
+
+
+def login_to_invoiceninja(page: Page) -> Page:
+    page = go_to_invoiceninja(page)
+
+    # Perform login
+    page.locator('input[name="email"]').click()
+    page.locator('input[name="email"]').fill(INITIAL_USER)
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    page.get_by_role("button", name="Save").click()
+
+    return page
+
+
 @pytest.fixture
 def logged_in_page(page: Page) -> Page:
     """
@@ -144,21 +164,6 @@ def logged_in_page(page: Page) -> Page:
     traced_page = create_traced_page(page)
     traced_page = login_to_invoiceninja(traced_page)
     return traced_page
-
-
-def login_to_invoiceninja(page: Page) -> Page:
-    page.set_viewport_size({"width": 1280, "height": 720})
-    page.goto(f"{INVOICE_NINJA_HOST}/login")
-
-    # Perform login
-    page.locator('input[name="email"]').click()
-    page.locator('input[name="email"]').fill(INITIAL_USER)
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
-    page.get_by_role("button", name="Login").click()
-    page.get_by_role("button", name="Save").click()
-
-    return page
 
 
 def create_client(

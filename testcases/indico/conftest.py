@@ -135,22 +135,27 @@ def test_data() -> IndicoTestData:
     return IndicoTestData()
 
 
-@pytest.fixture
-def logged_in_page(page: Page) -> Page:
-    traced_page = create_traced_page(page)
-    traced_page = login_to_indico(traced_page)
-    expect(traced_page.locator("#global-menu")).to_contain_text("My profile")
-    return traced_page
+def go_to_indico(page: Page) -> Page:
+    page.goto(INDICO_HOST)
+    return page
 
 
 def login_to_indico(page: Page) -> Page:
-    page.goto(INDICO_HOST)
+    page = go_to_indico(page)
     page.get_by_role("link", name=" Login").click()
     page.get_by_role("textbox", name="Username or email").fill(USER)
     page.get_by_role("textbox", name="Password").click()
     page.get_by_role("textbox", name="Password").fill(PASSWORD)
     page.get_by_role("button", name="Login with Indico").click()
     return page
+
+
+@pytest.fixture
+def logged_in_page(page: Page) -> Page:
+    traced_page = create_traced_page(page)
+    traced_page = login_to_indico(traced_page)
+    expect(traced_page.locator("#global-menu")).to_contain_text("My profile")
+    return traced_page
 
 
 @pytest.fixture

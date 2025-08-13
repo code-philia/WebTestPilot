@@ -2,14 +2,14 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from const import Application
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
 from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import Page, sync_playwright
-
-from ..evaluate import Application
+from tqdm import tqdm
 
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
@@ -22,7 +22,7 @@ load_dotenv()
 
 
 class WebTestPilotTestRunner(BaseTestRunner):
-    """Test runner implementation for LaVague agent."""
+    """Test runner implementation for WebTestPilot agent."""
 
     def __init__(
         self,
@@ -50,63 +50,85 @@ class WebTestPilotTestRunner(BaseTestRunner):
         return page
 
     def run_test_case(self, test_case: Dict) -> TestResult:
-        """Run a single test case using LaVague agent."""
+        """Run a single test case using WebTestPilot agent."""
         actions = test_case.get("actions", [])
         test_name = test_case.get("name", "Unnamed")
         setup_function = test_case.get("setup_function", "")
 
         result = TestResult(test_name=test_name, total_step=len(actions))
 
-        try:
-            # Get initial page with proper setup
-            page = self.get_initial_page(setup_function)
+        # Create nested progress bar for actions
+        with tqdm(
+            total=len(actions),
+            desc=f"  Steps for {test_name[:30]}",
+            leave=False,
+            unit="step",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
+            colour="green",
+        ) as step_bar:
+            try:
+                # Get initial page with proper setup
+                step_bar.set_description("  Setting up page")
+                page = self.get_initial_page(setup_function)
 
-            def get_page():
-                return page
+                def get_page():
+                    return page
 
-            # Create PlaywrightDriver with the captured page
-            playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
-            playwright_driver.page = page  # Set the page directly
+                # Create PlaywrightDriver with the captured page
+                playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
+                playwright_driver.page = page  # Set the page directly
 
-            # Set up LaVague components
-            token_counter = TokenCounter(log=True)
-            action_engine = ActionEngine(playwright_driver)
-            world_model = WorldModel()
-            agent = WebAgent(
-                world_model, action_engine, n_steps=1, token_counter=token_counter
-            )
+                # Set up LaVague components (WebTestPilot uses LaVague under the hood)
+                step_bar.set_description("  Initializing WebTestPilot")
+                token_counter = TokenCounter(log=False)  # Disable verbose logging
+                action_engine = ActionEngine(playwright_driver)
+                world_model = WorldModel()
+                agent = WebAgent(
+                    world_model, action_engine, n_steps=1, token_counter=token_counter
+                )
 
-            # Execute each action
-            for i, action in enumerate(actions):
-                try:
-                    print(f"  Step {i + 1}/{len(actions)}: {action['action']}")
-                    action_result = agent.run(action["action"])
+                # Execute each action
+                for i, action in enumerate(actions):
+                    try:
+                        action_text = (
+                            action["action"][:40]
+                            if len(action["action"]) > 40
+                            else action["action"]
+                        )
+                        step_bar.set_description(f"  Step {i + 1}: {action_text}")
 
-                    if not action_result:
-                        result.error_message = f"Action {i + 1} returned no result"
+                        action_result = agent.run(action["action"])
+
+                        if not action_result:
+                            result.error_message = f"Action {i + 1} returned no result"
+                            step_bar.set_postfix(status="✗", refresh=True)
+                            break
+
+                        result.traces.append(action_result.code)
+                        result.current_step += 1
+                        step_bar.update(1)
+                        step_bar.set_postfix(status="✓", refresh=True)
+
+                    except Exception as e:
+                        result.error_message = f"Error at step {i + 1}: {str(e)}"
+                        step_bar.set_postfix(status="✗", refresh=True)
+                        tqdm.write(f"    Error: {e}")
                         break
 
-                    result.traces.append(action_result.code)
-                    result.current_step += 1
+                # Mark as success if all steps completed
+                result.success = result.current_step == result.total_step
 
-                except Exception as e:
-                    result.error_message = f"Error at step {i + 1}: {str(e)}"
-                    print(f"    Error: {e}")
-                    break
+                # Print token usage if available
+                if hasattr(agent, "process_token_usage"):
+                    tqdm.write(f"  Token usage: {agent.process_token_usage()}")
 
-            # Mark as success if all steps completed
-            result.success = result.current_step == result.total_step
+                # Close the page
+                page.close()
 
-            # Print token usage
-            if hasattr(agent, "process_token_usage"):
-                print(f"  Token usage: {agent.process_token_usage()}")
-
-            # Close the page
-            page.close()
-
-        except Exception as e:
-            result.error_message = f"Test setup error: {str(e)}"
-            result.success = False
+            except Exception as e:
+                result.error_message = f"Test setup error: {str(e)}"
+                result.success = False
+                step_bar.set_postfix(status="✗", refresh=True)
 
         return result
 

@@ -153,6 +153,12 @@ def test_data() -> BookStackTestData:
     return BookStackTestData()
 
 
+def go_to_bookstack(page: Page) -> Page:
+    page.set_viewport_size({"width": 1280, "height": 720})
+    page.goto(BOOKSTACK_HOST)
+    return page
+
+
 def login_to_bookstack(page: Page) -> Page:
     """
     Login to BookStack and return a traced page.
@@ -164,8 +170,7 @@ def login_to_bookstack(page: Page) -> Page:
     Returns:
         Page: A traced page object with user logged in
     """
-    page.set_viewport_size({"width": 1280, "height": 720})
-    page.goto(BOOKSTACK_HOST)
+    page = go_to_bookstack(page)
 
     # Perform login
     page.get_by_role("link", name="Log in").click()
