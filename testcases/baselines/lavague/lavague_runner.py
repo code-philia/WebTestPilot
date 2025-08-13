@@ -120,12 +120,9 @@ class LavagueTestRunner(BaseTestRunner):
                 # Execute actions
                 for i, action in enumerate(actions):
                     try:
-                        action_text = (
-                            action["action"][:40]
-                            if len(action["action"]) > 40
-                            else action["action"]
+                        step_bar.set_description(
+                            f"  Step {i + 1}: {action['action'][:40]}"
                         )
-                        step_bar.set_description(f"  Step {i + 1}: {action_text}")
 
                         # Actual run step
                         action_result = agent.run(action["action"])
