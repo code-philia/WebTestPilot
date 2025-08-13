@@ -4,10 +4,6 @@
   "setup_function": "created_lecture_page",
   "actions": [
     {
-      "action": "Navigate to the lecture to be cloned",
-      "expectedResult": "Lecture detail page is displayed"
-    },
-    {
       "action": "Click \"Clone\" button",
       "expectedResult": "Clone event dialog appears"
     },

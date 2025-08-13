@@ -4,10 +4,6 @@
   "setup_function": "created_credit_page",
   "actions": [
     {
-      "action": "Navigate to a draft credit",
-      "expectedResult": "Credit detail page shows draft status"
-    },
-    {
       "action": "Click \"More Actions\" or status change dropdown",
       "expectedResult": "Actions menu opens"
     },

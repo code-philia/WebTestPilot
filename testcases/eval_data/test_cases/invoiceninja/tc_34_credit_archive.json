@@ -4,10 +4,6 @@
   "setup_function": "created_credit_page",
   "actions": [
     {
-      "action": "Navigate to the credit to be archived",
-      "expectedResult": "Credit detail page is displayed"
-    },
-    {
       "action": "Click \"More Actions\" or \"Actions\" dropdown",
       "expectedResult": "Actions menu opens"
     },

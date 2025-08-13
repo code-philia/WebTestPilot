@@ -4,10 +4,6 @@
   "setup_function": "created_page_page",
   "actions": [
     {
-      "action": "Navigate to the book containing the page",
-      "expectedResult": "Book detail page with page list is displayed"
-    },
-    {
       "action": "Click on the page with title \"Page123456\"",
       "expectedResult": "Page detail view opens"
     },

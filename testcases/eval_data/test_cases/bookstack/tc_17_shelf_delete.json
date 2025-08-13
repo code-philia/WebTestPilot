@@ -4,10 +4,6 @@
   "setup_function": "created_shelf_page",
   "actions": [
     {
-      "action": "Navigate to the shelf to be deleted",
-      "expectedResult": "Shelf detail page is displayed"
-    },
-    {
       "action": "Click \"Delete\" link in the shelf actions",
       "expectedResult": "Delete confirmation dialog appears"
     },

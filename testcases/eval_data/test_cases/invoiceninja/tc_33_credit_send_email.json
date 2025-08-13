@@ -4,10 +4,6 @@
   "setup_function": "created_credit_page",
   "actions": [
     {
-      "action": "Navigate to a draft credit",
-      "expectedResult": "Credit detail page is displayed"
-    },
-    {
       "action": "Click \"Email Credit\" button or option",
       "expectedResult": "Email dialog opens"
     },

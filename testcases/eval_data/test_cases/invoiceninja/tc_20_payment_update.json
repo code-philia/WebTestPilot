@@ -4,10 +4,6 @@
   "setup_function": "created_payment_page",
   "actions": [
     {
-      "action": "Navigate to the payment created in TC-019",
-      "expectedResult": "Payment detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Payment edit form opens with current values"
     },

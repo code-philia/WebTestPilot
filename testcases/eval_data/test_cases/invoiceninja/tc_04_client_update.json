@@ -4,10 +4,6 @@
   "setup_function": "created_client_page",
   "actions": [
     {
-      "action": "Navigate to the client created in TC-002",
-      "expectedResult": "Client detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Client edit form opens with current values"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_book_page",
   "actions": [
     {
-      "action": "Navigate to the book to be deleted",
-      "expectedResult": "Book detail page is displayed"
-    },
-    {
       "action": "Click \"Delete\" link in the book actions",
       "expectedResult": "Delete confirmation dialog appears"
     },

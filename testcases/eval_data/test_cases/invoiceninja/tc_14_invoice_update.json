@@ -4,10 +4,6 @@
   "setup_function": "created_invoice_page",
   "actions": [
     {
-      "action": "Navigate to the invoice created in TC-013",
-      "expectedResult": "Invoice detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Invoice edit form opens with current values"
     },

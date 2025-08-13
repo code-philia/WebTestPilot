@@ -4,10 +4,6 @@
   "setup_function": "created_credit_page",
   "actions": [
     {
-      "action": "Navigate to the credit created in TC-030",
-      "expectedResult": "Credit detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Credit edit form opens with current values"
     },

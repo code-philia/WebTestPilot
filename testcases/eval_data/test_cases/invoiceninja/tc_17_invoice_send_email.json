@@ -4,10 +4,6 @@
   "setup_function": "created_invoice_page",
   "actions": [
     {
-      "action": "Navigate to a draft invoice",
-      "expectedResult": "Invoice detail page is displayed"
-    },
-    {
       "action": "Click \"Email Invoice\" button or option",
       "expectedResult": "Email dialog opens"
     },

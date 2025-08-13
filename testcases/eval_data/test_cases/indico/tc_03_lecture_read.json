@@ -4,10 +4,6 @@
   "setup_function": "created_lecture_page",
   "actions": [
     {
-      "action": "Navigate to the created lecture page",
-      "expectedResult": "Lecture detail page is displayed"
-    },
-    {
       "action": "Verify lecture name appears in event settings data",
       "expectedResult": "Lecture name is displayed correctly"
     },

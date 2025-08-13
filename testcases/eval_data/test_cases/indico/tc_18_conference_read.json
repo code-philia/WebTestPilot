@@ -4,10 +4,6 @@
   "setup_function": "created_conference_page",
   "actions": [
     {
-      "action": "Navigate to the created conference page",
-      "expectedResult": "Conference detail page is displayed"
-    },
-    {
       "action": "Verify conference name appears in event settings data",
       "expectedResult": "Conference name is displayed correctly"
     },

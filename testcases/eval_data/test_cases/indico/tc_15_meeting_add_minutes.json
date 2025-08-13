@@ -4,10 +4,6 @@
   "setup_function": "created_meeting_page",
   "actions": [
     {
-      "action": "Navigate to the created meeting page",
-      "expectedResult": "Meeting detail page is displayed"
-    },
-    {
       "action": "Click \"Switch to display view\" link",
       "expectedResult": "Display view is activated"
     },

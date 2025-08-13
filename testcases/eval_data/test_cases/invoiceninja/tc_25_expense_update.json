@@ -4,10 +4,6 @@
   "setup_function": "created_expense_page",
   "actions": [
     {
-      "action": "Navigate to the expense created in TC-024",
-      "expectedResult": "Expense detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Expense edit form opens with current values"
     },

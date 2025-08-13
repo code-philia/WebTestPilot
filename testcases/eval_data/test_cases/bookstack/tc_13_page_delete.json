@@ -4,10 +4,6 @@
   "setup_function": "created_page_page",
   "actions": [
     {
-      "action": "Navigate to the page to be deleted",
-      "expectedResult": "Page detail view is displayed"
-    },
-    {
       "action": "Click \"Delete\" link in the page actions",
       "expectedResult": "Delete confirmation dialog appears"
     },

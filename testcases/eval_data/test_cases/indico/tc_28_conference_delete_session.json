@@ -4,10 +4,6 @@
   "setup_function": "created_conference_page",
   "actions": [
     {
-      "action": "Navigate to the conference with created session",
-      "expectedResult": "Conference detail page is displayed"
-    },
-    {
       "action": "Click \"Sessions\" link in navigation",
       "expectedResult": "Sessions section opens"
     },

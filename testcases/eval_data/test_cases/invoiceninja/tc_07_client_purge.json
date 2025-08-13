@@ -4,10 +4,6 @@
   "setup_function": "created_client_page",
   "actions": [
     {
-      "action": "Navigate to deleted clients view",
-      "expectedResult": "Deleted clients listing is displayed"
-    },
-    {
       "action": "Locate the client to be permanently deleted",
       "expectedResult": "Target deleted client is visible"
     },

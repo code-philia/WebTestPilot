@@ -4,10 +4,6 @@
   "setup_function": "created_page_page",
   "actions": [
     {
-      "action": "Navigate to an existing book page",
-      "expectedResult": "Book detail page is displayed"
-    },
-    {
       "action": "Click \"New Page\" button",
       "expectedResult": "Page creation form opens"
     },

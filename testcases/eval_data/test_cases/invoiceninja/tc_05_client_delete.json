@@ -4,10 +4,6 @@
   "setup_function": "created_client_page",
   "actions": [
     {
-      "action": "Navigate to the client to be deleted",
-      "expectedResult": "Client detail page is displayed"
-    },
-    {
       "action": "Click \"More Actions\" or \"Actions\" dropdown",
       "expectedResult": "Actions menu opens"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_lecture_page",
   "actions": [
     {
-      "action": "Navigate to a locked lecture",
-      "expectedResult": "Locked lecture detail page is displayed"
-    },
-    {
       "action": "Click the action menu button (three dots icon)",
       "expectedResult": "Action menu dropdown opens"
     },

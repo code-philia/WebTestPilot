@@ -4,10 +4,6 @@
   "setup_function": "created_conference_page",
   "actions": [
     {
-      "action": "Navigate to the created conference page",
-      "expectedResult": "Conference detail page is displayed"
-    },
-    {
       "action": "Click \"Registration\" link in navigation",
       "expectedResult": "Registration section opens"
     },

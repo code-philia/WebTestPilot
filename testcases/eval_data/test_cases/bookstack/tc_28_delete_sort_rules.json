@@ -4,10 +4,6 @@
   "setup_function": "created_sort_rule_page",
   "actions": [
     {
-      "action": "Navigate to sort rules management section",
-      "expectedResult": "Sort rules listing page is displayed"
-    },
-    {
       "action": "Locate the sort rule \"SortRule Updated 123456\"",
       "expectedResult": "Target sort rule is visible in the list"
     },

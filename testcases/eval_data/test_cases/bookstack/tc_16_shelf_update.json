@@ -4,10 +4,6 @@
   "setup_function": "created_shelf_page",
   "actions": [
     {
-      "action": "Navigate to the shelf created in TC-014",
-      "expectedResult": "Shelf detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" link in the shelf actions",
       "expectedResult": "Shelf edit form opens with current values"
     },

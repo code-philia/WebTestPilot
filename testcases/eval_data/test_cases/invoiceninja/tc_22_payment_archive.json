@@ -4,10 +4,6 @@
   "setup_function": "created_payment_page",
   "actions": [
     {
-      "action": "Navigate to the payment to be archived",
-      "expectedResult": "Payment detail page is displayed"
-    },
-    {
       "action": "Click \"More Actions\" or \"Actions\" dropdown",
       "expectedResult": "Actions menu opens"
     },

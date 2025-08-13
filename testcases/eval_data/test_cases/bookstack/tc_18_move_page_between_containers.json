@@ -4,10 +4,6 @@
   "setup_function": "created_page_move_page",
   "actions": [
     {
-      "action": "Click \"Move\" link in the page actions",
-      "expectedResult": "Move page dialog opens"
-    },
-    {
       "action": "Select destination chapter from dropdown",
       "expectedResult": "Chapter is selected as destination"
     },

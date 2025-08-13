@@ -4,10 +4,6 @@
   "setup_function": "created_expense_page",
   "actions": [
     {
-      "action": "Navigate to the expense to be deleted",
-      "expectedResult": "Expense detail page is displayed"
-    },
-    {
       "action": "Click \"More Actions\" or \"Actions\" dropdown",
       "expectedResult": "Actions menu opens"
     },

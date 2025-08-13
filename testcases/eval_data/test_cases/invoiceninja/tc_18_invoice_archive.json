@@ -4,10 +4,6 @@
   "setup_function": "created_invoice_page",
   "actions": [
     {
-      "action": "Navigate to the invoice to be archived",
-      "expectedResult": "Invoice detail page is displayed"
-    },
-    {
       "action": "Click \"More Actions\" or \"Actions\" dropdown",
       "expectedResult": "Actions menu opens"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_meeting_page",
   "actions": [
     {
-      "action": "Navigate to the meeting to be cloned",
-      "expectedResult": "Meeting detail page is displayed"
-    },
-    {
       "action": "Click \"Clone\" button",
       "expectedResult": "Clone event dialog appears"
     },

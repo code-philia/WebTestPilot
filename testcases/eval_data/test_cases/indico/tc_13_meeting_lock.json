@@ -4,10 +4,6 @@
   "setup_function": "created_meeting_page",
   "actions": [
     {
-      "action": "Navigate to the meeting to be locked",
-      "expectedResult": "Meeting detail page is displayed"
-    },
-    {
       "action": "Click the action menu button (three dots icon)",
       "expectedResult": "Action menu dropdown opens"
     },

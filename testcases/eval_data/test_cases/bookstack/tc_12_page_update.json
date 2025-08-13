@@ -4,10 +4,6 @@
   "setup_function": "created_page_page",
   "actions": [
     {
-      "action": "Navigate to the page created in TC-010",
-      "expectedResult": "Page detail view is displayed"
-    },
-    {
       "action": "Click \"Edit\" link in the page actions",
       "expectedResult": "Page edit form opens with current values"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_payment_page",
   "actions": [
     {
-      "action": "Navigate to a payment record",
-      "expectedResult": "Payment detail page is displayed"
-    },
-    {
       "action": "Click \"Email Payment\" button or option",
       "expectedResult": "Email dialog opens"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_product_page",
   "actions": [
     {
-      "action": "Navigate to the product created in TC-008",
-      "expectedResult": "Product detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" button or link",
       "expectedResult": "Product edit form opens with current values"
     },

@@ -4,10 +4,6 @@
   "setup_function": "created_chapter_page",
   "actions": [
     {
-      "action": "Navigate to an existing book page",
-      "expectedResult": "Book detail page is displayed"
-    },
-    {
       "action": "Click \"New Chapter\" button",
       "expectedResult": "Chapter creation form opens"
     },

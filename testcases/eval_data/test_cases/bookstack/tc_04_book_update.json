@@ -4,10 +4,6 @@
   "setup_function": "created_book_page",
   "actions": [
     {
-      "action": "Navigate to the book created in TC-002",
-      "expectedResult": "Book detail page is displayed"
-    },
-    {
       "action": "Click \"Edit\" link in the book actions",
       "expectedResult": "Book edit form opens with current values"
     },
