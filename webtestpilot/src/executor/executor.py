@@ -1,8 +1,11 @@
-from baml_client.sync_client import b
-from baml_py import Image
-from executor.assertion_api.session import Session
 import base64
+
+from baml_py import Image
 from baml_py import ClientRegistry
+from executor.assertion_api.session import Session
+
+from baml_client.sync_client import b
+from baml_client.types import Feedback
 from executor.assertion_api import execute_assertion
 
 
@@ -32,7 +35,11 @@ def verify_precondition(session: Session, condition: str) -> None:
     screenshot = Image.from_base64("image/png", screenshot)
     history = session.format_history()
     response = b.GenerateAssertion(
-        condition, history, screenshot, baml_options={"client_registry": cr}
+        condition,
+        history,
+        screenshot,
+        feedback=[],
+        baml_options={"client_registry": cr},
     )
     passed, message = execute_assertion(response, session)
     if passed:
@@ -66,15 +73,21 @@ def verify_postcondition(session: Session, expectation: str):
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
     history = session.format_history()
+    feedback = []
 
     for _ in range(1, MAX_RETRIES + 1):
         response = b.GenerateAssertion(
-            expectation, history, screenshot, baml_options={"client_registry": cr}
+            expectation,
+            history,
+            screenshot,
+            feedback,
+            baml_options={"client_registry": cr},
         )
         passed, message = execute_assertion(response, session)
         if passed:
             return
-
-        # TODO: provide feedback for iterative refinement
+        else:
+            feedback_item = Feedback(response=response, reason=message)
+            feedback.append(feedback_item)
 
     raise BugReport(message)

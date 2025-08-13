@@ -1,11 +1,12 @@
+import warnings
 from typing import Any, Type, TypeVar, Union, get_args, get_origin, Literal
 from types import UnionType
 from enum import Enum
+
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
 
 from baml_client.type_builder import TypeBuilder
-import warnings
 
 T = TypeVar("T")
 

@@ -12,6 +12,7 @@ function ProposeActions(screenshot: image, task: string) -> string {
     drag(source_description="...", target_description="...") # Drag from the source element to the target element, both specified by descriptions
     scroll(target_description="...", direction="...") # Focus on the described element (or None to scroll the page) and scroll in the given direction ("up", "down", "left", or "right")
     wait(duration=...) # Wait for the specified duration in milliseconds
+    finished() # No action required
     ```
 
     Do not provide any explanations in your output; only return the Python code block with the required actions.

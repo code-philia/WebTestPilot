@@ -163,6 +163,10 @@ def wait(duration: int):
     time.sleep(duration / 1000)
 
 
+def finished():
+    pass
+
+
 def execute(code: str, page: Page):
     """
     Safely execute LLM-generated Python code blocks containing only automation actions.
@@ -176,6 +180,7 @@ def execute(code: str, page: Page):
         "drag": drag,
         "scroll": scroll,
         "wait": wait,
+        "finished": finished
     }
 
     # Remove triple backticks and optional 'python' tag

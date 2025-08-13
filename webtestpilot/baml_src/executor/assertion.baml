@@ -1,4 +1,9 @@
-function GenerateAssertion(verify: string, history: string, screenshot: image) -> string {
+class Feedback {
+    response string
+    reason string
+}
+
+function GenerateAssertion(verify: string, history: string, screenshot: image, feedback: Feedback[]) -> string {
     client "GPT"
     prompt #"
         {{_.role("user")}}
@@ -55,8 +60,13 @@ function GenerateAssertion(verify: string, history: string, screenshot: image) -
         ```python
         def assertion(session: Session):
             # Define data models
-            class Product(BaseModel): title: str; price: float; quantity: Optional[int]
-            class Cart(BaseModel): items: List[Product]
+            class Product(BaseModel): 
+                title: str = Field(..., description="The name of the product")
+                price: float = Field(..., description="The unit price of the product in local currency")
+                quantity: Optional[int] = Field(None, "The quantity of this product (used in cart contexts). None indicates unlimited or not specified")
+            
+            class Cart(BaseModel): 
+                items: List[Product] = Field(default_factory=list, description="List of products in the cart with their respective quantities")
 
             # Extract product from latest state
             added = session.history[-1].extract("get product detail", schema=Product)
@@ -74,6 +84,22 @@ function GenerateAssertion(verify: string, history: string, screenshot: image) -
         {{ history }}
 
         {{ verify }}
+
+        {% if feedback %}
+        {% for f in feedback %}
+        {{ _.role("user") }}
+        # Feedback
+
+        Your previous assertion(s) might be incorrect:
+
+        {{ f.response }}
+
+        Reason: {{ f.reason }}
+
+        If you insist that it is correct, please output the same thing
+        Otherwise, modify the assertion
+        {% endfor %}
+        {% endif %}
     "#
 }
 
@@ -93,6 +119,7 @@ test InvoiceNinja {
         
         Current: Clients Page
     "#
+    feedback []
     screenshot { file "./invoiceninja.png" }
   }
 }

@@ -1,6 +1,7 @@
-class PageDescription {
-    name string
-    description string
+class PageAbstract {
+  name string
+  description string
+  layout string
 }
 
 
@@ -34,18 +35,38 @@ function IsSameLogicalPage(page_a: image, page_b: image) -> bool {
 }
 
 
-function DescribePage(page: image) -> PageDescription {
+function AbstractPage(page: image) -> PageAbstract {
   client "GPT"
   prompt #"
     {{_.role("user")}}
     You are an expert UI/UX evaluator with deep knowledge of web page layout, semantics, and interaction patterns.
-
+    
     You are given a page screenshot.
-    1. Give it a clear, semantically meaningful name (e.g., Shopping Cart Page).
-    2. Describe its visual layout, functional elements, navigation options, and any dynamic features.
+    1. Assign a clear, semantically meaningful name to the page (e.g., Shopping Cart Page).
+    2. Write a summary <15 words describing both the function and visual state of the page.
+    3. Analyze the layout: extract as a page template in XML format. You may include non-data attributes for context.
+      ```example
+      <Page>
+        <Header visibleFor="allUsers" role="navigation" hasNotifications="true" />
+        <Sidebar collapsible="true" visible="true" contains="menuItems" />
+        <Breadcrumb currentPage="true" hasPath="true" />
+        <MainContent>
+          <CartItems type="list" itemType="product" selectable="true" hasQuantity="true" hasPrice="true" availabilityState="enum" />
+          <Recommendations type="list" itemType="product" algorithmType="collaborativeFiltering" />
+        </MainContent>
+        <Footer role="footer" contains="links,contactInfo" />
+      </Page>
+      ```
 
     {{ ctx.output_format }}
 
     {{ page }}
   "#
+}
+
+test TestName {
+  functions [AbstractPage]
+  args {
+    page { file "/home/xiwen/WebTestPilot/webtestpilot/baml_src/executor/invoiceninja.png" }
+  }
 }

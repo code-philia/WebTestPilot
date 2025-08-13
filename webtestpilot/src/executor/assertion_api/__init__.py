@@ -1,4 +1,11 @@
 import re
+from typing import Any, Union, Literal, Optional, List, Set, Dict
+from enum import Enum
+from uuid import UUID
+from datetime import datetime, date
+
+from pydantic import BaseModel, Field, EmailStr, HttpUrl, constr, conint, confloat
+
 from executor.assertion_api.session import Session
 from executor.assertion_api.state import State
 from executor.assertion_api.element import Element
@@ -22,6 +29,28 @@ def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
         "Session": Session,
         "State": State,
         "Element": Element,
+        # Pydantic
+        "BaseModel": BaseModel,
+        "Field": Field,
+        "EmailStr": EmailStr,
+        "HttpUrl": HttpUrl,
+        "constr": constr,
+        "conint": conint,
+        "confloat": confloat,
+        # Typing
+        "Any": Any,
+        "Union": Union,
+        "Literal": Literal,
+        "Optional": Optional,
+        "List": List,
+        "Set": Set,
+        "Dict": Dict,
+        # Enum
+        "Enum": Enum,
+        # Common value types
+        "UUID": UUID,
+        "datetime": datetime,
+        "date": date,
     }
 
     # Compile and exec the code, exceptions propagate

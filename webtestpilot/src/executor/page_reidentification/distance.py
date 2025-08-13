@@ -1,11 +1,11 @@
-from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import Element as XMLElement
 
 import zss
 import Levenshtein
 
 
 class XMLNode(zss.Node):
-    def __init__(self, element: Element):
+    def __init__(self, element: XMLElement):
         self.element = element
         super().__init__(self.element.tag)
 
@@ -36,7 +36,7 @@ class XMLNode(zss.Node):
         return 1 + (1 - similarity)  # between 1 and 2
 
 
-def tree_distance(e1: list[Element], e2: list[Element]) -> int:
+def tree_distance(e1: list[XMLElement], e2: list[XMLElement]) -> int:
     return zss.simple_distance(
         XMLNode(e1),
         XMLNode(e2),

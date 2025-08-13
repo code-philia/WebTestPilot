@@ -3,11 +3,12 @@ from typing import Any
 
 from baml_py import Image
 from playwright.sync_api import Page
+from xml.etree.ElementTree import Element as XMLElement
 
 from executor.assertion_api.state import State
 from executor.assertion_api.element import Element
 from baml_client.sync_client import b
-from baml_client.types import PageDescription
+from baml_client.types import PageAbstract
 from executor.page_reidentification.accessibility import AccessibilityTree
 from executor.page_reidentification.abstract import to_xml_tree
 from executor.page_reidentification.distance import tree_distance
@@ -52,7 +53,7 @@ class Session:
         Return the most recent captured state.
         """
         return self._state
-    
+
     def capture_state(self, prev_action: str | None) -> State:
         """
         Capture and return the current state of the browser page after an action.
@@ -60,10 +61,13 @@ class Session:
         # Add previously recorded state into history
         self._history.append(self._state)
 
+        # Extract accessibility tree in XML format
         tree = AccessibilityTree(self.page)
+        xml_tree = to_xml_tree(tree)
+
         screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8")
         elements = self.capture_elements()
-        page_id, description = self._page_reidentification(tree, screenshot)
+        page_id, description = self._page_reidentification(xml_tree, screenshot)
 
         # Update with new state
         self._state = State(
@@ -74,80 +78,90 @@ class Session:
             content=self.page.content(),
             screenshot=self.page.screenshot(),
             elements=elements,
-            prev_action=prev_action
+            prev_action=prev_action,
+            xml_tree=xml_tree,
         )
         return self._state
-    
+
     def capture_elements(self) -> dict[int, Element]:
-        def _build_tree(elements_data: list[dict[str, Any]]) -> tuple[dict[int, Element], Element]:
-            elements: dict[str, Element] = {data['id']: Element(data) for data in elements_data}
+        def _build_tree(
+            elements_data: list[dict[str, Any]],
+        ) -> tuple[dict[int, Element], Element]:
+            elements: dict[str, Element] = {
+                data["id"]: Element(data) for data in elements_data
+            }
             root = None
             for el in elements.values():
                 if el.parentId is not None:
                     parent = elements.get(el.parentId)
                     if parent:
-                        parent.add_child(el)
+                        parent.children.append(el)
                 else:
                     root = el
             return elements, root
-        
+
         elements_data = self.page.evaluate("""
             (() => {
-            let idCounter = 1;
-            const nodes = [];
+                let idCounter = 1;
+                const nodes = [];
 
-            function traverse(node, parentId = null) {
-                const id = idCounter++;
-                const rect = node.getBoundingClientRect();
-                const style = window.getComputedStyle(node);
+                function traverse(node, parentId = null) {
+                    const id = idCounter++;
+                    const rect = node.getBoundingClientRect();
+                    const style = window.getComputedStyle(node);
 
-                nodes.push({
-                id,
-                parentId,
-                tagName: node.tagName,
-                outerHTML: node.outerHTML,
-                x: rect.x,
-                y: rect.y,
-                width: rect.width,
-                height: rect.height,
-                zIndex: parseInt(style.zIndex) || 0,
-                visible: style.visibility !== 'hidden' && style.display !== 'none' && style.opacity !== '0',
-                idAttr: node.id || null,
-                className: node.className || null,
-                });
+                    const attributes = {};
+                    for (const attr of node.attributes) {
+                        attributes[attr.name] = attr.value;
+                    }
 
-                for (const child of node.children) {
-                traverse(child, id);
+                    nodes.push({
+                        id,
+                        parentId,
+                        tagName: node.tagName,
+                        outerHTML: node.outerHTML,
+                        x: rect.x,
+                        y: rect.y,
+                        width: rect.width,
+                        height: rect.height,
+                        zIndex: parseInt(style.zIndex) || 0,
+                        visible: style.visibility !== 'hidden' && style.display !== 'none' && style.opacity !== '0',
+                        attributes,
+                        textContent: node.textContent.trim() || null
+                    });
+
+                    for (const child of node.children) {
+                        traverse(child, id);
+                    }
                 }
-            }
 
-            traverse(document.documentElement, null);
-            return nodes;
+                traverse(document.documentElement, null);
+                return nodes;
             })()
         """)
 
         elements, _ = _build_tree(elements_data)
         return elements
-    
+
     def format_history(self) -> str:
         lines = []
         for i, state in enumerate(self._history):
             lines.append(f"State {i}:")
             lines.append(f"  Page: {state.page_id or 'Unknown'}")
-            if getattr(state, 'description', None):
+            if getattr(state, "description", None):
                 lines.append(f"  Description: {state.description}")
             if state.prev_action:
                 lines.append(f"  Action: {state.prev_action}")
             # Example: if you had UI highlights list
-            if hasattr(state, 'ui_highlights') and state.ui_highlights:
-                lines.append(f"  UI Highlights:")
+            if hasattr(state, "ui_highlights") and state.ui_highlights:
+                lines.append("  UI Highlights:")
                 for item in state.ui_highlights:
                     lines.append(f"    - {item}")
             lines.append("")  # blank line between states
         return "\n".join(lines)
 
     def _page_reidentification(
-        self, tree: AccessibilityTree, screenshot: str
+        self, xml_tree: list[XMLElement], screenshot: str
     ) -> tuple[str, str]:
         """
         Determine if the current page matches any previously visited logical page.
@@ -159,18 +173,20 @@ class Session:
                 - page_id: A short identifier or name of the logical page.
                 - description: A detailed textual description of the page.
         """
-        current_tree = to_xml_tree(tree)
-
         # Find the history state with the smallest tree distance to current page
         closest_state = min(
-            self.history, key=lambda s: tree_distance(current_tree, s.tree)
+            self.history, key=lambda s: tree_distance(xml_tree, s.xml_tree)
         )
 
         current_img = Image.from_base64("image/png", screenshot)
         closest_img = Image.from_base64("image/png", closest_state.screenshot)
 
         if b.IsSameLogicalPage(current_img, closest_img):
-            return closest_state.page_id, closest_state.description
+            return (
+                closest_state.page_id,
+                closest_state.description,
+                closest_state.layout,
+            )
 
-        page_desc: PageDescription = b.DescribePage(current_img)
-        return page_desc.name, page_desc.description
+        page_abstract: PageAbstract = b.AbstractPage(current_img)
+        return page_abstract.name, page_abstract.description, page_abstract.layout
