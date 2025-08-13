@@ -4,7 +4,7 @@ from baml_client.sync_client import b
 from baml_client.types import TestCase
 
 
-def parser(description: str, cr: ClientRegistry) -> TestCase:
+def parse(description: str, cr: ClientRegistry) -> TestCase:
     """
     Parse a natural language test description into a structured test case.
 
