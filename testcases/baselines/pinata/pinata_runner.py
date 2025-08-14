@@ -1,16 +1,15 @@
 import asyncio
 import sys
 from pathlib import Path
-from typing import Dict
 
 from base_runner import BaseTestRunner, TestResult
-from const import ApplicationEnum
+from const import ApplicationEnum, TestCase
 from playwright.async_api import Page as AsyncPage
 from playwright.async_api import async_playwright
 from tqdm import tqdm
 from utils import setup_page_state
 
-from .src.VTAAS.data.testcase import TestCase
+from .src.VTAAS.data.testcase import TestCase as PinataTestCase
 from .src.VTAAS.llm.llm_client import LLMProvider
 from .src.VTAAS.orchestrator.orchestrator import Orchestrator
 from .src.VTAAS.schemas.verdict import Status
@@ -64,26 +63,24 @@ class PinataTestRunner(BaseTestRunner):
         # We'll handle the actual page setup in run_test_case_async
         return setup_function  # Return setup function to be used later
 
-    def convert_test_case_to_pinata_format(self, test_case: Dict) -> TestCase:
+    def convert_test_case_to_pinata_format(self, test_case: TestCase) -> PinataTestCase:
         """Convert standard test case format to Pinata's TestCase format."""
-        actions = [action["action"] for action in test_case.get("actions", [])]
-        expected_results = [
-            action.get("expectedResult", "") for action in test_case.get("actions", [])
-        ]
+        actions = [action.action for action in test_case.actions]
+        expected_results = [action.expectedResult for action in test_case.actions]
 
-        return TestCase(
-            full_name=test_case.get("name", "Unnamed"),
+        return PinataTestCase(
+            full_name=test_case.name,
             actions=actions,
             expected_results=expected_results,
-            url=test_case.get("url", ""),
+            url=test_case.url,
             failing_info=None,
             output_folder=str(self.test_output_path.parent),
         )
 
-    async def run_test_case_async(self, test_case: Dict) -> TestResult:
+    async def run_test_case_async(self, test_case: TestCase) -> TestResult:
         """Async implementation of test case execution."""
-        test_name = test_case.get("name", "Unnamed")
-        setup_function = test_case.get("setup_function", "")
+        test_name = test_case.name
+        setup_function = test_case.setup_function
         pinata_test_case = self.convert_test_case_to_pinata_format(test_case)
 
         result = TestResult(
@@ -173,7 +170,7 @@ class PinataTestRunner(BaseTestRunner):
 
         return result
 
-    def run_test_case(self, test_case: Dict) -> TestResult:
+    def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using Pinata agent."""
         # Run the async method in a new event loop
         loop = asyncio.new_event_loop()

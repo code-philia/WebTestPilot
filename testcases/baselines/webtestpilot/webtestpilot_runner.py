@@ -1,8 +1,7 @@
 import sys
 from pathlib import Path
-from typing import Dict
 
-from const import ApplicationEnum
+from const import ApplicationEnum, TestCase
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
@@ -49,11 +48,11 @@ class WebTestPilotTestRunner(BaseTestRunner):
         page = setup_page_state(page, setup_function, application=self.application)
         return page
 
-    def run_test_case(self, test_case: Dict) -> TestResult:
+    def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
-        actions = test_case.get("actions", [])
-        test_name = test_case.get("name", "Unnamed")
-        setup_function = test_case.get("setup_function", "")
+        actions = test_case.actions
+        test_name = test_case.name
+        setup_function = test_case.setup_function
 
         result = TestResult(test_name=test_name, total_step=len(actions))
 
@@ -90,14 +89,10 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 # Execute each action
                 for i, action in enumerate(actions):
                     try:
-                        action_text = (
-                            action["action"][:40]
-                            if len(action["action"]) > 40
-                            else action["action"]
-                        )
+                        action_text = action.action[:40]
                         step_bar.set_description(f"  Step {i + 1}: {action_text}")
 
-                        action_result = agent.run(action["action"])
+                        action_result = agent.run(action.action)
 
                         if not action_result:
                             result.error_message = f"Action {i + 1} returned no result"
