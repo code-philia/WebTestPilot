@@ -126,10 +126,9 @@ class LavagueTestRunner(BaseTestRunner):
                         )
 
                         # Actual run step
-                        print(action.action)
-                        action_result = agent.run(action.action, display=True)
-                        print("action_result", action_result)
+                        action_result = agent.run(action.action)
 
+                        result.token_count = action_result.total_estimated_tokens
                         # Save trace, the latest action result contains all the previous actions.
                         result.traces = self.extract_trace_from_code(action_result.code)
 
@@ -153,10 +152,6 @@ class LavagueTestRunner(BaseTestRunner):
 
                 # Mark as success if all steps completed
                 result.success = result.current_step == result.total_step
-
-                # Print token usage if available
-                if hasattr(agent, "process_token_usage"):
-                    tqdm.write(f"  Token usage: {agent.process_token_usage()}")
 
                 # Close the page
                 page.close()

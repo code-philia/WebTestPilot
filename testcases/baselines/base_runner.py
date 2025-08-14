@@ -18,6 +18,7 @@ class TestResult:
     traces: list = field(default_factory=list)
     error_message: Optional[str] = None
     runtime: float = 0.0
+    token_count: int = 0
 
     @property
     def correct_trace(self) -> float:
