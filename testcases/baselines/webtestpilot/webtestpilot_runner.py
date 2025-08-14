@@ -1,19 +1,19 @@
 import sys
+import time
 from pathlib import Path
 
 from const import ApplicationEnum, TestCase
 from dotenv import load_dotenv
-from lavague.core import ActionEngine, WorldModel
-from lavague.core.agents import WebAgent
-from lavague.core.token_counter import TokenCounter
-from lavague.drivers.playwright import PlaywrightDriver
 from playwright.sync_api import Page, sync_playwright
 from tqdm import tqdm
 
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
+sys.path.append(str(Path(__file__).resolve().parents[2] / "webtestpilot" / "src")) # webtestpilot dir
 
+CONFIG_PATH = Path(__file__).resolve().parents[2] / "webtestpilot" / "src" / "config.yaml"
+from webtestpilot.src.main import WebTestPilot, Config, Session, Step
 from base_runner import BaseTestRunner, TestResult
 from utils import setup_page_state
 
@@ -37,8 +37,18 @@ class WebTestPilotTestRunner(BaseTestRunner):
         self.browser = None
         self.context = None
 
+    def clean_up_playwright(self):
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()
+
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""
+        self.clean_up_playwright()
+
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(headless=self.headless)
         self.context = self.browser.new_context()
@@ -69,37 +79,21 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 # Get initial page with proper setup
                 step_bar.set_description("  Setting up page")
                 page = self.get_initial_page(setup_function)
-
-                def get_page():
-                    return page
-
-                # Create PlaywrightDriver with the captured page
-                playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
-                playwright_driver.page = page  # Set the page directly
-
-                # Set up LaVague components (WebTestPilot uses LaVague under the hood)
-                step_bar.set_description("  Initializing WebTestPilot")
-                token_counter = TokenCounter(log=False)  # Disable verbose logging
-                action_engine = ActionEngine(playwright_driver)
-                world_model = WorldModel()
-                agent = WebAgent(
-                    world_model, action_engine, n_steps=1, token_counter=token_counter
-                )
+                
+                config = Config.load(CONFIG_PATH)
+                session = Session(page, config)
 
                 # Execute each action
+                start_time = time.perf_counter()
                 for i, action in enumerate(actions):
                     try:
                         action_text = action.action[:40]
                         step_bar.set_description(f"  Step {i + 1}: {action_text}")
+                        step = Step(condition="", actiop="", expectation="")
 
-                        action_result = agent.run(action.action)
+                        WebTestPilot.run(session, step)
 
-                        if not action_result:
-                            result.error_message = f"Action {i + 1} returned no result"
-                            step_bar.set_postfix(status="✗", refresh=True)
-                            break
-
-                        result.traces.append(action_result.code)
+                        result.traces = session.trace
                         result.current_step += 1
                         step_bar.update(1)
                         step_bar.set_postfix(status="✓", refresh=True)
@@ -110,12 +104,11 @@ class WebTestPilotTestRunner(BaseTestRunner):
                         tqdm.write(f"    Error: {e}")
                         break
 
+                end_time = time.perf_counter()
+                result.runtime = end_time - start_time
+
                 # Mark as success if all steps completed
                 result.success = result.current_step == result.total_step
-
-                # Print token usage if available
-                if hasattr(agent, "process_token_usage"):
-                    tqdm.write(f"  Token usage: {agent.process_token_usage()}")
 
                 # Close the page
                 page.close()
@@ -128,10 +121,4 @@ class WebTestPilotTestRunner(BaseTestRunner):
         return result
 
     def __del__(self):
-        """Cleanup playwright resources."""
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
-        if self.playwright:
-            self.playwright.stop()
+        self.clean_up_playwright()

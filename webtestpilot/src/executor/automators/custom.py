@@ -1,13 +1,23 @@
 import re
 import time
+import logging
+import traceback
+from copy import deepcopy
 
 from baml_client.sync_client import b
 from playwright.sync_api import Page, ElementHandle
 
 
+# -------------------------
+# Globals
+# -------------------------
+logger = logging.getLogger(__name__)
 _current_page: Page | None = None
+_trace: list[dict] = []
 
-
+# -------------------------
+# Helpers
+# -------------------------
 def _parse_coordinates(coordinates: str) -> tuple[int, int]:
     match = re.match(r"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)", coordinates)
     if match:
@@ -45,6 +55,26 @@ def _get_element(page: Page, x: int, y: int) -> ElementHandle:
     return handle.as_element() if handle else None
 
 
+def _get_xpath(element: ElementHandle) -> str:
+    return element.evaluate("""
+    (el) => {
+        if (!el) return '';
+        const parts = [];
+        while (el && el.nodeType === Node.ELEMENT_NODE) {
+            let idx = 1;
+            let sibling = el.previousElementSibling;
+            while (sibling) {
+                if (sibling.tagName === el.tagName) idx++;
+                sibling = sibling.previousElementSibling;
+            }
+            parts.unshift(el.tagName.toLowerCase() + '[' + idx + ']');
+            el = el.parentElement;
+        }
+        return '/' + parts.join('/');
+    }
+    """)
+
+
 def _set_page(page: Page):
     global _current_page
     _current_page = page
@@ -63,6 +93,8 @@ def click(target_description: str):
     element: ElementHandle = _get_element(_current_page, x, y)
     element.click()
 
+    _trace.append({"action": {"name": "click", "args": {"xpath": _get_xpath(element)}}})
+
 
 def type(target_description: str, content: str):
     _require_page()
@@ -70,6 +102,8 @@ def type(target_description: str, content: str):
     x, y = _parse_coordinates(coordinates)
     element: ElementHandle = _get_element(_current_page, x, y)
     element.type(content)
+
+    _trace.append({"action": {"name": "fill", "args": {"xpath": _get_xpath(element)}}})
 
 
 def drag(source_description: str, target_description: str):
@@ -103,6 +137,13 @@ def drag(source_description: str, target_description: str):
 
     # Release mouse button
     _current_page.mouse.up()
+
+    _trace.append(
+      {"action": {"name": "drag", "args": {
+          "source_xpath": _get_xpath(_get_element(_current_page, source_x, source_y)),
+          "target_xpath": _get_xpath(_get_element(_current_page, target_x, target_y))
+      }}}
+    )
 
 
 def scroll(target_description: str | None, direction: str):
@@ -159,7 +200,7 @@ def scroll(target_description: str | None, direction: str):
 def wait(duration: int):
     if duration <= 0:
         raise ValueError("Wait duration must be >0 miliseconds")
-
+    
     time.sleep(duration / 1000)
 
 
@@ -167,13 +208,11 @@ def finished():
     pass
 
 
-def execute(code: str, page: Page):
+def execute(code: str, page: Page) -> list[dict]:
     """
     Safely execute LLM-generated Python code blocks containing only automation actions.
     Automatically sets the current Playwright Page before execution.
     """
-    _set_page(page)  # Bind this run to the given page
-
     safe_globals = {
         "click": click,
         "type": type,
@@ -184,8 +223,20 @@ def execute(code: str, page: Page):
     }
 
     # Remove triple backticks and optional 'python' tag
-    cleaned_code = re.sub(
-        r"^```(?:python)?|```$", "", code.strip(), flags=re.MULTILINE
-    ).strip()
+    try:
+        _set_page(page)  # Bind this run to the given page
 
-    exec(cleaned_code, safe_globals, {})
+        cleaned_code = re.sub(
+            r"^```(?:python)?|```$", "", code.strip(), flags=re.MULTILINE
+        ).strip()
+
+        exec(cleaned_code, safe_globals, {})
+
+    except Exception:
+        logger.error("Failed to execute action:", traceback.format_exc())
+    
+    finally:
+        trace = deepcopy(_trace)
+        _trace.clear()
+        
+    return trace

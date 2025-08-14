@@ -62,7 +62,8 @@ def execute_action(session: Session, action: str, config: Config) -> None:
     else:
         import executor.automators.custom as automator
 
-    automator.execute(code, session.page)
+    trace = automator.execute(code, session.page)
+    session.trace.extend(trace)
     session.capture_state(prev_action=action)
 
 

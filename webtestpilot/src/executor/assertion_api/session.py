@@ -33,6 +33,8 @@ class Session:
         assert isinstance(page, Page) and not page.is_closed()
         self._history: list[State] = []
         self._state: State = self.capture_state(prev_action=None)
+
+        self.trace: list[dict] = []
         self.page = page
         self.config = config
         self.state_factory = StateFactory(config)
