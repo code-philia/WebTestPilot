@@ -5,10 +5,11 @@ from baml_py import Image
 from playwright.sync_api import Page
 from xml.etree.ElementTree import Element as XMLElement
 
-from executor.assertion_api.state import State
-from executor.assertion_api.element import Element
+from config import Config
 from baml_client.sync_client import b
 from baml_client.types import PageAbstract
+from executor.assertion_api.state import State, StateFactory
+from executor.assertion_api.element import Element, ElementFactory
 from executor.page_reidentification.accessibility import AccessibilityTree
 from executor.page_reidentification.abstract import to_xml_tree
 from executor.page_reidentification.distance import tree_distance
@@ -22,19 +23,20 @@ class Session:
         page (Page): A Playwright Page instance that accesses the application under test.
             It's assumed that the application is already loaded
             and any necessary prerequisites (e.g., fixtures, authentication) have been set up.
+        config (Config): Runtime configurations for this test session.
 
     Raises:
         AssertionError: If the provided page is not a valid Page instance or is closed.
-
-    Attributes:
-        page (Page): The Playwright page instance being managed by this session.
     """
 
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, config: Config):
         assert isinstance(page, Page) and not page.is_closed()
         self._history: list[State] = []
         self._state: State = self.capture_state(prev_action=None)
         self.page = page
+        self.config = config
+        self.state_factory = StateFactory(config)
+        self.element_factory = ElementFactory(config)
 
     @property
     def history(self) -> list[State]:
@@ -70,9 +72,10 @@ class Session:
         page_id, description = self._page_reidentification(xml_tree, screenshot)
 
         # Update with new state
-        self._state = State(
+        self._state = self.state_factory.create(
             page_id=page_id,
             description=description,
+            layout=None,
             url=self.page.url,
             title=self.page.title(),
             content=self.page.content(),
@@ -88,7 +91,7 @@ class Session:
             elements_data: list[dict[str, Any]],
         ) -> tuple[dict[int, Element], Element]:
             elements: dict[str, Element] = {
-                data["id"]: Element(data) for data in elements_data
+                data["id"]: self.element_factory.create(data) for data in elements_data
             }
             root = None
             for el in elements.values():
@@ -143,23 +146,6 @@ class Session:
         elements, _ = _build_tree(elements_data)
         return elements
 
-    def format_history(self) -> str:
-        lines = []
-        for i, state in enumerate(self._history):
-            lines.append(f"State {i}:")
-            lines.append(f"  Page: {state.page_id or 'Unknown'}")
-            if getattr(state, "description", None):
-                lines.append(f"  Description: {state.description}")
-            if state.prev_action:
-                lines.append(f"  Action: {state.prev_action}")
-            # Example: if you had UI highlights list
-            if hasattr(state, "ui_highlights") and state.ui_highlights:
-                lines.append("  UI Highlights:")
-                for item in state.ui_highlights:
-                    lines.append(f"    - {item}")
-            lines.append("")  # blank line between states
-        return "\n".join(lines)
-
     def _page_reidentification(
         self, xml_tree: list[XMLElement], screenshot: str
     ) -> tuple[str, str]:
@@ -181,12 +167,19 @@ class Session:
         current_img = Image.from_base64("image/png", screenshot)
         closest_img = Image.from_base64("image/png", closest_state.screenshot)
 
-        if b.IsSameLogicalPage(current_img, closest_img):
+        if b.IsSameLogicalPage(
+            current_img,
+            closest_img,
+            baml_options={"client_registry": self.config.page_reidentification},
+        ):
             return (
                 closest_state.page_id,
                 closest_state.description,
                 closest_state.layout,
             )
 
-        page_abstract: PageAbstract = b.AbstractPage(current_img)
+        page_abstract: PageAbstract = b.AbstractPage(
+            current_img,
+            baml_options={"client_registry": self.config.page_reidentification},
+        )
         return page_abstract.name, page_abstract.description, page_abstract.layout

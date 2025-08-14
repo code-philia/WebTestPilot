@@ -10,7 +10,7 @@ class TestCase {
 }
 
 function ExtractTestCase(description: string) -> TestCase {
-  client "GPT"
+  client "Base"
   prompt #"
     You are an expert in semantic intent extraction for web application testing.
 
@@ -28,7 +28,7 @@ function ExtractTestCase(description: string) -> TestCase {
 }
 
 function ImplicitGeneration(testcase: TestCase) -> TestCase {
-  client "GPT"
+  client "Base"
   prompt #"
     You are an expert in semantic intent understanding for web application testing.
     Fill in the <unknown> blanks by inferring contextual information from other steps.

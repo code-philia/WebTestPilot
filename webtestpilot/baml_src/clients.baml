@@ -1,5 +1,15 @@
 // Learn more about clients at https://docs.boundaryml.com/docs/snippets/clients/overview
 
+// This is a stub client definition.
+// Actual provider clients (with real implementations) are selected and
+// instantiated at runtime based on the config/env
+client<llm> Base {
+  provider "openai-generic"
+  options {
+    base_url ""
+  }
+}
+
 client<llm> GPT {
   provider openai
   retry_policy Exponential

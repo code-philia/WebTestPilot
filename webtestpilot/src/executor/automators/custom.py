@@ -180,7 +180,7 @@ def execute(code: str, page: Page):
         "drag": drag,
         "scroll": scroll,
         "wait": wait,
-        "finished": finished
+        "finished": finished,
     }
 
     # Remove triple backticks and optional 'python' tag

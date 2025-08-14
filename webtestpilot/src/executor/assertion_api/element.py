@@ -1,16 +1,20 @@
 from __future__ import annotations
 import io
 import base64
-from typing import Optional, Any
+from typing import Optional, Any, TYPE_CHECKING
 
 import PIL.Image
 from pydantic import BaseModel
-from baml_py import Image
+from baml_py import Image, ClientRegistry
 
+from config import Config
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
-from executor.assertion_api.state import State
 from executor.assertion_api.pydantic_schema import build_from_pydantic
+
+
+if TYPE_CHECKING:
+    from executor.assertion_api.state import State
 
 
 class Element:
@@ -18,7 +22,7 @@ class Element:
     Represents a DOM-like element with spatial coordinates, dimensions, z-index, and hierarchy.
     """
 
-    def __init__(self, data: dict[str, Any]):
+    def __init__(self, data: dict[str, Any], client_registry: ClientRegistry):
         self.id: int = data["id"]
         self.parentId: Optional[int] = data["parentId"]
         self.tagName: str = data["tagName"]
@@ -35,6 +39,8 @@ class Element:
         self.children: list["Element"] = []
         self.parent: Optional["Element"] = None
         self.state: "State" = None
+
+        self.client_registry = client_registry
 
     def contains(self, px: float, py: float) -> bool:
         """
@@ -86,5 +92,18 @@ class Element:
         cropped_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
         screenshot = Image.from_base64("image/png", cropped_b64)
 
-        output = b.ExtractFromElement(screenshot, self.outerHTML, instruction, {"tb": tb})
+        output = b.ExtractFromElement(
+            screenshot,
+            self.outerHTML,
+            instruction,
+            baml_options={"tb": tb, "client_registry": self.client_registry},
+        )
         return schema.model_validate_json(output.model_dump().get("schema", {}))
+
+
+class ElementFactory:
+    def __init__(self, config: Config):
+        self.client_registry: ClientRegistry = config.assertion_api
+
+    def create(self, data: dict[str, Any]):
+        return Element(data, self.client_registry)

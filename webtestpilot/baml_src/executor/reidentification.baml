@@ -6,7 +6,7 @@ class PageAbstract {
 
 
 function IsSameLogicalPage(page_a: image, page_b: image) -> bool {
-  client "GPT"
+  client "Base"
   prompt #"
     {{_.role("user")}}
     You are an expert UI/UX evaluator with deep knowledge of web page layout, semantics, and interaction patterns.
@@ -36,7 +36,7 @@ function IsSameLogicalPage(page_a: image, page_b: image) -> bool {
 
 
 function AbstractPage(page: image) -> PageAbstract {
-  client "GPT"
+  client "Base"
   prompt #"
     {{_.role("user")}}
     You are an expert UI/UX evaluator with deep knowledge of web page layout, semantics, and interaction patterns.

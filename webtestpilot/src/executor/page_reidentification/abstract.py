@@ -1,13 +1,13 @@
 from hashlib import sha1
 from collections import defaultdict
-from xml.etree.ElementTree import Element, indent, tostring
+from xml.etree.ElementTree import Element as XMLElement, indent, tostring
 
 from executor.page_reidentification.accessibility import AccessibilityTree
 
 
-def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:
+def _convert_node_to_xml(node: dict, parent: XMLElement = None) -> XMLElement:
     """
-    Convert a node in the accessibility tree into an XML Element.
+    Convert a node in the accessibility tree into an XML XMLElement.
     """
     role_value = node["role"]["value"]
     id = node.get("id", "")
@@ -26,7 +26,7 @@ def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:
         return None
     else:
         # Create the XML element for the node
-        xml_element = Element(role_value)
+        xml_element = XMLElement(role_value)
 
         if name_value and len(name_value) > 0:
             xml_element.set("name", name_value)
@@ -52,7 +52,7 @@ def _convert_node_to_xml(node: dict, parent: Element = None) -> Element:
         return xml_element
 
 
-def _get_texts(node: Element) -> list[str]:
+def _get_texts(node: XMLElement) -> list[str]:
     """
     Get the text content of an element.
     """
@@ -67,7 +67,7 @@ def _get_texts(node: Element) -> list[str]:
     return list(texts)
 
 
-def _prune_redundant_name(node: Element) -> list[str]:
+def _prune_redundant_name(node: XMLElement) -> list[str]:
     """
     Recursively traverses the tree, removes redundant name information from parent nodes,
     and returns a list of all content (names) in the current subtree.
@@ -104,14 +104,14 @@ def _prune_redundant_name(node: Element) -> list[str]:
     return current_subtree_content
 
 
-def _hash_element(elem: Element, cache: dict[str, str]) -> str:
+def _hash_element(elem: XMLElement, cache: dict[str, str]) -> str:
     """
-    Hash an Element and its subtree structure using the element's 'id'.
+    Hash an XMLElement and its subtree structure using the element's 'id'.
     A per-tree `cache` must be provided to avoid cross-tree contamination.
     """
     elem_id = elem.get("id")
     if not elem_id:
-        raise ValueError("Element is missing 'id' attribute")
+        raise ValueError("XMLElement is missing 'id' attribute")
 
     if elem_id in cache:
         return cache[elem_id]
@@ -125,7 +125,7 @@ def _hash_element(elem: Element, cache: dict[str, str]) -> str:
     return digest
 
 
-def _group_similar_children(node: Element, cache: dict[str, str]):
+def _group_similar_children(node: XMLElement, cache: dict[str, str]):
     """
     Groups structurally similar children under a <dynamic> node.
     """
@@ -144,7 +144,7 @@ def _group_similar_children(node: Element, cache: dict[str, str]):
                 node.remove(child)
 
             # Create a Dynamic wrapper and reattach the group
-            dynamic_elem = Element("dynamic")
+            dynamic_elem = XMLElement("dynamic")
             dynamic_elem.set("id", str(int(node.get("id", "0")) + 1000))
             dynamic_elem.set("summary", f"{len(group)} similar items")
             for child in group:
@@ -158,7 +158,7 @@ def _group_similar_children(node: Element, cache: dict[str, str]):
             _group_similar_children(child, cache)
 
 
-def to_xml_tree(tree: AccessibilityTree) -> list[Element]:
+def to_xml_tree(tree: AccessibilityTree) -> list[XMLElement]:
     """
     Abstracted tree for page reidentification.
     """
@@ -175,12 +175,12 @@ def to_xml_tree(tree: AccessibilityTree) -> list[Element]:
     return element
 
 
-def to_xml_string(tree: Element) -> str:
+def to_xml_string(tree: XMLElement) -> str:
     """
     String representation of abstracted tree for prompting.
     """
-    if not isinstance(tree, Element):
-        raise ValueError("Expected xml.etree.ElementTree.Element")
+    if not isinstance(tree, XMLElement):
+        raise ValueError("Expected xml.etree.XMLElementTree.XMLElement")
 
     indent(tree)
     return tostring(tree, encoding="unicode")

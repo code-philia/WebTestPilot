@@ -4,23 +4,10 @@ from baml_py import Image
 from baml_py import ClientRegistry
 from executor.assertion_api.session import Session
 
+from config import Config
 from baml_client.sync_client import b
-from baml_client.types import Feedback
+from baml_client.types import Feedback, History
 from executor.assertion_api import execute_assertion
-
-
-MODEL = "GPT"
-MAX_RETRIES = 3
-cr = ClientRegistry()
-cr.set_primary(MODEL)
-
-
-if MODEL == "UITARS":
-    import executor.automators.uitars as automator
-elif MODEL == "InternVL3":
-    import executor.automators.pyautogui as automator
-else:
-    import executor.automators.custom as automator
 
 
 class BugReport(Exception):
@@ -30,16 +17,26 @@ class BugReport(Exception):
         self.steps = steps or []
 
 
-def verify_precondition(session: Session, condition: str) -> None:
+def verify_precondition(session: Session, condition: str, config: Config) -> None:
+    client_registry = config.assertion_generation
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = session.format_history()
+    history = [
+        History(
+            page_id=state.page_id,
+            layout=state.layout,
+            description=state.description,
+            prev_action=state.prev_action,
+        )
+        for state in session.history
+    ]
+
     response = b.GenerateAssertion(
         condition,
         history,
         screenshot,
         feedback=[],
-        baml_options={"client_registry": cr},
+        baml_options={"client_registry": client_registry},
     )
     passed, message = execute_assertion(response, session)
     if passed:
@@ -48,40 +45,50 @@ def verify_precondition(session: Session, condition: str) -> None:
         raise BugReport(message)
 
 
-def execute_action(session: Session, action: str) -> None:
+def execute_action(session: Session, action: str, config: Config) -> None:
+    client_registry: ClientRegistry = config.action_proposer
+    client_name = config.action_proposer_name
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
 
-    if MODEL == "UITARS":
-        code = b.ProposeActions_UITARS(
-            screenshot, action, baml_options={"client_registry": cr}
-        )
-    elif MODEL == "InternVL3":
-        code = b.ProposeActions_InternVL(
-            screenshot, action, baml_options={"client_registry": cr}
-        )
+    code = b.ProposeActions(
+        screenshot, action, baml_options={"client_registry": client_registry}
+    )
+
+    if client_name == "UITARS":
+        import executor.automators.uitars as automator
+    elif client_name == "InternVL3":
+        import executor.automators.pyautogui as automator
     else:
-        code = b.ProposeActions(
-            screenshot, action, baml_options={"client_registry": cr}
-        )
+        import executor.automators.custom as automator
 
     automator.execute(code, session.page)
     session.capture_state(prev_action=action)
 
 
-def verify_postcondition(session: Session, expectation: str):
+def verify_postcondition(session: Session, expectation: str, config: Config):
+    client_registry: ClientRegistry = config.assertion_generation
+    max_retries = config.max_retries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = session.format_history()
+    history = [
+        History(
+            page_id=state.page_id,
+            layout=state.layout,
+            description=state.description,
+            prev_action=state.prev_action,
+        )
+        for state in session.history
+    ]
     feedback = []
 
-    for _ in range(1, MAX_RETRIES + 1):
+    for _ in range(0, max_retries + 1):
         response = b.GenerateAssertion(
             expectation,
             history,
             screenshot,
             feedback,
-            baml_options={"client_registry": cr},
+            baml_options={"client_registry": client_registry},
         )
         passed, message = execute_assertion(response, session)
         if passed:

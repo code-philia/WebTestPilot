@@ -4,7 +4,7 @@ class Output {
 
 
 function ExtractFromState(screenshot: image, instruction: string) -> Output {
-    client "GPT"
+    client "Base"
     prompt #"
         {{_.role("user")}}
         Extract structured data from the webpage screenshot that is relevant to the instruction.
@@ -18,7 +18,7 @@ function ExtractFromState(screenshot: image, instruction: string) -> Output {
 }
 
 function ExtractFromElement(screenshot: image, html: string, instruction: string) -> Output {
-    client "GPT"
+    client "Base"
     prompt #"
         {{_.role("user")}}
         Extract structured data from the web UI element screenshot and HTML that is relevant to the instruction.

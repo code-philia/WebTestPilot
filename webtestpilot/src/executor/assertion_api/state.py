@@ -1,16 +1,20 @@
 from __future__ import annotations
 import re
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from pydantic import BaseModel
-from baml_py import Image
+from baml_py import Image, ClientRegistry
 from xml.etree.ElementTree import Element as XMLElement
 
+from config import Config
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
-from executor.assertion_api.element import Element
 from executor.assertion_api.pydantic_schema import build_from_pydantic
+
+
+if TYPE_CHECKING:
+    from executor.assertion_api.element import Element
 
 
 @dataclass(frozen=True)
@@ -27,6 +31,9 @@ class State:
     prev_action: Optional[str]
 
     xml_tree: list[XMLElement]
+
+    _cr_assertion_api: ClientRegistry
+    _cr_ui_locator: ClientRegistry
 
     def extract(self, instruction: str, schema: type[BaseModel]) -> BaseModel:
         """
@@ -58,7 +65,11 @@ class State:
             tb.Output.add_property("schema", field_type)
 
         screenshot = Image.from_base64("image/png", self.screenshot)
-        output = b.ExtractFromState(screenshot, instruction, {"tb": tb})
+        output = b.ExtractFromState(
+            screenshot,
+            instruction,
+            baml_options={"tb": tb, "client_registry": self._cr_assertion_api},
+        )
         return schema.model_validate_json(output.model_dump().get("schema", {}))
 
     def get_element(self, description: str) -> "Element" | None:
@@ -76,7 +87,11 @@ class State:
         """
         # Find the (x, y) screen coordinates of the given description.
         screenshot = Image.from_base64("image/png", self.screenshot)
-        coordinates = b.LocateUIElement(screenshot, description)
+        coordinates = b.LocateUIElement(
+            screenshot,
+            description,
+            baml_options={"client_registry": self._cr_ui_locator},
+        )
         match = re.match(r"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)", coordinates)
 
         if not match:
@@ -94,3 +109,37 @@ class State:
         # and then by area (smaller elements preferred when z-index ties).
         hits.sort(key=lambda el: (-el.z_index, el.width * el.height))
         return hits[0]
+
+
+class StateFactory:
+    def __init__(self, config: Config):
+        self.assertion_api: ClientRegistry = config.assertion_api
+        self.ui_locator: ClientRegistry = config.ui_locator
+
+    def create(
+        self,
+        page_id: str,
+        description: str,
+        layout: str,
+        url: str,
+        title: str,
+        content: str,
+        screenshot: str,
+        elements: dict[int, "Element"],
+        prev_action: Optional[str] = None,
+        xml_tree: Optional[list[XMLElement]] = None,
+    ) -> State:
+        return State(
+            page_id=page_id,
+            description=description,
+            layout=layout,
+            url=url,
+            title=title,
+            content=content,
+            screenshot=screenshot,
+            elements=elements,
+            prev_action=prev_action,
+            xml_tree=xml_tree or [],
+            _cr_assertion_api=self.assertion_api,
+            _cr_ui_locator=self.ui_locator,
+        )
