@@ -1,5 +1,6 @@
 import sys
 import time
+import traceback
 from pathlib import Path
 
 from const import ApplicationEnum, TestCase
@@ -10,11 +11,14 @@ from tqdm import tqdm
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
-sys.path.append(str(Path(__file__).resolve().parents[2] / "webtestpilot" / "src")) # webtestpilot dir
+webtestpilot_src_path = str(
+    Path(__file__).parent.parent.parent.parent / "webtestpilot" / "src"
+)
+sys.path.append(webtestpilot_src_path)
+CONFIG_PATH = Path(webtestpilot_src_path) / "config.yaml"
 
-CONFIG_PATH = Path(__file__).resolve().parents[2] / "webtestpilot" / "src" / "config.yaml"
-from webtestpilot.src.main import WebTestPilot, Config, Session, Step
 from base_runner import BaseTestRunner, TestResult
+from main import Config, Session, Step, WebTestPilot
 from utils import setup_page_state
 
 load_dotenv()
@@ -79,7 +83,6 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 # Get initial page with proper setup
                 step_bar.set_description("  Setting up page")
                 page = self.get_initial_page(setup_function)
-                
                 config = Config.load(CONFIG_PATH)
                 session = Session(page, config)
 
@@ -117,6 +120,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 result.error_message = f"Test setup error: {str(e)}"
                 result.success = False
                 step_bar.set_postfix(status="✗", refresh=True)
+                traceback.print_exc()
 
         return result
 
