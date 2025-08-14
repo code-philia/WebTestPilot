@@ -1,10 +1,10 @@
 import ast
 import sys
+import time
 from pathlib import Path
-from typing import Dict
 
 from base_runner import BaseTestRunner, TestResult
-from const import ApplicationEnum
+from const import ApplicationEnum, TestCase
 from dotenv import load_dotenv
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
@@ -79,11 +79,11 @@ class LavagueTestRunner(BaseTestRunner):
         print(traces)
         return traces
 
-    def run_test_case(self, test_case: Dict) -> TestResult:
+    def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using LaVague agent."""
-        actions = test_case.get("actions", [])
-        test_name = test_case.get("name", "Unnamed")
-        setup_function = test_case.get("setup_function", "")
+        actions = test_case.actions
+        test_name = test_case.name
+        setup_function = test_case.setup_function
 
         result = TestResult(test_name=test_name, total_step=len(actions))
 
@@ -117,23 +117,26 @@ class LavagueTestRunner(BaseTestRunner):
                     world_model, action_engine, n_steps=1, token_counter=token_counter
                 )
 
+                start_time = time.perf_counter()
                 # Execute actions
                 for i, action in enumerate(actions):
                     try:
                         step_bar.set_description(
-                            f"  Step {i + 1}: {action['action'][:40]}"
+                            f"  Step {i + 1}: {action.action[:40]}"
                         )
 
                         # Actual run step
-                        action_result = agent.run(action["action"])
+                        print(action.action)
+                        action_result = agent.run(action.action, display=True)
+                        print("action_result", action_result)
+
+                        # Save trace, the latest action result contains all the previous actions.
+                        result.traces = self.extract_trace_from_code(action_result.code)
 
                         if not action_result.success:
                             result.error_message = f"Action {i + 1} failed"
                             step_bar.set_postfix(status="✗", refresh=True)
                             break
-
-                        # Save trace, the latest action result contains all the previous actions.
-                        result.traces = self.extract_trace_from_code(action_result.code)
 
                         result.current_step += 1
                         step_bar.update(1)
@@ -144,6 +147,9 @@ class LavagueTestRunner(BaseTestRunner):
                         step_bar.set_postfix(status="✗", refresh=True)
                         tqdm.write(f"    Error: {e}")
                         break
+
+                end_time = time.perf_counter()
+                result.runtime = end_time - start_time
 
                 # Mark as success if all steps completed
                 result.success = result.current_step == result.total_step

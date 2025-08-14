@@ -3,8 +3,9 @@ import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
+from const import ApplicationEnum, TestCase
 from tqdm import tqdm
 
 
@@ -16,10 +17,15 @@ class TestResult:
     total_step: int = 0
     traces: list = field(default_factory=list)
     error_message: Optional[str] = None
+    runtime: float = 0.0
 
     @property
     def correct_trace(self) -> float:
         return self.current_step / self.total_step if self.total_step > 0 else 0.0
+
+    @property
+    def runtime_per_step(self) -> float:
+        return self.runtime / self.current_step if self.current_step > 0 else 0.0
 
     def __str__(self):
         status = "✓" if self.success else "✗"
@@ -58,7 +64,13 @@ class TestResultDataset:
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         with open(file_path, "w") as f:
-            json.dump([result.__dict__ for result in self.results], f, indent=4)
+            results_data = []
+            for result in self.results:
+                result_dict = result.__dict__.copy()
+                result_dict["correct_trace"] = result.correct_trace
+                result_dict["runtime_per_step"] = result.runtime_per_step
+                results_data.append(result_dict)
+            json.dump(results_data, f, indent=4)
 
         print(f"Results saved to {file_path}")
 
@@ -90,16 +102,20 @@ class BaseTestRunner(ABC):
     """Abstract base class for all test runner implementations."""
 
     def __init__(
-        self, test_case_path: str, test_output_path: str, application: str, **kwargs
+        self,
+        test_case_path: str,
+        test_output_path: str,
+        application: ApplicationEnum,
+        **kwargs,
     ):
         self.test_case_path = Path(test_case_path)
         self.test_output_path = Path(test_output_path)
         self.application = application
         self.config = kwargs
 
-    def load_test_cases(self, filter_pattern: Optional[str] = None) -> List[Dict]:
+    def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
-        test_cases: list[dict] = []
+        test_cases: list[TestCase] = []
 
         if not self.test_case_path.exists():
             print(f"Test case path does not exist: {self.test_case_path}")
@@ -107,13 +123,14 @@ class BaseTestRunner(ABC):
 
         for file_path in sorted(
             self.test_case_path.glob("*.json"), key=lambda p: p.stem
-        ):
+        )[:3]:
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
             try:
                 with open(file_path, "r") as f:
-                    test_case = json.load(f)
+                    test_case_data = json.load(f)
+                    test_case = TestCase.from_dict(test_case_data)
                     test_cases.append(test_case)
             except json.JSONDecodeError as e:
                 print(f"Error loading {file_path}: {e}")
@@ -134,18 +151,18 @@ class BaseTestRunner(ABC):
         pass
 
     @abstractmethod
-    def run_test_case(self, test_case: Dict) -> TestResult:
+    def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case.
 
         Args:
-            test_case: Dictionary containing test case data
+            test_case: TestCase object containing test case data
 
         Returns:
             TestResult object with execution results
         """
         pass
 
-    def restart_application(self, application: str):
+    def restart_application(self, application: ApplicationEnum):
         """Restart the specified application."""
         pass
 
@@ -172,7 +189,7 @@ class BaseTestRunner(ABC):
             for test_case in test_cases:
                 self.restart_application(self.application)
 
-                test_name = test_case.get("name", "Unnamed")
+                test_name = test_case.name
                 pbar.set_description(f"Running: {test_name[:40]}")
 
                 try:

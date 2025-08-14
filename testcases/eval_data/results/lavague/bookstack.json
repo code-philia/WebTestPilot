@@ -1,0 +1,44 @@
+[
+    {
+        "test_name": "01::Login",
+        "success": false,
+        "current_step": 0,
+        "total_step": 6,
+        "traces": [],
+        "error_message": "Action 1 failed",
+        "runtime": 17.13381141699938,
+        "correct_trace": 0.0,
+        "runtime_per_step": 0.0
+    },
+    {
+        "test_name": "02::Book Create",
+        "success": false,
+        "current_step": 0,
+        "total_step": 18,
+        "traces": [],
+        "error_message": "Error at step 1: No next engine found in the text: **Thoughts:**\n\n- The current screenshot shows a dashboard interface for a platform called BookStack.\n- The objective is to click on the \"Books\" link in the navigation.\n- The \"Books\" link is visible in the navigation bar at the top of the page.\n- The next step should involve clicking on the \"Books\" link to proceed.\n\n**Next Engine:** Navigation Engine\n\n**Instruction:** Click on the \"Books\" link in the navigation bar at the top of the page.",
+        "runtime": 8.259425375001229,
+        "correct_trace": 0.0,
+        "runtime_per_step": 0.0
+    },
+    {
+        "test_name": "03::Book Read",
+        "success": false,
+        "current_step": 0,
+        "total_step": 5,
+        "traces": [
+            {
+                "action": {
+                    "name": "click",
+                    "args": {
+                        "xpath": "/html/body/header/nav/div/a[3]"
+                    }
+                }
+            }
+        ],
+        "error_message": "Action 1 failed",
+        "runtime": 11.463346417000139,
+        "correct_trace": 0.0,
+        "runtime_per_step": 0.0
+    }
+]

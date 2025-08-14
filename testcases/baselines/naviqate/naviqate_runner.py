@@ -1,9 +1,8 @@
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict
 
-from const import ApplicationEnum
+from const import ApplicationEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
 from selenium.common.exceptions import WebDriverException
 from tqdm import tqdm
@@ -74,12 +73,12 @@ class NaviqateTestRunner(BaseTestRunner):
 
         return domain
 
-    def run_test_case(self, test_case: Dict) -> TestResult:
+    def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using Naviqate crawler."""
-        actions = test_case.get("actions", [])
-        test_name = test_case.get("name", "Unnamed")
-        setup_function = test_case.get("setup_function", "")
-        url = test_case.get("url", "")
+        actions = test_case.actions
+        test_name = test_case.name
+        setup_function = test_case.setup_function
+        url = test_case.url
 
         result = TestResult(test_name=test_name, total_step=len(actions))
 
@@ -102,12 +101,8 @@ class NaviqateTestRunner(BaseTestRunner):
         ) as action_bar:
             # Process each action
             for i, action_data in enumerate(actions):
-                action = action_data.get("action", "")
-                website = (
-                    self.get_website_from_url(url)
-                    if url
-                    else action_data.get("website", "")
-                )
+                action = action_data.action
+                website = self.get_website_from_url(url) if url else ""
 
                 # Update progress bar description
                 action_bar.set_description(f"  Action {i + 1}: {action[:40]}")
