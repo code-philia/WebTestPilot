@@ -9,14 +9,15 @@ from playwright.async_api import async_playwright
 from tqdm import tqdm
 from utils import setup_page_state
 
+sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
+sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
+sys.path.append(str(Path(__file__).parent / "src"))  # src dir
+
 from .src.VTAAS.data.testcase import TestCase as PinataTestCase
 from .src.VTAAS.llm.llm_client import LLMProvider
 from .src.VTAAS.orchestrator.orchestrator import Orchestrator
 from .src.VTAAS.schemas.verdict import Status
 from .src.VTAAS.workers.browser import Browser
-
-sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
-sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
 
 
 class PinataTestRunner(BaseTestRunner):
@@ -109,9 +110,32 @@ class PinataTestRunner(BaseTestRunner):
                         trace_folder=str(self.test_output_path.parent),
                     )
 
-                    browser._page = setup_page_state(
+                    sync_initial_page = setup_page_state(
                         browser._page, setup_function, application=self.application
                     )
+                    initial_url = sync_initial_page.url
+
+                    # OVERRIDEN implementation over browser.initialize() -> extracted out and override.
+                    # This is to make sure all the setup and login is in place.
+                    # Has to do this work-around because our setup and LaVague only support Playwright sync, but Pinata is Async
+                    browser._context = await browser._browser.new_context(
+                        bypass_csp=True,
+                        storage_state=sync_initial_page.context.storage_state(),
+                    )
+                    browser._context.set_default_timeout(browser._params["timeout"])
+                    if browser._params["tracer"]:
+                        browser.logger.info(
+                            f"Setting Playwright tracing ON: {browser._params['trace_folder']}"
+                        )
+                        await browser._context.tracing.start(
+                            screenshots=True, snapshots=True
+                        )
+                    browser._page = await browser._context.new_page()
+                    browser._page.on("load", lambda load: browser.load_js())
+                    browser._page.on("framenavigated", lambda load: browser.load_js())
+
+                    # Go to the setup URL.
+                    await browser._page.goto(initial_url)
 
                     # Create orchestrator
                     llm_provider = self.get_llm_provider()

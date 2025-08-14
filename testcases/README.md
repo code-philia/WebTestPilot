@@ -24,3 +24,24 @@ pytest --headed bookstack/*
 <!-- Speed up with tests in parallel -->
 pytest -n 4 bookstack/*.py -v --tb=short
 ```
+
+To run baselines:
+uv venv .venv-pinata
+source .venv-pinata/bin/activate
+uv pip install -e ".[pinata]"
+python baselines/evaluate.py pinata bookstack
+
+uv venv .venv-webtestpilot
+source .venv-webtestpilot/bin/activate
+uv pip install -e ".[webtestpilot]"
+python baselines/evaluate.py webtestpilot bookstack
+
+uv venv .venv-naviqate
+source .venv-naviqate/bin/activate
+uv pip install -e ".[naviqate]"
+python baselines/evaluate.py naviqate bookstack
+
+uv venv .venv-pinata
+source .venv-pinata/bin/activate
+uv pip install -e ".[pinata]"
+python baselines/evaluate.py lavague bookstack
