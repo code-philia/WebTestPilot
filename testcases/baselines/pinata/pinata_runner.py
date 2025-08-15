@@ -128,7 +128,6 @@ class PinataTestRunner(BaseTestRunner):
             colour="green",
         ) as step_bar:
             try:
-
                 async with async_playwright() as p:
                     # Create browser instance
                     step_bar.set_description("  Initializing browser")
@@ -178,7 +177,7 @@ class PinataTestRunner(BaseTestRunner):
 
                     async def process_with_progress(test_case):
                         # We'll track progress based on step completions
-                        result = await original_process(test_case)
+                        result = await original_process(test_case, max_tries=1)
                         # Update progress based on completed steps
                         if hasattr(result, "step_index"):
                             step_bar.n = result.step_index

@@ -1,0 +1,413 @@
+,,,
+►,TC-1-P :: Wish List - Add and remove,,BLE
+#,Actions,Expected Result,
+1,Go to http://www.vtaas-benchmark.com:7770/,The OneStopMarket page appears,
+2,Log in with the following details: emma.lopez@gmail.com / Password.123,"You are logged in and the message ""Welcome, Emma Lopez!"" is displayed",
+3,Go to My Whish List,"The message ""You have no items in your wish list."" is displayed.",
+4,"Select the ""Sports & Outdoors"" category and the ""Sports"" sub-category","The ""Sports"" page appears",
+5,Click on the heart symbol of any item.,"The ""My Wish List"" page is displayed, with the selected item.",
+6,"Click on ""Remove item"".","The message ""You have no items in your wish list."" is displayed.",
+,,,
+►,"TC-2-P :: Wish List - Add two items to the Whish List and then to the cart using the ""Add All to Cart"" button",,BLE
+#,Actions,Expected Result,
+1,Go to http://www.vtaas-benchmark.com:7770/,The OneStopMarket page appears,
+2,Log in with the following details: emma.lopez@gmail.com / Password.123,"You are logged in and the message Welcome, Emma Lopez! is displayed",
+3,Go to My Whish List,"The message ""You have no items in your wish list."" is displayed.",
+4,"Select the ""Home & Kitchen"" category and the ""Bedding"" sub-category and the ""Kids' Bedding"" sub-sub-category.","Kids' Bedding"" page is displayed",
+5,Click on the heart icon of the first item in the list.,The item appears in My Whish List,
+6,"Select the ""Home & Kitchen"" category and the ""Bedding"" sub-category and the ""Kids' Bedding"" sub-sub-category.","Kids' Bedding"" page displayed",
+7,Click on the heart icon of the third item in the list.,You have 2 items on your Wish List,
+8,"Add both items to the Cart with the ""Add All to Cart"" button","Two error messages appear, indicating that options are required. You are still on the ""My Whish List"" page",
+9,Remove the two items for the Wish List.,"The message ""You have no items in your wish list."" is displayed.",
+10,Sign out,"The message ""You are Signed out"" appears then after 5 seconds the Home page is displayed.",
+,,,
+►,TC-3-P :: Product Selection and Cart Verification ,,BLE
+#,Actions,Expected Result,
+1,Navigate to One Stop Market website at http://www.vtaas-benchmark.com:7770/,Home page loads with category navigation menu visible,
+2,"Click on ""Sports & Outdoors"" > ""Exercise & Fitness""",Exercise & Fitness category page loads ,
+3,Scroll down and click on LEIYAN Mens Linen Shorts,"Product page loads with details, price ($11.89), and options visible",
+4,"Choose Color ""01-blue"" and Size ""Medium""",Options are selected and reflected in the UI,
+5,"Set Quantity to 1 and click ""Add to Cart""","Confirmation message appears: ""You added LEIYAN Mens Linen Shorts... to your shopping cart.""",
+6,Navigate to Shopping Cart page,Cart page loads showing the added item with correct details and pricing,
+7,"Review cart contents:
+Item: LEIYAN Mens Linen Shorts
+Color: 01-blue
+Size: Medium
+Quantity: 1
+Price: $11.89
+Subtotal: $11.89
+Shipping: $5.00 (Flat Rate - Fixed)
+Order Total: $16.89",All features are correct,
+,,,
+►,"TC-4-P :: Attempt to create an account, already existing",,BLE
+#,Actions,Expected Result,
+1,Navigate to One Stop Market website at http://www.vtaas-benchmark.com:7770/,"Home page loads with ""Create an Account"" link visible",
+2,"Click on ""Create an Account"" link",Create New Customer Account loads,
+3,"Complete Account Form by filling in:
+First Name: Emma
+Last Name: Lopez
+Email: emma.lopez@gmail.com
+Password: Password123
+Confirm Password: Password123
+Check ""Sign Up for Newsletter""
+Check ""Show Password""","All fields populate correctly, password strength shows as ""Very Strong""",
+4,"Click ""Create an Account""","Error message appears, indicating that the account already exists",
+,,,
+►,TC-5-P :: Connection,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",1- pas d'indication qu'il faut aller sur la page de Sign In
+,,,
+►,TC-6-P :: Disconnection,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",1- pas d'indication qu'il faut aller sur la page de Sign In
+3,"Click on tab ""Sign out""",I'm disconnected.,
+,,,
+►,TC-7-P :: Creation an account,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.
+The tab ""Create an account"" is displayed.",
+2,"Click on the tab ""Create an account"".","The page ""Create an Account"" is displayed.",
+3,"Fill in the fields:
+ - First Name
+ - Last Name
+ - Email
+ - Password
+ - Confirm Password.
+Click on the button ""Create an Account""","The account is created.
+The page ""My account"" is displayed with a message ""Thank you for registering with Main Website Store"".",Création de données de test cohérente demandées
+4,,,
+,,,
+►,TC-8-P :: Add New Address,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Sign In with Email ""emma.lopez@gmail.com"" and Password ""Password.123"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""","The page ""My account"" is displayed.",
+4,"On the ""Address Book"" section, click on the link ""Manage Addresses""","The page ""Adress Book"" is displayed.",
+5,"Click on the button ""Add New Address""","The page ""Add New Address"" is displayed.",
+5,"Fill in the missing mandatories fields.
+ - Phone Number
+ - Street Address
+ - State/Province
+ - City
+ - Zip/Postal Code
+Click on the button ""Save Address"".","The page ""Adress Book"" is displayed with a confirmation message ""You saved the address"".
+New Adress appears in ""Additional Address Entries"" section.","1- Les données de test sont à concevoir.
+2- La base est changée après ce test"
+,,,
+►,TC-9-P :: Simple Search,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Type on the search field.
+Click on ""Enter"".","The screen ""Search"" is displayed. 
+The result of the search is displayed.",Le texte de la recherche est à inventer.
+,,,
+,,,
+,,,
+►,TC-10-P :: Advanced Search,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Click on the link ""Advanced Search"".","The page ""Advanced Search"" is displayed.",
+3,"Fill in ""Product Name"". (ex: ""one plus"")
+Click on the button ""Search"".","The page ""Catalog Advanced Search"" is displayed.
+The result of the search is displayed with the criteria selected.
+A warning message is diplayed with a link to modify the search.",
+4,"Click on the link ""Modify your search"".","The page ""Advanced Search"" is displayed.
+The field ""Product Name"" is already filled.",
+5,"Modify ""Product Name"". (""oneplus"")
+Click on the button ""Search"".","The page ""Catalog Advanced Search"" is displayed.
+The result of the search is displayed with the criteria selected.",
+,,,
+►,TC-11-P :: Add an item on my cart,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Type on the search field.
+Click on ""Enter"".","The screen ""Search"" is displayed. 
+The result of the search is displayed.","Rien n'est dit sur la recherche mais ensuite un item particulier est cité (il aurait fallu saisir ""OnePlus"" précédemment"
+3,"Click on the button ""Add to cart"" of any item of the result page. (ex: ""Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 "")","The message ""You added Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 to your shopping cart.""
+The item selected has been added on the cart.",
+4,"Click on the picture ""Cart"".","A popup appears.
+The item added appears on the cart.",
+,,,
+►,TC-12-P :: Delete an item from the cart,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Type on the search field.
+Click on ""Enter"".","The screen ""Search"" is displayed. 
+The result of the search is displayed.",
+3,"Click on the button ""Add to cart"" of any item of the result page. (ex: ""Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 "")","The message ""You added Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 to your shopping cart.""
+The item selected has been added on the cart.",
+4,"Click on the picture ""Cart"".","A popup appears.
+The item added appears on the cart.",
+5,"Click on the button ""View and Edit Cart"".","The page ""Shopping Cart"" is displayed.
+",
+6,"Click on the button ""Remove item"".",The item have been removed from the cart.,
+,,,
+►,TC-13-P :: Search From menu,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Click on ""Cell Phones & Accessories"" on the menu.
+Type on the search field.","The screen ""Cell Phones & Accessories"" is displayed. 
+The result of the search is displayed.",Ce qui doit être saisi dans le champ de recherche n'est pas indiqué
+,,,
+►,"TC-14-P :: Add to Wish List, Then Remove item from the Wish List",,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,Log in with the following details: emma.lopez@gmail.com / Password.123,"You are logged in and the message ""Welcome, Emma Lopez!"" is displayed",
+3,"Click on ""Cell Phones & Accessories"" on the menu.","The screen ""Cell Phones & Accessories"" is displayed. ",
+4,"Click on the picture""heart"" of any item of the result page. (ex: ""Dilwe1 12'' Phone Screen Magnifier, HD Mobile Phone Magnifier Projector Screen, Foldable Phone Stand with Screen Amplifier for Movies Videos"")","The page ""My Wish List"" is displayed.
+The item (""Dilwe1 12'' Phone Screen Magnifier, HD Mobile Phone Magnifier Projector Screen, Foldable Phone Stand with Screen Amplifier for Movies Videos"") is displayed.
+A confirmation message ""
+Dilwe1 12'' Phone Screen Magnifier, HD Mobile Phone Magnifier Projector Screen, Foldable Phone Stand with Screen Amplifier for Movies Videos has been added to your Wish List. Click here to continue shopping."" is displayed.
+","WARNING : Si la base n'est pas ré-initialisée avant l'exécution du test, alors il est possible que le produit ajouter à la Wisk List se retrouve sur un seconde page. C'est ce qui m'est arrivé lors de l'exécution manuelle du cas de test."
+5,"Click on the link ""Remove item"".","The page ""My Wish List"" is displayed.
+A confirmation message ""
+Dilwe1 12'' Phone Screen Magnifier, HD Mobile Phone Magnifier Projector Screen, Foldable Phone Stand with Screen Amplifier for Movies Videos has been removed from your Wish List."" is displayed.
+The item doesn't appears in the wish list.
+",
+,,,
+►,TC-15-P :: Proceed to checkout,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,Log in with the following details: emma.lopez@gmail.com / Password.123,"You are logged in and the message ""Welcome, Emma Lopez!"" is displayed",
+3,"Type  ""OnePlus"" on the search field.
+Click on ""Enter"".",The result of the search is displayed.,
+4,"Click on the button ""Add to cart"" of any item of the result page. (ex: ""Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 "")","The message ""You added Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 to your shopping cart.""
+The item selected has been added on the cart.",
+5,"Click on the picture ""Cart"".","A popup appears.
+The item added appears on the cart.",
+6,"Click on ""Proceed to checkout"".","The ""Shipping Address"" page is displayed.",
+7,"Click on the button ""Next"".","The ""Payment Method"" page is displayed.",
+8,"Click on button ""Place Order"".","A page of confirmation is displayed with message ""Thank you for your purchase!""
+The cart is empty.",
+,,,
+►,TC-16-P :: Compare 2 items,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Type ""oneplus"" on the search field.
+Click on ""Enter"".","The screen ""Search"" is displayed. 
+The result of the search is displayed.",
+3,"Click on the button ""Add to Compare"" for 1 item of the result page. (ex: ""Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 "")","The message ""You added product Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 to the comparison list.""
+The item selected has been added.
+Compare list appears on the left menu.",
+4,"Click on the button ""Add to Compare"" for 1 item of the result page. (ex: [2-Pack] HPTech Tempered Glass for OnePlus 6T, OnePlus 6T McLaren and OnePlus 7 Screen Protector, Easy to Install, Bubble Free, 9H Hardness, Case Friendly )","The message ""You added product [2-Pack] HPTech Tempered Glass for OnePlus 6T, OnePlus 6T McLaren and OnePlus 7 Screen Protector, Easy to Install, Bubble Free, 9H Hardness, Case Friendly to the comparison list.""
+The item selected has been added.
+Compare list on the left menu is updated.",
+5,"On the left menu, Click on ""Compare"".","The ""Compare Products"" page is displayed.",
+,,,
+►,TC-17-P :: Delete Compare list,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Type ""oneplus"" on the search field.
+Click on ""Enter"".","The screen ""Search"" is displayed. 
+The result of the search is displayed.",
+3,"Click on the button ""Add to Compare"" for 1 item of the result page. (ex: ""Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 "")","The message ""You added product Rexin OnePlus 7 pro Warp Charger, 30W Power Adapter [5V 6A] + OnePlus USB-C Fast Charging Cable 1M / 3.3FT Data Cable for OnePlus7 6T 6 5T 5 to the comparison list.""
+The item selected has been added.
+Compare list appears on the left menu.",
+4,"Click on the button ""Add to Compare"" for 1 item of the result page. (ex: [2-Pack] HPTech Tempered Glass for OnePlus 6T, OnePlus 6T McLaren and OnePlus 7 Screen Protector, Easy to Install, Bubble Free, 9H Hardness, Case Friendly )","The message ""You added product [2-Pack] HPTech Tempered Glass for OnePlus 6T, OnePlus 6T McLaren and OnePlus 7 Screen Protector, Easy to Install, Bubble Free, 9H Hardness, Case Friendly to the comparison list.""
+The item selected has been added.
+Compare list on the left menu is updated.",
+5,"On the left menu, Click on ""Clear All"".","A pop up is displayed with: the message:
+ - A message:""Are you sure you want to remove all items from your Compare Products list?""
+ - A button ""Cancel""
+ - A button ""OK""",
+6,"Click on the button ""OK"".","The list is empty.
+The message ""You have no items to compare."" is displayed",
+,,,
+►,TC-18-P :: My Orders,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"On the left menu, click on ""My Orders""","""My Orders"" screen is displayed.
+A list of orders is displayed.",
+,,,
+►,TC-19-P :: View Order,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"On the left menu, click on ""My Orders""","""My Orders"" screen is displayed.
+A list of orders is displayed.",
+4,"For any item, click on ""View order"".","The order is displayed on the screen, with the details.",
+,,,
+►,TC-20-P :: Print Order,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"On the left menu, click on ""My Orders""","""My Orders"" screen is displayed.
+A list of orders is displayed.",
+4,"For any item, click on ""View order"".","The order is displayed on the screen, with the details.",
+5,"Click on the button ""Print Order""",A dialog Window appears for printing.,
+,,,
+►,TC-21-P :: Reorder,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"On the left menu, click on ""My Orders""","""My Orders"" screen is displayed.
+A list of orders is displayed.",
+4,"For any item, click on ""Reorder"".","""Shopping Cart"" screen is displayed, with the item selected.",
+,,,
+►,TC-22-P :: Newsletter,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Scroll down.
+Enter an email adress on the field close to ""Subscribe"" button.
+Click on ""Subscribe"" button.","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Thank you for your subscription."" is displayed on the top of the page.",
+3,"On the left menu, click on ""Newsletter Subscriptions"".","The screen ""Newsletter Subscription"" is displayed.
+The option ""General Subscription"" is checked.",
+,,,
+►,TC-23-P :: Contact Us,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Scroll down.
+Click on ""Contact us"" link.","The screen ""Contact Us"" is displayed.",
+3,"Fill in the fields:
+ - Name
+ - Email
+ - What's on your mind?
+Click on ""Submit"" button","A confirmation message is displayed: ""Thanks for contacting us with your comments and questions. We'll respond to you very soon.""
+The fields are emptied.",
+,,,
+►,TC-24-P :: Orders and Returns - Search order by email,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Scroll down.
+Click on ""Orders and Returns"" link.","The screen ""Orders and Returns"" is displayed.",
+3,"Fill in the fields:
+ - Order ID (000000192)
+ - Billing Last Name (Lopez)
+ - Find Order By : Email
+ - Email (emma.lopez@gmail.com)
+Click on ""Continue"" button","The screen ""My Orders"" is displayed.",
+,,,
+►,TC-25-P :: Orders and Returns - Search order by ZIP Code,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Scroll down.
+Click on ""Orders and Returns"" link.","The screen ""Orders and Returns"" is displayed.",
+3,"Fill in the fields:
+ - Order ID (000000169)
+ - Billing Last Name (Lopez)
+ - Find Order By : ZIpcode
+ - Zipcode (94010)
+Click on ""Continue"" button","The screen ""My Orders"" is displayed.",
+,,,
+►,TC-26-P :: Search Terms,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Scroll down.
+Click on ""Search Terms"" link.","The screen ""Popular Search Terms"" is displayed.
+A list of terms is displayed.",
+3,"Click on one of them. (ex: ""apple iphone 11"")","The screen ""Search result"" is displayed with the result of the search for ""apple iphone 11"".",
+,,,
+►,TC-27-P :: Change Password,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+A message Welcome is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""","The page ""My account"" is displayed.",
+4,"Click on the link ""Change Password""","The page ""Edit Account Information"" is displayed.
+The checkbox ""Change Password"" is selected.",
+5,"Fill in the fields:
+ - Current Password
+ - New Password
+ - Confirme New Password
+Click on the button ""Save""","The page ""Customer Login"" is displayed with a confirmation message ""You saved the account information"".
+I'm disconnected.",WARNING : cela va changer le password du compte choisi --> il faudra restaurer la base de données pour continuer l'exécution des tests
+,,,
+►,TC-28-P :: Edit Account Information,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.  (emma.lopez@gmail.com and Password.123)
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""","The page ""My account"" is displayed.",
+4,"On the ""Account Information"" section, click on the link ""Edit""","The page ""Edit Account Information"" is displayed.",
+5,"Modify the fields:
+ - First Name
+ - Last Name
+Click on the button ""Save""","The page ""My Account"" is displayed with a confirmation message ""You saved the account information"".
+Account information have been updated.",WARNING : cela va changer le password du compte choisi --> il faudra restaurer la base de données pour continuer l'exécution des tests
+,,,
+►,TC-29-P :: Change Email Address,,FNK
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""","The page ""My account"" is displayed.",
+4,"On the ""Account Information"" section, click on the link ""Edit""","The page ""Edit Account Information"" is displayed.",
+5,"Click on the check box ""Change Email""","""Change Email"" section appears below.",
+5,"Modify the email.
+Fill in ""Current Password"" field.
+Click on the button ""Save"".","The page ""Customer Login"" is displayed with a confirmation message ""You saved the account information"".
+I'm disconnected.",WARNING : cela va changer le password du compte choisi --> il faudra restaurer la base de données pour continuer l'exécution des tests
+,,,
+►,TC-30-P :: test_empty_action,,ACH
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,,"I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""","The page ""My account"" is displayed.",
+4,"On the ""Account Information"" section, click on the link ""Edit""","The page ""Edit Account Information"" is displayed.",
+5,"Click on the check box ""Change Email""","""Change Email"" section appears below.",
+5,"Modify the email.
+Fill in ""Current Password"" field.
+Click on the button ""Save"".","The page ""Customer Login"" is displayed with a confirmation message ""You saved the account information"".
+I'm disconnected.",WARNING : cela va changer le password du compte choisi --> il faudra restaurer la base de données pour continuer l'exécution des tests
+,,,
+►,TC-31-P :: test_empty_assertion,,ACH
+#,Actions,Expected Result,
+1,"Type ""http://www.vtaas-benchmark.com:7770/"" on the url bar.
+And click on ""Enter"".","The Welcome page of web ""OneStopShop"" is displayed.",
+2,"Enter Email and Password fields.
+Click on the buton ""Sign In"".","I'm connected on the website. The screen ""My Account"" is displayed. 
+The message ""Welcome, Emma Lopez!"" is displayed at the right on the top of the page.",
+3,"Click on the tab ""My Account""",,
+4,"On the ""Account Information"" section, click on the link ""Edit""","The page ""Edit Account Information"" is displayed.",
+5,"Click on the check box ""Change Email""","""Change Email"" section appears below.",
+5,"Modify the email.
+Fill in ""Current Password"" field.
+Click on the button ""Save"".","The page ""Customer Login"" is displayed with a confirmation message ""You saved the account information"".
+I'm disconnected.",WARNING : cela va changer le password du compte choisi --> il faudra restaurer la base de données pour continuer l'exécution des tests

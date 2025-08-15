@@ -1,0 +1,12 @@
+Your task now is to analyze the execution report and determine the appropriate next action. Follow these steps:
+<workers_analysis>
+Carefully review the execution report to understand the outcome of the previous sequence execution. We have provided with a screenshot taken at the end of each worker's execution
+</worker_analysis>
+<last_screenshot_analysis>
+Look at the screenshot associated with the last worker of the sequence. Analyze its content to help you plan for the new sequence.
+</last_screenshot_analysis>
+
+Then generate another sequence (partial or full) to continue progressing towards the completion of the test step.
+
+Follow the same format and guidelines as in the initial planning phase for creating Act and Assert statements.
+Remember, your goal is to make the best decision for the test execution based on the available information and to provide clear, actionable guidance for the next steps or a well-justified conclusion to the test case.
