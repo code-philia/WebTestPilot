@@ -1,0 +1,107 @@
+{
+  "name": "14::Create A Virtual Product",
+  "url": "http://localhost:8081/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Click the 'Catalog' menu",
+      "expectedResult": "The Catalog submenu expands."
+    },
+    {
+      "action": "Click the 'Products' submenu",
+      "expectedResult": "The product list page is displayed correctly."
+    },
+    {
+      "action": "Click the 'New product' button",
+      "expectedResult": "A modal for selecting the product type appears."
+    },
+    {
+      "action": "Click the 'Virtual product' option",
+      "expectedResult": "The 'Virtual product' type is selected."
+    },
+    {
+      "action": "Click the 'Add new product' button to confirm",
+      "expectedResult": "The product creation page is loaded."
+    },
+    {
+      "action": "Enter 'bird' into the 'Name' field",
+      "expectedResult": "The product name is successfully entered."
+    },
+    {
+      "action": "Upload 'bird.jpg' as the product image",
+      "expectedResult": "The image is uploaded and a thumbnail is displayed."
+    },
+    {
+      "action": "Enter the summary and description information",
+      "expectedResult": "The product's summary and full description are filled in."
+    },
+    {
+      "action": "Click the 'Add categories' button",
+      "expectedResult": "The category selection modal appears."
+    },
+    {
+      "action": "Check the category checkbox 'Art'",
+      "expectedResult": "The 'Art' checkbox is successfully checked."
+    },
+    {
+      "action": "Click the 'Apply' button",
+      "expectedResult": "The category modal closes."
+    },
+    {
+      "action": "Click the 'Brand' dropdown and select 'Graphic Corner'",
+      "expectedResult": "The brand is successfully selected."
+    },
+    {
+      "action": "Click the 'Details' tab",
+      "expectedResult": "The view switches to the 'Details' tab."
+    },
+    {
+      "action": "Enter 'test1' into the 'Reference' field",
+      "expectedResult": "The reference is entered successfully."
+    },
+    {
+      "action": "Click the 'Virtual product' tab",
+      "expectedResult": "The view switches to the 'Virtual product' tab."
+    },
+    {
+      "action": "Enter '300' into the quantity field",
+      "expectedResult": "The stock quantity is set successfully."
+    },
+    {
+      "action": "Click the 'Pricing' tab",
+      "expectedResult": "The view switches to the 'Pricing' tab."
+    },
+    {
+      "action": "Enter the retail price '9.00' and wholesale price '5.49'",
+      "expectedResult": "The price information is filled in successfully."
+    },
+    {
+      "action": "Click the 'SEO' tab",
+      "expectedResult": "The view switches to the 'SEO' tab."
+    },
+    {
+      "action": "Enter 'bird-vector-graphics' into the Friendly URL field",
+      "expectedResult": "The friendly URL is entered successfully."
+    },
+    {
+      "action": "Select 'default' from the 'Redirection when offline' dropdown",
+      "expectedResult": "The redirection option is selected."
+    },
+    {
+      "action": "Click the 'Options' tab",
+      "expectedResult": "The view switches to the 'Options' tab."
+    },
+    {
+      "action": "Check the checkboxes for 'Fashion supplier'",
+      "expectedResult": "The suppliers are successfully associated."
+    },
+    {
+      "action": "Enter the reference and price for each selected supplier",
+      "expectedResult": "Supplier-specific information is filled in successfully."
+    },
+    {
+      "action": "Click the 'Save' button",
+      "expectedResult": "A 'Successful update' message is displayed at the top of the page."
+    }
+  ]
+}

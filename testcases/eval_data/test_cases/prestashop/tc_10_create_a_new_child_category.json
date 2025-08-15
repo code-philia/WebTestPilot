@@ -1,5 +1,5 @@
 {
-  "name": "10::Create a new child category",
+  "name": "10::Create A New Child Category",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

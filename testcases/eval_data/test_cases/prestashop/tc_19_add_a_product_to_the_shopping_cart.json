@@ -1,5 +1,5 @@
 {
-  "name": "14::Add a Product to the Shopping Cart",
+  "name": "19::Add A Product To The Shopping Cart",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [

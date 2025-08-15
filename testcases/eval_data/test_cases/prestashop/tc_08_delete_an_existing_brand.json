@@ -1,5 +1,5 @@
 {
-  "name": "08::Delete an existing Brand",
+  "name": "08::Delete An Existing Brand",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

@@ -1,5 +1,5 @@
 {
-  "name": "03::Delete an Attribute",
+  "name": "03::Delete An Attribute",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

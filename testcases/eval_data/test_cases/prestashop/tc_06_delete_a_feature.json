@@ -1,5 +1,5 @@
 {
-  "name": "06::Delete a Feature",
+  "name": "06::Delete A Feature",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_page",
   "actions": [

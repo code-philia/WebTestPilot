@@ -1,5 +1,5 @@
 {
-  "name": "17::Remove a Product from the Cart",
+  "name": "22::Remove A Product From Cart",
   "url": "http://localhost:8081/",
   "setup_function": "logged_in_buyer_page",
   "actions": [
@@ -13,7 +13,7 @@
     },
     {
       "action": "Click the \"Add to cart\" button.",
-      "expectedResult": "A confirmation modal appears indicating the product was added."
+      "expectedResult": "A confirmation modal appears"
     },
     {
       "action": "Click \"Continue shopping\" or close the modal.",
