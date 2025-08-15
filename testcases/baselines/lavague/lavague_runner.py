@@ -33,7 +33,9 @@ class LavagueTestRunner(BaseTestRunner):
         headless: bool = True,
         **kwargs,
     ):
-        super().__init__(test_case_path, test_output_path, application, model=model, **kwargs)
+        super().__init__(
+            test_case_path, test_output_path, application, model=model, **kwargs
+        )
         self.headless = headless
 
     def extract_trace_from_code(self, code: str) -> list[dict]:

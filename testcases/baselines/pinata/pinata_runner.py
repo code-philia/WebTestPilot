@@ -128,9 +128,7 @@ class PinataTestRunner(BaseTestRunner):
             colour="green",
         ) as step_bar:
             try:
-                sync_initial_page: Page = self.get_initial_page(
-                    setup_function, application=self.application
-                )
+                sync_initial_page: Page = self.get_initial_page(setup_function)
 
                 async with async_playwright() as p:
                     # Create browser instance

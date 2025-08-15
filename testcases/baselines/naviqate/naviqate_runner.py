@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Optional
 
 from const import ApplicationEnum, TestCase
-from playwright.sync_api import Page, sync_playwright
 from selenium.common.exceptions import WebDriverException
 from tqdm import tqdm
 
@@ -21,7 +20,6 @@ import method.utils.logger as logging
 import method.utils.utils as utils
 from base_runner import BaseTestRunner, TestResult
 from method.crawler.crawler import WebCrawler
-from utils import setup_page_state
 
 
 class NaviqateTestRunner(BaseTestRunner):
@@ -38,24 +36,14 @@ class NaviqateTestRunner(BaseTestRunner):
         abstracted: bool = False,
         **kwargs,
     ):
-        super().__init__(test_case_path, test_output_path, application, model=model, **kwargs)
+        super().__init__(
+            test_case_path, test_output_path, application, model=model, **kwargs
+        )
         self.headless = headless
         self.max_steps = max_steps
         self.abstracted = abstracted
         self.output_dir = str(self.test_output_path.parent / "naviqate_output")
         self.logger = logging.get_logger()
-
-    def get_initial_page(self, setup_function: str) -> Page:
-        """Get the initial page state based on setup function."""
-        # Start new playwright page
-        playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=self.headless)
-        context = browser.new_context()
-        page = context.new_page()
-
-        # Set up the page state based on the setup function
-        page = setup_page_state(page, setup_function, application=self.application)
-        return page
 
     def get_website_from_url(self, url: str) -> str:
         """Extract website domain from URL."""

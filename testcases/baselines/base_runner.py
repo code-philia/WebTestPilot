@@ -110,6 +110,7 @@ class BaseTestRunner(ABC):
         test_output_path: str,
         application: ApplicationEnum,
         model: Optional[str] = None,
+        headless: bool = False,
         **kwargs,
     ):
         self.test_case_path = Path(test_case_path)
@@ -117,6 +118,7 @@ class BaseTestRunner(ABC):
         self.application = application
         self.model = model
         self.config = kwargs
+        self.headless = headless
 
         # For configuring Playwright
         self.playwright = None
