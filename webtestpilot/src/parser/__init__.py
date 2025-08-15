@@ -1,19 +1,23 @@
-from baml_py import ClientRegistry
-
+from config import Config
 from baml_client.sync_client import b
-from baml_client.types import TestCase
+from baml_client.types import TestCase, Step
 
 
-def parse(description: str, cr: ClientRegistry) -> TestCase:
+class MissingStepsError(Exception):
+    def __init__(self, steps):
+        super().__init__(
+            f"Missing steps, please update test description to address <unknown> parts. Steps: {steps}"
+        )
+        self.steps = steps
+
+
+def parse(description: str, config: Config) -> TestCase:
     """
     Parse a natural language test description into a structured test case.
 
     Args:
         description (str):
             A plain-text description of a test scenario, written in natural language.
-        cr (ClientRegistry):
-            A BAML client registry containing configuration and runtime context
-            for model execution.
 
     Returns:
         TestCase:
@@ -24,13 +28,20 @@ def parse(description: str, cr: ClientRegistry) -> TestCase:
                 * action: The event or interaction being performed.
                 * expectation: The expected outcome or assertion.
     """
-    test_case = b.ExtractTestCase(description, {"client_registry": cr})
 
-    if any(
-        "<unknown>" in part
-        for step in test_case.steps
-        for part in (step.condition, step.action, step.expectation)
-    ):
-        test_case = b.ImplicitGeneration(test_case, {"client_registry": cr})
+    def contains_unknown(steps: list[Step]):
+        return any(
+            "<unknown>" in part
+            for step in steps
+            for part in (step.condition, step.action, step.expectation)
+        )
+
+    client_registry = config.parser
+    test_case = b.ExtractTestCase(description, {"client_registry": client_registry})
+
+    if contains_unknown(test_case.steps):
+        if config.infer_missing_steps:
+            return b.ImplicitGeneration(test_case, {"client_registry": client_registry})
+        raise MissingStepsError(test_case.steps)
 
     return test_case

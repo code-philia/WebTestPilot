@@ -1,11 +1,18 @@
 import re
+import io
 import time
+import base64
 import logging
 import traceback
+from functools import partial
 from copy import deepcopy
 
-from baml_client.sync_client import b
+import PIL.Image
+from baml_py import Image, ClientRegistry
 from playwright.sync_api import Page, ElementHandle
+
+from config import Config
+from baml_client.sync_client import b
 
 
 # -------------------------
@@ -15,15 +22,22 @@ logger = logging.getLogger(__name__)
 _current_page: Page | None = None
 _trace: list[dict] = []
 
+
 # -------------------------
 # Helpers
 # -------------------------
-def _parse_coordinates(coordinates: str) -> tuple[int, int]:
+def _parse_coordinates(coordinates: str, screenshot: Image) -> tuple[int, int]:
     match = re.match(r"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)", coordinates)
     if match:
         x, y = map(int, match.groups())
     else:
         raise ValueError("Invalid coordinate format")
+    
+    image, _ = screenshot.as_base64()
+    image = PIL.Image.open(io.BytesIO(base64.b64decode(image)))
+    width, height = image.width, image.height
+    x = x / 1000 * width
+    y = y / 1000 * height
     return x, y
 
 
@@ -75,6 +89,11 @@ def _get_xpath(element: ElementHandle) -> str:
     """)
 
 
+def _get_screenshot() -> Image:
+    screenshot = base64.b64encode(_current_page.screenshot(type="png")).decode("utf-8")
+    return Image.from_base64("image/png", screenshot)
+
+
 def _set_page(page: Page):
     global _current_page
     _current_page = page
@@ -85,33 +104,40 @@ def _require_page():
         raise RuntimeError("No active page. Call set_page() first.")
 
 
-def click(target_description: str):
+def click(cr: ClientRegistry, target_description: str):
     _require_page()
 
-    coordinates = b.LocateUIElement(target_description)
-    x, y = _parse_coordinates(coordinates)
+    screenshot = _get_screenshot()
+    coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    x, y = _parse_coordinates(coordinates, screenshot)
+
+    xpath = _get_xpath(element)
     element: ElementHandle = _get_element(_current_page, x, y)
     element.click()
 
-    _trace.append({"action": {"name": "click", "args": {"xpath": _get_xpath(element)}}})
+    _trace.append({"action": {"name": "click", "args": {"xpath": xpath}}})
 
 
-def type(target_description: str, content: str):
+def type(cr: ClientRegistry, target_description: str, content: str):
     _require_page()
-    coordinates = b.LocateUIElement(target_description)
-    x, y = _parse_coordinates(coordinates)
+
+    screenshot = _get_screenshot()
+    coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    x, y = _parse_coordinates(coordinates, screenshot)
     element: ElementHandle = _get_element(_current_page, x, y)
     element.type(content)
 
     _trace.append({"action": {"name": "fill", "args": {"xpath": _get_xpath(element)}}})
 
 
-def drag(source_description: str, target_description: str):
+def drag(cr: ClientRegistry, source_description: str, target_description: str):
     _require_page()
-    source_coordinates = b.LocateUIElement(source_description)
-    source_x, source_y = _parse_coordinates(source_coordinates)
-    target_coordinates = b.LocateUIElement(target_description)
-    target_x, target_y = _parse_coordinates(target_coordinates)
+
+    screenshot = _get_screenshot()
+    source_coordinates = b.LocateUIElement(screenshot, source_description, baml_options={"client_registry": cr})
+    source_x, source_y = _parse_coordinates(source_coordinates, screenshot)
+    target_coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    target_x, target_y = _parse_coordinates(target_coordinates, screenshot)
 
     # Move to source position
     _current_page.mouse.move(source_x, source_y)
@@ -139,14 +165,23 @@ def drag(source_description: str, target_description: str):
     _current_page.mouse.up()
 
     _trace.append(
-      {"action": {"name": "drag", "args": {
-          "source_xpath": _get_xpath(_get_element(_current_page, source_x, source_y)),
-          "target_xpath": _get_xpath(_get_element(_current_page, target_x, target_y))
-      }}}
+        {
+            "action": {
+                "name": "drag",
+                "args": {
+                    "source_xpath": _get_xpath(
+                        _get_element(_current_page, source_x, source_y)
+                    ),
+                    "target_xpath": _get_xpath(
+                        _get_element(_current_page, target_x, target_y)
+                    ),
+                },
+            }
+        }
     )
 
 
-def scroll(target_description: str | None, direction: str):
+def scroll(cr: ClientRegistry, target_description: str | None, direction: str):
     _require_page()
 
     direction = direction.lower()
@@ -155,8 +190,9 @@ def scroll(target_description: str | None, direction: str):
 
     # Default values: scroll window
     coords = None
+    screenshot = _get_screenshot()
     if target_description is not None:
-        coords = _parse_coordinates(b.LocateUIElement(target_description))
+        coords = _parse_coordinates(b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr}), screenshot)
 
     _current_page.evaluate(
         """
@@ -200,7 +236,7 @@ def scroll(target_description: str | None, direction: str):
 def wait(duration: int):
     if duration <= 0:
         raise ValueError("Wait duration must be >0 miliseconds")
-    
+
     time.sleep(duration / 1000)
 
 
@@ -208,16 +244,17 @@ def finished():
     pass
 
 
-def execute(code: str, page: Page) -> list[dict]:
+def execute(code: str, page: Page, config: Config) -> list[dict]:
     """
     Safely execute LLM-generated Python code blocks containing only automation actions.
     Automatically sets the current Playwright Page before execution.
     """
+    cr: ClientRegistry = config.ui_locator
     safe_globals = {
-        "click": click,
-        "type": type,
-        "drag": drag,
-        "scroll": scroll,
+        "click": partial(click, cr),
+        "type": partial(type, cr),
+        "drag": partial(drag, cr),
+        "scroll": partial(scroll, cr),
         "wait": wait,
         "finished": finished,
     }
@@ -234,9 +271,9 @@ def execute(code: str, page: Page) -> list[dict]:
 
     except Exception:
         logger.error("Failed to execute action:", traceback.format_exc())
-    
+
     finally:
         trace = deepcopy(_trace)
         _trace.clear()
-        
+
     return trace

@@ -47,4 +47,4 @@ logging:
   
   root:
     level: INFO
-    handlers: ["console", "file"]
+    handlers: ["console"]

@@ -5,9 +5,9 @@ class Feedback {
 
 class History {
     page_id string
-    layout string
-    description string
-    prev_action string
+    layout string?
+    description string?
+    prev_action string?
 }
 
 template_string Introduction() #"
@@ -95,33 +95,33 @@ template_string FormatHistory(history: History[]) #"
     {% else %}
     State {{ loop.index0 }}:
     {% endif %}
-      Page: {{ state.page_id or 'Unknown' }}
-      {% if state.description %}
-      Description: {{ state.description }}
-      {% endif %}
-      {% if loop.index < loop.length %}
-      Next Action: {{ history[loop.index].prev_action }}
-      {% endif %}
-
+        Page: {{ state.page_id or 'Unknown' }}
+    {% if state.description %}
+        Description: {{ state.description }}
+    {% endif %}
+    {% if state.layout %}
+        Layout: {{ state.layout }}
+    {% endif %}
+    {% if loop.index < loop.length %}
+        Next Action: {{ history[loop.index].prev_action }}
+    {% endif %}
     {% endfor %}
 "#
 
 function GenerateAssertion(verify: string, history: History[], screenshot: image, feedback: Feedback[]) -> string {
     client "Base"
     prompt #"
-        {{_.role("user")}}
+        {{_.role("system")}}
         {{ Introduction() }}
 
         {{ Specification() }}
 
         {{ Example() }}
 
+        {{_.role("user")}}
         {{ screenshot }}
-
         {{ FormatHistory(history) }}
-
         {{ verify }}
-
         {% if feedback %}
         {% for f in feedback %}
         {{ _.role("user") }}
@@ -146,17 +146,26 @@ test InvoiceNinja {
     verify #"
         Assertion: Client changes are saved
     "#
-    history #"
-        History:
-            State (0): Clients Page; Navigate to the client created in TC-002
-            State (1): Client Details Page; Click "Edit" button or link
-            State (2): Client Edit Page; Click in the "Name" textbox
-            State (3): Client Edit Page; Clear the name field and type "company_name Updated 123456"
-            State (4): Client Edit Page; Click "Save" button
-        
-        Current: Clients Page
-    "#
-    feedback []
+    history [
+        {
+            page_id "Test"
+        },
+        {
+            page_id "haha"
+            description "a description"
+            prev_action "bababa"
+        },
+        {
+            page_id "haha"
+            description "woowza"
+        }
+    ]
+    feedback [
+        {
+            response "my answer is ..."
+            reason "bad answer"
+        }
+    ]
     screenshot { file "./invoiceninja.png" }
   }
 }

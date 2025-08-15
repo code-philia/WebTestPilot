@@ -7,7 +7,7 @@ from xml.etree.ElementTree import Element as XMLElement
 
 from config import Config
 from baml_client.sync_client import b
-from baml_client.types import PageAbstract
+from baml_client.types import PageAbstract, History
 from executor.assertion_api.state import State, StateFactory
 from executor.assertion_api.element import Element, ElementFactory
 from executor.page_reidentification.accessibility import AccessibilityTree
@@ -31,14 +31,14 @@ class Session:
 
     def __init__(self, page: Page, config: Config):
         assert isinstance(page, Page) and not page.is_closed()
-        self._history: list[State] = []
-        self._state: State = self.capture_state(prev_action=None)
-
         self.trace: list[dict] = []
         self.page = page
         self.config = config
         self.state_factory = StateFactory(config)
         self.element_factory = ElementFactory(config)
+
+        self._history: list[State] = []
+        self._state: State = self.capture_state(prev_action=None)
 
     @property
     def history(self) -> list[State]:
@@ -63,7 +63,8 @@ class Session:
         Capture and return the current state of the browser page after an action.
         """
         # Add previously recorded state into history
-        self._history.append(self._state)
+        if hasattr(self, "_state") and isinstance(self._state, State):
+            self._history.append(self._state)
 
         # Extract accessibility tree in XML format
         tree = AccessibilityTree(self.page)
@@ -71,17 +72,17 @@ class Session:
 
         screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8")
         elements = self.capture_elements()
-        page_id, description = self._page_reidentification(xml_tree, screenshot)
+        page_id, description, layout = self._page_reidentification(xml_tree, screenshot)
 
         # Update with new state
         self._state = self.state_factory.create(
             page_id=page_id,
             description=description,
-            layout=None,
+            layout=layout,
             url=self.page.url,
             title=self.page.title(),
             content=self.page.content(),
-            screenshot=self.page.screenshot(),
+            screenshot=screenshot,
             elements=elements,
             prev_action=prev_action,
             xml_tree=xml_tree,
@@ -147,10 +148,27 @@ class Session:
 
         elements, _ = _build_tree(elements_data)
         return elements
+    
+    def get_history(self,) -> list[History]:
+        seen_pages = set()
+        history = []
+        for state in self.history:
+            layout = state.layout if state.page_id not in seen_pages else None
+            description = state.description if state.page_id not in seen_pages else None
+            history.append(
+                History(
+                    page_id=state.page_id,
+                    layout=layout,
+                    description=description,
+                    prev_action=state.prev_action,
+                )
+            )
+            seen_pages.add(state.page_id)
+        return history
 
     def _page_reidentification(
         self, xml_tree: list[XMLElement], screenshot: str
-    ) -> tuple[str, str]:
+    ) -> tuple[str, str, str]:
         """
         Determine if the current page matches any previously visited logical page.
         If matched, return the existing page ID and description.
@@ -161,12 +179,20 @@ class Session:
                 - page_id: A short identifier or name of the logical page.
                 - description: A detailed textual description of the page.
         """
+        current_img = Image.from_base64("image/png", screenshot)
+
+        # Handle empty history — no page to compare
+        if not self.history:
+            page_abstract: PageAbstract = b.AbstractPage(
+                current_img,
+                baml_options={"client_registry": self.config.page_reidentification},
+            )
+            return page_abstract.name, page_abstract.description, page_abstract.layout
+    
         # Find the history state with the smallest tree distance to current page
         closest_state = min(
             self.history, key=lambda s: tree_distance(xml_tree, s.xml_tree)
         )
-
-        current_img = Image.from_base64("image/png", screenshot)
         closest_img = Image.from_base64("image/png", closest_state.screenshot)
 
         if b.IsSameLogicalPage(

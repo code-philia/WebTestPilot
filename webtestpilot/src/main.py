@@ -39,7 +39,7 @@ class WebTestPilot:
 
         # Normalize to steps
         if isinstance(test_input, str):
-            test_case = parse(test_input, config.parser)
+            test_case = parse(test_input, config)
             steps = test_case.steps
         elif hasattr(test_input, "__iter__") and not isinstance(
             test_input, (str, bytes)
@@ -50,9 +50,9 @@ class WebTestPilot:
 
         for step in steps:
             try:
-                verify_precondition(session, step.condition, config)
+                #verify_precondition(session, step.condition, config)
                 execute_action(session, step.action, config)
-                verify_postcondition(session, step.expectation, config)
+                #verify_postcondition(session, step.expectation, config)
 
             except BugReport as report:
                 for hook in hooks:
@@ -68,19 +68,25 @@ class WebTestPilot:
 
 
 if __name__ == "__main__":
+    test_url = input("Test url: ")
     test_description = input("Test description: ")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        with browser.new_context() as context:
-            page = context.new_page()
-            config = Config.load("config.yaml")
-            session = Session(page, config)
-            WebTestPilot.run(session, test_description)
+        context = browser.new_context(
+            record_video_dir="videos",
+            record_video_size={"width": 1280, "height": 720}
+        )
+        page = context.new_page()
+        page.goto(test_url)
+        config = Config.load("config.yaml")
+        session = Session(page, config)
+        WebTestPilot.run(session, test_description)
 
+        context.close()
         browser.close()
 
 
 # TODO: Test run
 
-# TODO: Run experiments
+# TODO: Setup run RQ3, RQ4 scripts

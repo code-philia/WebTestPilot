@@ -14,7 +14,7 @@ client<llm> GPT {
   provider openai
   retry_policy Exponential
   options {
-    model "gpt-4o"
+    model "gpt-5"
     api_key env.OPENAI_API_KEY
     temperature 0.0
   }
@@ -65,8 +65,9 @@ client<llm> UITARS {
 client<llm> UGround {
   provider "openai-generic"
   options {
-    base_url "https://localhost:8000/v1"
-    model "UGround-V1-7B"
+    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    api_key "token-abc123"
+    model "osunlp/UGround-V1-7B"
   }
 }
 

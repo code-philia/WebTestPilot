@@ -6,7 +6,7 @@ from executor.assertion_api.session import Session
 
 from config import Config
 from baml_client.sync_client import b
-from baml_client.types import Feedback, History
+from baml_client.types import Feedback
 from executor.assertion_api import execute_assertion
 
 
@@ -21,15 +21,9 @@ def verify_precondition(session: Session, condition: str, config: Config) -> Non
     client_registry = config.assertion_generation
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = [
-        History(
-            page_id=state.page_id,
-            layout=state.layout,
-            description=state.description,
-            prev_action=state.prev_action,
-        )
-        for state in session.history
-    ]
+    history = session.get_history()
+
+    print(history)
 
     response = b.GenerateAssertion(
         condition,
@@ -62,7 +56,7 @@ def execute_action(session: Session, action: str, config: Config) -> None:
     else:
         import executor.automators.custom as automator
 
-    trace = automator.execute(code, session.page)
+    trace = automator.execute(code, session.page, config)
     session.trace.extend(trace)
     session.capture_state(prev_action=action)
 
@@ -72,17 +66,9 @@ def verify_postcondition(session: Session, expectation: str, config: Config):
     max_retries = config.max_retries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
-    history = [
-        History(
-            page_id=state.page_id,
-            layout=state.layout,
-            description=state.description,
-            prev_action=state.prev_action,
-        )
-        for state in session.history
-    ]
-    feedback = []
+    history = session.get_history()
 
+    feedback = []
     for _ in range(0, max_retries + 1):
         response = b.GenerateAssertion(
             expectation,
