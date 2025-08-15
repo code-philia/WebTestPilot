@@ -158,7 +158,7 @@ def main(
         print(f"Model      : {model.value}")
 
     if method == MethodEnum.pinata and provider:
-        print(f"LLM Provider: {provider.value} (deprecated)")
+        print(f"LLM Provider: {provider.value}")
     elif method == MethodEnum.naviqate:
         print(f"Max Steps: {max_steps}")
 

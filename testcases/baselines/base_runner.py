@@ -3,6 +3,7 @@ import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
+import traceback
 from typing import Optional
 
 from const import ApplicationEnum, TestCase
@@ -235,6 +236,7 @@ class BaseTestRunner(ABC):
                     )
                     results.results.append(result)
                     pbar.set_postfix(status="✗", refresh=True)
+                    traceback.print_exc()
 
                 pbar.update(1)
 

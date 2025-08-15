@@ -5,6 +5,7 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
+import nest_asyncio
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
 from playwright.async_api import async_playwright
@@ -108,12 +109,11 @@ class PinataTestRunner(BaseTestRunner):
             output_folder=str(self.test_output_path.parent),
         )
 
-    async def run_test_case_async(self, test_case: TestCase) -> TestResult:
-        """Async implementation of test case execution."""
+    async def run_test_case_async(
+        self, test_case: TestCase, sync_initial_page: Page
+    ) -> TestResult:
         test_name = test_case.name
-        setup_function = test_case.setup_function
         pinata_test_case = self.convert_test_case_to_pinata_format(test_case)
-
         result = TestResult(
             test_name=test_name, total_step=len(pinata_test_case.actions)
         )
@@ -128,7 +128,6 @@ class PinataTestRunner(BaseTestRunner):
             colour="green",
         ) as step_bar:
             try:
-                sync_initial_page: Page = self.get_initial_page(setup_function)
 
                 async with async_playwright() as p:
                     # Create browser instance
@@ -225,10 +224,9 @@ class PinataTestRunner(BaseTestRunner):
 
     def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using Pinata agent."""
-        # Run the async method in a new event loop
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        try:
-            return loop.run_until_complete(self.run_test_case_async(test_case))
-        finally:
-            loop.close()
+        sync_initial_page: Page = self.get_initial_page(test_case.setup_function)
+
+        nest_asyncio.apply()
+        return asyncio.get_event_loop().run_until_complete(
+            self.run_test_case_async(test_case, sync_initial_page)
+        )
