@@ -1,7 +1,7 @@
 {
   "name": "02::Book Create",
   "url": "http://localhost:8081/",
-  "setup_function": "created_book_page",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "From the dashboard click \"Books\" link in navigation",

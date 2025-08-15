@@ -1,13 +1,15 @@
 import asyncio
+import re
 import sys
+import traceback
 from pathlib import Path
+from typing import Optional
 
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
-from playwright.async_api import Page as AsyncPage
 from playwright.async_api import async_playwright
+from playwright.sync_api import Page
 from tqdm import tqdm
-from utils import setup_page_state
 
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
@@ -28,13 +30,16 @@ class PinataTestRunner(BaseTestRunner):
         test_case_path: str,
         test_output_path: str,
         application: ApplicationEnum,
+        model: Optional[str] = None,
         provider: str = "openai",
         headless: bool = False,
         save_screenshot: bool = True,
         tracer: bool = True,
         **kwargs,
     ):
-        super().__init__(test_case_path, test_output_path, application, **kwargs)
+        super().__init__(
+            test_case_path, test_output_path, application, model=model, **kwargs
+        )
         self.provider = provider
         self.headless = headless
         self.save_screenshot = save_screenshot
@@ -55,22 +60,47 @@ class PinataTestRunner(BaseTestRunner):
 
         return provider_map[self.provider]
 
-    def get_initial_page(self, setup_function: str) -> AsyncPage:
-        """Get the initial page state based on setup function.
-
-        This method converts a sync page to async page for Pinata compatibility.
+    def convert_test_name_to_pinata_format(
+        self, test_name: str, test_type: str = "P"
+    ) -> str:
         """
-        # This will be called from async context
-        # We'll handle the actual page setup in run_test_case_async
-        return setup_function  # Return setup function to be used later
+        Convert test name from current format to Pinata's expected format.
+
+        Args:
+            test_name: Current format like "02::Book Create"
+            test_type: Test type (P for Pass, F for Fail, etc.)
+
+        Returns:
+            Converted name like "TC-02-P :: Book Create"
+
+        Raises:
+            ValueError: If test_name doesn't match expected format
+        """
+        # Pattern to match current format: "02::Book Create"
+        pattern = r"(\d+)::(.+)"
+        match = re.match(pattern, test_name.strip())
+
+        if not match:
+            raise ValueError(
+                f"Test name '{test_name}' doesn't match expected format 'ID::Description'"
+            )
+
+        test_id = match.group(1)
+        description = match.group(2).strip()
+
+        # Convert to Pinata format: "TC-02-P :: Book Create"
+        return f"TC-{test_id}-{test_type} :: {description}"
 
     def convert_test_case_to_pinata_format(self, test_case: TestCase) -> PinataTestCase:
         """Convert standard test case format to Pinata's TestCase format."""
         actions = [action.action for action in test_case.actions]
         expected_results = [action.expectedResult for action in test_case.actions]
 
+        # Convert test name to Pinata format
+        converted_name = self.convert_test_name_to_pinata_format(test_case.name)
+
         return PinataTestCase(
-            full_name=test_case.name,
+            full_name=converted_name,
             actions=actions,
             expected_results=expected_results,
             url=test_case.url,
@@ -98,6 +128,10 @@ class PinataTestRunner(BaseTestRunner):
             colour="green",
         ) as step_bar:
             try:
+                sync_initial_page: Page = self.get_initial_page(
+                    setup_function, application=self.application
+                )
+
                 async with async_playwright() as p:
                     # Create browser instance
                     step_bar.set_description("  Initializing browser")
@@ -108,10 +142,6 @@ class PinataTestRunner(BaseTestRunner):
                         save_screenshot=self.save_screenshot,
                         tracer=self.tracer,
                         trace_folder=str(self.test_output_path.parent),
-                    )
-
-                    sync_initial_page = setup_page_state(
-                        browser._page, setup_function, application=self.application
                     )
                     initial_url = sync_initial_page.url
 
@@ -191,6 +221,7 @@ class PinataTestRunner(BaseTestRunner):
                 result.success = False
                 step_bar.n = result.current_step
                 step_bar.refresh()
+                traceback.print_exc()
 
         return result
 

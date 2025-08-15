@@ -1,6 +1,7 @@
 import sys
 import time
 from pathlib import Path
+from typing import Optional
 
 from const import ApplicationEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
@@ -31,12 +32,13 @@ class NaviqateTestRunner(BaseTestRunner):
         test_case_path: str,
         test_output_path: str,
         application: ApplicationEnum,
+        model: Optional[str] = None,
         headless: bool = False,
         max_steps: int = 1,
         abstracted: bool = False,
         **kwargs,
     ):
-        super().__init__(test_case_path, test_output_path, application, **kwargs)
+        super().__init__(test_case_path, test_output_path, application, model=model, **kwargs)
         self.headless = headless
         self.max_steps = max_steps
         self.abstracted = abstracted
