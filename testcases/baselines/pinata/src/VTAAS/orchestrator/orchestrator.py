@@ -46,6 +46,7 @@ class OrchestratorParams(TypedDict, total=False):
     name: str
     browser: Browser | None
     llm_provider: LLMProvider
+    model_name: str
     tracer: bool
     output_folder: str
 
@@ -58,6 +59,7 @@ class Orchestrator:
             "name": "missing name",
             "browser": None,
             "llm_provider": LLMProvider.OPENAI,
+            "model_name": "meta-llama/llama-3.2-90b-vision-instruct",
             "tracer": False,
             "output_folder": ".",
         }
@@ -75,6 +77,7 @@ class Orchestrator:
         self.name: str = self.params["name"]
         self._browser: Browser | None = self.params["browser"]
         self.llm_provider: LLMProvider = self.params["llm_provider"]
+        self.model_name: str = self.params["model_name"]
         self.tracer: bool = self.params["tracer"]
         self.output_folder: str = self.params["output_folder"]
         self.start_time: float = time.time()
@@ -88,7 +91,11 @@ class Orchestrator:
             self.logger.warning("This orchestrator should have a proper name!")
         self.logger.info(f"Orchestrator output folder: {self.output_folder}")
         self.llm_client: LLMClient = create_llm_client(
-            self.name, self.llm_provider, self.start_time, self.output_folder
+            self.name,
+            self.llm_provider,
+            self.start_time,
+            self.output_folder,
+            model_name=self.model_name
         )
         self._exec_context: TestExecutionContext | None = None
         self._followup_prompt: str | None = None
@@ -97,7 +104,9 @@ class Orchestrator:
         self.worker_counter: dict[str, int] = {"actor": 0, "assertor": 0}
         self.conversation: list[Message] = []
 
-    async def process_testcase(self, test_case: TestCase, max_tries: int = 4) -> TestCaseVerdict:
+    async def process_testcase(
+        self, test_case: TestCase, max_tries: int = 4
+    ) -> TestCaseVerdict:
         """Manages the main execution loop for the given Test Case."""
         self.logger.info(f"Processing test case {test_case.name}")
         exec_context = TestExecutionContext(
@@ -248,7 +257,9 @@ class Orchestrator:
         """Continuing planning for the test step: spawn workers based on LLM call."""
         results_str, screenshots = workers_result
         with open(
-            "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             results_str += prompt_file.read()
 
@@ -282,7 +293,9 @@ class Orchestrator:
         """Recover planning of the test step: spawn workers based on LLM call."""
         results_str, screenshots = workers_result
         with open(
-            "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             results_str += prompt_file.read()
 
@@ -455,7 +468,9 @@ class Orchestrator:
 
     def _build_system_prompt(self) -> str:
         with open(
-            "./baselines/pinata/src/VTAAS/orchestrator/system_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/system_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         return prompt_template
@@ -464,7 +479,9 @@ class Orchestrator:
         self, exec_context: TestExecutionContext, page_info: str, viewport_info: str
     ) -> str:
         with open(
-            "./baselines/pinata/src/VTAAS/orchestrator/init_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/init_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         test_case = exec_context.test_case
@@ -492,7 +509,9 @@ class Orchestrator:
         step_history: str,
     ) -> str:
         with open(
-            "./baselines/pinata/src/VTAAS/orchestrator/synthesis_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/synthesis_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         saved_data = (
@@ -536,7 +555,9 @@ class Orchestrator:
         """Get the followup prompt"""
         if self._followup_prompt is None:
             with open(
-                "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt", "r", encoding="utf-8"
+                "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt",
+                "r",
+                encoding="utf-8",
             ) as prompt_file:
                 self._followup_prompt = prompt_file.read()
         return self._followup_prompt
@@ -546,7 +567,9 @@ class Orchestrator:
         """Get the recover prompt"""
         if self._recover_prompt is None:
             with open(
-                "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt", "r", encoding="utf-8"
+                "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt",
+                "r",
+                encoding="utf-8",
             ) as prompt_file:
                 self._recover_prompt = prompt_file.read()
         return self._recover_prompt
