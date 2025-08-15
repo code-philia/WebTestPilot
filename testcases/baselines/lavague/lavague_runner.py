@@ -2,6 +2,7 @@ import ast
 import sys
 import time
 from pathlib import Path
+from typing import Optional
 
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
@@ -10,9 +11,7 @@ from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
 from lavague.core.token_counter import TokenCounter
 from lavague.drivers.playwright import PlaywrightDriver
-from playwright.sync_api import Page, sync_playwright
 from tqdm import tqdm
-from utils import setup_page_state
 
 # Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
@@ -30,35 +29,14 @@ class LavagueTestRunner(BaseTestRunner):
         test_case_path: str,
         test_output_path: str,
         application: ApplicationEnum,
+        model: Optional[str] = None,
         headless: bool = True,
         **kwargs,
     ):
-        super().__init__(test_case_path, test_output_path, application, **kwargs)
+        super().__init__(
+            test_case_path, test_output_path, application, model=model, **kwargs
+        )
         self.headless = headless
-        self.playwright = None
-        self.browser = None
-        self.context = None
-
-    def clean_up_playwright(self):
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
-        if self.playwright:
-            self.playwright.stop()
-
-    def get_initial_page(self, setup_function: str) -> Page:
-        """Get the initial page state based on setup function."""
-        self.clean_up_playwright()
-
-        self.playwright = sync_playwright().start()
-        self.browser = self.playwright.chromium.launch(headless=self.headless)
-        self.context = self.browser.new_context()
-        page = self.context.new_page()
-
-        # Set up the page state based on the setup function
-        page = setup_page_state(page, setup_function, application=self.application)
-        return page
 
     def extract_trace_from_code(self, code: str) -> list[dict]:
         """Lavague's trace contains code, the last trace contains all the actions.
@@ -162,6 +140,3 @@ class LavagueTestRunner(BaseTestRunner):
                 step_bar.set_postfix(status="✗", refresh=True)
 
         return result
-
-    def __del__(self):
-        self.clean_up_playwright()

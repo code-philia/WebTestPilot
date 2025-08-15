@@ -3,10 +3,12 @@ import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 from const import ApplicationEnum, TestCase
+from playwright.sync_api import Page, sync_playwright
 from tqdm import tqdm
+from utils import setup_page_state
 
 
 @dataclass
@@ -107,12 +109,21 @@ class BaseTestRunner(ABC):
         test_case_path: str,
         test_output_path: str,
         application: ApplicationEnum,
+        model: Optional[str] = None,
+        headless: bool = False,
         **kwargs,
     ):
         self.test_case_path = Path(test_case_path)
         self.test_output_path = Path(test_output_path)
         self.application = application
+        self.model = model
         self.config = kwargs
+        self.headless = headless
+
+        # For configuring Playwright
+        self.playwright = None
+        self.browser = None
+        self.context = None
 
     def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
@@ -124,7 +135,7 @@ class BaseTestRunner(ABC):
 
         for file_path in sorted(
             self.test_case_path.glob("*.json"), key=lambda p: p.stem
-        )[:3]:
+        )[1:2]:
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
@@ -139,17 +150,26 @@ class BaseTestRunner(ABC):
 
         return test_cases
 
-    @abstractmethod
-    def get_initial_page(self, setup_function: str) -> Any:
-        """Get the initial page state based on setup function.
+    def clean_up_playwright(self):
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()
 
-        Args:
-            setup_function: The setup function name from test case JSON
+    def get_initial_page(self, setup_function: str) -> Page:
+        """Get the initial page state based on setup function."""
+        self.clean_up_playwright()
 
-        Returns:
-            Page object appropriate for the specific runner implementation
-        """
-        pass
+        self.playwright = sync_playwright().start()
+        self.browser = self.playwright.chromium.launch(headless=self.headless)
+        self.context = self.browser.new_context()
+        page = self.context.new_page()
+
+        # Set up the page state based on the setup function
+        page = setup_page_state(page, setup_function, application=self.application)
+        return page
 
     @abstractmethod
     def run_test_case(self, test_case: TestCase) -> TestResult:
@@ -224,3 +244,6 @@ class BaseTestRunner(ABC):
         results.print_summary()
 
         return results
+
+    def __del__(self):
+        self.clean_up_playwright()

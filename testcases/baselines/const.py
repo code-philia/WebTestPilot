@@ -24,6 +24,16 @@ class ProviderEnum(str, Enum):
     openrouter = "openrouter"
 
 
+class ModelEnum(str, Enum):
+    gpt4o = "openai/gpt-4o-2024-11-20"
+    claude_3_7 = "anthropic/claude-3.7-sonnet"
+    gemini_2_5_pro = "google/gemini-2.5-pro"
+    ui_tars = "ui-tars"
+    qwen2_5vl = "qwen/qwen2.5-vl-72b-instruct"
+    intern3_5 = "opengvlab/internvl3-14b"
+    gpt5 = "openai/gpt-5"
+
+
 @dataclass
 class TestAction:
     """Represents a single test action with its expected result."""

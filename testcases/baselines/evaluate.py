@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Optional
 
 import typer
-from const import ApplicationEnum, MethodEnum, ProviderEnum
+from const import ApplicationEnum, MethodEnum, ModelEnum, ProviderEnum
 from typing_extensions import Annotated
 
 # Disable output buffering for immediate log display
@@ -56,12 +56,20 @@ def main(
     application: Annotated[
         ApplicationEnum, typer.Argument(help="The application to test")
     ],
+    model: Annotated[
+        Optional[ModelEnum],
+        typer.Option(
+            "--model",
+            "-m",
+            help="LLM model to use for the agent",
+        ),
+    ] = None,
     provider: Annotated[
-        ProviderEnum,
+        Optional[ProviderEnum],
         typer.Option(
             "--provider",
             "-p",
-            help="LLM provider (for pinata method)",
+            help="LLM provider (deprecated, will be removed in future versions)",
             show_default=True,
         ),
     ] = ProviderEnum.openai,
@@ -85,7 +93,6 @@ def main(
         int,
         typer.Option(
             "--max-steps",
-            "-m",
             help="Maximum steps for naviqate method",
             show_default=True,
         ),
@@ -147,8 +154,11 @@ def main(
     print(f"Output     : {output_path}")
     print(f"Headless   : {headless}")
 
-    if method == MethodEnum.pinata:
-        print(f"LLM Provider: {provider.value}")
+    if model:
+        print(f"Model      : {model.value}")
+
+    if method == MethodEnum.pinata and provider:
+        print(f"LLM Provider: {provider.value} (deprecated)")
     elif method == MethodEnum.naviqate:
         print(f"Max Steps: {max_steps}")
 
@@ -178,9 +188,14 @@ def main(
         "headless": headless,
     }
 
+    # Add model parameter if provided
+    if model:
+        runner_kwargs["model"] = model.value
+
     # Add method-specific parameters
     if method == MethodEnum.pinata:
-        runner_kwargs["provider"] = provider.value
+        if provider:
+            runner_kwargs["provider"] = provider.value
         runner_kwargs["save_screenshot"] = True
         runner_kwargs["tracer"] = True
     elif method == MethodEnum.naviqate:
