@@ -14,7 +14,7 @@ client<llm> GPT {
   provider openai
   retry_policy Exponential
   options {
-    model "gpt-5"
+    model "gpt-4.1"
     api_key env.OPENAI_API_KEY
     temperature 0.0
   }

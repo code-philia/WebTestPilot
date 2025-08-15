@@ -37,9 +37,17 @@ class XMLNode(zss.Node):
 
 
 def tree_distance(e1: list[XMLElement], e2: list[XMLElement]) -> int:
+    root1 = XMLElement("root")
+    for child in e1:
+        root1.append(child)
+
+    root2 = XMLElement("root")
+    for child in e2:
+        root2.append(child)
+
     return zss.simple_distance(
-        XMLNode(e1),
-        XMLNode(e2),
+        XMLNode(root1),
+        XMLNode(root2),
         get_children=XMLNode.get_children,
         get_label=XMLNode.label,
         label_dist=XMLNode.label_edit_cost,

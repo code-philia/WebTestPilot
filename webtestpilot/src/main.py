@@ -67,22 +67,44 @@ class WebTestPilot:
                 raise
 
 
+def login_to_indico(page):
+    page.goto("http://localhost:8080/")
+    page.get_by_role("link", name=" Login").click()
+    page.get_by_role("textbox", name="Username or email").fill("admin@admin.com")
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill("webtestpilot")
+    page.get_by_role("button", name="Login with Indico").click()
+
+
 if __name__ == "__main__":
-    test_url = input("Test url: ")
-    test_description = input("Test description: ")
+    #test_description = input("Test description: ")
+    test_steps = [
+        Step(condition="", action='Click "Create event" link in navigation', expectation="Create event dropdown menu appears"),
+        Step(condition="", action='Click "Lecture" option', expectation="Lecture creation form opens"),
+        Step(condition="", action='Click in the "Event title" textbox', expectation='Event title field is focused for input'),
+        Step(condition="", action='Type "Lecture123456" in the title field', expectation='Title field contains the unique lecture name'),
+        Step(condition="", action='Click in the "Venue" textbox', expectation='Venue field is focused and ready for input'),
+        Step(condition="", action='Type "Venue123456" in the venue field', expectation='Venue field contains unique venue name'),
+        Step(condition="", action='Click in the "Room" textbox', expectation='Room field is focused and ready for input'),
+        Step(condition="", action='Type "Room123456" in the room field', expectation='Room field contains unique room name'),
+        Step(condition="", action='Click "Public" option for event protection mode', expectation='Public protection mode is selected'),
+        Step(condition="", action='Click "Create event" button', expectation='Lecture is created and saved'),
+        Step(condition="", action='Verify lecture name appears in page heading', expectation='Lecture page displays with correct name in heading'),
+        Step(condition="", action='Verify venue and room information is displayed', expectation='Location details are shown on the lecture page'),
+    ]
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(
-            record_video_dir="videos",
-            record_video_size={"width": 1280, "height": 720}
-        )
+        context = browser.new_context()
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
         page = context.new_page()
-        page.goto(test_url)
+        
+        login_to_indico(page)
         config = Config.load("config.yaml")
         session = Session(page, config)
-        WebTestPilot.run(session, test_description)
+        WebTestPilot.run(session, test_steps)
 
+        context.tracing.stop(path = "trace.zip")
         context.close()
         browser.close()
 

@@ -18,7 +18,7 @@ To seed database with random data for testing
 For bookstack
 ```bash
 docker compose up
-docker compose run --rm -w /app/www app php artisan db:seed --class=DummyContentSeeder
+docker compose run --rm -w /var/www/bookstack app php artisan db:seed --class=DummyContentSeeder
 ```
 
 For invoiceninja

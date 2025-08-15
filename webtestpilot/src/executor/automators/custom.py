@@ -102,6 +102,34 @@ def _set_page(page: Page):
 def _require_page():
     if _current_page is None:
         raise RuntimeError("No active page. Call set_page() first.")
+    
+
+def _focus(x: int, y: int):
+    _current_page.evaluate(
+        """({ x, y }) => {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const docWidth = document.documentElement.scrollWidth;
+            const docHeight = document.documentElement.scrollHeight;
+
+            if (docWidth <= viewportWidth && docHeight <= viewportHeight) {
+                // No scrolling possible
+                return false;
+            }
+
+            let scrollX = x - viewportWidth / 2;
+            let scrollY = y - viewportHeight / 2;
+
+            const maxScrollX = docWidth - viewportWidth;
+            const maxScrollY = docHeight - viewportHeight;
+            scrollX = Math.max(0, Math.min(scrollX, maxScrollX));
+            scrollY = Math.max(0, Math.min(scrollY, maxScrollY));
+
+            window.scrollTo(scrollX, scrollY);
+            return true;
+        }""",
+        {"x": x, "y": y}
+    )
 
 
 def click(cr: ClientRegistry, target_description: str):
@@ -111,8 +139,9 @@ def click(cr: ClientRegistry, target_description: str):
     coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
     x, y = _parse_coordinates(coordinates, screenshot)
 
-    xpath = _get_xpath(element)
+    _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)
+    xpath = _get_xpath(element)
     element.click()
 
     _trace.append({"action": {"name": "click", "args": {"xpath": xpath}}})
@@ -124,6 +153,8 @@ def type(cr: ClientRegistry, target_description: str, content: str):
     screenshot = _get_screenshot()
     coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
     x, y = _parse_coordinates(coordinates, screenshot)
+
+    _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)
     element.type(content)
 
