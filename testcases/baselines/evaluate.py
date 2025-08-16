@@ -62,6 +62,7 @@ def main(
             "--model",
             "-m",
             help="LLM model to use for the agent",
+            default=ModelEnum.gpt4_1,
         ),
     ] = None,
     provider: Annotated[

@@ -18,7 +18,7 @@ def create_llm_client(
         case LLMProvider.GOOGLE:
             return GoogleLLMClient(name, start_time, output_folder)
         case LLMProvider.OPENAI:
-            return OpenAILLMClient(name, start_time, output_folder)
+            return OpenAILLMClient(name, start_time, output_folder, model=model_name)
         case LLMProvider.ANTHROPIC:
             return AnthropicLLMClient(name, start_time, output_folder)
         case LLMProvider.OPENROUTER:

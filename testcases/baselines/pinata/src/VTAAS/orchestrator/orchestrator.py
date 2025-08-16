@@ -95,7 +95,7 @@ class Orchestrator:
             self.llm_provider,
             self.start_time,
             self.output_folder,
-            model_name=self.model_name
+            model_name=self.model_name,
         )
         self._exec_context: TestExecutionContext | None = None
         self._followup_prompt: str | None = None
@@ -433,6 +433,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
+                    model_name=self.model_name,
                 )
                 self.workers.append(worker)
                 self.active_workers.append(worker)
@@ -444,6 +445,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
+                    model_name=self.model_name,
                 )
                 self.workers.append(worker)
                 self.active_workers.append(worker)

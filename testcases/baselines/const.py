@@ -25,13 +25,13 @@ class ProviderEnum(str, Enum):
 
 
 class ModelEnum(str, Enum):
-    gpt4_1 = "openai/gpt-4.1"
+    gpt4_1 = "gpt-4.1"
     claude_3_7 = "anthropic/claude-3.7-sonnet"
     gemini_2_5_pro = "google/gemini-2.5-pro"
     ui_tars = "bytedance/ui-tars-1.5-7b"
     qwen2_5vl = "qwen/qwen2.5-vl-72b-instruct"
     intern3_5 = "opengvlab/internvl3-14b"
-    gpt5 = "openai/gpt-5"
+    gpt5 = "gpt-5"
 
 
 @dataclass

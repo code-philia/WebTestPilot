@@ -33,7 +33,6 @@ from ..schemas.worker import (
 )
 
 
-
 @final
 class Actor(Worker):
     """The Actor receives an ACT query and issues browser commands to perform the query"""
@@ -47,6 +46,7 @@ class Actor(Worker):
         start_time: float,
         output_folder: str,
         max_rounds: int = 8,
+        model_name: str = "gpt-4o-2024-11-20",
     ):
         super().__init__(name, query, browser)
         self.type = WorkerType.ACTOR
@@ -61,7 +61,11 @@ class Actor(Worker):
             self.output_folder,
         )
         self.llm_client: LLMClient = create_llm_client(
-            self.name, llm_provider, start_time, self.output_folder
+            self.name,
+            llm_provider,
+            start_time,
+            self.output_folder,
+            model_name=model_name,
         )
         # self.logger.setLevel(logging.DEBUG)
         self.logger.info(f"Initialized with query: {self.query}")
@@ -128,7 +132,6 @@ class Actor(Worker):
         )
 
     async def run_command(self, command: Command) -> str:
-
         self.logger.info(f"Received command: {command!r}, type: {type(command)}")
         self.logger.info(f"Type of command: {type(command)}, id: {id(type(command))}")
 
@@ -189,7 +192,9 @@ class Actor(Worker):
         self, input: ActorInput, page_info: str, viewport_info: str
     ) -> str:
         with open(
-            "./baselines/pinata/src/VTAAS/workers/actor_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/workers/actor_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         history = (
