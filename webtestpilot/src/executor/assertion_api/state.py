@@ -1,5 +1,6 @@
 from __future__ import annotations
 import re
+import logging
 from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING
 
@@ -15,6 +16,9 @@ from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 if TYPE_CHECKING:
     from executor.assertion_api.element import Element
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -70,7 +74,9 @@ class State:
             instruction,
             baml_options={"tb": tb, "client_registry": self._cr_assertion_api},
         )
-        return schema.model_validate(output.model_dump().get("schema", {}))
+        data = schema.model_validate(output.model_dump().get("schema", {}))
+        logger.info(f"Extracted data: {data}")
+        return data
 
     def get_element(self, description: str) -> "Element" | None:
         """

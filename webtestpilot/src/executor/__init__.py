@@ -27,8 +27,6 @@ def verify_precondition(session: Session, condition: str, action: str, config: C
     screenshot = Image.from_base64("image/png", screenshot)
     history = session.get_history()
 
-    print(history)
-
     response = b.GeneratePrecondition(
         screenshot,
         history,
@@ -47,6 +45,7 @@ def verify_precondition(session: Session, condition: str, action: str, config: C
 
 
 def execute_action(session: Session, action: str, config: Config) -> None:
+    logger.info(f"Action: {action}")
     client_registry: ClientRegistry = config.action_proposer
     client_name = config.action_proposer_name
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
@@ -69,6 +68,7 @@ def execute_action(session: Session, action: str, config: Config) -> None:
 
 
 def verify_postcondition(session: Session, action: str, expectation: str, config: Config) -> None:
+    logger.info(f"Expectation: {expectation}")
     client_registry: ClientRegistry = config.assertion_generation
     max_retries = config.max_retries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
@@ -85,6 +85,7 @@ def verify_postcondition(session: Session, action: str, expectation: str, config
             feedback,
             baml_options={"client_registry": client_registry},
         )
+        logger.info(f"Postcondition: {response}")
         passed, message = execute_assertion(response, session)
         if passed:
             logger.info("Postcondition passed.")

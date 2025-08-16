@@ -1,6 +1,7 @@
 from __future__ import annotations
 import io
 import base64
+import logging
 from typing import Optional, Any, TYPE_CHECKING
 
 import PIL.Image
@@ -15,6 +16,9 @@ from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 if TYPE_CHECKING:
     from executor.assertion_api.state import State
+
+
+logger = logging.getLogger(__name__)
 
 
 class Element:
@@ -98,8 +102,10 @@ class Element:
             instruction,
             baml_options={"tb": tb, "client_registry": self.client_registry},
         )
-        return schema.model_validate(output.model_dump().get("schema", {}))
-
+        data = schema.model_validate(output.model_dump().get("schema", {}))
+        logger.info(f"Extracted data: {data}")
+        return data
+    
 
 class ElementFactory:
     def __init__(self, config: Config):

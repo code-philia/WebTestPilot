@@ -21,10 +21,6 @@ template_string Specification() #"
     - `title -> str`: Browser tab's visible title.
     - `url -> str`: Current browser URL.
     - `extract(instruction: str, schema: BaseModel) -> BaseModel`: Extract structured data from the state.
-    - `get_element(description: str) -> Element`: Obtain an Element object via visual description.
-
-    ### Element API
-    - `extract(instruction: str, schema: BaseModel) -> BaseModel`: Extract structured data from the element.
 "#
 
 template_string FormatHistory(history: History[]) #"

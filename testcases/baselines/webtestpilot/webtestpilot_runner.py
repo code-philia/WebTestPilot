@@ -70,7 +70,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
                     try:
                         action_text = action.action[:40]
                         step_bar.set_description(f"  Step {i + 1}: {action_text}")
-                        step = Step(condition="", actiop="", expectation="")
+                        step = Step(condition="", action=action.action, expectation=action.expectedResult)
 
                         WebTestPilot.run(session, step)
 

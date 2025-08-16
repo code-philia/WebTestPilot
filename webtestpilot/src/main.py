@@ -5,7 +5,6 @@ from playwright.sync_api import sync_playwright
 
 from baml_client.types import Step
 from executor import (
-    verify_precondition,
     execute_action,
     verify_postcondition,
     BugReport,
@@ -50,7 +49,6 @@ class WebTestPilot:
 
         for step in steps:
             try:
-                #verify_precondition(session, step.condition, step.action config)
                 execute_action(session, step.action, config)
                 verify_postcondition(session, step.action, step.expectation, config)
 
