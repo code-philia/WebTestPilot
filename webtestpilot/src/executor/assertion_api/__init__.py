@@ -13,7 +13,9 @@ from executor.assertion_api.element import Element
 
 def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
     """
-    Execute assertion code string defining `def assertion(session: Session)`.
+    Execute assertion code string defining either:
+      - def precondition(session: Session), or
+      - def postcondition(session: Session).
 
     - If assertion passes (returns True or does not raise), return True.
     - If assertion fails (returns False or AssertionError), return failure message.
@@ -56,9 +58,13 @@ def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
     # Compile and exec the code, exceptions propagate
     exec(code, allowed_globals, local_vars)
 
-    assertion_func = local_vars.get("assertion")
+    assertion_func = (
+        local_vars.get("precondition")
+        or local_vars.get("postcondition")
+    )
+
     if assertion_func is None or not callable(assertion_func):
-        return False, "No callable 'assertion' function found in generated code."
+        return False, "No callable 'precondition' or 'postcondition' function found in generated code."
 
     try:
         result = assertion_func(session)

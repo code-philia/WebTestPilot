@@ -38,7 +38,7 @@ class Session:
         self.element_factory = ElementFactory(config)
 
         self._history: list[State] = []
-        self._state: State = self.capture_state(prev_action=None)
+        self.capture_state(prev_action=None)
 
     @property
     def history(self) -> list[State]:
@@ -51,31 +51,20 @@ class Session:
         """
         return self._history.copy()
 
-    @property
-    def state(self) -> State:
+    def capture_state(self, prev_action: str | None):
         """
-        Return the most recent captured state.
+        Capture the current state of the browser page after an action.
         """
-        return self._state
-
-    def capture_state(self, prev_action: str | None) -> State:
-        """
-        Capture and return the current state of the browser page after an action.
-        """
-        # Add previously recorded state into history
-        if hasattr(self, "_state") and isinstance(self._state, State):
-            self._history.append(self._state)
-
         # Extract accessibility tree in XML format
         tree = AccessibilityTree(self.page)
         xml_tree = to_xml_tree(tree)
 
-        screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8")
-        elements = self.capture_elements()
+        screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8") 
         page_id, description, layout = self._page_reidentification(xml_tree, screenshot)
+        elements = self.capture_elements()
 
         # Update with new state
-        self._state = self.state_factory.create(
+        state = self.state_factory.create(
             page_id=page_id,
             description=description,
             layout=layout,
@@ -87,7 +76,11 @@ class Session:
             prev_action=prev_action,
             xml_tree=xml_tree,
         )
-        return self._state
+
+        for e in elements.values():
+            e.state = state
+
+        self._history.append(state)
 
     def capture_elements(self) -> dict[int, Element]:
         def _build_tree(

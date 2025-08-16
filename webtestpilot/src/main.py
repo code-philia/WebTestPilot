@@ -50,11 +50,12 @@ class WebTestPilot:
 
         for step in steps:
             try:
-                #verify_precondition(session, step.condition, config)
+                #verify_precondition(session, step.condition, step.action config)
                 execute_action(session, step.action, config)
-                #verify_postcondition(session, step.expectation, config)
+                verify_postcondition(session, step.action, step.expectation, config)
 
             except BugReport as report:
+                logger.error(f"Bug reported: {str(report)}")
                 for hook in hooks:
                     try:
                         hook(report)

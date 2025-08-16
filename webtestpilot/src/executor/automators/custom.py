@@ -142,7 +142,7 @@ def click(cr: ClientRegistry, target_description: str):
     _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)
     xpath = _get_xpath(element)
-    element.click()
+    element.click(force=True)
 
     _trace.append({"action": {"name": "click", "args": {"xpath": xpath}}})
 

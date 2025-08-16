@@ -38,9 +38,9 @@ class Element:
 
         self.children: list["Element"] = []
         self.parent: Optional["Element"] = None
-        self.state: "State" = None
 
         self.client_registry = client_registry
+        self.state: "State" = None
 
     def contains(self, px: float, py: float) -> bool:
         """
@@ -98,7 +98,7 @@ class Element:
             instruction,
             baml_options={"tb": tb, "client_registry": self.client_registry},
         )
-        return schema.model_validate_json(output.model_dump().get("schema", {}))
+        return schema.model_validate(output.model_dump().get("schema", {}))
 
 
 class ElementFactory:

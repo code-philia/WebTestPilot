@@ -70,7 +70,7 @@ class State:
             instruction,
             baml_options={"tb": tb, "client_registry": self._cr_assertion_api},
         )
-        return schema.model_validate_json(output.model_dump().get("schema", {}))
+        return schema.model_validate(output.model_dump().get("schema", {}))
 
     def get_element(self, description: str) -> "Element" | None:
         """

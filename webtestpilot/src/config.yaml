@@ -27,7 +27,7 @@ executor:
     page_reidentification: "GPT"
 
   # When a postcondition assertion fails, how many times to retry assertion generation before reporting as a bug
-  max_retries: 0
+  max_retries: 1
 
 
 # Logging dict configs

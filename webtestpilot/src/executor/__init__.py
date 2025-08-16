@@ -1,4 +1,5 @@
 import base64
+import logging
 
 from baml_py import Image
 from baml_py import ClientRegistry
@@ -10,6 +11,9 @@ from baml_client.types import Feedback
 from executor.assertion_api import execute_assertion
 
 
+logger = logging.getLogger(__name__)
+
+
 class BugReport(Exception):
     def __init__(self, message, screenshots=None, steps=None):
         super().__init__(message)
@@ -17,7 +21,7 @@ class BugReport(Exception):
         self.steps = steps or []
 
 
-def verify_precondition(session: Session, condition: str, config: Config) -> None:
+def verify_precondition(session: Session, condition: str, action: str, config: Config) -> None:
     client_registry = config.assertion_generation
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
@@ -25,17 +29,20 @@ def verify_precondition(session: Session, condition: str, config: Config) -> Non
 
     print(history)
 
-    response = b.GenerateAssertion(
-        condition,
-        history,
+    response = b.GeneratePrecondition(
         screenshot,
+        history,
+        action,
+        condition,
         feedback=[],
         baml_options={"client_registry": client_registry},
     )
     passed, message = execute_assertion(response, session)
     if passed:
+        logger.info("Precondition passed.")
         return
     else:
+        logger.info(f"Precondition failed: {message}")
         raise BugReport(message)
 
 
@@ -61,7 +68,7 @@ def execute_action(session: Session, action: str, config: Config) -> None:
     session.capture_state(prev_action=action)
 
 
-def verify_postcondition(session: Session, expectation: str, config: Config):
+def verify_postcondition(session: Session, action: str, expectation: str, config: Config) -> None:
     client_registry: ClientRegistry = config.assertion_generation
     max_retries = config.max_retries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
@@ -70,17 +77,20 @@ def verify_postcondition(session: Session, expectation: str, config: Config):
 
     feedback = []
     for _ in range(0, max_retries + 1):
-        response = b.GenerateAssertion(
-            expectation,
-            history,
+        response = b.GeneratePostcondition(
             screenshot,
+            history,
+            action,
+            expectation,
             feedback,
             baml_options={"client_registry": client_registry},
         )
         passed, message = execute_assertion(response, session)
         if passed:
+            logger.info("Postcondition passed.")
             return
         else:
+            logger.info(f"Postcondition failed: {message}")
             feedback_item = Feedback(response=response, reason=message)
             feedback.append(feedback_item)
 
