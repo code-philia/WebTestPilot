@@ -5,12 +5,12 @@ from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING
 
 from pydantic import BaseModel
-from baml_py import Image, ClientRegistry
+from baml_py import Image, ClientRegistry, Collector
 from xml.etree.ElementTree import Element as XMLElement
 
-from config import Config
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
+from executor.assertion_api.session import Session
 from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 
@@ -38,6 +38,7 @@ class State:
 
     _cr_assertion_api: ClientRegistry
     _cr_ui_locator: ClientRegistry
+    _collector: Collector
 
     def extract(self, instruction: str, schema: type[BaseModel]) -> BaseModel:
         """
@@ -72,7 +73,11 @@ class State:
         output = b.ExtractFromState(
             screenshot,
             instruction,
-            baml_options={"tb": tb, "client_registry": self._cr_assertion_api},
+            baml_options={
+                "tb": tb,
+                "client_registry": self._cr_assertion_api,
+                "collector": self._collector,
+            },
         )
         data = schema.model_validate(output.model_dump().get("schema", {}))
         logger.info(f"Extracted data: {data}")
@@ -96,7 +101,10 @@ class State:
         coordinates = b.LocateUIElement(
             screenshot,
             description,
-            baml_options={"client_registry": self._cr_ui_locator},
+            baml_options={
+                "client_registry": self._cr_ui_locator,
+                "collector": self._collector,
+            },
         )
         match = re.match(r"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)", coordinates)
 
@@ -118,9 +126,10 @@ class State:
 
 
 class StateFactory:
-    def __init__(self, config: Config):
-        self.assertion_api: ClientRegistry = config.assertion_api
-        self.ui_locator: ClientRegistry = config.ui_locator
+    def __init__(self, session: Session):
+        self.assertion_api: ClientRegistry = session.config.assertion_api
+        self.ui_locator: ClientRegistry = session.config.ui_locator
+        self.collector: Collector = session.collector
 
     def create(
         self,
@@ -148,4 +157,5 @@ class StateFactory:
             xml_tree=xml_tree or [],
             _cr_assertion_api=self.assertion_api,
             _cr_ui_locator=self.ui_locator,
+            _collector=self.collector,
         )

@@ -2,7 +2,6 @@ import base64
 import logging
 
 from baml_py import Image
-from baml_py import ClientRegistry
 from executor.assertion_api.session import Session
 
 from config import Config
@@ -21,8 +20,12 @@ class BugReport(Exception):
         self.steps = steps or []
 
 
-def verify_precondition(session: Session, condition: str, action: str, config: Config) -> None:
+def verify_precondition(
+    session: Session, condition: str, action: str, config: Config
+) -> None:
+    logger.info(f"Condition: {condition}")
     client_registry = config.assertion_generation
+    collector = session.collector
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
     history = session.get_history()
@@ -33,7 +36,7 @@ def verify_precondition(session: Session, condition: str, action: str, config: C
         action,
         condition,
         feedback=[],
-        baml_options={"client_registry": client_registry},
+        baml_options={"client_registry": client_registry, "collector": collector},
     )
     passed, message = execute_assertion(response, session)
     if passed:
@@ -46,13 +49,16 @@ def verify_precondition(session: Session, condition: str, action: str, config: C
 
 def execute_action(session: Session, action: str, config: Config) -> None:
     logger.info(f"Action: {action}")
-    client_registry: ClientRegistry = config.action_proposer
+    client_registry = config.action_proposer
     client_name = config.action_proposer_name
+    collector = session.collector
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
 
     code = b.ProposeActions(
-        screenshot, action, baml_options={"client_registry": client_registry}
+        screenshot,
+        action,
+        baml_options={"client_registry": client_registry, "collector": collector},
     )
 
     if client_name == "UITARS":
@@ -62,14 +68,17 @@ def execute_action(session: Session, action: str, config: Config) -> None:
     else:
         import executor.automators.custom as automator
 
-    trace = automator.execute(code, session.page, config)
+    trace = automator.execute(code, session.page, session)
     session.trace.extend(trace)
     session.capture_state(prev_action=action)
 
 
-def verify_postcondition(session: Session, action: str, expectation: str, config: Config) -> None:
+def verify_postcondition(
+    session: Session, action: str, expectation: str, config: Config
+) -> None:
     logger.info(f"Expectation: {expectation}")
-    client_registry: ClientRegistry = config.assertion_generation
+    client_registry = config.assertion_generation
+    collector = session.collector
     max_retries = config.max_retries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
@@ -83,7 +92,7 @@ def verify_postcondition(session: Session, action: str, expectation: str, config
             action,
             expectation,
             feedback,
-            baml_options={"client_registry": client_registry},
+            baml_options={"client_registry": client_registry, "collector": collector},
         )
         logger.info(f"Postcondition: {response}")
         passed, message = execute_assertion(response, session)

@@ -15,14 +15,14 @@ logger = logging.getLogger(__name__)
 @dataclass(frozen=True)
 class Config:
     parser: ClientRegistry
-    infer_missing_steps: bool
-
     assertion_generation: ClientRegistry
     assertion_api: ClientRegistry
     action_proposer: ClientRegistry
     action_proposer_name: str
     ui_locator: ClientRegistry
     page_reidentification: ClientRegistry
+
+    infer_missing_steps: bool
     max_retries: int
 
     @staticmethod
@@ -42,10 +42,8 @@ class Config:
 
         executor_clients = yaml_data["executor"]["llm_clients"]
         assertion_generation = ClientRegistry()
-        assertion_generation.set_primary(
-            executor_clients["assertion_generation"]
-        )
-        
+        assertion_generation.set_primary(executor_clients["assertion_generation"])
+
         assertion_api = ClientRegistry()
         assertion_api.set_primary(executor_clients["assertion_api"])
         action_proposer_name = executor_clients["action_proposer"]
@@ -57,10 +55,8 @@ class Config:
         ui_locator.set_primary(executor_clients["ui_locator"])
 
         page_reidentification = ClientRegistry()
-        page_reidentification.set_primary(
-            executor_clients["page_reidentification"]
-        )
-        
+        page_reidentification.set_primary(executor_clients["page_reidentification"])
+
         max_retries = yaml_data["executor"]["max_retries"]
 
         # Apply logging config if present
@@ -70,12 +66,12 @@ class Config:
 
         return Config(
             parser=parser,
-            infer_missing_steps=infer_missing_steps,
             assertion_generation=assertion_generation,
             assertion_api=assertion_api,
             action_proposer_name=action_proposer_name,
             action_proposer=action_proposer,
             ui_locator=ui_locator,
             page_reidentification=page_reidentification,
+            infer_missing_steps=infer_missing_steps,
             max_retries=max_retries,
         )

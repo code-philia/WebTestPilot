@@ -17,8 +17,7 @@ PRIMITIVE_TYPES = (int, float, str, bool, type(None))
 
 
 def _run_assertion_with_trace(
-    assertion_func: Callable[[Session], Any],
-    session: Session
+    assertion_func: Callable[[Session], Any], session: Session
 ) -> tuple[bool, str]:
     """
     Executes a given assertion function and captures variable traces
@@ -54,7 +53,10 @@ def _run_assertion_with_trace(
         if isinstance(result, str) and result.strip():
             return False, result
 
-        return False, f"Assertion failed without message.\nVariable trace:\n{pprint.pformat(captured_vars)}"
+        return (
+            False,
+            f"Assertion failed without message.\nVariable trace:\n{pprint.pformat(captured_vars)}",
+        )
 
     except AssertionError as ae:
         sys.settrace(None)
@@ -118,7 +120,10 @@ def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
     # Find the assertion function
     assertion_func = local_vars.get("precondition") or local_vars.get("postcondition")
     if assertion_func is None or not callable(assertion_func):
-        return False, "No callable 'precondition' or 'postcondition' function found in generated code."
+        return (
+            False,
+            "No callable 'precondition' or 'postcondition' function found in generated code.",
+        )
 
     # Run the assertion with variable tracing
     return _run_assertion_with_trace(assertion_func, session)

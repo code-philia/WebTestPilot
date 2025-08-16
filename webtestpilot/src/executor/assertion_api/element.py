@@ -6,11 +6,11 @@ from typing import Optional, Any, TYPE_CHECKING
 
 import PIL.Image
 from pydantic import BaseModel
-from baml_py import Image, ClientRegistry
+from baml_py import Image, ClientRegistry, Collector
 
-from config import Config
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
+from executor.assertion_api.session import Session
 from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 
@@ -26,7 +26,12 @@ class Element:
     Represents a DOM-like element with spatial coordinates, dimensions, z-index, and hierarchy.
     """
 
-    def __init__(self, data: dict[str, Any], client_registry: ClientRegistry):
+    def __init__(
+        self,
+        data: dict[str, Any],
+        client_registry: ClientRegistry,
+        collector: Collector,
+    ):
         self.id: int = data["id"]
         self.parentId: Optional[int] = data["parentId"]
         self.tagName: str = data["tagName"]
@@ -44,6 +49,7 @@ class Element:
         self.parent: Optional["Element"] = None
 
         self.client_registry = client_registry
+        self.collector = collector
         self.state: "State" = None
 
     def contains(self, px: float, py: float) -> bool:
@@ -100,16 +106,21 @@ class Element:
             screenshot,
             self.outerHTML,
             instruction,
-            baml_options={"tb": tb, "client_registry": self.client_registry},
+            baml_options={
+                "tb": tb,
+                "client_registry": self.client_registry,
+                "collector": self.collector,
+            },
         )
         data = schema.model_validate(output.model_dump().get("schema", {}))
         logger.info(f"Extracted data: {data}")
         return data
-    
+
 
 class ElementFactory:
-    def __init__(self, config: Config):
-        self.client_registry: ClientRegistry = config.assertion_api
+    def __init__(self, session: Session):
+        self.client_registry: ClientRegistry = session.config.assertion_api
+        self.collector: Collector = session.collector
 
     def create(self, data: dict[str, Any]):
-        return Element(data, self.client_registry)
+        return Element(data, self.client_registry, self.collector)

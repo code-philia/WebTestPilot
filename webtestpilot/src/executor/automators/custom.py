@@ -8,10 +8,10 @@ from functools import partial
 from copy import deepcopy
 
 import PIL.Image
-from baml_py import Image, ClientRegistry
+from baml_py import Image, ClientRegistry, Collector
 from playwright.sync_api import Page, ElementHandle
 
-from config import Config
+from executor.assertion_api.session import Session
 from baml_client.sync_client import b
 
 
@@ -32,7 +32,7 @@ def _parse_coordinates(coordinates: str, screenshot: Image) -> tuple[int, int]:
         x, y = map(int, match.groups())
     else:
         raise ValueError("Invalid coordinate format")
-    
+
     image, _ = screenshot.as_base64()
     image = PIL.Image.open(io.BytesIO(base64.b64decode(image)))
     width, height = image.width, image.height
@@ -102,7 +102,7 @@ def _set_page(page: Page):
 def _require_page():
     if _current_page is None:
         raise RuntimeError("No active page. Call set_page() first.")
-    
+
 
 def _focus(x: int, y: int):
     _current_page.evaluate(
@@ -128,15 +128,19 @@ def _focus(x: int, y: int):
             window.scrollTo(scrollX, scrollY);
             return true;
         }""",
-        {"x": x, "y": y}
+        {"x": x, "y": y},
     )
 
 
-def click(cr: ClientRegistry, target_description: str):
+def click(cr: ClientRegistry, collector: Collector, target_description: str):
     _require_page()
 
     screenshot = _get_screenshot()
-    coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    coordinates = b.LocateUIElement(
+        screenshot,
+        target_description,
+        baml_options={"client_registry": cr, "collector": collector},
+    )
     x, y = _parse_coordinates(coordinates, screenshot)
 
     _focus(x, y)
@@ -147,11 +151,17 @@ def click(cr: ClientRegistry, target_description: str):
     _trace.append({"action": {"name": "click", "args": {"xpath": xpath}}})
 
 
-def type(cr: ClientRegistry, target_description: str, content: str):
+def type(
+    cr: ClientRegistry, collector: Collector, target_description: str, content: str
+):
     _require_page()
 
     screenshot = _get_screenshot()
-    coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    coordinates = b.LocateUIElement(
+        screenshot,
+        target_description,
+        baml_options={"client_registry": cr, "collector": Collector},
+    )
     x, y = _parse_coordinates(coordinates, screenshot)
 
     _focus(x, y)
@@ -161,13 +171,26 @@ def type(cr: ClientRegistry, target_description: str, content: str):
     _trace.append({"action": {"name": "fill", "args": {"xpath": _get_xpath(element)}}})
 
 
-def drag(cr: ClientRegistry, source_description: str, target_description: str):
+def drag(
+    cr: ClientRegistry,
+    collector: Collector,
+    source_description: str,
+    target_description: str,
+):
     _require_page()
 
     screenshot = _get_screenshot()
-    source_coordinates = b.LocateUIElement(screenshot, source_description, baml_options={"client_registry": cr})
+    source_coordinates = b.LocateUIElement(
+        screenshot,
+        source_description,
+        baml_options={"client_registry": cr, "collector": collector},
+    )
     source_x, source_y = _parse_coordinates(source_coordinates, screenshot)
-    target_coordinates = b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr})
+    target_coordinates = b.LocateUIElement(
+        screenshot,
+        target_description,
+        baml_options={"client_registry": cr, "collector": collector},
+    )
     target_x, target_y = _parse_coordinates(target_coordinates, screenshot)
 
     # Move to source position
@@ -212,7 +235,12 @@ def drag(cr: ClientRegistry, source_description: str, target_description: str):
     )
 
 
-def scroll(cr: ClientRegistry, target_description: str | None, direction: str):
+def scroll(
+    cr: ClientRegistry,
+    collector: Collector,
+    target_description: str | None,
+    direction: str,
+):
     _require_page()
 
     direction = direction.lower()
@@ -223,7 +251,14 @@ def scroll(cr: ClientRegistry, target_description: str | None, direction: str):
     coords = None
     screenshot = _get_screenshot()
     if target_description is not None:
-        coords = _parse_coordinates(b.LocateUIElement(screenshot, target_description, baml_options={"client_registry": cr}), screenshot)
+        coords = _parse_coordinates(
+            b.LocateUIElement(
+                screenshot,
+                target_description,
+                baml_options={"client_registry": cr, "collector": collector},
+            ),
+            screenshot,
+        )
 
     _current_page.evaluate(
         """
@@ -275,17 +310,18 @@ def finished():
     pass
 
 
-def execute(code: str, page: Page, config: Config) -> list[dict]:
+def execute(code: str, page: Page, session: Session) -> list[dict]:
     """
     Safely execute LLM-generated Python code blocks containing only automation actions.
     Automatically sets the current Playwright Page before execution.
     """
-    cr: ClientRegistry = config.ui_locator
+    cr: ClientRegistry = session.config.ui_locator
+    collector: Collector = session.collector
     safe_globals = {
-        "click": partial(click, cr),
-        "type": partial(type, cr),
-        "drag": partial(drag, cr),
-        "scroll": partial(scroll, cr),
+        "click": partial(click, cr, collector),
+        "type": partial(type, cr, collector),
+        "drag": partial(drag, cr, collector),
+        "scroll": partial(scroll, cr, collector),
         "wait": wait,
         "finished": finished,
     }

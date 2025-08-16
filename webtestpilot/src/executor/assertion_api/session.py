@@ -1,7 +1,7 @@
 import base64
 from typing import Any
 
-from baml_py import Image
+from baml_py import Image, Collector
 from playwright.sync_api import Page
 from xml.etree.ElementTree import Element as XMLElement
 
@@ -31,12 +31,14 @@ class Session:
 
     def __init__(self, page: Page, config: Config):
         assert isinstance(page, Page) and not page.is_closed()
+
         self.trace: list[dict] = []
         self.page = page
         self.config = config
-        self.state_factory = StateFactory(config)
-        self.element_factory = ElementFactory(config)
+        self.state_factory = StateFactory(self)
+        self.element_factory = ElementFactory(self)
 
+        self.collector = Collector()
         self._history: list[State] = []
         self.capture_state(prev_action=None)
 
@@ -59,7 +61,7 @@ class Session:
         tree = AccessibilityTree(self.page)
         xml_tree = to_xml_tree(tree)
 
-        screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8") 
+        screenshot = base64.b64encode(self.page.screenshot(type="png")).decode("utf-8")
         page_id, description, layout = self._page_reidentification(xml_tree, screenshot)
         elements = self.capture_elements()
 
@@ -141,8 +143,10 @@ class Session:
 
         elements, _ = _build_tree(elements_data)
         return elements
-    
-    def get_history(self,) -> list[History]:
+
+    def get_history(
+        self,
+    ) -> list[History]:
         seen_pages = set()
         history = []
         for state in self.history:
@@ -178,10 +182,13 @@ class Session:
         if not self.history:
             page_abstract: PageAbstract = b.AbstractPage(
                 current_img,
-                baml_options={"client_registry": self.config.page_reidentification},
+                baml_options={
+                    "client_registry": self.config.page_reidentification,
+                    "collector": self.collector,
+                },
             )
             return page_abstract.name, page_abstract.description, page_abstract.layout
-    
+
         # Find the history state with the smallest tree distance to current page
         closest_state = min(
             self.history, key=lambda s: tree_distance(xml_tree, s.xml_tree)
@@ -191,7 +198,10 @@ class Session:
         if b.IsSameLogicalPage(
             current_img,
             closest_img,
-            baml_options={"client_registry": self.config.page_reidentification},
+            baml_options={
+                "client_registry": self.config.page_reidentification,
+                "collector": self.collector,
+            },
         ):
             return (
                 closest_state.page_id,
@@ -201,6 +211,9 @@ class Session:
 
         page_abstract: PageAbstract = b.AbstractPage(
             current_img,
-            baml_options={"client_registry": self.config.page_reidentification},
+            baml_options={
+                "client_registry": self.config.page_reidentification,
+                "collector": self.collector,
+            },
         )
         return page_abstract.name, page_abstract.description, page_abstract.layout
