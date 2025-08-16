@@ -1,6 +1,7 @@
 import asyncio
 import re
 import sys
+import time
 import traceback
 from pathlib import Path
 from typing import Optional
@@ -171,7 +172,10 @@ class PinataTestRunner(BaseTestRunner):
                     step_bar.set_description(f"  Executing {test_name[:30]}")
 
                     # Process test case
+                    start_time = time.perf_counter()
                     execution_result = await process_with_progress(pinata_test_case)
+                    stop_time = time.perf_counter()
+                    result.runtime = stop_time - start_time
 
                     # Update result based on execution
                     if execution_result.status == Status.PASS:
