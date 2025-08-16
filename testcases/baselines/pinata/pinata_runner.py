@@ -46,21 +46,6 @@ class PinataTestRunner(BaseTestRunner):
         self.save_screenshot = save_screenshot
         self.tracer = tracer
 
-    def get_llm_provider(self) -> LLMProvider:
-        """Get the LLM provider enum based on string input."""
-        provider_map = {
-            "openai": LLMProvider.OPENAI,
-            "anthropic": LLMProvider.ANTHROPIC,
-            "google": LLMProvider.GOOGLE,
-            "mistral": LLMProvider.MISTRAL,
-            "openrouter": LLMProvider.OPENROUTER,
-        }
-
-        if self.provider not in provider_map:
-            raise ValueError(f"Unknown provider: {self.provider}")
-
-        return provider_map[self.provider]
-
     def convert_test_name_to_pinata_format(
         self, test_name: str, test_type: str = "P"
     ) -> str:
@@ -163,13 +148,12 @@ class PinataTestRunner(BaseTestRunner):
                     # Go to the setup URL.
                     await browser._page.goto(initial_url)
 
-                    # Create orchestrator
-                    llm_provider = self.get_llm_provider()
                     orchestrator = Orchestrator(
                         browser=browser,
-                        llm_provider=llm_provider,
+                        llm_provider=LLMProvider.OPENROUTER,
                         tracer=self.tracer,
                         output_folder=str(self.test_output_path.parent),
+                        model_name=self.model,
                     )
 
                     # Monkey-patch orchestrator to update progress bar

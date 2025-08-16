@@ -7,7 +7,11 @@ from VTAAS.llm.openrouter_client import OpenRouterLLMClient
 
 
 def create_llm_client(
-    name: str, provider: LLMProvider, start_time: float, output_folder: str
+    name: str,
+    provider: LLMProvider,
+    start_time: float,
+    output_folder: str,
+    model_name: str,
 ) -> LLMClient:
     """Instantiates the correct LLM client based on the provider."""
     match provider:
@@ -18,6 +22,8 @@ def create_llm_client(
         case LLMProvider.ANTHROPIC:
             return AnthropicLLMClient(name, start_time, output_folder)
         case LLMProvider.OPENROUTER:
-            return OpenRouterLLMClient(name, start_time, output_folder)
+            return OpenRouterLLMClient(
+                name, start_time, output_folder, model=model_name
+            )
         case LLMProvider.MISTRAL:
             return MistralLLMClient(name, start_time, output_folder)

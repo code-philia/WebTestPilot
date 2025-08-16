@@ -6,7 +6,7 @@ from pathlib import Path
 import traceback
 from typing import Optional
 
-from const import ApplicationEnum, TestCase
+from const import ApplicationEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
 from tqdm import tqdm
 from utils import setup_page_state
@@ -110,7 +110,7 @@ class BaseTestRunner(ABC):
         test_case_path: str,
         test_output_path: str,
         application: ApplicationEnum,
-        model: Optional[str] = None,
+        model: Optional[ModelEnum] = None,
         headless: bool = False,
         **kwargs,
     ):
