@@ -1,6 +1,6 @@
 import logging
 import traceback
-from typing import Union, Optional, Callable
+from typing import Optional, Callable
 
 from playwright.sync_api import sync_playwright
 
@@ -21,9 +21,17 @@ Hook = Callable[[BugReport], None]
 
 class WebTestPilot:
     @staticmethod
+    def parse(
+        config: Config,
+        description: str
+    ) -> list["Step"]:
+        test_case = parse(description, config)
+        return test_case.steps
+
+    @staticmethod
     def run(
         session: Session,
-        test_input: Union[str, "Step", list["Step"]],
+        steps: list["Step"],
         hooks: Optional[list[Hook]] = None,
     ) -> None:
         """
@@ -34,19 +42,11 @@ class WebTestPilot:
             test_input: Description string, a single Step, or list of Steps.
             hooks: Optional list of hooks to trigger (Callables) when a BugReport occurs.
         """
+        assert isinstance(steps, list)
+        assert all(isinstance(s, Step) for s in steps)
+
         config = session.config
         hooks = hooks or []
-
-        # Normalize to steps
-        if isinstance(test_input, str):
-            test_case = parse(test_input, config)
-            steps = test_case.steps
-        elif hasattr(test_input, "__iter__") and not isinstance(
-            test_input, (str, bytes)
-        ):
-            steps = list(test_input)
-        else:
-            steps = [test_input]
 
         for step in steps:
             try:
@@ -155,8 +155,3 @@ if __name__ == "__main__":
         context.tracing.stop(path="trace.zip")
         context.close()
         browser.close()
-
-
-# TODO: Test run
-
-# TODO: Setup run RQ3, RQ4 scripts
