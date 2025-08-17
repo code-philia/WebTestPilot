@@ -52,6 +52,7 @@ class Actor(Worker):
         self.type = WorkerType.ACTOR
         self.start_time = start_time
         self.actions: list[ActorAction] = []
+        self.traces: list[dict] = []
         self.query = query
         self.max_rounds = max_rounds
         self.output_folder = output_folder
@@ -75,6 +76,8 @@ class Actor(Worker):
         """Actor execution loop"""
         if not self._is_actor_input(input):
             raise TypeError("Expected input of type ActorInput")
+        # Reset traces for this process call
+        self.traces = []
         await self.browser.mark_page()
         screenshot = await self.browser.screenshot()
         marks: list[Mark] = await self.browser.get_marks()
@@ -88,6 +91,11 @@ class Actor(Worker):
             round += 1
             response = await self.llm_client.act(self.conversation)
             command = response.command
+            
+            # Capture trace for this command
+            trace = self.command_to_trace(command)
+            self.traces.append(trace)
+            
             if command.name == "finish":
                 self.logger.info(
                     f'("{self.query}") is DONE: {command.status} - {command.reason or "No reason"}'
@@ -130,6 +138,67 @@ class Actor(Worker):
             screenshot=self._add_banner(screenshot, f'act("{self.query}")'),
             explaination="stopped after 3 rounds",
         )
+
+    def command_to_trace(self, command: Command) -> dict:
+        """Convert a command to trace format compatible with evaluation."""
+        match command:
+            case ClickCommand(name="click"):
+                return {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "label": str(command.label)
+                        }
+                    }
+                }
+            case GotoCommand(name="goto"):
+                return {
+                    "action": {
+                        "name": "goto",
+                        "args": {
+                            "url": command.url
+                        }
+                    }
+                }
+            case FillCommand(name="fill"):
+                return {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "label": str(command.label),
+                            "value": command.value
+                        }
+                    }
+                }
+            case SelectCommand(name="select"):
+                return {
+                    "action": {
+                        "name": "select",
+                        "args": {
+                            "label": str(command.label),
+                            "options": command.options
+                        }
+                    }
+                }
+            case ScrollCommand(name="scroll"):
+                return {
+                    "action": {
+                        "name": "scroll",
+                        "args": {
+                            "direction": command.direction
+                        }
+                    }
+                }
+            case FinishCommand(name="finish"):
+                return {
+                    "action": {
+                        "name": "finish",
+                        "args": {
+                            "status": command.status.value,
+                            "reason": command.reason
+                        }
+                    }
+                }
 
     async def run_command(self, command: Command) -> str:
         self.logger.info(f"Received command: {command!r}, type: {type(command)}")
