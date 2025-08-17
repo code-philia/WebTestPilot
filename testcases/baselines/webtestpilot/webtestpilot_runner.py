@@ -40,7 +40,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
         )
         self.headless = headless
 
-    def run_test_case(self, test_case: TestCase) -> TestResult:
+    def run_test_case(self, test_case: TestCase, config: Config = None) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
         actions = test_case.actions
         test_name = test_case.name
@@ -61,7 +61,9 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 # Get initial page with proper setup
                 step_bar.set_description("  Setting up page")
                 page = self.get_initial_page(setup_function)
-                config = Config.load(CONFIG_PATH)
+
+                # If there's a custom config, load it; otherwise load default config
+                config = Config.load(CONFIG_PATH) if not config else config
                 session = Session(page, config)
 
                 # Execute each action
@@ -85,8 +87,13 @@ class WebTestPilotTestRunner(BaseTestRunner):
                         tqdm.write(f"    Error: {e}")
                         break
 
+                # Record total runtime
                 end_time = time.perf_counter()
                 result.runtime = end_time - start_time
+
+                # Record cumulative token usage
+                usage = session.collector.usage
+                result.token_count = usage.input_tokens + usage.output_tokens
 
                 # Mark as success if all steps completed
                 result.success = result.current_step == result.total_step
