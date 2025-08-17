@@ -576,6 +576,21 @@ class Orchestrator:
                 self._recover_prompt = prompt_file.read()
         return self._recover_prompt
 
+    def get_total_token_usage(self) -> int:
+        """Get the total token usage from orchestrator and all workers."""
+        total_tokens = 0
+        
+        # Get tokens from orchestrator's own LLM client
+        if hasattr(self.llm_client, 'get_token_usage'):
+            total_tokens += self.llm_client.get_token_usage()
+        
+        # Get tokens from all workers (both active and retired)
+        for worker in self.workers:
+            if hasattr(worker, 'llm_client') and hasattr(worker.llm_client, 'get_token_usage'):
+                total_tokens += worker.llm_client.get_token_usage()
+        
+        return total_tokens
+
     async def close(self):
         self.logger.handlers.clear()
         self.llm_client.close()

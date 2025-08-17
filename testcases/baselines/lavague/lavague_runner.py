@@ -7,6 +7,7 @@ from typing import Optional
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
 from dotenv import load_dotenv
+from lavague.contexts.openai import OpenAIContext
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
 from lavague.core.token_counter import TokenCounter
@@ -89,8 +90,16 @@ class LavagueTestRunner(BaseTestRunner):
                 # Set up LaVague components
                 step_bar.set_description("  Initializing LaVague")
                 token_counter = TokenCounter(log=False)
-                action_engine = ActionEngine(playwright_driver)
-                world_model = WorldModel()
+                
+                if self.model:
+                    context = OpenAIContext(llm=self.model, mm_llm=self.model)
+                    action_engine = ActionEngine.from_context(context, playwright_driver)
+                    world_model = WorldModel.from_context(context)
+                else:
+                    # Use defaults
+                    action_engine = ActionEngine(playwright_driver)
+                    world_model = WorldModel()
+                
                 agent = WebAgent(
                     world_model, action_engine, n_steps=1, token_counter=token_counter
                 )

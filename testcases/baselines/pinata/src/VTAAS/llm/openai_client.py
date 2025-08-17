@@ -58,6 +58,7 @@ class OpenAILLMClient(LLMClient):
             self.output_folder,
         )
         self.max_tries: int = 3
+        self.token_usage: int = 0
         try:
             self.aclient: AsyncOpenAI = AsyncOpenAI()
         except OpenAIError as e:
@@ -81,6 +82,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMTestStepPlanResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(f"Error #{attempts} in plan step call: {str(e)}")
                 if attempts >= self.max_tries:
@@ -123,6 +125,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMTestStepFollowUpResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(f"Error #{attempts} in plan followup call: {str(e)}")
                 if attempts >= self.max_tries:
@@ -165,6 +168,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMTestStepRecoverResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(f"Error #{attempts} in plan recover call: {str(e)}")
                 if attempts >= self.max_tries:
@@ -207,6 +211,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMActResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(f"Error #{attempts} in act call: {str(e)}")
                 if attempts >= self.max_tries:
@@ -247,6 +252,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMAssertResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(f"Error #{attempts} in assert call: {str(e)}")
                 if attempts >= self.max_tries:
@@ -296,6 +302,7 @@ class OpenAILLMClient(LLMClient):
                     frequency_penalty=0.7,
                     response_format=LLMDataExtractionResponse,
                 )
+                self.token_usage += response.usage.total_tokens
             except Exception as e:
                 self.logger.error(
                     f"Error #{attempts} in data extraction call: {str(e)}"
@@ -370,3 +377,6 @@ class OpenAILLMClient(LLMClient):
                         ChatCompletionUserMessageParam(content=content, role="user")
                     )
         return messages
+
+    def get_token_usage(self) -> int:
+        return self.token_usage

@@ -176,6 +176,7 @@ class PinataTestRunner(BaseTestRunner):
                     execution_result = await process_with_progress(pinata_test_case)
                     stop_time = time.perf_counter()
                     result.runtime = stop_time - start_time
+                    result.token_count = orchestrator.get_total_token_usage()
 
                     # Update result based on execution
                     if execution_result.status == Status.PASS:
