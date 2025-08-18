@@ -115,12 +115,16 @@ class Browser:
         self._page.on("framenavigated", lambda load: self.load_js())
         self.logger.info(f"Browser {self.id} started")
 
+    def set_event_for_page(self):
+        self._page.on("load", lambda load: self.load_js())
+        self._page.on("framenavigated", lambda load: self.load_js())
+
     async def load_js(self):
-        _ = await self.page.add_script_tag(path="./js/mark_page.js")
+        _ = await self.page.add_script_tag(path="./baselines/pinata/js/mark_page.js")
         _ = await self.page.wait_for_function(
             "() => typeof window.markPage === 'function'"
         )
-        _ = await self.page.add_script_tag(path="./js/element_to_html_string.js")
+        _ = await self.page.add_script_tag(path="../baselines/pinata/js/element_to_html_string.js")
         _ = await self.page.wait_for_function(
             "() => typeof window.elementToHtmlString  === 'function'"
         )

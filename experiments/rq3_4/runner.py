@@ -2,19 +2,21 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-# Ensure repo root and webtestpilot/src are importable
-REPO_ROOT = Path(__file__).resolve().parents[2]
-WEBTESTPILOT_SRC = REPO_ROOT / "webtestpilot" / "src"
-if str(REPO_ROOT) not in sys.path:
-    sys.path.append(str(REPO_ROOT))
-if str(WEBTESTPILOT_SRC) not in sys.path:
-    sys.path.append(str(WEBTESTPILOT_SRC))
+# Add project directory
+PROJECT_DIR = Path(__file__).parent.parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.append(str(PROJECT_DIR))
+
+# Add webtestpilot directory
+WEBTESTPILOT_DIR = PROJECT_DIR / "webtestpilot" / "src"
+if str(WEBTESTPILOT_DIR) not in sys.path:
+    sys.path.append(str(WEBTESTPILOT_DIR))
 
 from ruamel.yaml import YAML
 from ruamel.yaml.parser import ParserError
-from testcases.baselines.webtestpilot.webtestpilot_runner import WebTestPilotTestRunner
-from testcases.baselines.const import TestCase
-from testcases.baselines.base_runner import TestResult
+from baselines.webtestpilot.runner import WebTestPilotTestRunner
+from baselines.const import TestCase
+from baselines.base_runner import TestResult
 
 # Reuse the same imports the baseline runner uses
 from main import Config, WebTestPilot

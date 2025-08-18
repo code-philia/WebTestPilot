@@ -27,13 +27,18 @@ class Assertor(Worker):
         llm_provider: LLMProvider,
         start_time: float,
         output_folder: str,
+        model_name: str = "gpt-4o-2024-11-20",
     ):
         super().__init__(name, query, browser)
         self.type = WorkerType.ASSERTOR
         self.start_time = start_time
         self.output_folder = output_folder
         self.llm_client = create_llm_client(
-            self.name, llm_provider, start_time, self.output_folder
+            self.name,
+            llm_provider,
+            start_time,
+            self.output_folder,
+            model_name=model_name,
         )
         self.logger = get_logger(
             "Assertor - " + self.name + " - " + self.id,
@@ -95,7 +100,9 @@ class Assertor(Worker):
         viewport_info: str,
     ) -> str:
         with open(
-            "./src/VTAAS/workers/assertor_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/workers/assertor_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
 

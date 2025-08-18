@@ -20,7 +20,7 @@ def default(actions: list[dict]) -> str:
     description = ". ".join(
         val
         for action in actions
-        for val in (action['action'], action['expectedResult'])
+        for val in (action["action"], action["expectedResult"])
     )
     return description
 
@@ -46,7 +46,7 @@ def summarize(actions: list[dict]) -> str:
     description = ". ".join(
         val
         for action in actions
-        for val in (action['action'], action['expectedResult'])
+        for val in (action["action"], action["expectedResult"])
     )
     result = b.Summarize(description)
     return result.output
@@ -56,7 +56,7 @@ def restyle(actions: list[dict]) -> str:
     description = ". ".join(
         val
         for action in actions
-        for val in (action['action'], action['expectedResult'])
+        for val in (action["action"], action["expectedResult"])
     )
     result = b.Restyle(description)
     return result.output
@@ -66,7 +66,7 @@ def add_noise(actions: list[dict], error_rate=0.10):
     description = ". ".join(
         val
         for action in actions
-        for val in (action['action'], action['expectedResult'])
+        for val in (action["action"], action["expectedResult"])
     )
     description = b.Restyle(description).output
 
@@ -76,7 +76,7 @@ def add_noise(actions: list[dict], error_rate=0.10):
         error.char_swap,
         error.missing_char,
         error.nearby_char,
-        error.similar_char
+        error.similar_char,
     ]
     for _ in range(num_errors):
         method = random.choice(typo_methods)
@@ -106,7 +106,7 @@ def process_json_file(filepath: str):
         "name": name,
         "url": url,
         "setup_function": setup_function,
-        "description": description
+        "description": description,
     }
 
 
@@ -119,7 +119,7 @@ def main(input_folder):
     filenames: list[str] = sorted(os.listdir(input_folder))
 
     for i, filename in enumerate(filenames):
-        print(f"{i+1}/{len(filenames)}")
+        print(f"{i + 1}/{len(filenames)}")
         if filename.endswith(".json"):
             filepath = os.path.join(input_folder, filename)
             case = process_json_file(filepath)
@@ -129,7 +129,11 @@ def main(input_folder):
             if not os.path.exists(OUTPUT_DIR):
                 os.makedirs(OUTPUT_DIR)
 
-            with open(f"{OUTPUT_DIR}/{filename.replace(".json", ".yaml")}", "w", encoding="utf-8") as f:
+            with open(
+                f"{OUTPUT_DIR}/{filename.replace('.json', '.yaml')}",
+                "w",
+                encoding="utf-8",
+            ) as f:
                 yaml.dump(case, f)
 
 
