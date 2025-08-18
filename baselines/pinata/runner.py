@@ -201,7 +201,9 @@ class PinataTestRunner(BaseTestRunner):
                     # Store traces if available
                     if hasattr(execution_result, "traces") and execution_result.traces:
                         result.traces = execution_result.traces
-                        orchestrator.logger.info(f"Collected {len(execution_result.traces)} traces")
+                        orchestrator.logger.info(
+                            f"Collected {len(execution_result.traces)} traces"
+                        )
 
             except Exception as e:
                 result.error_message = f"Test execution error: {str(e)}"

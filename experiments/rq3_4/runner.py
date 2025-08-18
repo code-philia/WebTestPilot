@@ -53,7 +53,7 @@ class WebTestPilotTestRunner_RQ3_4(WebTestPilotTestRunner):
 
         for file_path in sorted(
             self.test_case_path.glob("*.yaml"), key=lambda p: p.stem
-        )[1:2]:
+        ):
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 

@@ -2,12 +2,17 @@ import ast
 import sys
 import time
 from pathlib import Path
+import traceback
 from typing import Optional
-from xmlrpc.client import ServerProxy
 
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
 from dotenv import load_dotenv
+from lavague.contexts.openai import OpenaiContext
+from lavague.core import ActionEngine, WorldModel
+from lavague.core.agents import WebAgent
+from lavague.core.token_counter import TokenCounter
+from lavague.drivers.playwright import PlaywrightDriver
 from tqdm import tqdm
 
 # Add project directory
@@ -35,7 +40,6 @@ class LavagueTestRunner(BaseTestRunner):
             test_case_path, test_output_path, application, model=model, **kwargs
         )
         self.headless = headless
-        self.rpc_client = ServerProxy("http://localhost:5000", allow_none=True)
 
     def extract_trace_from_code(self, code: str) -> list[dict]:
         """Lavague's trace contains code, the last trace contains all the actions.
@@ -78,9 +82,31 @@ class LavagueTestRunner(BaseTestRunner):
                 step_bar.set_description("  Setting up page")
                 page = self.get_initial_page(setup_function)
 
+                def get_page():
+                    return page
+
+                # Create PlaywrightDriver with the setup page
+                playwright_driver = PlaywrightDriver(get_sync_playwright_page=get_page)
+                playwright_driver.page = page
+
                 # Set up LaVague components
                 step_bar.set_description("  Initializing LaVague")
-                agent_id: str = self.rpc_client.setup()
+                token_counter = TokenCounter(log=False)
+
+                if self.model:
+                    context = OpenaiContext(llm=self.model, mm_llm=self.model)
+                    action_engine = ActionEngine.from_context(
+                        context, playwright_driver
+                    )
+                    world_model = WorldModel.from_context(context)
+                else:
+                    # Use defaults
+                    action_engine = ActionEngine(playwright_driver)
+                    world_model = WorldModel()
+
+                agent = WebAgent(
+                    world_model, action_engine, n_steps=1, token_counter=token_counter
+                )
 
                 start_time = time.perf_counter()
                 # Execute actions
@@ -91,13 +117,13 @@ class LavagueTestRunner(BaseTestRunner):
                         )
 
                         # Actual run step
-                        action_result = self.rpc_client.run({"agent_id": agent_id, "action": action.action})
+                        action_result = agent.run(action.action)
 
+                        result.token_count = action_result.total_estimated_tokens
                         # Save trace, the latest action result contains all the previous actions.
-                        result.token_count = action_result.get("total_estimated_tokens", 0)
-                        result.traces = self.extract_trace_from_code(action_result.get("code", ""))
+                        result.traces = self.extract_trace_from_code(action_result.code)
 
-                        if not action_result.get("success", False):
+                        if not action_result.success:
                             result.error_message = f"Action {i + 1} failed"
                             step_bar.set_postfix(status="✗", refresh=True)
                             break
@@ -125,5 +151,6 @@ class LavagueTestRunner(BaseTestRunner):
                 result.error_message = f"Test setup error: {str(e)}"
                 result.success = False
                 step_bar.set_postfix(status="✗", refresh=True)
+                traceback.print_exc()
 
         return result

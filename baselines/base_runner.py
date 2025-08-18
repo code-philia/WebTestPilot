@@ -136,7 +136,7 @@ class BaseTestRunner(ABC):
 
         for file_path in sorted(
             self.test_case_path.glob("*.json"), key=lambda p: p.stem
-        )[1:2]:
+        ):
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
