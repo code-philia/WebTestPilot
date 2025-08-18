@@ -1,0 +1,4 @@
+name: 19::Move Chapter Between Books
+url: http://localhost:8081/
+setup_function: created_page_move_chapter
+description: Click 'Move' -> Move ch dialog opens -> Sel dest book from DD -> Book sel as dest -> Click 'Move Ch' btn -> Ch move op starts -> Verify alert 'Ch succ moved' -> Succ alert confirms move -> Nav to dest book -> Dest book pg disp -> Verify moved ch in dest -> Ch listed in dest book -> Nav back to orig book -> Orig book pg disp -> Verify ch not in orig loc -> Ch rmvd from orig book

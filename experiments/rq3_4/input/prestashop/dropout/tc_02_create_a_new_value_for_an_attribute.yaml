@@ -1,0 +1,4 @@
+name: 02::Create A New Value For An Attribute
+url: http://localhost:8081/
+setup_function: logged_in_page
+description: Navigate to the "Catalog" -> "Attributes & Features" page. The "Attributes & Features" page is displayed correctly. Click "Add new value" in the top-right corner. Select "Weight" from the "Attribute group" drop-down list. The dropdown list shows "Weight" as the selected attribute group. Enter a specific value e.g. "500g" in the "Value" field. The value "500g" is entered in the field. Click the "Save" button. A "Successful creation" message is displayed at the top of the page.

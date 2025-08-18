@@ -1,0 +1,4 @@
+name: 15::Shelf Read
+url: http://localhost:8081/
+setup_function: created_shelf_page
+description: Click 'Shelves' -> Shelves list pg shows all shelves. Click 'Shelf123456'. Shelf detail pg opens. Vfy shelf name in main heading. Vfy desc txt visible. Vfy books w/ thumbs displayed. Vfy stats (book cnt & metrics) shown. Rough draft.

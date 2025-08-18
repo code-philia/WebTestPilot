@@ -1,0 +1,4 @@
+name: 28::Delete Sort Rules
+url: http://localhost:8081/
+setup_function: created_sort_rule_page
+description: Find 'SortRule Updated 123456'. Click 'Delete'. Confirm del in dialog. Check msg 'Sort rule successfully deleted'. Ensure rule gone from list. Verify content uses def settings now.

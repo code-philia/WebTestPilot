@@ -1,0 +1,4 @@
+name: 34::Credit Archive
+url: http://localhost:8081/
+setup_function: created_credit_page
+description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Credit archiving is confirmed. Verify alert message "Successfully archived credit" appears. Success alert confirms credit archiving. Navigate to credits listing. Credits listing page is displayed. Verify archived credit no longer appears in active list. Credit is removed from main listing. Access archived credits view. Archived credits can be viewed separately. Verify credit appears in archived list. Credit is visible in archived credits view

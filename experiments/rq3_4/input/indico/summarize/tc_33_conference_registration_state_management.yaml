@@ -1,0 +1,4 @@
+name: 33::Conference Registration State Management
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: Click Reg link -> Reg sect opens -> Click 'Start now' -> Verify msg 'Regs open' -> Success alert -> Click 'Close now' -> Verify msg 'Regs closed' -> Success alert -> Click 'Reopen now' -> Confirm dialog -> Click 'OK' -> Verify msg 'Regs open' -> Success alert

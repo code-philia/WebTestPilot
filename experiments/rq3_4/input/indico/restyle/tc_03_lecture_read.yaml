@@ -1,0 +1,4 @@
+name: 03::Lecture Read
+url: http://localhost:8081/
+setup_function: created_lecture_page
+description: "To ensure accuracy, one must confirm that the lecture name is indeed listed within the event settings data. Next, follow these steps: check if the lecture name is displayed correctly on your screen. For technical reference, the venue information should be clearly visible in the designated location section of the interface. Understanding the concept, it's crucial to verify that the venue name is accurately shown in the event location details. If you encounter any issues, troubleshoot by ensuring the room information is also visible in the location section. Once upon a time, there was an event where the room name was shown in its proper place within the event location. Lastly, in a casual tone, make sure all event navigation elements are present and ready for use. The event navigation menu should be available for easy access throughout the event."

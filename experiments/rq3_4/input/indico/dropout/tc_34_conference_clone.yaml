@@ -1,0 +1,4 @@
+name: 34::Conference Clone
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: Clone event dialog appears. Click the close button in "Clone Event" dialog header. Clone operation is initiated. Verify cloned conference page is displayed. New conference page opens. Verify conference name is preserved in cloned event. Cloned conference has same name. Verify venue and room information is preserved. Location details are copied to clone.

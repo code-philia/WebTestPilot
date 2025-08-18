@@ -1,0 +1,4 @@
+name: 03::Lecture Read
+url: http://localhost:8081/
+setup_function: created_lecture_page
+description: 'chk lec name in evt set data; lec name disp corr. chk venue info in loc sec; venue name in evt loc. chk rm info in loc sec; rm name in evt loc. chk evt nav elmnts; evt nav menu avail. #roughdraft'

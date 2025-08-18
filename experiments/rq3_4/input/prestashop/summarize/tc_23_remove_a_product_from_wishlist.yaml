@@ -1,0 +1,4 @@
+name: 23::Remove A Product From Wishlist
+url: http://localhost:8081/
+setup_function: logged_in_buyer_page
+description: "Rough Draft: Enter prod name in Search box -> Prod name in search box -> Click search icon/press Enter -> Results page loads & shows prod -> Click color-chgd 'heart' icon on prod card -> Success msg 'Prod successfully removed from wishlist' @ top of page"

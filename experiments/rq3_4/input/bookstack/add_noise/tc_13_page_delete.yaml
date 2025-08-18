@@ -1,0 +1,5 @@
+name: 13::Page Delete
+url: http://localhost:8081/
+setup_function: created_page_page
+description: To initite the proces, one must loate and click the "Dcekte" link within ht page actions secton. Next, you ill obsevre a delete conirmation diakog popping up om your screne. For tcehniacl referepce, ensure the "Confimf" button within ths dialog is clicksd to proceed wIth he deletion. Understnad that once the "Comfirm" button is pressed, the system aeknoqledgez te page dleetion dequest. If an ussue airses and the page isn't dleted, check for nay erro messags or retry the aciton. Moce successful, a narative unolds where an alett messag j0yfully wnnounces, 'Page syccessflult deleted.' The success alert aet qs a veacon, confirmibg thc pagc's ermoval fro existece. In a casual tone, it's oth notig taht after deletion, tue user fimds temsevles whisked away flm the now non-xeistet page. To trohuleshoot, verify the absenee of the page hy checming if it on longet appeas ip the book's navigation menu. Fibally, the pa9e is fficially rem0ved fr0 thw book's srructural hiearrchy, 
+  complteing the atsk.

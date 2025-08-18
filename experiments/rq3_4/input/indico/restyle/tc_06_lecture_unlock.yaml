@@ -1,0 +1,4 @@
+name: 06::Lecture Unlock
+url: http://localhost:8081/
+setup_function: created_lecture_page
+description: To begin, locate and press the action menu button, which is represented by three dots. The action menu dropdown will then appear, revealing various options for you to choose from. Note that clicking the 'Unlock' option will initiate the unlocking process of the event. If you encounter any issues, ensure that the 'Unlock' option was selected correctly and try again. Once the unlock action is triggered, an alert message stating 'The event is now unlocked' should pop up on your screen. Imagine the satisfaction when you see the success alert confirming that the lecture has been successfully unlocked. Keep in mind that after unlocking, the lock status message should disappear from view. Lastly, the page will no longer display any indication of being locked, signifying the completion of the task.

@@ -1,0 +1,5 @@
+name: 24::Manual Sort Chapters and Pages
+url: http://localhost:8081/
+setup_function: created_data_for_sort_page
+description: "To begin your journey, you must select the tome labeled \"Book12345\" from the digital library's collection. Once you've clicked on it, behold! A page rich with details and a list of contents magically appears before your eyes. Next up, follow these instructions carefully: locate and press the \"Sort\" button to proceed. For those seeking technical guidance, understand that upon clicking the \"Sort\" button, an interface designed for sorting will materialize on your screen. If you're puzzled about what happens next, simply click the first \"Move Up\" button to witness the sort order transform right before your eyes. In a twist of events, our protagonist then decides to click the second \"Move Down\" button, and lo and behold, the sort order shifts once more. Feeling adventurous, they tap the second \"Move Up\" button again, causing yet another change in the sort order. Finally, to ensure all these alterations are not lost to time, one must click the \"Save New Order\" button,
+  thus preserving the newly arranged sequence."

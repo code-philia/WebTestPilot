@@ -1,0 +1,4 @@
+name: 20::Create and Use Page Template
+url: http://localhost:8081/
+setup_function: created_data_template_page
+description: Click 'Edit'. Pg editor opens. Click 'Templates' btn (RHS). Template config tab shown. Tick 'Pg is template' chkbox. Chkbox ticked. Click 'Save Pg'. Pg saved. Verify alert 'Template success created'. Success alert confirms. Navigate to create new pg. Pg creation frm opens. Click 'Templates' btn (RHS). Template config tab shown. Click 'Templates' dropdown. Dropdown appears. Select 'Template123456'. Template selctd. Verify pg content populates w/ template. Pg editor shows template content. Click 'Save Pg'. Pg w/ template content created. Verify alert 'Pg success created'. Success alert confirms.

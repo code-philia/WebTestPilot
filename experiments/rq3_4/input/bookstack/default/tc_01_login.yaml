@@ -1,0 +1,4 @@
+name: 01::Login
+url: http://localhost:8081/
+setup_function: ''
+description: Click in the email textbox labeled "Email". Email field is focused and ready for input. Type "admin@admin.com" in the email field. Email field displays "admin@admin.com". Click in the password textbox labeled "Password". Password field is focused and ready for input. Type "password" in the password field. Password field shows masked characters. Click the "Log In" button. User is successfully authenticated and redirected to dashboard. Verify "Books" link is visible in navigation. Books link is visible confirming successful login

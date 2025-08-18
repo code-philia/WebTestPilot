@@ -1,0 +1,4 @@
+name: 06::Client Restore
+url: http://localhost:8081/
+setup_function: created_client_page
+description: Click 'Clients' -> Clients list pg appears. Use filter/view opts to show del clients. Find 'company_name Upd 123456'. Click 'Restore' -> Confirm in dialog. Verify msg 'Success restore'. Go back to active clients. Check restored client in main list.

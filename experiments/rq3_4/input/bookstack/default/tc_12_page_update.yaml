@@ -1,0 +1,4 @@
+name: 12::Page Update
+url: http://localhost:8081/
+setup_function: created_page_page
+description: Click "Edit" link in the page actions. Page edit form opens with current values. Click in the "Page Name" textbox. Name field is focused and contains current name. Clear the name field and type "Page Updated 123456". Name field shows updated page name. Click in the Rich Text Area iframe. Rich text editor is focused. Clear existing content and type "Page Content Updated". Rich text area contains updated content. Click "Save Page" button. Page changes are saved. Verify alert message "Page successfully updated" appears. Success alert confirms page update. Verify page heading shows updated page name. Page shows new name in heading. Verify updated content text is visible. Updated content is displayed on page

@@ -1,0 +1,4 @@
+name: 10::Meeting Delete
+url: http://localhost:8081/
+setup_function: created_meeting_page
+description: Click 3dots -> Verify 'Delete' opt visible -> Click 'Delete' -> Confirm dialog pops -> Check 'I understand' box -> Click 'Delete event' btn -> Verify 'Event del success' msg -> Success alert confirms del

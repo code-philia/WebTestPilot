@@ -1,0 +1,4 @@
+name: 28::Delete Sort Rules
+url: http://localhost:8081/
+setup_function: created_sort_rule_page
+description: Locate the sort rule "SortRule Updated 123456". Target sort rule is visible in the list. Delete confirmation dialog appears. Click "Confirm" button in confirmation dialog. Sort rule deletion is confirmed. Verify alert message "Sort rule successfully deleted" appears. Success alert confirms rule deletion. Verify rule no longer appears in listing. Deleted rule is removed from rules table. Verify any content using rule reverts to default. Content sorting reverts to default behavior.

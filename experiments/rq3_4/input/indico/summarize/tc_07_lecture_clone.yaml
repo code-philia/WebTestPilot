@@ -1,0 +1,4 @@
+name: 07::Lecture Clone
+url: http://localhost:8081/
+setup_function: created_lecture_page
+description: Click 'Clone' btn. Clone evt dlg pops up. Hit close btn in dlg hdr. Clone op starts. Chk if cloned lecture pg shows. New lecture pg opens. Confirm orig lecture name in clone. Venue & rm info shld match. Loc details copied.

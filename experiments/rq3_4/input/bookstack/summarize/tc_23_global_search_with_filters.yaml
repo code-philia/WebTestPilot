@@ -1,0 +1,4 @@
+name: 23::Global Search with Filters
+url: http://localhost:8081/
+setup_function: created_global_search_page
+description: Click global search box @ top. Search fld focused. Type 'test'. Fld has term. Click 'View All'. Results pg shows. Verify results. List w/ matches. Unchk 'Chap' box. 'Chap' box unchkd. Click 'Update Search'. Results show only books. Verify no chap. No chap in list. Verify books. Books still in list.

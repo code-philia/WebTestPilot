@@ -1,0 +1,4 @@
+name: 14::Shelf Create
+url: http://localhost:8081/
+setup_function: created_shelf_page
+description: "Click 'Shelves' -> Shelves list pg. Click 'New Shelf' -> Shelf form. Focus on 'Shelf Name' txtbx. Enter 'Shelf123456'. Focus on RTA iframe. Enter 'Shelf Desc'. Expand 'Shelf Tags', focus on 'Tag Name' txtbx, enter 'shelf'. Enter 'test' in tag val fld. Expand 'Books', select books (highlighted). Click 'Save Shelf'. Verify msg: 'Shelf success'. Verify shelf pg w/ correct name & books."

@@ -1,0 +1,4 @@
+name: 29::Conference Add Contribution to Timetable
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: Click TT link -> TT view opens -> Click 'Add new' drop-down -> Add new menu -> Click 'Contri' opt -> Contri form opens -> Click 'Title' box -> Title fld focused -> Type 'Session Contri123456' -> Title has uniq name -> Click 'Save' btn -> Contri created & saved -> Verify contri in TT canvas w/ num prefix -> TT shows num'd contri

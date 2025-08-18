@@ -1,0 +1,4 @@
+name: 11::Page Read
+url: http://localhost:8081/
+setup_function: created_page_page
+description: Click pg titled "Page123456" -> Pg detail view opens. Vfy pg name in heading (main hding). Vfy pg cntnt vis (txt shown). Vfy nav elmnts prsnt (shows bk struct). Vfy brdcrmb nav (bk > pg; hierarch nav)

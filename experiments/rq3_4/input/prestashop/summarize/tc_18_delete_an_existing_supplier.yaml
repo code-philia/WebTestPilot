@@ -1,0 +1,4 @@
+name: 18::Delete An Existing Supplier
+url: http://localhost:8081/
+setup_function: logged_in_page
+description: Click 'Catalog' menu -> Cat submenu expands -> Click 'Brands & Supps' submenu -> 'Brands & Supps' pg displays -> Click 'Suppliers' tab -> Pg switches to supp list -> Locate 'Shoes supp' row -> Click 'more actions' btn (3 dots) -> Dropdown w/ 'Edit', 'Del' opts appears -> Click 'Del' opt -> Conf dialog pops up -> Click final 'Del' btn -> 'Success del' msg shows

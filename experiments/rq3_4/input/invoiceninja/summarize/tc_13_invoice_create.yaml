@@ -1,0 +1,4 @@
+name: 13::Invoice Create
+url: http://localhost:8081/
+setup_function: created_invoice_page
+description: Click 'Invs' lnk -> Invs list pg. Click 'New Inv' btn -> Inv crtn frm. Clk clnt sel fld -> Clnt ddbox fcsd. Sel/type 'cmpny_nm123456'. Clnt selctd. Clk 'Add Itm' -> Lne itms sectn. Clk prdct sel fld fr 1st lne itm -> Prdct ddbox opns. Sel 'prdct_nm123456'. Prdct addd. Vrfy qty/prc popld. Lne itm shws prdct dets. Clk 'Add Itm' -> 2nd lne itm row addd. Sel antr prdct -> 2nd prdct addd. Clk 'Save' btn -> Inv crtd/svd. Vrfy alert msg 'Succ crtd inv'. Succ alert cnfrms. Vrfy inv in lstng -> Nw inv vis in tbl. Vrfy inv stts 'Drft'. Inv shws corr init stts.

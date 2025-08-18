@@ -1,0 +1,4 @@
+name: 18::Conference Read
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: chk conf name in evt setts data; disp correcly. venu info vis in loc sectn; venu name in evt loc. rm info vis in loc sectn; rm name in evt loc. evt nav elmnts presnt; nav menu avail. conf-spec links avail; prog & opts presnt

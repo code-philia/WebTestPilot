@@ -1,0 +1,4 @@
+name: 02::Client Create
+url: http://localhost:8081/
+setup_function: created_client_page
+description: "Click 'Clients' -> Clients list pg. Click 'New Client' -> Form opens. Focus on Co. 'Name' box. Enter 'company_name123456'. Focus on 'Number' box. Enter 'company_number123456'. Focus on 'VAT' box. Enter 'vat_number123456'. Focus on 'Website' box. Enter 'website123456.com'. Focus on 'Phone' box. Enter 'phone123456'. Focus on Contact 'First Name' box. Enter 'first_name123456'. Focus on 'Last Name' box. Enter 'last_name123456'. Focus on Contact 'Email' box. Enter 'email123456@example.com'. Focus on Contact 'Phone' box. Enter 'phone123456'. Click 'Save'. Verify msg: 'Successfully created client'. Check clients list for new entry."

@@ -1,0 +1,5 @@
+name: 28::Delete Sort Rules
+url: http://localhost:8081/
+setup_function: created_sort_rule_page
+description: To find the sort rule named "SortRule Updated 123456", you'll need to scan through the list carefully. Next, proceed to click the "Delete" button associated with the targeted sort rule. For your reference, after clicking delete, a confirmation dialog box should pop up on the screen. If you're unsure about what to do next, simply click the "Confirm" button within the dialog that has appeared. Once the confirmation is complete, an alert message will appear, stating "Sort rule successfully deleted"—a sign that everything went as planned. The story goes that after confirming the deletion, the sort rule vanishes from the list like it was never there. In a more technical sense, the deleted rule is now absent from the rules table, which can be verified visually. To ensure everything's back to normal, check if any content previously sorted by the deleted rule has reverted to its default state. Lastly, just casually note that all content sorting should now follow the default 
+  behavior.

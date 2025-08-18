@@ -1,0 +1,4 @@
+name: 18::Move Page Between Containers
+url: http://localhost:8081/
+setup_function: created_page_move_page
+description: Select destination chapter from dropdown. Chapter is selected as destination. Click "Move Page" button. Page move operation is initiated. Verify alert message "Page successfully moved" appears. Success alert confirms page move. Navigate to the destination chapter. Chapter detail page is displayed. Verify moved page appears in destination. Page is now listed in destination chapter. Navigate back to original book. Original book page is displayed. Page is removed from original location.

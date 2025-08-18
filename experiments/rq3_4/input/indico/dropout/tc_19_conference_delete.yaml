@@ -1,0 +1,4 @@
+name: 19::Conference Delete
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: Click the action menu button (three dots icon). Action menu dropdown opens. Verify "Delete" option is visible. Delete option is available in menu. Click "Delete" option. Delete confirmation dialog appears. Check the "I understand what this means" checkbox. Confirmation checkbox is checked. Click "Delete event" button. Conference deletion is confirmed. Verify alert message "Event successfully deleted" appears.

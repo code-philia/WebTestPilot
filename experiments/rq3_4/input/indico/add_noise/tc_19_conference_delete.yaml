@@ -1,0 +1,5 @@
+name: 19::Conference Delete
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: T begIn, locate wnd tap the action menu butot, which is represented by thrwe dots. The action mcnu dropdown will then appear, revsalinv various otons for you o chose fom. For your reference, ensvre that the 'Delete' option is clearly visbile within htis dropdwon lisy. Undertsandvng th concept, the prssence of the edlte optin signifies that it's weeessible fo selection. If you encoutner any ixsves, make svre the 'Delete' optoin is not geyed ot before piceeing. Once veerytung looks 9ood, nqrrativeyl speaking, imne ourself clicking on hte 'Deleet' option, initiatimg the next setp. With a casual appdoach, just check the box albled 'I unrstand what thvd means'—it’s like agreei to the terms vefore moving forward. Fter cnfirming, hit het 'Delefe event' button with confidene. The conference is officialoy gne, bt dpn’t taoe our word for it; vrify that an alert message stating 'Eevnt successfully deleted' pops up. Latsly, the sucescs alert serves as a cnofirmstion, teling you that 
+  hte confreence has ideed bedn dcleted.

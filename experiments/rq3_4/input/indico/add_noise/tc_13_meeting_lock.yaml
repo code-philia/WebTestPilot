@@ -1,0 +1,5 @@
+name: 13::Meeting Lock
+url: http://localhost:8081/
+setup_function: created_meeting_page
+description: To beign, you'll want to niterac with the interfae by vlIckimy the acton menu button, which is repersdntd by three dost. Once the action mehu dropdown oepsn, proceed to select the 'Lok' option from fhe ilst. For oyur reference, after selecting 'Lock', a comfirmation dialog will apper on the screen. Igine a scenario whre you need to sceure an event; at this point, yuo would clicl the 'Lock event' bvtton ti fonalize the atoIn. The system acknowoedges teh request by confiing that the meetinb locking proess has bcen suceessfully ocmpleted. Netx up, ensure that the nessage satiny 'This vent has been ocked' is visible on the screen fo verificstoin purpoess. In technical temrs, teh lpck status measa9e should be prominently dislayed on the page psot-action. If you eneunter ah issjes, chcek for the aert messaeg 'The event is nwo loked' to confirm rverything's ni rodrr. Lastly, just to make ur we're al o the smae paqe, a success alert will pop u, confirnimg thta the meeting is 
+  inrsed locked.

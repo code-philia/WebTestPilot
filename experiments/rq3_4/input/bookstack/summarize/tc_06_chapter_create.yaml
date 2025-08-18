@@ -1,0 +1,4 @@
+name: 06::Chapter Create
+url: http://localhost:8081/
+setup_function: created_chapter_page
+description: Click 'New Chap' btn. Form opens. Focus on 'Chap Name' txtbx. Type 'Chap123456'. Unique name verified. Focus on RTA iframe. Type 'Chap Desc'. Expand 'Chap Tags'. Focus on 'Tag Name' txtbx. Type 'chap'. Enter 'test' in tag val fld. Click 'Save Chap'. Chap saved. Verify 'Chap success' alert. Chap in nav verified. Chap pg w/ correct name confirmed.

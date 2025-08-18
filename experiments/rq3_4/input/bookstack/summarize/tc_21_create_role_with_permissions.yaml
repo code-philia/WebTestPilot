@@ -1,0 +1,4 @@
+name: 21::Create Role with Permissions
+url: http://localhost:8081/
+setup_function: created_role_page
+description: Click 'Settings' -> Settings pg disp. Click 'Roles & Perm.' -> Sect opens. Click 'Create New Role' -> Form opens. Focus on 'Role Name' txtbx. Type 'TestRole123456'. Unique name verified. Focus on 'Role Desc.' txtbx. Type 'Test role for auto.'. Desc verified. Check perm checkboxes. Click 'Save Role' -> Role saved. Verify alert msg 'Role success.' -> Confirms creation. Verify role in roles list -> Listed. Verify perms -> Correctly set.

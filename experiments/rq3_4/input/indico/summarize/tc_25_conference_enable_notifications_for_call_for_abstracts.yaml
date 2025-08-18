@@ -1,0 +1,4 @@
+name: 25::Conference Enable Notifications for Call for Abstracts
+url: http://localhost:8081/
+setup_function: created_conference_page
+description: Click workflows menu -> Call for Abstracts. Expand. Click 'Call for Abs' link. Section opens. Click 'Enable mod' btn. Mod enabled. Click 'Notifs' btn. Config opens. Click 'Add new' btn. Form opens. Focus 'Title' txtbx. Type 'Email123456'. Unique title set. Click 'Add rule' btn. Config appears. Select 'Submitted' evt. Click 'Save' btn. Notif created & saved.

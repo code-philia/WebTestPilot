@@ -1,0 +1,5 @@
+name: 09::Chapter Delete
+url: http://localhost:8081/
+setup_function: created_chapter_page
+description: To remove a chapter, one must initiate the process by clicking the "Delete" link found within the chapter actions menu. Next, you will encounter a delete confirmation dialog; proceed by clicking the "Confirm" button to finalize your decision. Note that upon confirmation, the system triggers the chapter deletion sequence, ensuring the content is permanently removed. If you're wondering whether the operation was successful, look for the alert message stating "Chapter successfully deleted," which should pop up right after. Once the success alert confirms the chapter's removal, the user is seamlessly redirected away from the now non-existent chapter page. Imagine the scene where the user finds themselves on a new page, clearly indicating they are no longer viewing the deleted chapter. For thoroughness, check the book navigation to ensure the chapter has vanished from the list, confirming its absence. Lastly, it's worth noting that the chapter is effectively removed from the 
+  book's overall structure, completing the task.

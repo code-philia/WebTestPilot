@@ -1,0 +1,4 @@
+name: 33::Credit Send Email
+url: http://localhost:8081/
+setup_function: created_credit_page
+description: Click 'Email Credit' btn. Email dlg opens. Vrfy rcpt email frm client. Email fld shws client cntct email. Vrfy subj & msg tmpl. Tmpl lds w/ credit dets. Mod email cntnt if reqd. Cntnt can b custmzd. Click 'Send Email' btn. Email send init. Vrfy alert msg 'Succ email crdt'. Succ alert cnfrms sent. Vrfy crdt stts chngs to 'Sent'. Stts updts aft email. Vrfy email actvty logged. Actvty in crdt hist.

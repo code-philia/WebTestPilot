@@ -1,0 +1,4 @@
+name: 04::Book Update
+url: http://localhost:8081/
+setup_function: created_book_page
+description: Click 'Edit' -> Book edit frm opens w/ curr vals. Focus on 'Name' txtbx, clr & type "Book Updated 123456". Focus on RTA iframe, clr & type "Desc Updated". Click 'Save Book'. Verify alert "Book success upd". Check pg heading & desc show updates. Rough draft.

@@ -1,0 +1,4 @@
+name: 26::Create Sort Rules
+url: http://localhost:8081/
+setup_function: created_sort_rule_page
+description: Click 'Settings' -> Settings pg disp. Click 'Sort Rules' -> Sort rules mgmt sect opens. Click 'Create New Sort Rule' -> Form opens. Click 'Rule Name' txtbx -> Field focused. Type 'SortRule123456' -> Unique name. Sel sort type from ddwn -> Opt sel. Sel sort order (Asc/Desc) -> Opt sel. Sel ents (Bks/Chaps/Pgs) -> Targ ents sel. Click 'Save Sort Rule' -> Rule saved. Verify alert msg 'Sort rule success' -> Confirms creation. Verify rule in list -> New rule in tbl.

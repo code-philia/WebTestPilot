@@ -1,0 +1,4 @@
+name: 16::Meeting Clone
+url: http://localhost:8081/
+setup_function: created_meeting_page
+description: Click 'Clone' btn. Clone evt dlg pops up. Hit close btn in dlg hdr. Clone op starts. Chk if cloned mtg pg shows. New mtg pg opens. Confirm mtg name stays same in clone. Venue & rm info preserved. Loc details copied.

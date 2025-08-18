@@ -1,0 +1,4 @@
+name: 19::Add A Product To The Shopping Cart
+url: http://localhost:8081/
+setup_function: logged_in_buyer_page
+description: Click on a product link on the homepage e.g. "Hummingbird printed t-shirt". The product detail page for that item is displayed. The size is successfully selected. Check a "Color" radio button. The color is successfully selected. Click the "Add to cart" button. A modal with the title "Product successfully added" appears.

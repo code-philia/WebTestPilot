@@ -1,0 +1,4 @@
+name: 31::Credit Update
+url: http://localhost:8081/
+setup_function: created_credit_page
+description: "Click 'Edit' -> Cred edit frm opens w/ curr vals. Find 1st qty fld. Qty fld vis. Chg qty to '2'. Verify updated qty. Auto-upd line tot. Recalc line tot. Upd cred tot. Recalc tot amt. Click 'Save'. Verify msg: 'Success upd cred'. Confirm success. Verify upd qties & tots disp. Cred shows new line item dets."

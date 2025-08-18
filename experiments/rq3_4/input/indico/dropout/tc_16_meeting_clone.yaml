@@ -1,0 +1,4 @@
+name: 16::Meeting Clone
+url: http://localhost:8081/
+setup_function: created_meeting_page
+description: Click "Clone" button. Clone event dialog appears. Clone operation is initiated. Verify cloned meeting page is displayed. New meeting page opens. Verify meeting name is preserved in cloned event. Cloned meeting has same name. Verify venue and room information is preserved. Location details are copied to clone.

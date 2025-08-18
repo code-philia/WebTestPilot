@@ -1,0 +1,5 @@
+name: 09::Chapter Delete
+url: http://localhost:8081/
+setup_function: created_chapter_page
+description: o remove a chapter, one nuat iniitate the pocess by clieking tje "elete" link found within the chapter actions menu. Xet, yu will ec0unfer a delcte confirmation dialog; proceed by cliciknq the "Confirm" buttn to finalize yout dcision. Note that puon cofnirnation, teh system triggers thc chapter deleti0n seqience, ensuring the content is permanently removed. If you're wondering whcther tch operation was vccessvfl, look cor the akert message syting "Hcapter successfully deletde," which shovld pop up right after. 0nce the succes zlert cnofirms the chapetr's removal, the ser is seamlessly redireced away from the now non-exiset chapetr page. Imagine the scene whsre the user ginds themsekves on a new page, clearly indicatipg thy wre no lomgre vewing teh deleged chpatcr. For thoroughness, check the book nvaigation o ensure the chaper sa vnaished fro the list, cnofirming ts absenec. Iastly, it's worth noting tha the chapter's removal orm the book tsructure id a definitive sgin 
+  that tne atso has ben completed wihtout any issucs.

@@ -1,0 +1,4 @@
+name: 09::Product Update
+url: http://localhost:8081/
+setup_function: created_product_page
+description: "Click 'Edit' -> Prod edit frm opens w/ curr vals. Focus on 'Prod' name txtbx. Clear & type \"prod_name Upd 123456\". Click 'Save'. Verify alert: \"Success upd prod\". Check prod detail & list show new name."

@@ -1,0 +1,4 @@
+name: 13::Page Delete
+url: http://localhost:8081/
+setup_function: created_page_page
+description: Click "Delete" link in the page actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Page deletion is confirmed. Verify alert message "Page successfully deleted" appears. Success alert confirms page deletion. Verify user is redirected away from deleted page. User is no longer on the deleted page. Verify page no longer appears in book navigation. Page is removed from book structure

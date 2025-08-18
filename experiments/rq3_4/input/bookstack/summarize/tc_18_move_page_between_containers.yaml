@@ -1,0 +1,4 @@
+name: 18::Move Page Between Containers
+url: http://localhost:8081/
+setup_function: created_page_move_page
+description: Sel dest chp frm dd. Chp sel as dest. Clk 'Move Pg' btn. Pg mv opn strt. Vrfy alert msg 'Pg succ mvd'. Succ alert cnfrms pg mv. Nvg to dest chp. Chp dtl pg dspyd. Vrfy mvd pg in dest. Pg lstd in dest chp. Nvg bk to orig bk. Orig bk pg dspyd. Vrfy pg no lngr in orig loc. Pg rmvd fr orig loc.

@@ -23,6 +23,7 @@ class TransformationEnum(str, Enum):
     default = "default"
     add_noise = "add_noise"
     dropout = "dropout"
+    restyle = "restyle"
     summarize = "summarize"
 
 

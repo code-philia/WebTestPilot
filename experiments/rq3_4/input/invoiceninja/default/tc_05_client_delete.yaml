@@ -1,0 +1,4 @@
+name: 05::Client Delete
+url: http://localhost:8081/
+setup_function: created_client_page
+description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Client deletion is confirmed. Verify alert message "Successfully deleted client" appears. Success alert confirms client deletion. Navigate to clients listing. Clients listing page is displayed. Verify deleted client no longer appears in active list. Client is removed from main listing

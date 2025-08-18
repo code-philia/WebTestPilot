@@ -1,0 +1,4 @@
+name: 04::Book Update
+url: http://localhost:8081/
+setup_function: created_book_page
+description: Click "Edit" link in the book actions. Book edit form opens with current values. Click in the "Name" textbox. Name field is focused and contains current name. Clear the name field and type "Book Updated 123456". Name field shows updated book name. Click in the Rich Text Area iframe. Rich text editor is focused. Clear existing content and type "Description Updated". Rich text area contains updated description. Click "Save Book" button. Book changes are saved. Verify alert message "Book successfully updated" appears. Success alert confirms book update. Verify page heading shows updated book name. Book page shows new name in heading. Verify updated description text is visible.

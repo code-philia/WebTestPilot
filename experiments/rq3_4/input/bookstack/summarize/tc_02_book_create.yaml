@@ -1,0 +1,4 @@
+name: 02::Book Create
+url: http://localhost:8081/
+setup_function: logged_in_page
+description: Dash -> click 'Books' link. Verify 'Create New Book' link visible. Click it. Form opens. Focus on 'Name' txtbx, enter 'Book123456'. Focus on RTA iframe, type 'Description'. Expand 'Cover img', select './assets/minion.jpeg'. Expand 'Tags', focus on 'Tag Name', enter 'env', then 'test' in val field. Click 'Save Book'. Verify msg 'Book successfully created'. Check pg heading & desc match inputs.

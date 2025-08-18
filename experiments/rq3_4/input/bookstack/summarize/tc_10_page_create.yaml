@@ -1,0 +1,4 @@
+name: 10::Page Create
+url: http://localhost:8081/
+setup_function: created_page_page
+description: Click 'New Page' btn. Pg creation frm opens. Click 'Pg Name' txtbx. Pg name fld focused. Type 'Page123456'. Pg name fld has uniq pg name. Click RTA iframe. RTE focused. Type 'Pg Content'. RTA has 'Pg Content'. Click '◂ Pg Tags' btn. Pg tags sect expands. Click 'Tag Name' txtbx. Tag name fld focused. Type 'page'. Tag name fld has 'page'. Click tag val fld & type 'test'. Tag val fld has 'test'. Click 'Save Pg' btn. Pg created & saved. Verify alert msg 'Pg succ created'. Succ alert confirms pg creation. Verify pg in bk nav. Pg listed in bk struct. Verify pg disp w/ corr name & cont. Pg shows corr name & cont.

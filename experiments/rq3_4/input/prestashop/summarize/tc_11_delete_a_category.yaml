@@ -1,0 +1,4 @@
+name: 11::Delete A Category
+url: http://localhost:8081/
+setup_function: logged_in_page
+description: Click 'Catalog', then 'Categories' in BO menu. Find 'Shoes' row & click -> detail/edit pg. On edit pg, click 'Delete' (top-right). Confirmation modal pops up; select del mode (e.g., 'del cat only'), radio btn auto-selects. Click 'Delete' to confirm. 'Success msg' should appear.

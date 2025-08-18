@@ -1,0 +1,4 @@
+name: 22::Payment Archive
+url: http://localhost:8081/
+setup_function: created_payment_page
+description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Payment archiving is confirmed. Verify alert message "Successfully archived payment" appears. Success alert confirms payment archiving. Navigate to payments listing. Payments listing page is displayed. Verify archived payment no longer appears in active list. Payment is removed from main listing. Access archived payments view. Archived payments can be viewed separately. Verify payment appears in archived list. Payment is visible in archived payments view

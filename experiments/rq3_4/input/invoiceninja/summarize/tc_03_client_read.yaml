@@ -1,0 +1,4 @@
+name: 03::Client Read
+url: http://localhost:8081/
+setup_function: created_client_page
+description: "Click 'Clients' -> Clients list pg shows all clients. Search/filter for 'company_name123456'. Client search func works. Click client named 'company_name123456'. Detail pg opens. Verify: Co name in header, co name as main heading, co details visible, contact info on pg, client stats/metrics shown. Rough draft."
