@@ -103,12 +103,14 @@ class Orchestrator:
         self.worker_reports: dict[str, list[str]] = {}
         self.worker_counter: dict[str, int] = {"actor": 0, "assertor": 0}
         self.conversation: list[Message] = []
+        self.traces: list[dict] = []
 
     async def process_testcase(
         self, test_case: TestCase, max_tries: int = 4
     ) -> TestCaseVerdict:
         """Manages the main execution loop for the given Test Case."""
         self.logger.info(f"Processing test case {test_case.name}")
+        self.traces = []
         exec_context = TestExecutionContext(
             test_case=test_case,
             current_step=test_case.get_step(1),
@@ -142,6 +144,7 @@ class Orchestrator:
                         status=Status.FAIL,
                         step_index=exec_context.step_index,
                         explaination=None,
+                        traces=self.traces,
                     )
                 step_str = (
                     f"{exec_context.step_index}. {test_step[0]} -> {test_step[1]}"
@@ -154,13 +157,14 @@ class Orchestrator:
                     exec_context.history.append(
                         Orchestrator.synthesis_str(step_synthesis)
                     )
-            return TestCaseVerdict(status=Status.PASS, explaination=None)
+            return TestCaseVerdict(status=Status.PASS, explaination=None, traces=self.traces)
         except Exception as e:
             self.logger.warning(f"got this error: {str(e)}")
             return TestCaseVerdict(
                 status=Status.FAIL,
                 step_index=exec_context.step_index,
                 explaination=f"Got error: {str(e)}",
+                traces=self.traces,
             )
         finally:
             await self.browser.close()
@@ -340,6 +344,9 @@ class Orchestrator:
                 for action in result.actions:
                     if action:
                         local_history.append(action.action)
+                # Collect traces from Actor workers
+                if hasattr(worker, 'traces'):
+                    self.traces.extend(worker.traces)
             elif result.status == Status.PASS:
                 local_history.append(f"{worker.__str__()}: Assertion Verified")
             else:
@@ -575,6 +582,21 @@ class Orchestrator:
             ) as prompt_file:
                 self._recover_prompt = prompt_file.read()
         return self._recover_prompt
+
+    def get_total_token_usage(self) -> int:
+        """Get the total token usage from orchestrator and all workers."""
+        total_tokens = 0
+        
+        # Get tokens from orchestrator's own LLM client
+        if hasattr(self.llm_client, 'get_token_usage'):
+            total_tokens += self.llm_client.get_token_usage()
+        
+        # Get tokens from all workers (both active and retired)
+        for worker in self.workers:
+            if hasattr(worker, 'llm_client') and hasattr(worker.llm_client, 'get_token_usage'):
+                total_tokens += worker.llm_client.get_token_usage()
+        
+        return total_tokens
 
     async def close(self):
         self.logger.handlers.clear()

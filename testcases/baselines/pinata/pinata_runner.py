@@ -1,6 +1,7 @@
 import asyncio
 import re
 import sys
+import time
 import traceback
 from pathlib import Path
 from typing import Optional
@@ -171,7 +172,11 @@ class PinataTestRunner(BaseTestRunner):
                     step_bar.set_description(f"  Executing {test_name[:30]}")
 
                     # Process test case
+                    start_time = time.perf_counter()
                     execution_result = await process_with_progress(pinata_test_case)
+                    stop_time = time.perf_counter()
+                    result.runtime = stop_time - start_time
+                    result.token_count = orchestrator.get_total_token_usage()
 
                     # Update result based on execution
                     if execution_result.status == Status.PASS:
@@ -193,8 +198,9 @@ class PinataTestRunner(BaseTestRunner):
                         )
 
                     # Store traces if available
-                    if hasattr(execution_result, "traces"):
+                    if hasattr(execution_result, "traces") and execution_result.traces:
                         result.traces = execution_result.traces
+                        orchestrator.logger.info(f"Collected {len(execution_result.traces)} traces")
 
             except Exception as e:
                 result.error_message = f"Test execution error: {str(e)}"
