@@ -44,15 +44,13 @@ load_dotenv(find_dotenv())
 
 class WebCrawler():
     def __init__(self, website, task, abstracted=False, headless=False, output_dir='./out'):
-
-        
         chrome_options = uc.ChromeOptions()
+        chrome_options.debugger_address = "http://localhost:9222"
         chrome_options.add_argument("--disable-notifications")
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument(f"window-size={WINDOW_WIDTH},{WINDOW_HEIGHT}")
         chrome_options.add_experimental_option("prefs", {"profile.default_content_settings.cookies": 0})
-
 
         # chrome_options.add_argument('--headless')
         
@@ -69,7 +67,14 @@ class WebCrawler():
         self.id_dict = defaultdict(lambda: 0)
         self.driver.maximize_window()
         self.driver.implicitly_wait(WAIT_TIMEOUT * 5)
-        self.driver.get("https://" + website)
+
+        # Get the list of tabs (window handles)
+        tabs = self.driver.window_handles
+        print(f"Found tabs: {tabs}")
+
+        # Switch to the first tab
+        self.driver.switch_to.window(tabs[0])
+
         self.driver.implicitly_wait(WAIT_TIMEOUT)
         self.dir = f'{output_dir}/{self.website}/{utils.string_to_filename(self.task)}'
         

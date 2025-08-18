@@ -1,9 +1,11 @@
 import sys
 import time
+import subprocess
 from pathlib import Path
 from typing import Optional
 
 from const import ApplicationEnum, TestCase
+from playwright.sync_api import Page, sync_playwright
 from selenium.common.exceptions import WebDriverException
 from tqdm import tqdm
 
@@ -16,6 +18,7 @@ import baselines.naviqate.method.utils.logger as logging
 import baselines.naviqate.method.utils.utils as utils
 from baselines.naviqate.method.crawler.crawler import WebCrawler
 from baselines.base_runner import BaseTestRunner, TestResult
+from baselines.utils import setup_page_state
 
 
 class NaviqateTestRunner(BaseTestRunner):
@@ -58,6 +61,19 @@ class NaviqateTestRunner(BaseTestRunner):
             domain += ".com"
 
         return domain
+    
+    def get_initial_page(self, setup_function: str) -> Page:
+        """Get the initial page state based on setup function."""
+        self.clean_up_playwright()
+
+        self.playwright = sync_playwright().start()
+        self.browser = self.playwright.chromium.connect_over_cdp("http://localhost:9222")
+        self.context = self.browser.contexts[0] if self.browser.contexts else self.browser.new_context()
+        page = self.context.new_page()
+
+        # Set up the page state based on the setup function
+        page = setup_page_state(page, setup_function, application=self.application)
+        return page
 
     def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using Naviqate crawler."""
@@ -70,11 +86,13 @@ class NaviqateTestRunner(BaseTestRunner):
 
         # Get initial page setup if needed
         if setup_function:
-            # For Naviqate, we might need to handle this differently
-            # as it uses Selenium WebDriver rather than Playwright
-            # For now, we'll note that setup was requested
-            self.logger.info(f"Setup function requested: {setup_function}")
-            # You might want to implement Selenium-based setup here
+            # Restart browser
+            script_dir = Path(__file__).parent.resolve()
+            remote_browser_script = script_dir / "browser.sh"
+            subprocess.run(["bash", str(remote_browser_script)], check=True)
+
+            # Setup initial page on remote browser
+            self.get_initial_page(setup_function)
 
         # Create nested progress bar for actions
         with tqdm(
