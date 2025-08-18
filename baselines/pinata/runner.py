@@ -18,6 +18,10 @@ PROJECT_DIR = Path(__file__).parent.parent
 if str(PROJECT_DIR) not in sys.path:
     sys.path.append(str(PROJECT_DIR))
 
+PINATA_DIR = Path(__file__).parent / "src"
+if str(PINATA_DIR) not in sys.path:
+    sys.path.append(str(PINATA_DIR))
+
 from baselines.pinata.src.VTAAS.data.testcase import TestCase as PinataTestCase
 from baselines.pinata.src.VTAAS.llm.llm_client import LLMProvider
 from baselines.pinata.src.VTAAS.orchestrator.orchestrator import Orchestrator
