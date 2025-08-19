@@ -4,10 +4,14 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 
+from tqdm import tqdm
 from const import ApplicationEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
+from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from tqdm import tqdm
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Add project directory
 PROJECT_DIR = Path(__file__).parent.parent
@@ -72,6 +76,7 @@ class NaviqateTestRunner(BaseTestRunner):
         page = self.context.new_page()
 
         # Set up the page state based on the setup function
+        self.logger.info("setup page state")
         page = setup_page_state(page, setup_function, application=self.application)
         return page
 
@@ -84,13 +89,12 @@ class NaviqateTestRunner(BaseTestRunner):
 
         result = TestResult(test_name=test_name, total_step=len(actions))
 
-        # Get initial page setup if needed
-        if setup_function:
-            # Restart browser
-            script_dir = Path(__file__).parent.resolve()
-            remote_browser_script = script_dir / "browser.sh"
-            subprocess.run(["bash", str(remote_browser_script)], check=True)
+        # Restart browser
+        script_dir = Path(__file__).parent.resolve()
+        remote_browser_script = script_dir / "browser.sh"
+        subprocess.run(["bash", str(remote_browser_script)], check=True)
 
+        if setup_function is not None:
             # Setup initial page on remote browser
             self.get_initial_page(setup_function)
 
@@ -103,10 +107,30 @@ class NaviqateTestRunner(BaseTestRunner):
             bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
             colour="green",
         ) as action_bar:
+            
+            website = self.get_website_from_url(url) if url else ""
+            
+            chrome_options = Options()
+            chrome_options.debugger_address = "localhost:9222"
+            driver = webdriver.Chrome(
+                service=Service(ChromeDriverManager().install()),
+                options=chrome_options
+            )
+
+            # Create crawler for this action
+            crawler = WebCrawler(
+                driver,
+                website,
+                abstracted=self.abstracted,
+                headless=self.headless,
+                output_dir=self.output_dir,
+            )
+            
             # Process each action
             for i, action_data in enumerate(actions):
                 action = action_data.action
-                website = self.get_website_from_url(url) if url else ""
+                crawler.task = action
+                crawler.prev_context = ""
 
                 # Update progress bar description
                 action_bar.set_description(f"  Action {i + 1}: {action[:40]}")
@@ -118,14 +142,7 @@ class NaviqateTestRunner(BaseTestRunner):
                 start_time = time.time()
 
                 try:
-                    # Create crawler for this action
-                    crawler = WebCrawler(
-                        website,
-                        action,
-                        abstracted=self.abstracted,
-                        headless=self.headless,
-                        output_dir=self.output_dir,
-                    )
+
 
                     # Execute the action
                     crawler.loop(MAX_STEPS=self.max_steps)
@@ -156,6 +173,8 @@ class NaviqateTestRunner(BaseTestRunner):
                     self.logger.error(
                         f"Unexpected error: {e} - Stopping at Task {i + 1}"
                     )
+                    import traceback
+                    self.logger.error(traceback.format_exc())
                     action_bar.set_postfix(status="✗", refresh=True)
                     break
 

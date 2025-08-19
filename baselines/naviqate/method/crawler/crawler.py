@@ -1,38 +1,29 @@
+import os
+import time
+import json
+import shutil
+import datetime
+import configparser
+from io import BytesIO
+from pathlib import Path
+from collections import defaultdict
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
 
-from io import BytesIO
-
-import undetected_chromedriver as uc
-
-import time
-
-from collections import defaultdict
-import os
-from bs4 import BeautifulSoup
-
-import datetime
-import shutil
-import json
-
-import method.utils.utils as utils
-import method.llm.prompts as prompts
-from method.llm.llm_prompting import *
-
-import configparser
+import baselines.naviqate.method.utils.utils as utils
+import baselines.naviqate.method.llm.prompts as prompts
+from baselines.naviqate.method.llm.llm_prompting import *
 
 config = configparser.ConfigParser()
-#config.readfp(open(r'../method/configs.config'))
-with open('../method/configs.config') as f:
+script_dir = Path(__file__).resolve().parent
+
+with open(script_dir / ".." / "configs.config") as f:
     config.read_file(f)
+
 WINDOW_WIDTH = int(config.get('DRIVER', 'width'))
 WINDOW_HEIGHT = int(config.get('DRIVER', 'height'))
 WAIT_TIMEOUT = int(config.get('DRIVER', 'timeout'))
@@ -41,26 +32,10 @@ MAX_ACTIONABLES = int(config.get('METHOD', 'max_actionables'))
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
-
 class WebCrawler():
-    def __init__(self, website, task, abstracted=False, headless=False, output_dir='./out'):
-        chrome_options = uc.ChromeOptions()
-        chrome_options.debugger_address = "http://localhost:9222"
-        chrome_options.add_argument("--disable-notifications")
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument(f"window-size={WINDOW_WIDTH},{WINDOW_HEIGHT}")
-        chrome_options.add_experimental_option("prefs", {"profile.default_content_settings.cookies": 0})
-
-        # chrome_options.add_argument('--headless')
-        
-        self.driver = uc.Chrome(options=chrome_options, headless=headless, use_subprocess=True)
-        
-        # service = Service(executable_path=ChromeDriverManager().install())
-        
+    def __init__(self, driver, website, abstracted=False, headless=False, output_dir='./out'):
+        self.driver = driver
         self.driver.set_window_size(WINDOW_WIDTH, WINDOW_HEIGHT)
-        self.task = task
-        # self.website_category = "shopping" # We focus on e-commers websites for now
         self.website = website
         self.current_actionables = []
         self.history = []
@@ -70,14 +45,20 @@ class WebCrawler():
 
         # Get the list of tabs (window handles)
         tabs = self.driver.window_handles
-        print(f"Found tabs: {tabs}")
+        titles = []
+
+        for handle in tabs:
+            self.driver.switch_to.window(handle)
+            titles.append(self.driver.title)
+
+        print(f"Found tabs: {titles}")
 
         # Switch to the first tab
         self.driver.switch_to.window(tabs[0])
 
         self.driver.implicitly_wait(WAIT_TIMEOUT)
-        self.dir = f'{output_dir}/{self.website}/{utils.string_to_filename(self.task)}'
-        
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.dir = f'{output_dir}/{self.website}/{timestamp}'
         # self.close_modal()
         self.init_dir()
         # self.model = init_model(model='gpt')
@@ -88,12 +69,12 @@ class WebCrawler():
 
         self.model_chain = create_model_chain(init_model(model='gpt'))
         self.model_chain_gpt_mini = create_model_chain(init_model(model='gpt_mini'))
-        self.prev_context = ""
 
-        
+        self.task: str = ""
+        self.prev_context: str = ""
 
-        if abstracted:
-            self.task = self.generate_concrete_task()
+        # if abstracted:
+        #     self.task = self.generate_concrete_task()
         
     def init_dir(self):
 
@@ -412,7 +393,7 @@ class WebCrawler():
 
         time.sleep(2)
         self.driver.implicitly_wait(WAIT_TIMEOUT)
-        self.driver.switch_to.window(self.driver.window_handles[len(self.driver.window_handles)-1])
+        self.driver.switch_to.window(self.driver.window_handles[0])
 
 
         if action == "type" and text:
@@ -806,4 +787,4 @@ class WebCrawler():
                 pass
             if self.step() == 1:
                 break
-        self.quit()
+        # self.quit()

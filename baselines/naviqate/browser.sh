@@ -1,25 +1,38 @@
 #!/bin/bash
 
-CONTAINER_NAME="browser"
-IMAGE="docker.io/chromedp/headless-shell"
 PORT=9222
 WINDOW_SIZE="1280,720"
+PROFILE_DIR="/tmp/chrome-profile"
 
-# Check if container is already running
-if docker ps -a --format '{{.Names}}' | grep -Eq "^${CONTAINER_NAME}\$"; then
-    echo "Container '${CONTAINER_NAME}' already exists. Restarting..."
-    docker rm -f "${CONTAINER_NAME}"
-fi
+# Kill any existing Chrome instance using that port
+pkill -f "google-chrome.*--remote-debugging-port=${PORT}" || true
 
-# Run the container
-echo "Starting container '${CONTAINER_NAME}'..."
-docker run -d \
-    -p ${PORT}:9222 \
-    --name "${CONTAINER_NAME}" \
-    ${IMAGE} \
+# Make sure profile dir exists
+mkdir -p "$PROFILE_DIR"
+
+# Start Chrome
+echo "Starting local Chrome..."
+google-chrome \
+    --remote-debugging-port=${PORT} \
+    --remote-debugging-address=127.0.0.1 \
+    --user-data-dir=${PROFILE_DIR} \
+    --no-first-run \
+    --no-default-browser-check \
+    --disable-extensions \
+    --headless=new \
     --window-size=${WINDOW_SIZE} \
-    --remote-debugging-port=9222 \
-    --disable-gpu \
-    --no-sandbox
+    > /tmp/chrome.log 2>&1 &
 
-echo "Headless browser running on port ${PORT} with window size ${WINDOW_SIZE}."
+CHROME_PID=$!
+echo "Chrome PID: $CHROME_PID"
+
+# Wait for "DevTools listening on" in logs
+echo "Waiting for Chrome DevTools endpoint..."
+while true; do
+    endpoint=$(grep -oE "ws://[^ ]+" /tmp/chrome.log)
+    if [ -n "$endpoint" ]; then
+        echo "DevTools endpoint: $endpoint"
+        break
+    fi
+    sleep 0.5
+done
