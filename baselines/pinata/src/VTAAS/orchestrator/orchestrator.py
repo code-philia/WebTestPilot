@@ -46,6 +46,7 @@ class OrchestratorParams(TypedDict, total=False):
     name: str
     browser: Browser | None
     llm_provider: LLMProvider
+    model_name: str
     tracer: bool
     output_folder: str
 
@@ -58,6 +59,7 @@ class Orchestrator:
             "name": "missing name",
             "browser": None,
             "llm_provider": LLMProvider.OPENAI,
+            "model_name": "meta-llama/llama-3.2-90b-vision-instruct",
             "tracer": False,
             "output_folder": ".",
         }
@@ -75,6 +77,7 @@ class Orchestrator:
         self.name: str = self.params["name"]
         self._browser: Browser | None = self.params["browser"]
         self.llm_provider: LLMProvider = self.params["llm_provider"]
+        self.model_name: str = self.params["model_name"]
         self.tracer: bool = self.params["tracer"]
         self.output_folder: str = self.params["output_folder"]
         self.start_time: float = time.time()
@@ -88,7 +91,11 @@ class Orchestrator:
             self.logger.warning("This orchestrator should have a proper name!")
         self.logger.info(f"Orchestrator output folder: {self.output_folder}")
         self.llm_client: LLMClient = create_llm_client(
-            self.name, self.llm_provider, self.start_time, self.output_folder
+            self.name,
+            self.llm_provider,
+            self.start_time,
+            self.output_folder,
+            model_name=self.model_name,
         )
         self._exec_context: TestExecutionContext | None = None
         self._followup_prompt: str | None = None
@@ -96,10 +103,14 @@ class Orchestrator:
         self.worker_reports: dict[str, list[str]] = {}
         self.worker_counter: dict[str, int] = {"actor": 0, "assertor": 0}
         self.conversation: list[Message] = []
+        self.traces: list[dict] = []
 
-    async def process_testcase(self, test_case: TestCase) -> TestCaseVerdict:
+    async def process_testcase(
+        self, test_case: TestCase, max_tries: int = 4
+    ) -> TestCaseVerdict:
         """Manages the main execution loop for the given Test Case."""
         self.logger.info(f"Processing test case {test_case.name}")
+        self.traces = []
         exec_context = TestExecutionContext(
             test_case=test_case,
             current_step=test_case.get_step(1),
@@ -115,13 +126,15 @@ class Orchestrator:
                 tracer=self.tracer,
                 trace_folder=self.output_folder,
             )
-        _ = await self.browser.goto(exec_context.test_case.url)
+            
+        # This is to use the existing url from configuration instead, determined at runtime.
+        # _ = await self.browser.goto(exec_context.test_case.url)
         verdict = TestCaseVerdict(step_index=1, status=Status.UNK)
         try:
             for idx, test_step in enumerate(test_case):
                 exec_context.current_step = test_step
                 exec_context.step_index = idx + 1
-                verdict = await self.process_step(exec_context)
+                verdict = await self.process_step(exec_context, max_tries)
                 if verdict.status != Status.PASS:
                     self.logger.info(
                         (
@@ -133,6 +146,7 @@ class Orchestrator:
                         status=Status.FAIL,
                         step_index=exec_context.step_index,
                         explaination=None,
+                        traces=self.traces,
                     )
                 step_str = (
                     f"{exec_context.step_index}. {test_step[0]} -> {test_step[1]}"
@@ -145,13 +159,14 @@ class Orchestrator:
                     exec_context.history.append(
                         Orchestrator.synthesis_str(step_synthesis)
                     )
-            return TestCaseVerdict(status=Status.PASS, explaination=None)
+            return TestCaseVerdict(status=Status.PASS, explaination=None, traces=self.traces)
         except Exception as e:
             self.logger.warning(f"got this error: {str(e)}")
             return TestCaseVerdict(
                 status=Status.FAIL,
                 step_index=exec_context.step_index,
                 explaination=f"Got error: {str(e)}",
+                traces=self.traces,
             )
         finally:
             await self.browser.close()
@@ -248,7 +263,9 @@ class Orchestrator:
         """Continuing planning for the test step: spawn workers based on LLM call."""
         results_str, screenshots = workers_result
         with open(
-            "./src/VTAAS/orchestrator/followup_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             results_str += prompt_file.read()
 
@@ -282,7 +299,9 @@ class Orchestrator:
         """Recover planning of the test step: spawn workers based on LLM call."""
         results_str, screenshots = workers_result
         with open(
-            "./src/VTAAS/orchestrator/recover_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             results_str += prompt_file.read()
 
@@ -327,6 +346,9 @@ class Orchestrator:
                 for action in result.actions:
                     if action:
                         local_history.append(action.action)
+                # Collect traces from Actor workers
+                if hasattr(worker, 'traces'):
+                    self.traces.extend(worker.traces)
             elif result.status == Status.PASS:
                 local_history.append(f"{worker.__str__()}: Assertion Verified")
             else:
@@ -420,6 +442,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
+                    model_name=self.model_name,
                 )
                 self.workers.append(worker)
                 self.active_workers.append(worker)
@@ -431,6 +454,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
+                    model_name=self.model_name,
                 )
                 self.workers.append(worker)
                 self.active_workers.append(worker)
@@ -455,7 +479,9 @@ class Orchestrator:
 
     def _build_system_prompt(self) -> str:
         with open(
-            "./src/VTAAS/orchestrator/system_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/system_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         return prompt_template
@@ -464,7 +490,9 @@ class Orchestrator:
         self, exec_context: TestExecutionContext, page_info: str, viewport_info: str
     ) -> str:
         with open(
-            "./src/VTAAS/orchestrator/init_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/init_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         test_case = exec_context.test_case
@@ -492,7 +520,9 @@ class Orchestrator:
         step_history: str,
     ) -> str:
         with open(
-            "./src/VTAAS/orchestrator/synthesis_prompt.txt", "r", encoding="utf-8"
+            "./baselines/pinata/src/VTAAS/orchestrator/synthesis_prompt.txt",
+            "r",
+            encoding="utf-8",
         ) as prompt_file:
             prompt_template = prompt_file.read()
         saved_data = (
@@ -536,7 +566,9 @@ class Orchestrator:
         """Get the followup prompt"""
         if self._followup_prompt is None:
             with open(
-                "./src/VTAAS/orchestrator/followup_prompt.txt", "r", encoding="utf-8"
+                "./baselines/pinata/src/VTAAS/orchestrator/followup_prompt.txt",
+                "r",
+                encoding="utf-8",
             ) as prompt_file:
                 self._followup_prompt = prompt_file.read()
         return self._followup_prompt
@@ -546,10 +578,27 @@ class Orchestrator:
         """Get the recover prompt"""
         if self._recover_prompt is None:
             with open(
-                "./src/VTAAS/orchestrator/recover_prompt.txt", "r", encoding="utf-8"
+                "./baselines/pinata/src/VTAAS/orchestrator/recover_prompt.txt",
+                "r",
+                encoding="utf-8",
             ) as prompt_file:
                 self._recover_prompt = prompt_file.read()
         return self._recover_prompt
+
+    def get_total_token_usage(self) -> int:
+        """Get the total token usage from orchestrator and all workers."""
+        total_tokens = 0
+        
+        # Get tokens from orchestrator's own LLM client
+        if hasattr(self.llm_client, 'get_token_usage'):
+            total_tokens += self.llm_client.get_token_usage()
+        
+        # Get tokens from all workers (both active and retired)
+        for worker in self.workers:
+            if hasattr(worker, 'llm_client') and hasattr(worker.llm_client, 'get_token_usage'):
+                total_tokens += worker.llm_client.get_token_usage()
+        
+        return total_tokens
 
     async def close(self):
         self.logger.handlers.clear()

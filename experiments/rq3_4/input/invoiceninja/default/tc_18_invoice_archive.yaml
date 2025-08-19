@@ -1,4 +1,4 @@
 name: 18::Invoice Archive
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_invoice_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Invoice archiving is confirmed. Verify alert message "Successfully archived invoice" appears. Success alert confirms invoice archiving. Navigate to invoices listing. Invoices listing page is displayed. Verify archived invoice no longer appears in active list. Invoice is removed from main listing. Access archived invoices view. Archived invoices can be viewed separately. Verify invoice appears in archived list. Invoice is visible in archived invoices view

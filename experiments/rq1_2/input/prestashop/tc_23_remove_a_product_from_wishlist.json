@@ -1,0 +1,19 @@
+{
+  "name": "23::Remove A Product From Wishlist",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_buyer_page",
+  "actions": [
+    {
+      "action": "Enter the name of the liked product into the \"Search\" input box.",
+      "expectedResult": "The product name is successfully entered in the search box."
+    },
+    {
+      "action": "Click the search icon or press the Enter key.",
+      "expectedResult": "The search results page is loaded and displays the product."
+    },
+    {
+      "action": "Click the activated (color-changed) \"heart\" icon on the product card.",
+      "expectedResult": "A success message \"Product successfully removed from your wishlist\" appears at the top of the page."
+    }
+  ]
+}

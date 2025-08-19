@@ -1,4 +1,4 @@
 name: 13::Delete A Customer Account
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: Click the "Customers" link in the back-office main menu. The Customers submenu expands. Click the "Customers" link in the submenu. The customer list page is displayed correctly. Find the data row for the customer using their unique email address. The target row is correctly located. A dropdown menu with options like "View". Click the "Delete" option from the dropdown menu. A confirmation dialog appears. Click the "Delete" button in the dialog to confirm. A "Successful deletion" message is displayed.

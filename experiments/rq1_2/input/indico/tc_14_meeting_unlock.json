@@ -1,0 +1,23 @@
+{
+  "name": "14::Meeting Unlock",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_meeting_page",
+  "actions": [
+    {
+      "action": "Click the action menu button (three dots icon)",
+      "expectedResult": "Action menu dropdown opens"
+    },
+    {
+      "action": "Click \"Unlock\" option",
+      "expectedResult": "Unlock action is triggered"
+    },
+    {
+      "action": "Verify alert message \"The event is now unlocked\" appears",
+      "expectedResult": "Success alert confirms meeting is unlocked"
+    },
+    {
+      "action": "Verify lock status message is no longer visible",
+      "expectedResult": "Page no longer shows locked status"
+    }
+  ]
+}

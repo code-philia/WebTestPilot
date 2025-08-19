@@ -1,0 +1,31 @@
+{
+  "name": "05::Lecture Lock",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_lecture_page",
+  "actions": [
+    {
+      "action": "Click the action menu button (three dots icon)",
+      "expectedResult": "Action menu dropdown opens"
+    },
+    {
+      "action": "Click \"Change type\" option",
+      "expectedResult": "Change type submenu appears"
+    },
+    {
+      "action": "Click \"Lock\" option",
+      "expectedResult": "Lock confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Lock event\" button",
+      "expectedResult": "Lecture locking is confirmed"
+    },
+    {
+      "action": "Verify \"This event has been locked\" message appears",
+      "expectedResult": "Lock status message is displayed on page"
+    },
+    {
+      "action": "Verify alert message \"The event is now locked\" appears",
+      "expectedResult": "Success alert confirms lecture is locked"
+    }
+  ]
+}

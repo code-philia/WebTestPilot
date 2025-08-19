@@ -1,5 +1,5 @@
 name: 13::Meeting Lock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_meeting_page
 description: To begin, you'll want to interact with the interface by clicking the action menu button, which is represented by three dots. Once the action menu dropdown opens, proceed to select the 'Lock' option from the list. For your reference, after selecting 'Lock', a confirmation dialog will appear on the screen. Imagine a scenario where you need to secure an event; at this point, you would click the 'Lock event' button to finalize the action. The system acknowledges the request by confirming that the meeting locking process has been successfully completed. Next up, ensure that the message stating 'This event has been locked' is visible on the screen for verification purposes. In technical terms, the lock status message should be prominently displayed on the page post-action. If you encounter any issues, check for the alert message 'The event is now locked' to confirm everything's in order. Lastly, just to make sure we're all on the same page, a success alert will pop up, 
   confirming that the meeting is indeed locked.

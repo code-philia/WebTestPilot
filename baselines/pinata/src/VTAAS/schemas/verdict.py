@@ -47,7 +47,8 @@ class TestStepVerdict(BaseResult):
 
 
 class TestCaseVerdict(BaseResult):
-    step_index: int = None  # type: ignore
+    step_index: int = -1  # type: ignore
+    traces: list[dict | None] = []
 
 
 WorkerResult = ActorResult | AssertorResult

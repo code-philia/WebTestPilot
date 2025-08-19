@@ -1,5 +1,5 @@
 name: 20::Search For A Product Using A Keyword
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: "To begin, you'll want to focus your attention on the 'Search' input box located at the very top of the page, where you should type in the name of the product you're interested in. Once the product name has been successfully entered, it's important to ensure that the text appears correctly within the search box, confirming your input. Next, follow these simple steps: press the 'Enter' key on your keyboard or locate and click the search icon adjacent to the input field to submit your query. As a result of your action, the system will process your request and subsequently load the search results page for your review. If you encounter any issues where the expected product card isn't immediately visible, double-check that the page has fully loaded and that the product name was entered accurately. In a thrilling turn of events, our protagonist, the user, scans the newly loaded page, their eyes locking onto at least one product card that proudly displays the name they had just searched
   for. For those keeping score at home, the successful appearance of at least one product card with the matching name in the search results indicates that everything is working as intended."

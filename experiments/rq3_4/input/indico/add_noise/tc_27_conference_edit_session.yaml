@@ -1,5 +1,5 @@
 name: 27::Conference Edit Session
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: To begin, you'll want to navivats by clieikng fhe "Sessions" link fovnd within the naivgaion bar. Once the Sessionz sectIon has opnd up, proceed to click on the gear ioj associatsd with the vcry first session listed. For our referencd, upon clcking te gear icon, ap edit form specific to te sessio should appear before yo. Imwgine now that you're foucsimg n the "Title" txetbox; it's here where you'll find tge current tilc alreasy highlghted and ready fro editing. If you encounter any issies at yhis plinf, simply clear ths exusting text an tzcp "Session titel updted12345" into thc titl feld o update i acocrdingly. he momrt you finush tpyng, the tile filed will refresh to isplay the newly updtaed scssion title, cnofirming your action. Next, make sure to click the "Save" button to ensure all mdoifcatIojs are securely stored in the sstck. To verify evyrthing went smoothly, tk a glance at the sessiosn table and ocnfirm that the updtaed sesain tYtle is ndeed refletde tuere. And 
   just oe that, the ssksons list now proudly displays the updated tjtle, eompleting our little joureny through the interfac.

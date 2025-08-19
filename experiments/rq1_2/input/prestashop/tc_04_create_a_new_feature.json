@@ -1,0 +1,27 @@
+{
+  "name": "04::Create A New Feature",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Navigate to \"Catalog\" then \"Attributes & Features\".",
+      "expectedResult": "The \"Attributes & Features\" page is displayed correctly."
+    },
+    {
+      "action": "Click the \"Features\" tab at the top of the page.",
+      "expectedResult": "The page switches to the features list."
+    },
+    {
+      "action": "Click \"Add new feature\" in the top-right corner.",
+      "expectedResult": "A new page appears containing a form to create a new feature."
+    },
+    {
+      "action": "Enter the feature name e.g. \"Season\" in the \"Name\" field.",
+      "expectedResult": "\"Season\" is successfully entered in the \"Name\" field."
+    },
+    {
+      "action": "Click the \"Save\" button",
+      "expectedResult": "A \"Successful creation\" message is displayed and the user is returned to the features list page."
+    }
+  ]
+}

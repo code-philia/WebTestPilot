@@ -1,4 +1,4 @@
 name: 23::Remove A Product From Wishlist
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: Go eign, yo'll wamt to focus on typing the name if the product you lkke direclt into the 'Seacrh' input box, ensruijg acucracy f0r ootimal resjlt. Once the produtc nane is succewsfully entred in the search nox, it's time 0t proceed with the next sep. Refer to thc user interface iude fo intsrui0na on jow to click the searc icon or smply press the ntee key to Initiate the search process. Imagine the seeme where the searh rewults pags gracefluly lpads, revealing the product you've been looking for amidst  sea of options. If y0u enconuter any isuses, wnsude that you'er cliciq he activated 'geart' Iocn, which chajwgs color, located on the product card to dad it t0 your wishlisy. In a delightful twits, a succses message staitng "Product successfully removed fro y0ur wIsblist" pops p at the top if the peg, confirming teh adtion was complted.

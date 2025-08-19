@@ -1,4 +1,4 @@
 name: 21::Conference Unlock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: To begin, you'll want to interact with the interface by clicking the action menu button, which is represented by three dots. Once the action menu dropdown opens, proceed to select the 'Unlock' option from the list. Note that upon selection, the system triggers an unlock action, a fundamental process for altering access permissions. If everything goes smoothly, you should see an alert message stating, 'The event is now unlocked,' popping up like a friendly ghost confirming your success. The success alert acts as a beacon, confirming that the conference has indeed been unlocked and is ready for further actions. In case you're troubleshooting, ensure that the lock status message has disappeared, indicating the change in state. Finally, the page will no longer display any indication of a locked status, wrapping up the sequence as if it were the end of a short story.

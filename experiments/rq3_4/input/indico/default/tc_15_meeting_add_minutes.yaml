@@ -1,4 +1,4 @@
 name: 15::Meeting Add Minutes
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_meeting_page
 description: Click "Switch to display view" link. Display view is activated. Click the action menu button (three dots icon). Action menu dropdown opens. Click "Add minutes" option. Minutes editor opens. Click in the Rich Text Area iframe. Rich text editor is focused. Type "Meeting Minute123456" in the editor. Text is entered in the editor. Click "Save" button. Minutes are saved. Verify minutes content is displayed in editor. Editor shows the saved minutes text. Verify "Save" button is disabled. Save button indicates no unsaved changes. Click "Close" button. Minutes editor is closed

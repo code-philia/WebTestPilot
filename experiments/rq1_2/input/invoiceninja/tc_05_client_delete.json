@@ -1,0 +1,31 @@
+{
+  "name": "05::Client Delete",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_client_page",
+  "actions": [
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Delete\" option",
+      "expectedResult": "Delete confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Client deletion is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully deleted client\" appears",
+      "expectedResult": "Success alert confirms client deletion"
+    },
+    {
+      "action": "Navigate to clients listing",
+      "expectedResult": "Clients listing page is displayed"
+    },
+    {
+      "action": "Verify deleted client no longer appears in active list",
+      "expectedResult": "Client is removed from main listing"
+    }
+  ]
+}

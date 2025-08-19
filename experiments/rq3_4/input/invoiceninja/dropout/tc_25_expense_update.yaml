@@ -1,4 +1,4 @@
 name: 25::Expense Update
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click "Edit" button or link. Expense edit form opens with current values. Click in the "Amount" textbox. Amount field is focused and contains current amount. Clear the amount field and type "amount_updated123456". Amount field shows updated expense amount. Click "Save" button. Expense changes are saved. Verify alert message "Successfully updated expense" appears. Success alert confirms expense update. Verify updated amount appears in expense detail. Expense page shows new amount. Expenses table shows updated expense amount.

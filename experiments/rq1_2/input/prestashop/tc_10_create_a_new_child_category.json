@@ -1,0 +1,43 @@
+{
+  "name": "10::Create A New Child Category",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Click \"Catalog\"",
+      "expectedResult": "then click \"Categories\" in the back-office menu."
+    },
+    {
+      "action": "Click the \"Add new category\" button.",
+      "expectedResult": "A new page for creating a new category appears."
+    },
+    {
+      "action": "Enter the sub-category name e.g. \"Sports shoes\" in the \"Name\" field.",
+      "expectedResult": "The sub-category name \"Sports shoes\" is successfully entered."
+    },
+    {
+      "action": "Click the \"Expand\" button in the \"Parent Category\" area.",
+      "expectedResult": "The category tree is expanded."
+    },
+    {
+      "action": "Select \"Shoes\" as the parent category from the tree.",
+      "expectedResult": "PrestaShop understands that you want to create a sub-category"
+    },
+    {
+      "action": "Enter a description for the category in the \"Description\" area.",
+      "expectedResult": "The description is filled into the rich text editor."
+    },
+    {
+      "action": "Upload a \"Category cover image\".",
+      "expectedResult": "The image filename is displayed in the upload area."
+    },
+    {
+      "action": "Enter a custom URL e.g. \"sports-shoes\" for the \"Friendly URL\" field.",
+      "expectedResult": "\"sports-shoes\" is successfully entered in the Friendly URL field."
+    },
+    {
+      "action": "Click the \"Save\" button",
+      "expectedResult": "A \"Successful creation\" message is displayed at the top of the page."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
 name: 03::Lecture Read
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: Verify lecture name appears in event settings data. Lecture name is displayed correctly. Verify venue information is visible in location section. Venue name is shown in event location. Room name is shown in event location. Verify event navigation elements are present. Event navigation menu is available.

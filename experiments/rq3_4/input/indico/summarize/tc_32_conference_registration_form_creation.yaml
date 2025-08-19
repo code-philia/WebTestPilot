@@ -1,4 +1,4 @@
 name: 32::Conference Registration Form Creation
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: Click Reg link -> Reg sect opens -> Click 'Create form' -> Dialog opens -> Click Title box -> Title fld focused -> Type 'Reg Form' -> Title fld has form name -> Click 'Create' btn -> Reg form created -> Verify alert msg 'Reg form created' -> Success alert confirms

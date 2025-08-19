@@ -1,0 +1,39 @@
+{
+  "name": "33::Conference Registration State Management",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_conference_page",
+  "actions": [
+    {
+      "action": "Click \"Registration\" link in navigation",
+      "expectedResult": "Registration section opens"
+    },
+    {
+      "action": "Click \"Start now\" button",
+      "expectedResult": "Registration opening is initiated"
+    },
+    {
+      "action": "Verify alert message \"Registrations are now open\" appears",
+      "expectedResult": "Success alert confirms registrations opened"
+    },
+    {
+      "action": "Click \"Close now\" link",
+      "expectedResult": "Registration closing is initiated"
+    },
+    {
+      "action": "Verify alert message \"Registrations are now closed\" appears",
+      "expectedResult": "Success alert confirms registrations closed"
+    },
+    {
+      "action": "Click \"Reopen now\" button",
+      "expectedResult": "Reopen confirmation dialog appears"
+    },
+    {
+      "action": "Click \"OK\" button",
+      "expectedResult": "Registration reopening is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Registrations are now open\" appears",
+      "expectedResult": "Success alert confirms registrations reopened"
+    }
+  ]
+}

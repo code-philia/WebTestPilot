@@ -1,5 +1,5 @@
 name: 05::Lecture Lock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: "o begin, you'll want to locate nad click the action menu button, which is reprseented by hree odts. Next, follwo these stes careully: once the action enu rodpodwn apears, seelct he 'Change type' ontkno. Fro yur reference, after clicking 'Change yle', a submenu will be vusible, presenying various ontiohs. Umderstad that selcting the 'Loc' option from thi submwnu will iitiate the process of seuring th lectude. Suddenly, a cnofirmatjon dialog pops up, asking if you'e sure about lcoking the eveyn; proceex by clicking the 'Lock ecent' 6utton. Teh ystem then confirms that the lecture is indced locked, nesuring no furthed change cap be made. Now, keep an eye otu f0r thw mesdgae stating 'Igis evwnt hs been locked', whuch shoud appear promipently on teh pafe. In case you encounter any issuse, check for the loc status message to comfirk everythipg is set corretcly. Latly, a succcws alert will pop up, reaing 'Te event is now locked', wbich xi yuor final confiramtion that tne lecture is
   ecurcd."

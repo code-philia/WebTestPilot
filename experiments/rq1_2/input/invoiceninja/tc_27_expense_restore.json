@@ -1,0 +1,39 @@
+{
+  "name": "27::Expense Restore",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_expense_page",
+  "actions": [
+    {
+      "action": "Click \"Expenses\" link in navigation menu",
+      "expectedResult": "Expenses listing page appears"
+    },
+    {
+      "action": "Click filter or view options to show archived expenses",
+      "expectedResult": "Archived expenses view is available"
+    },
+    {
+      "action": "Locate the archived expense with amount \"amount_updated123456\"",
+      "expectedResult": "Archived expense is visible in filtered view"
+    },
+    {
+      "action": "Click \"Restore\" button or action for the archived expense",
+      "expectedResult": "Restore action is available"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" in the restoration dialog",
+      "expectedResult": "Expense restoration is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully restored expense\" appears",
+      "expectedResult": "Success alert confirms expense restoration"
+    },
+    {
+      "action": "Return to active expenses view",
+      "expectedResult": "Standard expenses listing is displayed"
+    },
+    {
+      "action": "Verify restored expense appears in active list",
+      "expectedResult": "Expense is back in main listing"
+    }
+  ]
+}

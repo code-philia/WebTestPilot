@@ -1,0 +1,19 @@
+{
+  "name": "20::Search For A Product Using A Keyword",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_buyer_page",
+  "actions": [
+    {
+      "action": "Enter a product name into the \"Search\" input box at the top of the page.",
+      "expectedResult": "The product name is successfully entered in the search box."
+    },
+    {
+      "action": "Press the \"Enter\" key or click the search icon to submit.",
+      "expectedResult": "The search results page is loaded"
+    },
+    {
+      "action": "Verify that the product card containing the product name is visible on the page.",
+      "expectedResult": "At least one product card containing the product name appears in the search results."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "30::Credit Create",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_credit_page",
+  "actions": [
+    {
+      "action": "Click \"Credits\" link in navigation menu",
+      "expectedResult": "Credits listing page appears"
+    },
+    {
+      "action": "Click \"New Credit\" button",
+      "expectedResult": "Credit creation form opens"
+    },
+    {
+      "action": "Click in the client selection field",
+      "expectedResult": "Client dropdown or combobox is focused"
+    },
+    {
+      "action": "Select or type \"company_name123456\" to choose client",
+      "expectedResult": "Client is selected for the credit"
+    },
+    {
+      "action": "Click \"Add Item\" or navigate to line items section",
+      "expectedResult": "Line items section is available"
+    },
+    {
+      "action": "Click in the product selection field for first line item",
+      "expectedResult": "Product selection dropdown opens"
+    },
+    {
+      "action": "Select \"product_name123456\" for the first line item",
+      "expectedResult": "Product is added to line item"
+    },
+    {
+      "action": "Verify quantity and price are populated",
+      "expectedResult": "Line item shows product details"
+    },
+    {
+      "action": "Click \"Add Item\" to add a second line item",
+      "expectedResult": "Second line item row is added"
+    },
+    {
+      "action": "Select another product for the second line item",
+      "expectedResult": "Second product is added to credit"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Credit is created and saved"
+    },
+    {
+      "action": "Verify alert message \"Successfully created credit\" appears",
+      "expectedResult": "Success alert confirms credit creation"
+    },
+    {
+      "action": "Verify credit appears in credits listing",
+      "expectedResult": "New credit is visible in the credits table"
+    },
+    {
+      "action": "Verify credit status is \"Draft\"",
+      "expectedResult": "Credit shows correct initial status"
+    }
+  ]
+}

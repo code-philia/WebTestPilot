@@ -1,4 +1,4 @@
 name: 29::Expense Clone
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Clone" or "Duplicate" option. Clone action initiates. Verify expense clone form opens with copied data. Clone form shows original expense data. Modify cloned expense details if needed. Expense details can be adjusted. Click "Save" button. Cloned expense is created and saved. Verify alert message "Successfully created expense" appears. Success alert confirms expense clone creation. Verify cloned expense appears in expenses listing. New cloned expense is visible in expenses table. Verify original expense remains unchanged. Original expense is still present and unmodified

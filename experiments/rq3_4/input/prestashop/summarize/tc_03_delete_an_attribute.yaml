@@ -1,4 +1,4 @@
 name: 03::Delete An Attribute
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: NAV to 'Catalog' -> 'Attrs & Feats' pg. 'Attrs & Feats' pg shows up rite. Locate 'Weight' attr row & hit 'more acts' btn on rt. Dropdown w/ 'Edit', 'Del' pops up. Select 'Del'. Confirm del dialog shows. Hit 'Yes' in dialog. 'Success del' msg @ top & 'Weight' gone frm list.

@@ -1,0 +1,47 @@
+{
+  "name": "25::Conference Enable Notifications for Call for Abstracts",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_conference_page",
+  "actions": [
+    {
+      "action": "Click on the workflows collapsible menu containing Call for Abstracts",
+      "expectedResult": "Workflows menu expands"
+    },
+    {
+      "action": "Click \"Call for Abstracts\" link",
+      "expectedResult": "Call for Abstracts section opens"
+    },
+    {
+      "action": "Click \"Enable module\" button",
+      "expectedResult": "Module is enabled"
+    },
+    {
+      "action": "Click \"Notifications\" button",
+      "expectedResult": "Notifications configuration opens"
+    },
+    {
+      "action": "Click \"Add new one\" button",
+      "expectedResult": "Notification creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Email123456\" in the title field",
+      "expectedResult": "Title field contains unique notification title"
+    },
+    {
+      "action": "Click \"Add new rule\" button",
+      "expectedResult": "Rule configuration appears"
+    },
+    {
+      "action": "Select \"Submitted\" from the event dropdown",
+      "expectedResult": "Submitted event is selected"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Notification is created and saved"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
 name: 06::Lecture Unlock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: "Click 3dots btn. Dropdown opens. Click 'Unlock'. Unlock trig. Verify msg 'Event unlocked'. Success alert shows. Lock status msg gone. Page no longer locked. #roughdraft"

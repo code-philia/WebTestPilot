@@ -1,0 +1,23 @@
+{
+  "name": "03::Lecture Read",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_lecture_page",
+  "actions": [
+    {
+      "action": "Verify lecture name appears in event settings data",
+      "expectedResult": "Lecture name is displayed correctly"
+    },
+    {
+      "action": "Verify venue information is visible in location section",
+      "expectedResult": "Venue name is shown in event location"
+    },
+    {
+      "action": "Verify room information is visible in location section",
+      "expectedResult": "Room name is shown in event location"
+    },
+    {
+      "action": "Verify event navigation elements are present",
+      "expectedResult": "Event navigation menu is available"
+    }
+  ]
+}

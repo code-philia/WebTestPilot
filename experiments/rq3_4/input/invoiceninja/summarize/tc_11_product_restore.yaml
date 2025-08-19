@@ -1,4 +1,4 @@
 name: 11::Product Restore
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: Click 'Products' -> Prod listing pg appears. Use filter/view opts to show del prods. Find 'prod_name Upd 123456'. Click 'Restore' -> Confirm in dialog. Verify msg 'Success restore prod'. Go back to active prods. Check restored prod in main list.

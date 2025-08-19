@@ -1,4 +1,4 @@
 name: 21::Add A Product To Wishlist
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: Enter the product name e.g. "Hummingbird printed t-shirt" into the "Search" input box.. The product name is successfully entered in the search box.. Press the "Enter" key or click the search icon to submit.. The search results page is loaded and displays the product.. Click the visible "heart" icon (Add to Wishlist button) on the specific product card.. A list for selecting a wishlist appears.. Click "My wishlist" from the list.. A success message "Product added" appears at the top of the page.

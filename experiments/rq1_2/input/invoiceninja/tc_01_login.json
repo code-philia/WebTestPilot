@@ -1,0 +1,35 @@
+{
+  "name": "01::Login",
+  "url": "http://localhost:8082/",
+  "setup_function": "",
+  "actions": [
+    {
+      "action": "Click in the email textbox labeled \"Email\"",
+      "expectedResult": "Email field is focused and ready for input"
+    },
+    {
+      "action": "Type \"admin@example.com\" in the email field",
+      "expectedResult": "Email field displays \"admin@example.com\""
+    },
+    {
+      "action": "Click in the password textbox labeled \"Password\"",
+      "expectedResult": "Password field is focused and ready for input"
+    },
+    {
+      "action": "Type \"changeme!\" in the password field",
+      "expectedResult": "Password field shows masked characters"
+    },
+    {
+      "action": "Click the \"Login\" button",
+      "expectedResult": "User authentication is processed"
+    },
+    {
+      "action": "Click the \"Save\" button on the confirmation screen",
+      "expectedResult": "User is successfully authenticated and redirected to dashboard"
+    },
+    {
+      "action": "Verify dashboard elements are visible",
+      "expectedResult": "Dashboard shows navigation menu and main content area"
+    }
+  ]
+}

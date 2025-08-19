@@ -1,0 +1,39 @@
+{
+  "name": "34::Credit Archive",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_credit_page",
+  "actions": [
+    {
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Archive\" option",
+      "expectedResult": "Archive confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
+      "expectedResult": "Credit archiving is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully archived credit\" appears",
+      "expectedResult": "Success alert confirms credit archiving"
+    },
+    {
+      "action": "Navigate to credits listing",
+      "expectedResult": "Credits listing page is displayed"
+    },
+    {
+      "action": "Verify archived credit no longer appears in active list",
+      "expectedResult": "Credit is removed from main listing"
+    },
+    {
+      "action": "Access archived credits view",
+      "expectedResult": "Archived credits can be viewed separately"
+    },
+    {
+      "action": "Verify credit appears in archived list",
+      "expectedResult": "Credit is visible in archived credits view"
+    }
+  ]
+}

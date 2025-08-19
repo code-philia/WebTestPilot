@@ -36,6 +36,8 @@ class LLMClient(Protocol):
         self, system: str, user: str, screenshots: list[bytes]
     ) -> LLMDataExtractionResponse: ...
 
+    def get_token_usage(self) -> int: ...
+
     def close(self):
         self.logger.handlers.clear()
 

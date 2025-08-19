@@ -1,4 +1,4 @@
 name: 03::Client Read
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_client_page
 description: Click "Clients" link in navigation menu. Clients listing page shows all available clients. Use search or filter to find "company_name123456". Client search functionality works. Click on the client with name "company_name123456". Client detail page opens. Verify company name appears in page header. Client name is displayed as main heading. Verify company details are visible. Company information is shown in detail view. Contact details are visible on the page. Verify client statistics and metrics are shown. Client metrics and activity data are displayed.

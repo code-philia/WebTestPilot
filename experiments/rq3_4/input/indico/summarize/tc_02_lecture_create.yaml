@@ -1,4 +1,4 @@
 name: 02::Lecture Create
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: Click 'Create event' -> Dropdown appears -> Click 'Lecture' -> Form opens -> Focus & type 'Lecture123456' in title -> Focus & type 'Venue123456' in venue -> Focus & type 'Room123456' in room -> Select 'Public' mode -> Click 'Create event' btn -> Lecture created -> Verify name in heading -> Verify venue & room info displayed

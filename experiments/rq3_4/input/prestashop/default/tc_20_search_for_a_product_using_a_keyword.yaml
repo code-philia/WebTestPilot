@@ -1,4 +1,4 @@
 name: 20::Search For A Product Using A Keyword
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: Enter a product name into the "Search" input box at the top of the page.. The product name is successfully entered in the search box.. Press the "Enter" key or click the search icon to submit.. The search results page is loaded. Verify that the product card containing the product name is visible on the page.. At least one product card containing the product name appears in the search results.

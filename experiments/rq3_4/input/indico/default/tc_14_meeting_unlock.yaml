@@ -1,4 +1,4 @@
 name: 14::Meeting Unlock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_meeting_page
 description: Click the action menu button (three dots icon). Action menu dropdown opens. Click "Unlock" option. Unlock action is triggered. Verify alert message "The event is now unlocked" appears. Success alert confirms meeting is unlocked. Verify lock status message is no longer visible. Page no longer shows locked status

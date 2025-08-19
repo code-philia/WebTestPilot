@@ -1,4 +1,4 @@
 name: 17::Invoice Send Email
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_invoice_page
 description: Click 'Email Invoice' btn. Email dlg opens. Vrfy rcpt email frm client. Email fld shws client cntct email. Vrfy subj & msg tmpl. Tmpl lds w/ inv details. Mod email cntnt if reqd. Cntnt can b custmzd. Click 'Send Email' btn. Email send init. Vrfy alert msg 'Succ emailing inv'. Succ alert cnfrms sent. Vrfy inv status chngs to 'Sent'. Status updtz aft email. Vrfy email actvty logged. Actvty in inv hist.

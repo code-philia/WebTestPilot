@@ -1,0 +1,55 @@
+{
+  "name": "02::Lecture Create",
+  "url": "http://localhost:8080/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Click \"Create event\" link in navigation",
+      "expectedResult": "Create event dropdown menu appears"
+    },
+    {
+      "action": "Click \"Lecture\" option",
+      "expectedResult": "Lecture creation form opens"
+    },
+    {
+      "action": "Click in the \"Event title\" textbox",
+      "expectedResult": "Event title field is focused for input"
+    },
+    {
+      "action": "Type \"Lecture123456\" in the title field",
+      "expectedResult": "Title field contains the unique lecture name"
+    },
+    {
+      "action": "Click in the \"Venue\" textbox",
+      "expectedResult": "Venue field is focused and ready for input"
+    },
+    {
+      "action": "Type \"Venue123456\" in the venue field",
+      "expectedResult": "Venue field contains unique venue name"
+    },
+    {
+      "action": "Click in the \"Room\" textbox",
+      "expectedResult": "Room field is focused and ready for input"
+    },
+    {
+      "action": "Type \"Room123456\" in the room field",
+      "expectedResult": "Room field contains unique room name"
+    },
+    {
+      "action": "Click \"Public\" option for event protection mode",
+      "expectedResult": "Public protection mode is selected"
+    },
+    {
+      "action": "Click \"Create event\" button",
+      "expectedResult": "Lecture is created and saved"
+    },
+    {
+      "action": "Verify lecture name appears in page heading",
+      "expectedResult": "Lecture page displays with correct name in heading"
+    },
+    {
+      "action": "Verify venue and room information is displayed",
+      "expectedResult": "Location details are shown on the lecture page"
+    }
+  ]
+}

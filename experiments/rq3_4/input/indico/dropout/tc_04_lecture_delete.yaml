@@ -1,4 +1,4 @@
 name: 04::Lecture Delete
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: Click the action menu button (three dots icon). Action menu dropdown opens. Verify "Delete" option is visible. Delete option is available in menu. Delete confirmation dialog appears. Check the "I understand what this means" checkbox. Confirmation checkbox is checked. Click "Delete event" button. Lecture deletion is confirmed. Verify alert message "Event successfully deleted" appears. Success alert confirms lecture deletion.

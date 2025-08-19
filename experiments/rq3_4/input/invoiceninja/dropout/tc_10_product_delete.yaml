@@ -1,4 +1,4 @@
 name: 10::Product Delete
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Product deletion is confirmed. Verify alert message "Successfully deleted product" appears. Success alert confirms product deletion. Navigate to products listing. Products listing page is displayed. Verify deleted product no longer appears in active list.

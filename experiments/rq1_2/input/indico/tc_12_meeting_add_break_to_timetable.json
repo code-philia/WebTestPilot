@@ -1,0 +1,51 @@
+{
+  "name": "12::Meeting Add Break to Timetable",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_meeting_page",
+  "actions": [
+    {
+      "action": "Click \"Timetable\" link in navigation",
+      "expectedResult": "Timetable view opens"
+    },
+    {
+      "action": "Click \"Add new\" dropdown button",
+      "expectedResult": "Add new menu appears"
+    },
+    {
+      "action": "Click \"Break\" option",
+      "expectedResult": "Break creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Break123456\" in the title field",
+      "expectedResult": "Title field contains unique break name"
+    },
+    {
+      "action": "Click in the \"Description\" textbox",
+      "expectedResult": "Description field is focused"
+    },
+    {
+      "action": "Type \"Description123456\" in the description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click in the time field labeled \"--:--\"",
+      "expectedResult": "Time picker opens"
+    },
+    {
+      "action": "Select \"11\" from time picker",
+      "expectedResult": "Start time is set to 11:00"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Break is created and saved"
+    },
+    {
+      "action": "Verify \"Break\" appears in timetable canvas",
+      "expectedResult": "Timetable shows the break entry"
+    }
+  ]
+}

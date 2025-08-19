@@ -1,4 +1,4 @@
 name: 20::Payment Update
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click 'Edit' -> Payment edit frm opens w/ curr vals. Click 'Date' fld -> Fld focused & shows curr date. Chg paymnt date -> Date fld shows updtd date. Click 'Save' -> Paymnt chngs saved. Verify alert msg 'Success updtd paymnt'. Success alert confirms updte. Verify updtd date in paymnt detail. Paymnt pg shows new date. Verify updtd info reflctd in lstng. Paymnts tbl shows updtd paymnt date

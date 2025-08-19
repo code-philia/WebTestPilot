@@ -1,4 +1,4 @@
 name: 04::Lecture Delete
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: Click 3dots -> Verify 'Delete' opt visible -> Click 'Delete' -> Confirm dialog pops -> Check 'I understand' box -> Click 'Delete event' -> Verify msg 'Event del success' -> Success alert confirms del

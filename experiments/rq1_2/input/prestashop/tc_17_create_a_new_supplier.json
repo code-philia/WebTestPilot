@@ -1,0 +1,47 @@
+{
+  "name": "17::Create A New Supplier",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Click the 'Catalog' menu",
+      "expectedResult": "The Catalog submenu expands."
+    },
+    {
+      "action": "Click the 'Brands & Suppliers' submenu",
+      "expectedResult": "The 'Brands & Suppliers' page is displayed."
+    },
+    {
+      "action": "Click the 'Suppliers' tab",
+      "expectedResult": "The page switches to the suppliers list."
+    },
+    {
+      "action": "Click the 'Add new' button",
+      "expectedResult": "A new page for creating a new supplier appears."
+    },
+    {
+      "action": "Enter 'Shoes supplier' into the 'Name' field",
+      "expectedResult": "The name of the supplier is entered successfully."
+    },
+    {
+      "action": "Enter Phone '090-1234-5678', Address 'Nishi-Shinjuku 1-25-1', and City 'Tokyo'",
+      "expectedResult": "The contact information is filled into the respective fields."
+    },
+    {
+      "action": "Select the Country 'Japan'",
+      "expectedResult": "The country is selected."
+    },
+    {
+      "action": "Select the State 'Tokyo' from the dynamically loaded dropdown",
+      "expectedResult": "The state is selected correctly based on the chosen country."
+    },
+    {
+      "action": "Check the 'Enabled' radio button for 'Yes'",
+      "expectedResult": "The supplier is set to be active."
+    },
+    {
+      "action": "Click the 'Save' button",
+      "expectedResult": "A 'Successful creation' message is displayed."
+    }
+  ]
+}

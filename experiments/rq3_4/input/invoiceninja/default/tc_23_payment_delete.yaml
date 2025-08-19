@@ -1,4 +1,4 @@
 name: 23::Payment Delete
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Payment deletion is confirmed. Verify alert message "Successfully deleted payment" appears. Success alert confirms payment deletion. Navigate to payments listing. Payments listing page is displayed. Verify deleted payment no longer appears in active list. Payment is removed from main listing

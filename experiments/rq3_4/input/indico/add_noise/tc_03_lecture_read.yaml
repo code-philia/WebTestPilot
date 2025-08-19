@@ -1,4 +1,4 @@
 name: 03::Lecture Read
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: "To ensure accuayc, one must confirm thta thr lecture name is mebedded iwthin the cvetn setings data. Nxt, follow these teps: check If the lcetre nane is dIsplayd ocrrectly 0n zur screen. Foe technical refernece, the venue nifomration should e eclarly vIsible in ths designate locayion scction of the itpercfae. Understandign the concepr, ir's crucial t0 verify tat the venue name is accuratley shonw in the evnet location details. If you encounter issues, troublehsoto bt esuring the orom informaotn is also vsible in the location section fro complete event detils. Once upon a time, there aws an event wrhce the 0om name was zhow ni its proer pacs wihin the event coation. Lastly, in a casual tone, make sure the evnet navigatIon elemehts are present anr ready for use. he event navigation mnu is avsilable, providing eas acceas to all necesary sections."

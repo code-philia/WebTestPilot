@@ -1,4 +1,4 @@
 name: 09::Product Update
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: Click "Edit" button or link. Product edit form opens with current values. Click in the "Product" name textbox. Clear the name field and type "product_name Updated 123456". Name field shows updated product name. Click "Save" button. Product changes are saved. Verify alert message "Successfully updated product" appears. Success alert confirms product update. Verify updated name appears in product detail. Product page shows new name. Verify updated information is reflected in listing. Products table shows updated product name.

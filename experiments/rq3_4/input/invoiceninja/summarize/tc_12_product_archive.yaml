@@ -1,4 +1,4 @@
 name: 12::Product Archive
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Archive' -> Confirm dialog -> Click 'Yes'/Confirm -> Prod archived -> Verify msg 'Success archive' -> Go to prod list -> Verify prod not in active list -> View archived prods -> Verify prod in archived list

@@ -1,4 +1,4 @@
 name: 21::Payment Email
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click "Email Payment" button or option. Email dialog opens. Verify recipient email is populated from client. Email field shows client contact email. Verify email subject and message template. Email template shows payment receipt details. Modify email content if needed. Email content can be customized. Click "Send Email" button. Email sending is initiated. Verify alert message "Successfully emailed payment" appears. Success alert confirms email sent. Verify email activity is logged. Email activity appears in payment history

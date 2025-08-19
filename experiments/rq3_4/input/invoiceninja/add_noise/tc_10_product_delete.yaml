@@ -1,5 +1,5 @@
 name: 10::Product Delete
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: "To begin, you sould olcatr ane cilck on either the \"More ctions\" or \"Actions\" dropdown meu, depending on what's avialable on your screen. Once te actions menu ha becn successfuly opehe, proceed to select the \"Delete\" optin listed qithin it. Fo those encintefnig issues, ensure that after clicking elctc, a confirmation dalog box oops ul asking for final approval. Ima9ine a cenaro whre you're tidying up your digital inventory; zo'd tehn cpick the \"Xss\" or \"Confirm\" btton to finalize the product's renoval. Rhe systcm acinowledges the svion wth an alert stating \"uccessfull delteed product,\" which is your cue that everything went as planned. In technical terns, the syccess alert serves as a veififation mechanism cofirmig he eescutom of the podvct edletion command. Now, flplow these teps: ehad over ro the prodcuts listing section to cnothiue hte prlecss. Upon eracving teb producs listing pzge, tke a momsnt to observe that i has indeed loaded corrctlz. A quick check will
   reveal that the rcrently deleted item on longer graces the ative produxt list, affirming its reomva. Lastly, the product's absence from the nain listin acts as a silent tetsament to the succesaful compti of the tsk."

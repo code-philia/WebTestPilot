@@ -3,17 +3,19 @@ from pathlib import Path
 from enum import Enum
 from typing import Optional
 
-# Ensure repo root and webtestpilot/src are importable
-REPO_ROOT = Path(__file__).resolve().parents[2]
-WEBTESTPILOT_SRC = REPO_ROOT / "webtestpilot" / "src"
-if str(REPO_ROOT) not in sys.path:
-    sys.path.append(str(REPO_ROOT))
-if str(WEBTESTPILOT_SRC) not in sys.path:
-    sys.path.append(str(WEBTESTPILOT_SRC))
+# Add project directory
+PROJECT_DIR = Path(__file__).parent.parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.append(str(PROJECT_DIR))
+
+# Add webtestpilot directory
+WEBTESTPILOT_DIR = PROJECT_DIR / "webtestpilot" / "src"
+if str(WEBTESTPILOT_DIR) not in sys.path:
+    sys.path.append(str(WEBTESTPILOT_DIR))
 
 import typer
 from typing_extensions import Annotated
-from testcases.baselines.const import ApplicationEnum
+from baselines.const import ApplicationEnum
 from experiments.rq3_4.runner import WebTestPilotTestRunner_RQ3_4
 
 from main import Config
@@ -70,7 +72,7 @@ def main(
         config=config,
         headless=True,
     )
-    runner.run_test_cases()
+    runner.run_all_test_cases()
 
 
 if __name__ == "__main__":

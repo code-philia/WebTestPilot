@@ -1,4 +1,4 @@
 name: 23::Payment Delete
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Delete' -> Confirm dialog pops up -> Click 'Yes'/Confirm -> Verify 'Successfully deleted payment' alert -> Navigate to payments list -> Check deleted payment not in active list -> Payment gone from main list

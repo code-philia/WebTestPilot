@@ -1,0 +1,52 @@
+[
+    {
+        "test_name": "03::Client Read",
+        "success": false,
+        "current_step": 3,
+        "total_step": 7,
+        "traces": [
+            {
+                "action": {
+                    "name": "click",
+                    "args": {
+                        "label": "6",
+                        "xpath": "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]/div/span"
+                    }
+                }
+            },
+            {
+                "action": {
+                    "name": "finish",
+                    "args": {
+                        "status": "success",
+                        "reason": "Successfully navigated to the Clients listing page by clicking on the 'Clients' link in the left sidebar navigation menu."
+                    }
+                }
+            },
+            {
+                "action": {
+                    "name": "fill",
+                    "args": {
+                        "label": "57",
+                        "value": "company_name123456",
+                        "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/section/div/input"
+                    }
+                }
+            },
+            {
+                "action": {
+                    "name": "finish",
+                    "args": {
+                        "status": "success",
+                        "reason": "Typed 'company_name123456' into the Filter input box and confirmed that results updated (no matches found). Task complete."
+                    }
+                }
+            }
+        ],
+        "error_message": "Failed at step 4",
+        "runtime": 189.15156304099946,
+        "token_count": 86522,
+        "correct_trace_percentage": 0.42857142857142855,
+        "runtime_per_step": 63.05052101366649
+    }
+]

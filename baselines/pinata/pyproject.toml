@@ -1,110 +1,33 @@
 [project]
-name = "OpenATA"
+name = "pinata"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = "==3.12.*"
+requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.45.2",
     "asyncio>=3.4.3",
+    "dotenv>=0.9.9",
     "google-genai>=1.0.0",
     "ipykernel>=6.29.5",
     "mistralai>=1.5.0",
+    "nest-asyncio>=1.6.0",
     "openai>=1.59.8",
     "pillow>=11.1.0",
     "playwright>=1.49.1",
+    "playwright-dompath>=0.0.1",
     "pydantic>=2.10.5",
+    "pytest>=8.4.1",
+    "pytest-dependency>=0.6.0",
     "pytest-playwright>=0.6.2",
+    "pytest-xdist>=3.8.0",
     "python-dotenv>=1.0.1",
     "requests>=2.32.3",
+    "tqdm>=4.67.1",
+    "typer>=0.16.0",
 ]
-
-[tool.ruff]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "site-packages",
-    "venv",
-]
-
-# Same as Black.
-line-length = 88
-indent-width = 4
-
-# Assume Python 3.9
-target-version = "py39"
-
-[tool.ruff.lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
-# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
-# McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F"]
-ignore = []
-
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
-unfixable = []
-
-# Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
-[tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
-
-# Like Black, indent with spaces, rather than tabs.
-indent-style = "space"
-
-# Like Black, respect magic trailing commas.
-skip-magic-trailing-comma = false
-
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
-
-# Enable auto-formatting of code examples in docstrings. Markdown,
-# reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
-docstring-code-format = false
-
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
-docstring-code-line-length = "dynamic"
 
 [dependency-groups]
 dev = [
-    "pytest-asyncio>=0.25.2",
-    "pytest-mock>=3.14.0",
+    "ruff>=0.12.9",
 ]
-[tool.pytest.ini_options]
-markers = [
-    "llm: tests that call LLMs (deselect with '-m \"not llm\"')",
-]
-pythonpath = "src"

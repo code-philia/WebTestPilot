@@ -1,0 +1,35 @@
+{
+  "name": "15::Invoice Mark Sent",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_invoice_page",
+  "actions": [
+    {
+      "action": "Click \"More Actions\" or status change dropdown",
+      "expectedResult": "Actions menu opens"
+    },
+    {
+      "action": "Click \"Mark Sent\" option",
+      "expectedResult": "Mark sent confirmation dialog appears"
+    },
+    {
+      "action": "Click \"Yes\" or \"Confirm\" button",
+      "expectedResult": "Status change is confirmed"
+    },
+    {
+      "action": "Verify alert message \"Successfully marked invoice as sent\" appears",
+      "expectedResult": "Success alert confirms status change"
+    },
+    {
+      "action": "Verify invoice status changes to \"Sent\"",
+      "expectedResult": "Invoice status indicator shows \"\"Sent\"\""
+    },
+    {
+      "action": "Navigate to invoices listing",
+      "expectedResult": "Invoices listing page is displayed"
+    },
+    {
+      "action": "Verify invoice appears in sent invoices filter",
+      "expectedResult": "Invoice is in sent status in listing"
+    }
+  ]
+}

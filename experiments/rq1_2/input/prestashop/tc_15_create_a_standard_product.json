@@ -1,0 +1,103 @@
+{
+  "name": "15::Create A Standard Product",
+  "url": "http://localhost:8083/",
+  "setup_function": "logged_in_page",
+  "actions": [
+    {
+      "action": "Click the 'Catalog' menu",
+      "expectedResult": "The Catalog submenu expands."
+    },
+    {
+      "action": "Click the 'Products' submenu",
+      "expectedResult": "The product list page is displayed correctly."
+    },
+    {
+      "action": "Click the 'New product' button",
+      "expectedResult": "A modal for selecting the product type appears."
+    },
+    {
+      "action": "Click the 'Standard product' option",
+      "expectedResult": "The 'Standard product' type is selected."
+    },
+    {
+      "action": "Click the 'Add new product' button to confirm",
+      "expectedResult": "The product creation page is loaded."
+    },
+    {
+      "action": "Enter 'cat notebook' into the 'Name' field",
+      "expectedResult": "The product name is successfully entered."
+    },
+    {
+      "action": "Upload 'cat notebook.jpg' as the product image",
+      "expectedResult": "The image is uploaded and a thumbnail is displayed."
+    },
+    {
+      "action": "Enter the summary and description information for the product",
+      "expectedResult": "The product's summary and full description are filled in."
+    },
+    {
+      "action": "Click the 'Add categories' button",
+      "expectedResult": "The category selection modal appears."
+    },
+    {
+      "action": "Check one or more category checkboxes, e.g., 'Stationery'",
+      "expectedResult": "The checkboxes are successfully checked."
+    },
+    {
+      "action": "Click the 'Apply' button",
+      "expectedResult": "The category modal closes and the selected categories are displayed on the product page."
+    },
+    {
+      "action": "Click the 'Brand' dropdown",
+      "expectedResult": "The brand list expands."
+    },
+    {
+      "action": "Select the brand 'Graphic Corner'",
+      "expectedResult": "'Graphic Corner' is successfully selected."
+    },
+    {
+      "action": "Click the 'Details' tab",
+      "expectedResult": "The view switches to the 'Details' tab."
+    },
+    {
+      "action": "Click the 'Add a feature' button",
+      "expectedResult": "A new row for adding a feature appears."
+    },
+    {
+      "action": "Select the feature 'Composition' from the 'Choose a feature' dropdown",
+      "expectedResult": "The feature 'Composition' is selected."
+    },
+    {
+      "action": "Select the value 'Recycled cardboard' from the 'Choose a value' dropdown",
+      "expectedResult": "The feature value 'Recycled cardboard' is selected."
+    },
+    {
+      "action": "Click the 'Stocks' tab",
+      "expectedResult": "The view switches to the 'Stocks' tab."
+    },
+    {
+      "action": "Enter '300' into the quantity field",
+      "expectedResult": "The stock quantity is set successfully."
+    },
+    {
+      "action": "Click the 'Pricing' tab",
+      "expectedResult": "The view switches to the 'Pricing' tab."
+    },
+    {
+      "action": "Enter the retail price '12.90' and wholesale price '5.49'",
+      "expectedResult": "The price information is filled in successfully."
+    },
+    {
+      "action": "Click the 'Shipping' tab",
+      "expectedResult": "The view switches to the 'Shipping' tab."
+    },
+    {
+      "action": "Enter '0.3' into the shipping weight field",
+      "expectedResult": "The shipping weight is set successfully."
+    },
+    {
+      "action": "Click the 'Save' button",
+      "expectedResult": "A 'Successful update' message is displayed at the top of the page."
+    }
+  ]
+}

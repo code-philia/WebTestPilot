@@ -1,4 +1,4 @@
 name: 16::Delete A Product
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: Click 'Catalog' -> 'Products'. Product list shows. Filter 'bird', hit Search. Find prod row. Click 3-dots -> 'Delete'. Confirm del in dialog. Success msg shows, prod gone.

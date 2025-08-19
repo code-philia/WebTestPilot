@@ -1,5 +1,5 @@
 name: 05::Client Delete
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_client_page
 description: To begin, you'll want to interact with the interface by clicking on either the "More Actions" or simply the "Actions" dropdown menu. Once the actions menu has been successfully opened, proceed to select the "Delete" option listed within it. For your reference, upon selecting delete, a confirmation dialog box will appear on the screen. If you're unsure about how to confirm the action, just click the "Yes" or "Confirm" button within the dialog that pops up. Imagine a scenario where you've just confirmed the deletion; you'd then see an alert message saying "Successfully deleted client," confirming the operation was successful. The success alert is like a little victory flag, indicating that the client has indeed been removed from the system. Now, casually head over to the clients listing section. As expected, the clients listing page should now be visible on your screen. In order to ensure everything went according to plan, check that the recently deleted client no longer 
   shows up in the active list of clients. Ultimately, the client is officially removed from the main listing, completing the task.

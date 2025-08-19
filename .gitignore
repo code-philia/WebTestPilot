@@ -2,8 +2,6 @@
 *.DS_Store
 .aider*
 *screenshots*
-*env*
-*.egg-info*
 
 # Python-generated files
 __pycache__/
@@ -18,6 +16,13 @@ wheels/
 
 # Environment variables
 .env
+*env*
 
 # Ruff
 .ruff_cache/
+
+experiments/**/resources/*
+experiments/**/*.network
+experiments/**/*.trace
+experiments/**/*.zip
+experiments/**/*.log

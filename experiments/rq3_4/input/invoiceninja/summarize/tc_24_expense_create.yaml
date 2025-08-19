@@ -1,4 +1,4 @@
 name: 24::Expense Create
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click 'Expenses' -> Expenses list pg appears. Click 'New Expense' -> Form opens. Focus on 'Amt' txtbx, type '123456'. Focus on client sel fld, choose 'company_name123456'. Focus on 'Date' fld, set exp date. Add desc/cat if avail. Click 'Save' -> Exp created & saved. Verify alert msg 'Success'. Verify new exp in list tbl.

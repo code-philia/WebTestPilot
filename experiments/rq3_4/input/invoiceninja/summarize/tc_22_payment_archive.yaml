@@ -1,4 +1,4 @@
 name: 22::Payment Archive
-url: http://localhost:8081/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Archive' -> Confirm dialog -> Click 'Yes'/Confirm -> Verify 'Success msg' -> Navigate to payments list -> Verify payment not in active list -> Access archived view -> Verify payment in archived list

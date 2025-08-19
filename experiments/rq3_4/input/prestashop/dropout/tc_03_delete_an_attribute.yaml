@@ -1,4 +1,4 @@
 name: 03::Delete An Attribute
-url: http://localhost:8081/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: Navigate to the "Catalog" -> "Attributes & Features" page. The "Attributes & Features" page is displayed correctly. Find the row for the attribute named "Weight" and click the "more actions" button on the right side of that row. A dropdown menu with options like "Edit" and "Delete" appears. Click the "Delete" option from the dropdown menu. A confirmation dialog appears. Click the "Yes" button in the dialog to confirm the deletion.

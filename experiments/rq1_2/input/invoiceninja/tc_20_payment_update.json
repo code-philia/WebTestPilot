@@ -1,0 +1,35 @@
+{
+  "name": "20::Payment Update",
+  "url": "http://localhost:8082/",
+  "setup_function": "created_payment_page",
+  "actions": [
+    {
+      "action": "Click \"Edit\" button or link",
+      "expectedResult": "Payment edit form opens with current values"
+    },
+    {
+      "action": "Click in the \"Date\" field",
+      "expectedResult": "Date field is focused and shows current date"
+    },
+    {
+      "action": "Change the payment date to a different date",
+      "expectedResult": "Date field shows updated payment date"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Payment changes are saved"
+    },
+    {
+      "action": "Verify alert message \"Successfully updated payment\" appears",
+      "expectedResult": "Success alert confirms payment update"
+    },
+    {
+      "action": "Verify updated date appears in payment detail",
+      "expectedResult": "Payment page shows new date"
+    },
+    {
+      "action": "Verify updated information is reflected in listing",
+      "expectedResult": "Payments table shows updated payment date"
+    }
+  ]
+}

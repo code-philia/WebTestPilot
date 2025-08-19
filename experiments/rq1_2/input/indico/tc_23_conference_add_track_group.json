@@ -1,0 +1,43 @@
+{
+  "name": "23::Conference Add Track Group",
+  "url": "http://localhost:8080/",
+  "setup_function": "created_conference_page",
+  "actions": [
+    {
+      "action": "Click \"Programme\" link in navigation",
+      "expectedResult": "Programme section opens"
+    },
+    {
+      "action": "Click \"Add track group\" link",
+      "expectedResult": "Track group creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Track group123456\" in the title field",
+      "expectedResult": "Title field contains unique track group name"
+    },
+    {
+      "action": "Click in the \"Description\" textbox",
+      "expectedResult": "Description field is focused"
+    },
+    {
+      "action": "Type \"Many papers about123456\" in the description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Track group is created and saved"
+    },
+    {
+      "action": "Verify track group appears in track list container",
+      "expectedResult": "Track list shows the new track group"
+    },
+    {
+      "action": "Verify track group description is visible",
+      "expectedResult": "Track group description is displayed"
+    }
+  ]
+}
