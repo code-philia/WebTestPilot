@@ -1,6 +1,6 @@
 {
   "name": "09::Create A New Parent Category",
-  "url": "http://http://localhost:8083/",
+  "url": "http://localhost:8083/",
   "setup_function": "logged_in_page",
   "actions": [
     {

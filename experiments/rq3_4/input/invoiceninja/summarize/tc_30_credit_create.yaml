@@ -1,4 +1,4 @@
 name: 30::Credit Create
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_credit_page
 description: Click 'Credits' -> Credits list pg. Click 'New Credit' -> Form opens. Focus on client sel. fld. Type/select 'company_name123456'. Client sel'd. Add Item -> Line items sec. avail. Sel prod for 1st item -> Pop qty & price. Add 2nd item -> Sel diff prod. Save -> Ver msg 'Success'. Ver in list & status='Draft'. Rough draft.

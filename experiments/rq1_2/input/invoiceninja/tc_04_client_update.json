@@ -1,6 +1,6 @@
 {
   "name": "04::Client Update",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_client_page",
   "actions": [
     {

@@ -1,6 +1,6 @@
 {
   "name": "19::Payment Create",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_payment_page",
   "actions": [
     {

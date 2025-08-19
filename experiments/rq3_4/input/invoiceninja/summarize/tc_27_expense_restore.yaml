@@ -1,4 +1,4 @@
 name: 27::Expense Restore
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click 'Expenses' -> Expenses pg appears. Use filter/view opts to show archived exps. Find exp w/ amt 'amount_updated123456'. Click 'Restore' -> Confirm in dialog. Verify msg 'Success restore'. Go back to active exps. Check restored exp in main list.

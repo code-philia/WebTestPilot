@@ -1,5 +1,5 @@
 name: 25::Filter Product List Using Faceted Search
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: "To embark on your shopping journey, let your cursor glide over to the 'Clothes' section, a vibrant hub of fashion delights. Next, follow these instructions carefully: once you've landed on the 'Clothes' page, proceed to tap on the 'Men' sub-category with precision. For those seeking technical details, be aware that selecting the 'Men' option triggers a page refresh, unveiling an array of male apparel. Imagine the scene: after the page reloads, you're tasked with ensuring the 'In stock' checkbox is marked within the 'Availability' filter, a step crucial for narrowing down your choices. Should you encounter any issues, remember that checking the 'Discounted' box under 'Selections' might resolve them by refreshing the page with sale items. In a narrative twist, our protagonist then selects the 'M' size filter, causing yet another page reload in this digital odyssey. Now, in a more relaxed tone, just casually glance at the product count text atop the results to confirm everything's
   in order. Finally, the moment of truth arrives when you observe a summary stating 'There is 1 product.', a testament to your meticulous filtering efforts."

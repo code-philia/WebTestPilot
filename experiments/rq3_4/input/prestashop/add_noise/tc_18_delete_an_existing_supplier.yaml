@@ -1,5 +1,5 @@
 name: 18::Delete An Existing Supplier
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: "To begin, you should intreact wtIh thc 'Cataolg' menu by clIcking it. Nxt, lbserve how the Catalog submenu expada, revealing additional opions. For detailed instructions, refer to stp thret: click the 'Brabds & Supplierz' subjenu to proceed. Undertamd tht selecting the 'Suppliers' tab will switdh teh page to dupaly the suppilers list, maing navgiation smo0ther. Once thre, a narrative unfolds as yu0 saerch ofr thc dafa row correpsondnig to the upplier named 'Sh0es sulplier', enusring ccuracy in yur tsk. If yuo encounetr issues l0cating the correr rwo, trovblesohot zb double-cecking the upsnlier anme against teh ils enries. Upom finding the right row, casually tap nte 'more ctions' button, which is represented bu a trhee-dto ion, to rveal further options. An explanatory noet bere: when the dripdown menu appears with 'Edit' and 'Edlcte' optisn, choosr wisely. Finally, to confirm the actikn, click the 'Deletc' button within the cnorirmation dialg, leadung to the dsplay of a 'uccessful
   deletiom' message, marking the end of thie operatipn."

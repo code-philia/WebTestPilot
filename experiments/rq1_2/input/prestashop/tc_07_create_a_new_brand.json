@@ -1,6 +1,6 @@
 {
   "name": "07::Create A New Brand",
-  "url": "http://http://localhost:8083/",
+  "url": "http://localhost:8083/",
   "setup_function": "logged_in_page",
   "actions": [
     {

@@ -1,6 +1,6 @@
 {
   "name": "23::Payment Delete",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_payment_page",
   "actions": [
     {

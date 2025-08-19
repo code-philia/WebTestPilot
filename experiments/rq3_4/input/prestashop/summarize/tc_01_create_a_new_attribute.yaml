@@ -1,4 +1,4 @@
 name: 01::Create A New Attribute
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: NAV to 'Catalog' -> 'Attrs & Feats'. Click 'Add new attr' (top-right). New pg w/ form appears. Enter 'Weight' in 'Name' fld. 'Weight' confirmed in 'Name' fld. Enter 'Weight' in 'Pub name' fld. Click 'Save'. 'Success msg' shows @ top; back to attrs list.

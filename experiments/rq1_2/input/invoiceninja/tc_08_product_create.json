@@ -1,6 +1,6 @@
 {
   "name": "08::Product Create",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_product_page",
   "actions": [
     {

@@ -1,5 +1,5 @@
 name: 30::Credit Create
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_credit_page
 description: Click "Credits" link in navigation menu. Credits listing page appears. Click "New Credit" button. Credit creation form opens. Click in the client selection field. Client dropdown or combobox is focused. Select or type "company_name123456" to choose client. Client is selected for the credit. Click "Add Item" or navigate to line items section. Line items section is available. Product selection dropdown opens. Select "product_name123456" for the first line item. Product is added to line item. Verify quantity and price are populated. Line item shows product details. Click "Add Item" to add a second line item. Select another product for the second line item. Second product is added to credit. Click "Save" button. Credit is created and saved. Verify alert message "Successfully created credit" appears. Success alert confirms credit creation. Verify credit appears in credits listing. New credit is visible in the credits table. Verify credit status is "Draft". Credit shows correct 
   initial status.

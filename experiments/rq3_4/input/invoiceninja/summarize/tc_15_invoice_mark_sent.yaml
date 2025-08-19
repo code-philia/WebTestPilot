@@ -1,4 +1,4 @@
 name: 15::Invoice Mark Sent
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_invoice_page
 description: "Click 'More Actions' or status change DD. Actions menu opens. Click 'Mark Sent'. Confirm dialog pops up. Click 'Yes'/ 'Confirm'. Status change confirmed. Verify alert msg: 'Successfully marked invoice as sent'. Success alert confirms status change. Verify invoice status = 'Sent'. Status indicator shows 'Sent'. Go to invoices list. List page displays. Verify invoice in 'sent' filter. Invoice in sent status in list."

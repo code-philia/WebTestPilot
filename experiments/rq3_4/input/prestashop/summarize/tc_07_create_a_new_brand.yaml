@@ -1,4 +1,4 @@
 name: 07::Create A New Brand
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: NAV to 'Catalog' menu -> Click 'Brands & Supps' -> Hit 'Add new brand' btn -> New pg opens -> Input brand name (e.g., Nike) in 'Name' fld -> Fill desc in 'Desc' area w/ RTE -> Upload 'Logo' img -> 'Logo' fld shows img name -> Click 'Save' -> 'Success msg' @ top pg

@@ -1,4 +1,4 @@
 name: 14::Create A Virtual Product
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: "Click 'Catalog' -> 'Products'; prod list shows. Click 'New prod' btn; modal pops. Select 'Virtual prod', click 'Add new prod'. Enter 'bird' as name, upload 'bird.jpg'. Fill summary/desc. Add cat 'Art', choose brand 'Graphic Corner'. Switch tabs: Details->Ref='test1', Virtual->Qty=300, Pricing->Prices set, SEO->URL='bird-vector-graphics', Options->Suppliers checked+info filled. Save; msg shows success."

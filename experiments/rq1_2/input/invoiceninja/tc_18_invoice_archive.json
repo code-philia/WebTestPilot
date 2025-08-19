@@ -1,6 +1,6 @@
 {
   "name": "18::Invoice Archive",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_invoice_page",
   "actions": [
     {

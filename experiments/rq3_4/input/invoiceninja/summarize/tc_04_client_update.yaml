@@ -1,4 +1,4 @@
 name: 04::Client Update
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_client_page
 description: "Click 'Edit' -> CEF opens w/ curr vals. Focus on 'Name' box. Clear & type \"company_name Updated 123456\". Click 'Save'. Verify alert: \"Success update\". Check new name in details & header. Confirm update in clients tbl."

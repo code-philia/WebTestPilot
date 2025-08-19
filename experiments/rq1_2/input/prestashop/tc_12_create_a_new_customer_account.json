@@ -1,6 +1,6 @@
 {
   "name": "12::Create A New Customer Account",
-  "url": "http://http://localhost:8083/",
+  "url": "http://localhost:8083/",
   "setup_function": "logged_in_page",
   "actions": [
     {

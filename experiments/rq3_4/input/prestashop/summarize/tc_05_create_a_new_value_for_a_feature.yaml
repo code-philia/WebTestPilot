@@ -1,4 +1,4 @@
 name: 05::Create A New Value For A Feature
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: NAV to 'Catalog' -> 'Attrs & Feats'. 'Attrs & Feats' pg loads. Click 'Feats' tab. Pg switches to feats list. Click 'Add new feat val' @ top-right. New pg w/ form appears. Select 'Season' from 'Feat' dd. DD shows 'Season' sel. Enter 'Spring/Summer' in 'Val' fld. Val 'Spring/Summer' in fld. Click 'Save'. 'Success msg' @ pg top.

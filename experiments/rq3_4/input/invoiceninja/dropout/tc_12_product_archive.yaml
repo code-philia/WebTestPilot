@@ -1,4 +1,4 @@
 name: 12::Product Archive
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_product_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Product archiving is confirmed. Success alert confirms product archiving. Navigate to products listing. Products listing page is displayed. Verify archived product no longer appears in active list. Product is removed from main listing. Access archived products view. Archived products can be viewed separately. Verify product appears in archived list. Product is visible in archived products view.

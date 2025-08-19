@@ -1,4 +1,4 @@
 name: 24::Expense Create
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click "Expenses" link in navigation menu. Expenses listing page appears. Click "New Expense" button. Expense creation form opens. Click in the "Amount" textbox. Amount field is focused. Type "123456" in the amount field. Amount field contains unique expense amount. Click in the client selection field. Client dropdown or combobox is focused. Select or type "company_name123456" to choose client. Client is selected for the expense. Click in the "Date" field. Date picker or field is focused. Select or enter expense date. Expense date is set. Add description or category if available. Expense details are completed. Click "Save" button. Expense is created and saved. Verify alert message "Successfully created expense" appears. Success alert confirms expense creation. Verify expense appears in expenses listing. New expense is visible in the expenses table

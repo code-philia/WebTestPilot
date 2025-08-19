@@ -1,5 +1,5 @@
 name: 13::Invoice Create
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_invoice_page
 description: Click "Invoices" link in navigation menu. Invoices listing page appears. Click "New Invoice" button. Invoice creation form opens. Click in the client selection field. Client dropdown or combobox is focused. Select or type "company_name123456" to choose client. Client is selected for the invoice. Click "Add Item" or navigate to line items section. Line items section is available. Click in the product selection field for first line item. Product selection dropdown opens. Select "product_name123456" for the first line item. Product is added to line item. Verify quantity and price are populated. Line item shows product details. Click "Add Item" to add a second line item. Second line item row is added. Select another product for the second line item. Click "Save" button. Invoice is created and saved. Verify alert message "Successfully created invoice" appears. Success alert confirms invoice creation. New invoice is visible in the invoices table. Verify invoice status is 
   "Draft". Invoice shows correct initial status.

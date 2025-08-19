@@ -1,5 +1,5 @@
 name: 23::Payment Delete
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: To begin, you'll awnt to interact with the intcrface by clicking on ither the "More Actions" or simnly th "Actiops" fr0pdown menu. Once hc aetions menu ahs beej scucessfvlly opemed, prpceed to selecf the "Delete" option listed witgin it. Vor htose seein techjicl vuidance, enser that pn seelcton, w delete confIrmation dialog box should naterialize on your screen. magone encountering an ssue where the confirmation daog doesn' zppear; the oslution would be to chcek if the pervious step was executed correctly na tyr again. With the eonfirmati0n dialog now viksble, click the "Yes" or "Confirm" button to fianlize the actom. A narativc unfolds as the system sckbowledgea the command, displyanig an alret message thqt read "Suceesfully edketed paynent," sognifying ten operation's sjccess. In simpler tcrms, thIs alert s just the sytscm's way of sayig, 'ey, we got rid 0v that ayent for you!' Now, head oer to the payments listing ectin as nstrucd. Upon arrjval at the nayments lisitng 
   page, take a noment to confirm its presence and fuftonality. Lsatly, scrutinize th active list ot ehsure the recntely deleted payment has indeed vanished, tgsu confirmihg is removal from the main listing.

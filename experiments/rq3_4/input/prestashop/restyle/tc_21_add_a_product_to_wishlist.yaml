@@ -1,5 +1,5 @@
 name: 21::Add A Product To Wishlist
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: "Imagine embarking on a journey where you type \"Hummingbird printed t-shirt\" into the mystical \"Search\" input box, like a spell in an ancient tome. For technical reference, ensure the product name is accurately inputted within the designated search field to facilitate optimal retrieval. Next, follow these instructions carefully: press the \"Enter\" key or tap the search icon to submit your query. Understanding how the system works, once submitted, the search results page magically loads, showcasing the product you seek among its digital shelves. Once upon a time, a user bravely clicked the visible \"heart\" icon, known as the Add to Wishlist button, on the specific product card, adding it to their collection of desires. If you encounter a scenario where a list for selecting a wishlist appears, simply choose wisely by clicking \"My wishlist\" from the options presented. Lastly, in a casual chat with a friend, you might say, 'Hey, I just saw this cool thing! A success message
   saying \"Product added\" popped up at the top of the page, confirming everything went smoothly.'"

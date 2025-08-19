@@ -1,4 +1,4 @@
 name: 20::Payment Update
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_payment_page
 description: Click "Edit" button or link. Payment edit form opens with current values. Click in the "Date" field. Date field is focused and shows current date. Change the payment date to a different date. Date field shows updated payment date. Click "Save" button. Payment changes are saved. Verify alert message "Successfully updated payment" appears. Success alert confirms payment update. Verify updated date appears in payment detail. Payment page shows new date. Verify updated information is reflected in listing. Payments table shows updated payment date

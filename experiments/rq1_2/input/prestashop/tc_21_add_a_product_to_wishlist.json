@@ -1,6 +1,6 @@
 {
   "name": "21::Add A Product To Wishlist",
-  "url": "http://http://localhost:8083/",
+  "url": "http://localhost:8083/",
   "setup_function": "logged_in_buyer_page",
   "actions": [
     {

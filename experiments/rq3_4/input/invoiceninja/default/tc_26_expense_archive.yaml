@@ -1,4 +1,4 @@
 name: 26::Expense Archive
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Expense archiving is confirmed. Verify alert message "Successfully archived expense" appears. Success alert confirms expense archiving. Navigate to expenses listing. Expenses listing page is displayed. Verify archived expense no longer appears in active list. Expense is removed from main listing. Access archived expenses view. Archived expenses can be viewed separately. Verify expense appears in archived list. Expense is visible in archived expenses view

@@ -1,5 +1,5 @@
 name: 28::Expense Delete
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: "To begin, you should locate and click on either the \"More Actions\" or \"Actions\" dropdown menu, depending on what's available on your screen. Once the actions menu has been successfully opened, proceed to select the \"Delete\" option listed within it. For those encountering issues, ensure that after clicking delete, a confirmation dialog box pops up asking for final approval. Imagine a scenario where you're tidying up old records; you'd then click the \"Yes\" or \"Confirm\" button in the confirmation dialog to finalize the action. The system acknowledges the successful removal of the expense by displaying an alert message stating \"Successfully deleted expense.\" In technical terms, the success alert serves as a verification mechanism confirming the expense deletion process was executed correctly. Now, follow these steps: navigate to the expenses listing section of the application. Upon reaching the expenses listing page, you'll find a comprehensive display of all current
   expenses. To ensure accuracy, cross-check that the recently deleted expense does not appear in the active list anymore. Finally, the main listing will reflect the update, with the expense now removed from view."

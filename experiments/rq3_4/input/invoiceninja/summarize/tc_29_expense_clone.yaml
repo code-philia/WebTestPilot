@@ -1,4 +1,4 @@
 name: 29::Expense Clone
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click 'More Actions'/'Actions' dropdown -> Actions menu opens -> Click 'Clone'/'Duplicate' -> Clone starts -> Verify clone form w/ copied data -> Form shows orig expense data -> Mod cloned details if req'd -> Adj expense details -> Click 'Save' -> Cloned expense saved -> Verify 'Success' msg -> Confirm clone creation -> Verify cloned exp in list -> New clone visible in table -> Orig exp unchanged

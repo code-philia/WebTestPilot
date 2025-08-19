@@ -1,4 +1,4 @@
 name: 18::Invoice Archive
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_invoice_page
 description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Archive' -> Confirm dialog -> Click 'Yes'/Confirm -> Verify 'Success' msg -> Navigate to invoices list -> Verify not in active list -> View archived invoices -> Verify in archived list

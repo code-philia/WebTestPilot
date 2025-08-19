@@ -1,4 +1,4 @@
 name: 19::Add A Product To The Shopping Cart
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: Click prod link on home (e.g., Hummingbird t-shirt) -> Prod detail pg shows -> Sel size from 'Size' dd -> Size sel'd -> Chk 'Color' rb -> Color sel'd -> Click 'Add to cart' btn -> Modal pops w/ 'Prod successfully added'

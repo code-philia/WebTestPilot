@@ -1,4 +1,4 @@
 name: 25::Expense Update
-url: http://http://localhost:8082/
+url: http://localhost:8082/
 setup_function: created_expense_page
 description: Click 'Edit' -> Exp edit frm opens w/ curr vals. Click 'Amt' txtbx -> Amt fld focused & has curr amt. Clear & type "amt_upd123456" -> Amt fld shows new amt. Click 'Save' -> Chngs saved. Verify alert msg "Success upd exp" -> Confirms upd. Verify new amt in exp detail -> Exp pg shows new amt. Verify upd info in lst -> Exp tbl shows upd amt

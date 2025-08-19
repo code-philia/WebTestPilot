@@ -1,5 +1,5 @@
 name: 01::Create A New Attribute
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: "To embark on this journey, one must first venture into the realm known as \"Catalog\". Next, follow these precise instructions: proceed to \"Attributes & Features\" without delay. For those seeking technical guidance, be aware that an option labeled \"Add new attribute\" resides in the uppermost right quadrant of your screen. Imagine a magical portal opening before you—a new page emerges, revealing a form designed for the creation of a novel attribute. Now, let's fill in the \"Name\" field with the term \"Weight\", ensuring clarity and precision. Confirming our action, we observe that \"Weight\" has indeed been successfully inscribed within the \"Name\" field. As we continue our narrative, place \"Weight\" once more, but this time in the \"Public name\" field, envisioning it as the title customers will behold. Conceptually, understand that the label \"Weight\", as it appears to the audience, has now been inputted into its designated space. Should any issues arise, remember
   that clicking the \"Save\" button is your next step towards resolution. Finally, a triumphant \"Successful creation\" notification graces the page's pinnacle, and like a victorious hero, you are whisked back to the attributes list."

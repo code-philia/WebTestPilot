@@ -1,4 +1,4 @@
 name: 23::Remove A Product From Wishlist
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: To begin, you'll want to focus on typing the name of the product you like directly into the 'Search' input box, ensuring accuracy for optimal results. Once the product name is successfully entered in the search box, it's time to proceed with the next step. Refer to the user interface guide for details on how to click the search icon or simply press the Enter key to initiate the search process. Imagine the scene where the search results page gracefully loads, revealing the product you've been looking for amidst a sea of options. If you encounter any issues, ensure that you're clicking the activated 'heart' icon, which changes color, located on the product card to toggle its status. In a delightful twist, a success message stating "Product successfully removed from your wishlist" pops up at the top of the page, confirming the action was executed correctly.

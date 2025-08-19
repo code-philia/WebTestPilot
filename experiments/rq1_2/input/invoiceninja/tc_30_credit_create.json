@@ -1,6 +1,6 @@
 {
   "name": "30::Credit Create",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "created_credit_page",
   "actions": [
     {

@@ -1,4 +1,4 @@
 name: 17::Create A New Supplier
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: Click 'Catalog' menu -> Cat sub-menu expands -> Click 'Brands & Supps' sub-menu -> 'Brands & Supps' pg displays -> Click 'Supps' tab -> Pg switches to supps list -> Click 'Add new' btn -> New pg for creating supp appears -> Enter 'Shoes supp' in 'Name' fld -> Name entered -> Enter Phone '090-1234-5678', Addr 'Nishi-Shinjuku 1-25-1', City 'Tokyo' -> Contact info filled -> Select Country 'Japan' -> Country sel -> Sel State 'Tokyo' from dyn dropdown -> State sel correctly based on country -> Check 'Enabled' radio for 'Yes' -> Supp set active -> Click 'Save' btn -> 'Success msg' disp

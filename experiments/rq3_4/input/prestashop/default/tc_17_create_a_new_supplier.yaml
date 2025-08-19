@@ -1,4 +1,4 @@
 name: 17::Create A New Supplier
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_page
 description: Click the 'Catalog' menu. The Catalog submenu expands.. Click the 'Brands & Suppliers' submenu. The 'Brands & Suppliers' page is displayed.. Click the 'Suppliers' tab. The page switches to the suppliers list.. Click the 'Add new' button. A new page for creating a new supplier appears.. Enter 'Shoes supplier' into the 'Name' field. The name of the supplier is entered successfully.. Enter Phone '090-1234-5678', Address 'Nishi-Shinjuku 1-25-1', and City 'Tokyo'. The contact information is filled into the respective fields.. Select the Country 'Japan'. The country is selected.. Select the State 'Tokyo' from the dynamically loaded dropdown. The state is selected correctly based on the chosen country.. Check the 'Enabled' radio button for 'Yes'. The supplier is set to be active.. Click the 'Save' button. A 'Successful creation' message is displayed.

@@ -1,4 +1,4 @@
 name: 20::Search For A Product Using A Keyword
-url: http://http://localhost:8083/
+url: http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: "Quick draft: Enter prod name in 'Search' box @ top. Hit Enter or click icon. Load res page. Check if prod card w/ name is visible. Confirm >=1 card w/ name in results."

@@ -1,6 +1,6 @@
 {
   "name": "02::Client Create",
-  "url": "http://http://localhost:8082/",
+  "url": "http://localhost:8082/",
   "setup_function": "logged_in_page",
   "actions": [
     {
