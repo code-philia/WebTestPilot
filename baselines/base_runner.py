@@ -352,7 +352,7 @@ class BaseTestRunner(ABC):
         if patch_file:
             cmd.append(patch_file)
 
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        _ = subprocess.run(cmd, capture_output=True, text=True, check=True)
 
     def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
@@ -370,13 +370,7 @@ class BaseTestRunner(ABC):
         total_runs = len(test_cases) + bug_count
 
         print(
-            f"Running {len(test_cases)} test cases"
-            + (
-                f" ({bug_count} with bugs, {total_runs} total runs)"
-                if bug_count
-                else ""
-            )
-            + "...\n"
+            f"Running ({bug_count} 🐛 buggy +  {len(test_cases)} normal = {total_runs} runs)...\n"
         )
 
         # Main progress bar
