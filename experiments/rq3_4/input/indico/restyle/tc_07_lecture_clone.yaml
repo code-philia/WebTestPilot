@@ -1,5 +1,5 @@
 name: 07::Lecture Clone
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: To begin, you should click the "Clone" button, initiating the duplication process. Next, ensure that the Clone event dialog appears; it's your gateway to creating a duplicate. For those seeking detailed instructions, simply locate and click the close button situated within the "Clone Event" dialog header. The clone operation is now underway, like a seed sprouting beneath the soil. Imagine a scene where you must verify that the newly cloned lecture page is indeed displayed before you. A new lecture page opens, presenting itself as a fresh canvas for your content. To confirm accuracy, check if the lecture name remains unchanged in the cloned event, ensuring continuity. It's worth noting that the cloned lecture retains the exact same name as its predecessor. Lastly, troubleshoot any discrepancies by verifying that the venue and room information is accurately preserved during the cloning process. Location details are seamlessly transferred to the clone, maintaining the 
   integrity of the event's setting.

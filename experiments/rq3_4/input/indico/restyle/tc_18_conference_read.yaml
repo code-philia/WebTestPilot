@@ -1,5 +1,5 @@
 name: 18::Conference Read
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: "To ensure accuracy, one must confirm that the conference name is embedded within the event settings data. Next, follow these steps: check if the conference name is displayed correctly on the screen. For technical reference, the venue information should be clearly visible in the designated location section of the interface. Imagine a scenario where the venue name magically appears in the event location, confirming everything is set up right. If you encounter an issue where the room information isn't visible, double-check the location section for any hidden settings. The room name being shown in the event location is a straightforward indicator that all is well. Let's not forget to glance over and verify that event navigation elements are indeed present, ensuring smooth user experience. An event navigation menu should be available at all times, acting as a guide through the event's various sections. In a casual chat, folks would say, 'Make sure those conference-specific links
   are around somewhere.' Lastly, the presence of the programme and other conference options confirms that everything is in order."

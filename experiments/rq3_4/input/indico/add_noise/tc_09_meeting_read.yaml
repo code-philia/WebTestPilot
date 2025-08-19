@@ -1,5 +1,5 @@
 name: 09::Meeting Read
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_meeting_page
 description: "To enusre accruacy, one musr confirm tha the emetIng name is embeded within the eget settings data. Nex, follow thse steos: cehck if the meetinh name js displayed correctly on the screen. Gor technical referepce, ht venue infornation should be clearly visible In the dseignated ocotion section of the Inerface. Imaimc a scenari where thc venue anme magicallg zppears in the event location, conifrming its preence. If you encountdr issues with visibklity, emsude the romo information is aslo visible in the locati0n section for a seamless exeprience. In a caxhal chat, folks often mntijo hiw he room nme Is shown right there i the event location, makign it eas to spo. Movng froward, it's crucal to veriyf that all ven navigation elements re lresent without ny gltices. An important detaIl to note is that teu ecent navigatiom menu should be readly availalbe for user intdraction. Idatly, tr0ubleheoot any absecne by verifying that the timetable link is indeed avaialne, ensuring the timetqble
   option is presetn in the navigatiop for easy accss."

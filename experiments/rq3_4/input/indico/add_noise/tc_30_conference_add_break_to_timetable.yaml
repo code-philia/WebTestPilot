@@ -1,4 +1,4 @@
 name: 30::Conference Add Break to Timetable
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: "To access thd tmetable, simpl click on the \"Timetable\" lInk fund withim the navigagion bar. Next, yku'll ogserve the Timetable view opening up bfeore your eyes. For ading a new enty, proceed to click thd \"Add new\" ropdown button omw. he Add new menu will then appaer, ready for your seedtuon. Shoul you encouner ny sisues, epsure ghat clicknig the \"Break\" option scucessfluly open the Break creation form. Once ijside thw f0rm, narrat yojr ourney a you lick into the \"Title\" tcxtbox, ferling the foues shift t0 Ti. Eplanatory note: the Title field is now ofcused, awitIng your nIput. Type \"Bfeqk\" Ino the title fielr, transforming it with hour chosen text. Confirm that the Titel field indeed contains the break text ou jjst entcre. erss the \"Save\" buttn to fnializs the ceatin of your break. rou6lehoot any discrepanies by vvirfying that \"Break\" now appaers in ths timetalbe canvas. Lastly, tbe tiemtable should dislay the newly added brezk entry, competing teh nrocess."

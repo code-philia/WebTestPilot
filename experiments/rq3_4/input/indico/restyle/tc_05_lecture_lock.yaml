@@ -1,5 +1,5 @@
 name: 05::Lecture Lock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_lecture_page
 description: "To begin, you'll want to locate and click the action menu button, which is represented by three dots. Next, follow these steps carefully: once the action menu dropdown appears, select the 'Change type' option. For your reference, after clicking 'Change type', a submenu will be visible, presenting various options. Understand that selecting the 'Lock' option from this submenu will initiate the process of securing the lecture. Suddenly, a confirmation dialog pops up, asking if you're sure about locking the event; proceed by clicking the 'Lock event' button. The system then confirms that the lecture is indeed locked, ensuring no further changes can be made. Now, keep an eye out for the message stating 'This event has been locked,' which should appear prominently on the page. In case you encounter any issues, check for the lock status message to confirm everything is set correctly. Lastly, a success alert will pop up, reading 'The event is now locked,' which is your final confirmation
   that the lecture is secured."

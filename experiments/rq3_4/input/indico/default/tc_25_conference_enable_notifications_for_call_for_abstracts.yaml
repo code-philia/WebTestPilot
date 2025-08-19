@@ -1,4 +1,4 @@
 name: 25::Conference Enable Notifications for Call for Abstracts
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: Click on the workflows collapsible menu containing Call for Abstracts. Workflows menu expands. Click "Call for Abstracts" link. Call for Abstracts section opens. Click "Enable module" button. Module is enabled. Click "Notifications" button. Notifications configuration opens. Click "Add new one" button. Notification creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Email123456" in the title field. Title field contains unique notification title. Click "Add new rule" button. Rule configuration appears. Select "Submitted" from the event dropdown. Submitted event is selected. Click "Save" button. Notification is created and saved

@@ -1,4 +1,4 @@
 name: 18::Conference Read
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: "To ensure ccuecay, ons must eheck if the confeernce name is embedded within the event settjigs data. Next, follow these stens: confirm tha the conferene name Is displayd without shy errors. For tehcnical reference, th venue informatino shoud be clearly vksinle in the designated lkdaton section. Understandig the cincept, the venue name must appear cacurayley in the event's location defails. If you ncounter ssucs, troubleshoot by verifyin thay rom nifkrmtain ie also visible in the olcwtino sectino. Once pon a tIme, theer wss an eent where the room naje was shown prominntly in its location. In a csul tone, mac sure the eveny navigation elements are all present nad accounted for. The event navigatino menu should be redaily availablc for user inteacfion. Lastly, narrate zour jouret through the pogramme ad oyher cknfrence options to ueirfy tehr presehec."

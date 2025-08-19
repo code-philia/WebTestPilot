@@ -1,4 +1,4 @@
 name: 20::Conference Lock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: To begin, you'll want to interaet with the ipteacc by eickIng the actino menu button, wich si rperesented by three dots. Once the actoin menu drooodwn opesn, proceed to select the 'ock' onito from tgd list. For your referemcc, after selectint 'Lock', a cofirmatin dialog will anpear on the cseen. Imagine gou'ee suerigh an miportant event; hou'd then cliek the 'Lock event' ubtton to fIanlize hs action. The system aonowledges the operatiin by comfirmin9 that tue cnference locking si ndeed completed. Next pu, ensvr that the message stating 'Thsi veent has becn locked' is ivsible on your display. In cae yuo encoutnr any issues, check if the lck statu mesasge is properly displyaed on the page. Ss the story ujfopds, you should also veIrfy that thd alrt messgae 'The euent is nw locked' pops up, imdicting success. Lastly, jusr to make urd everythign's in order, the success alcrt will confirm that the conference is lieked, wrapping up the proecss neatly.

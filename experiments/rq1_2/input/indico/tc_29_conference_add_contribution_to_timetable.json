@@ -1,6 +1,6 @@
 {
   "name": "29::Conference Add Contribution to Timetable",
-  "url": "http://localhost:8081/",
+  "url": "http://localhost:8080/",
   "setup_function": "created_conference_page",
   "actions": [
     {
