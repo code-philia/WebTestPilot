@@ -1,4 +1,4 @@
-FROM solidnerd/bookstack:25.2.1
+FROM --platform=linux/amd64 solidnerd/bookstack:25.2.1
 
 # Switch to root so we can install things
 USER root

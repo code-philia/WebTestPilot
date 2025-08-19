@@ -2,6 +2,7 @@ version: "3"
 
 services:
   app:
+    platform: linux/amd64
     # image: lscr.io/linuxserver/bookstack:version-v25.02.1
     build: .
     environment:
