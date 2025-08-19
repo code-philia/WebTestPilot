@@ -342,13 +342,13 @@ class BaseTestRunner(ABC):
 
         # Stop the application
         subprocess.run(
-            [str(WEBAPPS_DIR / "stop_app.sh"), application],
+            ["bash", str(WEBAPPS_DIR / "stop_app.sh"), application],
             capture_output=True,
             text=True,
         )
 
         # Start with optional bug injection
-        cmd = [str(WEBAPPS_DIR / "start_app.sh"), application]
+        cmd = ["bash", str(WEBAPPS_DIR / "start_app.sh"), application]
         if patch_file:
             cmd.append(patch_file)
 
