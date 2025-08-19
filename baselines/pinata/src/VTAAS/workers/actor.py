@@ -1,13 +1,12 @@
-from datetime import datetime
 import os
+from datetime import datetime
 from typing import TypeGuard, final, override
+
+from playwright_dompath.dompath_async import xpath_path
 
 from VTAAS.llm.llm_client import LLMClient, LLMProvider
 from VTAAS.llm.utils import create_llm_client
-from VTAAS.utils.banner import add_banner
-from VTAAS.utils.logger import get_logger
-
-from ..schemas.llm import (
+from VTAAS.schemas.llm import (
     ClickCommand,
     Command,
     FillCommand,
@@ -19,18 +18,21 @@ from ..schemas.llm import (
     SelectCommand,
     WorkerType,
 )
+from VTAAS.utils.banner import add_banner
+from VTAAS.utils.logger import get_logger
+
 from ..schemas.verdict import (
     ActorAction,
     ActorResult,
     Status,
     WorkerResult,
 )
-from ..workers.browser import Browser, Mark
 from ..schemas.worker import (
     ActorInput,
     Worker,
     WorkerInput,
 )
+from ..workers.browser import Browser, Mark
 
 
 @final
@@ -91,11 +93,11 @@ class Actor(Worker):
             round += 1
             response = await self.llm_client.act(self.conversation)
             command = response.command
-            
+
             # Capture trace for this command
-            trace = self.command_to_trace(command)
+            trace = await self.command_to_trace(command, self.browser)
             self.traces.append(trace)
-            
+
             if command.name == "finish":
                 self.logger.info(
                     f'("{self.query}") is DONE: {command.status} - {command.reason or "No reason"}'
@@ -139,54 +141,60 @@ class Actor(Worker):
             explaination="stopped after 3 rounds",
         )
 
-    def command_to_trace(self, command: Command) -> dict:
+    async def command_to_trace(self, command: Command, browser: Browser) -> dict:
         """Convert a command to trace format compatible with evaluation."""
+
+        # Helper function to extract XPath for commands with labels
+        async def get_xpath_for_label(label: str) -> str | None:
+            try:
+                result = await browser._resolve_mark(label)
+                if "locator" in result:
+                    return await xpath_path(result["locator"], False)
+            except Exception as e:
+                self.logger.warning(f"Failed to extract XPath for label {label}: {e}")
+                return f"error: {str(e)}"
+            return None
+
         match command:
             case ClickCommand(name="click"):
+                xpath = await get_xpath_for_label(str(command.label))
                 return {
                     "action": {
                         "name": "click",
-                        "args": {
-                            "label": str(command.label)
-                        }
+                        "args": {"label": str(command.label), "xpath": xpath},
                     }
                 }
             case GotoCommand(name="goto"):
-                return {
-                    "action": {
-                        "name": "goto",
-                        "args": {
-                            "url": command.url
-                        }
-                    }
-                }
+                return {"action": {"name": "goto", "args": {"url": command.url}}}
             case FillCommand(name="fill"):
+                xpath = await get_xpath_for_label(str(command.label))
                 return {
                     "action": {
                         "name": "fill",
                         "args": {
                             "label": str(command.label),
-                            "value": command.value
-                        }
+                            "value": command.value,
+                            "xpath": xpath,
+                        },
                     }
                 }
             case SelectCommand(name="select"):
+                xpath = await get_xpath_for_label(str(command.label))
                 return {
                     "action": {
                         "name": "select",
                         "args": {
                             "label": str(command.label),
-                            "options": command.options
-                        }
+                            "options": command.options,
+                            "xpath": xpath,
+                        },
                     }
                 }
             case ScrollCommand(name="scroll"):
                 return {
                     "action": {
                         "name": "scroll",
-                        "args": {
-                            "direction": command.direction
-                        }
+                        "args": {"direction": command.direction},
                     }
                 }
             case FinishCommand(name="finish"):
@@ -195,8 +203,8 @@ class Actor(Worker):
                         "name": "finish",
                         "args": {
                             "status": command.status.value,
-                            "reason": command.reason
-                        }
+                            "reason": command.reason,
+                        },
                     }
                 }
 

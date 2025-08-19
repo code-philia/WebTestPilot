@@ -17,9 +17,6 @@ from urllib.parse import urlparse
 from VTAAS.utils.logger import get_logger
 
 
-
-
-
 T = TypeVar("T", bound="Browser")
 
 ScrollDirection: TypeAlias = Literal["up", "down"]
@@ -124,7 +121,9 @@ class Browser:
         _ = await self.page.wait_for_function(
             "() => typeof window.markPage === 'function'"
         )
-        _ = await self.page.add_script_tag(path="../baselines/pinata/js/element_to_html_string.js")
+        _ = await self.page.add_script_tag(
+            path="./baselines/pinata/js/element_to_html_string.js"
+        )
         _ = await self.page.wait_for_function(
             "() => typeof window.elementToHtmlString  === 'function'"
         )
@@ -210,7 +209,8 @@ class Browser:
         if "error" in result or "locator" not in result:
             error_message = result.get("error", "Unknown error")
             self.logger.error(
-                f"[DEBUG] Failed to resolve mark '{mark}' into a clickable element. Error: {error_message}")
+                f"[DEBUG] Failed to resolve mark '{mark}' into a clickable element. Error: {error_message}"
+            )
             return error_message
 
         locator = result["locator"]
@@ -223,7 +223,10 @@ class Browser:
             await self.page.wait_for_load_state("domcontentloaded")
         except Exception as error:
             # Log the full traceback information
-            self.logger.error(f"[DEBUG] A fatal error occurred while clicking element '{mark}': {error}", exc_info=True)
+            self.logger.error(
+                f"[DEBUG] A fatal error occurred while clicking element '{mark}': {error}",
+                exc_info=True,
+            )
             return f"Unable to click on element '{mark}' due to a timeout or error: {error}"
 
         after_url = self.page.url
@@ -254,7 +257,7 @@ class Browser:
                 _ = await locator.select_option(value)
             else:
                 await locator.clear()
-                await locator.type(value,delay=50)
+                await locator.type(value, delay=50)
 
             typed_value = await locator.input_value()
             if typed_value == value:

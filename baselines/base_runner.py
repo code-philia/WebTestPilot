@@ -24,12 +24,13 @@ class TestResult:
     token_count: int = 0
 
     @property
-    def correct_trace(self) -> float:
+    def correct_trace_percentage(self) -> float:
         return self.current_step / self.total_step if self.total_step > 0 else 0.0
 
     @property
     def runtime_per_step(self) -> float:
-        return self.runtime / self.current_step if self.current_step > 0 else 0.0
+        # If the step fails -> it's not counted, so we need to increase by
+        return self.runtime / min(self.current_step + 1, self.total_step)
 
     def __str__(self):
         status = "✓" if self.success else "✗"
@@ -39,7 +40,7 @@ class TestResult:
         return (
             f"{status_color}{status}{reset_color} {self.test_name:<45}: "
             f"Steps={self.current_step:>2}/{self.total_step:<2} "
-            f"({self.correct_trace})"
+            f"({self.correct_trace_percentage})"
         )
 
 
@@ -48,9 +49,10 @@ class TestResultDataset:
     results: list[TestResult] = field(default_factory=list)
 
     @property
-    def correct_trace(self) -> float:
+    def correct_trace_percentage(self) -> float:
         return (
-            sum(result.correct_trace for result in self.results) / len(self.results)
+            sum(result.correct_trace_percentage for result in self.results)
+            / len(self.results)
             if self.results
             else 0.0
         )
@@ -71,7 +73,9 @@ class TestResultDataset:
             results_data = []
             for result in self.results:
                 result_dict = result.__dict__.copy()
-                result_dict["correct_trace"] = result.correct_trace
+                result_dict["correct_trace_percentage"] = (
+                    result.correct_trace_percentage
+                )
                 result_dict["runtime_per_step"] = result.runtime_per_step
                 results_data.append(result_dict)
             json.dump(results_data, f, indent=4)
@@ -98,7 +102,7 @@ class TestResultDataset:
             f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
         )
         print(f"Success Rate: {self.success_rate:.1%}")
-        print(f"Overall Correct Trace: {self.correct_trace:.1%}")
+        print(f"Overall Correct Trace: {self.correct_trace_percentage:.1%}")
         print("=" * 80)
 
 

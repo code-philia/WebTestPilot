@@ -129,6 +129,7 @@ class PinataTestRunner(BaseTestRunner):
                         save_screenshot=self.save_screenshot,
                         tracer=self.tracer,
                         trace_folder=str(self.test_output_path.parent),
+                        name=test_case.name,
                     )
                     initial_url = sync_initial_page.url
 
@@ -160,6 +161,7 @@ class PinataTestRunner(BaseTestRunner):
                         tracer=self.tracer,
                         output_folder=str(self.test_output_path.parent),
                         model_name=self.model,
+                        name=test_case.name,
                     )
 
                     # Monkey-patch orchestrator to update progress bar
@@ -192,7 +194,8 @@ class PinataTestRunner(BaseTestRunner):
                         orchestrator.logger.info("Test PASSED!")
                     else:
                         result.success = False
-                        result.current_step = execution_result.step_index
+                        # Since we only record successful steps.
+                        result.current_step = execution_result.step_index - 1
                         step_bar.n = execution_result.step_index
                         step_bar.refresh()
                         result.error_message = (

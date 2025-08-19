@@ -20,3 +20,9 @@ wheels/
 
 # Ruff
 .ruff_cache/
+
+experiments/**/resources/*
+experiments/**/*.network
+experiments/**/*.trace
+experiments/**/*.zip
+experiments/**/*.log

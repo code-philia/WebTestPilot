@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 # ---------------------------
 # Configurable lists
@@ -15,12 +14,12 @@ APP=${2:-}
 
 if [[ -z "$BASELINE" ]]; then
     echo "Error: BASELINE is required. Valid options: ${BASELINES[*]}"
-    exit 1
+    return 1
 fi
 
 if [[ -z "$APP" ]]; then
     echo "Error: APP is required. Valid options: ${APPS[*]}"
-    exit 1
+    return 1
 fi
 
 # ---------------------------
@@ -29,23 +28,25 @@ fi
 if [[ ! " ${BASELINES[*]} " =~ " $BASELINE " ]]; then
     echo "Invalid baseline: $BASELINE"
     echo "Valid options: ${BASELINES[*]}"
-    exit 1
+    return 1
 fi
 
 if [[ ! " ${APPS[*]} " =~ " $APP " ]]; then
     echo "Invalid app: $APP"
     echo "Valid options: ${APPS[*]}"
-    exit 1
+    return 1
 fi
 
 # ---------------------------
 # Absolute paths relative to script
 # ---------------------------
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-BASELINE_DIR="$SCRIPT_DIR/../../baselines/$BASELINE"
-VENV_DIR="$BASELINE_DIR/.venv"
-RESULTS_DIR="$BASELINE_DIR/results/$BASELINE"
-TEST_DIR="$BASELINE_DIR/input/$APP"
+BASELINE_DIR="$SCRIPT_DIR/baselines/"
+VENV_DIR="$BASELINE_DIR/.venv-$BASELINE"
+
+EXPERIMENTS_DIR="$SCRIPT_DIR/experiments/"
+RESULTS_DIR="$EXPERIMENTS_DIR/rq1_2/results/$BASELINE"
+TEST_DIR="$EXPERIMENTS_DIR/rq1_2/input/$APP"
 
 # ---------------------------
 # Run evaluation

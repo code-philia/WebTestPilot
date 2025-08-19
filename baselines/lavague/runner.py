@@ -1,13 +1,12 @@
 import ast
 import sys
 import time
-from pathlib import Path
 import traceback
+from pathlib import Path
 from typing import Optional
 
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, TestCase
-from dotenv import load_dotenv
 from lavague.contexts.openai import OpenaiContext
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
@@ -19,9 +18,6 @@ from tqdm import tqdm
 PROJECT_DIR = Path(__file__).parent.parent
 if str(PROJECT_DIR) not in sys.path:
     sys.path.append(str(PROJECT_DIR))
-
-
-load_dotenv()
 
 
 class LavagueTestRunner(BaseTestRunner):

@@ -12,6 +12,7 @@ from typing import Optional
 
 import typer
 from const import ApplicationEnum, MethodEnum, ModelEnum, ProviderEnum
+from dotenv import load_dotenv
 from typing_extensions import Annotated
 
 # Disable output buffering for immediate log display
@@ -25,6 +26,8 @@ cli = typer.Typer(
     help="Run test cases using different agent implementations",
     no_args_is_help=True,
 )
+
+load_dotenv()
 
 
 def get_runner_class(method: MethodEnum):
@@ -60,11 +63,7 @@ def main(
     ],
     model: Annotated[
         Optional[ModelEnum],
-        typer.Option(
-            "--model",
-            "-m",
-            help="LLM model to use for the agent"
-        ),
+        typer.Option("--model", "-m", help="LLM model to use for the agent"),
     ] = ModelEnum.gpt4_1,
     provider: Annotated[
         Optional[ProviderEnum],
@@ -130,7 +129,7 @@ def main(
     test_case_path = test_dir
 
     # Output directory
-    output_path = output_dir / f"{method.value}_{application.value}.json"
+    output_path = output_dir / f"{application.value}.json"
 
     # Print configuration
     print("=" * 80)
