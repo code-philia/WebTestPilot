@@ -55,11 +55,7 @@ webtestpilot = [
     "zss>=1.2.0",
 ]
 
-lavague = [
-    "lavague>=1.1.19",
-    "lavague-drivers-playwright>=0.2.11",
-    "lavague-contexts-openai",
-]
+lavague = ["lavague @ https://github.com/ABCbum/LaVague.git"]
 
 naviqate = [
     "aiohttp==3.9.5",

@@ -195,7 +195,7 @@ def main(
         runner = RunnerClass(**runner_kwargs)
 
         print("Starting test execution...")
-        results = runner.run_test_cases(filter_pattern=filter)
+        results = runner.run_all_test_cases(filter_pattern=filter)
 
         # Exit with appropriate code
         if results.success_rate == 1.0:

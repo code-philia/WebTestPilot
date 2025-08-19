@@ -4,7 +4,7 @@ set -euo pipefail
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     echo "Usage: $0 <app_name> [patch_file]"
-    exit 1
+    return 1
 fi
 
 app_name="$1"
@@ -25,7 +25,7 @@ apps=(
 if [[ -z "${apps[$app_name]+x}" ]]; then
     echo "Error: Unsupported app '$app_name'"
     echo "Supported apps: ${!apps[@]}"
-    exit 1
+    return 1
 fi
 
 cd "$SCRIPT_DIR/$app_name"

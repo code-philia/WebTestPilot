@@ -72,7 +72,7 @@ def main(
         config=config,
         headless=True,
     )
-    runner.run_test_cases()
+    runner.run_all_test_cases()
 
 
 if __name__ == "__main__":

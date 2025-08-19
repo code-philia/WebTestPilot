@@ -1,10 +1,10 @@
 import os
 import json
+import subprocess
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-import traceback
-from typing import Optional
+from typing import Optional, Dict
 
 from const import ApplicationEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
@@ -22,6 +22,8 @@ class TestResult:
     error_message: Optional[str] = None
     runtime: float = 0.0
     token_count: int = 0
+    has_bug: bool = False
+    bug_name: Optional[str] = None
 
     @property
     def correct_trace_percentage(self) -> float:
@@ -65,6 +67,22 @@ class TestResultDataset:
             else 0.0
         )
 
+    @property
+    def buggy_results(self) -> list[TestResult]:
+        return [r for r in self.results if r.has_bug]
+
+    @property
+    def normal_results(self) -> list[TestResult]:
+        return [r for r in self.results if not r.has_bug]
+
+    @property
+    def bug_detection_rate(self) -> float:
+        """Percentage of buggy tests that failed (detected the bug)."""
+        buggy = self.buggy_results
+        if not buggy:
+            return 0.0
+        return sum(1 for r in buggy if not r.success) / len(buggy)
+
     def save_results(self, file_path: str):
         if not os.path.exists(file_path):
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -78,7 +96,19 @@ class TestResultDataset:
                 )
                 result_dict["runtime_per_step"] = result.runtime_per_step
                 results_data.append(result_dict)
-            json.dump(results_data, f, indent=4)
+
+            # Add summary statistics
+            summary = {
+                "total_runs": len(self.results),
+                "success_rate": self.success_rate,
+                "correct_trace_percentage": self.correct_trace_percentage,
+                "normal_tests": len(self.normal_results),
+                "buggy_tests": len(self.buggy_results),
+                "bug_detection_rate": self.bug_detection_rate,
+            }
+
+            output = {"summary": summary, "results": results_data}
+            json.dump(output, f, indent=4)
 
         print(f"Results saved to {file_path}")
 
@@ -89,20 +119,63 @@ class TestResultDataset:
         print("TEST RESULT SUMMARY")
         print("=" * 80)
 
-        # Create a summary progress bar for visual representation
-        passed_tests = sum(1 for r in self.results if r.success)
-        failed_tests = len(self.results) - passed_tests
+        # Separate results by bug status
+        normal_results = self.normal_results
+        buggy_results = self.buggy_results
 
-        for result in sorted(self.results, key=lambda r: r.test_name):
-            print(result)
+        # Print normal test results
+        if normal_results:
+            print("\nNormal Test Runs:")
+            for result in sorted(normal_results, key=lambda r: r.test_name):
+                print(result)
+
+        # Print buggy test results
+        if buggy_results:
+            print("\nBuggy Test Runs (🐛):")
+            for result in sorted(buggy_results, key=lambda r: r.test_name):
+                print(result)
 
         print("=" * 80)
-        print(f"Total Tests: {len(self.results)}")
+
+        # Overall statistics
+        total_tests = len(self.results)
+        passed_tests = sum(1 for r in self.results if r.success)
+        failed_tests = total_tests - passed_tests
+
+        print(f"Total Runs: {total_tests}")
         print(
             f"\033[92mPassed: {passed_tests}\033[0m | \033[91mFailed: {failed_tests}\033[0m"
         )
-        print(f"Success Rate: {self.success_rate:.1%}")
+        print(f"Overall Success Rate: {self.success_rate:.1%}")
         print(f"Overall Correct Trace: {self.correct_trace_percentage:.1%}")
+
+        # Bug-specific statistics
+        if buggy_results:
+            print("\n" + "-" * 40)
+            print("BUG INJECTION STATISTICS:")
+            print("-" * 40)
+
+            bugs_detected = sum(1 for r in buggy_results if not r.success)
+            bugs_missed = len(buggy_results) - bugs_detected
+
+            print(f"Total Bugs Injected: {len(buggy_results)}")
+            print(
+                f"\033[92mBugs Detected: {bugs_detected}\033[0m | "
+                f"\033[91mBugs Missed: {bugs_missed}\033[0m"
+            )
+            print(f"Bug Detection Rate: {self.bug_detection_rate:.1%}")
+
+            # Normal vs Buggy success rates
+            if normal_results:
+                normal_success_rate = sum(1 for r in normal_results if r.success) / len(
+                    normal_results
+                )
+                buggy_success_rate = sum(1 for r in buggy_results if r.success) / len(
+                    buggy_results
+                )
+                print(f"\nNormal Test Success Rate: {normal_success_rate:.1%}")
+                print(f"Buggy Test Success Rate: {buggy_success_rate:.1%}")
+
         print("=" * 80)
 
 
@@ -130,6 +203,9 @@ class BaseTestRunner(ABC):
         self.browser = None
         self.context = None
 
+        # Load bug mapping if available
+        self.bug_mapping = self._load_bug_mapping()
+
     def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
         test_cases: list[TestCase] = []
@@ -140,7 +216,7 @@ class BaseTestRunner(ABC):
 
         for file_path in sorted(
             self.test_case_path.glob("*.json"), key=lambda p: p.stem
-        ):
+        )[2:3]:
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
@@ -188,11 +264,99 @@ class BaseTestRunner(ABC):
         """
         pass
 
-    def restart_application(self, application: ApplicationEnum):
-        """Restart the specified application."""
-        pass
+    def run_single_test(
+        self,
+        test_case: TestCase,
+        pbar: tqdm,
+        is_buggy: bool = False,
+        patch_file: Optional[str] = None,
+    ) -> TestResult:
+        """Execute a test case with proper error handling and status reporting.
 
-    def run_test_cases(self, filter_pattern: Optional[str] = None) -> TestResultDataset:
+        Args:
+            test_case: TestCase to execute
+            pbar: Progress bar for status updates
+            is_buggy: Whether this is a buggy test run
+            patch_file: Optional patch file for bug injection
+
+        Returns:
+            TestResult with execution results
+        """
+        test_name = test_case.name
+        display_name = f"{test_name} - Bug" if is_buggy else test_name
+
+        # Update progress bar description
+        if is_buggy:
+            pbar.set_description(f"🐛 {test_name[:35]}")
+        else:
+            pbar.set_description(test_name[:40])
+
+        # Restart application with or without bug
+        # self.restart_application(self.application, patch_file)
+
+        try:
+            result = self.run_test_case(test_case)
+            if is_buggy:
+                result.test_name = display_name
+                result.has_bug = True
+                result.bug_name = patch_file
+
+            status = (
+                "✓"
+                if result.success
+                else f"✗({result.current_step}/{result.total_step})"
+            )
+            tqdm.write(f"{status} {display_name}")
+            return result
+
+        except Exception as e:
+            result = TestResult(
+                test_name=display_name,
+                success=False,
+                error_message=str(e),
+                has_bug=is_buggy,
+                bug_name=patch_file if is_buggy else None,
+            )
+            tqdm.write(f"✗ {display_name}: {str(e)[:50]}")
+            return result
+
+    def _load_bug_mapping(self) -> Dict[str, str]:
+        """Load test case to bug mapping from JSON file."""
+        webapps_dir = Path(__file__).parent.parent / "webapps"
+        mapping_file = webapps_dir / self.application / "testcase_to_bug.json"
+
+        if mapping_file.exists():
+            try:
+                with open(mapping_file, "r") as f:
+                    return json.load(f)
+            except json.JSONDecodeError as e:
+                print(f"Warning: Failed to load bug mapping file: {e}")
+                return {}
+        return {}
+
+    def restart_application(
+        self, application: ApplicationEnum, patch_file: Optional[str] = None
+    ):
+        """Restart the specified application with optional bug injection."""
+        WEBAPPS_DIR = Path(__file__).parent.parent / "webapps"
+
+        # Stop the application
+        subprocess.run(
+            [str(WEBAPPS_DIR / "stop_app.sh"), application],
+            capture_output=True,
+            text=True,
+        )
+
+        # Start with optional bug injection
+        cmd = [str(WEBAPPS_DIR / "start_app.sh"), application]
+        if patch_file:
+            cmd.append(patch_file)
+
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+
+    def run_all_test_cases(
+        self, filter_pattern: Optional[str] = None
+    ) -> TestResultDataset:
         """Run all test cases and return results."""
         test_cases = self.load_test_cases(filter_pattern)
         results = TestResultDataset()
@@ -201,47 +365,43 @@ class BaseTestRunner(ABC):
             print(f"No test cases found in {self.test_case_path}")
             return results
 
-        print(f"Running {len(test_cases)} test cases...")
-        print()
+        # Calculate total runs
+        bug_count = sum(1 for tc in test_cases if tc.name in self.bug_mapping)
+        total_runs = len(test_cases) + bug_count
 
-        # Main progress bar for all tests
+        print(
+            f"Running {len(test_cases)} test cases"
+            + (
+                f" ({bug_count} with bugs, {total_runs} total runs)"
+                if bug_count
+                else ""
+            )
+            + "...\n"
+        )
+
+        # Main progress bar
         with tqdm(
-            total=len(test_cases),
+            total=total_runs,
             desc="Test Suite Progress",
-            unit="test",
-            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+            unit="run",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
             colour="blue",
         ) as pbar:
             for test_case in test_cases:
-                self.restart_application(self.application)
-
-                test_name = test_case.name
-                pbar.set_description(f"Running: {test_name[:40]}")
-
-                try:
-                    result = self.run_test_case(test_case)
-                    results.results.append(result)
-
-                    if result.success:
-                        tqdm.write(f"✓ Test passed: {test_name}")
-                        pbar.set_postfix(status="✓", refresh=True)
-                    else:
-                        tqdm.write(
-                            f"✗ Test failed: {test_name} (completed {result.current_step}/{result.total_step} steps)"
-                        )
-                        if result.error_message:
-                            tqdm.write(f"  Error: {result.error_message}")
-                        pbar.set_postfix(status="✗", refresh=True)
-
-                except Exception as e:
-                    tqdm.write(f"✗ Test crashed: {test_name} - {str(e)}")
-                    result = TestResult(
-                        test_name=test_name, success=False, error_message=str(e)
+                # Run buggy test if mapping exists
+                if test_case.name in self.bug_mapping:
+                    result = self.run_single_test(
+                        test_case,
+                        pbar,
+                        is_buggy=True,
+                        patch_file=self.bug_mapping[test_case.name],
                     )
                     results.results.append(result)
-                    pbar.set_postfix(status="✗", refresh=True)
-                    traceback.print_exc()
+                    pbar.update(1)
 
+                # Run normal test
+                result = self.run_single_test(test_case, pbar)
+                results.results.append(result)
                 pbar.update(1)
 
         # Save results & get summary

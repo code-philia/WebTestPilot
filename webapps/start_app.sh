@@ -4,7 +4,7 @@ set -euo pipefail
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     echo "Usage: $0 <app_name> [patch_file]"
-    exit 1
+    return 1
 fi
 
 app_name="$1"
@@ -26,7 +26,7 @@ apps=(
 if [[ -z "${apps[$app_name]+x}" ]]; then
     echo "Error: Unsupported app '$app_name'"
     echo "Supported apps: ${!apps[@]}"
-    exit 1
+    return 1
 fi
 
 # If patch is provided, validate file
@@ -34,7 +34,7 @@ if [[ -n "$patch_name" ]]; then
     patch_path="$SCRIPT_DIR/$app_name/bugs/$patch_name"
     if [ ! -f "$patch_path" ]; then
         echo "Error: Patch file not found: $patch_path"
-        exit 1
+        return 1
     fi
 fi
 

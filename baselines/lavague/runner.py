@@ -132,6 +132,7 @@ class LavagueTestRunner(BaseTestRunner):
                         result.error_message = f"Error at step {i + 1}: {str(e)}"
                         step_bar.set_postfix(status="✗", refresh=True)
                         tqdm.write(f"    Error: {e}")
+                        traceback.print_exc()
                         break
 
                 end_time = time.perf_counter()
