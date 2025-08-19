@@ -1,4 +1,4 @@
 name: 08::Delete An Existing Brand
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: "To begin your journey through the system, you'll want to head over to the 'Catalog' menu. Next, follow these instructions carefully: select 'Brands & Suppliers'. For those familiar with the interface, you should now be able to locate the entry for 'Nike' within the brand list; once found, proceed by clicking on it to access its detailed information. Imagine yourself as a detective searching for clues; upon reaching the Nike brand's edit page, you'll find a 'Delete' link that seems out of place. If you encounter any issues during this process, remember that a confirmation dialog will pop up after you click 'Delete', serving as a safety net to prevent accidental deletions. To finalize the action, press the 'Delete' button within the dialog box, much like turning the final key in a lock. And there you have it—a narrative of triumph as the system rewards your efforts with a 'Successful deletion' message, proudly displayed at the top of the page."

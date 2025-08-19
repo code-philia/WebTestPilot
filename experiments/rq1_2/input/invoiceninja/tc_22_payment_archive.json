@@ -1,6 +1,6 @@
 {
   "name": "22::Payment Archive",
-  "url": "http://localhost:8081/",
+  "url": "http://http://localhost:8082/",
   "setup_function": "created_payment_page",
   "actions": [
     {

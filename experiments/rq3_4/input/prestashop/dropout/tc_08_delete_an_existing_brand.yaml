@@ -1,4 +1,4 @@
 name: 08::Delete An Existing Brand
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Navigate to the "Catalog" menu. Find the row containing "Nike" in the brand list and click on it to go to its detail page. The page navigates to the edit page for the "Nike" brand. Click the "Delete" link. A confirmation dialog appears. Click the "Delete" button in the dialog to confirm. A "Successful deletion" message is displayed at the top of the page.

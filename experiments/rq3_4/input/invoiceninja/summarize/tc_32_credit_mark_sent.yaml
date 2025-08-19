@@ -1,4 +1,4 @@
 name: 32::Credit Mark Sent
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_credit_page
 description: Click 'More Actions' or status chng ddwn. Actions menu pops up. Hit 'Mark Sent'. Conf dialog shows. Click 'Yes'/ 'Confirm'. Status chng confirmed. Check alert msg 'Successfully marked credit as sent'. Success alert verifies status chng. Verify credit status = 'Sent'. Status indicator shows 'Sent'. Go to credits list. Credits list pg displays. Verify credit in 'sent' filter. Credit in sent status in list.

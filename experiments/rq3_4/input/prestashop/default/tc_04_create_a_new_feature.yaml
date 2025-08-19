@@ -1,4 +1,4 @@
 name: 04::Create A New Feature
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Navigate to "Catalog" then "Attributes & Features".. The "Attributes & Features" page is displayed correctly.. Click the "Features" tab at the top of the page.. The page switches to the features list.. Click "Add new feature" in the top-right corner.. A new page appears containing a form to create a new feature.. Enter the feature name e.g. "Season" in the "Name" field.. "Season" is successfully entered in the "Name" field.. Click the "Save" button. A "Successful creation" message is displayed and the user is returned to the features list page.

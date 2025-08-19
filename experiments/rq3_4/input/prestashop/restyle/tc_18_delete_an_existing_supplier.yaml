@@ -1,5 +1,5 @@
 name: 18::Delete An Existing Supplier
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: "To begin, you'll want to interact with the 'Catalog' menu, which is your first step in navigating the system. Next, follow these instructions carefully: expand the Catalog submenu by clicking it. For those seeking detailed technical guidance, note that selecting the 'Brands & Suppliers' submenu will lead you to the corresponding page. Imagine embarking on a journey where the next stop is the 'Suppliers' tab; click it to view the list of suppliers. If you're having trouble locating the correct data, remember that the row for 'Shoes supplier' should be your focus here. Now, let's delve into the action: tap the 'more actions' button, identifiable by its three-dot icon, on the targeted row. Should you encounter any issues, know that choosing the 'Delete' option from the dropdown will reveal a confirmation dialog. In a narrative twist, our protagonist must now face the ultimate decision by clicking the 'Delete' button within the dialog to confirm their choice. Lastly, a 'Successful
   deletion' message greets the user, confirming the operation was completed without a hitch."

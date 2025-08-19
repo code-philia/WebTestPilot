@@ -1,5 +1,5 @@
 name: 06::Delete A Feature
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: "To begin your journey through the digital realm, let's embark on an adventure to the 'Catalog' section. Next, follow these instructions carefully: proceed to the 'Attributes & Features' area. For those seeking technical guidance, please be advised that you must now interact with the 'Features' tab located prominently at the page's apex. Imagine the page transforming before your eyes as it transitions seamlessly into the features list. Now, envision yourself as a detective searching for clues; locate the row bearing the label 'Season' and prepare to engage the 'more actions' button nestled on its far right. If you're encountering issues with the interface, fear not! A dropdown menu will emerge, presenting you with choices such as 'Edit' and 'Delete'. In the spirit of storytelling, let us continue our tale by selecting the 'Delete' option from this newly appeared menu. Suddenly, a confirmation dialog materializes out of nowhere, demanding your attention. With a casual flick of
   your wrist, click the 'Yes' button within this dialog to finalize the deed. And lo, a message shall appear, proclaiming the 'Successful deletion' of your chosen feature."

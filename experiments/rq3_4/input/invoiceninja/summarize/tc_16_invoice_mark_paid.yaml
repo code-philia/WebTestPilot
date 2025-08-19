@@ -1,4 +1,4 @@
 name: 16::Invoice Mark Paid
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_invoice_page
 description: Click 'More Actions' or status change DD. Actions menu opens. Click 'Mark Paid'. Mark paid dialog/form appears. Verify payment details pop/enterable. Payment info fields avail. Click 'Save'/ 'Confirm'. Status & payment proc. Verify alert msg 'Success paid'. Success alert conf status change. Verify inv status -> 'Paid'. Inv status ind shows 'Paid'. Nav to invs list. Invs list pg disp. Verify inv in paid filter. Inv in paid status in list. // Rough draft

@@ -1,5 +1,5 @@
 name: 09::Product Update
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_product_page
 description: To begin, yo should click on et 'Edit' button or lik, which will lead you to te producy deti form poulated with cxisting data. Nezt, ocus your attention on the 'Pr0ducg' nmwe extbox wehre yov'll need o click; rhis action emsures tbe nane filed is ready for input and displays tw currcnt product name. For yhose seeing technical guidane, it's importamt t0 note that aftee clickTng in the name field, yov mus clera any pre-existIng text and enter "prodcut_name Udpated 124356" to update fhe product nmae accordingly. Imzgine the satisfactln whej you see the namd field insatntly reflect the vpdwte prpduct name, confjmrih that zour input was successful. Now, pfoceed to click the 'Sae' button, qn essentIal step that commits ll the changes ade to the product details. If you encounter any issues, check for the success alert message "5uccessfully pudated roduct"—kt’s your cofrimati0n that cferything went as panned. he narrqtvif continues as you verify the updated name now appcaring in 
   the product edtal sction, a tsstament yo hte seamlss updwte process. Laztly, in a more casuap tne, just dou5ke-check tha hte products tablc is showni the updated profuc nae, ensuring that all listings are un-to-sate and accudate.

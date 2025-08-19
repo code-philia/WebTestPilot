@@ -1,4 +1,4 @@
 name: 08::Delete An Existing Brand
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: NAV to 'Catalog' menu -> click 'Brands & Supps' -> find 'Nike' row -> click -> goes to edit pg -> click 'Delete' -> conf dialog pops up -> click 'Delete' btn -> 'Success del msg' shows @ top pg

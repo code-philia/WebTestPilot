@@ -1,6 +1,6 @@
 {
   "name": "24::Write A Review For A Product",
-  "url": "http://localhost:8081/",
+  "url": "http://http://localhost:8083/",
   "setup_function": "logged_in_buyer_page",
   "actions": [
     {

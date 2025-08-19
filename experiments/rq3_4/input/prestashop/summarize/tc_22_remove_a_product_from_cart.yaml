@@ -1,4 +1,4 @@
 name: 22::Remove A Product From Cart
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: NAV to prod detail pg -> prod pg displays corr -> sel size & clr -> specs sel -> click 'Add to cart' -> conf modal pops up -> click 'Cont shop' or close modal -> modal clsd -> click cart icon @ top pg -> cart pg loads -> verify prod name & size -> click 'del' link/icon -> prod line item gone -> verify cart empty -> msg 'no items in cart' disp

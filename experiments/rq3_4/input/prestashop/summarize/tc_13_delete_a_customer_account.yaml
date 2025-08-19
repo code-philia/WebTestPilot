@@ -1,4 +1,4 @@
 name: 13::Delete A Customer Account
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click 'Custs' in bck-off menu. Custs submnu expnds. Click 'Custs' in submnu. Cust list pg shows. Locate cust row by uniq email. Target row found. Click 'more acts' btn (3 dots) on rt. Dropdown w/ opts like 'View'. Select 'Del'. Conf dlg pops. Click 'Del' in dlg. 'Suc del' msg disp.

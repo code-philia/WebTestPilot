@@ -1,4 +1,4 @@
 name: 21::Add A Product To Wishlist
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: "Prod: Hummingbird printed t-shirt -> Enter in Search box -> Hit Enter/click search icon -> Results page loads -> Click heart (Add to Wishlist) on prod card -> Select 'My wishlist' -> Success msg 'Prod added' @ top pg"

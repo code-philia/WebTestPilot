@@ -1,4 +1,4 @@
 name: 04::Client Update
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_client_page
 description: Click "Edit" button or link. Client edit form opens with current values. Click in the "Name" textbox. Name field is focused and contains current name. Clear the name field and type "company_name Updated 123456". Click "Save" button. Client changes are saved. Verify alert message "Successfully updated client" appears. Success alert confirms client update. Verify updated name appears in client detail. Client page shows new name in header. Verify updated information is reflected in listing. Clients table shows updated client name.

@@ -1,4 +1,4 @@
 name: 30::Conference Add Break to Timetable
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: Click TT lnk -> TT view opens -> Click 'Add new' ddn -> Add new menu -> Click 'Break' -> Break frm opens -> Click 'Title' txtbx -> Title fld fcsd -> Type 'Break' -> Title fld has brk txt -> Click 'Save' btn -> Brk crtd & svd -> Vrfy 'Break' in TT cnvs -> TT shws brk ent

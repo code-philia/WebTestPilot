@@ -1,4 +1,4 @@
 name: 22::Remove A Product From Cart
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_buyer_page
 description: Navigate to a specific product detail page. The product detail page is displayed correctly. Select the product's size and color. Click the "Add to cart" button. A confirmation modal appears. Click "Continue shopping" or close the modal. The modal closes. Click the shopping cart icon at the top of the page. The shopping cart page is loaded. Verify the product name. size. Click the "delete" link or icon next to the product line item. The product line item disappears from the cart. Verify the cart is now empty. A message such as "There are no more items in your cart" is displayed.

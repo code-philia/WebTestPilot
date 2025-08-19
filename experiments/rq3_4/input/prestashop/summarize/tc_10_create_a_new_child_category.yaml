@@ -1,4 +1,4 @@
 name: 10::Create A New Child Category
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click 'Catalog', then 'Categories' in BO menu. Click 'Add new cat.' btn. New page appears. Enter sub-cat name (e.g., 'Sports shoes') in 'Name' fld. Click 'Expand' in 'Parent Cat.' area. Select 'Shoes' as parent. Enter desc in 'Desc' area. Upload img. Enter custom URL (e.g., 'sports-shoes') in 'Friendly URL' fld. Click 'Save'. 'Success msg' disp'd.

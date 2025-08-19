@@ -1,4 +1,4 @@
 name: 12::Create A New Customer Account
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click 'Custs' link in back-off menu.. Submenu expands.. Click 'Custs' again.. Cust list pg shows.. Click 'Add new' btn.. New cust create pg appears.. Sel 'Social title', eg 'Mr.'.. 'Mr.' sel'd.. Enter 'Fname' & 'Lname'.. Name in fields.. Enter 'Email'.. Email in.. Enter 'Pwd'.. Pwd set.. Sel 'Bday' (yr, mth).. Click 'Save'.. 'Success msg' @ top pg.

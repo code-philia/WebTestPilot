@@ -1,4 +1,4 @@
 name: 21::Payment Email
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_payment_page
 description: Click 'Email Payment' btn. Email dlg pops up. Chk rcpt email frm client. Email fld shws client cntct email. Vrfy subj & msg tmpl. Tmpl shws pymt recpt dets. Mod email cntnt if reqd. Cstmzble email cntnt. Clk 'Send Email' btn. Email send starts. Vrfy 'Succesfully emailed pymt' alert msg. Succ alert cnfrms email sent. Vrfy email actvty logged. Email actvty in pymt hist.

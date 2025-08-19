@@ -1,4 +1,4 @@
 name: 12::Create A New Customer Account
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click the "Customers" link in the back-office main menu.. The Customers submenu expands.. Click the "Customers" link in the submenu.. The customer list page is displayed correctly.. Click the "Add new" button.. A new page for creating a new customer appears.. Select a "Social title" e.g. "Mr.".. The "Mr." option is successfully selected.. Enter the customer's "First name" and "Last name".. The customer's name is entered in the fields.. Enter the customer's "Email address".. The email address. Enter the customer's "Password".. The password is set for the account.. Select the customer's "Birthday" (year. month. Click the "Save" button.. A "Successful creation" message is displayed at the top of the page.

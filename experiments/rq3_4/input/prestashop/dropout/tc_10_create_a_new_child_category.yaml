@@ -1,4 +1,4 @@
 name: 10::Create A New Child Category
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click "Catalog". then click "Categories" in the back-office menu. Click the "Add new category" button. A new page for creating a new category appears. Enter the sub-category name e.g. "Sports shoes" in the "Name" field. Click the "Expand" button in the "Parent Category" area. The category tree is expanded. Select "Shoes" as the parent category from the tree. PrestaShop understands that you want to create a sub-category. Enter a description for the category in the "Description" area. The description is filled into the rich text editor. Upload a "Category cover image". The image filename is displayed in the upload area. Enter a custom URL e.g. "sports-shoes" for the "Friendly URL" field. "sports-shoes" is successfully entered in the Friendly URL field. Click the "Save" button. A "Successful creation" message is displayed at the top of the page.

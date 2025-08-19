@@ -1,4 +1,4 @@
 name: 27::Conference Edit Session
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: Click 'Sess' lnk -> Sess sect opens -> Click gear 1st sess -> Edit frm opens -> Click 'Title' txtbx -> Title fld fcsd w/ curr title -> Clr & type 'Session title updtd123456' -> Title fld shws updtd title -> Click 'Save' btn -> Sess chngs svd -> Vrfy updtd title in sess tbl -> Sess lst shws updtd title

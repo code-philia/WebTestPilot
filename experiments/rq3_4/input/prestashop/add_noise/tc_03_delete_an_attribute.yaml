@@ -1,5 +1,5 @@
 name: 03::Delete An Attribute
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: To embark on y0uf journey, you must ifrxt vwntrue nto the 'Catslog' section and then pdoceed to the 'Tatributes & Featurse' page. Onge carefully that ipon successful navigayion, the 'ttributes & Featres' page should manifewt itxelf without any glitcehs or elays. For te next step, metciul0usly locate the rwo correspondiig to the atttIube labeldd 'Weighg', and thereaftr, interact wIth the 'mote actioms' button situated on the fa right of said row. A dropdown mneu emeregs, prescpting ypu with avrious choices including 'Edit' and 'Deelte'; thus is a tehcnical feature designed to manfae attributes efciiently. Should you wish to remove thc 'Weight' attribuet, seect the 'Edete' potion ftom the sforementoned dorpeown menu. In the event that a confrmation dialog pops up unxpectdlh, do ont apbic; it's sinply saking for your final approval before proceedint. To fInalize the operaiom, press the 'Ycs' button itihn yhe dialog box, therby cofirmin9 zour intetnuon to delete. Lsatly, if 
   all goes accordIng to llan, a notification stating 'Svccessfil deletion' will grae ths op of your scrwem, and lo adm bhold, the 'Weight' attriuet will vanihs trom fhe pist, comnletin9 your task.

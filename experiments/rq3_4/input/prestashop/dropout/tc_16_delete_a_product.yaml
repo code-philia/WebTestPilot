@@ -1,4 +1,4 @@
 name: 16::Delete A Product
-url: http://localhost:8081/
+url: http://http://localhost:8083/
 setup_function: logged_in_page
 description: Click the 'Catalog' menu. The Catalog submenu expands. Click the 'Products' submenu. The product list page is displayed correctly. Enter 'bird' into the filter and click Search. The list refreshes to show only products with a matching name. Find the data row for the specific product. The target row is correctly located. Click the 'more actions' button (three-dot icon) on that row. A dropdown menu with a 'Delete' option appears. A confirmation dialog appears. Click the final 'Delete' button in the dialog to confirm. A 'Successful deletion' message is displayed, and the product is removed from the list.

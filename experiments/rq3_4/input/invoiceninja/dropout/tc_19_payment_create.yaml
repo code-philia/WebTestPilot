@@ -1,4 +1,4 @@
 name: 19::Payment Create
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_payment_page
 description: Click "Payments" link in navigation menu. Payments listing page appears. Click "New Payment" button. Click in the client selection field. Client dropdown or combobox is focused. Select or type "company_name123456" to choose client. Client is selected for the payment. Click in the invoice selection field. Invoice dropdown shows client invoices. Select a "Sent" status invoice from the dropdown. Invoice is selected and linked to payment. Verify payment amount is populated from invoice. Payment amount matches invoice total. Date picker or field is focused. Select or enter payment date. Payment date is set. Click "Save" button. Payment is created and saved. Verify alert message "Successfully created payment" appears. Success alert confirms payment creation. Verify payment appears in payments listing. New payment is visible in the payments table. Verify linked invoice status updates if applicable. Related invoice may show payment received.

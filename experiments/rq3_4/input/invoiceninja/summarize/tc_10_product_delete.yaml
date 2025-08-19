@@ -1,4 +1,4 @@
 name: 10::Product Delete
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_product_page
 description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Delete' -> Confirm dialog pops up -> Click 'Yes'/Confirm -> Prod del confirmed -> Check msg 'Success del prod' -> Go to prod list -> Prod list shows -> Ensure del prod not in active list -> Prod gone from main list

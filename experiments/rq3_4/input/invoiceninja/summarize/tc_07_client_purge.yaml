@@ -1,4 +1,4 @@
 name: 07::Client Purge
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_client_page
 description: Find tgt client 2 b del. Client shld b visible. Click 'More Acts' or ctx menu. Adv acts menu pops up. Hit 'Purge'/'Del Perm'. Perm del conf dialog shows. Click 'Yes'/Conf. Perm del confirmed. Chk alert msg 'Success purge client'. Success alert confirms perm del. Verify client not in del clients view. Client rmvd frm sys.

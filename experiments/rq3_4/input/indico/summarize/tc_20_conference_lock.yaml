@@ -1,4 +1,4 @@
 name: 20::Conference Lock
-url: http://localhost:8081/
+url: http://localhost:8080/
 setup_function: created_conference_page
 description: "Click 3dots -> Action menu opens. Select 'Lock'. Confirm dialog pops up. Click 'Lock event'. Conf: 'Event locked' msg shows. Lock status visible on pg. Alert: 'Event locked' appears. Success alert confirms lock."

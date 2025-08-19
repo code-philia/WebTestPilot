@@ -1,6 +1,6 @@
 {
   "name": "09::Product Update",
-  "url": "http://localhost:8081/",
+  "url": "http://http://localhost:8082/",
   "setup_function": "created_product_page",
   "actions": [
     {

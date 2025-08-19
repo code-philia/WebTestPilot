@@ -1,4 +1,4 @@
 name: 19::Payment Create
-url: http://localhost:8081/
+url: http://http://localhost:8082/
 setup_function: created_payment_page
 description: Click 'Pmts' lnk -> Pmts list pg -> Click 'New Pmt' btn -> Pmt frm opens -> Click client sel fld -> Client ddbox fcsd -> Sel/type 'company_name123456' -> Client sel'd -> Click inv sel fld -> Inv ddbox shows client invs -> Sel 'Sent' stat inv -> Inv sel'd & lnkd -> Vrfy pmt amt pop'd from inv -> Pmt amt mchs inv tot -> Click 'Date' fld -> Date picker/fld fcsd -> Sel/ent pmt date -> Pmt date set -> Click 'Save' btn -> Pmt crtd & svd -> Vrfy alert msg 'Succ crtd pmt' -> Succ alert cnfrms pmt crtn -> Vrfy pmt in pmts list -> New pmt vis in pmts tbl -> Vrfy lnkd inv stat upds if app -> Rel inv may shw pymt rcvd

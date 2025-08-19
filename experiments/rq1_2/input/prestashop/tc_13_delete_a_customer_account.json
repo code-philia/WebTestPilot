@@ -1,6 +1,6 @@
 {
   "name": "13::Delete A Customer Account",
-  "url": "http://localhost:8081/",
+  "url": "http://http://localhost:8083/",
   "setup_function": "logged_in_page",
   "actions": [
     {

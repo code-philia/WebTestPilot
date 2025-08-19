@@ -1,6 +1,6 @@
 {
   "name": "31::Credit Update",
-  "url": "http://localhost:8081/",
+  "url": "http://http://localhost:8082/",
   "setup_function": "created_credit_page",
   "actions": [
     {
