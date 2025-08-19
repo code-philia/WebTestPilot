@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
@@ -75,4 +74,4 @@ else
     echo "ℹ️  No patch provided. Skipping bug injection."
 fi
 
-echo "✅ Done. $app_name is up and running."
+echo "✅ Done."

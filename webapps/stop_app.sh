@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
