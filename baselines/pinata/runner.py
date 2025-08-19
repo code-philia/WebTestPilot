@@ -156,7 +156,7 @@ class PinataTestRunner(BaseTestRunner):
 
                     orchestrator = Orchestrator(
                         browser=browser,
-                        llm_provider=LLMProvider.OPENROUTER,
+                        llm_provider=LLMProvider.OPENAI,
                         tracer=self.tracer,
                         output_folder=str(self.test_output_path.parent),
                         model_name=self.model,

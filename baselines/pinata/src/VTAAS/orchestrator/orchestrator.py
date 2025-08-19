@@ -126,7 +126,9 @@ class Orchestrator:
                 tracer=self.tracer,
                 trace_folder=self.output_folder,
             )
-        _ = await self.browser.goto(exec_context.test_case.url)
+            
+        # This is to use the existing url from configuration instead, determined at runtime.
+        # _ = await self.browser.goto(exec_context.test_case.url)
         verdict = TestCaseVerdict(step_index=1, status=Status.UNK)
         try:
             for idx, test_step in enumerate(test_case):
