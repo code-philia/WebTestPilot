@@ -7,6 +7,7 @@ Usage:
 
 import os
 import sys
+import traceback
 from pathlib import Path
 from typing import Optional
 
@@ -207,10 +208,7 @@ def main(
             raise typer.Exit(code=1)
     except Exception as e:
         print(f"Error during test execution: {e}")
-        if verbose:
-            import traceback
-
-            traceback.print_exc()
+        traceback.print_exc()
         raise typer.Exit(code=1)
 
 

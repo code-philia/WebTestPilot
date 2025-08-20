@@ -1,6 +1,8 @@
 import json
 import os
 import subprocess
+import time
+import traceback
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -319,6 +321,7 @@ class BaseTestRunner(ABC):
                 bug_name=patch_file if is_buggy else None,
             )
             tqdm.write(f"✗ {display_name}: {str(e)[:50]}")
+            traceback.print_exc()
             return result
 
     def _load_bug_mapping(self) -> Dict[str, str]:
@@ -354,6 +357,9 @@ class BaseTestRunner(ABC):
             cmd.append(patch_file)
 
         _ = subprocess.run(cmd, capture_output=True, text=True, check=True)
+
+        # Wait to make sure the app is accessible.
+        time.sleep(20)
 
     def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
