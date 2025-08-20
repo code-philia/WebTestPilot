@@ -65,14 +65,20 @@ class NaviqateTestRunner(BaseTestRunner):
             domain += ".com"
 
         return domain
-    
+
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""
         self.clean_up_playwright()
 
         self.playwright = sync_playwright().start()
-        self.browser = self.playwright.chromium.connect_over_cdp("http://localhost:9222")
-        self.context = self.browser.contexts[0] if self.browser.contexts else self.browser.new_context()
+        self.browser = self.playwright.chromium.connect_over_cdp(
+            "http://localhost:9222"
+        )
+        self.context = (
+            self.browser.contexts[0]
+            if self.browser.contexts
+            else self.browser.new_context()
+        )
         page = self.context.new_page()
 
         # Set up the page state based on the setup function
@@ -107,14 +113,12 @@ class NaviqateTestRunner(BaseTestRunner):
             bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
             colour="green",
         ) as action_bar:
-            
             website = self.get_website_from_url(url) if url else ""
-            
+
             chrome_options = Options()
             chrome_options.debugger_address = "localhost:9222"
             driver = webdriver.Chrome(
-                service=Service(ChromeDriverManager().install()),
-                options=chrome_options
+                service=Service(ChromeDriverManager().install()), options=chrome_options
             )
 
             # Create crawler for this action
@@ -125,8 +129,9 @@ class NaviqateTestRunner(BaseTestRunner):
                 headless=self.headless,
                 output_dir=self.output_dir,
             )
-            
+
             # Process each action
+            start_time = time.perf_counter()
             for i, action_data in enumerate(actions):
                 action = action_data.action
                 crawler.task = action
@@ -139,11 +144,7 @@ class NaviqateTestRunner(BaseTestRunner):
                 self.logger.info(f"ACTION {i + 1}/{len(actions)}: {action}")
                 self.logger.info(f"WEBSITE: {website}, MAX_STEPS: {self.max_steps}")
 
-                start_time = time.time()
-
                 try:
-
-
                     # Execute the action
                     crawler.loop(MAX_STEPS=self.max_steps)
 
@@ -153,7 +154,6 @@ class NaviqateTestRunner(BaseTestRunner):
                         {
                             "action": action,
                             "website": website,
-                            "duration": time.time() - start_time,
                         }
                     )
 
@@ -174,14 +174,13 @@ class NaviqateTestRunner(BaseTestRunner):
                         f"Unexpected error: {e} - Stopping at Task {i + 1}"
                     )
                     import traceback
+
                     self.logger.error(traceback.format_exc())
                     action_bar.set_postfix(status="✗", refresh=True)
                     break
 
-                end_time = time.time()
-                self.logger.info(
-                    f"DURATION: {utils.calculate_time_interval(start_time, end_time)}"
-                )
+            end_time = time.perf_counter()
+            result.runtime = end_time - start_time
 
         # Mark as success if all steps completed
         result.success = result.current_step == result.total_step
