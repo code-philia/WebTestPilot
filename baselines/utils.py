@@ -49,7 +49,9 @@ from testcases.prestashop.conftest import (
 )
 
 
-def setup_page_state(page: Page, setup_function: str, application: ApplicationEnum) -> Page:
+def setup_page_state(
+    page: Page, setup_function: str, application: ApplicationEnum
+) -> Page:
     """Set up the page state based on the application and setup function.
 
     Args:
@@ -185,12 +187,10 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
         )
 
     elif setup_function == "created_sort_rule_page":
-        return create_sort_rule(logged_in_page, test_data.sort_rule_name)
+        return create_sort_rule(logged_in_page, test_data)
 
     elif setup_function == "created_role_page":
-        return create_role(
-            logged_in_page, test_data.role_name, test_data.role_description
-        )
+        return create_role(logged_in_page, test_data)
 
     elif setup_function == "created_data_template_page":
         return setup_data_for_create_page_template(logged_in_page, test_data)
