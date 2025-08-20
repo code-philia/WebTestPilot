@@ -359,7 +359,11 @@ class BaseTestRunner(ABC):
         _ = subprocess.run(cmd, capture_output=True, text=True, check=True)
 
         # Wait to make sure the app is accessible.
-        time.sleep(20)
+        if application == ApplicationEnum.invoiceninja:
+            # invoiceninja takes a while to start
+            time.sleep(60)
+        else:
+            time.sleep(15)
 
     def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
