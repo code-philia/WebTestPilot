@@ -1,13 +1,14 @@
-import os
 import json
+import os
 import subprocess
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Dict, Optional
 
 from const import ApplicationEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
+from playwright.sync_api._generated import Browser, BrowserContext, Playwright
 from tqdm import tqdm
 from utils import setup_page_state
 
@@ -198,10 +199,10 @@ class BaseTestRunner(ABC):
         self.config = kwargs
         self.headless = headless
 
-        # For configuring Playwright
-        self.playwright = None
-        self.browser = None
-        self.context = None
+        # For configuring Playwright, to load initial page.
+        self.playwright: Optional[Playwright] = None
+        self.browser: Optional[Browser] = None
+        self.context: Optional[BrowserContext] = None
 
         # Load bug mapping if available
         self.bug_mapping = self._load_bug_mapping()
@@ -292,7 +293,7 @@ class BaseTestRunner(ABC):
             pbar.set_description(test_name[:40])
 
         # Restart application with or without bug
-        # self.restart_application(self.application, patch_file)
+        self.restart_application(self.application, patch_file)
 
         try:
             result = self.run_test_case(test_case)
