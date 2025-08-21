@@ -126,7 +126,7 @@ class Orchestrator:
                 tracer=self.tracer,
                 trace_folder=self.output_folder,
             )
-            
+
         # This is to use the existing url from configuration instead, determined at runtime.
         # _ = await self.browser.goto(exec_context.test_case.url)
         verdict = TestCaseVerdict(step_index=1, status=Status.UNK)
@@ -159,7 +159,9 @@ class Orchestrator:
                     exec_context.history.append(
                         Orchestrator.synthesis_str(step_synthesis)
                     )
-            return TestCaseVerdict(status=Status.PASS, explaination=None, traces=self.traces)
+            return TestCaseVerdict(
+                status=Status.PASS, explaination=None, traces=self.traces
+            )
         except Exception as e:
             self.logger.warning(f"got this error: {str(e)}")
             return TestCaseVerdict(
@@ -347,7 +349,7 @@ class Orchestrator:
                     if action:
                         local_history.append(action.action)
                 # Collect traces from Actor workers
-                if hasattr(worker, 'traces'):
+                if hasattr(worker, "traces"):
                     self.traces.extend(worker.traces)
             elif result.status == Status.PASS:
                 local_history.append(f"{worker.__str__()}: Assertion Verified")
@@ -442,6 +444,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
+                    max_rounds=1,
                     model_name=self.model_name,
                 )
                 self.workers.append(worker)
@@ -588,16 +591,18 @@ class Orchestrator:
     def get_total_token_usage(self) -> int:
         """Get the total token usage from orchestrator and all workers."""
         total_tokens = 0
-        
+
         # Get tokens from orchestrator's own LLM client
-        if hasattr(self.llm_client, 'get_token_usage'):
+        if hasattr(self.llm_client, "get_token_usage"):
             total_tokens += self.llm_client.get_token_usage()
-        
+
         # Get tokens from all workers (both active and retired)
         for worker in self.workers:
-            if hasattr(worker, 'llm_client') and hasattr(worker.llm_client, 'get_token_usage'):
+            if hasattr(worker, "llm_client") and hasattr(
+                worker.llm_client, "get_token_usage"
+            ):
                 total_tokens += worker.llm_client.get_token_usage()
-        
+
         return total_tokens
 
     async def close(self):
