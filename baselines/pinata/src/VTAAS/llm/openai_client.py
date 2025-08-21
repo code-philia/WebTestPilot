@@ -57,7 +57,7 @@ class OpenAILLMClient(LLMClient):
             self.start_time,
             self.output_folder,
         )
-        self.max_tries: int = 3
+        self.max_tries: int = 1
         self.token_usage: int = 0
         try:
             self.aclient: AsyncOpenAI = AsyncOpenAI()
