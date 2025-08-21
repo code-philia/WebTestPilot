@@ -1,5 +1,5 @@
 --- ./views/settings/sort-rules/edit.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/settings/sort-rules/edit.blade.php	2025-07-09 19:22:50.056592284 +0800
++++ ./views/settings/sort-rules/edit.blade.php	2025-07-09 19:22:50.056592284 +0800
 @@ -9,7 +9,7 @@
          <div class="card content-wrap auto-height">
              <h1 class="list-heading">{{ trans('settings.sort_rule_edit') }}</h1>

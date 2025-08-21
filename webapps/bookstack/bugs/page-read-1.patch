@@ -1,5 +1,5 @@
 --- ./views/pages/show.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/pages/show.blade.php	2025-07-09 18:32:52.735893534 +0800
++++ ./views/pages/show.blade.php	2025-07-09 18:32:52.735893534 +0800
 @@ -17,22 +17,45 @@
      </div>
  

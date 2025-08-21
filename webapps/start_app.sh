@@ -15,7 +15,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Supported apps
 declare -A apps
 apps=(
-    ["bookstack"]="bookstack-app-1:/var/www/bookstack -p0"
+    ["bookstack"]="bookstack-app-1:/var/www/bookstack/resources -p0"
     ["indico"]="indico-web-1:/opt/indico/.venv/lib/python3.12/site-packages -p1"
     ["invoiceninja"]="invoiceninja-app-1:/var/www/html -p1"
     ["prestashop"]="prestashop-app-1:/var/www/html -p1"
@@ -39,7 +39,7 @@ fi
 
 # Parse container and target path
 container=$(echo "${apps[$app_name]}" | cut -d: -f1)
-workdir=$(echo "${apps[$app_name]}" | cut -d' ' -f2)
+workdir=$(echo "${apps[$app_name]}" | cut -d: -f2 | awk '{print $1}')
 patch_level=$(echo "${apps[$app_name]}" | awk '{print $NF}')
 
 # Reset app

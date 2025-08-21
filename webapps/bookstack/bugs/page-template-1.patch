@@ -1,5 +1,5 @@
 --- ./views/pages/parts/template-manager-list.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/pages/parts/template-manager-list.blade.php	2025-07-09 18:52:14.513002617 +0800
++++ ./views/pages/parts/template-manager-list.blade.php	2025-07-09 18:52:14.513002617 +0800
 @@ -1,23 +1,7 @@
  {{ $templates->links() }}
  

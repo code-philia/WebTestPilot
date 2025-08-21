@@ -1,5 +1,5 @@
 --- ./views/users/parts/form.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/users/parts/form.blade.php	2025-07-09 19:03:41.323210630 +0800
++++ ./views/users/parts/form.blade.php	2025-07-09 19:03:41.323210630 +0800
 @@ -39,9 +39,6 @@
  <div>
      <label for="role" class="setting-list-label">{{ trans('settings.users_role') }}</label>

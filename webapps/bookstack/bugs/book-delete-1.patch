@@ -1,5 +1,5 @@
 --- ./views/books/show.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/books/show.blade.php	2025-07-09 16:55:04.213211891 +0800
++++ ./views/books/show.blade.php	2025-07-09 16:55:04.213211891 +0800
 @@ -131,7 +131,7 @@
                  </a>
              @endif

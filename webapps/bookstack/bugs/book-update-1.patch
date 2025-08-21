@@ -1,5 +1,5 @@
 --- ./views/books/edit.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/books/edit.blade.php	2025-07-09 16:43:32.052379580 +0800
++++ ./views/books/edit.blade.php	2025-07-09 16:43:32.052379580 +0800
 @@ -16,8 +16,7 @@
  
          <main class="content-wrap card auto-height">

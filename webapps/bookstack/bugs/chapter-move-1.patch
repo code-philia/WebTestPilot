@@ -1,5 +1,5 @@
 --- ./views/chapters/move.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/chapters/move.blade.php	2025-07-09 17:38:51.656359718 +0800
++++ ./views/chapters/move.blade.php	2025-07-09 17:38:51.656359718 +0800
 @@ -1,40 +1,40 @@
 -@extends('layouts.simple')
 -

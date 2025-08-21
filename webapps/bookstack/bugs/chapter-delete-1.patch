@@ -1,5 +1,5 @@
 --- ./views/chapters/delete.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/chapters/delete.blade.php	2025-07-09 17:34:11.622282929 +0800
++++ ./views/chapters/delete.blade.php	2025-07-09 17:34:11.622282929 +0800
 @@ -20,10 +20,9 @@
              <p>{{ trans('entities.chapters_delete_explain', ['chapterName' => $chapter->name]) }}</p>
              <p class="text-neg"><strong>{{ trans('entities.chapters_delete_confirm') }}</strong></p>

@@ -1,5 +1,5 @@
 --- ./views/layouts/parts/header-search.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/layouts/parts/header-search.blade.php	2025-07-09 19:43:18.391207484 +0800
++++ ./views/layouts/parts/header-search.blade.php	2025-07-09 19:43:18.391207484 +0800
 @@ -1,20 +1,2 @@
  <form component="global-search" action="{{ url('/search') }}" method="GET" class="search-box" role="search" tabindex="0">
 -    <button id="header-search-box-button"

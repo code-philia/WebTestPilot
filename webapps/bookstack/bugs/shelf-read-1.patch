@@ -1,5 +1,5 @@
 --- ./views/shelves/parts/list-item.blade.php	2025-07-09 15:01:07.721925212 +0800
-+++ ./bug_views/shelves/parts/list-item.blade.php	2025-07-09 15:53:22.477645418 +0800
++++ ./views/shelves/parts/list-item.blade.php	2025-07-09 15:53:22.477645418 +0800
 @@ -1,4 +1,4 @@
 -<a href="{{ $shelf->getUrl() }}" class="shelf entity-list-item" data-entity-type="bookshelf" data-entity-id="{{$shelf->id}}">
 +<a href="#" class="shelf entity-list-item" data-entity-type="bookshelf" data-entity-id="{{$shelf->id}}">

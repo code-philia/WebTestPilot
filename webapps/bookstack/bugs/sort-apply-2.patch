@@ -1,5 +1,5 @@
 --- ./views/books/sort.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/books/sort.blade.php	2025-07-09 19:40:10.913660446 +0800
++++ ./views/books/sort.blade.php	2025-07-09 19:40:10.913660446 +0800
 @@ -1,76 +1,76 @@
 -@extends('layouts.simple')
 -

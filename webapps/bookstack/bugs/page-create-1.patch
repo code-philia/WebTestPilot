@@ -1,5 +1,5 @@
 --- ./views/books/show.blade.php	2025-07-09 16:35:51.351875212 +0800
-+++ ./bug_views/books/show.blade.php	2025-07-09 18:27:01.174507513 +0800
++++ ./views/books/show.blade.php	2025-07-09 18:27:01.174507513 +0800
 @@ -44,7 +44,7 @@
  
                      <div class="icon-list block inline">

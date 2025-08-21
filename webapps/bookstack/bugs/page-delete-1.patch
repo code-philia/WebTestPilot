@@ -1,5 +1,5 @@
 --- ./views/pages/delete.blade.php	2025-07-09 16:35:51.355875253 +0800
-+++ ./bug_views/pages/delete.blade.php	2025-07-09 18:35:47.334169259 +0800
++++ ./views/pages/delete.blade.php	2025-07-09 18:35:47.334169259 +0800
 @@ -37,7 +37,6 @@
                          <input type="hidden" name="_method" value="DELETE">
                          <div class="form-group text-right">

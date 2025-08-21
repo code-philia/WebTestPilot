@@ -347,7 +347,6 @@ class BaseTestRunner(ABC):
         # Stop the application
         subprocess.run(
             ["bash", str(WEBAPPS_DIR / "stop_app.sh"), application],
-            capture_output=True,
             text=True,
         )
 
@@ -356,7 +355,7 @@ class BaseTestRunner(ABC):
         if patch_file:
             cmd.append(patch_file)
 
-        _ = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        _ = subprocess.run(cmd, text=True, check=True)
 
         # Wait to make sure the app is accessible.
         if application == ApplicationEnum.invoiceninja:
