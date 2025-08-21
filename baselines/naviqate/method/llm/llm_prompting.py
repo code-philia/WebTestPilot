@@ -11,6 +11,7 @@ MODELS = {
     'gpt_mini': 'gpt-4o-mini',
     'o1': 'gpt-3.5-turbo',
     'gpt': 'gpt-4o',
+    'gpt-4.1': 'gpt-4.1',
     'qwen_vl': 'qwen/qwen2.5-vl-32b-instruct:free',
 }
 
@@ -24,7 +25,7 @@ def create_model_chain(model='gpt'):
     # 如果 model 是字典中的简称，则获取其对应的完整名称；否则直接使用 model
     model_name = MODELS.get(model, model)
 
-    def invoke_model_chain(system_prompt, user_prompt, verbose=True):
+    def invoke_model_chain(system_prompt, user_prompt, verbose=True, return_usage=False):
         # 客户端不再是全局的，而是在这里根据模型名称动态创建
         client = None
         extra_args = {} # 用于存放非 OpenAI 官方接口可能需要的额外参数
@@ -78,6 +79,10 @@ def create_model_chain(model='gpt'):
             print("Response:")
             print(result)
             print("")
+        
+        # Return usage info if requested
+        if return_usage and hasattr(response, 'usage'):
+            return result, response.usage.total_tokens if response.usage else 0
         return result
 
     return invoke_model_chain

@@ -7,6 +7,7 @@ import configparser
 from io import BytesIO
 from pathlib import Path
 from collections import defaultdict
+from typing import Callable
 
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
@@ -33,7 +34,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 class WebCrawler():
-    def __init__(self, driver, website, abstracted=False, headless=False, output_dir='./out'):
+    def __init__(self, driver, website, abstracted=False, headless=False, output_dir='./out', model: str = 'gpt'):
         self.driver = driver
         self.driver.set_window_size(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.website = website
@@ -67,11 +68,14 @@ class WebCrawler():
 
         self.driver.switch_to.default_content()
 
-        self.model_chain = create_model_chain(init_model(model='gpt'))
+        self.model_chain = create_model_chain(init_model(model=model))
         self.model_chain_gpt_mini = create_model_chain(init_model(model='gpt_mini'))
 
         self.task: str = ""
         self.prev_context: str = ""
+        
+        # Custom fields for webtestpilot evals.
+        self.total_tokens: int = 0
 
         # if abstracted:
         #     self.task = self.generate_concrete_task()
@@ -82,6 +86,12 @@ class WebCrawler():
             shutil.rmtree(self.dir)
 
         os.makedirs(self.dir, exist_ok=True)
+
+    def _call_model_with_tracking(self, model_chain: Callable, system_prompt: str, user_prompt: dict, verbose=True):
+        """Call model chain and track token usage."""
+        result, tokens = model_chain(system_prompt, user_prompt, verbose=verbose, return_usage=True)
+        self.total_tokens += tokens
+        return result
 
     def generate_concrete_task(self):
         description = self.get_meta_description()
@@ -97,7 +107,8 @@ class WebCrawler():
 
         data = json.dumps(data)
 
-        response = self.model_chain(
+        response = self._call_model_with_tracking(
+            self.model_chain,
             prompts.abstract_to_concrete_prompt,
             create_single_user_message(data)
         )
@@ -121,7 +132,8 @@ class WebCrawler():
 
         try:
 
-            res = self.model_chain(
+            res = self._call_model_with_tracking(
+                self.model_chain,
                 prompts.context_extraction_prompt,
                 create_multimodal_user_message(data, img)
             )
@@ -129,7 +141,8 @@ class WebCrawler():
             
         except Exception as e:
             img = self.take_screenshot()
-            res = self.model_chain(
+            res = self._call_model_with_tracking(
+                self.model_chain,
                 prompts.context_extraction_prompt,
                 create_multimodal_user_message(data, img)
             )
@@ -158,7 +171,8 @@ class WebCrawler():
 
         data = json.dumps(data)
 
-        response = self.model_chain(
+        response = self._call_model_with_tracking(
+                self.model_chain,
                 prompts.next_step_prompt,
                 create_single_user_message(data)
             )
@@ -509,14 +523,16 @@ class WebCrawler():
 
     def choose_action(self, data, img):
         try:
-            response = self.model_chain(
+            response = self._call_model_with_tracking(
+                self.model_chain,
                 prompts.which_actionable_prompt,
                 # create_single_user_message(json.dumps(data))
                 create_multimodal_user_message(json.dumps(data), img)
             )
         except Exception as e:
             img = self.take_screenshot()
-            response = self.model_chain(
+            response = self._call_model_with_tracking(
+                self.model_chain,
                 prompts.which_actionable_prompt,
                 # create_single_user_message(json.dumps(data))
                 create_multimodal_user_message(json.dumps(data), img)
@@ -718,7 +734,8 @@ class WebCrawler():
 
             while tries < 3:
 
-                response = self.model_chain_gpt_mini(
+                response = self._call_model_with_tracking(
+                    self.model_chain_gpt_mini,
                     prompts.element_functionality_prompt_with_context + f" Ensure that there are exactly {len(chunk)} items in the list.",
                     create_single_user_message(utils.to_json(chunk)),
                     verbose=False
@@ -766,6 +783,56 @@ class WebCrawler():
 
         with open(filepath + "history.json", "w") as json_file:
             json_file.write(json_data)
+
+    def get_token_usage(self):
+        """Return the total token usage."""
+        return self.total_tokens
+    
+    def get_last_action_trace(self):
+        """Get the last action trace in the desired format with XPath."""
+        if not self.history:
+            return None
+        
+        # History tuple format: (outerHTML, xpath, action, description, location, url)
+        last_action = self.history[-1]
+        xpath = last_action[1]
+        action_str = last_action[2]
+        
+        # Parse the action string to extract action type and arguments
+        if ':' in action_str:
+            # Actions like 'type:text' or 'select:index'
+            action_type, arg = action_str.split(':', 1)
+            
+            if action_type == 'type':
+                return {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": xpath,
+                            "value": arg
+                        }
+                    }
+                }
+            elif action_type == 'select':
+                return {
+                    "action": {
+                        "name": "select",
+                        "args": {
+                            "xpath": xpath,
+                            "index": int(arg)
+                        }
+                    }
+                }
+        else:
+            # Simple actions like 'click', 'hover', etc.
+            return {
+                "action": {
+                    "name": action_str,
+                    "args": {
+                        "xpath": xpath
+                    }
+                }
+            }
 
     def quit(self):
         img = self.take_screenshot()
