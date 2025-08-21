@@ -8,16 +8,20 @@
       "expectedResult": "Search input field is focused"
     },
     {
-      "action": "Type \"test\" in the search field",
+      "action": "Type \"\" in the search field",
       "expectedResult": "Search field contains search term"
     },
     {
-      "action": "Click \"View All\" button",
+      "action": "Click \"Search\" button",
       "expectedResult": "Search results page is displayed"
     },
     {
-      "action": "Verify search results are shown",
-      "expectedResult": "Search results list appears with matching items"
+      "action": "Verify \"Book\" is shown",
+      "expectedResult": "Search results list appears \"Book\""
+    },
+    {
+      "action": "Verify \"Chapter\" is shown",
+      "expectedResult": "Search results list appears \"Chapter\""
     },
     {
       "action": "Uncheck \"Chapter\" checkbox",

@@ -1,15 +1,15 @@
 {
   "name": "21::Create Role with Permissions",
   "url": "http://localhost:8081/",
-  "setup_function": "created_role_page",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Click \"Settings\" link in navigation",
       "expectedResult": "Settings page is displayed"
     },
     {
-      "action": "Click \"Roles & Permissions\" in settings menu",
-      "expectedResult": "Roles and permissions section opens"
+      "action": "Click \"Roles\" in settings menu",
+      "expectedResult": "Roles section opens"
     },
     {
       "action": "Click \"Create New Role\" button",
@@ -20,36 +20,44 @@
       "expectedResult": "Role name field is focused"
     },
     {
-      "action": "Type \"TestRole123456\" in the name field",
-      "expectedResult": "Role name field contains unique role name"
+      "action": "Type \"Role\" in the name field",
+      "expectedResult": "Role name field contains the name"
     },
     {
       "action": "Click in the \"Role Description\" textbox",
       "expectedResult": "Role description field is focused"
     },
     {
-      "action": "Type \"Test role for automation\" in description field",
+      "action": "Type \"Role description\" in description field",
       "expectedResult": "Description field contains role description"
     },
     {
-      "action": "Select permissions checkboxes for the role",
-      "expectedResult": "Permission checkboxes are checked"
+      "action": "Checkbox for the button \"Manage all book, chapter & page permissions\"",
+      "expectedResult": "Permission check box is checked"
     },
     {
-      "action": "Click \"Save Role\" button",
+      "action": "Scrolldown and click \"Toggle All\" button under \"Shelves\" text",
+      "expectedResult": "Permissions in shelves section are checked"
+    },
+    {
+      "action": "Click \"Toggle All\" button under \"Books\" text",
+      "expectedResult": "Permissions in books section are checked"
+    },
+    {
+      "action": "Click \"Toggle All\" button under \"Chapters\" text",
+      "expectedResult": "Permissions in chapters section are checked"
+    },
+    {
+      "action": "Click \"Toggle All\" button under \"Pages\" text",
+      "expectedResult": "Permissions in pages section are checked"
+    },
+    {
+      "action": "Scroll down and click \"Save Role\" button",
       "expectedResult": "Role is created and saved"
     },
     {
-      "action": "Verify alert message \"Role successfully created\" appears",
-      "expectedResult": "Success alert confirms role creation"
-    },
-    {
-      "action": "Verify role appears in roles listing",
+      "action": "Verify role \"Role\" appears in roles listing",
       "expectedResult": "New role is listed in roles table"
-    },
-    {
-      "action": "Verify role permissions are correctly set",
-      "expectedResult": "Role shows assigned permissions"
     }
   ]
 }

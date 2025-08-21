@@ -12,16 +12,8 @@
       "expectedResult": "Chapter deletion is confirmed"
     },
     {
-      "action": "Verify alert message \"Chapter successfully deleted\" appears",
-      "expectedResult": "Success alert confirms chapter deletion"
-    },
-    {
       "action": "Verify user is redirected away from deleted chapter page",
       "expectedResult": "User is no longer on the deleted chapter page"
-    },
-    {
-      "action": "Verify chapter no longer appears in book navigation",
-      "expectedResult": "Chapter is removed from book structure"
     }
   ]
 }

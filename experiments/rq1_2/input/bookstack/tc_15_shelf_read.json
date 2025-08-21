@@ -8,7 +8,7 @@
       "expectedResult": "Shelves listing page shows all available shelves"
     },
     {
-      "action": "Click on the shelf with title \"Shelf123456\"",
+      "action": "Click on the shelf with title \"Shelf\"",
       "expectedResult": "Shelf detail page opens"
     },
     {
@@ -20,12 +20,12 @@
       "expectedResult": "Shelf description text is shown on the page"
     },
     {
-      "action": "Verify books within shelf are displayed",
-      "expectedResult": "Books in shelf are listed with thumbnails"
+      "action": "Verify Book1 is present in the shelf",
+      "expectedResult": "Book1 is listed in the shelf"
     },
     {
-      "action": "Verify shelf statistics are shown",
-      "expectedResult": "Shelf shows book count and other metrics"
+      "action": "Verify Book2 is present in the shelf",
+      "expectedResult": "Book2 is listed in the shelf"
     }
   ]
 }

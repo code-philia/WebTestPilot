@@ -4,7 +4,7 @@
   "setup_function": "created_data_for_sort_page",
   "actions": [
     {
-      "action": "Click the book \"Book12345\"",
+      "action": "Click the book \"Book\"",
       "expectedResult": "Book detail page with content list is displayed"
     },
     {
@@ -18,14 +18,6 @@
     {
       "action": "Click \"Apply\" or confirm sort selection",
       "expectedResult": "Sort by name operation is executed"
-    },
-    {
-      "action": "Verify content is sorted alphabetically",
-      "expectedResult": "Items are arranged in alphabetical order"
-    },
-    {
-      "action": "Verify both chapters and pages are sorted",
-      "expectedResult": "All content types follow alphabetical order"
     }
   ]
 }

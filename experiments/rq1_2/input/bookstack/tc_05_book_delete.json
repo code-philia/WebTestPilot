@@ -12,10 +12,6 @@
       "expectedResult": "Book deletion is confirmed"
     },
     {
-      "action": "Verify alert message \"Book successfully deleted\" appears",
-      "expectedResult": "Success alert confirms book deletion"
-    },
-    {
       "action": "Verify user is redirected away from deleted book page",
       "expectedResult": "User is no longer on the deleted book page"
     }

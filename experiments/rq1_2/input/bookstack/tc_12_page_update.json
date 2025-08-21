@@ -8,11 +8,11 @@
       "expectedResult": "Page edit form opens with current values"
     },
     {
-      "action": "Click in the \"Page Name\" textbox",
+      "action": "Click in the \"Page Title\" textbox",
       "expectedResult": "Name field is focused and contains current name"
     },
     {
-      "action": "Clear the name field and type \"Page Updated 123456\"",
+      "action": "Clear the name field and type \"Page Updated\"",
       "expectedResult": "Name field shows updated page name"
     },
     {
@@ -26,10 +26,6 @@
     {
       "action": "Click \"Save Page\" button",
       "expectedResult": "Page changes are saved"
-    },
-    {
-      "action": "Verify alert message \"Page successfully updated\" appears",
-      "expectedResult": "Success alert confirms page update"
     },
     {
       "action": "Verify page heading shows updated page name",

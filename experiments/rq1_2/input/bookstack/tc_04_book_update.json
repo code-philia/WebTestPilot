@@ -4,16 +4,16 @@
   "setup_function": "created_book_page",
   "actions": [
     {
-      "action": "Click \"Edit\" link in the book actions",
-      "expectedResult": "Book edit form opens with current values"
+      "action": "Click \"Edit\" button in the book actions",
+      "expectedResult": "Book edit form opens"
     },
     {
       "action": "Click in the \"Name\" textbox",
       "expectedResult": "Name field is focused and contains current name"
     },
     {
-      "action": "Clear the name field and type \"Book Updated 123456\"",
-      "expectedResult": "Name field shows updated book name"
+      "action": "Clear the name field and type \"Book Updated\"",
+      "expectedResult": "Name field shows updated book name \"Book Updated\""
     },
     {
       "action": "Click in the Rich Text Area iframe",
@@ -21,7 +21,7 @@
     },
     {
       "action": "Clear existing content and type \"Description Updated\"",
-      "expectedResult": "Rich text area contains updated description"
+      "expectedResult": "Rich text area contains updated description \"Description Updated\""
     },
     {
       "action": "Click \"Save Book\" button",
@@ -33,11 +33,11 @@
     },
     {
       "action": "Verify page heading shows updated book name",
-      "expectedResult": "Book page shows new name in heading"
+      "expectedResult": "Book page shows new name \"Book Updated\" in heading"
     },
     {
       "action": "Verify updated description text is visible",
-      "expectedResult": "Updated description is displayed on page"
+      "expectedResult": "Updated description \"Description Updated\" is displayed on page"
     }
   ]
 }

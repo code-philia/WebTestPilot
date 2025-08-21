@@ -4,7 +4,7 @@
   "setup_function": "created_data_for_sort_page",
   "actions": [
     {
-      "action": "Click the book \"Book12345\"",
+      "action": "Click the book \"Book\"",
       "expectedResult": "Book detail page with content list is displayed"
     },
     {

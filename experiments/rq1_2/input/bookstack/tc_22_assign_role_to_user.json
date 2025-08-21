@@ -4,44 +4,24 @@
   "setup_function": "created_role_page",
   "actions": [
     {
-      "action": "Click \"Settings\" link in navigation",
-      "expectedResult": "Settings page is displayed"
-    },
-    {
       "action": "Click \"Users\" in settings menu",
       "expectedResult": "Users management section opens"
     },
     {
-      "action": "Select a user from the users list",
+      "action": "Select user Guest guest@example.com",
       "expectedResult": "User details page or edit form opens"
     },
     {
-      "action": "Click \"Edit\" button for the selected user",
-      "expectedResult": "User edit form is displayed"
-    },
-    {
-      "action": "Locate the roles section in user form",
-      "expectedResult": "User roles selection area is visible"
-    },
-    {
-      "action": "Select \"TestRole123456\" from available roles",
-      "expectedResult": "Role is selected for assignment"
+      "action": "Select \"Role\" from available roles",
+      "expectedResult": "Role is selected and checked"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "User role assignment is saved"
     },
     {
-      "action": "Verify alert message \"User successfully updated\" appears",
-      "expectedResult": "Success alert confirms user update"
-    },
-    {
-      "action": "Verify role is assigned to user",
-      "expectedResult": "User profile shows assigned role"
-    },
-    {
-      "action": "Note: Full testing limited by demo restrictions",
-      "expectedResult": "Demo environment may have permission limitations"
+      "action": "Verify role \"Role\" is assigned to user Guest",
+      "expectedResult": "Guest shows assigned role \"Role\""
     }
   ]
 }

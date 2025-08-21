@@ -20,24 +20,28 @@
       "expectedResult": "The page saved successfully"
     },
     {
-      "action": "Verify alert message \"Template successfully created\" appears",
-      "expectedResult": "Success alert confirms template creation"
+      "action": "Click \"Book\" button in breadcrumb",
+      "expectedResult": "Book page details show up"
     },
     {
-      "action": "Navigate to create a new page",
-      "expectedResult": "Page creation form opens"
+      "action": "Click \"Page\" button in the main content",
+      "expectedResult": "Page details page show up"
+    },
+    {
+      "action": "Click \"Edit\" button in the main content",
+      "expectedResult": "Page details page show up"
     },
     {
       "action": "Click the \"Templates\" button on the right hand side",
       "expectedResult": "The template configuration tab is displayed"
     },
     {
-      "action": "Click \"Templates\" dropdown",
-      "expectedResult": "Template selection dropdown appears"
+      "action": "Click the \"Page Template\" prepend to page content button",
+      "expectedResult": "\"Page Description\" is inserted"
     },
     {
-      "action": "Select \"Template123456\" from dropdown",
-      "expectedResult": "Template is selected"
+      "action": "Click the \"Page Template\" append to page content button",
+      "expectedResult": "\"Page Description\" is inserted"
     },
     {
       "action": "Verify page content is populated with template",
@@ -46,10 +50,6 @@
     {
       "action": "Click \"Save Page\" button",
       "expectedResult": "Page with template content is created"
-    },
-    {
-      "action": "Verify alert message \"Page successfully created\" appears",
-      "expectedResult": "Success alert confirms page creation"
     }
   ]
 }

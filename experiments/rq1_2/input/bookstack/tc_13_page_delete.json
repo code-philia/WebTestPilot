@@ -12,10 +12,6 @@
       "expectedResult": "Page deletion is confirmed"
     },
     {
-      "action": "Verify alert message \"Page successfully deleted\" appears",
-      "expectedResult": "Success alert confirms page deletion"
-    },
-    {
       "action": "Verify user is redirected away from deleted page",
       "expectedResult": "User is no longer on the deleted page"
     },

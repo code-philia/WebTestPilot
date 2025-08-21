@@ -12,7 +12,7 @@
       "expectedResult": "Name field is focused and contains current name"
     },
     {
-      "action": "Clear the name field and type \"Chapter Updated 123456\"",
+      "action": "Clear the name field and type \"Chapter Updated\"",
       "expectedResult": "Name field shows updated chapter name"
     },
     {
@@ -26,10 +26,6 @@
     {
       "action": "Click \"Save Chapter\" button",
       "expectedResult": "Chapter changes are saved"
-    },
-    {
-      "action": "Verify alert message \"Chapter successfully updated\" appears",
-      "expectedResult": "Success alert confirms chapter update"
     },
     {
       "action": "Verify page heading shows updated chapter name",

@@ -12,7 +12,7 @@
       "expectedResult": "Chapter name field is focused"
     },
     {
-      "action": "Type \"Chapter123456\" in the name field",
+      "action": "Type \"Chapter\" in the name field",
       "expectedResult": "Chapter name field contains unique chapter name"
     },
     {
@@ -32,28 +32,24 @@
       "expectedResult": "Tag name field is focused"
     },
     {
-      "action": "Type \"chapter\" in the tag name field",
-      "expectedResult": "Tag name field contains \"chapter\""
+      "action": "Type \"Sample Tag\" in the tag name field",
+      "expectedResult": "Tag name field contains \"Sample Tag\""
     },
     {
-      "action": "Click in the tag value field and type \"test\"",
-      "expectedResult": "Tag value field contains \"test\""
+      "action": "Click in the tag value field and type \"Sample Tag\"",
+      "expectedResult": "Tag value field contains \"Sample Tag\""
     },
     {
       "action": "Click \"Save Chapter\" button",
       "expectedResult": "Chapter is created and saved"
     },
     {
-      "action": "Verify alert message \"Chapter successfully created\" appears",
-      "expectedResult": "Success alert confirms chapter creation"
-    },
-    {
-      "action": "Verify chapter appears in book navigation",
+      "action": "Verify chapter \"Chapter\" appears in book navigation",
       "expectedResult": "Chapter is listed in book structure"
     },
     {
-      "action": "Verify chapter page displays with correct name",
-      "expectedResult": "Chapter page shows correct name in heading"
+      "action": "Verify chapter page displays with correct name \"Chapter\" in heading",
+      "expectedResult": "Chapter page shows correct name \"Chapter\" in heading"
     }
   ]
 }

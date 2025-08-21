@@ -8,32 +8,36 @@
       "expectedResult": "Move chapter dialog opens"
     },
     {
-      "action": "Select destination book from dropdown",
-      "expectedResult": "Book is selected as destination"
+      "action": "Click the search text box",
+      "expectedResult": "Search box is focused"
+    },
+    {
+      "action": "Type \"Book1\" in the search box",
+      "expectedResult": "Search results are filtered by \"Book1\""
+    },
+    {
+      "action": "Select the chapter \"Book1\" from the dropdown",
+      "expectedResult": "Book1 is selected as destination"
     },
     {
       "action": "Click \"Move Chapter\" button",
-      "expectedResult": "Chapter move operation is initiated"
+      "expectedResult": "Chapter move operation is confirmed"
     },
     {
-      "action": "Verify alert message \"Chapter successfully moved\" appears",
-      "expectedResult": "Success alert confirms chapter move"
+      "action": "Click the \"Books\" button in the navigation bar",
+      "expectedResult": "Book listing page is displayed"
     },
     {
-      "action": "Navigate to the destination book",
-      "expectedResult": "Destination book page is displayed"
+      "action": "From the \"Recently Viewed\" section, click on the book with title \"Book1\"",
+      "expectedResult": "It opens the \"Book1\" page"
     },
     {
-      "action": "Verify moved chapter appears in destination",
-      "expectedResult": "Chapter is now listed in destination book"
+      "action": "Verify that \"Chapter 1\" is shown in the main content of the page",
+      "expectedResult": "\"Chapter 1\" is displayed in the main content"
     },
     {
-      "action": "Navigate back to original book",
-      "expectedResult": "Original book page is displayed"
-    },
-    {
-      "action": "Verify chapter no longer appears in original location",
-      "expectedResult": "Chapter is removed from original book"
+      "action": "Verify that \"Chapter 2\" is shown in the main content of the page",
+      "expectedResult": "\"Chapter 2\" is displayed in the main content"
     }
   ]
 }

@@ -4,24 +4,24 @@
   "setup_function": "created_page_page",
   "actions": [
     {
-      "action": "Click on the page with title \"Page123456\"",
+      "action": "Click on the link with title \"Book\" in breadcrumb",
       "expectedResult": "Page detail view opens"
     },
     {
-      "action": "Verify page name appears in page heading",
-      "expectedResult": "Page name is displayed as main heading"
+      "action": "Verify page \"Page\" title is displayed",
+      "expectedResult": "Page is displayed correctly"
     },
     {
-      "action": "Verify page content is visible",
-      "expectedResult": "Page content text is shown on the page"
+      "action": "Click on the link with title \"Page\" in book navigation",
+      "expectedResult": "Page detail view opens"
     },
     {
-      "action": "Verify page navigation elements are present",
-      "expectedResult": "Page navigation shows book structure"
+      "action": "Verify page name \"Page\" appears in page heading",
+      "expectedResult": "Page name \"Page\" is displayed as main heading"
     },
     {
-      "action": "Verify breadcrumb navigation shows book > page",
-      "expectedResult": "Breadcrumb shows hierarchical navigation"
+      "action": "Verify page description is visible",
+      "expectedResult": "Page description text is shown on the page"
     }
   ]
 }

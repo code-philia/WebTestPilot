@@ -4,43 +4,27 @@
   "setup_function": "created_sort_rule_page",
   "actions": [
     {
-      "action": "Locate \"SortRule123456\" in the rules list",
+      "action": "Click \"Rule\" in the rules list",
       "expectedResult": "Target sort rule is visible in the list"
     },
     {
-      "action": "Click \"Edit\" button for the sort rule",
-      "expectedResult": "Sort rule edit form opens"
-    },
-    {
-      "action": "Click in the \"Rule Name\" textbox",
+      "action": "Click in the \"Name\" textbox",
       "expectedResult": "Name field is focused with current name"
     },
     {
-      "action": "Clear and type \"SortRule Updated 123456\"",
+      "action": "Clear and type \"Rule updated\"",
       "expectedResult": "Name field shows updated rule name"
     },
     {
-      "action": "Change sort type to different option",
-      "expectedResult": "Different sort type is selected"
+      "action": "Click button to add \"Chapters First\" to the list",
+      "expectedResult": "The option is added to the list"
     },
     {
-      "action": "Change sort order option",
-      "expectedResult": "Different sort order is selected"
-    },
-    {
-      "action": "Modify entity selection if available",
-      "expectedResult": "Entity type selections are updated"
-    },
-    {
-      "action": "Click \"Save Sort Rule\" button",
+      "action": "Click \"Save\" button",
       "expectedResult": "Sort rule changes are saved"
     },
     {
-      "action": "Verify alert message \"Sort rule successfully updated\" appears",
-      "expectedResult": "Success alert confirms rule update"
-    },
-    {
-      "action": "Verify updated rule appears in listing",
+      "action": "Verify rule \"Rule updated\" appears in listing",
       "expectedResult": "Rules list shows updated rule details"
     }
   ]

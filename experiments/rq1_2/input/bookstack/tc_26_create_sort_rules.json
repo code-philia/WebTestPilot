@@ -1,50 +1,42 @@
 {
   "name": "26::Create Sort Rules",
   "url": "http://localhost:8081/",
-  "setup_function": "created_sort_rule_page",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Click \"Settings\" link in navigation",
       "expectedResult": "Settings page is displayed"
     },
     {
-      "action": "Click \"Sort Rules\" or equivalent option",
+      "action": "Click \"Sorting\" or equivalent option",
       "expectedResult": "Sort rules management section opens"
     },
     {
-      "action": "Click \"Create New Sort Rule\" button",
+      "action": "Click \"Create Sort Rule\" button",
       "expectedResult": "Sort rule creation form opens"
     },
     {
-      "action": "Click in the \"Rule Name\" textbox",
-      "expectedResult": "Rule name field is focused"
+      "action": "Click in the \"Name\" textbox",
+      "expectedResult": "Name field is focused"
     },
     {
-      "action": "Type \"SortRule123456\" in the name field",
-      "expectedResult": "Rule name field contains unique rule name"
+      "action": "Type \"Rule\" in the name field",
+      "expectedResult": "Name field contains the name"
     },
     {
-      "action": "Select sort type from dropdown (e.g. Name/Created/Updated)",
-      "expectedResult": "Sort type option is selected"
+      "action": "Click button to add \"Name - Alphabetical (Asc)\" to the list",
+      "expectedResult": "The option is added to the list"
     },
     {
-      "action": "Select sort order (Ascending/Descending)",
-      "expectedResult": "Sort order option is selected"
+      "action": "Click button to add \"Created Date (Asc)\"",
+      "expectedResult": "The option is added to the list"
     },
     {
-      "action": "Select entities to apply rule to (Books/Chapters/Pages)",
-      "expectedResult": "Target entity types are selected"
-    },
-    {
-      "action": "Click \"Save Sort Rule\" button",
+      "action": "Click \"Save\" button",
       "expectedResult": "Sort rule is created and saved"
     },
     {
-      "action": "Verify alert message \"Sort rule successfully created\" appears",
-      "expectedResult": "Success alert confirms rule creation"
-    },
-    {
-      "action": "Verify rule appears in sort rules listing",
+      "action": "Verify rule \"Role\" appears in sort rules listing",
       "expectedResult": "New sort rule is listed in rules table"
     }
   ]

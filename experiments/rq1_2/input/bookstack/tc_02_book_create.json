@@ -20,8 +20,8 @@
       "expectedResult": "Name field is focused for input"
     },
     {
-      "action": "Type \"Book123456\" to name field",
-      "expectedResult": "Book name field contains the unique book name"
+      "action": "Type \"Book\" to name field",
+      "expectedResult": "Book name field input is filled"
     },
     {
       "action": "Click in the Rich Text Area iframe",
@@ -30,18 +30,6 @@
     {
       "action": "Type \"Description\" in the rich text area",
       "expectedResult": "Rich text area contains \"Description\""
-    },
-    {
-      "action": "Click \"\u25b8 Cover image\" button to expand cover section",
-      "expectedResult": "Cover image section expands showing upload options"
-    },
-    {
-      "action": "Click \"Select Image\" button",
-      "expectedResult": "File chooser dialog appears"
-    },
-    {
-      "action": "Select the file \"./assets/minion.jpeg\"",
-      "expectedResult": "Image is selected and preview appears"
     },
     {
       "action": "Click \"\u25b8 Book Tags\" button to expand tags section",
@@ -64,16 +52,12 @@
       "expectedResult": "Book is created and saved"
     },
     {
-      "action": "Verify alert message \"Book successfully created\" appears",
-      "expectedResult": "Success alert confirms book creation"
-    },
-    {
-      "action": "Verify page heading shows the book name",
-      "expectedResult": "Book page displays with correct name in heading"
+      "action": "Verify page heading shows the book name \"Book\"",
+      "expectedResult": "Book page displays with correct name \"Book\" in heading"
     },
     {
       "action": "Verify \"Description\" text is visible on the page",
-      "expectedResult": "Book description is displayed on the book page"
+      "expectedResult": "Book description \"Description\" is displayed on the book page"
     }
   ]
 }

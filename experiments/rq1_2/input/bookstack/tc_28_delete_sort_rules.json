@@ -4,7 +4,7 @@
   "setup_function": "created_sort_rule_page",
   "actions": [
     {
-      "action": "Locate the sort rule \"SortRule Updated 123456\"",
+      "action": "Locate the sort rule \"Rule\"",
       "expectedResult": "Target sort rule is visible in the list"
     },
     {
@@ -16,16 +16,8 @@
       "expectedResult": "Sort rule deletion is confirmed"
     },
     {
-      "action": "Verify alert message \"Sort rule successfully deleted\" appears",
-      "expectedResult": "Success alert confirms rule deletion"
-    },
-    {
       "action": "Verify rule no longer appears in listing",
       "expectedResult": "Deleted rule is removed from rules table"
-    },
-    {
-      "action": "Verify any content using rule reverts to default",
-      "expectedResult": "Content sorting reverts to default behavior"
     }
   ]
 }

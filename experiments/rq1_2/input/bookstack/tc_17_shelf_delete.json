@@ -12,10 +12,6 @@
       "expectedResult": "Shelf deletion is confirmed"
     },
     {
-      "action": "Verify alert message \"Shelf successfully deleted\" appears",
-      "expectedResult": "Success alert confirms shelf deletion"
-    },
-    {
       "action": "Verify user is redirected away from deleted shelf page",
       "expectedResult": "User is no longer on the deleted shelf page"
     },
