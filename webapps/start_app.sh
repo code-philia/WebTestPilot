@@ -63,10 +63,10 @@ if [[ -n "$patch_name" ]]; then
         cd "$SCRIPT_DIR/$app_name"
         if [[ "$app_name" == "indico" ]]; then
             echo "🔄 Restarting Indico web service..."
-            docker compose -f "$SCRIPT_DIR/$app_name/docker-compose.yml" restart web
+            docker compose -f "$SCRIPT_DIR/$app_name/docker-compose.yaml" restart web
         else
             echo "🔄 Restarting $app_name app service..."
-            docker compose -f "$SCRIPT_DIR/$app_name/docker-compose.yml" restart app
+            docker compose -f "$SCRIPT_DIR/$app_name/docker-compose.yaml" restart app
         fi
     )
     
