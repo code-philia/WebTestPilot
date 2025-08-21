@@ -22,6 +22,7 @@ from testcases.bookstack.conftest import (
     setup_data_for_global_search_page,
     setup_data_for_page_move_chapter,
     setup_data_for_page_move_page,
+    setup_data_for_shelf_create,
     setup_data_for_sort_chapter_and_page,
 )
 from testcases.indico.conftest import (
@@ -77,6 +78,7 @@ def setup_page_state(
 def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
     """Set up InvoiceNinja page based on setup function."""
     test_data = InvoiceNinjaTestData()
+    test_data._unique_id = ""
 
     # No setup.
     if setup_function == "":
@@ -112,6 +114,7 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 def setup_indico_page(page: Page, setup_function: str) -> Page:
     """Set up Indico page based on setup function."""
     test_data = IndicoTestData()
+    test_data._unique_id = ""
 
     # No setup.
     if setup_function == "":
@@ -148,6 +151,7 @@ def setup_prestashop_page(page: Page, setup_function: str) -> Page:
 def setup_bookstack_page(page: Page, setup_function: str) -> Page:
     """Set up BookStack page based on setup function."""
     test_data = BookStackTestData()
+    test_data._unique_id = ""
 
     # No setup.
     if setup_function == "":
@@ -185,6 +189,14 @@ def setup_bookstack_page(page: Page, setup_function: str) -> Page:
             [test_data.book_name1, test_data.book_name2],
             test_data.book_description,
         )
+    elif (
+        setup_function == "setup_data_for_shelf_create"
+    ):  # Custom for add test case only.
+        book_names = [test_data.book_name1, test_data.book_name2]
+        setup_data_for_shelf_create(
+            logged_in_page, book_names, test_data.book_description
+        )
+        return go_to_bookstack(logged_in_page)
 
     elif setup_function == "created_sort_rule_page":
         return create_sort_rule(logged_in_page, test_data)
