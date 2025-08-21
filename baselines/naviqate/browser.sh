@@ -11,15 +11,17 @@ else
     CHROME_CMD="google-chrome"
 fi
 
+# Create a unique temporary profile directory
+PROFILE_DIR=$(mktemp -d /tmp/chrome-profile-XXXX)
+
 # Kill any existing Chrome instance using that port
-pkill -f "google-chrome.*--remote-debugging-port=${PORT}" || true
-pkill -f "Google Chrome.*--remote-debugging-port=${PORT}" || true
+pkill -f chrome
 
 # Make sure profile dir exists
 mkdir -p "$PROFILE_DIR"
 
 # Start Chrome
-echo "Starting local Chrome..."
+echo "Starting headless Chrome with profile $PROFILE_DIR..."
 "$CHROME_CMD" \
     --remote-debugging-port=${PORT} \
     --remote-debugging-address=127.0.0.1 \
@@ -37,7 +39,7 @@ echo "Chrome PID: $CHROME_PID"
 # Wait for "DevTools listening on" in logs
 echo "Waiting for Chrome DevTools endpoint..."
 while true; do
-    endpoint=$(grep -oE "ws://[^ ]+" /tmp/chrome.log)
+    endpoint=$(grep -aoE "ws://[^ ]+" /tmp/chrome.log)
     if [ -n "$endpoint" ]; then
         echo "DevTools endpoint: $endpoint"
         break

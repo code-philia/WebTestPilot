@@ -35,7 +35,10 @@ class TestResult:
     @property
     def runtime_per_step(self) -> float:
         # If the step fails -> it's not counted, so we need to increase by
-        return self.runtime / min(self.current_step + 1, self.total_step)
+        try:
+            return self.runtime / min(self.current_step + 1, self.total_step)
+        except:
+            return 0
 
     def __str__(self):
         status = "✓" if self.success else "✗"
@@ -235,12 +238,15 @@ class BaseTestRunner(ABC):
         return test_cases
 
     def clean_up_playwright(self):
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
-        if self.playwright:
-            self.playwright.stop()
+        try:
+            if self.context:
+                self.context.close()
+            if self.browser:
+                self.browser.close()
+            if self.playwright:
+                self.playwright.stop()
+        except:
+            pass
 
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""
