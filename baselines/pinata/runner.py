@@ -8,7 +8,7 @@ from typing import Optional
 
 import nest_asyncio
 from base_runner import BaseTestRunner, TestResult
-from const import ApplicationEnum, TestCase
+from const import ApplicationEnum, MethodEnum, TestCase
 from playwright.async_api import async_playwright
 from playwright.sync_api import Page
 from tqdm import tqdm
@@ -45,7 +45,12 @@ class PinataTestRunner(BaseTestRunner):
         **kwargs,
     ):
         super().__init__(
-            test_case_path, test_output_path, application, model=model, **kwargs
+            test_case_path,
+            test_output_path,
+            application,
+            model=model,
+            method=MethodEnum.pinata,
+            **kwargs,
         )
         self.provider = provider
         self.headless = headless

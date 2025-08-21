@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from tqdm import tqdm
-from const import ApplicationEnum, ModelEnum, TestCase
+from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -40,7 +40,12 @@ class NaviqateTestRunner(BaseTestRunner):
         **kwargs,
     ):
         super().__init__(
-            test_case_path, test_output_path, application, model=model, **kwargs
+            test_case_path,
+            test_output_path,
+            application,
+            model=model,
+            method=MethodEnum.naviqate,
+            **kwargs,
         )
         self.headless = headless
         self.max_steps = max_steps

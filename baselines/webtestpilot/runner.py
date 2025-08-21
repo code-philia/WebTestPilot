@@ -4,7 +4,7 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
-from const import ApplicationEnum, TestCase
+from const import ApplicationEnum, MethodEnum, TestCase
 from dotenv import load_dotenv
 from tqdm import tqdm
 
@@ -36,7 +36,12 @@ class WebTestPilotTestRunner(BaseTestRunner):
         **kwargs,
     ):
         super().__init__(
-            test_case_path, test_output_path, application, model=model, **kwargs
+            test_case_path,
+            test_output_path,
+            application,
+            model=model,
+            method=MethodEnum.webtestpilot,
+            **kwargs,
         )
         self.headless = headless
 
@@ -72,7 +77,11 @@ class WebTestPilotTestRunner(BaseTestRunner):
                     try:
                         action_text = action.action[:40]
                         step_bar.set_description(f"  Step {i + 1}: {action_text}")
-                        step = Step(condition="", action=action.action, expectation=action.expectedResult)
+                        step = Step(
+                            condition="",
+                            action=action.action,
+                            expectation=action.expectedResult,
+                        )
 
                         WebTestPilot.run(session, step)
 

@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Optional
 
-from const import ApplicationEnum, ModelEnum, TestCase
+from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
 from playwright.sync_api._generated import Browser, BrowserContext, Playwright
 from tqdm import tqdm
@@ -195,6 +195,7 @@ class BaseTestRunner(ABC):
         application: ApplicationEnum,
         model: Optional[ModelEnum] = None,
         headless: bool = False,
+        method: Optional[MethodEnum] = None,
         **kwargs,
     ):
         self.test_case_path = Path(test_case_path)
@@ -203,6 +204,7 @@ class BaseTestRunner(ABC):
         self.model = model
         self.config = kwargs
         self.headless = headless
+        self.method = method
 
         # For configuring Playwright, to load initial page.
         self.playwright: Optional[Playwright] = None
@@ -222,7 +224,7 @@ class BaseTestRunner(ABC):
 
         for file_path in sorted(
             self.test_case_path.glob("*.json"), key=lambda p: p.stem
-        )[2:3]:
+        ):
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
@@ -381,13 +383,21 @@ class BaseTestRunner(ABC):
             print(f"No test cases found in {self.test_case_path}")
             return results
 
-        # Calculate total runs
-        bug_count = sum(1 for tc in test_cases if tc.name in self.bug_mapping)
-        total_runs = len(test_cases) + bug_count
+        disable_buggy_tests = self.method in [MethodEnum.naviqate, MethodEnum.lavague]
 
-        print(
-            f"Running ({bug_count} 🐛 buggy +  {len(test_cases)} normal = {total_runs} runs)...\n"
-        )
+        # Calculate total runs
+        if disable_buggy_tests:
+            bug_count = 0
+            total_runs = len(test_cases)
+            print(
+                f"Running {len(test_cases)} normal test(s) (buggy tests disabled for {self.method.value if self.method else 'unknown'})...\n"
+            )
+        else:
+            bug_count = sum(1 for tc in test_cases if tc.name in self.bug_mapping)
+            total_runs = len(test_cases) + bug_count
+            print(
+                f"Running ({bug_count} 🐛 buggy +  {len(test_cases)} normal = {total_runs} runs)...\n"
+            )
 
         # Main progress bar
         with tqdm(
@@ -398,8 +408,8 @@ class BaseTestRunner(ABC):
             colour="blue",
         ) as pbar:
             for test_case in test_cases:
-                # Run buggy test if mapping exists
-                if test_case.name in self.bug_mapping:
+                # Run buggy test if mapping exists and method supports it
+                if test_case.name in self.bug_mapping and not disable_buggy_tests:
                     result = self.run_single_test(
                         test_case,
                         pbar,

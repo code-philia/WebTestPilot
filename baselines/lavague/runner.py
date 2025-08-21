@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Optional
 
 from base_runner import BaseTestRunner, TestResult
-from const import ApplicationEnum, TestCase
+from const import ApplicationEnum, MethodEnum, TestCase
 from lavague.contexts.openai import OpenaiContext
 from lavague.core import ActionEngine, WorldModel
 from lavague.core.agents import WebAgent
@@ -33,7 +33,12 @@ class LavagueTestRunner(BaseTestRunner):
         **kwargs,
     ):
         super().__init__(
-            test_case_path, test_output_path, application, model=model, **kwargs
+            test_case_path,
+            test_output_path,
+            application,
+            model=model,
+            method=MethodEnum.lavague,
+            **kwargs,
         )
         self.headless = headless
 
