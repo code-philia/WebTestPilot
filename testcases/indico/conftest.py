@@ -61,8 +61,7 @@ class IndicoTestData:
 
     @property
     def end_date(self) -> str:
-        # tomorrow's date in DD/MM/YYYY format
-        return (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y")
+        return "10/10/2040"
 
     @property
     def end_time(self) -> str:

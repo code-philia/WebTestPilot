@@ -33,7 +33,7 @@
     },
     {
       "action": "Type \"Room\" in the room field",
-      "expectedResult": "Room field contains unique room name"
+      "expectedResult": "Room field contains the room name"
     },
     {
       "action": "Click \"Public\" option for event protection mode",
@@ -48,7 +48,7 @@
       "expectedResult": "Lecture page displays with correct name in heading"
     },
     {
-      "action": "Verify venue and room information is displayed",
+      "action": "Verify lecture name \"Lecture\", venue and room information is displayed",
       "expectedResult": "Location details are shown on the lecture page"
     }
   ]

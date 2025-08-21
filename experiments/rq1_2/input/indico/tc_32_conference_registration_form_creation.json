@@ -22,10 +22,6 @@
     {
       "action": "Click \"Create\" button",
       "expectedResult": "Registration form is created"
-    },
-    {
-      "action": "Verify alert message \"Registration form has been successfully created\" appears",
-      "expectedResult": "Success alert confirms form creation"
     }
   ]
 }

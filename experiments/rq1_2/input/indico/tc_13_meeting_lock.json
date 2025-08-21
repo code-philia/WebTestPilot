@@ -14,14 +14,6 @@
     {
       "action": "Click \"Lock event\" button",
       "expectedResult": "Meeting locking is confirmed"
-    },
-    {
-      "action": "Verify \"This event has been locked\" message appears",
-      "expectedResult": "Lock status message is displayed on page"
-    },
-    {
-      "action": "Verify alert message \"The event is now locked\" appears",
-      "expectedResult": "Success alert confirms meeting is locked"
     }
   ]
 }

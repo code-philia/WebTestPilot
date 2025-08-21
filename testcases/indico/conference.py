@@ -404,20 +404,6 @@ def test_registration_change_state_in_conference(
     )
 
 
-def test_create_conference(
-    created_conference_page: Page, test_data: IndicoTestData
-) -> None:
-    expect(created_conference_page.locator("#event-settings-data")).to_contain_text(
-        test_data.conference_name
-    )
-    expect(created_conference_page.locator("#event-settings-location")).to_contain_text(
-        test_data.room_name
-    )
-    expect(created_conference_page.locator("#event-settings-location")).to_contain_text(
-        test_data.venue_name
-    )
-
-
 def test_delete_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:

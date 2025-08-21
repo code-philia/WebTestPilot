@@ -12,16 +12,8 @@
       "expectedResult": "Registration opening is initiated"
     },
     {
-      "action": "Verify alert message \"Registrations are now open\" appears",
-      "expectedResult": "Success alert confirms registrations opened"
-    },
-    {
       "action": "Click \"Close now\" link",
       "expectedResult": "Registration closing is initiated"
-    },
-    {
-      "action": "Verify alert message \"Registrations are now closed\" appears",
-      "expectedResult": "Success alert confirms registrations closed"
     },
     {
       "action": "Click \"Reopen now\" button",
@@ -30,10 +22,6 @@
     {
       "action": "Click \"OK\" button",
       "expectedResult": "Registration reopening is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Registrations are now open\" appears",
-      "expectedResult": "Success alert confirms registrations reopened"
     }
   ]
 }

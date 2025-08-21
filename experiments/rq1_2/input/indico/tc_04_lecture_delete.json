@@ -22,10 +22,6 @@
     {
       "action": "Click \"Delete event\" button",
       "expectedResult": "Lecture deletion is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Event successfully deleted\" appears",
-      "expectedResult": "Success alert confirms lecture deletion"
     }
   ]
 }

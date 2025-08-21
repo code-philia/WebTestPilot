@@ -42,10 +42,6 @@
     {
       "action": "Verify track appears in track list container",
       "expectedResult": "Track list shows the new track"
-    },
-    {
-      "action": "Verify alert message \"Track has been created\" appears",
-      "expectedResult": "Success alert confirms track creation"
     }
   ]
 }

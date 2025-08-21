@@ -39,6 +39,7 @@ from testcases.invoiceninja.conftest import (
     create_product,
     go_to_invoiceninja,
     login_to_invoiceninja,
+    setup_data_for_create_invoice,
     setup_for_credit_page,
     setup_for_expense_page,
     setup_for_invoice_page,
@@ -97,6 +98,9 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 
     elif setup_function == "created_invoice_page":
         return setup_for_invoice_page(logged_in_page, test_data)
+
+    elif setup_function == "setup_data_for_create_invoice":
+        return setup_data_for_create_invoice(logged_in_page, test_data)
 
     elif setup_function == "created_payment_page":
         return setup_for_payment_page(logged_in_page, test_data)

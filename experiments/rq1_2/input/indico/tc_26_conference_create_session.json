@@ -8,6 +8,34 @@
       "expectedResult": "Sessions section opens"
     },
     {
+      "action": "Click \"Contribution settings\" dropdown link in navigation",
+      "expectedResult": "Contribution settings dropdown opens"
+    },
+    {
+      "action": "Click \"Session types\" link",
+      "expectedResult": "Session types settings open"
+    },
+    {
+      "action": "Click \"New session type\" link",
+      "expectedResult": "Session add form open"
+    },
+    {
+      "action": "Fill \"Session type\" to the name field",
+      "expectedResult": "Name field is filled with session type"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Session type is created and saved"
+    },
+    {
+      "action": "Verify session type appears in session types list",
+      "expectedResult": "Session type is listed in session types"
+    },
+    {
+      "action": "Click \"Close\" button",
+      "expectedResult": "Session types settings are closed"
+    },
+    {
       "action": "Click \"Add new session\" button",
       "expectedResult": "Session creation form opens"
     },

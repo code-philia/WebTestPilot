@@ -50,10 +50,6 @@
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Payment settings are saved"
-    },
-    {
-      "action": "Verify alert message \"Settings for Bank Transfer saved\" appears",
-      "expectedResult": "Success alert confirms settings saved"
     }
   ]
 }

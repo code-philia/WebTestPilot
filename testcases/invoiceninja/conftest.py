@@ -57,7 +57,7 @@ class InvoiceNinjaTestData:
 
     @property
     def company_phone(self) -> str:
-        return f"09{self._unique_id}"
+        return "0987654321"
 
     # Contact
     @property
@@ -74,7 +74,7 @@ class InvoiceNinjaTestData:
 
     @property
     def contact_phone(self) -> str:
-        return f"099{self._unique_id}"
+        return "0912345678"
 
     # Product
     @property
@@ -304,9 +304,7 @@ def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 def setup_for_invoice_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
-    create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name1, test_data)
-    create_product(logged_in_page, test_data.product_name2, test_data)
+    setup_data_for_create_invoice(logged_in_page, test_data)
 
     # Navigate
     logged_in_page.wait_for_timeout(1000)
@@ -345,6 +343,12 @@ def setup_for_invoice_page(
     logged_in_page.wait_for_timeout(2000)
 
     return logged_in_page
+
+
+def setup_data_for_create_invoice(logged_in_page, test_data: InvoiceNinjaTestData):
+    create_client(logged_in_page, test_data.company_name, test_data)
+    create_product(logged_in_page, test_data.product_name1, test_data)
+    create_product(logged_in_page, test_data.product_name2, test_data)
 
 
 @pytest.fixture

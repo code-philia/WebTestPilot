@@ -20,7 +20,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"MeetingContribution\" in the title field",
+      "action": "Type \"Meeting Contribution\" in the title field",
       "expectedResult": "Title field contains unique contribution name"
     },
     {
@@ -48,7 +48,7 @@
       "expectedResult": "Contribution is created and saved"
     },
     {
-      "action": "Verify contribution appears in timetable canvas",
+      "action": "Verify contribution \"Meeting Contribution\" appears in timetable canvas",
       "expectedResult": "Timetable shows the new contribution"
     }
   ]

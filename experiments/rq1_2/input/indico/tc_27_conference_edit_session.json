@@ -8,6 +8,34 @@
       "expectedResult": "Sessions section opens"
     },
     {
+      "action": "Click \"Add new session\" button",
+      "expectedResult": "Session creation form opens"
+    },
+    {
+      "action": "Click in the \"Title\" textbox",
+      "expectedResult": "Title field is focused for input"
+    },
+    {
+      "action": "Type \"Session title\" in the title field",
+      "expectedResult": "Title field contains unique session title"
+    },
+    {
+      "action": "Click in the \"Description\" textbox",
+      "expectedResult": "Description field is focused"
+    },
+    {
+      "action": "Type \"Session description\" in the description field",
+      "expectedResult": "Description field contains text"
+    },
+    {
+      "action": "Click \"Save\" button",
+      "expectedResult": "Session is created and saved"
+    },
+    {
+      "action": "Click \"Sessions\" link in navigation",
+      "expectedResult": "Sessions section opens"
+    },
+    {
       "action": "Click the gear icon for the first session",
       "expectedResult": "Session edit form opens"
     },

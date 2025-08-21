@@ -8,7 +8,7 @@
       "expectedResult": "Clone event dialog appears"
     },
     {
-      "action": "Click the close button in \"Clone Event\" dialog header",
+      "action": "Click the close button in \"Clone Event\" dialog",
       "expectedResult": "Clone operation is initiated"
     },
     {
@@ -16,7 +16,7 @@
       "expectedResult": "New lecture page opens"
     },
     {
-      "action": "Verify lecture name is preserved in cloned event",
+      "action": "Verify lecture name is \"Lecture\"",
       "expectedResult": "Cloned lecture has same name"
     },
     {

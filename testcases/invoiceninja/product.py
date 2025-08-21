@@ -17,11 +17,6 @@ def test_create_product(
 def test_update_product(
     created_product_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
-    created_product_page.get_by_role("button").nth(4).click()
-    created_product_page.locator("div").filter(
-        has_text=re.compile(r"^EditDocumentsProduct Fields$")
-    ).nth(1).click()
-
     expect(created_product_page.get_by_role("list")).to_contain_text("Edit Product")
 
     created_product_page.locator("div").filter(

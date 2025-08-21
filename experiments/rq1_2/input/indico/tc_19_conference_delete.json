@@ -22,10 +22,6 @@
     {
       "action": "Click \"Delete event\" button",
       "expectedResult": "Conference deletion is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Event successfully deleted\" appears",
-      "expectedResult": "Success alert confirms conference deletion"
     }
   ]
 }

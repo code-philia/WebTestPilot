@@ -1,7 +1,7 @@
 {
   "name": "17::Conference Create",
   "url": "http://localhost:8080/",
-  "setup_function": "created_conference_page",
+  "setup_function": "logged_in_page",
   "actions": [
     {
       "action": "Click \"Create event\" link in navigation",
@@ -17,15 +17,15 @@
     },
     {
       "action": "Type \"Conference\" in the title field",
-      "expectedResult": "Title field contains the unique conference name"
+      "expectedResult": "Title field contains the conference name"
     },
     {
       "action": "Click in the end date field labeled \"DD/MM/YYYY\"",
       "expectedResult": "Date picker is focused"
     },
     {
-      "action": "Enter tomorrow's date in DD/MM/YYYY format",
-      "expectedResult": "End date field shows tomorrow's date"
+      "action": "Enter date as \"10/10/2040\"",
+      "expectedResult": "End date field shows \"10/10/2040\""
     },
     {
       "action": "Click in the end time field labeled \"--:--\"",
