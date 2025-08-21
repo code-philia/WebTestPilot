@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from tqdm import tqdm
-from const import ApplicationEnum, TestCase
+from const import ApplicationEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -128,6 +128,7 @@ class NaviqateTestRunner(BaseTestRunner):
                 abstracted=self.abstracted,
                 headless=self.headless,
                 output_dir=self.output_dir,
+                model=ModelEnum.gpt4_1,
             )
 
             # Process each action
@@ -150,12 +151,9 @@ class NaviqateTestRunner(BaseTestRunner):
 
                     # If we get here, the action succeeded
                     result.current_step += 1
-                    result.traces.append(
-                        {
-                            "action": action,
-                            "website": website,
-                        }
-                    )
+
+                    trace_data = crawler.get_last_action_trace()
+                    result.traces.append(trace_data)
 
                     # Update progress bar
                     action_bar.update(1)
@@ -179,8 +177,10 @@ class NaviqateTestRunner(BaseTestRunner):
                     action_bar.set_postfix(status="✗", refresh=True)
                     break
 
+            # Run metadata
             end_time = time.perf_counter()
             result.runtime = end_time - start_time
+            result.token_count = crawler.get_token_usage()
 
         # Mark as success if all steps completed
         result.success = result.current_step == result.total_step
