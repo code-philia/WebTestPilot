@@ -16,7 +16,7 @@
       "expectedResult": "Product name field is focused"
     },
     {
-      "action": "Type \"product_name123456\" in the name field",
+      "action": "Type \"product_name\" in the name field",
       "expectedResult": "Product name field contains unique product name"
     },
     {
@@ -24,7 +24,7 @@
       "expectedResult": "Description field is focused"
     },
     {
-      "action": "Type \"product_description123456\" in description field",
+      "action": "Type \"product_description\" in description field",
       "expectedResult": "Description field contains unique description"
     },
     {
@@ -32,7 +32,7 @@
       "expectedResult": "Price field is focused"
     },
     {
-      "action": "Type \"123456\" in the price field",
+      "action": "Type \"\" in the price field",
       "expectedResult": "Price field contains unique price value"
     },
     {

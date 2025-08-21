@@ -16,7 +16,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"Session title123456\" in the title field",
+      "action": "Type \"Session title\" in the title field",
       "expectedResult": "Title field contains unique session title"
     },
     {
@@ -24,7 +24,7 @@
       "expectedResult": "Description field is focused"
     },
     {
-      "action": "Type \"Session description123456\" in the description field",
+      "action": "Type \"Session description\" in the description field",
       "expectedResult": "Description field contains text"
     },
     {

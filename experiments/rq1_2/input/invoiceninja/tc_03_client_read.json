@@ -8,11 +8,11 @@
       "expectedResult": "Clients listing page shows all available clients"
     },
     {
-      "action": "Use search or filter to find \"company_name123456\"",
+      "action": "Use search or filter to find \"company_name\"",
       "expectedResult": "Client search functionality works"
     },
     {
-      "action": "Click on the client with name \"company_name123456\"",
+      "action": "Click on the client with name \"company_name\"",
       "expectedResult": "Client detail page opens"
     },
     {

@@ -20,7 +20,7 @@
       "expectedResult": "Rich text editor is focused"
     },
     {
-      "action": "Type \"Meeting Minute123456\" in the editor",
+      "action": "Type \"Meeting Minute\" in the editor",
       "expectedResult": "Text is entered in the editor"
     },
     {

@@ -12,7 +12,7 @@
       "expectedResult": "Deleted clients view is available"
     },
     {
-      "action": "Locate the deleted client \"company_name Updated 123456\"",
+      "action": "Locate the deleted client \"company_name Updated\"",
       "expectedResult": "Deleted client is visible in filtered view"
     },
     {

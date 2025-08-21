@@ -16,7 +16,7 @@
       "expectedResult": "Client dropdown or combobox is focused"
     },
     {
-      "action": "Select or type \"company_name123456\" to choose client",
+      "action": "Select or type \"company_name\" to choose client",
       "expectedResult": "Client is selected for the credit"
     },
     {
@@ -28,7 +28,7 @@
       "expectedResult": "Product selection dropdown opens"
     },
     {
-      "action": "Select \"product_name123456\" for the first line item",
+      "action": "Select \"product_name\" for the first line item",
       "expectedResult": "Product is added to line item"
     },
     {

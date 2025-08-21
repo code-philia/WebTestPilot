@@ -16,7 +16,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"Track group123456\" in the title field",
+      "action": "Type \"Track group\" in the title field",
       "expectedResult": "Title field contains unique track group name"
     },
     {
@@ -24,7 +24,7 @@
       "expectedResult": "Description field is focused"
     },
     {
-      "action": "Type \"Many papers about123456\" in the description field",
+      "action": "Type \"Many papers about\" in the description field",
       "expectedResult": "Description field contains text"
     },
     {

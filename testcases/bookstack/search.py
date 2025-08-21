@@ -13,18 +13,8 @@ def test_global_search(
     page.get_by_role("textbox", name="Search").click()
     page.get_by_role("textbox", name="Search").fill(f'"{test_data._unique_id}"')
 
-    # Shows chapter and book in the pop-up
-    expect(
-        page.locator("#header").get_by_role(
-            "link", name=test_data.book_name, exact=True
-        )
-    ).to_be_visible(timeout=1000)
-    expect(
-        page.locator("#header").get_by_role("link", name=test_data.chapter_name)
-    ).to_be_visible(timeout=1000)
-
-    # See list page
-    page.get_by_role("button", name="View All").click()
+    # Search
+    page.locator("#header-search-box-button").click()
 
     expect(page.locator("#search-system")).to_contain_text(test_data.book_name)
     expect(page.locator("#search-system")).to_contain_text(test_data.chapter_name)

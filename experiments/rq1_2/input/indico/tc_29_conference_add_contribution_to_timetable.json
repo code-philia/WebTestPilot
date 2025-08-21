@@ -20,7 +20,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"Session Contribution123456\" in the title field",
+      "action": "Type \"Session Contribution\" in the title field",
       "expectedResult": "Title field contains unique contribution name"
     },
     {

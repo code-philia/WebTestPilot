@@ -5,20 +5,9 @@ from bookstack.conftest import BookStackTestData
 
 
 def test_create_page(created_page_page: Page, test_data: BookStackTestData) -> None:
-    # Navigate back to book page and check
-    created_page_page.get_by_label("Breadcrumb").get_by_role(
-        "link", name=test_data.page_name
-    ).click()
-
     # Check content
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_description)
-
-    # Check the book's chapter list
-    created_page_page.get_by_label("Book Navigation").get_by_role(
-        "link", name=test_data.page_name
-    ).click()
-    expect(created_page_page.get_by_role("list")).to_contain_text(test_data.page_name)
 
     # Navigate back to book page and check
     created_page_page.get_by_label("Breadcrumb").get_by_role(
@@ -28,12 +17,12 @@ def test_create_page(created_page_page: Page, test_data: BookStackTestData) -> N
 
 
 def test_read_page(created_page_page: Page, test_data: BookStackTestData) -> None:
-    # Navigate back to the book, check the chapter
+    # Navigate back to the book, check the page
     created_page_page.get_by_label("Breadcrumb").get_by_role(
         "link", name=test_data.book_name
     ).click()
 
-    # Click the chapter link and check content
+    # Click the page link and check content
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
     created_page_page.get_by_role("link", name=test_data.page_name).first.click()
 

@@ -12,7 +12,7 @@
       "expectedResult": "Archived expenses view is available"
     },
     {
-      "action": "Locate the archived expense with amount \"amount_updated123456\"",
+      "action": "Locate the archived expense with amount \"amount_updated\"",
       "expectedResult": "Archived expense is visible in filtered view"
     },
     {

@@ -16,7 +16,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"Track123456\" in the title field",
+      "action": "Type \"Track\" in the title field",
       "expectedResult": "Title field contains unique track name"
     },
     {
@@ -32,7 +32,7 @@
       "expectedResult": "Description field is focused"
     },
     {
-      "action": "Type \"Papers about123456\" in the description field",
+      "action": "Type \"Papers about\" in the description field",
       "expectedResult": "Description field contains text"
     },
     {

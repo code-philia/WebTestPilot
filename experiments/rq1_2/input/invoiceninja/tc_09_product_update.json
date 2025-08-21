@@ -12,7 +12,7 @@
       "expectedResult": "Name field is focused and contains current name"
     },
     {
-      "action": "Clear the name field and type \"product_name Updated 123456\"",
+      "action": "Clear the name field and type \"product_name Updated\"",
       "expectedResult": "Name field shows updated product name"
     },
     {

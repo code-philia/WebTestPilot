@@ -12,7 +12,7 @@
       "expectedResult": "Amount field is focused and contains current amount"
     },
     {
-      "action": "Clear the amount field and type \"amount_updated123456\"",
+      "action": "Clear the amount field and type \"amount_updated\"",
       "expectedResult": "Amount field shows updated expense amount"
     },
     {

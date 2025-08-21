@@ -16,7 +16,7 @@
       "expectedResult": "Event title field is focused for input"
     },
     {
-      "action": "Type \"Lecture123456\" in the title field",
+      "action": "Type \"Lecture\" in the title field",
       "expectedResult": "Title field contains the unique lecture name"
     },
     {
@@ -24,7 +24,7 @@
       "expectedResult": "Venue field is focused and ready for input"
     },
     {
-      "action": "Type \"Venue123456\" in the venue field",
+      "action": "Type \"Venue\" in the venue field",
       "expectedResult": "Venue field contains unique venue name"
     },
     {
@@ -32,7 +32,7 @@
       "expectedResult": "Room field is focused and ready for input"
     },
     {
-      "action": "Type \"Room123456\" in the room field",
+      "action": "Type \"Room\" in the room field",
       "expectedResult": "Room field contains unique room name"
     },
     {

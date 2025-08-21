@@ -16,7 +16,7 @@
       "expectedResult": "Title field is focused with current title"
     },
     {
-      "action": "Clear and type \"Session title updated123456\" in the title field",
+      "action": "Clear and type \"Session title updated\" in the title field",
       "expectedResult": "Title field shows updated session title"
     },
     {

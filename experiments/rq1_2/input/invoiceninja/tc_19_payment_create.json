@@ -16,7 +16,7 @@
       "expectedResult": "Client dropdown or combobox is focused"
     },
     {
-      "action": "Select or type \"company_name123456\" to choose client",
+      "action": "Select or type \"company_name\" to choose client",
       "expectedResult": "Client is selected for the payment"
     },
     {

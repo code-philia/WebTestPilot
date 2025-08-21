@@ -35,11 +35,11 @@ class BookStackTestData:
 
     @property
     def book_name1(self) -> str:
-        return self.book_name + " 1"
+        return self.book_name + "1"
 
     @property
     def book_name2(self) -> str:
-        return self.book_name + " 2"
+        return self.book_name + "2"
 
     @property
     def book_description(self) -> str:
@@ -72,7 +72,7 @@ class BookStackTestData:
 
     @property
     def chapter_name_updated(self) -> str:
-        return f"Chapter Updated {self._unique_id}"
+        return f"Chapter Updated{self._unique_id}"
 
     @property
     def chapter_description_updated(self) -> str:
@@ -97,7 +97,7 @@ class BookStackTestData:
 
     @property
     def page_name_updated(self) -> str:
-        return f"Page Updated {self._unique_id}"
+        return f"Page Updated{self._unique_id}"
 
     # Page template properties
     @property
@@ -123,7 +123,7 @@ class BookStackTestData:
 
     @property
     def shelf_name_updated(self) -> str:
-        return f"Shelf Updated {self._unique_id}"
+        return f"Shelf Updated{self._unique_id}"
 
     @property
     def shelf_description_updated(self) -> str:
@@ -136,15 +136,15 @@ class BookStackTestData:
 
     @property
     def sort_rule_name_updated(self) -> str:
-        return f"Rule updated {self._unique_id}"
+        return f"Rule updated{self._unique_id}"
 
     @property
     def role_name(self) -> str:
-        return f"Role {self._unique_id}"
+        return f"Role{self._unique_id}"
 
     @property
     def role_description(self) -> str:
-        return f"Role description {self._unique_id}"
+        return f"Role description{self._unique_id}"
 
 
 @pytest.fixture
@@ -354,8 +354,7 @@ def create_shelf(
     book_names: list[str],
     book_description: str,
 ):
-    for book_name in book_names:
-        create_book(logged_in_page, book_name, book_description)
+    setup_data_for_shelf_create(logged_in_page, book_names, book_description)
 
     logged_in_page.get_by_role("link", name="Shelves").click()
     logged_in_page.get_by_role("link", name="New Shelf").click()
@@ -378,6 +377,10 @@ def create_shelf(
 
     logged_in_page.get_by_role("button", name="Save Shelf").click()
     return logged_in_page
+
+def setup_data_for_shelf_create(logged_in_page, book_names, book_description):
+    for book_name in book_names:
+        create_book(logged_in_page, book_name, book_description)
 
 
 @pytest.fixture
@@ -402,7 +405,6 @@ def create_sort_rule(logged_in_page: Page, test_data: BookStackTestData) -> Page
     logged_in_page.get_by_role("textbox", name="Name").fill(test_data.sort_rule_name)
 
     # Sort rule configs
-    logged_in_page.get_by_text("Configure the sort actions to").click()
     logged_in_page.get_by_role("listitem").filter(
         has_text="Name - Alphabetical (Asc)"
     ).get_by_role("button").click()

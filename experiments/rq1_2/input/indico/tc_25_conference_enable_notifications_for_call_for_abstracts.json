@@ -28,7 +28,7 @@
       "expectedResult": "Title field is focused for input"
     },
     {
-      "action": "Type \"Email123456\" in the title field",
+      "action": "Type \"Email\" in the title field",
       "expectedResult": "Title field contains unique notification title"
     },
     {

@@ -16,11 +16,11 @@
       "expectedResult": "Session creation form opens"
     },
     {
-      "action": "Type \"Session title123456\" in title field",
+      "action": "Type \"Session title\" in title field",
       "expectedResult": "Title field contains session title"
     },
     {
-      "action": "Type \"Session description123456\" in description field",
+      "action": "Type \"Session description\" in description field",
       "expectedResult": "Description field contains text"
     },
     {

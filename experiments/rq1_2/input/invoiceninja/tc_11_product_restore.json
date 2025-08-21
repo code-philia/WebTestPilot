@@ -12,7 +12,7 @@
       "expectedResult": "Deleted products view is available"
     },
     {
-      "action": "Locate the deleted product \"product_name Updated 123456\"",
+      "action": "Locate the deleted product \"product_name Updated\"",
       "expectedResult": "Deleted product is visible in filtered view"
     },
     {
