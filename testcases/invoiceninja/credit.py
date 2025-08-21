@@ -63,7 +63,7 @@ def test_send_email_credit(
 
     # Go back to credit page and check the status
     created_credit_page.get_by_role(
-        "link", name=test_data._unique_id, exact=True
+        "link", name=test_data.credit_number, exact=True
     ).first.click()
     expect(created_credit_page.get_by_role("main")).to_contain_text("Sent")
 

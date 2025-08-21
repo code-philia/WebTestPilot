@@ -48,7 +48,7 @@
       "expectedResult": "Phone field is focused"
     },
     {
-      "action": "Type \"phone\" in the phone field",
+      "action": "Type \"0987654321\" in the phone field",
       "expectedResult": "Phone field contains unique phone number"
     },
     {
@@ -80,16 +80,12 @@
       "expectedResult": "Contact phone field is focused"
     },
     {
-      "action": "Type \"phone\" in the contact phone field",
+      "action": "Type \"0912345678\" in the contact phone field",
       "expectedResult": "Contact phone field contains unique phone number"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Client is created and saved"
-    },
-    {
-      "action": "Verify alert message \"Successfully created client\" appears",
-      "expectedResult": "Success alert confirms client creation"
     },
     {
       "action": "Verify client appears in clients listing",

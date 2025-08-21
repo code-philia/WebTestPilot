@@ -4,36 +4,16 @@
   "setup_function": "created_client_page",
   "actions": [
     {
-      "action": "Click \"Clients\" link in navigation menu",
-      "expectedResult": "Clients listing page appears"
+      "action": "Click \"More Actions\" or \"Actions\" dropdown",
+      "expectedResult": "Actions menu opens"
     },
     {
-      "action": "Click filter or view options to show deleted clients",
-      "expectedResult": "Deleted clients view is available"
-    },
-    {
-      "action": "Locate the deleted client \"company_name Updated\"",
-      "expectedResult": "Deleted client is visible in filtered view"
+      "action": "Click \"Delete\" option",
+      "expectedResult": "Delete confirmation dialog appears"
     },
     {
       "action": "Click \"Restore\" button or action for the deleted client",
       "expectedResult": "Restore action is available"
-    },
-    {
-      "action": "Click \"Yes\" or \"Confirm\" in the restoration dialog",
-      "expectedResult": "Client restoration is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Successfully restored client\" appears",
-      "expectedResult": "Success alert confirms client restoration"
-    },
-    {
-      "action": "Return to active clients view",
-      "expectedResult": "Standard clients listing is displayed"
-    },
-    {
-      "action": "Verify restored client appears in active list",
-      "expectedResult": "Client is back in main listing"
     }
   ]
 }

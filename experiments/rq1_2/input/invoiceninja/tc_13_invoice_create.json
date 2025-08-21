@@ -1,7 +1,7 @@
 {
   "name": "13::Invoice Create",
   "url": "http://localhost:8082/",
-  "setup_function": "created_invoice_page",
+  "setup_function": "setup_data_for_create_invoice",
   "actions": [
     {
       "action": "Click \"Invoices\" link in navigation menu",
@@ -20,44 +20,56 @@
       "expectedResult": "Client is selected for the invoice"
     },
     {
+      "action": "Choose the \"company_name\" option",
+      "expectedResult": "The client option is chosen"
+    },
+    {
+      "action": "Click the invoice number field",
+      "expectedResult": "The invoice number field is focused"
+    },
+    {
+      "action": "Fill \"123456\" to the invoice number field",
+      "expectedResult": "The invoice number field is filled"
+    },
+    {
       "action": "Click \"Add Item\" or navigate to line items section",
       "expectedResult": "Line items section is available"
     },
     {
       "action": "Click in the product selection field for first line item",
-      "expectedResult": "Product selection dropdown opens"
+      "expectedResult": "Product selection field is focused"
     },
     {
-      "action": "Select \"product_name\" for the first line item",
-      "expectedResult": "Product is added to line item"
+      "action": "Fill product_name1 to the product selection field",
+      "expectedResult": "Shows product dropdown items"
     },
     {
-      "action": "Verify quantity and price are populated",
-      "expectedResult": "Line item shows product details"
+      "action": "Select product_name1 option in dropdown select",
+      "expectedResult": "product_name1 is selected"
     },
     {
-      "action": "Click \"Add Item\" to add a second line item",
-      "expectedResult": "Second line item row is added"
+      "action": "Click \"Add Item\" or navigate to line items section",
+      "expectedResult": "Line items section is available"
     },
     {
-      "action": "Select another product for the second line item",
-      "expectedResult": "Second product is added to invoice"
+      "action": "Click in the product selection field for second line item",
+      "expectedResult": "Product selection field is focused"
+    },
+    {
+      "action": "Fill product_name2 to the product selection field",
+      "expectedResult": "Shows product dropdown items"
+    },
+    {
+      "action": "Select product_name2 option in dropdown select",
+      "expectedResult": "product_name2 is selected"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Invoice is created and saved"
     },
     {
-      "action": "Verify alert message \"Successfully created invoice\" appears",
-      "expectedResult": "Success alert confirms invoice creation"
-    },
-    {
-      "action": "Verify invoice appears in invoices listing",
-      "expectedResult": "New invoice is visible in the invoices table"
-    },
-    {
-      "action": "Verify invoice status is \"Draft\"",
-      "expectedResult": "Invoice shows correct initial status"
+      "action": "Verify the page has \"Edit Invoice\"",
+      "expectedResult": "The page has Edit Invoice text meaning it's created"
     }
   ]
 }

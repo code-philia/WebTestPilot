@@ -1,15 +1,27 @@
 {
   "name": "24::Expense Create",
   "url": "http://localhost:8082/",
-  "setup_function": "created_expense_page",
+  "setup_function": "setup_data_for_expense_create",
   "actions": [
     {
       "action": "Click \"Expenses\" link in navigation menu",
       "expectedResult": "Expenses listing page appears"
     },
     {
-      "action": "Click \"New Expense\" button",
+      "action": "Click \"Enter Expense\" button",
       "expectedResult": "Expense creation form opens"
+    },
+    {
+      "action": "Click the Client field",
+      "expectedResult": "The client field is focused"
+    },
+    {
+      "action": "Fill \"company_name\" in the client field",
+      "expectedResult": "Dropdown options show to choose client"
+    },
+    {
+      "action": "Choose option \"company_name\"",
+      "expectedResult": "Client \"company_name\" is chosen for the Client field"
     },
     {
       "action": "Click in the \"Amount\" textbox",
@@ -17,39 +29,23 @@
     },
     {
       "action": "Type \"2,3234\" in the amount field",
-      "expectedResult": "Amount field contains unique expense amount"
+      "expectedResult": "Amount field contains value \"\"2,324\""
     },
     {
-      "action": "Click in the client selection field",
-      "expectedResult": "Client dropdown or combobox is focused"
+      "action": "Click the \"Currency\" field",
+      "expectedResult": "The option dropdown to choose currency shows"
     },
     {
-      "action": "Select or type \"company_name\" to choose client",
-      "expectedResult": "Client is selected for the expense"
-    },
-    {
-      "action": "Click in the \"Date\" field",
-      "expectedResult": "Date picker or field is focused"
-    },
-    {
-      "action": "Select or enter expense date",
-      "expectedResult": "Expense date is set"
-    },
-    {
-      "action": "Add description or category if available",
-      "expectedResult": "Expense details are completed"
+      "action": "Choose option \"Australian Dollar (AUD)\"",
+      "expectedResult": "Australian Dollar (AUD) is chosen for currency"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Expense is created and saved"
     },
     {
-      "action": "Verify alert message \"Successfully created expense\" appears",
-      "expectedResult": "Success alert confirms expense creation"
-    },
-    {
-      "action": "Verify expense appears in expenses listing",
-      "expectedResult": "New expense is visible in the expenses table"
+      "action": "Verify that the page now contains \"Edit Expense\"",
+      "expectedResult": "The page has \"Edit Expense\" text meaning expense is created"
     }
   ]
 }

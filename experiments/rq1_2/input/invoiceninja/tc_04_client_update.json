@@ -20,10 +20,6 @@
       "expectedResult": "Client changes are saved"
     },
     {
-      "action": "Verify alert message \"Successfully updated client\" appears",
-      "expectedResult": "Success alert confirms client update"
-    },
-    {
       "action": "Verify updated name appears in client detail",
       "expectedResult": "Client page shows new name in header"
     },

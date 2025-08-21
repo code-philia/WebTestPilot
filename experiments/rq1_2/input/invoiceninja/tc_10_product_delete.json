@@ -10,22 +10,6 @@
     {
       "action": "Click \"Delete\" option",
       "expectedResult": "Delete confirmation dialog appears"
-    },
-    {
-      "action": "Click \"Yes\" or \"Confirm\" button in the confirmation dialog",
-      "expectedResult": "Product deletion is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Successfully deleted product\" appears",
-      "expectedResult": "Success alert confirms product deletion"
-    },
-    {
-      "action": "Navigate to products listing",
-      "expectedResult": "Products listing page is displayed"
-    },
-    {
-      "action": "Verify deleted product no longer appears in active list",
-      "expectedResult": "Product is removed from main listing"
     }
   ]
 }

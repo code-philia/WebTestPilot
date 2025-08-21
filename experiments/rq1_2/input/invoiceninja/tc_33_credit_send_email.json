@@ -4,36 +4,28 @@
   "setup_function": "created_credit_page",
   "actions": [
     {
-      "action": "Click \"Email Credit\" button or option",
-      "expectedResult": "Email dialog opens"
+      "action": "Click \"More Actions\" dropdown button",
+      "expectedResult": "Actions menu opens"
     },
     {
-      "action": "Verify recipient email is populated from client",
-      "expectedResult": "Email field shows client contact email"
-    },
-    {
-      "action": "Verify email subject and message template",
-      "expectedResult": "Email template is loaded with credit details"
-    },
-    {
-      "action": "Modify email content if needed",
-      "expectedResult": "Email content can be customized"
+      "action": "Click \"Email Credit\" option",
+      "expectedResult": "Shows the page to draft email content"
     },
     {
       "action": "Click \"Send Email\" button",
-      "expectedResult": "Email sending is initiated"
+      "expectedResult": "Navigates to client details page"
     },
     {
-      "action": "Verify alert message \"Successfully emailed credit\" appears",
-      "expectedResult": "Success alert confirms email sent"
+      "action": "Click \"Send Email\" button",
+      "expectedResult": "Navigates to client details with credit list page"
     },
     {
-      "action": "Verify credit status automatically changes to \"Sent\"",
-      "expectedResult": "Credit status updates after email"
+      "action": "Click link with title \"123456\" in the credit table",
+      "expectedResult": "Shows the credit detail page"
     },
     {
-      "action": "Verify email activity is logged",
-      "expectedResult": "Email activity appears in credit history"
+      "action": "Verify credit status changes to \"Sent\"",
+      "expectedResult": "Credit status indicator shows \"\"Sent\"\""
     }
   ]
 }

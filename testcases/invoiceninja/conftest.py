@@ -99,7 +99,7 @@ class InvoiceNinjaTestData:
 
     @property
     def product_price(self) -> str:
-        return f"{self._unique_id}"
+        return "60000"
 
     @property
     def product_default_quantity(self) -> str:
@@ -112,12 +112,13 @@ class InvoiceNinjaTestData:
     # Invoice
     @property
     def invoice_number(self) -> str:
-        return str(self._unique_id)
+        return str(self._unique_id) if self._unique_id else "123456"
 
     @property
     def invoice_date(self) -> str:
         return "2025-07-15"
 
+    # Expense
     @property
     def expense_amount(self) -> str:
         return "2,3234"
@@ -125,6 +126,11 @@ class InvoiceNinjaTestData:
     @property
     def expense_amount_updated(self) -> str:
         return "23,2340"
+
+    # Credit
+    @property
+    def credit_number(self) -> str:
+        return str(self._unique_id) if self._unique_id else "123456"
 
 
 @pytest.fixture
@@ -329,7 +335,7 @@ def setup_for_invoice_page(
         test_data.product_name1
     )
     logged_in_page.get_by_role("listitem").filter(
-        has_text=test_data.product_name2
+        has_text=test_data.product_name1
     ).click()
     logged_in_page.get_by_role("button", name="Add Item").click()
     logged_in_page.get_by_role("row", name="$ 0.00").get_by_role(
@@ -365,17 +371,7 @@ def created_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 
 
 def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData):
-    created_invoice_page = setup_for_invoice_page(logged_in_page, test_data)
-
-    created_invoice_page.locator("div").filter(
-        has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
-    ).get_by_role("button").nth(2).click()
-    created_invoice_page.get_by_role("button", name="Mark Sent").click()
-
-    created_invoice_page.wait_for_timeout(1000)
-    expect(created_invoice_page.get_by_role("main")).to_contain_text(
-        "Sent", timeout=5000
-    )
+    created_invoice_page = setup_data_for_create_payment(logged_in_page, test_data)
 
     # Navigate
     created_invoice_page.get_by_role("link", name="Payments").click()
@@ -410,6 +406,24 @@ def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData
     return created_invoice_page
 
 
+def setup_data_for_create_payment(
+    logged_in_page: Page, test_data: InvoiceNinjaTestData
+):
+    created_invoice_page = setup_for_invoice_page(logged_in_page, test_data)
+
+    created_invoice_page.locator("div").filter(
+        has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
+    ).get_by_role("button").nth(2).click()
+    created_invoice_page.get_by_role("button", name="Mark Sent").click()
+
+    created_invoice_page.wait_for_timeout(1000)
+    expect(created_invoice_page.get_by_role("main")).to_contain_text(
+        "Sent", timeout=5000
+    )
+
+    return created_invoice_page
+
+
 @pytest.fixture
 def created_expense_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     created_client_page = setup_for_expense_page(logged_in_page, test_data)
@@ -419,9 +433,7 @@ def created_expense_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 def setup_for_expense_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
-    created_client_page = create_client(
-        logged_in_page, test_data.company_name, test_data
-    )
+    created_client_page = setup_data_for_expense_create(logged_in_page, test_data)
 
     created_client_page.wait_for_timeout(500)
     created_client_page.get_by_role("link", name="Expenses").first.click()
@@ -462,6 +474,16 @@ def setup_for_expense_page(
     return created_client_page
 
 
+def setup_data_for_expense_create(
+    logged_in_page: Page, test_data: InvoiceNinjaTestData
+):
+    created_client_page = create_client(
+        logged_in_page, test_data.company_name, test_data
+    )
+
+    return created_client_page
+
+
 @pytest.fixture
 def created_credit_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page = setup_for_credit_page(logged_in_page, test_data)
@@ -471,9 +493,7 @@ def created_credit_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -
 def setup_for_credit_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
-    create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name1, test_data)
-    create_product(logged_in_page, test_data.product_name2, test_data)
+    setup_data_for_credit_create(logged_in_page, test_data)
 
     logged_in_page.wait_for_timeout(500)
     logged_in_page.get_by_role("link", name="Credits", exact=True).click()
@@ -484,7 +504,7 @@ def setup_for_credit_page(
     logged_in_page.get_by_role("option", name=test_data.company_name).click()
 
     logged_in_page.locator("#number").click()
-    logged_in_page.locator("#number").fill(test_data.invoice_number)
+    logged_in_page.locator("#number").fill(test_data.credit_number)
 
     # Add items
     logged_in_page.get_by_role("button", name="Add Item").click()
@@ -509,3 +529,9 @@ def setup_for_credit_page(
     logged_in_page.wait_for_timeout(2000)
 
     return logged_in_page
+
+
+def setup_data_for_credit_create(logged_in_page: Page, test_data: InvoiceNinjaTestData):
+    create_client(logged_in_page, test_data.company_name, test_data)
+    create_product(logged_in_page, test_data.product_name1, test_data)
+    create_product(logged_in_page, test_data.product_name2, test_data)

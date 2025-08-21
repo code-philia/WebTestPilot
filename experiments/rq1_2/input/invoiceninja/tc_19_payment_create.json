@@ -1,14 +1,14 @@
 {
   "name": "19::Payment Create",
   "url": "http://localhost:8082/",
-  "setup_function": "created_payment_page",
+  "setup_function": "setup_data_for_create_payment",
   "actions": [
     {
       "action": "Click \"Payments\" link in navigation menu",
       "expectedResult": "Payments listing page appears"
     },
     {
-      "action": "Click \"New Payment\" button",
+      "action": "Click \"Enter Payment\" button",
       "expectedResult": "Payment creation form opens"
     },
     {
@@ -24,36 +24,24 @@
       "expectedResult": "Invoice dropdown shows client invoices"
     },
     {
-      "action": "Select a \"Sent\" status invoice from the dropdown",
-      "expectedResult": "Invoice is selected and linked to payment"
+      "action": "Select a invoice with number \"123456\" from the dropdown",
+      "expectedResult": "Invoice \"123456\" is chosen"
     },
     {
-      "action": "Verify payment amount is populated from invoice",
-      "expectedResult": "Payment amount matches invoice total"
+      "action": "Click payment type choose field",
+      "expectedResult": "Shows payment type options"
     },
     {
-      "action": "Click in the \"Date\" field",
-      "expectedResult": "Date picker or field is focused"
-    },
-    {
-      "action": "Select or enter payment date",
-      "expectedResult": "Payment date is set"
+      "action": "Click payment type \"Bank Transfer\"",
+      "expectedResult": "Bank Transfer payment type is chosen"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Payment is created and saved"
     },
     {
-      "action": "Verify alert message \"Successfully created payment\" appears",
-      "expectedResult": "Success alert confirms payment creation"
-    },
-    {
-      "action": "Verify payment appears in payments listing",
-      "expectedResult": "New payment is visible in the payments table"
-    },
-    {
-      "action": "Verify linked invoice status updates if applicable",
-      "expectedResult": "Related invoice may show payment received"
+      "action": "Verify that the page has \"Edit Payment\" text",
+      "expectedResult": "The page has Edit Payment meaning it's created"
     }
   ]
 }

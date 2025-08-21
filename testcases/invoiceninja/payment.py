@@ -16,7 +16,7 @@ def test_update_payment(
     created_payment_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
     expect(created_payment_page.get_by_role("list")).to_contain_text("Edit Payment")
-    created_payment_page.locator("#date").fill(test_data.invoice_date)
+    created_payment_page.locator("#transaction_reference").fill("123123")
 
     created_payment_page.get_by_role("button", name="Save").click()
 

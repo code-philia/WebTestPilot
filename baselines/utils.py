@@ -40,6 +40,9 @@ from testcases.invoiceninja.conftest import (
     go_to_invoiceninja,
     login_to_invoiceninja,
     setup_data_for_create_invoice,
+    setup_data_for_create_payment,
+    setup_data_for_credit_create,
+    setup_data_for_expense_create,
     setup_for_credit_page,
     setup_for_expense_page,
     setup_for_invoice_page,
@@ -105,11 +108,20 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
     elif setup_function == "created_payment_page":
         return setup_for_payment_page(logged_in_page, test_data)
 
+    elif setup_function == "setup_data_for_create_payment":
+        return setup_data_for_create_payment(logged_in_page, test_data)
+
     elif setup_function == "created_expense_page":
         return setup_for_expense_page(logged_in_page, test_data)
 
+    elif setup_function == "setup_data_for_expense_create":
+        return setup_data_for_expense_create(logged_in_page, test_data)
+
     elif setup_function == "created_credit_page":
         return setup_for_credit_page(logged_in_page, test_data=test_data)
+
+    elif setup_function == "setup_data_for_credit_create":
+        return setup_data_for_credit_create(logged_in_page, test_data=test_data)
 
     else:
         raise ValueError(f"Unknown invoiceninja setup function: {setup_function}")

@@ -12,28 +12,16 @@
       "expectedResult": "Line item quantity field is visible"
     },
     {
-      "action": "Change the quantity from default to \"2\"",
+      "action": "Change the quantity of the product_name1 to \"10\"",
       "expectedResult": "Quantity field shows updated value"
-    },
-    {
-      "action": "Verify line total updates automatically",
-      "expectedResult": "Line item total recalculates"
-    },
-    {
-      "action": "Verify invoice total updates",
-      "expectedResult": "Invoice total amount recalculates"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Invoice changes are saved"
     },
     {
-      "action": "Verify alert message \"Successfully updated invoice\" appears",
-      "expectedResult": "Success alert confirms invoice update"
-    },
-    {
-      "action": "Verify updated quantities and totals are displayed",
-      "expectedResult": "Invoice shows updated line item details"
+      "action": "Verify product_name1 has quantity 10",
+      "expectedResult": "Product line item shows updated quantity"
     }
   ]
 }

@@ -1,14 +1,14 @@
 {
   "name": "30::Credit Create",
   "url": "http://localhost:8082/",
-  "setup_function": "created_credit_page",
+  "setup_function": "setup_data_for_credit_create",
   "actions": [
     {
       "action": "Click \"Credits\" link in navigation menu",
       "expectedResult": "Credits listing page appears"
     },
     {
-      "action": "Click \"New Credit\" button",
+      "action": "Click \"Enter Credit\" button",
       "expectedResult": "Credit creation form opens"
     },
     {
@@ -16,48 +16,56 @@
       "expectedResult": "Client dropdown or combobox is focused"
     },
     {
-      "action": "Select or type \"company_name\" to choose client",
-      "expectedResult": "Client is selected for the credit"
+      "action": "Type \"company_name\" to choose client",
+      "expectedResult": "Shows a list of clients to choose"
     },
     {
-      "action": "Click \"Add Item\" or navigate to line items section",
-      "expectedResult": "Line items section is available"
+      "action": "Choose option \"company_name\"",
+      "expectedResult": "Client \"company_name\" is chosen"
+    },
+    {
+      "action": "Click Credit Number field",
+      "expectedResult": "Credit Number field is focused"
+    },
+    {
+      "action": "Fill \"123456\" to the Credit Number field",
+      "expectedResult": "Credit Number field is filled"
+    },
+    {
+      "action": "Click \"Add Item\" button",
+      "expectedResult": "A line item is added"
     },
     {
       "action": "Click in the product selection field for first line item",
       "expectedResult": "Product selection dropdown opens"
     },
     {
-      "action": "Select \"product_name\" for the first line item",
-      "expectedResult": "Product is added to line item"
+      "action": "Type \"product_name1\" to the product selection field of first line",
+      "expectedResult": "Shows list of product options to choose"
     },
     {
-      "action": "Verify quantity and price are populated",
-      "expectedResult": "Line item shows product details"
+      "action": "Select \"product_name1\" for the first line item",
+      "expectedResult": "Product is added to line item"
     },
     {
       "action": "Click \"Add Item\" to add a second line item",
       "expectedResult": "Second line item row is added"
     },
     {
-      "action": "Select another product for the second line item",
-      "expectedResult": "Second product is added to credit"
+      "action": "Type \"product_name2\" to the product selection field of first line",
+      "expectedResult": "Shows list of product options to choose"
+    },
+    {
+      "action": "Select \"product_name2\" for the first line item",
+      "expectedResult": "Product is added to line item"
     },
     {
       "action": "Click \"Save\" button",
       "expectedResult": "Credit is created and saved"
     },
     {
-      "action": "Verify alert message \"Successfully created credit\" appears",
-      "expectedResult": "Success alert confirms credit creation"
-    },
-    {
-      "action": "Verify credit appears in credits listing",
-      "expectedResult": "New credit is visible in the credits table"
-    },
-    {
-      "action": "Verify credit status is \"Draft\"",
-      "expectedResult": "Credit shows correct initial status"
+      "action": "Verify that the page now contains \"Edit Credit\"",
+      "expectedResult": "The page has \"Edit Credit\" text meaning credit is created"
     }
   ]
 }

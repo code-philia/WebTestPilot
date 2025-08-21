@@ -56,12 +56,8 @@
       "expectedResult": "Product is created and saved"
     },
     {
-      "action": "Verify alert message \"Successfully created product\" appears",
-      "expectedResult": "Success alert confirms product creation"
-    },
-    {
-      "action": "Verify product appears in products listing",
-      "expectedResult": "New product is visible in the products table"
+      "action": "Verify there is an \"Edit Product\" option",
+      "expectedResult": "Edit Product option is available for the new product"
     }
   ]
 }

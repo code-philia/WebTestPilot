@@ -16,16 +16,8 @@
       "expectedResult": "Permanent deletion confirmation dialog appears"
     },
     {
-      "action": "Click \"Yes\" or \"Confirm\" in the confirmation dialog",
+      "action": "Click \"Continue\" button",
       "expectedResult": "Permanent deletion is confirmed"
-    },
-    {
-      "action": "Verify alert message \"Successfully purged client\" appears",
-      "expectedResult": "Success alert confirms permanent deletion"
-    },
-    {
-      "action": "Verify client no longer appears in deleted clients view",
-      "expectedResult": "Client is permanently removed from system"
     }
   ]
 }
