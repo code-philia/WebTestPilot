@@ -251,15 +251,18 @@ class BaseTestRunner(ABC):
         return test_cases
 
     def clean_up_playwright(self):
-        try:
-            if self.context:
-                self.context.close()
-            if self.browser:
-                self.browser.close()
-            if self.playwright:
-                self.playwright.stop()
-        except:
-            pass
+        for item in [self.context, self.browser, self.playwright]:
+            try:
+                if isinstance(item, Playwright):
+                    item.stop()
+                elif isinstance(item, Browser):
+                    item.close()
+                elif isinstance(item, BrowserContext):
+                    item.close()
+            except:
+                pass
+            finally:
+                del item
 
     def get_initial_page(self, setup_function: str) -> Page:
         """Get the initial page state based on setup function."""

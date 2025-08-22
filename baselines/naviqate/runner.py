@@ -6,7 +6,7 @@ from typing import Optional
 
 from tqdm import tqdm
 from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
-from playwright.sync_api import Page, sync_playwright
+from playwright.sync_api import Playwright, Page, sync_playwright
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options
@@ -75,7 +75,12 @@ class NaviqateTestRunner(BaseTestRunner):
         """Get the initial page state based on setup function."""
         self.clean_up_playwright()
 
+        if self.playwright is not None:
+            del self.playwright
+            self.playwright = None
+
         self.playwright = sync_playwright().start()
+
         self.browser = self.playwright.chromium.connect_over_cdp(
             "http://localhost:9222"
         )
