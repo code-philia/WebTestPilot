@@ -11,9 +11,13 @@ APPS=("bookstack" "invoiceninja" "indico" "prestashop")
 # ---------------------------
 BASELINE=${1:-}
 APP=${2:-}
+RERUN=${3:-}  # Optional: comma-separated test numbers (e.g., "1,10,7,24,25")
 
 if [[ -z "$BASELINE" ]]; then
-    echo "Error: BASELINE is required. Valid options: ${BASELINES[*]}"
+    echo "Usage: $0 <baseline> <app> [rerun_numbers]"
+    echo "  baseline: ${BASELINES[*]}"
+    echo "  app: ${APPS[*]}"
+    echo "  rerun_numbers: optional comma-separated test numbers (e.g., '1,10,7,24,25')"
     return 1
 fi
 
@@ -55,11 +59,21 @@ echo "Running baseline: $BASELINE, app: $APP"
 echo "Output directory: $RESULTS_DIR"
 echo "Test directory: $TEST_DIR"
 
+if [[ -n "$RERUN" ]]; then
+    echo "Rerunning tests: $RERUN"
+fi
+
 # Activate virtual environment
 source "$VENV_DIR/bin/activate"
 
 # Run the evaluation script
-python "$BASELINE_DIR/evaluate.py" "$BASELINE" "$APP" \
-    --headless \
-    --output-dir "$RESULTS_DIR" \
-    --test-dir "$TEST_DIR"
+if [[ -n "$RERUN" ]]; then
+    python "$BASELINE_DIR/evaluate.py" "$BASELINE" "$APP" \
+        --output-dir "$RESULTS_DIR" \
+        --test-dir "$TEST_DIR" \
+        --rerun "$RERUN"
+else
+    python "$BASELINE_DIR/evaluate.py" "$BASELINE" "$APP" \
+        --output-dir "$RESULTS_DIR" \
+        --test-dir "$TEST_DIR"
+fi
