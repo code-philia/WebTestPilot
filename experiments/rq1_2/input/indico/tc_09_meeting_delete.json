@@ -1,5 +1,5 @@
 {
-  "name": "10::Meeting Delete",
+  "name": "09::Meeting Delete",
   "url": "http://localhost:8080/",
   "setup_function": "created_meeting_page",
   "actions": [

@@ -1,7 +1,7 @@
 {
-  "name": "34::Conference Clone",
+  "name": "15::Meeting Clone",
   "url": "http://localhost:8080/",
-  "setup_function": "created_conference_page",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Click \"Clone\" button",
@@ -12,12 +12,12 @@
       "expectedResult": "Clone operation is initiated"
     },
     {
-      "action": "Verify cloned conference page is displayed",
-      "expectedResult": "New conference page opens"
+      "action": "Verify cloned meeting page is displayed",
+      "expectedResult": "New meeting page opens"
     },
     {
-      "action": "Verify conference name is preserved in cloned event",
-      "expectedResult": "Cloned conference has same name"
+      "action": "Verify meeting name is preserved in cloned event",
+      "expectedResult": "Cloned meeting has same name"
     },
     {
       "action": "Verify venue and room information is preserved",

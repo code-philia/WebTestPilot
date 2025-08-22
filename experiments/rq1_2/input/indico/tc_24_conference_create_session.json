@@ -1,5 +1,5 @@
 {
-  "name": "26::Conference Create Session",
+  "name": "24::Conference Create Session",
   "url": "http://localhost:8080/",
   "setup_function": "created_conference_page",
   "actions": [

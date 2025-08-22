@@ -1,7 +1,7 @@
 {
-  "name": "21::Conference Unlock",
+  "name": "13::Meeting Unlock",
   "url": "http://localhost:8080/",
-  "setup_function": "created_conference_page",
+  "setup_function": "created_meeting_page",
   "actions": [
     {
       "action": "Click the action menu button (three dots icon)",
@@ -13,7 +13,7 @@
     },
     {
       "action": "Click \"Lock event\" button",
-      "expectedResult": "Conference locking is confirmed"
+      "expectedResult": "Meeting locking is confirmed"
     },
     {
       "action": "Click the action menu button (three dots icon)",

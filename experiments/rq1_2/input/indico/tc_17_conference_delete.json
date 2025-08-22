@@ -1,5 +1,5 @@
 {
-  "name": "19::Conference Delete",
+  "name": "17::Conference Delete",
   "url": "http://localhost:8080/",
   "setup_function": "created_conference_page",
   "actions": [
