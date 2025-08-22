@@ -3,8 +3,11 @@ import os
 import subprocess
 import time
 import traceback
+import urllib.error
+import urllib.request
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -188,6 +191,14 @@ class TestResultDataset:
 class BaseTestRunner(ABC):
     """Abstract base class for all test runner implementations."""
 
+    # Application URL mapping
+    APPLICATION_URLS = {
+        ApplicationEnum.indico: "http://localhost:8080",
+        ApplicationEnum.bookstack: "http://localhost:8081/",
+        ApplicationEnum.invoiceninja: "http://localhost:8082",
+        ApplicationEnum.prestashop: "http://localhost:8083",
+    }
+
     def __init__(
         self,
         test_case_path: str,
@@ -211,8 +222,8 @@ class BaseTestRunner(ABC):
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
 
-        # Load bug mapping if available
         self.bug_mapping = self._load_bug_mapping()
+        self.checkpoint_folder: Optional[Path] = None
 
     def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
@@ -304,7 +315,6 @@ class BaseTestRunner(ABC):
 
         # Restart application with or without bug
         self.restart_application(self.application, patch_file)
-
         try:
             result = self.run_test_case(test_case)
             if is_buggy:
@@ -346,6 +356,28 @@ class BaseTestRunner(ABC):
                 return {}
         return {}
 
+    def wait_for_application(self, application: ApplicationEnum, max_wait: int = 180):
+        """Wait for application to be accessible via HTTP."""
+        url = self.APPLICATION_URLS.get(application)
+        assert url, f"URL for {application} not found"
+
+        print(f"Waiting for {application} to be ready at {url}...")
+        start_time = time.time()
+
+        while time.time() - start_time < max_wait:
+            try:
+                response = urllib.request.urlopen(url, timeout=5)
+                if response.status < 500:
+                    print(f"✓ {application} is ready")
+                    return
+            except Exception as e:
+                print(f"{application} is giving error: {e}")
+                pass
+
+            time.sleep(15)
+
+        print(f"Warning: {application} may not be fully ready after {max_wait}s")
+
     def restart_application(
         self, application: ApplicationEnum, patch_file: Optional[str] = None
     ):
@@ -365,12 +397,8 @@ class BaseTestRunner(ABC):
 
         _ = subprocess.run(cmd, text=True, check=True)
 
-        # Wait to make sure the app is accessible.
-        if application == ApplicationEnum.invoiceninja:
-            # invoiceninja takes a while to start
-            time.sleep(60)
-        else:
-            time.sleep(15)
+        # Wait for application to be accessible
+        self.wait_for_application(application)
 
     def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
@@ -382,6 +410,16 @@ class BaseTestRunner(ABC):
         if not test_cases:
             print(f"No test cases found in {self.test_case_path}")
             return results
+
+        # Create checkpoint folder with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.checkpoint_folder = (
+            self.test_output_path.parent / f"checkpoint_{timestamp}"
+        )
+        self.checkpoint_folder.mkdir(parents=True, exist_ok=True)
+
+        checkpoint_file = self.checkpoint_folder / f"{self.test_output_path.name}"
+        print(f"Checkpoint folder: {self.checkpoint_folder}")
 
         disable_buggy_tests = self.method in [MethodEnum.naviqate, MethodEnum.lavague]
 
@@ -419,14 +457,25 @@ class BaseTestRunner(ABC):
                     results.results.append(result)
                     pbar.update(1)
 
+                    # Save checkpoint
+                    results.save_results(str(checkpoint_file))
+
                 # Run normal test
                 result = self.run_single_test(test_case, pbar)
                 results.results.append(result)
                 pbar.update(1)
 
-        # Save results & get summary
+                # Save checkpoint after each test
+                results.save_results(str(checkpoint_file))
+
+        # Final results
         self.test_output_path.parent.mkdir(parents=True, exist_ok=True)
         results.save_results(str(self.test_output_path))
+
+        # Final checkpoint
+        results.save_results(str(checkpoint_file))
+        print(f"Checkpoints saved in: {self.checkpoint_folder}")
+
         results.print_summary()
 
         return results
