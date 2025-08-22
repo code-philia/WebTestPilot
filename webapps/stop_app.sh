@@ -35,7 +35,7 @@ case "$app_name" in
         volumes_to_delete="bookstack_app_config bookstack_db"
         ;;
     "indico")
-        volumes_to_delete="prod_archive prod_customization prod_indico-logs prod_postgres-data prod_redis prod_static-files"
+        volumes_to_delete="indico_archive indico_customization indico_indico-logs indico_postgres-data indico_redis indico_static-files"
         ;;
     "invoiceninja")
         volumes_to_delete="invoiceninja_app_cache invoiceninja_app_public invoiceninja_app_storage invoiceninja_mysql invoiceninja_redis"
