@@ -26,3 +26,6 @@ experiments/**/*.network
 experiments/**/*.trace
 experiments/**/*.zip
 experiments/**/*.log
+
+checkpoint_*
+*naviqate_output*
