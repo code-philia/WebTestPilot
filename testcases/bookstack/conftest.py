@@ -218,9 +218,6 @@ def create_book(logged_in_page: Page, book_name: str, book_description: str) -> 
         "Rich Text Area. Press ALT-0"
     ).fill(book_description)
 
-    # Cover image
-    logged_in_page.get_by_role("button", name="▸ Cover image").click()
-
     # Book Tags
     logged_in_page.get_by_role("button", name="▸ Book Tags").click()
     logged_in_page.get_by_role("textbox", name="Tag Name").fill("env")
@@ -377,9 +374,14 @@ def create_shelf(
     logged_in_page.get_by_role("button", name="Save Shelf").click()
     return logged_in_page
 
-def setup_data_for_shelf_create(logged_in_page, book_names, book_description):
+
+def setup_data_for_shelf_create(
+    logged_in_page: Page, book_names: list[str], book_description: str
+):
     for book_name in book_names:
         create_book(logged_in_page, book_name, book_description)
+
+    return logged_in_page
 
 
 @pytest.fixture
