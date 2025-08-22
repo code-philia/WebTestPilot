@@ -10,11 +10,11 @@ from baml_py import Image, ClientRegistry, Collector
 
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
-from executor.assertion_api.session import Session
 from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 
 if TYPE_CHECKING:
+    from executor.assertion_api.session import Session
     from executor.assertion_api.state import State
 
 
@@ -118,7 +118,7 @@ class Element:
 
 
 class ElementFactory:
-    def __init__(self, session: Session):
+    def __init__(self, session: "Session"):
         self.client_registry: ClientRegistry = session.config.assertion_api
         self.collector: Collector = session.collector
 

@@ -10,11 +10,11 @@ from xml.etree.ElementTree import Element as XMLElement
 
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
-from executor.assertion_api.session import Session
 from executor.assertion_api.pydantic_schema import build_from_pydantic
 
 
 if TYPE_CHECKING:
+    from executor.assertion_api.session import Session
     from executor.assertion_api.element import Element
 
 
@@ -126,7 +126,7 @@ class State:
 
 
 class StateFactory:
-    def __init__(self, session: Session):
+    def __init__(self, session: "Session"):
         self.assertion_api: ClientRegistry = session.config.assertion_api
         self.ui_locator: ClientRegistry = session.config.ui_locator
         self.collector: Collector = session.collector

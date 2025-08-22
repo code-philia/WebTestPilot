@@ -32,6 +32,7 @@ class WebTestPilot:
     def run(
         session: Session,
         steps: list["Step"],
+        assertion: bool,
         hooks: Optional[list[Hook]] = None,
     ) -> None:
         """
@@ -51,7 +52,8 @@ class WebTestPilot:
         for step in steps:
             try:
                 execute_action(session, step.action, config)
-                verify_postcondition(session, step.action, step.expectation, config)
+                if assertion:
+                    verify_postcondition(session, step.action, step.expectation, config)
 
             except BugReport as report:
                 logger.error(f"Bug reported: {str(report)}")

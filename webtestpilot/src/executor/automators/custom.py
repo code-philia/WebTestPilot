@@ -160,7 +160,7 @@ def type(
     coordinates = b.LocateUIElement(
         screenshot,
         target_description,
-        baml_options={"client_registry": cr, "collector": Collector},
+        baml_options={"client_registry": cr, "collector": collector},
     )
     x, y = _parse_coordinates(coordinates, screenshot)
 

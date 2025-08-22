@@ -48,7 +48,7 @@ logging:
     file:
       class: logging.FileHandler
       formatter: default
-      filename: "webtestpilot-{}.log".format(__import__("datetime").datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+      filename: "webtestpilot.log"
 
   root:
     level: INFO

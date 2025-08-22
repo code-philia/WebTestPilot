@@ -35,10 +35,10 @@ class Session:
         self.trace: list[dict] = []
         self.page = page
         self.config = config
+        self.collector = Collector()
         self.state_factory = StateFactory(self)
         self.element_factory = ElementFactory(self)
 
-        self.collector = Collector()
         self._history: list[State] = []
         self.capture_state(prev_action=None)
 
