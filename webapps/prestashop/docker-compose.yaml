@@ -2,6 +2,7 @@ services:
   app:
     #image: prestashop/prestashop:8
     build: .
+    platform: linux/x86_64
     ports:
       - ${APP_PORT}:80
     environment:
