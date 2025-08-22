@@ -943,17 +943,107 @@
         },
         {
             "test_name": "18::Move Page Into Chapter",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_role(\"link\", name=\"New Page\").first\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[1]/div/div[1]/aside/div[2]/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/button",
+                            "value": "Chapter"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div[2]/div/div/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div[2]/div/div/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[2]/div[2]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[1]/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[2]/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 335.5390274579986,
+            "token_count": 92898,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 30.503547950727146
         },
         {
             "test_name": "19::Move Chapter Between Books",
