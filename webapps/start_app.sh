@@ -58,6 +58,15 @@ echo "🔄 Resetting $app_name environment..."
 
 # If patch provided → inject bug
 if [[ -n "$patch_name" ]]; then
+    if [[ "$app_name" == "indico" ]]; then
+        echo "⏳ Waiting for Indico setup to complete..."
+        until curl -s http://localhost:8080 | grep -q "All events"; do
+            echo "   ... Indico not ready yet, retrying in 5s"
+            sleep 5
+        done
+        echo "✅ Indico is ready, continuing with patch"
+    fi
+
     echo "📦 Injecting patch: $patch_name into $app_name"
     docker cp "$patch_path" "$container:/tmp/change.patch"
     docker exec -w "$workdir" "$container" patch "$patch_level" -i /tmp/change.patch --fuzz=10 --verbose
