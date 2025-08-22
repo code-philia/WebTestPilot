@@ -32,7 +32,7 @@ echo "🗑️  Deleting volumes for $app_name..."
 # Define actual volume names for each app (based on current Docker volumes)
 case "$app_name" in
     "bookstack")
-        volumes_to_delete="app_app_config app_db app_mysql app_redis app_app_public app_app_storage"
+        volumes_to_delete="bookstack_app_config bookstack_db"
         ;;
     "indico")
         volumes_to_delete="prod_archive prod_customization prod_indico-logs prod_postgres-data prod_redis prod_static-files"

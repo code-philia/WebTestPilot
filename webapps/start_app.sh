@@ -13,20 +13,25 @@ patch_name="${2:-}"   # optional
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Supported apps
-declare -A apps
-apps=(
-    ["bookstack"]="bookstack-app-1:/var/www/bookstack/resources -p0"
-    ["indico"]="indico-web-1:/opt/indico/.venv/lib/python3.12/site-packages -p1"
-    ["invoiceninja"]="invoiceninja-app-1:/var/www/html -p1"
-    ["prestashop"]="prestashop-app-1:/var/www/html -p1"
-)
-
-# Validate app
-if [[ -z "${apps[$app_name]+x}" ]]; then
-    echo "Error: Unsupported app '$app_name'"
-    echo "Supported apps: ${!apps[@]}"
-    return 1
-fi
+case "$app_name" in
+    "bookstack")
+        app_config="bookstack-app-1:/var/www/bookstack/resources -p0"
+        ;;
+    "indico")
+        app_config="indico-web-1:/opt/indico/.venv/lib/python3.12/site-packages -p1"
+        ;;
+    "invoiceninja")
+        app_config="invoiceninja-app-1:/var/www/html -p1"
+        ;;
+    "prestashop")
+        app_config="prestashop-app-1:/var/www/html -p1"
+        ;;
+    *)
+        echo "Error: Unsupported app '$app_name'"
+        echo "Supported apps: bookstack, indico, invoiceninja, prestashop"
+        return 1
+        ;;
+esac
 
 # If patch is provided, validate file
 if [[ -n "$patch_name" ]]; then
@@ -38,9 +43,9 @@ if [[ -n "$patch_name" ]]; then
 fi
 
 # Parse container and target path
-container=$(echo "${apps[$app_name]}" | cut -d: -f1)
-workdir=$(echo "${apps[$app_name]}" | cut -d: -f2 | awk '{print $1}')
-patch_level=$(echo "${apps[$app_name]}" | awk '{print $NF}')
+container=$(echo "$app_config" | cut -d: -f1)
+workdir=$(echo "$app_config" | cut -d: -f2 | awk '{print $1}')
+patch_level=$(echo "$app_config" | awk '{print $NF}')
 
 # Reset app
 echo "🔄 Resetting $app_name environment..."
