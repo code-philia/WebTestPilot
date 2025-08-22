@@ -20,7 +20,7 @@
 	"23::Conference Add Track Group": "conference-add-track-group-1.patch",
 	"24::Conference Enable Call for Abstracts" : "conference-enable-call-1.patch",
 	"25::Conference Enable Notifications for Call for Abstracts" : "conference-enable-notification-1.patch",
-	"26::Conference Create Session" : "conference-add-session-1.patch",	
+	"26::Conference Create Session" : "conference-add-session-1.patch",
 	"27::Conference Edit Session" : "conference-edit-session-1.patch",
 	"28::Conference Delete Session" : "conference-delete-session-1.patch",
 	"29::Conference Add Contribution to Timetable" : "conference-add-contribution-1.patch",
