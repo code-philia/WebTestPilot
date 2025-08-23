@@ -5,7 +5,7 @@
 	"06::Lecture Unlock" : "lecture-unlock-1.patch",
 	"07::Lecture Clone" : "lecture-clone-1.patch",
 	"08::Meeting Create" : "meeting-create-1.patch",
-	"9::Meeting Delete" : "meeting-delete-1.patch",
+	"09::Meeting Delete" : "meeting-delete-1.patch",
 	"10::Meeting Add Contribution to Timetable" : "meeting-add-contribution-1.patch",
 	"11::Meeting Add Break to Timetable" : "meeting-add-break-1.patch",
 	"12::Meeting Lock" : "meeting-lock-1.patch",

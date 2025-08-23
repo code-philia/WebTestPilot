@@ -42,13 +42,9 @@ USER indico
 RUN set -ex && \
     python -m venv ${INDICO_VIRTUALENV} && \
     ${pip} install --upgrade pip setuptools wheel && \
-    ${pip} install uwsgi
+    ${pip} install uwsgi && \
+    ${pip} install indico==3.3.6
 
-RUN if [ "$tag" = "latest" ]; then \
-    ${pip} install indico; \
-else \
-    ${pip} install indico==${tag}; \
-fi;
 
 RUN ${INDICO_VIRTUALENV}/bin/indico setup create-symlinks /opt/indico
 
