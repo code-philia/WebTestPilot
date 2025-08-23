@@ -28,7 +28,7 @@
                     "name": "fill",
                     "args": {
                         "label": "57",
-                        "value": "company_name123456",
+                        "value": "company_name",
                         "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/section/div/input"
                     }
                 }
@@ -38,7 +38,7 @@
                     "name": "finish",
                     "args": {
                         "status": "success",
-                        "reason": "Typed 'company_name123456' into the Filter input box and confirmed that results updated (no matches found). Task complete."
+                        "reason": "Typed 'company_name' into the Filter input box and confirmed that results updated (no matches found). Task complete."
                     }
                 }
             }
