@@ -1,0 +1,4 @@
+name: 24::Conference Create Session
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click 'Sess' ln nav. Sess sect opens. Click 'Contrb sett' ddwn ln nav. Contrb sett ddwn opens. Click 'Sess types' ln. Sess types sett open. Click 'New sess type' ln. Sess add frm open. Fill 'Sess type' to name fld. Name fld filled w/ sess type. Click 'Save' btn. Sess type crtd & saved. Vrfy sess type in sess types lst. Sess type lstd in sess types. Click 'Close' btn. Sess types sett closed. Click 'Add new sess' btn. Sess crtn frm opens. Click in 'Title' txtbx. Title fld fcsd for inp. Type 'Sess title' in title fld. Title fld cnts uniq sess title. Click in 'Desc' txtbx. Desc fld fcsd. Type 'Sess desc' in desc fld. Desc fld cnts txt. Click 'Save' btn. Sess crtd & saved. Vrfy sess in sess tbl. Sess lst shws new sess

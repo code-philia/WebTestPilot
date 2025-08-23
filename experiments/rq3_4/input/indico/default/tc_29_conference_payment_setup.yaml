@@ -1,0 +1,4 @@
+name: 29::Conference Payment Setup
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click "Registration" link in navigation. Registration section opens. Verify "Enable payments" link is visible. Payment enablement option is available. Click "Enable payments" link. Payment confirmation dialog appears. Click "OK" button. Payments are enabled. Click "Payments" link in navigation. Payments configuration page opens. Verify payment status shows "enabled". Payment module is active. Verify "Bank Transfer disabled" link is visible. Bank transfer option is available. Click "Bank Transfer disabled" link. Bank transfer configuration opens. Check the "Enabled" checkbox. Bank transfer is enabled. Click in the "Payment details" textbox. Payment details field is focused. Type "Payment details" in the field. Payment details are entered. Click "Save" button. Payment settings are saved

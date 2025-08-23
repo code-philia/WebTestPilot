@@ -1,4 +1,0 @@
-name: 12::Meeting Add Break to Timetable
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click "Timetable" link in navigation. Timetable view opens. Click "Add new" dropdown button. Add new menu appears. Click "Break" option. Break creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Break123456" in the title field. Title field contains unique break name. Click in the "Description" textbox. Description field is focused. Type "Description123456" in the description field. Description field contains text. Click in the time field labeled "--:--". Time picker opens. Select "11" from time picker. Start time is set to 11:00. Click "Save" button. Break is created and saved. Verify "Break" appears in timetable canvas. Timetable shows the break entry

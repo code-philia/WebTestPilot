@@ -1,4 +1,4 @@
 name: 11::Product Restore
 url: http://localhost:8082/
 setup_function: created_product_page
-description: Click "Products" link in navigation menu. Products listing page appears. Click filter or view options to show deleted products. Deleted products view is available. Locate the deleted product "product_name Updated 123456". Deleted product is visible in filtered view. Click "Restore" button or action for the deleted product. Restore action is available. Click "Yes" or "Confirm" in the restoration dialog. Product restoration is confirmed. Verify alert message "Successfully restored product" appears. Success alert confirms product restoration. Return to active products view. Standard products listing is displayed. Verify restored product appears in active list. Product is back in main listing
+description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Product status show deleted. Click "Restore" button. Product status is restored

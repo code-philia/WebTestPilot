@@ -1,4 +1,0 @@
-name: 21::Conference Unlock
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 3dots btn. Dropdown opens. Select 'Unlock'. Verify msg 'Event unlocked'. Check success alert. Confirm lock msg gone. Page doesn't show locked state.

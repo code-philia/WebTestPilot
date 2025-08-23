@@ -1,5 +1,0 @@
-name: 10::Meeting Delete
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: To begin, locate and tap the action menu button, which is represented by three dots. The action menu dropdown will then appear, revealing various options for you to choose from. For your reference, ensure that the 'Delete' option is clearly visible within this dropdown list. Understanding the concept, the presence of the delete option signifies that it's accessible for selection. If you encounter any issues, make sure the 'Delete' option is not greyed out before proceeding. Once everything looks good, narratively speaking, imagine yourself clicking on the 'Delete' option, initiating the process. With a casual approach, just check the box next to 'I understand what this means'—it’s like agreeing to the terms. After confirming, hit the 'Delete event' button with confidence. The meeting is officially gone, but don’t take our word for it; verify that an alert message stating 'Event successfully deleted' pops up. Lastly, the success alert serves as a confirmation, telling you 
-  that the meeting has indeed been deleted.

@@ -1,4 +1,4 @@
 name: 03::Book Read
 url: http://localhost:8081/
 setup_function: created_book_page
-description: Click 'Books' lnk -> Bks lst pg shws all bks. Clk bk titled 'Book123456'. Dtl pg opns. Vrfy bk nm in pg hding (bk nm as m/h). Vrfy desc cntnt vis. Desc txt shwn. Vrfy nav elmnts prsnt. Nav sb/sdr shws strct. // Rough draft
+description: Click 'Books' lnk -> Bks lst pg shws all bks. Clk bk titled 'Book'. Dtl pg opns. Vrfy 'Book' in pg hding. 'Book' as m/hdg. Vrfy desc 'Desc' vis. 'Desc' txt shwn. Vrfy nav elmnts prsnt. Sidebar shws strctre. // Rough draft

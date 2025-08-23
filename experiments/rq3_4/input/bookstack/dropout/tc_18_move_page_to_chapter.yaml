@@ -1,0 +1,4 @@
+name: 18::Move Page Into Chapter
+url: http://localhost:8081/
+setup_function: created_page_move_page
+description: Page move operation is initiated. Click the search text box. Search box is focused. Type "Chapter" in the search box. Search results are filtered by "Chapter". Select the chapter "Chapter" from the dropdown. Chapter is selected as destination. Click "Move Page" button. Page move operation is confirmed. Verify that "Page" is shown in the menu. Verify page breadcrumb to contain "Book". "Book" link is present in the breadcrumb. Verify page breadcrumb to contain "Chapter". "Chapter" link is present in the breadcrumb. Verify page breadcrumb to contain "Page". "Page" link is present in the breadcrumb. Navigate back to the chapter through breadcrumb link. Original chapter page is displayed. Verify page name "Page" is shown in the main content of the page. "Page" is displayed in the main content.

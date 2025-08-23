@@ -1,4 +1,0 @@
-name: 19::Conference Delete
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 3dots -> Verify 'Delete' opt visible -> Click 'Delete' -> Confirm dialog pops -> Check 'I understand' box -> Click 'Delete event' -> Verify 'Event successfully deleted' msg -> Confirms conf del

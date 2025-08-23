@@ -1,4 +1,4 @@
 name: 25::Sort Content by Name
 url: http://localhost:8081/
 setup_function: created_data_for_sort_page
-description: Click Bk 'Book12345'. Bk det pg w/ cnt list shown. Clk 'Sort' btn. Sort iface/drpdown pops. Sel 'Sort by Name' opt. Name sort opt sel. Clk 'Apply'/cnfrm. Sort by name exec. Vrfy cnt sorted alpha. Itms alpha ord. Vrfy chaps & pgs sorted. All cnt types alpha ord.
+description: Click 'Book' -> Bk detail pg w/ cnt list shown. Click 'Sort' btn -> Sort iface/dropdown pops up. Sel 'Sort by Name' opt -> Name sort opt chosen. Click 'Apply'/cnfrm sel -> Sort by name op exec'd

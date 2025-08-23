@@ -1,4 +1,4 @@
 name: 09::Chapter Delete
 url: http://localhost:8081/
 setup_function: created_chapter_page
-description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Ver 'Chap succ del' alert -> User redir from del chap pg -> Chap gone frm nav -> Chap rmvd frm bk struct (rough draft)
+description: Click 'Del' ln chp actns. Del conf dlg pops up. Click 'Conf' btn. Chp del confd. Ver usr redir frm del chp pg. Usr not on del chp pg anymore.

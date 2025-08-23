@@ -1,4 +1,4 @@
 name: 05::Client Delete
 url: http://localhost:8082/
 setup_function: created_client_page
-description: Click 'More Actions'/'Actions' dropdwon -> Actions menu opens -> Click 'Delete' -> Del conf dialog appears -> Click 'Yes'/Confirm btn -> Client del confirmed -> Verify alert msg 'Success del client' -> Succ alert confirms del -> Navigate to clients list -> Clients list pg displayed -> Verify del client not in active list -> Client rmvd from main list
+description: Click 'More Acts'/'Acts' ddwn. Acts menu pops. Click 'Del'. Del conf dialog shows up.

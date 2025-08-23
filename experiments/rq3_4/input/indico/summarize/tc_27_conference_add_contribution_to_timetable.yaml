@@ -1,0 +1,4 @@
+name: 27::Conference Add Contribution to Timetable
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click TT lnk -> TT view opens -> Click 'Add new' ddn -> Add new menu -> Click 'Contri' opt -> Contri form opens -> Click 'Title' txtbx -> Title fld focused -> Type 'Sess Contri' -> Title fld has uniq name -> Click 'Save' btn -> Contri created & saved -> Verify contri in TT canvas w/ num pref -> TT shows numd contri

@@ -1,4 +1,4 @@
 name: 17::Shelf Delete
 url: http://localhost:8081/
 setup_function: created_shelf_page
-description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Verify 'Shelf del'd' alert msg -> Check user redir'd away -> Shelf gone frm list
+description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Shelf del confirmed -> Verify usr redir away frm del shelf pg -> Usr not on del shelf pg -> Verify shelf gone frm shelves lst -> Shelf rmvd frm lst (rough draft)

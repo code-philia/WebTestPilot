@@ -1,4 +1,0 @@
-name: 34::Conference Clone
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 'Clone' btn. Clone evt dlg pops up. Hit close btn in dlg hdr. Clone op starts. Chk if cloned conf pg shows. New conf pg opens. Confirm conf name stays same in clone. Venue & rm info preserved. Loc details copied.

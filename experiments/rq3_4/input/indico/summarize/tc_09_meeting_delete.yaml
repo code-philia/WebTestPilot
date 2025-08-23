@@ -1,0 +1,4 @@
+name: 09::Meeting Delete
+url: http://localhost:8080/
+setup_function: created_meeting_page
+description: Click 3dots btn. Dropdown opens. Vfy 'Del' opt vis. Del opt avail. Click 'Del'. Conf dialog pops. Chk 'I understand' box. Box chkd. Click 'Del event' btn. Meet del conf.

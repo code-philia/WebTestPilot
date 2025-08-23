@@ -1,4 +1,4 @@
 name: 28::Expense Delete
 url: http://localhost:8082/
 setup_function: created_expense_page
-description: Click 'More Actions'/'Actions' dropdwon -> Actions menu opens -> Click 'Delete' -> Del conf dialog appears -> Click 'Yes'/Confirm btn -> Expense del confirmed -> Verify alert msg 'Success del expense' -> Success alert confirms del -> Navigate to exp listing -> Exp listing pg displayed -> Verify del exp not in active list -> Exp rmvd from main listing
+description: Click 'More Actions' ddn btn. Menu pops up. Select 'Delete'. Exp shows 'Deleted'. Confirm exp status is 'Deleted'. Pg displays exp status as 'Deleted'

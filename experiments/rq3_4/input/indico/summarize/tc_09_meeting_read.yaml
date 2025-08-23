@@ -1,4 +1,0 @@
-name: 09::Meeting Read
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: chk mtg name in evt setts data; disp correcly. vrfy venue info in loc sectn; venue name in evt loc. vrfy rm info in loc sectn; rm name in evt loc. vrfy evt nav elmnts prsn; evt nav menu avail. vrfy timtbl lnk avail; timtbl opt in nav

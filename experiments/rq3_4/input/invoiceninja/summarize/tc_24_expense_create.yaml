@@ -1,4 +1,4 @@
 name: 24::Expense Create
 url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'Expenses' -> Expenses list pg appears. Click 'New Expense' -> Form opens. Focus on 'Amt' txtbx, type '123456'. Focus on client sel fld, choose 'company_name123456'. Focus on 'Date' fld, set exp date. Add desc/cat if avail. Click 'Save' -> Exp created & saved. Verify alert msg 'Success'. Verify new exp in list tbl.
+setup_function: setup_data_for_expense_create
+description: Click 'Expenses' -> Expenses list pg. Click 'Enter Expense' -> Form opens. Focus on Client fld. Enter 'company_name'. Dropdown shows -> Select 'company_name'. Focus on Amount fld. Enter '2,3234' -> Shows '2,324'. Click Currency fld. Dropdown shows -> Select 'AUD'. Click Save -> Expense saved. Verify 'Edit Expense' txt exists -> Confirms creation.

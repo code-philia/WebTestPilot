@@ -1,0 +1,4 @@
+name: 26::Conference Delete Session
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click 'Sess' link -> Sess sect opens -> Ver 'No sess yet' msg -> Empty msg shown -> Click 'Add new sess' btn -> Form opens -> Type 'Title' in title fld -> Title fld has title -> Type 'Desc' in desc fld -> Desc fld has txt -> Click 'Save' btn -> Sess created/saved -> Click trash icn for 1st sess -> Del conf dialog pops -> Click 'OK' -> Del conf -> Ver 'No sess yet' msg again -> Sess list empty

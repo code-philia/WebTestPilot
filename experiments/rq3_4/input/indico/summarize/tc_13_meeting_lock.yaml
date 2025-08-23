@@ -1,4 +1,0 @@
-name: 13::Meeting Lock
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: "Click 3dots -> Action menu opens. Select 'Lock'. Confirm dialog pops up. Click 'Lock event'. Verify msg: 'Event locked'. Check lock status shown. Confirm alert: 'Event locked'. Success alert verifies."

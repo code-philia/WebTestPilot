@@ -1,0 +1,4 @@
+name: 31::Conference Registration State Management
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click "Registration" link in navigation. Registration section opens. Click "Start now" button. Registration opening is initiated. Click "Close now" link. Registration closing is initiated. Click "Reopen now" button. Reopen confirmation dialog appears. Click "OK" button. Registration reopening is confirmed
