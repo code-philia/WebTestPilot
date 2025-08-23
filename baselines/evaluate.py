@@ -123,6 +123,14 @@ def main(
             help="Enable verbose output",
         ),
     ] = False,
+    rerun: Annotated[
+        Optional[str],
+        typer.Option(
+            "--rerun",
+            "-r",
+            help="Comma-separated list of test case numbers to run (e.g., '1,10,7,24,25')",
+        ),
+    ] = None,
 ):
     """Main entry point for the evaluation script."""
 
@@ -131,6 +139,16 @@ def main(
 
     # Output directory
     output_path = output_dir / f"{application.value}.json"
+
+    rerun_numbers = None
+    if rerun:
+        try:
+            rerun_numbers = [int(num.strip()) for num in rerun.split(",")]
+        except ValueError:
+            print(
+                f"Error: Invalid rerun format. Expected comma-separated numbers, got: {rerun}"
+            )
+            raise typer.Exit(code=1)
 
     # Print configuration
     print("=" * 80)
@@ -152,6 +170,9 @@ def main(
 
     if filter:
         print(f"Filter: {filter}")
+
+    if rerun_numbers:
+        print(f"Rerun tests: {rerun_numbers}")
 
     print("=" * 80)
     print()
@@ -176,9 +197,10 @@ def main(
         "headless": headless,
     }
 
-    # Add model parameter if provided
     if model:
         runner_kwargs["model"] = model.value
+    if rerun_numbers:
+        runner_kwargs["rerun_numbers"] = rerun_numbers
 
     # Add method-specific parameters
     if method == MethodEnum.pinata:

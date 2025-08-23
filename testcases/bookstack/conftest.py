@@ -484,11 +484,15 @@ def setup_data_for_sort_chapter_and_page(
     )
 
     # Go back to book page and create a page.
-    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    chapter_created_page.get_by_role(
+        "link", name=test_data.book_name, exact=True
+    ).first.click()
     page_created_page = create_page(
         chapter_created_page, test_data.page_name1, test_data.page_description
     )
-    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    chapter_created_page.get_by_role(
+        "link", name=test_data.book_name, exact=True
+    ).first.click()
     page_created_page = create_page(
         chapter_created_page, test_data.page_name2, test_data.page_description
     )
@@ -513,12 +517,13 @@ def setup_data_for_create_page_template(
     )
 
     # Create 1 more page, 1 is a template, 1 uses the template.
-    page_template_name = test_data.page_template_name
     page_template_description = test_data.page_template_description
-    created_page_page.get_by_role("link", name=test_data.book_name).first.click()
+    created_page_page.get_by_role(
+        "link", name=test_data.book_name, exact=True
+    ).first.click()
     created_page_page = create_page(
         created_page_page,
-        page_template_name,
+        test_data.page_template_name,
         page_template_description,
     )
 
@@ -558,7 +563,9 @@ def setup_data_for_page_move_page(
     )
 
     # Go back to book page and create a page.
-    chapter_created_page.get_by_role("link", name=test_data.book_name).first.click()
+    chapter_created_page.get_by_role(
+        "link", name=test_data.book_name, exact=True
+    ).first.click()
     page_created_page = create_page(
         chapter_created_page, test_data.page_name, test_data.page_description
     )

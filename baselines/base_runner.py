@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import time
 import traceback
@@ -9,7 +10,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Optional
 
 from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
 from playwright.sync_api import Page, sync_playwright
@@ -207,6 +208,7 @@ class BaseTestRunner(ABC):
         model: Optional[ModelEnum] = None,
         headless: bool = False,
         method: Optional[MethodEnum] = None,
+        rerun_numbers: Optional[list[int]] = None,
         **kwargs,
     ):
         self.test_case_path = Path(test_case_path)
@@ -216,6 +218,7 @@ class BaseTestRunner(ABC):
         self.config = kwargs
         self.headless = headless
         self.method = method
+        self.rerun_numbers = rerun_numbers
 
         # For configuring Playwright, to load initial page.
         self.playwright: Optional[Playwright] = None
@@ -224,6 +227,14 @@ class BaseTestRunner(ABC):
 
         self.bug_mapping = self._load_bug_mapping()
         self.checkpoint_folder: Optional[Path] = None
+
+    @staticmethod
+    def extract_test_number(test_name: str) -> Optional[int]:
+        """From: 02::Book Create -> 2"""
+        match = re.match(r"(\d+)::", test_name)
+        if match:
+            return int(match.group(1))
+        return None
 
     def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
@@ -243,6 +254,13 @@ class BaseTestRunner(ABC):
                 with open(file_path, "r") as f:
                     test_case_data = json.load(f)
                     test_case = TestCase.from_dict(test_case_data)
+
+                    # Re-run subset of tests
+                    if self.rerun_numbers:
+                        test_number = self.extract_test_number(test_case.name)
+                        if not test_number or test_number not in self.rerun_numbers:
+                            continue
+
                     test_cases.append(test_case)
             except json.JSONDecodeError as e:
                 print(f"Error loading {file_path}: {e}")
@@ -345,7 +363,7 @@ class BaseTestRunner(ABC):
             traceback.print_exc()
             return result
 
-    def _load_bug_mapping(self) -> Dict[str, str]:
+    def _load_bug_mapping(self) -> dict[str, str]:
         """Load test case to bug mapping from JSON file."""
         webapps_dir = Path(__file__).parent.parent / "webapps"
         mapping_file = webapps_dir / self.application / "testcase_to_bug.json"
@@ -353,7 +371,18 @@ class BaseTestRunner(ABC):
         if mapping_file.exists():
             try:
                 with open(mapping_file, "r") as f:
-                    return json.load(f)
+                    bug_mapping = json.load(f)
+
+                    # Filter bug mapping by rerun numbers if specified
+                    if self.rerun_numbers:
+                        filtered_mapping = {}
+                        for test_name, bug_file in bug_mapping.items():
+                            test_number = self.extract_test_number(test_name)
+                            if test_number and test_number in self.rerun_numbers:
+                                filtered_mapping[test_name] = bug_file
+                        return filtered_mapping
+
+                    return bug_mapping
             except json.JSONDecodeError as e:
                 print(f"Warning: Failed to load bug mapping file: {e}")
                 return {}

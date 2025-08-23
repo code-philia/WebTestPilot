@@ -92,7 +92,7 @@ class NaviqateTestRunner(BaseTestRunner):
         page = self.context.new_page()
 
         # Set up the page state based on the setup function
-        self.logger.info("setup page state")
+        self.logger.info("Setting up page state")
         page = setup_page_state(page, setup_function, application=self.application)
         return page
 
