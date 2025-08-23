@@ -41,7 +41,7 @@ client<llm> Claude {
 client<llm> Qwen {
   provider "openai-generic"
   options {
-    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    base_url "http://localhost:8000/v1"
     model "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"
   }
 }
@@ -49,7 +49,7 @@ client<llm> Qwen {
 client<llm> InternVL {
   provider "openai-generic"
   options {
-    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    base_url "http://localhost:8000/v1"
     model "./InternVL3-78B.Q4_K_M.gguf"
   }
 }
@@ -57,7 +57,7 @@ client<llm> InternVL {
 client<llm> Gemma {
   provider "openai-generic"
   options {
-    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    base_url "http://localhost:8000/v1"
     model "gaunernst/gemma-3-27b-it-int4-awq"
   }
 }
@@ -65,7 +65,7 @@ client<llm> Gemma {
 client<llm> GLM {
   provider "openai-generic"
   options {
-    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    base_url "http://localhost:8000/v1"
     model "dengcao/GLM-4.1V-9B-Thinking-AWQ"
   }
 }

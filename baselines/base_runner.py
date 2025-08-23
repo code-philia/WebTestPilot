@@ -1,3 +1,4 @@
+import sys
 import json
 import os
 import re
@@ -14,8 +15,12 @@ from tqdm import tqdm
 from playwright.sync_api import Page, sync_playwright
 from playwright.sync_api._generated import Browser, BrowserContext, Playwright
 
-from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
-from utils import setup_page_state
+PROJECT_DIR = Path(__file__).parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.append(str(PROJECT_DIR))
+
+from baselines.const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
+from baselines.utils import setup_page_state
 
 
 @dataclass
@@ -337,6 +342,7 @@ class BaseTestRunner(ABC):
         self.restart_application(self.application, patch_file)
         try:
             result = self.run_test_case(test_case)
+
             if is_buggy:
                 result.test_name = display_name
                 result.has_bug = True

@@ -4,7 +4,7 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
-from const import ApplicationEnum, MethodEnum, TestCase
+from baselines.const import ApplicationEnum, MethodEnum, TestCase
 from dotenv import load_dotenv
 from tqdm import tqdm
 
@@ -12,7 +12,7 @@ from tqdm import tqdm
 sys.path.append(str(Path(__file__).parent.parent))  # baselines dir
 sys.path.append(str(Path(__file__).parent.parent.parent))  # testcases dir
 webtestpilot_src_path = str(
-    Path(__file__).parent.parent.parent.parent / "webtestpilot" / "src"
+    Path(__file__).parent.parent.parent / "webtestpilot" / "src"
 )
 sys.path.append(webtestpilot_src_path)
 CONFIG_PATH = Path(webtestpilot_src_path) / "config.yaml"
@@ -45,7 +45,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
         )
         self.headless = headless
 
-    def run_test_case(self, test_case: TestCase, config: Config = None) -> TestResult:
+    def run_test_case(self, test_case: TestCase, is_buggy: bool, config = None) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
         actions = test_case.actions
         test_name = test_case.name
@@ -68,7 +68,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 page = self.get_initial_page(setup_function)
 
                 # If there's a custom config, load it; otherwise load default config
-                config = Config.load(CONFIG_PATH) if not config else config
+                config = config if config else Config.load(CONFIG_PATH)
                 session = Session(page, config)
 
                 # Execute each action
@@ -83,7 +83,10 @@ class WebTestPilotTestRunner(BaseTestRunner):
                             expectation=action.expectedResult,
                         )
 
-                        WebTestPilot.run(session, step)
+                        if is_buggy:
+                            WebTestPilot.run(session, [step], assertion=True)
+                        else:
+                            WebTestPilot.run(session, [step], assertion=False)
 
                         result.traces = session.trace
                         result.current_step += 1
@@ -94,6 +97,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
                         result.error_message = f"Error at step {i + 1}: {str(e)}"
                         step_bar.set_postfix(status="✗", refresh=True)
                         tqdm.write(f"    Error: {e}")
+                        print(traceback.format_exc())
                         break
 
                 # Record total runtime
@@ -114,6 +118,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
                 result.error_message = f"Test setup error: {str(e)}"
                 result.success = False
                 step_bar.set_postfix(status="✗", refresh=True)
-                traceback.print_exc()
+                print(traceback.format_exc())
+                # traceback.print_exc()
 
         return result

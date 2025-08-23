@@ -29,3 +29,8 @@ experiments/**/*.log
 
 checkpoint_*
 *naviqate_output*
+
+experiments/**/*.html
+experiments/**/*.png
+experiments/**/*.json
+experiments/**/*.tmux

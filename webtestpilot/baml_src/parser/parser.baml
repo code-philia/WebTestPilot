@@ -20,6 +20,7 @@ function ExtractTestCase(description: string) -> TestCase {
     - `Expectation`: A testable outcome (e.g., page redirects to dashboard)
 
     If the information is not provided, fill with <unknown> placeholder.
+    Please correct typos and other errors to produce well-formed, complete sentences, without adding or omitting any information.
 
     {{ ctx.output_format }}
 

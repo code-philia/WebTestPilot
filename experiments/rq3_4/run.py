@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Optional
 
 # Add project directory
-PROJECT_DIR = Path(__file__).parent.parent
+PROJECT_DIR = Path(__file__).parent.parent.parent
 if str(PROJECT_DIR) not in sys.path:
     sys.path.append(str(PROJECT_DIR))
 
@@ -16,7 +16,7 @@ if str(WEBTESTPILOT_DIR) not in sys.path:
 import typer
 from typing_extensions import Annotated
 from baselines.const import ApplicationEnum
-from experiments.rq3_4.runner import WebTestPilotTestRunner_RQ3_4
+from runner import WebTestPilotTestRunner
 
 from main import Config
 
@@ -65,15 +65,16 @@ def main(
         base / f"{config.parser}_{application.value}_{transformation.value}.json"
     )
 
-    runner = WebTestPilotTestRunner_RQ3_4(
+    runner = WebTestPilotTestRunner(
         test_case_path=str(test_case_path),
         test_output_path=str(test_output_path),
         application=application.value,
-        config=config,
+        model=None,
         headless=True,
+        config=config
     )
     runner.run_all_test_cases()
 
 
 if __name__ == "__main__":
-    main()
+    cli()
