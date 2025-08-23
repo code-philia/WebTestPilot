@@ -634,17 +634,59 @@
         },
         {
             "test_name": "14::Invoice Update",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div[1]/div/div/div/div/table/tbody/tr[1]/td[4]/div/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div[1]/div/div/div/div/table/tbody/tr[1]/td[4]/div/section/div/input",
+                            "value": "10"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 266.2381257910165,
+            "token_count": 42484,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 53.2476251582033
         },
         {
             "test_name": "15::Invoice Mark Sent",
