@@ -1,4 +1,0 @@
-name: 26::Conference Create Session
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Sessions" link in navigation. Sessions section opens. Click "Add new session" button. Session creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Session title123456" in the title field. Title field contains unique session title. Click in the "Description" textbox. Type "Session description123456" in the description field. Description field contains text. Click "Save" button. Session is created and saved. Verify session appears in sessions table. Sessions list shows the new session.

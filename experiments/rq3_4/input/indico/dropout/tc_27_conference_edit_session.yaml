@@ -1,4 +1,0 @@
-name: 27::Conference Edit Session
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Sessions" link in navigation. Sessions section opens. Click the gear icon for the first session. Session edit form opens. Click in the "Title" textbox. Title field is focused with current title. Clear and type "Session title updated123456" in the title field. Title field shows updated session title. Session changes are saved. Verify updated session title appears in sessions table. Sessions list shows updated title.

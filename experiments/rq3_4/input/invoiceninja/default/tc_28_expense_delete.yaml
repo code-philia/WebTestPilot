@@ -1,4 +1,4 @@
 name: 28::Expense Delete
 url: http://localhost:8082/
 setup_function: created_expense_page
-description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Yes" or "Confirm" button in the confirmation dialog. Expense deletion is confirmed. Verify alert message "Successfully deleted expense" appears. Success alert confirms expense deletion. Navigate to expenses listing. Expenses listing page is displayed. Verify deleted expense no longer appears in active list. Expense is removed from main listing
+description: Click "More Actions" dropdown button. Actions menu opens. Click "Delete" option. Expense shows "Deleted" status. Verify expense has Deleted status. The page shows expense's status is Deleted

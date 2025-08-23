@@ -1,4 +1,4 @@
 name: 08::Meeting Create
 url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click 'Create event' -> Dropdown appears -> Click 'Meeting' -> Form opens -> Focus 'Event title' -> Type 'Meeting123456' -> Focus 'End date' -> Enter tmrw's date (DD/MM/YYYY) -> Focus 'End time' -> Select '12' -> Set time to 12:00 -> Focus 'Venue' -> Type 'Venue123456' -> Focus 'Room' -> Type 'Room123456' -> Click 'Public' -> Click 'Create event' -> Meeting saved -> Verify name in heading -> Verify venue & room info displayed
+setup_function: logged_in_page
+description: Click 'Create event' -> Dropdown appears -> Click 'Meeting' -> Form opens -> Focus 'Event title' -> Type 'Meeting' -> Unique title -> Focus end date -> Enter '10/10/2040' -> Date shows correctly -> Focus end time -> Select '12' -> Time set -> Focus 'Venue' -> Type 'Venue' -> Venue shows -> Focus 'Room' -> Type 'Room' -> Room shows -> Click 'Public' -> Public mode selected -> Click 'Create event' -> Meeting saved -> Verify name in heading -> Verify venue & room -> Details displayed

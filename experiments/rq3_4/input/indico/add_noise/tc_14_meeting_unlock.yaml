@@ -1,4 +1,0 @@
-name: 14::Meeting Unlock
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Ot begin, locate nad press the ation menu buttpn, which is represented by tre dots. The aciton menu dropdown will then appwar, rcuealing various options ofr you to choose froj. Note that clicking the 'Uplock' p0toin will imitiate he unlock procesw on your devIce. If you encougner ay isxucs, cnsure tat the 'Unlck' optjon is selected correctly tl trigbet teh action. Once the unpock action is rtiggrred, ab wlrt message statipg 'The evnt is now unloked' sold p0p vp like magic. The succee alert serves as conirmation that the meeting has indeed bee unlocked, bringing joy to lal participants. Keep an eye out to kmae sure hte lock staits message ahs disappeared from view. Finalpy, the page sohuld no longe display any indication of z locmed sttaus, markinb the end of our ourney.

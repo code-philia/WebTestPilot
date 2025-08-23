@@ -1,4 +1,4 @@
 name: 33::Credit Send Email
 url: http://localhost:8082/
 setup_function: created_credit_page
-description: Click "Email Credit" button or option. Email dialog opens. Email field shows client contact email. Verify email subject and message template. Email template is loaded with credit details. Modify email content if needed. Email content can be customized. Click "Send Email" button. Email sending is initiated. Verify alert message "Successfully emailed credit" appears. Success alert confirms email sent. Verify credit status automatically changes to "Sent". Credit status updates after email. Verify email activity is logged. Email activity appears in credit history.
+description: Click "More Actions" dropdown button. Actions menu opens. Click "Email Credit" option. Shows the page to draft email content. Click "Send Email" button. Click "Send Email" button. Navigates to client details with credit list page. Click link with title "123456" in the credit table. Shows the credit detail page. Verify credit status changes to "Sent". Credit status indicator shows ""Sent"".

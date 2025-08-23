@@ -1,0 +1,4 @@
+name: 18::Conference Lock
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: To begin, you'll want to interact with the action menu button, which is represented by three dots. Next, ensure that the action menu dropdown has successfully opened up for you. For your reference, the 'Lock' option should be clearly visible within this dropdown list. If you're wondering how to proceed, simply click on the 'Lock' option to trigger the next step. Should you encounter any issues, remember that clicking 'Lock event' will bring up the lock confirmation dialog. Once upon a time, a user bravely clicked the 'Lock event' button, and the conference was locked forevermore. Lastly, just give it a casual tap on the 'Lock event' button, and voila! The conference locking is confirmed.

@@ -18,6 +18,6 @@
     {
       "action": "Verify invoice status changes to \"Paid\"",
       "expectedResult": "Invoice status indicator shows \"\"Paid\"\""
-    },
+    }
   ]
 }

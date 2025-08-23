@@ -1,4 +1,4 @@
 name: 27::Update Sort Rules
 url: http://localhost:8081/
 setup_function: created_sort_rule_page
-description: Find 'SortRule123456' in rules list. Tgt rule visible. Click 'Edit'. Edit form opens. Click 'Rule Name' box. Name fld focused w/ curr name. Clear & type 'SortRule Updated 123456'. Name fld shows new name. Chg sort type to diff opt. Diff sort type sel. Chg sort order opt. Diff sort order sel. Mod entity sel if avail. Entity type sel updated. Click 'Save Sort Rule'. Changes saved. Verify alert msg 'Sort rule successfully updated' appears. Success alert confirms update. Verify updated rule in listing. Rules list shows updated details.
+description: Click 'Rule' -> tgt sort rule visible -> click 'Name' txtbx -> name fld focused w/ curr name -> clr & type 'Rule updated' -> name fld shows updated name -> click btn to add 'Chaps First' -> opt added -> click 'Save' -> changes saved -> verify 'Rule updated' in list -> rules list shows updated details

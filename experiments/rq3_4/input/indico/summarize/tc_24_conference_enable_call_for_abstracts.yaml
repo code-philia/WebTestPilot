@@ -1,4 +1,0 @@
-name: 24::Conference Enable Call for Abstracts
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: "Click workflows menu -> Call for Abstracts. Expand. Click 'Enable module'. Verify msg: 'Not open yet'. Click 'Start now'. Click 'Close now'. Click 'Reopen now'. Confirm dialog pops up. Close dialog header btn. Call reopens."

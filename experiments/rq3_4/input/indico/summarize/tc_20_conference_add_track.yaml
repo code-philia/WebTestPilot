@@ -1,0 +1,4 @@
+name: 20::Conference Add Track
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click 'Programme' -> Programme sect opens. Click 'Add track' -> Track form opens. Click 'Title' txtbx -> Title fld focused. Type 'Track' -> Unique name in title fld. Click 'Code' txtbx -> Code fld focused. Type 'OC' -> Track code in fld. Click 'Desc' txtbx -> Desc fld focused. Type 'Papers about' -> Text in desc fld. Click 'Save' btn -> Track created & saved. Verify track in list cont -> New track shown.

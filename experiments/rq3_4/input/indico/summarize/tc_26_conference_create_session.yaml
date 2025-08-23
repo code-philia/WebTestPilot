@@ -1,4 +1,0 @@
-name: 26::Conference Create Session
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 'Sess' ln nav. Sess sect opens. Click 'Add new sess' btn. Form opens. Click 'Title' txtbx. Title fld fcsd. Type 'Session title123456'. Title fld has uniq title. Click 'Desc' txtbx. Desc fld fcsd. Type 'Session desc123456'. Desc fld has txt. Click 'Save' btn. Sess crtd & svd. Vrfy sess in sess tbl. List shws new sess

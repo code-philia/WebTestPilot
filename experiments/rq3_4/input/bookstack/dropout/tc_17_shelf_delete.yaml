@@ -1,4 +1,4 @@
 name: 17::Shelf Delete
 url: http://localhost:8081/
 setup_function: created_shelf_page
-description: Click "Delete" link in the shelf actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Shelf deletion is confirmed. Verify alert message "Shelf successfully deleted" appears. Success alert confirms shelf deletion. User is no longer on the deleted shelf page. Verify shelf no longer appears in shelves listing. Shelf is removed from shelves list.
+description: Click "Delete" link in the shelf actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Shelf deletion is confirmed. Verify user is redirected away from deleted shelf page. User is no longer on the deleted shelf page. Verify shelf no longer appears in shelves listing.

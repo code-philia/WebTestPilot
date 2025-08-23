@@ -1,4 +1,4 @@
 name: 05::Book Delete
 url: http://localhost:8081/
 setup_function: created_book_page
-description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Verify 'Book del'd' alert msg -> Check user redir'd away frm del'd book pg
+description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Book del confirmed -> Verify usr redir away frm del book pg -> Usr not on del book pg anymore

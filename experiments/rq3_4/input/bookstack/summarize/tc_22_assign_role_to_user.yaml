@@ -1,4 +1,4 @@
 name: 22::Assign Role to User
 url: http://localhost:8081/
 setup_function: created_role_page
-description: "Click 'Settings' -> Settings pg disp. Click 'Users' -> Users mgmt sect opens. Sel user from list -> User det pg or edit frm opens. Click 'Edit' -> User edit frm disp. Locate roles sect -> Roles sel area vis. Sel 'TestRole123456' -> Role sel for assign. Click 'Save' -> User role assign saved. Verify alert msg 'User succ updated' -> Succ alert conf user update. Verify role assgn'd to user -> User prof shows assgn'd role. Note: Full test lim by demo restr. Demo env may have perm lim."
+description: Click 'Users' in setts menu. Users mgmt sectn opens. Selct user Guest guest@example.com. User dets pg or edit frm opens. Selct 'Role'. Role selctd & chked. Click 'Save' btn. User role assgnmnt saved. Vrfy role 'Role' assgned to Guest. Guest shws assgned role 'Role'

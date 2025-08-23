@@ -1,4 +1,0 @@
-name: 31::Conference Payment Setup
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click Reg link -> Reg sect opens -> Verify 'Enable paymnts' vis -> Paymnt opt avail -> Click 'Enable paymnts' -> Confirm dialg pops -> Click 'OK' -> Paymnts enbl -> Click 'Paymnts' nav link -> Config pg opens -> Verify paymnt stat 'enbl' -> Mod active -> Verify 'BT disbl' vis -> BT opt avail -> Click 'BT disbl' -> BT config opens -> Chk 'Enbl' box -> BT enbl -> Click 'Paymnt dets' txtbx -> Field fcs -> Type 'Paymnt dets' -> Dets entrd -> Click 'Save' -> Setts svd -> Verify alert msg 'BT setts svd' -> Succ alert conf setts svd

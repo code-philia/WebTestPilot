@@ -1,0 +1,4 @@
+name: 22::Conference Enable Call for Abstracts
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click on the workflows collapsible menu containing Call for Abstracts. Workflows menu expands. Click "Call for Abstracts" link. Call for Abstracts section opens. Click "Enable module" button. Module is enabled. Verify "The call for abstracts is not open yet" message appears. Initial status message is displayed. Click "Start now" button. Call for abstracts is opened. Click "Close now" button. Call for abstracts is closed. Click "Reopen now" button. Reopen confirmation dialog appears. Click close button in "Confirm action" dialog header. Call for abstracts is reopened

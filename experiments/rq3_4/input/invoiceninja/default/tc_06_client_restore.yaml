@@ -1,4 +1,4 @@
 name: 06::Client Restore
 url: http://localhost:8082/
 setup_function: created_client_page
-description: Click "Clients" link in navigation menu. Clients listing page appears. Click filter or view options to show deleted clients. Deleted clients view is available. Locate the deleted client "company_name Updated 123456". Deleted client is visible in filtered view. Click "Restore" button or action for the deleted client. Restore action is available. Click "Yes" or "Confirm" in the restoration dialog. Client restoration is confirmed. Verify alert message "Successfully restored client" appears. Success alert confirms client restoration. Return to active clients view. Standard clients listing is displayed. Verify restored client appears in active list. Client is back in main listing
+description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Restore" button or action for the deleted client. Restore action is available

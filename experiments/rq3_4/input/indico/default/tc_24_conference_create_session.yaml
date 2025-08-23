@@ -1,0 +1,5 @@
+name: 24::Conference Create Session
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click "Sessions" link in navigation. Sessions section opens. Click "Contribution settings" dropdown link in navigation. Contribution settings dropdown opens. Click "Session types" link. Session types settings open. Click "New session type" link. Session add form open. Fill "Session type" to the name field. Name field is filled with session type. Click "Save" button. Session type is created and saved. Verify session type appears in session types list. Session type is listed in session types. Click "Close" button. Session types settings are closed. Click "Add new session" button. Session creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Session title" in the title field. Title field contains unique session title. Click in the "Description" textbox. Description field is focused. Type "Session description" in the description field. Description field contains text. Click "Save" button. Session is created and saved. Verify session appears
+  in sessions table. Sessions list shows the new session

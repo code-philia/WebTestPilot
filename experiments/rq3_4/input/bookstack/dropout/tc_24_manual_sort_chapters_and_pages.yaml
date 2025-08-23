@@ -1,4 +1,4 @@
 name: 24::Manual Sort Chapters and Pages
 url: http://localhost:8081/
 setup_function: created_data_for_sort_page
-description: Click the book "Book12345". Book detail page with content list is displayed. Click "Sort" button. Click the first "Move Up" button. Sort order changes. Click the second "Move Down" button. Sort order changes. Click the second "Move Up" button. Sort order changes. Click the "Save New Order" button. The sort order changes are saved.
+description: Click the book "Book". Book detail page with content list is displayed. Click "Sort" button. Click the first "Move Up" button. Sort order changes. Click the second "Move Down" button. Sort order changes. Click the second "Move Up" button. Sort order changes. Click the "Save New Order" button. The sort order changes are saved.

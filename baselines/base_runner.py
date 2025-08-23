@@ -4,18 +4,17 @@ import re
 import subprocess
 import time
 import traceback
-import urllib.error
 import urllib.request
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
-
-from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
+from typing import Optional, Callable
+from tqdm import tqdm
 from playwright.sync_api import Page, sync_playwright
 from playwright.sync_api._generated import Browser, BrowserContext, Playwright
-from tqdm import tqdm
+
+from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
 from utils import setup_page_state
 
 
@@ -390,21 +389,31 @@ class BaseTestRunner(ABC):
 
     def wait_for_application(self, application: ApplicationEnum, max_wait: int = 180):
         """Wait for application to be accessible via HTTP."""
+
+        READY_CHECKS: dict[str, Callable[[str], bool]] = {
+            "indico": lambda text: "All events" in text,
+            "invoiceninja": lambda text: "Invoice Ninja" in text,
+            "prestashop": lambda text: "Ecommerce software by PrestaShop" in text,
+            "bookstack": lambda text: "BookStack" in text,  # adjust as needed
+        }
+
         url = self.APPLICATION_URLS.get(application)
         assert url, f"URL for {application} not found"
 
         print(f"Waiting for {application} to be ready at {url}...")
         start_time = time.time()
+        check_func: Callable[[str], bool] = READY_CHECKS.get(application, lambda _: True)
 
         while time.time() - start_time < max_wait:
             try:
                 response = urllib.request.urlopen(url, timeout=5)
-                if response.status < 500:
+                text = response.read().decode("utf-8", errors="ignore")
+
+                if check_func(text):
                     print(f"✓ {application} is ready")
                     return
             except Exception as e:
                 print(f"{application} is giving error: {e}")
-                pass
 
             time.sleep(15)
 

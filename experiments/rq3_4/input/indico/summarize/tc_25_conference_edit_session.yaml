@@ -1,0 +1,4 @@
+name: 25::Conference Edit Session
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click 'Sess' ln nav. Sess sect opens. Click 'Add new sess' btn. Sess create frm opens. Click 'Title' txtbx. Title fld fcsd. Type 'Sess title'. Title fld has uniq title. Click 'Desc' txtbx. Desc fld fcsd. Type 'Sess desc'. Desc fld has txt. Click 'Save' btn. Sess crtd & svd. Click 'Sess' ln nav. Sess sect opens. Click gear icn frst sess. Sess edit frm opens. Click 'Title' txtbx. Title fld fcsd w/ curr title. Clr & type 'Sess title upd'. Title fld shws upd title. Click 'Save' btn. Sess chngs svd. Vrfy upd title in sess tbl. Sess lst shws upd title

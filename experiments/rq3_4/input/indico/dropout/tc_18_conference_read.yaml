@@ -1,4 +1,0 @@
-name: 18::Conference Read
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Verify conference name appears in event settings data. Conference name is displayed correctly. Verify venue information is visible in location section. Verify room information is visible in location section. Room name is shown in event location. Verify event navigation elements are present. Event navigation menu is available. Verify conference-specific links are available. Programme and other conference options are present.

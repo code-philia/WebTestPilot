@@ -1,4 +1,4 @@
 name: 09::Chapter Delete
 url: http://localhost:8081/
 setup_function: created_chapter_page
-description: Click "Delete" link in the chapter actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Chapter deletion is confirmed. Verify alert message "Chapter successfully deleted" appears. Success alert confirms chapter deletion. Verify user is redirected away from deleted chapter page. User is no longer on the deleted chapter page. Verify chapter no longer appears in book navigation.
+description: Click "Delete" link in the chapter actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Chapter deletion is confirmed. Verify user is redirected away from deleted chapter page.

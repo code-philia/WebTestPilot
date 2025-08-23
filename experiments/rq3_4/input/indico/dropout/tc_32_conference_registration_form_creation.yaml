@@ -1,4 +1,0 @@
-name: 32::Conference Registration Form Creation
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Registration" link in navigation. Registration section opens. Click "Create form" link. Registration form creation dialog opens. Click in the "Title" textbox. Title field is focused for input. Type "Registration Form" in the title field. Title field contains form name. Click "Create" button. Registration form is created. Verify alert message "Registration form has been successfully created" appears.

@@ -1,4 +1,4 @@
 name: 11::Page Read
 url: http://localhost:8081/
 setup_function: created_page_page
-description: Click on the page with title "Page123456". Page detail view opens. Verify page name appears in page heading. Page name is displayed as main heading. Verify page content is visible. Page content text is shown on the page. Verify page navigation elements are present. Page navigation shows book structure. Verify breadcrumb navigation shows book > page.
+description: Click on the link with title "Book" in breadcrumb. Page detail view opens. Verify page "Page" title is displayed. Page is displayed correctly. Click on the link with title "Page" in book navigation. Verify page name "Page" appears in page heading. Page name "Page" is displayed as main heading. Verify page description is visible. Page description text is shown on the page.

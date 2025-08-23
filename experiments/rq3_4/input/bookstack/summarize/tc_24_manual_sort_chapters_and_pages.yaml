@@ -1,4 +1,4 @@
 name: 24::Manual Sort Chapters and Pages
 url: http://localhost:8081/
 setup_function: created_data_for_sort_page
-description: Click Book12345 -> Bk detail pg w/ cnt list shown. Click 'Sort' btn -> Sort iface opens. Click 1st 'Move Up' -> Ord chngs. Click 2nd 'Move Dn' -> Ord chngs. Click 2nd 'Move Up' -> Ord chngs. Click 'Save New Ord' btn -> Ord chngs saved. Rough draft.
+description: "Click 'Book'. Bk detail pg w/ cnt list shown. Click 'Sort'. Sort iface pops up. Click 1st 'Move Up' -> order chngs. Click 2nd 'Move Down' -> order chngs. Click 2nd 'Move Up' -> order chngs. Click 'Save New Order' -> new sort order saved. #roughdraft"

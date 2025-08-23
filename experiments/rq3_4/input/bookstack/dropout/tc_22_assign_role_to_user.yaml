@@ -1,4 +1,4 @@
 name: 22::Assign Role to User
 url: http://localhost:8081/
 setup_function: created_role_page
-description: 'Settings page is displayed. Click "Users" in settings menu. Users management section opens. Select a user from the users list. Click "Edit" button for the selected user. User edit form is displayed. Locate the roles section in user form. User roles selection area is visible. Select "TestRole123456" from available roles. Role is selected for assignment. Click "Save" button. User role assignment is saved. Verify alert message "User successfully updated" appears. Success alert confirms user update. Verify role is assigned to user. User profile shows assigned role. Note: Full testing limited by demo restrictions. Demo environment may have permission limitations.'
+description: Click "Users" in settings menu. Users management section opens. Select user Guest guest@example.com. User details page or edit form opens. Select "Role" from available roles. Role is selected and checked. Click "Save" button. User role assignment is saved. Guest shows assigned role "Role".

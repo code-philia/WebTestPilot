@@ -1,4 +1,4 @@
 name: 27::Update Sort Rules
 url: http://localhost:8081/
 setup_function: created_sort_rule_page
-description: Locate "SortRule123456" in the rules list. Target sort rule is visible in the list. Click "Edit" button for the sort rule. Sort rule edit form opens. Click in the "Rule Name" textbox. Name field is focused with current name. Clear and type "SortRule Updated 123456". Name field shows updated rule name. Change sort type to different option. Different sort type is selected. Change sort order option. Different sort order is selected. Modify entity selection if available. Entity type selections are updated. Click "Save Sort Rule" button. Sort rule changes are saved. Verify updated rule appears in listing. Rules list shows updated rule details.
+description: Click "Rule" in the rules list. Target sort rule is visible in the list. Click in the "Name" textbox. Name field is focused with current name. Clear and type "Rule updated". Name field shows updated rule name. Click button to add "Chapters First" to the list. The option is added to the list. Click "Save" button. Verify rule "Rule updated" appears in listing. Rules list shows updated rule details.

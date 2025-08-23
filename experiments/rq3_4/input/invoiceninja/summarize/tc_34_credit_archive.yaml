@@ -1,4 +1,4 @@
 name: 34::Credit Archive
 url: http://localhost:8082/
 setup_function: created_credit_page
-description: Click 'More Actions'/'Actions' -> Menu opens -> Click 'Archive' -> Confirm dialog pops up -> Click 'Yes'/Confirm -> Verify 'Successfully archived credit' msg -> Navigate to credits list -> Check archived credit not in active list -> Go to archived view -> Verify credit in archived list
+description: Click 'More Actions' ddn btn. Actions menu pops up. Select 'Archive'. Crdt status shld update to 'Archived'. Confirm crdt status = 'Archived'. Status indtr displays 'Archived'.

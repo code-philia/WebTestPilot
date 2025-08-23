@@ -1,4 +1,4 @@
 name: 05::Lecture Lock
 url: http://localhost:8080/
 setup_function: created_lecture_page
-description: "Click 3dots -> 'Change type' -> 'Lock'. Confirm lock dialog by clicking 'Lock event'. Verify msg: 'Event locked', lock status shown, & alert: 'Event now locked'. Success alert confirms."
+description: "Click 3dots -> 'Change type' -> 'Lock'. Lock dialog pops up. Hit 'Lock event'. Confirm lecture lock. #roughdraft"

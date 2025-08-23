@@ -1,4 +1,0 @@
-name: 14::Meeting Unlock
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: To begin, you'll want to interact with the interface by clicking on the action menu button, which is represented by three dots. Once the action menu dropdown appears, proceed to select the 'Unlock' option from the list. Note that upon selection, the system triggers an unlock action, a fundamental process for altering access permissions. If everything goes smoothly, you should encounter a success alert stating, 'The event is now unlocked,' confirming the operation's completion. Imagine the relief when the screen finally displays the message, signaling that the meeting is indeed unlocked after all the effort. In case you're troubleshooting, ensure that the lock status message has disappeared, indicating the change was successful. Lastly, in a more casual tone, just check that the page doesn't show any locked status anymore, and you're good to go!

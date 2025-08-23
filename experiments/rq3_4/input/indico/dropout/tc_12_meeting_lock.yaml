@@ -1,0 +1,4 @@
+name: 12::Meeting Lock
+url: http://localhost:8080/
+setup_function: created_meeting_page
+description: Click the action menu button (three dots icon). Action menu dropdown opens. Click "Lock" option. Click "Lock event" button. Meeting locking is confirmed.

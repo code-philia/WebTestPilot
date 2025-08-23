@@ -1,4 +1,4 @@
 name: 01::Login
 url: http://localhost:8081/
 setup_function: ''
-description: Click email txtbx -> focus & type admin@admin.com -> disp admin@admin.com. Click pwd txtbx -> focus & type pwd -> show masked chars. Click Log In btn -> auth success & redirect to dash. Verify 'Books' link vis in nav -> confirms login success. Rough draft.
+description: Click email txtbx -> focus & type admin@admin.com -> disp admin@admin.com. Click pwd txtbx -> focus & type pwd -> show masked chars. Click Log In btn -> auth success & redirect to dash. Verify 'Books' link vis in nav -> confirms login success.

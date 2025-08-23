@@ -1,4 +1,0 @@
-name: 17::Conference Create
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 'Create event' -> Conf dropdown -> Click 'Conf' -> Conf form opens -> Focus 'Event title' -> Type 'Conf123456' -> Focus 'End date' -> Enter tmrw's date (DD/MM/YYYY) -> Focus 'End time' -> Select '12' -> Set time to 12:00 -> Focus 'Venue' -> Type 'Venue123456' -> Focus 'Room' -> Type 'Room123456' -> Click 'Public' -> Click 'Create event' -> Conf created -> Verify conf name in heading -> Verify venue & room info displayed

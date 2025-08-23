@@ -1,4 +1,4 @@
 name: 07::Lecture Clone
 url: http://localhost:8080/
 setup_function: created_lecture_page
-description: Click "Clone" button. Clone event dialog appears. Click the close button in "Clone Event" dialog header. Clone operation is initiated. Verify cloned lecture page is displayed. New lecture page opens. Verify lecture name is preserved in cloned event. Cloned lecture has same name. Verify venue and room information is preserved. Location details are copied to clone
+description: Click "Clone" button. Clone event dialog appears. Click the close button in "Clone Event" dialog. Clone operation is initiated. Verify cloned lecture page is displayed. New lecture page opens. Verify lecture name is "Lecture". Cloned lecture has same name. Verify venue and room information is preserved. Location details are copied to clone

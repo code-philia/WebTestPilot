@@ -1,0 +1,4 @@
+name: 26::Conference Delete Session
+url: http://localhost:8080/
+setup_function: created_conference_page
+description: Click "Sessions" link in navigation. Verify "There are no sessions yet" message initially. Empty sessions message is displayed. Click "Add new session" button. Session creation form opens. Type "Session title" in title field. Title field contains session title. Type "Session description" in description field. Description field contains text. Click "Save" button. Session is created and saved. Click the trash icon for the first session. Delete confirmation dialog appears. Click "OK" button. Session deletion is confirmed. Verify "There are no sessions yet" message appears again. Sessions list is empty again.

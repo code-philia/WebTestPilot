@@ -1,4 +1,4 @@
 name: 03::Book Read
 url: http://localhost:8081/
 setup_function: created_book_page
-description: Click "Books" link in navigation. Books listing page shows all available books. Click on the book with title "Book123456". Verify book name appears in page heading. Book name is displayed as main heading. Verify book description content is visible. Book description text is shown on the page. Verify book navigation elements are present. Book navigation sidebar shows structure.
+description: Click "Books" link in navigation. Books listing page shows all available books. Click on the book with title "Book". Verify book name "Book" appears in page heading. Book name "Book" is displayed as main heading. Verify book description "Description" content is visible. Book description "Description" text is shown on the page. Verify book navigation elements are present. Book navigation sidebar shows structure.

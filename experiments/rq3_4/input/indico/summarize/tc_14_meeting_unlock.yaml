@@ -1,4 +1,0 @@
-name: 14::Meeting Unlock
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click 3dots btn. Dropdown opens. Select 'Unlock'. Verify msg 'Event unlocked' pops up. Confirm success alert. Check lock status msg gone. Page no longer shows locked.
