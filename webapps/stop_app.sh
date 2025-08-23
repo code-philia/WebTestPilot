@@ -24,7 +24,7 @@ case "$app_name" in
 esac
 
 cd "$SCRIPT_DIR/$app_name"
-docker compose down -v
+docker compose down -v --remove-orphans
 
 # Delete all the volumes used in the app to restart the data as well
 echo "🗑️  Deleting volumes for $app_name..."
