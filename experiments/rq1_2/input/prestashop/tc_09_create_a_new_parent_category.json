@@ -4,11 +4,15 @@
   "setup_function": "logged_in_page",
   "actions": [
     {
-      "action": "Click \"Catalog\"",
-      "expectedResult": "then click \"Categories\" in the back-office menu."
+      "action": "Click \"Catalog\" menu item",
+      "expectedResult": "Catalog submenu items expand"
     },
     {
-      "action": "Click the \"Add new category\" button in the top-right corner.",
+      "action": "Click \"Categories\" submenu item",
+      "expectedResult": "The Categories page is displayed"
+    },
+    {
+      "action": "Click the \"Add new\" button in the top-right corner.",
       "expectedResult": "A new page for creating a new category appears."
     },
     {

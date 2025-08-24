@@ -1,7 +1,7 @@
 {
   "name": "23::Remove A Product From Wishlist",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_buyer_page",
+  "setup_function": "created_wishlist_item_page",
   "actions": [
     {
       "action": "Enter the name of the liked product into the \"Search\" input box.",

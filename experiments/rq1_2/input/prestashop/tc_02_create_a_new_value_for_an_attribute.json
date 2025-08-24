@@ -1,15 +1,23 @@
 {
   "name": "02::Create A New Value For An Attribute",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_attribute_page",
   "actions": [
     {
-      "action": "Navigate to the \"Catalog\" -> \"Attributes & Features\" page.",
-      "expectedResult": "The \"Attributes & Features\" page is displayed correctly."
+      "action": "Click \"Catalog\" menu item",
+      "expectedResult": "Catalog submenu items expand"
+    },
+    {
+      "action": "Click \"Attributes & Features\" submenu item",
+      "expectedResult": "The Attributes & Features page is displayed"
     },
     {
       "action": "Click \"Add new value\" in the top-right corner.",
       "expectedResult": "A new page appears containing a form to create a new value."
+    },
+    {
+      "action": "Click the \"Attribute group\" drop-down list.",
+      "expectedResult": "The dropdown list shows the list of attribute groups."
     },
     {
       "action": "Select \"Weight\" from the \"Attribute group\" drop-down list.",

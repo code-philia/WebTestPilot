@@ -4,8 +4,12 @@
   "setup_function": "logged_in_page",
   "actions": [
     {
-      "action": "Navigate to \"Catalog\" then \"Attributes & Features\".",
-      "expectedResult": "The \"Attributes & Features\" page is displayed correctly."
+      "action": "Click \"Catalog\" menu item",
+      "expectedResult": "Catalog submenu items expand"
+    },
+    {
+      "action": "Click \"Attributes & Features\" submenu item",
+      "expectedResult": "The Attributes & Features page is displayed"
     },
     {
       "action": "Click the \"Features\" tab at the top of the page.",

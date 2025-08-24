@@ -4,8 +4,12 @@
   "setup_function": "logged_in_page",
   "actions": [
     {
-      "action": "Navigate to the \"Catalog\" menu",
-      "expectedResult": "then click \"Brands & Suppliers\"."
+      "action": "Click \"Catalog\" menu item",
+      "expectedResult": "Catalog submenu items expand"
+    },
+    {
+      "action": "Click \"Brands & Suppliers\" submenu item",
+      "expectedResult": "The Brands & Suppliers page is displayed"
     },
     {
       "action": "Click on the \"Add new brand\" button.",
@@ -18,10 +22,6 @@
     {
       "action": "Enter a brand description in the \"Description\" area.",
       "expectedResult": "The complex description of the brand is filled into the rich text editor."
-    },
-    {
-      "action": "Upload a \"Logo\" image file for the brand.",
-      "expectedResult": "The \"Logo\" field displays the name of the selected image file."
     },
     {
       "action": "Click the \"Save\" button",

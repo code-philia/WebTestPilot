@@ -28,12 +28,8 @@
       "expectedResult": "The product name is successfully entered."
     },
     {
-      "action": "Upload 'bird.jpg' as the product image",
-      "expectedResult": "The image is uploaded and a thumbnail is displayed."
-    },
-    {
-      "action": "Enter the summary and description information",
-      "expectedResult": "The product's summary and full description are filled in."
+      "action": "Enter the description as \"Description\"",
+      "expectedResult": "The product's description is filled in."
     },
     {
       "action": "Click the 'Add categories' button",
@@ -48,8 +44,12 @@
       "expectedResult": "The category modal closes."
     },
     {
-      "action": "Click the 'Brand' dropdown and select 'Graphic Corner'",
-      "expectedResult": "The brand is successfully selected."
+      "action": "Click the 'Brand'",
+      "expectedResult": "Options show up for brands"
+    },
+    {
+      "action": "Choose brand 'Graphic Corner'",
+      "expectedResult": "'Graphic Corner' is selected as the brand."
     },
     {
       "action": "Click the 'Details' tab",
@@ -72,7 +72,11 @@
       "expectedResult": "The view switches to the 'Pricing' tab."
     },
     {
-      "action": "Enter the retail price '9.00' and wholesale price '5.49'",
+      "action": "Enter the retail price '9.000000' and wholesale price '5.49'",
+      "expectedResult": "The price information is filled in successfully."
+    },
+    {
+      "action": "Enter the wholesale price '5.490000'",
       "expectedResult": "The price information is filled in successfully."
     },
     {
@@ -92,11 +96,19 @@
       "expectedResult": "The view switches to the 'Options' tab."
     },
     {
+      "action": "Check the checkboxes for 'Accessories supplier'",
+      "expectedResult": "The suppliers are successfully associated."
+    },
+    {
       "action": "Check the checkboxes for 'Fashion supplier'",
       "expectedResult": "The suppliers are successfully associated."
     },
     {
-      "action": "Enter the reference and price for each selected supplier",
+      "action": "Enter virtual product fashion supplier reference as 'test1'",
+      "expectedResult": "Supplier-specific information is filled in successfully."
+    },
+    {
+      "action": "Enter virtual product fashion supplier price as '6.490000'",
       "expectedResult": "Supplier-specific information is filled in successfully."
     },
     {

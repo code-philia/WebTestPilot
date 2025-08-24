@@ -1,12 +1,8 @@
 {
   "name": "11::Delete A Category",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_parent_category_page",
   "actions": [
-    {
-      "action": "Click \"Catalog\"",
-      "expectedResult": "then click \"Categories\" in the back-office menu."
-    },
     {
       "action": "Find the row for the category named \"Shoes\" and click it to go to its detail/edit page.",
       "expectedResult": "The edit page for the \"Shoes\" category is displayed."
@@ -18,7 +14,7 @@
     {
       "action": "Select a deletion mode e.g. \"I want to delete this category only...\".",
       "expectedResult": "The corresponding radio button is selected."
-    },
+    },================
     {
       "action": "Click the \"Delete\" button to confirm.",
       "expectedResult": "A \"Successful deletion\" message is displayed"

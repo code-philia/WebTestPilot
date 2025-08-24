@@ -1,12 +1,8 @@
 {
   "name": "08::Delete An Existing Brand",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_brand_page",
   "actions": [
-    {
-      "action": "Navigate to the \"Catalog\" menu",
-      "expectedResult": "then click \"Brands & Suppliers\"."
-    },
     {
       "action": "Find the row containing \"Nike\" in the brand list and click on it to go to its detail page.",
       "expectedResult": "The page navigates to the edit page for the \"Nike\" brand."

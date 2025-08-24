@@ -1,7 +1,7 @@
 {
   "name": "06::Delete A Feature",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_feature_page",
   "actions": [
     {
       "action": "Navigate to \"Catalog\"",

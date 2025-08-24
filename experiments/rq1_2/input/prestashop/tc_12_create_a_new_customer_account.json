@@ -4,7 +4,7 @@
   "setup_function": "logged_in_page",
   "actions": [
     {
-      "action": "Click the \"Customers\" link in the back-office main menu.",
+      "action": "Click the \"Customers\" link.",
       "expectedResult": "The Customers submenu expands."
     },
     {
@@ -20,20 +20,28 @@
       "expectedResult": "The \"Mr.\" option is successfully selected."
     },
     {
-      "action": "Enter the customer's \"First name\" and \"Last name\".",
-      "expectedResult": "The customer's name is entered in the fields."
+      "action": "Enter \"Jones\" in the First Name field",
+      "expectedResult": "The first name is entered in the field."
     },
     {
-      "action": "Enter the customer's \"Email address\".",
-      "expectedResult": "The email address"
+      "action": "Enter \"Jonathan\" in the Last Name field",
+      "expectedResult": "The last name is entered in the field."
     },
     {
-      "action": "Enter the customer's \"Password\".",
-      "expectedResult": "The password is set for the account."
+      "action": "Enter the customer's \"Email address\" as test@test.com.",
+      "expectedResult": "The email address is entered in the field."
     },
     {
-      "action": "Select the customer's \"Birthday\" (year",
-      "expectedResult": "month"
+      "action": "Enter the customer's birth year as 2003.",
+      "expectedResult": "The birth year is entered in the field."
+    },
+    {
+      "action": "Enter the customer's birth month as 1.",
+      "expectedResult": "The birth month is entered in the field."
+    },
+    {
+      "action": "Enter the customer's birth day as 1.",
+      "expectedResult": "The birth day is entered in the field."
     },
     {
       "action": "Click the \"Save\" button.",
