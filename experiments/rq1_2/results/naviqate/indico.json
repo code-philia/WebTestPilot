@@ -10,17 +10,76 @@
     "results": [
         {
             "test_name": "01::Login",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Message: no such window: target window already closed\nfrom unknown error: web view not found\n  (Session info: chrome=139.0.7258.139)\nStacktrace:\n0   chromedriver                        0x00000001013b4c20 cxxbridge1$str$ptr + 2747652\n1   chromedriver                        0x00000001013acb20 cxxbridge1$str$ptr + 2714628\n2   chromedriver                        0x0000000100ef50c8 cxxbridge1$string$len + 90536\n3   chromedriver                        0x0000000100eceea0 chromedriver + 143008\n4   chromedriver                        0x0000000100f646f4 cxxbridge1$string$len + 546772\n5   chromedriver                        0x0000000100f7d4fc cxxbridge1$string$len + 648668\n6   chromedriver                        0x0000000100f30934 cxxbridge1$string$len + 334356\n7   chromedriver                        0x000000010137788c cxxbridge1$str$ptr + 2496880\n8   chromedriver                        0x000000010137aab8 cxxbridge1$str$ptr + 2509724\n9   chromedriver                        0x0000000101358510 cxxbridge1$str$ptr + 2369012\n10  chromedriver                        0x000000010137b360 cxxbridge1$str$ptr + 2511940\n11  chromedriver                        0x0000000101349610 cxxbridge1$str$ptr + 2307828\n12  chromedriver                        0x000000010139b230 cxxbridge1$str$ptr + 2642708\n13  chromedriver                        0x000000010139b3bc cxxbridge1$str$ptr + 2643104\n14  chromedriver                        0x00000001013ac76c cxxbridge1$str$ptr + 2713680\n15  libsystem_pthread.dylib             0x000000019de96c0c _pthread_start + 136\n16  libsystem_pthread.dylib             0x000000019de91b80 thread_start + 8\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[1]/div/div/div/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/main/div/div/div/div[1]/div[1]/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/main/div/div[1]/div/div[1]/div[1]/div[2]/form/input[4]",
+                            "value": "admin@admin.com"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/main/div/div[1]/div/div[1]/div[1]/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/main/div/div[1]/div/div[1]/div[1]/div[2]/form/input[5]",
+                            "value": "webtestpilot"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[1]/div/div/div/div/button[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/menu/li[5]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 167.21922316600103,
+            "token_count": 39800,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 23.888460452285862
         },
         {
             "test_name": "02::Lecture Create",
@@ -271,17 +330,72 @@
         },
         {
             "test_name": "08::Meeting Create",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"load\"\n",
-            "runtime": 0.0,
+            "success": true,
+            "current_step": 16,
+            "total_step": 16,
+            "traces": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null        {
+                    "test_name": "18::Conference Lock",
+                    "success": true,
+                    "current_step": 3,
+                    "total_step": 3,
+                    "traces": [
+                        {
+                            "action": {
+                                "name": "click",
+                                "args": {
+                                    "xpath": "/html/body/main/div[2]/div/div[1]/div[2]/div/div[2]/div/button"
+                                }
+                            }
+                        },
+                        {
+                            "action": {
+                                "name": "click",
+                                "args": {
+                                    "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                                }
+                            }
+                        },
+                        {
+                            "action": {
+                                "name": "click",
+                                "args": {
+                                    "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                                }
+                            }
+                        }
+                    ],
+                    "error_message": null,
+                    "runtime": 80.36310329100525,
+                    "token_count": 19066,
+                    "has_bug": false,
+                    "bug_name": null,
+                    "correct_trace_percentage": 1.0,
+                    "runtime_per_step": 26.787701097001747
+                },
+            ],
+            "error_message": null,
+            "runtime": 49.26274216599995,
             "token_count": 0,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.078921385374997
         },
         {
             "test_name": "09::Meeting Delete",
@@ -650,17 +764,42 @@
         },
         {
             "test_name": "18::Conference Lock",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"load\"\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[1]/div[2]/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 80.36310329100525,
+            "token_count": 19066,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 26.787701097001747
         },
         {
             "test_name": "19::Conference Unlock",
@@ -719,17 +858,102 @@
         },
         {
             "test_name": "20::Conference Add Track",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"load\"\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[1]/div/div/ul/li[5]/ul/li[4]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[1]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[2]/div[2]/input",
+                            "value": "Track"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[5]/div[2]/div/div[1]/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[2]/div[2]/input",
+                            "value": "OC"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[2]/div[2]/input",
+                            "value": "OC"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[5]/div[2]/div/div[1]/textarea",
+                            "value": "Papers about"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/form/div[6]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[1]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 302.3904864579963,
+            "token_count": 82432,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 30.23904864579963
         },
         {
             "test_name": "21::Conference Add Track Group",
@@ -900,17 +1124,100 @@
         },
         {
             "test_name": "23::Conference Enable Notifications for Call for Abstracts",
-            "success": false,
-            "current_step": 0,
-            "total_step": 0,
-            "traces": [],
-            "error_message": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"load\"\n",
-            "runtime": 0.0,
-            "token_count": 0,
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[1]/div/div/ul/li[6]/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[1]/div/div/ul/li[6]/ul/li[1]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div[3]/div[1]/div[3]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div[1]/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[9]/div[2]/div/form/div[1]/div[2]/input",
+                            "value": "Email"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[9]/div[2]/div/form/fieldset/div/div/div/div[2]/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "select",
+                        "args": {
+                            "xpath": "/html/body/div[9]/div[2]/div/form/fieldset/div/div/div/div[2]/ul/li/div[1]/select",
+                            "index": 1
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[9]/div[2]/div/form/div[3]/div[2]/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 323.74892841700057,
+            "token_count": 89711,
             "has_bug": false,
             "bug_name": null,
-            "correct_trace_percentage": 0.0,
-            "runtime_per_step": 0
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 32.37489284170006
         },
         {
             "test_name": "24::Conference Create Session",
