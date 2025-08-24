@@ -49,8 +49,19 @@ from testcases.invoiceninja.conftest import (
     setup_for_payment_page,
 )
 from testcases.prestashop.conftest import (
+    PrestaShopTestData,
     login_to_prestashop,
     login_to_prestashop_as_buyer,
+    setup_data_for_attribute_tests,
+    setup_data_for_brand_tests,
+    setup_data_for_cart_tests,
+    setup_data_for_child_category_tests,
+    setup_data_for_customer_tests,
+    setup_data_for_feature_tests,
+    setup_data_for_parent_category_tests,
+    setup_data_for_product_delete_tests,
+    setup_data_for_supplier_tests,
+    setup_data_for_wishlist_tests,
 )
 
 
@@ -156,10 +167,55 @@ def setup_indico_page(page: Page, setup_function: str) -> Page:
 
 def setup_prestashop_page(page: Page, setup_function: str) -> Page:
     """Set up PrestaShop page based on setup function."""
+    test_data = PrestaShopTestData()
+    test_data._unique_id = ""
+
+    # Login once for all other functions
+    if (
+        setup_function == "logged_in_buyer_page"
+        or setup_function == "created_cart_item_page"
+        or setup_function == "created_wishlist_item_page"
+    ):
+        logged_in_page = login_to_prestashop_as_buyer(page)
+    else:
+        logged_in_page = login_to_prestashop(page)
+
     if setup_function == "logged_in_page":
-        return login_to_prestashop(page)
-    elif setup_function == "logged_in_buyer_page":
-        return login_to_prestashop_as_buyer(page)
+        return logged_in_page
+
+    if setup_function == "logged_in_buyer_page":
+        return logged_in_page
+
+    elif setup_function == "created_cart_item_page":
+        return setup_data_for_cart_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_wishlist_item_page":
+        return setup_data_for_wishlist_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_attribute_page":
+        return setup_data_for_attribute_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_feature_page":
+        return setup_data_for_feature_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_brand_page":
+        return setup_data_for_brand_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_parent_category_page":
+        return setup_data_for_parent_category_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_child_category_page":
+        return setup_data_for_child_category_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_customer_page":
+        return setup_data_for_customer_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_product_for_delete_page":
+        return setup_data_for_product_delete_tests(logged_in_page, test_data)
+
+    elif setup_function == "created_supplier_page":
+        return setup_data_for_supplier_tests(logged_in_page, test_data)
+
     else:
         raise ValueError(f"Unknown prestashop setup function: {setup_function}")
 
