@@ -87,7 +87,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
 
         return test_cases
     
-    def run_test_case(self, test_case: TestCase, config = None) -> TestResult:
+    def run_test_case(self, test_case: TestCase, is_buggy: bool) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
         actions = test_case.actions
         test_name = test_case.name
@@ -124,7 +124,12 @@ class WebTestPilotTestRunner(BaseTestRunner):
                             expectation=action.expectedResult,
                         )
 
-                        WebTestPilot.run(session, [step], assertion=False)
+                        if is_buggy:
+                            print("Running with assertion")
+                            WebTestPilot.run(session, [step], assertion=True)
+                        else:
+                            print("Running without assertion")
+                            WebTestPilot.run(session, [step], assertion=False)
 
                         result.traces = session.trace
                         result.current_step += 1

@@ -48,7 +48,7 @@ logging:
     file:
       class: logging.FileHandler
       formatter: default
-      filename: "webtestpilot-qwen.log"
+      filename: "webtestpilot-qwen-restyle.log"
 
   root:
     level: INFO
