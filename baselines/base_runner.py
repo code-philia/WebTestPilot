@@ -393,7 +393,7 @@ class BaseTestRunner(ABC):
                 return {}
         return {}
 
-    def wait_for_application(self, application: ApplicationEnum, max_wait: int = 180):
+    def wait_for_application(self, application: ApplicationEnum, max_wait: int = 240):
         """Wait for application to be accessible via HTTP."""
 
         READY_CHECKS: dict[str, Callable[[str], bool]] = {

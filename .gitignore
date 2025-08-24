@@ -32,5 +32,7 @@ checkpoint_*
 
 experiments/**/*.html
 experiments/**/*.png
-experiments/**/*.json
+# experiments/**/*.json
 experiments/**/*.tmux
+
+archive/
