@@ -88,4 +88,15 @@ else
     echo "ℹ️  No patch provided. Skipping bug injection."
 fi
 
+# Create buyer user for PrestaShop at the beginning
+if [[ "$app_name" == "prestashop" ]]; then
+    until curl -s http://localhost:8083 > /dev/null 2>&1; do
+        echo "Waiting for PrestaShop to ready..."
+        sleep 10
+    done
+    
+    echo "PrestaShop is ready, creating buyer user..."
+    docker exec "$container" php /var/www/html/tools/create_user.php
+fi
+
 echo "✅ Done."

@@ -41,7 +41,7 @@ case "$app_name" in
         volumes_to_delete="invoiceninja_app_cache invoiceninja_app_public invoiceninja_app_storage invoiceninja_mysql invoiceninja_redis"
         ;;
     "prestashop")
-        volumes_to_delete=""
+        volumes_to_delete="prestashop_db"
         ;;
     *)
         volumes_to_delete=""
