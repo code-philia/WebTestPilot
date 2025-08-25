@@ -67,6 +67,15 @@ if [[ -n "$patch_name" ]]; then
         echo "✅ Indico is ready, continuing with patch"
     fi
 
+    if [[ "$app_name" == "prestashop" ]]; then
+        echo "⏳ Waiting for Prestashop setup to complete..."
+        until curl -s http://localhost:8083 | grep -q "PrestaShop"; do
+            echo "   ... Prestashop not ready yet, retrying in 5s"
+            sleep 5
+        done
+        echo "✅ Prestashop is ready, continuing with patch"
+    fi
+
     echo "📦 Injecting patch: $patch_name into $app_name"
     docker cp "$patch_path" "$container:/tmp/change.patch"
     docker exec -w "$workdir" "$container" patch "$patch_level" -i /tmp/change.patch --fuzz=10 --verbose
