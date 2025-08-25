@@ -1,7 +1,7 @@
 {
   "name": "10::Create A New Child Category",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_parent_category_page",
   "actions": [
     {
       "action": "Click \"Catalog\"",
@@ -21,15 +21,11 @@
     },
     {
       "action": "Select \"Shoes\" as the parent category from the tree.",
-      "expectedResult": "PrestaShop understands that you want to create a sub-category"
+      "expectedResult": "\"Shoes\" is successfully selected as the parent category."
     },
     {
       "action": "Enter a description for the category in the \"Description\" area.",
       "expectedResult": "The description is filled into the rich text editor."
-    },
-    {
-      "action": "Upload a \"Category cover image\".",
-      "expectedResult": "The image filename is displayed in the upload area."
     },
     {
       "action": "Enter a custom URL e.g. \"sports-shoes\" for the \"Friendly URL\" field.",

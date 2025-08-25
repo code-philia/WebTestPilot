@@ -1,11 +1,15 @@
 {
   "name": "03::Delete An Attribute",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_page",
+  "setup_function": "created_attribute_page",
   "actions": [
     {
-      "action": "Navigate to the \"Catalog\" -> \"Attributes & Features\" page.",
-      "expectedResult": "The \"Attributes & Features\" page is displayed correctly."
+      "action": "Click \"Catalog\" menu item",
+      "expectedResult": "Catalog submenu items expand"
+    },
+    {
+      "action": "Click \"Attributes & Features\" submenu item",
+      "expectedResult": "The Attributes & Features page is displayed"
     },
     {
       "action": "Find the row for the attribute named \"Weight\" and click the \"more actions\" button on the right side of that row.",

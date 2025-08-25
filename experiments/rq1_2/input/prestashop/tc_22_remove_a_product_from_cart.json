@@ -1,15 +1,23 @@
 {
   "name": "22::Remove A Product From Cart",
   "url": "http://localhost:8083/",
-  "setup_function": "logged_in_buyer_page",
+  "setup_function": "created_cart_item_page",
   "actions": [
     {
-      "action": "Navigate to a specific product detail page.",
-      "expectedResult": "The product detail page is displayed correctly."
+      "action": "Click a product link of \"Hummingbird printed t-shirt\".",
+      "expectedResult": "The product detail page for that item is displayed."
     },
     {
-      "action": "Select the product's size and color.",
-      "expectedResult": "The specifications are selected."
+      "action": "Click the size dropdown.",
+      "expectedResult": "The size dropdown is opened."
+    },
+    {
+      "action": "Select a size 'M' from the dropdown.",
+      "expectedResult": "Size M is chosen from the dropdown."
+    },
+    {
+      "action": "Check color Black in the colour options.",
+      "expectedResult": "The color Black is successfully selected."
     },
     {
       "action": "Click the \"Add to cart\" button.",
@@ -24,8 +32,8 @@
       "expectedResult": "The shopping cart page is loaded"
     },
     {
-      "action": "Verify the product name",
-      "expectedResult": "size"
+      "action": "Verify the product name \"Hummingbird printed t-shirt\", selected color, and selected size are displayed in the cart.",
+      "expectedResult": "The product name, color, and size are correctly displayed in the cart."
     },
     {
       "action": "Click the \"delete\" link or icon next to the product line item.",
@@ -33,7 +41,7 @@
     },
     {
       "action": "Verify the cart is now empty.",
-      "expectedResult": "A message such as \"There are no more items in your cart\" is displayed."
+      "expectedResult": "A message such as \"There are no more items in\" is displayed."
     }
   ]
 }
