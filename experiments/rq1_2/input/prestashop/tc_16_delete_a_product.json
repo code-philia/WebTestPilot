@@ -4,19 +4,15 @@
   "setup_function": "created_product_for_delete_page",
   "actions": [
     {
-      "action": "Click the 'Catalog' menu",
-      "expectedResult": "The Catalog submenu expands."
+      "action": "Enter 'bird' into the product name filter",
+      "expectedResult": "The product name filter is populated."
     },
     {
-      "action": "Click the 'Products' submenu",
-      "expectedResult": "The product list page is displayed correctly."
-    },
-    {
-      "action": "Enter 'bird' into the filter and click Search",
+      "action": "Click the 'Search' button in product list",
       "expectedResult": "The list refreshes to show only products with a matching name."
     },
     {
-      "action": "Find the data row for the specific product",
+      "action": "Click the data row for 'bird'",
       "expectedResult": "The target row is correctly located."
     },
     {

@@ -28,20 +28,28 @@
       "expectedResult": "The product name is successfully entered."
     },
     {
-      "action": "Upload 'cat notebook.jpg' as the product image",
-      "expectedResult": "The image is uploaded and a thumbnail is displayed."
+      "action": "Enter the product description as 'Description'",
+      "expectedResult": "The product's description is filled in."
     },
     {
-      "action": "Enter the summary and description information for the product",
-      "expectedResult": "The product's summary and full description are filled in."
+      "action": "Enter the product short description as 'Short description'",
+      "expectedResult": "The product's short description is filled in."
     },
     {
       "action": "Click the 'Add categories' button",
       "expectedResult": "The category selection modal appears."
     },
     {
-      "action": "Check one or more category checkboxes, e.g., 'Stationery'",
+      "action": "In the 'Search categories' box, type 'Stationery'",
       "expectedResult": "The checkboxes are successfully checked."
+    },
+    {
+      "action": "Click the 'Stationery' dropdown option to select category",
+      "expectedResult": "'Stationery' is successfully selected as category."
+    },
+    {
+      "action": "Check the box for accessories",
+      "expectedResult": "'Accessories' check box is checked."
     },
     {
       "action": "Click the 'Apply' button",
@@ -64,12 +72,40 @@
       "expectedResult": "A new row for adding a feature appears."
     },
     {
-      "action": "Select the feature 'Composition' from the 'Choose a feature' dropdown",
+      "action": "Click the 'Choose a feature' dropdown",
+      "expectedResult": "The feature dropdown with options show up."
+    },
+    {
+      "action": "Select the feature 'Composition' from the dropdown",
       "expectedResult": "The feature 'Composition' is selected."
     },
     {
-      "action": "Select the value 'Recycled cardboard' from the 'Choose a value' dropdown",
+      "action": "Click the 'Choose a value' dropdown",
+      "expectedResult": "The feature value dropdown with options show up."
+    },
+    {
+      "action": "Select the value 'Recycled cardboard' from the dropdown",
       "expectedResult": "The feature value 'Recycled cardboard' is selected."
+    },
+    {
+      "action": "Click the 'Add a feature' button",
+      "expectedResult": "A new row for adding a feature appears."
+    },
+    {
+      "action": "Click the 'Choose a feature' dropdown",
+      "expectedResult": "The feature dropdown with options show up."
+    },
+    {
+      "action": "Select the feature 'Property' from the dropdown",
+      "expectedResult": "The feature 'Property' is selected."
+    },
+    {
+      "action": "Click the 'Choose a value' dropdown",
+      "expectedResult": "The feature value dropdown with options show up."
+    },
+    {
+      "action": "Select the value 'pages' from the dropdown",
+      "expectedResult": "The feature value 'pages' is selected."
     },
     {
       "action": "Click the 'Stocks' tab",
@@ -84,8 +120,12 @@
       "expectedResult": "The view switches to the 'Pricing' tab."
     },
     {
-      "action": "Enter the retail price '12.90' and wholesale price '5.49'",
-      "expectedResult": "The price information is filled in successfully."
+      "action": "Enter the retail price '12.900000'",
+      "expectedResult": "The retail price information is filled in successfully."
+    },
+    {
+      "action": "Enter the wholesale price '5.490000'",
+      "expectedResult": "The wholesale price information is filled in successfully."
     },
     {
       "action": "Click the 'Shipping' tab",
@@ -94,6 +134,26 @@
     {
       "action": "Enter '0.3' into the shipping weight field",
       "expectedResult": "The shipping weight is set successfully."
+    },
+    {
+      "action": "Click the 'SEO' tab",
+      "expectedResult": "The view switches to the 'SEO' tab."
+    },
+    {
+      "action": "Enter 'cat-notebook-vector-graphics' into the SEO link rewrite field",
+      "expectedResult": "The SEO link rewrite is set successfully."
+    },
+    {
+      "action": "Choose 'default' option for 'Redirection when offline' field",
+      "expectedResult": "The 'Redirection when offline' field is set to 'default'."
+    },
+    {
+      "action": "Click the 'Options' tab",
+      "expectedResult": "The view switches to the 'Options' tab."
+    },
+    {
+      "action": "Check the checkboxes for 'Accessories supplier'",
+      "expectedResult": "The 'Accessories supplier' checkboxes are checked."
     },
     {
       "action": "Click the 'Save' button",

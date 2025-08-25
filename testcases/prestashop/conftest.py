@@ -217,11 +217,11 @@ class PrestaShopTestData:
 
     @property
     def standard_product_description(self) -> str:
-        return "120 sheets notebook with hard cover made of recycled cardboard. 16x22cm"
+        return "Description"
 
     @property
     def standard_product_short_description(self) -> str:
-        return "The Mountain fox notebook is the best option to write down your most ingenious ideas. At work, at home or when traveling, its endearing design and manufacturing quality will make you feel like writing! 90 gsm paper / double spiral binding."
+        return "Short description"
 
     @property
     def standard_product_category_search(self) -> str:
@@ -295,7 +295,7 @@ class PrestaShopTestData:
 
     @property
     def supplier_state(self) -> str:
-        return "Tokyo"
+        return "Aichi"
 
     @property
     def supplier_logo_active(self) -> str:
@@ -328,7 +328,7 @@ class PrestaShopTestData:
 
     @property
     def buyer_review(self) -> str:
-        return "very confortable!"
+        return "very comfortable!"
 
     @property
     def buyer_main_category(self) -> str:
@@ -715,9 +715,6 @@ def create_virtual_product(page: Page, test_data: PrestaShopTestData) -> Page:
     page.get_by_role("textbox", name="product_header_name_1 input").fill(
         test_data.virtual_product_name
     )
-    page.locator("input.dz-hidden-input").set_input_files(
-        test_data.virtual_product_image_file
-    )
     page.locator("#product_description_description_1_ifr").content_frame.locator(
         "#tinymce"
     ).fill(test_data.virtual_product_description)
@@ -824,6 +821,8 @@ def create_supplier(page: Page, test_data: PrestaShopTestData) -> Page:
     page.get_by_role("option", name=test_data.supplier_country).click()
 
     # Handle dynamic state selection
+    # page.get_by_role("textbox", name="Aichi").click()
+    # can't use this, because the value of state is different each time the page is opened
     state_container = page.locator(".js-supplier-state")
     state_container.get_by_role("combobox").click()
     page.get_by_role("option", name=test_data.supplier_state).click()

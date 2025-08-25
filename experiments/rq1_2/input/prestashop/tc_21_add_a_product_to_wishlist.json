@@ -4,7 +4,7 @@
   "setup_function": "logged_in_buyer_page",
   "actions": [
     {
-      "action": "Enter the product name e.g. \"Hummingbird printed t-shirt\" into the \"Search\" input box.",
+      "action": "Enter the product name \"Hummingbird printed t-shirt\" into the \"Search\" input box.",
       "expectedResult": "The product name is successfully entered in the search box."
     },
     {

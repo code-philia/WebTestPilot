@@ -24,16 +24,32 @@
       "expectedResult": "The name of the supplier is entered successfully."
     },
     {
-      "action": "Enter Phone '090-1234-5678', Address 'Nishi-Shinjuku 1-25-1', and City 'Tokyo'",
-      "expectedResult": "The contact information is filled into the respective fields."
+      "action": "Enter Phone '090-1234-5678'",
+      "expectedResult": "The phone number is entered successfully."
+    },
+    {
+      "action": "Enter Address 'Nishi-Shinjuku 1-25-1'",
+      "expectedResult": "The address is entered successfully."
+    },
+    {
+      "action": "Enter City 'Tokyo'",
+      "expectedResult": "The city is entered successfully."
+    },
+    {
+      "action": "Click the country dropdown",
+      "expectedResult": "The country dropdown is opened."
     },
     {
       "action": "Select the Country 'Japan'",
-      "expectedResult": "The country is selected."
+      "expectedResult": "'Japan' is selected."
     },
     {
-      "action": "Select the State 'Tokyo' from the dynamically loaded dropdown",
-      "expectedResult": "The state is selected correctly based on the chosen country."
+      "action": "Click the state dropdown",
+      "expectedResult": "The state dropdown shows up."
+    },
+    {
+      "action": "Select the state 'Aichi'",
+      "expectedResult": "'Aichi' state is selected."
     },
     {
       "action": "Check the 'Enabled' radio button for 'Yes'",

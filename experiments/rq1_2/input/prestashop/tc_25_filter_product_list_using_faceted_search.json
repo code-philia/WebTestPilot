@@ -4,11 +4,11 @@
   "setup_function": "logged_in_buyer_page",
   "actions": [
     {
-      "action": "Navigate to a main category page e.g. \"Clothes\".",
+      "action": "Navigate to a main category page \"Clothes\".",
       "expectedResult": "The \"Clothes\" category page loads."
     },
     {
-      "action": "Click on a sub-category e.g. \"Men\".",
+      "action": "Click on a sub-category \"Men\".",
       "expectedResult": "The page reloads to show products in the \"Men\" sub-category."
     },
     {

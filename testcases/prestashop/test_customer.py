@@ -1,5 +1,5 @@
 from playwright.sync_api import Page
-from prestashop.conftest import PrestaShopTestData
+from prestashop.conftest import PrestaShopTestData, create_customer
 from tracing_api import traced_expect as expect
 
 # 2 test cases
@@ -7,28 +7,7 @@ from tracing_api import traced_expect as expect
 
 def test_create_customer(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
     page = logged_in_page
-    page.get_by_role("link", name="account_circle Customers").click()
-    page.get_by_role("link", name="Customers", exact=True).click()
-    page.get_by_role("link", name="add_circle_outline Add new").click()
-
-    page.locator("label").filter(has_text=test_data.customer_social_title).locator(
-        "i"
-    ).click()
-    page.get_by_role("textbox", name="customer_first_name input").fill(
-        test_data.customer_first_name
-    )
-    page.get_by_role("textbox", name="customer_last_name input").fill(
-        test_data.customer_last_name
-    )
-    page.get_by_role("textbox", name="* Email").fill(test_data.customer_email)
-    page.get_by_role("textbox", name="Password").fill(test_data.customer_password)
-    page.locator("#customer_birthday_year").select_option(test_data.customer_birth_year)
-    page.locator("#customer_birthday_month").select_option(
-        test_data.customer_birth_month
-    )
-    page.locator("#customer_birthday_day").select_option(test_data.customer_birth_day)
-
-    page.get_by_role("button", name="Save").click()
+    page = create_customer(page, test_data)
     expect(page.get_by_text("Successful creation")).to_be_visible()
 
 

@@ -81,7 +81,6 @@ def test_dislike_product(
     product_article.locator(".wishlist-button-add").click()
     page.get_by_role("listitem").filter(has_text="My wishlist").click()
 
-    # page.get_by_role("button", name="favorite", exact=True).click()
     product_article.locator(".wishlist-button-add").click()
     expect(page.get_by_text("Product successfully removed")).to_be_visible()
 
@@ -91,8 +90,6 @@ def test_write_review(
 ) -> None:
     page = logged_in_buyer_page
     page.get_by_role("link", name=test_data.buyer_product_name).nth(1).click()
-    page.get_by_label("Size").select_option(test_data.buyer_size_cnt)
-    page.get_by_role("radio", name=test_data.buyer_color).check()
     page.get_by_role("button", name="edit Be the first to write").click()
     page.locator(f".star-content > div:nth-child({test_data.buyer_star})").first.click()
     page.get_by_role("textbox", name="Title*").fill(test_data.buyer_title)

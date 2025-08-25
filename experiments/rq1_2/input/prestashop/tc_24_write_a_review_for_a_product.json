@@ -8,28 +8,24 @@
       "expectedResult": "The product detail page is displayed correctly."
     },
     {
-      "action": "Select the product's size and color.",
-      "expectedResult": "The specifications are selected."
-    },
-    {
       "action": "Click the \"Be the first to write your review\" link.",
       "expectedResult": "A form for writing a review appears."
     },
     {
-      "action": "Select a star rating.",
+      "action": "Select a 5 star rating.",
       "expectedResult": "The corresponding stars are highlighted."
     },
     {
-      "action": "Enter a review title in the \"Title\" field.",
+      "action": "Enter a review title 'Good thing' in the \"Title\" field.",
       "expectedResult": "The title is entered successfully."
     },
     {
-      "action": "Enter the review content in the \"Review\" field.",
+      "action": "Enter the review content 'very comfortable!' in the \"Review\" field.",
       "expectedResult": "The review content is entered successfully."
     },
     {
       "action": "Click the \"Send\" button.",
-      "expectedResult": "A success message \"Your comment has been submitted\" is displayed."
+      "expectedResult": "A success message \"Your comment has been\" is displayed."
     }
   ]
 }
