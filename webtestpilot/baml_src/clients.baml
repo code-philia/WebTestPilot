@@ -38,7 +38,7 @@ client<llm> Claude {
   }
 }
 
-client<llm> Qwen {
+client<llm> Qwen72b {
   provider "openai-generic"
   options {
     base_url "http://localhost:8000/v1"
@@ -46,27 +46,27 @@ client<llm> Qwen {
   }
 }
 
-client<llm> InternVL {
+client<llm> Qwen32b {
   provider "openai-generic"
   options {
     base_url "http://localhost:8000/v1"
-    model "./InternVL3-78B.Q4_K_M.gguf"
+    model "Qwen/Qwen2.5-VL-32B-Instruct-AWQ"
   }
 }
 
-client<llm> Gemma {
+client<llm> Qwen7b {
   provider "openai-generic"
   options {
     base_url "http://localhost:8000/v1"
-    model "gaunernst/gemma-3-27b-it-int4-awq"
+    model "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
   }
 }
 
-client<llm> GLM {
+client<llm> Qwen3b {
   provider "openai-generic"
   options {
     base_url "http://localhost:8000/v1"
-    model "dengcao/GLM-4.1V-9B-Thinking-AWQ"
+    model "Qwen/Qwen2.5-VL-3B-Instruct-AWQ"
   }
 }
 

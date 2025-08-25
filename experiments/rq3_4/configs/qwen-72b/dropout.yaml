@@ -3,7 +3,7 @@
 
 parser:
   # Semantic parsing of text descriptions into (condition, action, expectation) test steps
-  llm_client: "Gemma"
+  llm_client: "Qwen72b"
 
   # Automatically infer <unknown> placeholders in parsed test steps
   # If false, throw exception and inform user
@@ -12,19 +12,19 @@ parser:
 executor:
   llm_clients:
     # Generates pre- and post-conditions using the assertion API
-    assertion_generation: "Gemma"
+    assertion_generation: "Qwen72b"
 
     # Executes assertion API methods (e.g., extract() from state and element)
-    assertion_api: "Gemma"
+    assertion_api: "Qwen72b"
 
     # Proposes actions given a natural language action description
-    action_proposer: "Gemma"
+    action_proposer: "Qwen72b"
 
     # Locates UI elements (x, y) from a UI description
     ui_locator: "UGround"
 
     # For tracking same logical pages across states
-    page_reidentification: "Gemma"
+    page_reidentification: "Qwen72b"
 
   # When a postcondition assertion fails, how many times to retry assertion generation before reporting as a bug
   max_retries: 1
@@ -48,7 +48,7 @@ logging:
     file:
       class: logging.FileHandler
       formatter: default
-      filename: "webtestpilot-gemma-dropout.log"
+      filename: "webtestpilot-qwen-72b-dropout.log"
 
   root:
     level: INFO
