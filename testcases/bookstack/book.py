@@ -1,10 +1,22 @@
+from bookstack.conftest import BOOKSTACK_HOST, BookStackTestData, create_book
 from playwright.sync_api import Page
 from tracing_api import traced_expect as expect
 
-from bookstack.conftest import BOOKSTACK_HOST, BookStackTestData
+from testcases.tracing.core.tracer import TraceEntry
 
 
-def test_create_book(created_book_page: Page, test_data: BookStackTestData) -> None:
+def test_create_book(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    if not hasattr(logged_in_page, "_tracer"):
+        logged_in_page._tracer.traces.append(TraceEntry("START", "START", "START"))
+
+    created_book_page = create_book(
+        logged_in_page, test_data.book_name, test_data.book_description
+    )
+    expect(
+        created_book_page.get_by_role("alert").filter(
+            has_text="Book successfully created"
+        )
+    ).to_be_visible(timeout=1000)
     expect(
         created_book_page.get_by_role("heading", name=test_data.book_name)
     ).to_be_visible()
