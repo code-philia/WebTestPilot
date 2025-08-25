@@ -351,35 +351,6 @@ class PrestaShopTestData:
         return "M"
 
 
-# Load test data from JSON files (kept for backward compatibility during migration)
-with open(
-    Path(__file__).parent / "test_data" / "attribute-feature_data.json", "r"
-) as f:
-    attribute_feature_data = json.load(f)
-
-with open(Path(__file__).parent / "test_data" / "brand_data.json", "r") as f:
-    brand_data = json.load(f)
-
-with open(Path(__file__).parent / "test_data" / "buyer_data.json", "r") as f:
-    buyer_data = json.load(f)
-
-with open(Path(__file__).parent / "test_data" / "category_data.json", "r") as f:
-    category_data = json.load(f)
-
-with open(Path(__file__).parent / "test_data" / "customer_data.json", "r") as f:
-    customer_data = json.load(f)
-
-with open(
-    Path(__file__).parent / "test_data" / "product_data.json", "r", encoding="utf-8"
-) as f:
-    product_data = json.load(f)
-
-with open(
-    Path(__file__).parent / "test_data" / "supplier_data.json", "r", encoding="utf-8"
-) as f:
-    supplier_data = json.load(f)
-
-
 @pytest.fixture
 def test_data() -> PrestaShopTestData:
     """Provides fresh, unique test data for each test"""
