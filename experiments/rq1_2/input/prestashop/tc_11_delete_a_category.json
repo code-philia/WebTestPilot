@@ -4,17 +4,17 @@
   "setup_function": "created_parent_category_page",
   "actions": [
     {
-      "action": "Find the row for the category named \"Shoes\" and click it to go to its detail/edit page.",
-      "expectedResult": "The edit page for the \"Shoes\" category is displayed."
+      "action": "Find the row for the category named \"Shoes\" and click the more actions (three dot) button",
+      "expectedResult": "Dropdown shows up with Delete option."
     },
     {
-      "action": "Click the \"Delete\" link in the top-right corner.",
+      "action": "Click the \"Delete\" option.",
       "expectedResult": "A confirmation modal with deletion options appears."
     },
     {
-      "action": "Select a deletion mode e.g. \"I want to delete this category only...\".",
+      "action": "Select a deletion mode e.g. \"If they have no other category, I want to associate them with the parent category and turn them offline. (Recommended)\".",
       "expectedResult": "The corresponding radio button is selected."
-    },================
+    },
     {
       "action": "Click the \"Delete\" button to confirm.",
       "expectedResult": "A \"Successful deletion\" message is displayed"

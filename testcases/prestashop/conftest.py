@@ -61,7 +61,7 @@ class PrestaShopTestData:
 
     @property
     def brand_logo_file(self) -> str:
-        return "test_data/pictures/nike logo.jpg"
+        return "prestashop/test_data/pictures/nike logo.jpg"
 
     # Category properties
     @property
@@ -78,7 +78,7 @@ class PrestaShopTestData:
 
     @property
     def parent_category_image_file(self) -> str:
-        return "test_data/pictures/shoes.png"
+        return "prestashop/test_data/pictures/shoes.png"
 
     @property
     def parent_category_link_rewrite(self) -> str:
@@ -98,7 +98,7 @@ class PrestaShopTestData:
 
     @property
     def child_category_image_file(self) -> str:
-        return "test_data/pictures/sports shoes.jpg"
+        return "prestashop/test_data/pictures/sports shoes.jpg"
 
     @property
     def child_category_link_rewrite(self) -> str:
@@ -148,7 +148,7 @@ class PrestaShopTestData:
 
     @property
     def virtual_product_image_file(self) -> str:
-        return "test_data/pictures/bird.jpg"
+        return "prestashop/test_data/pictures/bird.jpg"
 
     @property
     def virtual_product_description(self) -> str:
@@ -213,7 +213,7 @@ class PrestaShopTestData:
 
     @property
     def standard_product_image_file(self) -> str:
-        return "test_data/pictures/cat notebook.jpg"
+        return "prestashop/test_data/pictures/cat notebook.jpg"
 
     @property
     def standard_product_description(self) -> str:
