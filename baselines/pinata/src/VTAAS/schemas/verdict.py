@@ -1,3 +1,4 @@
+import ast
 from enum import Enum
 from typing import Generic, TypeVar, override
 
@@ -40,15 +41,30 @@ class ActorResult(WorkerBaseResult):
 
 class AssertorResult(WorkerBaseResult):
     synthesis: str
+    step_index: int = -1
+
+    def to_dict(self) -> dict:
+        # Parse synthesis string to dict using library
+        synthesis_dict = ast.literal_eval(self.synthesis)
+
+        return {
+            "query": self.query,
+            "status": self.status,
+            "explaination": self.explaination,
+            "synthesis": synthesis_dict,
+            "step_index": self.step_index,
+        }
 
 
 class TestStepVerdict(BaseResult):
     history: list[str | tuple[str, list[bytes]]]
+    assertor_results: list[AssertorResult] = []
 
 
 class TestCaseVerdict(BaseResult):
     step_index: int = -1  # type: ignore
     traces: list[dict | None] = []
+    assertor_results: list[AssertorResult] = []
 
 
 WorkerResult = ActorResult | AssertorResult

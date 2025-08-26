@@ -16,6 +16,7 @@ from VTAAS.schemas.llm import (
 from ..data.testcase import TestCase
 from ..schemas.verdict import (
     ActorResult,
+    AssertorResult,
     BaseResult,
     TestCaseVerdict,
     Status,
@@ -104,6 +105,7 @@ class Orchestrator:
         self.worker_counter: dict[str, int] = {"actor": 0, "assertor": 0}
         self.conversation: list[Message] = []
         self.traces: list[dict] = []
+        self.assertor_results: list[AssertorResult] = []
 
     async def process_testcase(
         self, test_case: TestCase, max_tries: int = 4
@@ -111,6 +113,7 @@ class Orchestrator:
         """Manages the main execution loop for the given Test Case."""
         self.logger.info(f"Processing test case {test_case.name}")
         self.traces = []
+        self.assertor_results = []
         exec_context = TestExecutionContext(
             test_case=test_case,
             current_step=test_case.get_step(1),
@@ -135,6 +138,7 @@ class Orchestrator:
                 exec_context.current_step = test_step
                 exec_context.step_index = idx + 1
                 verdict = await self.process_step(exec_context, max_tries)
+                self.assertor_results.extend(verdict.assertor_results)
                 if verdict.status != Status.PASS:
                     self.logger.info(
                         (
@@ -147,6 +151,7 @@ class Orchestrator:
                         step_index=exec_context.step_index,
                         explaination=None,
                         traces=self.traces,
+                        assertor_results=self.assertor_results,
                     )
                 step_str = (
                     f"{exec_context.step_index}. {test_step[0]} -> {test_step[1]}"
@@ -160,7 +165,10 @@ class Orchestrator:
                         Orchestrator.synthesis_str(step_synthesis)
                     )
             return TestCaseVerdict(
-                status=Status.PASS, explaination=None, traces=self.traces
+                status=Status.PASS,
+                explaination=None,
+                traces=self.traces,
+                assertor_results=self.assertor_results,
             )
         except Exception as e:
             self.logger.warning(f"got this error: {str(e)}")
@@ -169,6 +177,7 @@ class Orchestrator:
                 step_index=exec_context.step_index,
                 explaination=f"Got error: {str(e)}",
                 traces=self.traces,
+                assertor_results=self.assertor_results,
             )
         finally:
             await self.browser.close()
@@ -181,6 +190,7 @@ class Orchestrator:
         viewport_info: str = await self.browser.get_viewport_info()
         results: list[WorkerResult] = []
         step_history: list[str | tuple[str, list[bytes]]] = []
+        assertion_results: list[AssertorResult] = []
         self.logger.info(
             (
                 f"Planning for test step "
@@ -196,20 +206,39 @@ class Orchestrator:
                 f"{exec_context.current_step[0]} => {exec_context.current_step[1]}"
             )
         )
-        for i in range(max_tries + 1):
+        for i in range(max_tries):
             self.logger.info(
                 f"step #{exec_context.step_index}: processing iteration {i + 1}"
             )
             results = await self.execute_step(exec_context)
-            success = not any(verdict.status != Status.PASS for verdict in results)
+            success = not any(
+                (verdict.status != Status.PASS and isinstance(verdict, ActorResult))
+                for verdict in results
+            )
+            self.logger.info(f"step #{exec_context.step_index}: Success {success}")
+            self.logger.info(
+                f"step #{exec_context.step_index}: Results {[[verdict.status, type(verdict)] for verdict in results]}"
+            )
             if not success and i >= max_tries:
                 break
+
             workers_result = self._merge_worker_results(success, results)
+            for result in results:
+                if isinstance(result, AssertorResult):
+                    # To distinguish Assertors run multiple times.
+                    result.step_index = exec_context.step_index
+                    assertion_results.append(result)
+
             step_history.append(workers_result[0])
-            self.logger.debug(f"workers merged results:\n{workers_result[0]}")
+            self.logger.info(f"workers merged results:\n{workers_result[0]}")
             if sequence_type == SequenceType.full and success:
                 self.logger.info(f"Test step #{exec_context.step_index} PASSED")
-                return TestStepVerdict(status=Status.PASS, history=step_history)
+                return TestStepVerdict(
+                    status=Status.PASS,
+                    history=step_history,
+                    assertor_results=assertion_results,
+                )
+
             page_info = await self.browser.get_page_info()
             viewport_info = await self.browser.get_viewport_info()
             if success:
@@ -226,14 +255,20 @@ class Orchestrator:
                     self.logger.info(
                         f"No recovery solution found -> Test step #{exec_context.step_index} FAIL"
                     )
-                    return TestStepVerdict(status=Status.FAIL, history=step_history)
+                    return TestStepVerdict(
+                        status=Status.FAIL,
+                        history=step_history,
+                        assertor_results=assertion_results,
+                    )
                 else:
                     sequence_type = recovery
 
         self.logger.info(
             f"{max_tries} failed attempts at performing step #{exec_context.step_index} -> Test step FAIL"
         )
-        return TestStepVerdict(status=Status.FAIL, history=step_history)
+        return TestStepVerdict(
+            status=Status.FAIL, history=step_history, assertor_results=assertion_results
+        )
 
     async def plan_step_init(
         self,
@@ -444,7 +479,7 @@ class Orchestrator:
                     self.llm_provider,
                     self.start_time,
                     self.output_folder,
-                    max_rounds=1,
+                    max_rounds=4,
                     model_name=self.model_name,
                 )
                 self.workers.append(worker)

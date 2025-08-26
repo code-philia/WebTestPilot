@@ -15,6 +15,8 @@ from tqdm import tqdm
 from playwright.sync_api import Page, sync_playwright
 from playwright.sync_api._generated import Browser, BrowserContext, Playwright
 
+from baselines.pinata.src.VTAAS.schemas.verdict import AssertorResult
+
 PROJECT_DIR = Path(__file__).parent
 if str(PROJECT_DIR) not in sys.path:
     sys.path.append(str(PROJECT_DIR))
@@ -35,6 +37,7 @@ class TestResult:
     token_count: int = 0
     has_bug: bool = False
     bug_name: Optional[str] = None
+    assertor_results: list[AssertorResult] = field(default_factory=list)
 
     @property
     def correct_trace_percentage(self) -> float:
@@ -109,6 +112,9 @@ class TestResultDataset:
                     result.correct_trace_percentage
                 )
                 result_dict["runtime_per_step"] = result.runtime_per_step
+                result_dict["assertor_results"] = [
+                    x.to_dict() for x in result.assertor_results
+                ]
                 results_data.append(result_dict)
 
             # Add summary statistics
@@ -408,7 +414,9 @@ class BaseTestRunner(ABC):
 
         print(f"Waiting for {application} to be ready at {url}...")
         start_time = time.time()
-        check_func: Callable[[str], bool] = READY_CHECKS.get(application, lambda _: True)
+        check_func: Callable[[str], bool] = READY_CHECKS.get(
+            application, lambda _: True
+        )
 
         while time.time() - start_time < max_wait:
             try:
