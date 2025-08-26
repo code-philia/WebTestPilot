@@ -1,14 +1,17 @@
 import re
 
+from invoiceninja.conftest import InvoiceNinjaTestData, create_client
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
-from invoiceninja.conftest import InvoiceNinjaTestData
 
+def test_create_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
 
-def test_create_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
+    created_client_page = create_client(
+        logged_in_page, test_data.company_name, test_data
+    )
     expect(created_client_page.get_by_role("list")).to_contain_text(
         test_data.company_name
     )
@@ -27,6 +30,8 @@ def test_create_client(
 def test_read_client(
     created_client_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
+    insert_start_event_to_page(created_client_page)
+
     # Go back to listing page and check
     created_client_page.get_by_label("Breadcrumb").get_by_role(
         "link", name="Clients"
@@ -54,6 +59,8 @@ def test_read_client(
 def test_update_client(
     created_client_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
+    insert_start_event_to_page(created_client_page)
+
     created_client_page.get_by_role("button", name="Edit").click()
 
     created_client_page.locator("div").filter(
@@ -82,6 +89,8 @@ def test_update_client(
 def test_delete_client(
     created_client_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
+    insert_start_event_to_page(created_client_page)
+
     created_client_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
     ).get_by_role("button").nth(2).click()
@@ -97,6 +106,8 @@ def test_delete_client(
 def test_restore_client(
     created_client_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
+    insert_start_event_to_page(created_client_page)
+
     # Delete first
     created_client_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
@@ -120,6 +131,8 @@ def test_restore_client(
 def test_purge_client(
     created_client_page: Page, test_data: InvoiceNinjaTestData
 ) -> None:
+    insert_start_event_to_page(created_client_page)
+
     created_client_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
     ).get_by_role("button").nth(2).click()

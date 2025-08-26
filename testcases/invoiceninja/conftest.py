@@ -314,6 +314,12 @@ def setup_for_invoice_page(
 
     # Navigate
     logged_in_page.wait_for_timeout(1000)
+    logged_in_page = create_invoice(logged_in_page, test_data)
+
+    return logged_in_page
+
+
+def create_invoice(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
     logged_in_page.get_by_role("link", name="New Invoice").click()
 
@@ -372,7 +378,11 @@ def created_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 
 def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData):
     created_invoice_page = setup_data_for_create_payment(logged_in_page, test_data)
+    created_payment_page = create_payment(created_invoice_page, test_data)
+    return created_payment_page
 
+
+def create_payment(created_invoice_page: Page, test_data: InvoiceNinjaTestData):
     # Navigate
     created_invoice_page.get_by_role("link", name="Payments").click()
     created_invoice_page.wait_for_timeout(500)
@@ -433,9 +443,16 @@ def created_expense_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) 
 def setup_for_expense_page(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ) -> Page:
-    created_client_page = setup_data_for_expense_create(logged_in_page, test_data)
+    created_expense_page = setup_data_for_expense_create(logged_in_page, test_data)
+    created_expense_page.wait_for_timeout(500)
+    created_expense_page = create_expense(created_expense_page, test_data)
+    return created_expense_page
 
-    created_client_page.wait_for_timeout(500)
+
+def create_expense(
+    created_client_page: Page,
+    test_data: InvoiceNinjaTestData,
+) -> Page:
     created_client_page.get_by_role("link", name="Expenses").first.click()
     created_client_page.get_by_role("link", name="Enter Expense").click()
 
@@ -470,7 +487,6 @@ def setup_for_expense_page(
     expect(created_client_page.get_by_role("main")).to_contain_text("Logged")
 
     created_client_page.wait_for_timeout(1000)
-
     return created_client_page
 
 
@@ -496,6 +512,13 @@ def setup_for_credit_page(
     setup_data_for_credit_create(logged_in_page, test_data)
 
     logged_in_page.wait_for_timeout(500)
+
+    logged_in_page = create_credit(logged_in_page, test_data)
+
+    return logged_in_page
+
+
+def create_credit(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page.get_by_role("link", name="Credits", exact=True).click()
     logged_in_page.get_by_role("link", name="Enter Credit").click()
 
