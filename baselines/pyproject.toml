@@ -55,7 +55,7 @@ webtestpilot = [
     "zss>=1.2.0",
 ]
 
-lavague = ["lavague @ https://github.com/ABCbum/LaVague.git"]
+lavague = ["lavague @ git+https://github.com/gyataro/LaVague.git@mve"]
 
 naviqate = [
     "bs4>=0.0.2",
