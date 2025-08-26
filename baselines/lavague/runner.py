@@ -105,8 +105,9 @@ class LavagueTestRunner(BaseTestRunner):
                     action_engine = ActionEngine(playwright_driver)
                     world_model = WorldModel()
 
+                # 4 steps as it requires at least 2 steps to finish + to handle commands with multiple actions.
                 agent = WebAgent(
-                    world_model, action_engine, n_steps=1, token_counter=token_counter
+                    world_model, action_engine, n_steps=4, token_counter=token_counter
                 )
 
                 start_time = time.perf_counter()
