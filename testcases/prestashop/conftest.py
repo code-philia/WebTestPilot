@@ -465,9 +465,9 @@ def create_brand(page: Page, test_data: PrestaShopTestData) -> Page:
     page.locator("#manufacturer_description_1_ifr").content_frame.locator(
         "#tinymce"
     ).fill(test_data.brand_description)
-    page.get_by_role("button", name="Logo Choose file(s) Browse").set_input_files(
-        test_data.brand_logo_file
-    )
+    # page.get_by_role("button", name="Logo Choose file(s) Browse").set_input_files(
+    #     test_data.brand_logo_file
+    # )
 
     page.get_by_role("button", name="Save").click()
     return page
@@ -571,15 +571,15 @@ def create_parent_category(page: Page, test_data: PrestaShopTestData) -> Page:
     page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
         test_data.parent_category_description
     )
-    page.locator("#category_cover_image").set_input_files(
-        test_data.parent_category_image_file
-    )
-    page.locator("#category_thumbnail_image").set_input_files(
-        test_data.parent_category_image_file
-    )
-    page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-        test_data.parent_category_image_file
-    )
+    # page.locator("#category_cover_image").set_input_files(
+    #     test_data.parent_category_image_file
+    # )
+    # page.locator("#category_thumbnail_image").set_input_files(
+    #     test_data.parent_category_image_file
+    # )
+    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
+    #     test_data.parent_category_image_file
+    # )
     page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
         test_data.parent_category_link_rewrite
     )
@@ -602,15 +602,15 @@ def create_child_category(page: Page, test_data: PrestaShopTestData) -> Page:
     page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
         test_data.child_category_description
     )
-    page.locator("#category_cover_image").set_input_files(
-        test_data.child_category_image_file
-    )
-    page.locator("#category_thumbnail_image").set_input_files(
-        test_data.child_category_image_file
-    )
-    page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-        test_data.child_category_image_file
-    )
+    # page.locator("#category_cover_image").set_input_files(
+    #     test_data.child_category_image_file
+    # )
+    # page.locator("#category_thumbnail_image").set_input_files(
+    #     test_data.child_category_image_file
+    # )
+    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
+    #     test_data.child_category_image_file
+    # )
     page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
         test_data.child_category_link_rewrite
     )

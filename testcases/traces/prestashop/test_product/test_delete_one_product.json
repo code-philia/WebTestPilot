@@ -2,8 +2,8 @@
   "test": "test_delete_one_product",
   "app": "prestashop",
   "collection": "test_product",
-  "total_traces": 17,
-  "successful_traces": 17,
+  "total_traces": 46,
+  "successful_traces": 46,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -11,6 +11,7 @@
       "fill",
       "goto",
       "press",
+      "select_option",
       "to_be_visible"
     ],
     "successful_methods": [
@@ -18,118 +19,11 @@
       "fill",
       "goto",
       "press",
+      "select_option",
       "to_be_visible"
     ],
     "failed_methods": [],
     "missing_methods": []
   },
-  "traces": [
-    {
-      "url": "about:blank",
-      "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8083/webtestpilot/"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
-      "action": "fill",
-      "value": "admin@admin.com"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"passwd\"]",
-      "action": "fill",
-      "value": "admin12345"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"submit_login\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminLogin&token=5a3967cacc7902d93ae7a6ff3cf88898",
-      "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"sfToolbarHideButton-7c8dbb\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"tab-AdminDashboard\"]/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php?controller=AdminDashboard&token=d43748b3e8a8a13f0bd1e9de4d512713",
-      "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminCatalog\"]/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"subtab-AdminProducts\"]/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"product_name\"]",
-      "action": "fill",
-      "value": "bird"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"product_name\"]",
-      "action": "press",
-      "value": "Enter"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?product%5Bfilters%5D%5Bname%5D=bird&_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"product_grid_table\"]/thead/tr[2]/td[11]/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?product%5Bfilters%5D%5Bname%5D=bird&_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"product_grid_table\"]/tbody/tr[1]/td[11]/div/div/div/a[3]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?product%5Bfilters%5D%5Bname%5D=bird&_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "action",
-      "xpath": "//*[@id=\"product-grid-confirm-modal\"]/div/div/div[3]/button[2]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/webtestpilot/index.php/sell/catalog/products-v2/?_token=c8Q0BE4F7ANPxOMfDIe8c9TQl9K1OWgs5mMPBUNYsJE",
-      "action_type": "assertion",
-      "xpath": "//*[@id=\"main-div\"]/div/div[3]/div/p",
-      "action": "to_be_visible"
-    }
-  ]
+  "traces": []
 }

@@ -2,6 +2,7 @@ import re
 
 from playwright.sync_api import Page
 from prestashop.conftest import PrestaShopTestData
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 # 6 testcases
@@ -9,6 +10,8 @@ from tracing_api import traced_expect as expect
 
 def test_create_attribute(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
     page = logged_in_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Attributes & Features").click()
     page.get_by_role("link", name="Add new attribute").click()
@@ -22,6 +25,8 @@ def test_create_attribute_value(
     created_attribute_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = created_attribute_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name="Add new value").click()
     # use the name of the attribute to select the option
     page.locator("#id_attribute_group").select_option(label=test_data.attribute_name)
@@ -34,6 +39,8 @@ def test_delete_attribute(
     created_attribute_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = created_attribute_page
+    insert_start_event_to_page(page)
+
     # page.get_by_role("row", name="Weight 1  5  View ").get_by_role("button").click()
     # Find the row that contains the specific attribute name, then find the button within that row
     page.get_by_role("row", name=re.compile(test_data.attribute_name)).get_by_role(
@@ -46,6 +53,8 @@ def test_delete_attribute(
 
 def test_create_feature(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
     page = logged_in_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Attributes & Features").click()
     page.get_by_role("link", name="Features", exact=True).click()
@@ -59,6 +68,8 @@ def test_create_feature_value(
     created_feature_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = created_feature_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name=" Add new feature value").click()
     # use the name of the feature to select the option
     page.locator("#id_feature").select_option(label=test_data.feature_name)
@@ -71,6 +82,8 @@ def test_delete_feature(
     created_feature_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = created_feature_page
+    insert_start_event_to_page(page)
+
     # page.get_by_role("row", name="Season 1  3  View ").get_by_role("button").click()
     page.get_by_role("row", name=re.compile(test_data.feature_name)).get_by_role(
         "button"
