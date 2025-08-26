@@ -1,0 +1,2810 @@
+{
+    "summary": {
+        "total_runs": 55,
+        "success_rate": 0.5636363636363636,
+        "correct_trace_percentage": 0.627895387440842,
+        "normal_tests": 28,
+        "buggy_tests": 27,
+        "bug_detection_rate": 0.8888888888888888
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": true,
+            "current_step": 8,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[2]/form[1]/div[1]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 16.011911236913875,
+            "token_count": 44783,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.0014889046142343
+        },
+        {
+            "test_name": "02::Book Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 15,
+            "traces": [],
+            "error_message": "Error at step 1: Pydantic models should inherit from BaseModel, BaseModel cannot be instantiated directly\n\nFor further information visit https://errors.pydantic.dev/2.11/u/base-model-instantiated",
+            "runtime": 13.37446453096345,
+            "token_count": 23737,
+            "has_bug": true,
+            "bug_name": "book-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 13.37446453096345
+        },
+        {
+            "test_name": "02::Book Create",
+            "success": true,
+            "current_step": 15,
+            "total_step": 15,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[4]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/h1[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[6]/div[1]/div[2]/div[3]/div[2]/button[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 46.93342399201356,
+            "token_count": 84819,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.128894932800904
+        },
+        {
+            "test_name": "03::Book Read - Bug",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[2]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 21.60493345488794,
+            "token_count": 45897,
+            "has_bug": true,
+            "bug_name": "book-read-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 4.3209866909775885
+        },
+        {
+            "test_name": "03::Book Read",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 15.437561355996877,
+            "token_count": 30814,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.087512271199375
+        },
+        {
+            "test_name": "04::Book Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [],
+            "error_message": "Error at step 1: 1 validation error for BookDetails\ntags\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 4.296598945045844,
+            "token_count": 10650,
+            "has_bug": true,
+            "bug_name": "book-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 4.296598945045844
+        },
+        {
+            "test_name": "04::Book Update",
+            "success": true,
+            "current_step": 9,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/p[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 27.16080726799555,
+            "token_count": 46192,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.017867474221728
+        },
+        {
+            "test_name": "05::Book Delete - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/ul[1]/li[3]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 20.191140240058303,
+            "token_count": 37179,
+            "has_bug": true,
+            "bug_name": "book-delete-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.730380080019434
+        },
+        {
+            "test_name": "05::Book Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 7.074234243948013,
+            "token_count": 17782,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.358078081316004
+        },
+        {
+            "test_name": "06::Chapter Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [],
+            "error_message": "Error at step 1: name 'Toolbar' is not defined",
+            "runtime": 6.2295916099101305,
+            "token_count": 11079,
+            "has_bug": true,
+            "bug_name": "chapter-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 6.2295916099101305
+        },
+        {
+            "test_name": "06::Chapter Create",
+            "success": true,
+            "current_step": 12,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[3]/div[2]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 47.947484139120206,
+            "token_count": 65441,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.995623678260017
+        },
+        {
+            "test_name": "07::Chapter Read - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: type object 'str' has no attribute 'model_fields'",
+            "runtime": 9.580644472967833,
+            "token_count": 23038,
+            "has_bug": true,
+            "bug_name": "chapter-read-1.patch",
+            "correct_trace_percentage": 0.16666666666666666,
+            "runtime_per_step": 4.790322236483917
+        },
+        {
+            "test_name": "07::Chapter Read",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 14.04233073303476,
+            "token_count": 32618,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.3403884555057934
+        },
+        {
+            "test_name": "08::Chapter Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [],
+            "error_message": "Error at step 1: 1 validation error for ChapterDetails\npages\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 5.823170979041606,
+            "token_count": 12364,
+            "has_bug": true,
+            "bug_name": "chapter-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 5.823170979041606
+        },
+        {
+            "test_name": "08::Chapter Update",
+            "success": true,
+            "current_step": 9,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 22.124540187884122,
+            "token_count": 50175,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.458282243098236
+        },
+        {
+            "test_name": "09::Chapter Delete - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: 1 validation error for BookContents\nchapters\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 12.22569830995053,
+            "token_count": 22955,
+            "has_bug": true,
+            "bug_name": "chapter-delete-1.patch",
+            "correct_trace_percentage": 0.3333333333333333,
+            "runtime_per_step": 6.112849154975265
+        },
+        {
+            "test_name": "09::Chapter Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/details[1]/ul[1]/li[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 6.010700966930017,
+            "token_count": 18093,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.0035669889766723
+        },
+        {
+            "test_name": "10::Page Create - Bug",
+            "success": false,
+            "current_step": 4,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 5: type object 'str' has no attribute 'model_fields'",
+            "runtime": 31.191138316877186,
+            "token_count": 58302,
+            "has_bug": true,
+            "bug_name": "page-create-1.patch",
+            "correct_trace_percentage": 0.4,
+            "runtime_per_step": 6.238227663375437
+        },
+        {
+            "test_name": "10::Page Create",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[3]/div[2]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/h5[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 31.552607543068007,
+            "token_count": 60471,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.1552607543068008
+        },
+        {
+            "test_name": "11::Page Read - Bug",
+            "success": false,
+            "current_step": 2,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 3: name 'Details' is not defined",
+            "runtime": 19.02510461420752,
+            "token_count": 33604,
+            "has_bug": true,
+            "bug_name": "page-read-1.patch",
+            "correct_trace_percentage": 0.4,
+            "runtime_per_step": 6.341701538069174
+        },
+        {
+            "test_name": "11::Page Read",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 8.908995961071923,
+            "token_count": 24526,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.7817991922143848
+        },
+        {
+            "test_name": "12::Page Update - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: 1 validation error for BookDetailsPage\neditAction\n  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/bool_type",
+            "runtime": 10.462694118032232,
+            "token_count": 23304,
+            "has_bug": true,
+            "bug_name": "page-update-1.patch",
+            "correct_trace_percentage": 0.1,
+            "runtime_per_step": 5.231347059016116
+        },
+        {
+            "test_name": "12::Page Update",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/ul[1]/li[5]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/ul[1]/li[5]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[3]/div[1]/div[2]/div[1]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 30.718864742899314,
+            "token_count": 55546,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.0718864742899314
+        },
+        {
+            "test_name": "13::Page Delete - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/img[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: BamlValidationError(message=Failed to parse LLM response: Failed to coerce value: [InferedObject(String(\"There is no confirmation message displayed after any action on the provided webpage screenshot. Therefore, it's not possible to extract a structured data response based on the given instruction.\", Complete))], raw_output=There is no confirmation message displayed after any action on the provided webpage screenshot. Therefore, it's not possible to extract a structured data response based on the given instruction., prompt=\u001b[43muser: \u001b[0mExtract structured data from the webpage screenshot that is relevant to the instruction.<image_placeholder base64>Instruction: get confirmation message\n\nAnswer in JSON using this schema:\n{\n  schema: {\n    // Confirmation message displayed after action\n    message: string,\n  },\n}\n)",
+            "runtime": 14.825922626070678,
+            "token_count": 28177,
+            "has_bug": true,
+            "bug_name": "page-delete-1.patch",
+            "correct_trace_percentage": 0.2,
+            "runtime_per_step": 7.412961313035339
+        },
+        {
+            "test_name": "13::Page Delete",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 9.69737363094464,
+            "token_count": 27260,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.9394747261889278
+        },
+        {
+            "test_name": "14::Shelf Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [],
+            "error_message": "Error at step 1: 1 validation error for ShelfManagementPage\nshelves\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 5.019534790888429,
+            "token_count": 12303,
+            "has_bug": true,
+            "bug_name": "shelf-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 5.019534790888429
+        },
+        {
+            "test_name": "14::Shelf Create",
+            "success": true,
+            "current_step": 12,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 36.236043160781264,
+            "token_count": 73267,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.0196702633984387
+        },
+        {
+            "test_name": "15::Shelf Read - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Error at step 1: 2 validation errors for ShelfDetails\ncreated_at\n  Input should be a valid datetime or date, invalid character in year [type=datetime_from_date_parsing, input_value='4 seconds ago', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/datetime_from_date_parsing\nupdated_at\n  Input should be a valid datetime or date, invalid character in year [type=datetime_from_date_parsing, input_value='4 seconds ago', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/datetime_from_date_parsing",
+            "runtime": 3.8708875740412623,
+            "token_count": 10795,
+            "has_bug": true,
+            "bug_name": "shelf-read-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 3.8708875740412623
+        },
+        {
+            "test_name": "15::Shelf Read",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 12.102042999118567,
+            "token_count": 25218,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.0255107497796416
+        },
+        {
+            "test_name": "16::Shelf Update - Bug",
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/div[2]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 86.31819251412526,
+            "token_count": 148486,
+            "has_bug": true,
+            "bug_name": "shelf-update-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 7.847108410375023
+        },
+        {
+            "test_name": "16::Shelf Update",
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[3]/div[1]/ul[1]/li[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 28.307913086842746,
+            "token_count": 59637,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.5734466442584316
+        },
+        {
+            "test_name": "17::Shelf Delete - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 8,
+            "traces": [],
+            "error_message": "Error at step 1: 1 validation error for Shelf\nbooks\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 5.124271563952789,
+            "token_count": 13614,
+            "has_bug": true,
+            "bug_name": "shelf-delete-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 5.124271563952789
+        },
+        {
+            "test_name": "17::Shelf Delete",
+            "success": true,
+            "current_step": 8,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/input[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 27.67922936496325,
+            "token_count": 59342,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.459903670620406
+        },
+        {
+            "test_name": "18::Move Page Into Chapter - Bug",
+            "success": false,
+            "current_step": 5,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 6: 1 validation error for Book\npages\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 37.9413839050103,
+            "token_count": 76940,
+            "has_bug": true,
+            "bug_name": "page-move-1.patch",
+            "correct_trace_percentage": 0.45454545454545453,
+            "runtime_per_step": 6.323563984168383
+        },
+        {
+            "test_name": "18::Move Page Into Chapter",
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/div[1]/input[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/div[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 31.029147698078305,
+            "token_count": 62539,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.8208316089162095
+        },
+        {
+            "test_name": "19::Move Chapter Between Books - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: type object 'Element' has no attribute 'model_fields'",
+            "runtime": 10.291596019873396,
+            "token_count": 21361,
+            "has_bug": true,
+            "bug_name": "chapter-move-1.patch",
+            "correct_trace_percentage": 0.1111111111111111,
+            "runtime_per_step": 5.145798009936698
+        },
+        {
+            "test_name": "19::Move Chapter Between Books",
+            "success": true,
+            "current_step": 9,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[3]/div[1]/select[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[3]/div[1]/select[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[3]/div[1]/select[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[5]/div[2]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[2]/aside[1]/div[2]/div[1]/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 22.97793878009543,
+            "token_count": 52061,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.553104308899492
+        },
+        {
+            "test_name": "20::Create and Use Page Template - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [],
+            "error_message": "Error at step 1: BamlValidationError(message=Failed to parse LLM response: Failed to coerce value: <root>: Failed while parsing required fields: missing=0, unparsed=1\n  - <root>: Failed to parse field schema: schema: Failed while parsing required fields: missing=0, unparsed=1\n    - schema: Failed to parse field author: schema.author: Expected string, got null\n      - schema.author: Expected string, got null\n    - schema: Failed while parsing required fields: missing=0, unparsed=1\n      - schema: Failed to parse field author: schema.author: Expected string, got null\n        - schema.author: Expected string, got null, raw_output=```json\n{\n  \"schema\": {\n    \"title\": \"Page Template\",\n    \"author\": null,\n    \"actions\": [\n      \"Back\",\n      \"Editing Page\",\n      \"Set Changelog\",\n      \"Save Page\"\n    ]\n  }\n}\n```, prompt=\u001b[43muser: \u001b[0mExtract structured data from the webpage screenshot that is relevant to the instruction.<image_placeholder base64>Instruction: get page template details\n\nAnswer in JSON using this schema:\n{\n  schema: {\n    // The title of the page template\n    title: string,\n    // The author of the page template\n    author: string,\n    // List of actions available on the page template\n    actions: string[] or null,\n  },\n}\n)",
+            "runtime": 4.6313126410823315,
+            "token_count": 10594,
+            "has_bug": true,
+            "bug_name": "page-template-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 4.6313126410823315
+        },
+        {
+            "test_name": "20::Create and Use Page Template",
+            "success": true,
+            "current_step": 12,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/button[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[3]/div[2]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/p[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/p[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/iframe[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 31.5328911121469,
+            "token_count": 69630,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.6277409260122417
+        },
+        {
+            "test_name": "21::Create Role with Permissions - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 13,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/ul[1]/li[1]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: 1 validation error for RoleForm\npermissions\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 12.749285724945366,
+            "token_count": 23920,
+            "has_bug": true,
+            "bug_name": "role-create-1.patch",
+            "correct_trace_percentage": 0.07692307692307693,
+            "runtime_per_step": 6.374642862472683
+        },
+        {
+            "test_name": "21::Create Role with Permissions",
+            "success": true,
+            "current_step": 13,
+            "total_step": 13,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/ul[1]/li[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/img[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/img[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/ul[1]/li[3]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 20.74108507297933,
+            "token_count": 72103,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.5954680825368717
+        },
+        {
+            "test_name": "22::Assign Role to User - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Test setup error: Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8081/\nCall log:\n  - navigating to \"http://localhost:8081/\", waiting until \"load\"\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "role-assign-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "22::Assign Role to User",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/div[3]/div[2]/div[1]/img[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/small[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 14.174522780114785,
+            "token_count": 31557,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.834904556022957
+        },
+        {
+            "test_name": "23::Global Search with Filters - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 7,
+            "traces": [],
+            "error_message": "Error at step 1: type object 'bool' has no attribute 'model_fields'",
+            "runtime": 2.9885513021145016,
+            "token_count": 9147,
+            "has_bug": true,
+            "bug_name": "search-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 2.9885513021145016
+        },
+        {
+            "test_name": "23::Global Search with Filters",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 10.119584569009021,
+            "token_count": 36668,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.44565493842986
+        },
+        {
+            "test_name": "24::Manual Sort Chapters and Pages - Bug",
+            "success": false,
+            "current_step": 4,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 5: BamlValidationError(message=Failed to parse LLM response: Failed to coerce value: <root>: Failed while parsing required fields: missing=0, unparsed=1\n  - <root>: Failed to parse field schema: <implied:schema>: Failed while parsing required fields: missing=2, unparsed=0\n    - <implied:schema>: Missing required field: title\n    - <implied:schema>: Missing required field: new_order\n    - <implied:schema>: Failed while parsing required fields: missing=2, unparsed=0\n      - <implied:schema>: Missing required field: title\n      - <implied:schema>: Missing required field: new_order, raw_output=There is no sort order information present on the provided webpage screenshot. Therefore, it's not possible to extract structured data related to the instruction., prompt=\u001b[43muser: \u001b[0mExtract structured data from the webpage screenshot that is relevant to the instruction.<image_placeholder base64>Instruction: get sort order\n\nAnswer in JSON using this schema:\n{\n  schema: {\n    // The title of the page being sorted\n    title: string,\n    // The new order number assigned to the page\n    new_order: int,\n  },\n}\n)",
+            "runtime": 33.0212785480544,
+            "token_count": 67372,
+            "has_bug": true,
+            "bug_name": "sort-apply-2.patch",
+            "correct_trace_percentage": 0.8,
+            "runtime_per_step": 6.60425570961088
+        },
+        {
+            "test_name": "24::Manual Sort Chapters and Pages",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/main[1]/form[1]/div[1]/div[1]/div[2]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/a[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 11.42925342102535,
+            "token_count": 30205,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.2858506842050703
+        },
+        {
+            "test_name": "25::Sort Content by Name - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/a[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: 1 validation error for PageDetails\nitems\n  Input should be a valid list [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 12.770060835871845,
+            "token_count": 25235,
+            "has_bug": true,
+            "bug_name": "sort-apply-1.patch",
+            "correct_trace_percentage": 0.2,
+            "runtime_per_step": 6.385030417935923
+        },
+        {
+            "test_name": "25::Sort Content by Name",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/div[1]/nav[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[2]/div[1]/main[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/aside[1]/div[2]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/form[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[7]/button[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 15.769014495890588,
+            "token_count": 31884,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.1538028991781175
+        },
+        {
+            "test_name": "26::Create Sort Rules - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: BamlValidationError(message=Failed to parse LLM response: Failed to coerce value: <root>: Failed while parsing required fields: missing=0, unparsed=1\n  - <root>: Failed to parse field schema: <implied:schema>: Failed while parsing required fields: missing=3, unparsed=0\n    - <implied:schema>: Missing required field: title\n    - <implied:schema>: Missing required field: field\n    - <implied:schema>: Missing required field: direction\n    - <implied:schema>: Failed while parsing required fields: missing=3, unparsed=0\n      - <implied:schema>: Missing required field: title\n      - <implied:schema>: Missing required field: field\n      - <implied:schema>: Missing required field: direction, raw_output=There is no sort rule form present on the webpage screenshot provided. Therefore, it's not possible to extract structured data related to the instruction., prompt=\u001b[43muser: \u001b[0mExtract structured data from the webpage screenshot that is relevant to the instruction.<image_placeholder base64>Instruction: get sort rule form\n\nAnswer in JSON using this schema:\n{\n  schema: {\n    // The title of the sort rule\n    title: string,\n    // The field to sort by\n    field: string,\n    // The direction of sorting (ascending or descending)\n    direction: string,\n  },\n}\n)",
+            "runtime": 14.052021284820512,
+            "token_count": 23858,
+            "has_bug": true,
+            "bug_name": "sort-create-1.patch",
+            "correct_trace_percentage": 0.125,
+            "runtime_per_step": 7.026010642410256
+        },
+        {
+            "test_name": "26::Create Sort Rules",
+            "success": true,
+            "current_step": 8,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/nav[1]/div[2]/span[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/header[1]/div[2]/form[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 14.518834543880075,
+            "token_count": 46133,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.8148543179850094
+        },
+        {
+            "test_name": "27::Update Sort Rules - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: name 'SettingsSchema' is not defined",
+            "runtime": 7.284571674885228,
+            "token_count": 18487,
+            "has_bug": true,
+            "bug_name": "sort-update-1.patch",
+            "correct_trace_percentage": 0.16666666666666666,
+            "runtime_per_step": 3.642285837442614
+        },
+        {
+            "test_name": "27::Update Sort Rules",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/nav[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 13.210725298151374,
+            "token_count": 34370,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 2.2017875496918955
+        },
+        {
+            "test_name": "28::Delete Sort Rules - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Error at step 1: type object 'State' has no attribute 'model_fields'",
+            "runtime": 3.5508879111148417,
+            "token_count": 9375,
+            "has_bug": true,
+            "bug_name": "sort-delete-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 3.5508879111148417
+        },
+        {
+            "test_name": "28::Delete Sort Rules",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[2]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 4.622991076903418,
+            "token_count": 15170,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 1.5409970256344725
+        }
+    ]
+}

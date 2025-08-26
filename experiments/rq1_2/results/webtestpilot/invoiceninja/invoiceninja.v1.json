@@ -1,0 +1,2576 @@
+{
+    "summary": {
+        "total_runs": 67,
+        "success_rate": 0.5970149253731343,
+        "correct_trace_percentage": 0.6034825870646766,
+        "normal_tests": 34,
+        "buggy_tests": 33,
+        "bug_detection_rate": 0.7575757575757576
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/form[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/form[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/form[1]/section[2]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/form[1]/section[2]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/form[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 39.58879356505349,
+            "token_count": 37552,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 5.655541937864784
+        },
+        {
+            "test_name": "02::Client Create - Bug",
+            "success": true,
+            "current_step": 22,
+            "total_step": 22,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/p[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/span[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[1]/nav[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[5]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[3]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[3]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[9]/dd[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/nav[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 643.6913212609943,
+            "token_count": 327238,
+            "has_bug": true,
+            "bug_name": "client-create-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 29.258696420954287
+        },
+        {
+            "test_name": "02::Client Create",
+            "success": true,
+            "current_step": 22,
+            "total_step": 22,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[1]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[10]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[12]/dd[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[5]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[3]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[1]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 210.60604569502175,
+            "token_count": 120163,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.573002077046443
+        },
+        {
+            "test_name": "03::Client Read - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 7,
+            "traces": [],
+            "error_message": "Test setup error: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:8082/login\", waiting until \"load\"\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "client-read-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "03::Client Read",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 90.7416513459757,
+            "token_count": 33566,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 12.9630930494251
+        },
+        {
+            "test_name": "04::Client Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 6,
+            "traces": [],
+            "error_message": "Error at step 1: 2 validation errors for CompanyDetails\ngroup\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\nuser\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type",
+            "runtime": 28.605271320790052,
+            "token_count": 12449,
+            "has_bug": true,
+            "bug_name": "client-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 28.605271320790052
+        },
+        {
+            "test_name": "04::Client Update",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 54.53280432592146,
+            "token_count": 32705,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.08880072098691
+        },
+        {
+            "test_name": "05::Client Delete - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 2,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "client-delete-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "05::Client Delete",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 13.768817937001586,
+            "token_count": 13257,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.884408968500793
+        },
+        {
+            "test_name": "06::Client Restore - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 65.38637971598655,
+            "token_count": 36785,
+            "has_bug": true,
+            "bug_name": "client-restore-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 21.79545990532885
+        },
+        {
+            "test_name": "06::Client Restore",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 20.3939277890604,
+            "token_count": 18318,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.7979759296868
+        },
+        {
+            "test_name": "07::Client Purge - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "client-purge-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "07::Client Purge",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 29.860185102093965,
+            "token_count": 22317,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 7.465046275523491
+        },
+        {
+            "test_name": "08::Product Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 14,
+            "traces": [],
+            "error_message": "Test setup error: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:8082/login\", waiting until \"load\"\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "product-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "08::Product Create",
+            "success": true,
+            "current_step": 14,
+            "total_step": 14,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[3]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[1]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[1]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[4]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[5]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[5]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[5]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 87.68067590007558,
+            "token_count": 73267,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.26290542143397
+        },
+        {
+            "test_name": "09::Product Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:8082/login\", waiting until \"load\"\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "product-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "09::Product Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 21.971271230839193,
+            "token_count": 22005,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 5.492817807709798
+        },
+        {
+            "test_name": "10::Product Delete - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 2,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "product-delete-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "10::Product Delete",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 12.301069415872917,
+            "token_count": 11780,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.150534707936458
+        },
+        {
+            "test_name": "11::Product Restore - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "product-restore-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "11::Product Restore",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 14.780151252867654,
+            "token_count": 16896,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 4.926717084289218
+        },
+        {
+            "test_name": "12::Product Archive - Bug",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 36.484726519091055,
+            "token_count": 22371,
+            "has_bug": true,
+            "bug_name": "product-archive-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 18.242363259545527
+        },
+        {
+            "test_name": "12::Product Archive",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 10.356035674922168,
+            "token_count": 11740,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 5.178017837461084
+        },
+        {
+            "test_name": "13::Invoice Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 17,
+            "traces": [],
+            "error_message": "Test setup error: ",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "invoice-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "13::Invoice Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 17,
+            "traces": [],
+            "error_message": "Test setup error: ",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "14::Invoice Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Test setup error: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:8082/login\", waiting until \"load\"\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "invoice-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "14::Invoice Update",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[6]/form[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[3]/form[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[6]/form[1]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 44.813048616051674,
+            "token_count": 27302,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 8.962609723210335
+        },
+        {
+            "test_name": "15::Invoice Mark Sent - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 98.95606298092753,
+            "token_count": 46025,
+            "has_bug": true,
+            "bug_name": "invoice-mark-sent-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 32.985354326975845
+        },
+        {
+            "test_name": "15::Invoice Mark Sent",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[3]/form[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 32.36748709785752,
+            "token_count": 18701,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.789162365952507
+        },
+        {
+            "test_name": "16::Invoice Mark Paid - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "invoice-mark-sent-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "16::Invoice Mark Paid",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/span[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 35.37169879907742,
+            "token_count": 25099,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 8.842924699769355
+        },
+        {
+            "test_name": "17::Invoice Send Email - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "invoice-email-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "17::Invoice Send Email",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]/div[1]/nav[1]/ol[1]/li[2]/div[1]/svg[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[4]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 51.29432880412787,
+            "token_count": 26859,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 12.823582201031968
+        },
+        {
+            "test_name": "18::Invoice Archive - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "invoice-archive-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "18::Invoice Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/div[3]/form[1]/div[1]/div[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 30.4151620301418,
+            "token_count": 18544,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.1383873433806
+        },
+        {
+            "test_name": "19::Payment Create - Bug",
+            "success": false,
+            "current_step": 1,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[6]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: 1 validation error for PaymentForm\nfields\n  Input should be a valid list [type=list_type, input_value='[Client, Amount received...ference, Private Notes]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 73.5960637528915,
+            "token_count": 30950,
+            "has_bug": true,
+            "bug_name": "payment-create-1.patch",
+            "correct_trace_percentage": 0.1,
+            "runtime_per_step": 36.79803187644575
+        },
+        {
+            "test_name": "19::Payment Create",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[6]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[1]/dd[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[2]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[6]/dd[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[2]/div[3]/dd[1]/section[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 98.78088321001269,
+            "token_count": 60527,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.878088321001268
+        },
+        {
+            "test_name": "20::Payment Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "payment-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "20::Payment Update",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[8]/dd[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[2]/div[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 24.587022558087483,
+            "token_count": 18592,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 8.19567418602916
+        },
+        {
+            "test_name": "21::Payment Email - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 2,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "payment-email-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "21::Payment Email",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 18.92178478697315,
+            "token_count": 13493,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.460892393486574
+        },
+        {
+            "test_name": "22::Payment Archive - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 2,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "payment-archive-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "22::Payment Archive",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 21.246047858847305,
+            "token_count": 13467,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.623023929423653
+        },
+        {
+            "test_name": "23::Payment Delete - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 90.71715435292572,
+            "token_count": 36865,
+            "has_bug": true,
+            "bug_name": "payment-delete-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 30.23905145097524
+        },
+        {
+            "test_name": "23::Payment Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 25.609098779037595,
+            "token_count": 17200,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 8.536366259679198
+        },
+        {
+            "test_name": "24::Expense Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 11,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "expense-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "24::Expense Create",
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]/div[3]/dd[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]/div[1]/dd[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[2]/div[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[2]/div[1]/section[1]/div[1]/textarea[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]/div[1]/dd[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[3]/div[1]/form[1]/div[2]/div[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]/div[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]/div[8]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 114.44335656007752,
+            "token_count": 65599,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.403941505461592
+        },
+        {
+            "test_name": "25::Expense Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "expense-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "25::Expense Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 40.833677858812734,
+            "token_count": 26662,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.208419464703184
+        },
+        {
+            "test_name": "26::Expense Archive - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "expense-archive-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "26::Expense Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 20.289817868033424,
+            "token_count": 15573,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.763272622677808
+        },
+        {
+            "test_name": "27::Expense Restore - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "expense-restore-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "27::Expense Restore",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[3]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 31.684191333828494,
+            "token_count": 24396,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 6.336838266765699
+        },
+        {
+            "test_name": "28::Expense Delete - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 60.651122794952244,
+            "token_count": 34632,
+            "has_bug": true,
+            "bug_name": "expense-delete-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 20.217040931650747
+        },
+        {
+            "test_name": "28::Expense Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 17.24585003615357,
+            "token_count": 15625,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 5.748616678717856
+        },
+        {
+            "test_name": "29::Expense Clone - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 7,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "expense-clone-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "29::Expense Clone",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/dd[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 76.98029661015607,
+            "token_count": 39417,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 10.997185230022296
+        },
+        {
+            "test_name": "30::Credit Create - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [],
+            "error_message": "Test setup error: ",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "credit-create-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "30::Credit Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [],
+            "error_message": "Test setup error: ",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "31::Credit Update - Bug",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Test setup error: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"email\\\"]\")\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": true,
+            "bug_name": "credit-update-1.patch",
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0.0
+        },
+        {
+            "test_name": "31::Credit Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[6]/form[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[3]/form[1]/div[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[6]/form[1]/div[1]/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 37.97147260908969,
+            "token_count": 22311,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.492868152272422
+        },
+        {
+            "test_name": "32::Credit Mark Sent - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 78.83621828397736,
+            "token_count": 38781,
+            "has_bug": true,
+            "bug_name": "credit-mark-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 26.278739427992452
+        },
+        {
+            "test_name": "32::Credit Mark Sent",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[5]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 42.010281739989296,
+            "token_count": 17233,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 14.0034272466631
+        },
+        {
+            "test_name": "33::Credit Send Email - Bug",
+            "success": false,
+            "current_step": 2,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 3: 5 validation errors for ClientDetailsPage\ndetails\n  Input should be a valid dictionary [type=dict_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type\ncontacts\n  Input should be a valid dictionary [type=dict_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type\nstanding\n  Input should be a valid dictionary [type=dict_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type\ntabs\n  Input should be a valid list [type=list_type, input_value='Dashboard, Clients, Prod..., Transactions, Reports', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type\ncredits_table_columns\n  Input should be a valid list [type=list_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/list_type",
+            "runtime": 85.50860448507592,
+            "token_count": 36951,
+            "has_bug": true,
+            "bug_name": "credit-email-1.patch",
+            "correct_trace_percentage": 0.3333333333333333,
+            "runtime_per_step": 28.502868161691975
+        },
+        {
+            "test_name": "33::Credit Send Email",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[8]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[8]/div[1]/div[1]/div[1]/div[1]/div[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/nav[1]/div[8]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/main[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/div[1]/div[1]/div[1]/div[16]/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 58.93548496207222,
+            "token_count": 36892,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 9.822580827012038
+        },
+        {
+            "test_name": "34::Credit Archive - Bug",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[9]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[9]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 70.68670371198095,
+            "token_count": 35796,
+            "has_bug": true,
+            "bug_name": "credit-archive-1.patch",
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 23.56223457066032
+        },
+        {
+            "test_name": "34::Credit Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/button[9]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 35.9647666439414,
+            "token_count": 17202,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 11.988255547980467
+        }
+    ]
+}

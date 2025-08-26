@@ -25,14 +25,11 @@ experiments/**/resources/*
 experiments/**/*.network
 experiments/**/*.trace
 experiments/**/*.zip
-experiments/**/*.log
 
 checkpoint_*
 *naviqate_output*
 
 experiments/**/*.html
 experiments/**/*.png
-# experiments/**/*.json
-experiments/**/*.tmux
 
 archive/
