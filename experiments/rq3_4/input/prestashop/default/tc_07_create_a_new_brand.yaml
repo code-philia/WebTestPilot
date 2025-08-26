@@ -1,4 +1,4 @@
 name: 07::Create A New Brand
 url: http://localhost:8083/
 setup_function: logged_in_page
-description: Navigate to the "Catalog" menu. then click "Brands & Suppliers".. Click on the "Add new brand" button.. A new page appears. Enter the brand name e.g. "Nike" in the "Name" field.. The name of the brand. Enter a brand description in the "Description" area.. The complex description of the brand is filled into the rich text editor.. Upload a "Logo" image file for the brand.. The "Logo" field displays the name of the selected image file.. Click the "Save" button. A success message "Successful creation" is displayed at the top of the page
+description: Click "Catalog" menu item. Catalog submenu items expand. Click "Brands & Suppliers" submenu item. The Brands & Suppliers page is displayed. Click on the "Add new brand" button.. A new page appears. Enter the brand name e.g. "Nike" in the "Name" field.. The name of the brand. Enter a brand description in the "Description" area.. The complex description of the brand is filled into the rich text editor.. Click the "Save" button. A success message "Successful creation" is displayed at the top of the page

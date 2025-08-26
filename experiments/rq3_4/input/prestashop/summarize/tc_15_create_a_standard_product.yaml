@@ -1,4 +1,4 @@
 name: 15::Create A Standard Product
 url: http://localhost:8083/
 setup_function: logged_in_page
-description: Click 'Catalog' -> 'Products'; prod list shows. Click 'New prod' btn; modal pops. Select 'Std prod', click 'Add new prod'. Enter 'cat notebook' as name, upload img, fill desc. Add cats (e.g., 'Stationery'), select brand 'Graphic Corner'. In 'Details', add feat 'Comp' w/ val 'Recycled card'. Set stocks to 300, prices & ship wt. Click 'Save'; msg confirms success.
+description: "Click 'Catalog' -> 'Products'; prod list shows. Click 'New prod' -> 'Std prod' -> 'Add new prod'. Enter name: 'cat notebook', desc: 'Desc', short desc: 'Short desc'. Add cats: 'Stationery', 'Accessories'. Brand: 'Graphic Corner'. Details: Add feat 'Comp' -> 'Recycled card', 'Prop' -> 'pages'. Stocks: Qty '300'. Pricing: Retail '12.90', Whlsl '5.49'. Shipping: Wt '0.3'. SEO: Link 'cat-notebook-vector-graphics', Offline redir 'default'. Options: Check 'Acc supp'. Save -> Success msg."

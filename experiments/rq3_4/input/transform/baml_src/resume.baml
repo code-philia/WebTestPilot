@@ -3,7 +3,7 @@ class TransformedOutput {
 }
 
 function AddNoise(description: string) -> TransformedOutput {
-  client "Qwen"
+  client "Qwen72b"
   prompt #"
     You are a web quality assurance expert.
 
@@ -20,7 +20,7 @@ function AddNoise(description: string) -> TransformedOutput {
 }
 
 function Summarize(description: string) -> TransformedOutput {
-  client "Qwen"
+  client "Qwen72b"
   prompt #"
     You are a web quality assurance expert.
 
@@ -38,7 +38,7 @@ function Summarize(description: string) -> TransformedOutput {
 }
 
 function Restyle(description: string) -> TransformedOutput {
-  client "Qwen"
+  client "Qwen72b"
   prompt #"
     Rewrite the following test description so that each sentence may use a different documentation style. 
     - You can mix styles such as descriptive/expository, procedural/instructional, reference/technical, explanatory/conceptual, troubleshooting/problem-solving, narrative/storytelling, or casual/noisy.

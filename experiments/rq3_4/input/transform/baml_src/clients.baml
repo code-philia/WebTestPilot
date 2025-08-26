@@ -1,4 +1,4 @@
-client<llm> Qwen {
+client<llm> Qwen72b {
   provider "openai-generic"
   options {
     base_url "http://localhost:8000/v1"

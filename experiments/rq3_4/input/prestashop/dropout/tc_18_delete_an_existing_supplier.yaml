@@ -1,4 +1,4 @@
 name: 18::Delete An Existing Supplier
 url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click the 'Catalog' menu. The Catalog submenu expands. Click the 'Brands & Suppliers' submenu. The 'Brands & Suppliers' page is displayed. Click the 'Suppliers' tab. The page switches to the suppliers list. Find the data row for the supplier named 'Shoes supplier'. The target row is correctly located. A dropdown menu with 'Edit' and 'Delete' options appears. Click the 'Delete' option from the dropdown menu. A confirmation dialog appears. Click the final 'Delete' button in the dialog to confirm. A 'Successful deletion' message is displayed.
+setup_function: created_supplier_page
+description: Click the 'more actions' button (three-dot icon) on the supplier named 'Shoes supplier'. A dropdown menu with 'Delete' options appears. A confirmation dialog appears. Click the final 'Delete' button in the dialog to confirm. A 'Successful deletion' message is displayed.

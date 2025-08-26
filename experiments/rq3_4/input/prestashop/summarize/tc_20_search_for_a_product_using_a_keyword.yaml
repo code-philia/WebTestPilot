@@ -1,4 +1,4 @@
 name: 20::Search For A Product Using A Keyword
 url: http://localhost:8083/
 setup_function: logged_in_buyer_page
-description: "Quick draft: Enter prod name in 'Search' box @ top. Hit Enter or click icon. Load res page. Check if prod card w/ name is visible. Confirm >=1 card w/ name in results."
+description: "Quick draft: Enter 'Hummingbird printed t-shirt' in top Search box -> Hit Enter or click search icon -> Load search results pg -> Verify prod card w/ 'Hummingbird printed t-shirt' is visible -> Confirm >=1 matching prod card in results."

@@ -1,4 +1,4 @@
 name: 11::Delete A Category
 url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click "Catalog". then click "Categories" in the back-office menu.. Find the row for the category named "Shoes" and click it to go to its detail/edit page.. The edit page for the "Shoes" category is displayed.. Click the "Delete" link in the top-right corner.. A confirmation modal with deletion options appears.. Select a deletion mode e.g. "I want to delete this category only...".. The corresponding radio button is selected.. Click the "Delete" button to confirm.. A "Successful deletion" message is displayed
+setup_function: created_parent_category_page
+description: Find the row for the category named "Shoes" and click the more actions (three dot) button. Dropdown shows up with Delete option.. Click the "Delete" option.. A confirmation modal with deletion options appears.. Select a deletion mode e.g. "If they have no other category, I want to associate them with the parent category and turn them offline. (Recommended)".. The corresponding radio button is selected.. Click the "Delete" button to confirm.. A "Successful deletion" message is displayed

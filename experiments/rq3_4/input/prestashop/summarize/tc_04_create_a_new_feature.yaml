@@ -1,4 +1,4 @@
 name: 04::Create A New Feature
 url: http://localhost:8083/
 setup_function: logged_in_page
-description: NAV to 'Catalog' -> 'Attrs & Feats'. 'Attrs & Feats' pg shows up rite. Click 'Feats' tab @ top. Pg switches to feats list. Click 'Add new feat' @ top-right. New pg w/ form 4 new feat appears. Enter feat name eg 'Season' in 'Name' fld. 'Season' enters succefully. Click 'Save' btn. 'Succeful creation' msg shows & user goes back to feats list pg.
+description: Click 'Catalog' -> 'Attributes & Features'. Page loads. Click 'Features' tab. Click 'Add new feature'. New form appears. Enter 'Season' in 'Name' field. Click 'Save'. Success msg shown; back to features list.
