@@ -1,0 +1,917 @@
+[2025-08-26 11:16:25,672] [INFO] [executor.execute_action] Action: click on the email textbox
+[2025-08-26 11:16:26,838] [INFO] [executor.execute_action] Action: type 'admin@admin.com' into the email field
+[2025-08-26 11:16:27,979] [INFO] [executor.execute_action] Action: click on the password textbox
+[2025-08-26 11:16:29,095] [INFO] [executor.execute_action] Action: type 'password' into the password field
+[2025-08-26 11:16:30,887] [INFO] [executor.execute_action] Action: click on the 'Log In' button
+[2025-08-26 11:16:32,520] [INFO] [executor.execute_action] Action: verify that the 'Books' link is visible in the navigation
+[2025-08-26 11:17:09,192] [INFO] [executor.execute_action] Action: click on 'Books' link in navigation
+[2025-08-26 11:17:10,266] [INFO] [executor.verify_postcondition] Expectation: books listing page appears
+[2025-08-26 11:17:11,240] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Book(BaseModel): 
+        title: str = Field(..., description="The title of the book")
+        author: str = Field(..., description="The author of the book")
+        publication_date: str = Field(..., description="The publication date of the book")
+
+    class BookListing(BaseModel): 
+        books: List[Book] = Field(default_factory=list, description="List of books displayed on the page")
+
+    # Extract book listings from latest state
+    books = session.history[-1].extract("get book listings", schema=BookListing).books
+
+    # Assert at least one book is listed
+    assert len(books) > 0
+```
+[2025-08-26 11:17:50,689] [INFO] [executor.execute_action] Action: click on 'Books' link in navigation
+[2025-08-26 11:17:51,670] [INFO] [executor.execute_action] Action: verify 'Create New Book' link is visible
+[2025-08-26 11:17:52,945] [INFO] [executor.execute_action] Action: click on 'Create New Book' link
+[2025-08-26 11:17:54,419] [INFO] [executor.execute_action] Action: click on the 'Name' textbox
+[2025-08-26 11:17:56,115] [INFO] [executor.execute_action] Action: type 'Book' into the Name field
+[2025-08-26 11:17:57,483] [INFO] [executor.execute_action] Action: click on the Rich Text Area iframe
+[2025-08-26 11:17:59,550] [INFO] [executor.execute_action] Action: type 'Description' into the Rich Text Area
+[2025-08-26 11:18:01,759] [INFO] [executor.execute_action] Action: click on the '▸ Book Tags' button
+[2025-08-26 11:18:03,731] [INFO] [executor.execute_action] Action: click on the 'Tag Name' textbox
+[2025-08-26 11:18:42,659] [INFO] [executor.execute_action] Action: click on the book with title 'Book'
+[2025-08-26 11:18:44,103] [INFO] [executor.verify_postcondition] Expectation: book detail page opens
+[2025-08-26 11:18:45,670] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Book(BaseModel): 
+        title: str = Field(..., description="The title of the book")
+        author: str = Field(..., description="The author of the book")
+        description: str = Field(..., description="A brief description of the book")
+        pages: int = Field(..., description="The number of pages in the book")
+        publication_date: str = Field(..., description="The date the book was published")
+        isbn: str = Field(..., description="The International Standard Book Number of the book")
+
+    class Chapter(BaseModel): 
+        title: str = Field(..., description="The title of the chapter")
+        content: str = Field(..., description="The content of the chapter")
+
+    # Extract book details from latest state
+    book = session.history[-1].extract("get book details", schema=Book)
+
+    # Assert book detail page opens
+    assert book.title != ""
+    assert book.author != ""
+    assert book.description != ""
+    assert book.pages != 0
+    assert book.publication_date != ""
+    assert book.isbn != ""
+```
+[2025-08-26 11:18:46,282] [INFO] [executor.assertion_api.state.extract] Extracted data: title='Sample Book' author='John Doe' description='This is a sample book about technology and innovation.' pages=250 publication_date='2023-10-01' isbn='978-1-23456-789-0'
+[2025-08-26 11:18:46,283] [INFO] [executor.verify_postcondition] Postcondition passed.
+[2025-08-26 11:18:46,283] [INFO] [executor.execute_action] Action: verify that the book name 'Book' appears in the page heading
+[2025-08-26 11:18:48,225] [INFO] [executor.verify_postcondition] Expectation: book name 'Book' is displayed as main heading
+[2025-08-26 11:18:48,817] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the book title from the current state
+    book_title = session.extract("get book title", schema=BaseModel).title
+    
+    # Verify that the book name 'Book' appears in the page heading
+    assert "Book" in session.title
+```
+[2025-08-26 11:19:29,073] [INFO] [executor.execute_action] Action: click on the book with title 'Book'
+[2025-08-26 11:19:30,244] [INFO] [executor.execute_action] Action: verify that the book name 'Book' appears in the page heading
+[2025-08-26 11:19:31,496] [INFO] [executor.execute_action] Action: verify that the book description 'Description' content is visible
+[2025-08-26 11:19:33,460] [INFO] [executor.execute_action] Action: verify that the book navigation elements are present
+[2025-08-26 11:20:12,523] [INFO] [executor.execute_action] Action: click on the 'Edit' button
+[2025-08-26 11:20:13,939] [INFO] [executor.verify_postcondition] Expectation: book edit form opens
+[2025-08-26 11:20:15,389] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Book(BaseModel): 
+        title: str = Field(..., description="The title of the book")
+        author: str = Field(..., description="The author of the book")
+        description: str = Field(..., description="A brief description of the book")
+        cover_image: str = Field(..., description="The cover image of the book")
+        tags: List[str] = Field(default_factory=list, description="Tags associated with the book")
+        default_page_template: str = Field(..., description="Default page template for the book")
+        chapters: List[str] = Field(default_factory=list, description="Chapters of the book")
+
+    # Extract book from latest state
+    book = session.history[-1].extract("get book details", schema=Book)
+
+    # Assert book edit form is open
+    assert "Edit Book" in session.title
+    assert "Edit" in session.url
+    assert "Edit" in session.history[-1].extract("get form elements", schema=Element)
+```
+[2025-08-26 11:20:15,787] [INFO] [executor.assertion_api.state.extract] Extracted data: title='Book' author='' description='' cover_image='' tags=[] default_page_template='' chapters=[]
+[2025-08-26 11:20:56,748] [INFO] [executor.execute_action] Action: click on the 'Edit' button
+[2025-08-26 11:20:58,101] [INFO] [executor.execute_action] Action: click on the 'Name' textbox
+[2025-08-26 11:21:01,077] [INFO] [executor.execute_action] Action: clear the name field and type "Book Updated"
+[2025-08-26 11:21:03,066] [INFO] [executor.execute_action] Action: click on the Rich Text Area iframe
+[2025-08-26 11:21:05,157] [INFO] [executor.execute_action] Action: clear existing content and type "Description Updated"
+[2025-08-26 11:21:07,395] [INFO] [executor.execute_action] Action: click on the 'Save Book' button
+[2025-08-26 11:21:09,823] [INFO] [executor.execute_action] Action: verify that an alert message "Book successfully updated" appears
+[2025-08-26 11:21:12,374] [INFO] [executor.execute_action] Action: verify that the page heading shows updated book name
+[2025-08-26 11:21:14,925] [INFO] [executor.execute_action] Action: verify that the updated description text is visible
+[2025-08-26 11:22:07,910] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:22:09,284] [INFO] [executor.verify_postcondition] Expectation: delete confirmation dialog appears
+[2025-08-26 11:22:09,979] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get book details", schema=BookDetails)
+    
+    # Check if the 'Delete' link is present
+    if current_state.find("Delete") is not None:
+        # Assert that the 'Delete' link is present
+        assert current_state.find("Delete") is not None
+    else:
+        # Assert that the 'Delete' link is not present
+        assert current_state.find("Delete") is None
+```
+[2025-08-26 11:22:51,078] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:22:53,120] [INFO] [executor.execute_action] Action: click on the 'Confirm' button
+[2025-08-26 11:22:55,068] [INFO] [executor.execute_action] Action: scroll to the top of the page
+[2025-08-26 11:23:49,767] [INFO] [executor.execute_action] Action: click the 'New Chapter' button
+[2025-08-26 11:23:51,203] [INFO] [executor.verify_postcondition] Expectation: chapter creation form opens
+[2025-08-26 11:23:51,638] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get bookshelf chapter", schema=BookshelfChapter)
+    
+    # Check if the form is open
+    assert current_state.form_opened
+```
+[2025-08-26 11:24:33,697] [INFO] [executor.execute_action] Action: click the 'New Chapter' button
+[2025-08-26 11:24:34,895] [INFO] [executor.execute_action] Action: click in the 'Chapter Name' textbox
+[2025-08-26 11:24:36,352] [INFO] [executor.execute_action] Action: type 'Chapter' in the name field
+[2025-08-26 11:24:37,886] [INFO] [executor.execute_action] Action: click in the Rich Text Area iframe
+[2025-08-26 11:24:39,493] [INFO] [executor.execute_action] Action: type 'Chapter Description' in the rich text area
+[2025-08-26 11:24:41,281] [INFO] [executor.execute_action] Action: click '▸ Chapter Tags' button
+[2025-08-26 11:24:43,542] [INFO] [executor.execute_action] Action: click in the 'Tag Name' textbox
+[2025-08-26 11:25:22,360] [INFO] [executor.execute_action] Action: click on the chapter with title 'Chapter'
+[2025-08-26 11:25:24,420] [INFO] [executor.verify_postcondition] Expectation: chapter detail page opens
+[2025-08-26 11:25:24,956] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the chapter title from the current state
+    chapter_title = session.extract("get chapter title", schema=str).title
+    
+    # Assert that the chapter detail page opens
+    assert chapter_title == "Chapter"
+```
+[2025-08-26 11:26:06,968] [INFO] [executor.execute_action] Action: click on the chapter with title 'Chapter'
+[2025-08-26 11:26:08,213] [INFO] [executor.execute_action] Action: verify that the chapter name appears in the page heading
+[2025-08-26 11:26:09,847] [INFO] [executor.execute_action] Action: verify that the chapter description content is visible
+[2025-08-26 11:26:11,240] [INFO] [executor.execute_action] Action: verify that the chapter navigation elements are present
+[2025-08-26 11:26:13,037] [INFO] [executor.execute_action] Action: verify that the breadcrumb navigation shows book > chapter
+[2025-08-26 11:26:51,187] [INFO] [executor.execute_action] Action: click on the 'Chapter Name' textbox
+[2025-08-26 11:26:52,481] [INFO] [executor.verify_postcondition] Expectation: chapter name field is focused and contains current name
+[2025-08-26 11:26:53,203] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Chapter(BaseModel): 
+        name: str = Field(..., description="The name of the chapter")
+
+    # Extract chapter from latest state
+    chapter = session.history[-1].extract("get chapter summary", schema=Chapter)
+
+    # Assert chapter name field is focused and contains current name
+    assert chapter.name == "Chapter Name"
+```
+[2025-08-26 11:26:53,462] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Chapter'
+[2025-08-26 11:26:53,463] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': {'name': 'Chapter'}})]
+[2025-08-26 11:26:53,983] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Chapter(BaseModel): 
+        name: str = Field(..., description="The name of the chapter")
+
+    # Extract chapter from latest state
+    chapter = session.history[-1].extract("get chapter summary", schema=Chapter)
+
+    # Assert chapter name field is focused and contains current name
+    assert chapter.name == "Chapter Name"
+```
+[2025-08-26 11:26:54,121] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Chapter'
+[2025-08-26 11:26:54,122] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': {'name': 'Chapter'}})]
+[2025-08-26 11:26:54,122] [ERROR] [main.run] Bug reported: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': {'name': 'Chapter'}})]
+[2025-08-26 11:26:54,123] [INFO] [executor.execute_action] Action: clear the name field
+[2025-08-26 11:26:56,157] [INFO] [executor.verify_postcondition] Expectation: name field shows updated chapter name
+[2025-08-26 11:26:56,815] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Chapter(BaseModel): 
+        name: str = Field(..., description="The name of the chapter")
+
+    # Extract chapter from latest state
+    chapter = session.history[-1].extract("get chapter summary", schema=Chapter).name
+
+    # Assert chapter name is cleared
+    assert chapter == ""
+```
+[2025-08-26 11:26:57,064] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Chapter'
+[2025-08-26 11:26:57,065] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': 'Chapter'})]
+[2025-08-26 11:26:57,535] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Chapter(BaseModel): 
+        name: str = Field(..., description="The name of the chapter")
+
+    # Extract chapter from latest state
+    chapter = session.history[-1].extract("get chapter summary", schema=Chapter).name
+
+    # Assert chapter name is cleared
+    assert chapter == ""
+```
+[2025-08-26 11:26:57,671] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Chapter'
+[2025-08-26 11:26:57,672] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': 'Chapter'})]
+[2025-08-26 11:26:57,672] [ERROR] [main.run] Bug reported: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'chapter': 'Chapter'})]
+[2025-08-26 11:26:57,672] [INFO] [executor.execute_action] Action: click in the Rich Text Area iframe
+[2025-08-26 11:26:59,872] [INFO] [executor.verify_postcondition] Expectation: Rich text editor is focused
+[2025-08-26 11:27:00,401] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get chapter details", schema=Chapter)
+    
+    # Check if the Rich Text Area iframe is focused
+    assert current_state.isRichTextAreaFocused
+```
+[2025-08-26 11:27:41,832] [INFO] [executor.execute_action] Action: click on the 'Chapter Name' textbox
+[2025-08-26 11:27:42,837] [INFO] [executor.execute_action] Action: clear the name field
+[2025-08-26 11:27:44,211] [INFO] [executor.execute_action] Action: click in the Rich Text Area iframe
+[2025-08-26 11:27:46,290] [INFO] [executor.execute_action] Action: clear existing content
+[2025-08-26 11:27:48,018] [INFO] [executor.execute_action] Action: type "Chapter Description Updated"
+[2025-08-26 11:27:49,988] [INFO] [executor.execute_action] Action: click on the 'Save Chapter' button
+[2025-08-26 11:27:52,819] [INFO] [executor.execute_action] Action: verify page heading
+[2025-08-26 11:27:55,498] [INFO] [executor.execute_action] Action: verify updated description text
+[2025-08-26 11:28:34,652] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:28:35,852] [INFO] [executor.verify_postcondition] Expectation: delete confirmation dialog appears
+[2025-08-26 11:28:36,421] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get bookshelf chapter", schema=BookshelfChapter)
+    
+    # Check if the 'Delete' link is present
+    if current_state.find("Delete") is not None:
+        # Assert that the delete confirmation dialog appears
+        assert "delete confirmation dialog" in current_state.text
+```
+[2025-08-26 11:29:18,149] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:29:19,494] [INFO] [executor.execute_action] Action: click on the 'Confirm' button
+[2025-08-26 11:29:20,891] [INFO] [executor.execute_action] Action: scroll to the bottom of the page
+[2025-08-26 11:29:22,959] [INFO] [executor.execute_action] Action: scroll down
+[2025-08-26 11:30:15,163] [INFO] [executor.execute_action] Action: click on the 'New Page' button
+[2025-08-26 11:30:16,905] [INFO] [executor.verify_postcondition] Expectation: page creation form opens
+[2025-08-26 11:30:17,534] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get book management page", schema=Page)
+    
+    # Check if the 'New Page' button is present
+    assert "New Page" in current_state.MainContent.CreateNewPage.text, "New Page button is not present."
+```
+[2025-08-26 11:30:58,212] [INFO] [executor.execute_action] Action: click on the 'New Page' button
+[2025-08-26 11:30:59,644] [INFO] [executor.execute_action] Action: click on the 'Page Title' textbox
+[2025-08-26 11:31:02,764] [INFO] [executor.execute_action] Action: type 'Page' in the title field
+[2025-08-26 11:31:05,030] [INFO] [executor.execute_action] Action: click on the Rich Text Area iframe
+[2025-08-26 11:31:07,386] [INFO] [executor.execute_action] Action: type 'Page Content' in the rich text area
+[2025-08-26 11:31:09,364] [INFO] [executor.execute_action] Action: click on the 'Save Page' button
+[2025-08-26 11:31:11,506] [INFO] [executor.execute_action] Action: verify that the page 'Page' is shown on the page content
+[2025-08-26 11:32:05,343] [INFO] [executor.execute_action] Action: click on the link with title 'Book'
+[2025-08-26 11:32:06,784] [INFO] [executor.verify_postcondition] Expectation: page detail view opens
+[2025-08-26 11:32:07,305] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get page detail", schema=Page)
+    
+    # Check if the current state matches the expected state
+    assert current_state.title == "Book"
+```
+[2025-08-26 11:32:49,313] [INFO] [executor.execute_action] Action: click on the link with title 'Book'
+[2025-08-26 11:32:50,725] [INFO] [executor.execute_action] Action: verify that the page title 'Page' is displayed
+[2025-08-26 11:32:52,137] [INFO] [executor.execute_action] Action: click on the link with title 'Page' in book navigation
+[2025-08-26 11:32:53,779] [INFO] [executor.execute_action] Action: verify that the page name 'Page' appears in the page heading
+[2025-08-26 11:32:56,080] [INFO] [executor.execute_action] Action: verify that the page description is visible
+[2025-08-26 11:33:51,089] [INFO] [executor.execute_action] Action: click on the 'Edit' link
+[2025-08-26 11:33:52,726] [INFO] [executor.verify_postcondition] Expectation: page edit form opens
+[2025-08-26 11:33:53,535] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get page description", schema=Page)
+    
+    # Check if the 'Edit' link is present in the current state
+    if "Edit" in current_state.description:
+        # Assert that the 'Edit' link is present
+        assert "Edit" in current_state.description
+    else:
+        # Assert that the 'Edit' link is not present
+        assert "Edit" not in current_state.description
+```
+[2025-08-26 11:34:34,517] [INFO] [executor.execute_action] Action: click on the 'Edit' link
+[2025-08-26 11:34:36,049] [INFO] [executor.execute_action] Action: click on the 'Page Title' textbox
+[2025-08-26 11:34:38,221] [INFO] [executor.execute_action] Action: clear the name field
+[2025-08-26 11:34:40,179] [INFO] [executor.execute_action] Action: type "Page Updated"
+[2025-08-26 11:34:42,781] [INFO] [executor.execute_action] Action: click on the Rich Text Area iframe
+[2025-08-26 11:34:45,572] [INFO] [executor.execute_action] Action: clear existing content
+[2025-08-26 11:34:48,737] [INFO] [executor.execute_action] Action: type "Page Content Updated"
+[2025-08-26 11:34:51,765] [INFO] [executor.execute_action] Action: verify page heading
+[2025-08-26 11:34:55,083] [INFO] [executor.execute_action] Action: verify updated content text
+[2025-08-26 11:35:35,978] [INFO] [executor.execute_action] Action: click 'Delete' link
+[2025-08-26 11:35:37,591] [INFO] [executor.verify_postcondition] Expectation: delete confirmation dialog appears
+[2025-08-26 11:35:38,056] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get page description", schema=Page)
+    
+    # Check if the current state matches the description of the page
+    assert current_state.description == "A generic page with no specific function or content."
+```
+[2025-08-26 11:36:19,897] [INFO] [executor.execute_action] Action: click 'Delete' link
+[2025-08-26 11:36:21,266] [INFO] [executor.execute_action] Action: click 'Confirm' button
+[2025-08-26 11:36:22,335] [INFO] [executor.execute_action] Action: scroll down
+[2025-08-26 11:36:23,517] [INFO] [executor.execute_action] Action: scroll down
+[2025-08-26 11:36:24,917] [INFO] [executor.execute_action] Action: scroll down
+[2025-08-26 11:37:19,158] [INFO] [executor.execute_action] Action: click on the 'Shelves' link in the navigation
+[2025-08-26 11:37:20,994] [INFO] [executor.verify_postcondition] Expectation: shelves listing page appears
+[2025-08-26 11:37:31,719] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get bookshelf", schema=BookShelf)
+    
+    # Check if the current state is a list of books
+    assert isinstance(current_state.items, list), "Expected the state to be a list of books."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state to have a 'hasQuantity' attribute."
+    
+    # Check if the current state has a 'hasPrice' attribute
+    assert 'hasPrice' in current_state, "Expected the state to have a 'hasPrice' attribute."
+    
+    # Check if the current state has an 'availabilityState' attribute
+    assert 'availabilityState' in current_state, "Expected the state to have an 'availabilityState' attribute."
+    
+    # Check if the current state has a 'selectable' attribute
+    assert 'selectable' in current_state, "Expected the state to have a 'selectable' attribute."
+    
+    # Check if the current state has a 'hasQuantity' attribute
+    assert 'hasQuantity' in current_state, "Expected the state
+[2025-08-26 11:37:31,720] [INFO] [executor.verify_postcondition] Postcondition failed: No callable 'precondition' or 'postcondition' function found in generated code.
+[2025-08-26 11:38:13,611] [INFO] [executor.execute_action] Action: click on the 'Shelves' link in the navigation
+[2025-08-26 11:38:14,752] [INFO] [executor.execute_action] Action: click on the 'New Shelf' button
+[2025-08-26 11:38:16,238] [INFO] [executor.execute_action] Action: click on the 'Shelf Name' textbox
+[2025-08-26 11:38:17,665] [INFO] [executor.execute_action] Action: type 'Shelf' in the name field
+[2025-08-26 11:38:19,811] [INFO] [executor.execute_action] Action: click on the Rich Text Area iframe
+[2025-08-26 11:38:22,202] [INFO] [executor.execute_action] Action: type 'Shelf Description' in the rich text area
+[2025-08-26 11:38:24,595] [INFO] [executor.execute_action] Action: click on the '▸ Books' button
+[2025-08-26 11:38:27,039] [INFO] [executor.execute_action] Action: click on the 'add' button for Book1
+[2025-08-26 11:38:29,651] [INFO] [executor.execute_action] Action: click on the 'add' button for Book2
+[2025-08-26 11:38:31,810] [INFO] [executor.execute_action] Action: click on the 'Save Shelf' button
+[2025-08-26 11:38:34,511] [INFO] [executor.execute_action] Action: verify that the shelf page displays with the correct name
+[2025-08-26 11:38:36,964] [INFO] [executor.execute_action] Action: verify that Book1 is present in the shelf
+[2025-08-26 11:38:41,733] [INFO] [executor.execute_action] Action: verify that Book2 is present in the shelf
+[2025-08-26 11:39:39,619] [INFO] [executor.execute_action] Action: click on the shelf with title 'Shelf'
+[2025-08-26 11:39:41,019] [INFO] [executor.verify_postcondition] Expectation: shelf detail page opens
+[2025-08-26 11:39:41,550] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the shelf title from the current state
+    shelf_title = session.extract("get shelf title", schema=str)
+    
+    # Assert that the shelf detail page opens
+    assert shelf_title == "Shelf"
+```
+[2025-08-26 11:40:24,657] [INFO] [executor.execute_action] Action: click on the shelf with title 'Shelf'
+[2025-08-26 11:40:26,045] [INFO] [executor.execute_action] Action: verify shelf name appears in page heading
+[2025-08-26 11:40:28,158] [INFO] [executor.execute_action] Action: verify shelf description content is visible
+[2025-08-26 11:40:30,200] [INFO] [executor.execute_action] Action: verify Book1 is present in the shelf
+[2025-08-26 11:40:31,974] [INFO] [executor.execute_action] Action: verify Book2 is present in the shelf
+[2025-08-26 11:41:27,097] [INFO] [executor.execute_action] Action: click on the 'Shelf Name' textbox
+[2025-08-26 11:41:28,657] [INFO] [executor.verify_postcondition] Expectation: shelf name field is focused
+[2025-08-26 11:41:29,385] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Shelf(BaseModel): 
+        name: str = Field(..., description="The name of the shelf")
+
+    # Extract shelf name from latest state
+    shelf_name = session.history[-1].extract("get shelf name", schema=Shelf).name
+
+    # Assert shelf name field is focused
+    assert session.history[-1].isFocused('shelf-name')
+```
+[2025-08-26 11:41:29,609] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Shelves'
+[2025-08-26 11:42:11,772] [INFO] [executor.execute_action] Action: click on the 'Shelf Name' textbox
+[2025-08-26 11:42:12,843] [INFO] [executor.execute_action] Action: clear the name field
+[2025-08-26 11:42:14,837] [INFO] [executor.execute_action] Action: type "Shelf Updated"
+[2025-08-26 11:42:16,270] [INFO] [executor.execute_action] Action: click in the Rich Text Area iframe
+[2025-08-26 11:42:18,166] [INFO] [executor.execute_action] Action: clear existing content
+[2025-08-26 11:42:20,022] [INFO] [executor.execute_action] Action: modify book selections in the books section
+[2025-08-26 11:42:22,343] [INFO] [executor.execute_action] Action: click on the 'Save Shelf' button
+[2025-08-26 11:42:24,295] [INFO] [executor.execute_action] Action: verify page heading shows updated shelf name
+[2025-08-26 11:42:26,947] [INFO] [executor.execute_action] Action: verify updated description text is visible
+[2025-08-26 11:43:23,506] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:43:24,830] [INFO] [executor.verify_postcondition] Expectation: delete confirmation dialog appears
+[2025-08-26 11:43:25,244] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Check if the confirmation dialog is present
+    assert "Are you sure you want to delete this shelf?" in session.page.title
+```
+[2025-08-26 11:44:07,298] [INFO] [executor.execute_action] Action: click on the 'Delete' link
+[2025-08-26 11:44:09,166] [INFO] [executor.execute_action] Action: click on the 'Confirm' button
+[2025-08-26 11:44:11,329] [INFO] [executor.execute_action] Action: scroll to the top of the page
+[2025-08-26 11:44:13,258] [INFO] [executor.execute_action] Action: refresh the page
+[2025-08-26 11:45:08,160] [INFO] [executor.execute_action] Action: click on the search text box
+[2025-08-26 11:45:11,156] [INFO] [executor.verify_postcondition] Expectation: search box is focused
+[2025-08-26 11:45:11,695] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the search box element
+    search_box = session.extract("find element by id", schema=Element)
+    
+    # Check if the search box is focused
+    assert search_box.is_focused()
+```
+[2025-08-26 11:45:54,721] [INFO] [executor.execute_action] Action: click on the search text box
+[2025-08-26 11:45:56,950] [INFO] [executor.execute_action] Action: type 'Chapter' in the search box
+[2025-08-26 11:45:58,968] [INFO] [executor.execute_action] Action: select the chapter 'Chapter' from the dropdown
+[2025-08-26 11:46:00,968] [INFO] [executor.execute_action] Action: click on the 'Move Page' button
+[2025-08-26 11:46:03,182] [INFO] [executor.execute_action] Action: verify that 'Page' is shown in the menu
+[2025-08-26 11:46:05,272] [INFO] [executor.execute_action] Action: verify that 'Book' link is present in the breadcrumb
+[2025-08-26 11:46:07,454] [INFO] [executor.execute_action] Action: verify that 'Chapter' link is present in the breadcrumb
+[2025-08-26 11:46:09,083] [INFO] [executor.execute_action] Action: verify that 'Page' link is present in the breadcrumb
+[2025-08-26 11:46:11,407] [INFO] [executor.execute_action] Action: navigate back to the chapter through breadcrumb link
+[2025-08-26 11:46:13,799] [INFO] [executor.execute_action] Action: verify that 'Page' is shown in the main content of the page
+[2025-08-26 11:46:55,850] [INFO] [executor.execute_action] Action: click 'Move' link
+[2025-08-26 11:46:57,089] [INFO] [executor.verify_postcondition] Expectation: chapter dialog opens
+[2025-08-26 11:46:57,896] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Chapter(BaseModel): 
+        id: int = Field(..., description="Unique identifier for the chapter")
+        title: str = Field(..., description="The title of the chapter")
+        description: str = Field(..., description="A brief description of the chapter")
+
+    # Extract chapter from latest state
+    moved = session.history[-1].extract("get chapter details", schema=Chapter)
+
+    # Assert chapter dialog opens
+    assert moved.id > 0
+```
+[2025-08-26 11:46:58,235] [INFO] [executor.assertion_api.state.extract] Extracted data: id=2 title='Chapter 2' description='No pages are currently in this chapter.'
+[2025-08-26 11:46:58,236] [INFO] [executor.verify_postcondition] Postcondition passed.
+[2025-08-26 11:46:58,236] [INFO] [executor.execute_action] Action: click the search text box
+[2025-08-26 11:47:00,247] [INFO] [executor.verify_postcondition] Expectation: search box is focused
+[2025-08-26 11:47:00,960] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class SearchBox(BaseModel): 
+        value: str = Field(..., description="The current value in the search box")
+
+    # Extract search box from latest state
+    search_box = session.history[-1].extract("get search box", schema=SearchBox)
+
+    # Assert search box is focused
+    assert search_box.value == ""
+```
+[2025-08-26 11:47:01,223] [INFO] [executor.assertion_api.state.extract] Extracted data: value='Search'
+[2025-08-26 11:47:01,224] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'search_box': {'value': 'Search'}})]
+[2025-08-26 11:47:01,750] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class SearchBox(BaseModel): 
+        value: str = Field(..., description="The current value in the search box")
+
+    # Extract search box from latest state
+    search_box = session.history[-1].extract("get search box", schema=SearchBox)
+
+    # Assert search box is focused
+    assert search_box.value == ""
+```
+[2025-08-26 11:47:01,894] [INFO] [executor.assertion_api.state.extract] Extracted data: value='Search'
+[2025-08-26 11:47:01,895] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'search_box': {'value': 'Search'}})]
+[2025-08-26 11:47:01,895] [ERROR] [main.run] Bug reported: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'search_box': {'value': 'Search'}})]
+[2025-08-26 11:47:01,896] [INFO] [executor.execute_action] Action: type 'Book1' in the search box
+[2025-08-26 11:47:04,054] [INFO] [executor.verify_postcondition] Expectation: search results are filtered by 'Book1'
+[2025-08-26 11:47:04,985] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class SearchResult(BaseModel): 
+        title: str = Field(..., description="The title of the search result")
+        author: str = Field(..., description="The author of the search result")
+        publisher: str = Field(..., description="The publisher of the search result")
+
+    # Extract search results from latest state
+    search_results = session.history[-1].extract("get search results", schema=SearchResult)
+
+    # Assert search results contain 'Book1'
+    assert any(r.title == "Book1" for r in search_results)
+```
+[2025-08-26 11:47:05,282] [INFO] [executor.assertion_api.state.extract] Extracted data: title='' author='' publisher=''
+[2025-08-26 11:47:48,685] [INFO] [executor.execute_action] Action: click 'Move' link
+[2025-08-26 11:47:50,111] [INFO] [executor.execute_action] Action: click the search text box
+[2025-08-26 11:47:53,271] [INFO] [executor.execute_action] Action: type 'Book1' in the search box
+[2025-08-26 11:47:55,432] [INFO] [executor.execute_action] Action: select the chapter 'Book1' from the dropdown
+[2025-08-26 11:47:57,766] [INFO] [executor.execute_action] Action: click 'Move Chapter' button
+[2025-08-26 11:48:00,157] [INFO] [executor.execute_action] Action: click the 'Books' button in the navigation bar
+[2025-08-26 11:48:02,661] [INFO] [executor.execute_action] Action: click on the book with title 'Book1'
+[2025-08-26 11:48:05,351] [INFO] [executor.execute_action] Action: verify that 'Chapter 1' is shown in the main content of the page
+[2025-08-26 11:48:08,400] [INFO] [executor.execute_action] Action: verify that 'Chapter 2' is shown in the main content of the page
+[2025-08-26 11:49:04,526] [INFO] [executor.execute_action] Action: click the 'Edit' button
+[2025-08-26 11:49:05,845] [INFO] [executor.verify_postcondition] Expectation: page editor opens
+[2025-08-26 11:49:06,563] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get page details", schema=State)
+    
+    # Check if the current state is a book details page
+    assert current_state.page_id == "book_details"
+    
+    # Check if the action was to click the 'Edit' button
+    assert "click the 'Edit' button" in session.history[-1].action
+    
+    # Assert that the page editor opens
+    assert "page editor opens" in session.history[-1].action
+```
+[2025-08-26 11:49:49,404] [INFO] [executor.execute_action] Action: click the 'Edit' button
+[2025-08-26 11:49:51,560] [INFO] [executor.execute_action] Action: click the 'Templates' button on the right hand side
+[2025-08-26 11:49:52,997] [INFO] [executor.execute_action] Action: tick the checkbox 'Page is a template'
+[2025-08-26 11:49:54,962] [INFO] [executor.execute_action] Action: click the 'Save Page' button
+[2025-08-26 11:49:57,336] [INFO] [executor.execute_action] Action: click the 'Book' button
+[2025-08-26 11:49:59,710] [INFO] [executor.execute_action] Action: click the 'Page' button
+[2025-08-26 11:50:01,588] [INFO] [executor.execute_action] Action: click the 'Edit' button
+[2025-08-26 11:50:04,310] [INFO] [executor.execute_action] Action: click the 'Templates' button on the right hand side
+[2025-08-26 11:50:07,363] [INFO] [executor.execute_action] Action: click the 'Page Template' prepend to page content button
+[2025-08-26 11:50:10,494] [INFO] [executor.execute_action] Action: click the 'Page Template' append to page content button
+[2025-08-26 11:50:13,416] [INFO] [executor.execute_action] Action: verify page content is populated with template
+[2025-08-26 11:50:16,467] [INFO] [executor.execute_action] Action: click the 'Save Page' button
+[2025-08-26 11:50:53,994] [INFO] [executor.execute_action] Action: click on the 'Roles' link in the settings menu
+[2025-08-26 11:50:55,278] [INFO] [executor.verify_postcondition] Expectation: roles section opens
+[2025-08-26 11:50:55,974] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Roles(BaseModel): 
+        roles: List[str] = Field(default_factory=list, description="List of roles associated with the user")
+
+    # Extract roles from latest state
+    roles = session.history[-1].extract("get roles", schema=Roles).roles
+
+    # Assert roles section opens
+    assert "roles" in roles
+```
+[2025-08-26 11:50:56,197] [INFO] [executor.assertion_api.state.extract] Extracted data: roles=['Admin']
+[2025-08-26 11:50:56,197] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'roles': ['Admin']})]
+[2025-08-26 11:50:56,717] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class Roles(BaseModel): 
+        roles: List[str] = Field(default_factory=list, description="List of roles associated with the user")
+
+    # Extract roles from latest state
+    roles = session.history[-1].extract("get roles", schema=Roles).roles
+
+    # Assert roles section opens
+    assert "roles" in roles
+```
+[2025-08-26 11:50:56,834] [INFO] [executor.assertion_api.state.extract] Extracted data: roles=['Admin']
+[2025-08-26 11:50:56,835] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'roles': ['Admin']})]
+[2025-08-26 11:50:56,835] [ERROR] [main.run] Bug reported: AssertionError raised without message.
+Variable trace:
+[(3, {}), (7, {}), (10, {'roles': ['Admin']})]
+[2025-08-26 11:50:56,836] [INFO] [executor.execute_action] Action: click on the 'Create New Role' button
+[2025-08-26 11:50:58,274] [INFO] [executor.verify_postcondition] Expectation: role creation form opens
+[2025-08-26 11:50:58,824] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get bookshelf", schema=Page)
+    
+    # Check if the form for creating a new role is present
+    assert "Create New Role" in current_state.content
+```
+[2025-08-26 11:51:38,034] [INFO] [executor.execute_action] Action: click on the 'Roles' link in the settings menu
+[2025-08-26 11:51:39,160] [INFO] [executor.execute_action] Action: click on the 'Create New Role' button
+[2025-08-26 11:51:41,211] [INFO] [executor.execute_action] Action: click inside the 'Role Name' textbox
+[2025-08-26 11:51:42,534] [INFO] [executor.execute_action] Action: type 'Role' into the name field
+[2025-08-26 11:51:44,654] [INFO] [executor.execute_action] Action: click inside the 'Role Description' textbox
+[2025-08-26 11:51:46,949] [INFO] [executor.execute_action] Action: type 'Role description' into the description field
+[2025-08-26 11:51:48,690] [INFO] [executor.execute_action] Action: click on the checkbox for the button 'Manage all book, chapter & page permissions'
+[2025-08-26 11:51:51,208] [INFO] [executor.execute_action] Action: scroll down and click on the 'Toggle All' button under 'Shelves' text
+[2025-08-26 11:51:52,964] [INFO] [executor.execute_action] Action: click on the 'Toggle All' button under 'Books' text
+[2025-08-26 11:51:54,889] [INFO] [executor.execute_action] Action: click on the 'Toggle All' button under 'Chapters' text
+[2025-08-26 11:51:56,925] [INFO] [executor.execute_action] Action: click on the 'Toggle All' button under 'Pages' text
+[2025-08-26 11:51:59,044] [INFO] [executor.execute_action] Action: click on the 'Save Role' button
+[2025-08-26 11:52:01,888] [INFO] [executor.execute_action] Action: verify that role 'Role' appears in the roles listing
+[2025-08-26 11:52:41,543] [INFO] [executor.execute_action] Action: click on 'Users' option
+[2025-08-26 11:52:43,580] [INFO] [executor.verify_postcondition] Expectation: users management section opens
+[2025-08-26 11:52:44,153] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current page title
+    current_page_title = session.extract("get page title", schema=str).title
+    
+    # Check if the current page title matches the expected value
+    assert current_page_title == "User Roles"
+```
+[2025-08-26 11:53:25,455] [INFO] [executor.execute_action] Action: click on 'Users' option
+[2025-08-26 11:53:26,771] [INFO] [executor.execute_action] Action: select user Guest guest@example.com
+[2025-08-26 11:53:28,883] [INFO] [executor.execute_action] Action: select 'Role'
+[2025-08-26 11:53:31,057] [INFO] [executor.execute_action] Action: click 'Save' button
+[2025-08-26 11:53:32,027] [INFO] [executor.execute_action] Action: verify role 'Role' is assigned to user Guest
+[2025-08-26 11:54:26,015] [INFO] [executor.execute_action] Action: type 'search term' into search input field
+[2025-08-26 11:54:27,562] [INFO] [executor.verify_postcondition] Expectation: search results page is displayed
+[2025-08-26 11:54:28,036] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract search term from the current state
+    search_term = session.extract("get search term", schema=str)
+    
+    # Check if the search term is present in the search results
+    assert search_term in session.history[-1].extract("get search results", schema=str)
+```
+[2025-08-26 11:55:10,315] [INFO] [executor.execute_action] Action: type 'search term' into search input field
+[2025-08-26 11:55:12,108] [INFO] [executor.execute_action] Action: verify 'Book' is shown in search results
+[2025-08-26 11:55:13,937] [INFO] [executor.execute_action] Action: verify 'Chapter' is shown in search results
+[2025-08-26 11:55:16,042] [INFO] [executor.execute_action] Action: uncheck 'Chapter' checkbox
+[2025-08-26 11:55:18,290] [INFO] [executor.execute_action] Action: click 'Update Search' button
+[2025-08-26 11:55:19,914] [INFO] [executor.execute_action] Action: verify no chapter is shown in search results
+[2025-08-26 11:55:21,680] [INFO] [executor.execute_action] Action: verify books are shown in search results
+[2025-08-26 11:56:03,848] [INFO] [executor.execute_action] Action: click on the 'Sort' button
+[2025-08-26 11:56:05,157] [INFO] [executor.verify_postcondition] Expectation: sort interface opens
+[2025-08-26 11:56:05,845] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get book details", schema=BookDetails)
+    
+    # Check if the 'Sort' button is present in the current state
+    if 'Sort' in current_state:
+        assert True, "Sort interface opened"
+    else:
+        assert False, "Sort interface did not open"
+```
+[2025-08-26 11:56:50,188] [INFO] [executor.execute_action] Action: click on the 'Sort' button
+[2025-08-26 11:56:52,256] [INFO] [executor.execute_action] Action: click the first 'Move Up' button
+[2025-08-26 11:56:54,752] [INFO] [executor.execute_action] Action: click the second 'Move Down' button
+[2025-08-26 11:56:57,040] [INFO] [executor.execute_action] Action: click the second 'Move Up' button
+[2025-08-26 11:56:59,532] [INFO] [executor.execute_action] Action: click the 'Save New Order' button
+[2025-08-26 11:57:42,841] [INFO] [executor.execute_action] Action: click the 'Sort' button
+[2025-08-26 11:57:44,159] [INFO] [executor.verify_postcondition] Expectation: sort interface or dropdown opens
+[2025-08-26 11:57:44,875] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the current state
+    current_state = session.extract("get book details", schema=BookDetails)
+    
+    # Check if the 'Sort' button is present
+    if 'Sort' in current_state:
+        assert True, "The 'Sort' button is present."
+    else:
+        assert False, "The 'Sort' button is not present."
+```
+[2025-08-26 11:58:28,829] [INFO] [executor.execute_action] Action: click the 'Sort' button
+[2025-08-26 11:58:30,120] [INFO] [executor.execute_action] Action: select 'Sort by Name'
+[2025-08-26 11:58:32,245] [INFO] [executor.execute_action] Action: click 'Apply' or confirm sort selection
+[2025-08-26 11:59:08,423] [INFO] [executor.execute_action] Action: click on the 'Sorting' or equivalent option
+[2025-08-26 11:59:09,384] [INFO] [executor.verify_postcondition] Expectation: sort rules management section opens
+[2025-08-26 11:59:09,916] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract sorting options from the current state
+    sorting_options = session.extract("get sorting options", schema=dict)
+    
+    # Assert that the sorting options are available
+    assert "sort rules management" in sorting_options.keys()
+```
+[2025-08-26 11:59:49,063] [INFO] [executor.execute_action] Action: click on the 'Sorting' or equivalent option
+[2025-08-26 11:59:50,016] [INFO] [executor.execute_action] Action: click on the 'Create Sort Rule' button
+[2025-08-26 11:59:51,577] [INFO] [executor.execute_action] Action: click on the 'Name' textbox
+[2025-08-26 11:59:52,763] [INFO] [executor.execute_action] Action: type 'Rule' into the name field
+[2025-08-26 11:59:54,545] [INFO] [executor.execute_action] Action: click on the button to add 'Name - Alphabetical (Asc)' to the list
+[2025-08-26 11:59:56,441] [INFO] [executor.execute_action] Action: click on the button to add 'Created Date (Asc)'
+[2025-08-26 11:59:57,629] [INFO] [executor.execute_action] Action: click on the 'Save' button
+[2025-08-26 11:59:59,816] [INFO] [executor.execute_action] Action: verify that 'Role' appears in the sort rules listing
+[2025-08-26 12:00:01,589] [INFO] [executor.execute_action] Action: verify that new sort rule is listed in the rules table
+[2025-08-26 12:00:39,440] [INFO] [executor.execute_action] Action: click on 'Rule' in the rules list
+[2025-08-26 12:00:40,607] [INFO] [executor.verify_postcondition] Expectation: target sort rule is visible in the list
+[2025-08-26 12:00:41,230] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the rule from the current state
+    rule = session.extract("get sort rule", schema=SortRule)
+    
+    # Check if the rule is visible in the list
+    assert rule.name in session.history[-1].extract("get sort rules", schema=List[SortRule]).name
+```
+[2025-08-26 12:01:21,889] [INFO] [executor.execute_action] Action: click on 'Rule' in the rules list
+[2025-08-26 12:01:23,161] [INFO] [executor.execute_action] Action: click in the 'Name' textbox
+[2025-08-26 12:01:25,119] [INFO] [executor.execute_action] Action: clear and type 'Rule updated'
+[2025-08-26 12:01:27,164] [INFO] [executor.execute_action] Action: click button to add 'Chapters First' to the list
+[2025-08-26 12:01:29,219] [INFO] [executor.execute_action] Action: click 'Save' button
+[2025-08-26 12:01:30,164] [INFO] [executor.execute_action] Action: verify rule 'Rule updated' appears in listing
+[2025-08-26 12:02:07,660] [INFO] [executor.execute_action] Action: click the 'Delete' button for the sort rule
+[2025-08-26 12:02:08,917] [INFO] [executor.verify_postcondition] Expectation: delete confirmation dialog appears
+[2025-08-26 12:02:09,701] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class SortRule(BaseModel): 
+        name: str = Field(..., description="The name of the sort rule")
+        created_date: str = Field(..., description="The date the sort rule was created")
+
+    # Extract sort rule from latest state
+    rule = session.history[-1].extract("get sort rule", schema=SortRule)
+
+    # Assert that the sort rule is deleted
+    assert rule.name == "Alphabetical (Asc)" and rule.created_date == "Created Date (Asc)"
+```
+[2025-08-26 12:02:09,927] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Name - Alphabetical (Asc)' created_date='2023-10-01'
+[2025-08-26 12:02:09,928] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}),
+ (8, {}),
+ (11,
+  {'rule': {'created_date': '2023-10-01',
+            'name': 'Name - Alphabetical (Asc)'}})]
+[2025-08-26 12:02:10,634] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Define data models
+    class SortRule(BaseModel): 
+        name: str = Field(..., description="The name of the sort rule")
+        created_date: str = Field(..., description="The date the sort rule was created")
+
+    # Extract sort rule from latest state
+    rule = session.history[-1].extract("get sort rule", schema=SortRule)
+
+    # Assert that the sort rule is deleted
+    assert rule.name == "Alphabetical (Asc)" and rule.created_date == "Created Date (Asc)"
+```
+[2025-08-26 12:02:10,855] [INFO] [executor.assertion_api.state.extract] Extracted data: name='Name - Alphabetical (Asc)' created_date='2023-10-01'
+[2025-08-26 12:02:10,856] [INFO] [executor.verify_postcondition] Postcondition failed: AssertionError raised without message.
+Variable trace:
+[(3, {}),
+ (8, {}),
+ (11,
+  {'rule': {'created_date': '2023-10-01',
+            'name': 'Name - Alphabetical (Asc)'}})]
+[2025-08-26 12:02:10,856] [ERROR] [main.run] Bug reported: AssertionError raised without message.
+Variable trace:
+[(3, {}),
+ (8, {}),
+ (11,
+  {'rule': {'created_date': '2023-10-01',
+            'name': 'Name - Alphabetical (Asc)'}})]
+[2025-08-26 12:02:10,857] [INFO] [executor.execute_action] Action: click the 'Confirm' button in the confirmation dialog
+[2025-08-26 12:02:12,822] [INFO] [executor.verify_postcondition] Expectation: sort rule deletion is confirmed
+[2025-08-26 12:02:13,224] [INFO] [executor.verify_postcondition] Postcondition: ```python
+def postcondition(session: Session):
+    # Extract the sort rule from the current state
+    sort_rule = session.extract("get sort rule", schema=SortRule)
+    
+    # Check if the sort rule is deleted
+    assert sort_rule is None
+```
+[2025-08-26 12:02:53,599] [INFO] [executor.execute_action] Action: click the 'Delete' button for the sort rule
+[2025-08-26 12:02:54,569] [INFO] [executor.execute_action] Action: click the 'Confirm' button in the confirmation dialog
+[2025-08-26 12:02:56,499] [INFO] [executor.execute_action] Action: scroll down to ensure the sort rule is no longer visible in the list
+[2025-08-26 12:02:57,276] [INFO] [executor.execute_action] Action: verify that the sort rule is removed from the rules table

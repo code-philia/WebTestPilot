@@ -349,45 +349,7 @@
                 null,
                 null,
                 null,
-                null        {
-                    "test_name": "18::Conference Lock",
-                    "success": true,
-                    "current_step": 3,
-                    "total_step": 3,
-                    "traces": [
-                        {
-                            "action": {
-                                "name": "click",
-                                "args": {
-                                    "xpath": "/html/body/main/div[2]/div/div[1]/div[2]/div/div[2]/div/button"
-                                }
-                            }
-                        },
-                        {
-                            "action": {
-                                "name": "click",
-                                "args": {
-                                    "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
-                                }
-                            }
-                        },
-                        {
-                            "action": {
-                                "name": "click",
-                                "args": {
-                                    "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
-                                }
-                            }
-                        }
-                    ],
-                    "error_message": null,
-                    "runtime": 80.36310329100525,
-                    "token_count": 19066,
-                    "has_bug": false,
-                    "bug_name": null,
-                    "correct_trace_percentage": 1.0,
-                    "runtime_per_step": 26.787701097001747
-                },
+                null        
             ],
             "error_message": null,
             "runtime": 49.26274216599995,
