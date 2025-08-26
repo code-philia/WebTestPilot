@@ -56,7 +56,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
 
         for file_path in sorted(
             self.test_case_path.glob("*.yaml"), key=lambda p: p.stem
-        )[:1]:
+        ):
             if filter_pattern and filter_pattern not in file_path.stem:
                 continue
 
