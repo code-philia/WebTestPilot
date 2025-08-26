@@ -1,6 +1,6 @@
 import os
 
-from testcases.tracing.core.tracer import TraceEntry
+from tracing.core.tracer import TraceEntry
 
 
 def is_tracing_enabled() -> bool:

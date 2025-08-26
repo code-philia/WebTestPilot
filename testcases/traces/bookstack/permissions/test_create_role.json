@@ -2,7 +2,7 @@
   "test": "test_create_role",
   "app": "bookstack",
   "collection": "permissions",
-  "total_traces": 22,
+  "total_traces": 13,
   "successful_traces": 22,
   "failed_traces": 0,
   "coverage_stats": {
@@ -25,142 +25,85 @@
   },
   "traces": [
     {
-      "url": "about:blank",
-      "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8081/"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"header\"]/nav/div/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email\"]",
-      "action": "fill",
-      "value": "admin@admin.com"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "fill",
-      "value": "password"
-    },
-    {
-      "url": "http://localhost:8081/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"login-form\"]/div[2]/div[2]/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8081/",
-      "action_type": "assertion",
-      "xpath": "//*[@id=\"header\"]/nav/div[1]/a[3]",
-      "action": "to_be_visible"
-    },
-    {
       "url": "http://localhost:8081/",
       "action_type": "action",
-      "xpath": "//*[@id=\"header\"]/nav/div[1]/a[4]",
+      "xpath": "/html/body/header/nav/div[1]/a[4]",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/features",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/nav/a[5]",
+      "xpath": "/html/body/div[4]/div/div/div/div/nav/a[5]",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/div[1]/div/a",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/div[1]/div/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"display_name\"]",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[1]/div[2]/div[1]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"display_name\"]",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[1]/div[2]/div[1]/input",
       "action": "fill",
-      "value": "Role 726361"
+      "value": "Role876078"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"description\"]",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[1]/div[2]/div[2]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"description\"]",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[1]/div[2]/div[2]/input",
       "action": "fill",
-      "value": "Role description 726361"
+      "value": "Role description876078"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[2]/div/div[1]/div[1]/label/span[2]",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[2]/div/div[1]/div[1]/label/span[2]",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[3]/div[1]/div[3]/div[1]/a",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[3]/div[1]/div[3]/div[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[3]/div[1]/div[4]/div[1]/a",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[3]/div[1]/div[4]/div[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[1]/div[3]/div[1]/div[5]/div[1]/a",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[1]/div[3]/div[1]/div[5]/div[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles/new",
       "action_type": "action",
-      "xpath": "//*[@id=\"main-content\"]/div/div/form/div[2]/button",
+      "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[2]/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8081/settings/roles",
       "action_type": "assertion",
-      "xpath": "/html/body/div[1]",
-      "action": "to_be_visible"
-    },
-    {
-      "url": "http://localhost:8081/settings/roles",
-      "action_type": "assertion",
-      "xpath": "//*[@id=\"main-content\"]",
+      "xpath": "/html/body/div[4]/div/div/div",
       "action": "to_contain_text",
-      "value": "Role 726361"
+      "value": "Role876078"
     }
   ]
 }

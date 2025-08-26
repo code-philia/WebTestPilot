@@ -35,7 +35,7 @@ def pytest_configure(config: Any) -> None:
     if config.getoption("--with-xpath-tracing"):
         # Set environment variables for traced_playwright.py to pick up
         os.environ["ENABLE_XPATH_TRACING"] = "true"
-        os.environ["XPATH_TRACE_DEBUG"] = "false"
+        os.environ["XPATH_TRACE_DEBUG"] = "true"
 
         # Store base trace directory
         base_dir = config.getoption("--xpath-trace-dir")

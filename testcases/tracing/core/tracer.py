@@ -103,9 +103,6 @@ class XPathTracer:
         filename = f"{clean_test_name}.json"
         filepath = os.path.join(self.output_dir, filename)
 
-        # Debug output
-        print(f"\n[DEBUG] Saving {len(self.traces)} traces to {filepath}")
-
         # Calculate coverage statistics
         missing_methods: set[str] = self.failed_methods - self.successful_methods
         coverage_stats: dict[str, Any] = {
@@ -127,11 +124,14 @@ class XPathTracer:
             if trace["action"] == "START":
                 start = True
 
+        # Debug output
+        print(f"\n[DEBUG] Saving {len(self.traces)} traces to {filepath}")
+
         data: dict[str, Any] = {
             "test": clean_test_name,
             "app": self.app,
             "collection": self.collection,
-            "total_traces": len(self.traces),
+            "total_traces": len(truncated_traces),
             "successful_traces": len([t for t in self.traces if t.success]),
             "failed_traces": len([t for t in self.traces if not t.success]),
             "coverage_stats": coverage_stats,
