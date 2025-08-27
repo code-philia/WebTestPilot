@@ -42,24 +42,73 @@ class LavagueTestRunner(BaseTestRunner):
         )
         self.headless = headless
 
-    def extract_trace_from_code(self, code: str) -> list[dict]:
+    def extract_trace_from_code(self, code: str) -> list[dict] | str:
         """Lavague's trace contains code, the last trace contains all the actions.
-        i.e.: from playwright.sync_api import sync_playwright\n\npage.set_viewport_size({\"width\": 1080, \"height\": 1080})\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/header/nav/div/a\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div/div[2]/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div/div[2]/input\",\n                \"value\": \"password\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div[4]/div/div[2]/form/div[2]/div[2]/button\"\n            }\n        }\n    }\n]
+        Sample edge case:
+        ```python
+        from playwright.sync_api import sync_playwright
+
+        page.set_viewport_size({"width": 1080, "height": 1080})
+        [
+            {
+                "action": {
+                    "name": "setValue",
+                    "args": {
+                        "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input",
+                        "value": "Rule updated"
+                    }
+                }
+            }
+        ]    def scroll_down(self) -> None:
+                self.execute_script("window.scrollBy(0, window.innerHeight);")
+        [
+            {
+                "action": {
+                    "name": "click",
+                    "args": {
+                        "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div[2]/div/div[2]/ul/li[6]/div[3]/button[4]"
+                    }
+                }
+            }
+        ]
+        ```
         """
-        # First 3 lines are code, remove
-        code = "\n".join(code.split("\n")[3:])
+        try:
+            code = "\n".join(code.split("\n")[3:])
 
-        # Parse the remaining data (arrays concatenated together)
-        # Split the arrays but keep the brackets
-        arrays = code.split("][")
-        arrays = [arr + "]" if not arr.endswith("]") else arr for arr in arrays]
-        arrays = ["[" + arr if not arr.startswith("[") else arr for arr in arrays]
-        traces = []
-        for arr in arrays:
-            traces.extend(ast.literal_eval(arr))
+            # Parse the remaining traces.
+            arrays: list[str] = []
+            current = ""
+            bracket_level = 0
+            for c in code:
+                if c == "[":
+                    bracket_level += 1
 
-        print(traces)
-        return traces
+                    # Edge case with code in between.
+                    if len(current) > 0 and bracket_level == 0:
+                        arrays.append(current)
+                        current = ""
+
+                    current += c
+                elif c == "]":
+                    bracket_level -= 1
+                    if bracket_level == 0:
+                        arrays.append(current + c)
+                        current = ""
+                else:
+                    current += c
+
+            traces = []
+            for arr in arrays:
+                try:
+                    traces.extend(ast.literal_eval(arr))
+                except SyntaxError:
+                    # Name is between def and (.
+                    name = arr[arr.find("def ") + 4 : arr.find("(")].strip()
+                    traces.append({"action": {"name": name, "args": {"content": arr}}})
+            return traces
+        except Exception:
+            return code
 
     def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using LaVague agent."""
