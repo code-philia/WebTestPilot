@@ -1,0 +1,55 @@
+# config.yaml
+# See `baml_src/clients` for available clients
+
+parser:
+  # Semantic parsing of text descriptions into (condition, action, expectation) test steps
+  llm_client: "GPT"
+
+  # Automatically infer <unknown> placeholders in parsed test steps
+  # If false, throw exception and inform user
+  infer_missing_steps: true
+  
+executor:
+  llm_clients:
+    # Generates pre- and post-conditions using the assertion API
+    assertion_generation: "GPT"
+
+    # Executes assertion API methods (e.g., extract() from state and element)
+    assertion_api: "GPT"
+
+    # Proposes actions given a natural language action description
+    action_proposer: "GPT"
+
+    # Locates UI elements (x, y) from a UI description
+    ui_locator: "UGround"
+
+    # For tracking same logical pages across states
+    page_reidentification: "GPT"
+
+  # When a postcondition assertion fails, how many times to retry assertion generation before reporting as a bug
+  max_retries: 1
+
+
+# Logging dict configs
+logging:
+  version: 1
+
+  disable_existing_loggers: false
+  
+  formatters:
+    default:
+      format: "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s] %(message)s"
+  
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: default
+  
+    file:
+      class: logging.FileHandler
+      formatter: default
+      filename: "webtestpilot-gpt-add-noise.log"
+
+  root:
+    level: INFO
+    handlers: ["console", "file"]
