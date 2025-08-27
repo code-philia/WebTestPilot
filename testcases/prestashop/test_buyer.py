@@ -2,6 +2,7 @@ import re
 
 from playwright.sync_api import Page
 from prestashop.conftest import PrestaShopTestData
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 # 7 testcases
@@ -9,6 +10,8 @@ from tracing_api import traced_expect as expect
 
 def test_add_to_cart(logged_in_buyer_page: Page, test_data: PrestaShopTestData) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name=test_data.buyer_product_name).nth(1).click()
     page.get_by_label("Size").select_option(test_data.buyer_size_cnt)
     page.get_by_role("radio", name=test_data.buyer_color).check()
@@ -22,6 +25,8 @@ def test_search_product(
     logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("textbox", name="Search").fill(test_data.buyer_product_name)
     page.get_by_role("textbox", name="Search").press("Enter")
     expect(
@@ -33,6 +38,8 @@ def test_like_product(
     logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("textbox", name="Search").fill(test_data.buyer_product_name)
     page.get_by_role("textbox", name="Search").press("Enter")
     product_article = page.get_by_role("article").filter(
@@ -47,6 +54,8 @@ def test_add_and_remove_product(
     logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     # because this web doesn't memorize the product in the cart, so we need to add the product to the cart again
     page.get_by_role("link", name=test_data.buyer_product_name).nth(1).click()
     page.get_by_label("Size").select_option(test_data.buyer_size)
@@ -72,6 +81,8 @@ def test_dislike_product(
     created_wishlist_item_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = created_wishlist_item_page
+    insert_start_event_to_page(page)
+
     # Product is already in wishlist, search for it and remove it
     page.get_by_role("textbox", name="Search").fill(test_data.buyer_product_name)
     page.get_by_role("textbox", name="Search").press("Enter")
@@ -89,6 +100,8 @@ def test_write_review(
     logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name=test_data.buyer_product_name).nth(1).click()
     page.get_by_role("button", name="edit Be the first to write").click()
     page.locator(f".star-content > div:nth-child({test_data.buyer_star})").first.click()
@@ -102,6 +115,8 @@ def test_click_category(
     logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_buyer_page
+    insert_start_event_to_page(page)
+
     page.get_by_role("link", name=test_data.buyer_main_category).click()
     page.get_by_title(test_data.buyer_sub_category, exact=True).click()
     page.get_by_label(test_data.buyer_filter_availability).check()

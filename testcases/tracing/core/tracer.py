@@ -15,7 +15,6 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 from .constants import ActionType
-from .utils import is_debug_enabled
 
 
 @dataclass
@@ -95,11 +94,6 @@ class XPathTracer:
         else:
             self.failed_methods.add(action)
 
-        # Optional debug output
-        if is_debug_enabled():
-            status = "SUCCESS" if success else f"FAILED: {error_message}"
-            print(f"[TRACE] {action} on {xpath} at {url} - {status}")
-
     def save_traces(self) -> str:
         """Save traces to JSON file with simplified format"""
         # Clean up test name - remove [chromium] and similar browser identifiers
@@ -108,10 +102,6 @@ class XPathTracer:
         )
         filename = f"{clean_test_name}.json"
         filepath = os.path.join(self.output_dir, filename)
-
-        # Debug output
-        if is_debug_enabled():
-            print(f"\n[DEBUG] Saving {len(self.traces)} traces to {filepath}")
 
         # Calculate coverage statistics
         missing_methods: set[str] = self.failed_methods - self.successful_methods
@@ -124,15 +114,28 @@ class XPathTracer:
 
         simplified_traces = [trace.to_simplified_dict() for trace in self.traces]
 
+        # Only start from the [START] mark
+        truncated_traces = []
+        start = False
+        for trace in simplified_traces:
+            if start:
+                truncated_traces.append(trace)
+
+            if trace["action"] == "START":
+                start = True
+
+        # Debug output
+        print(f"\n[DEBUG] Saving {len(self.traces)} traces to {filepath}")
+
         data: dict[str, Any] = {
             "test": clean_test_name,
             "app": self.app,
             "collection": self.collection,
-            "total_traces": len(self.traces),
+            "total_traces": len(truncated_traces),
             "successful_traces": len([t for t in self.traces if t.success]),
             "failed_traces": len([t for t in self.traces if not t.success]),
             "coverage_stats": coverage_stats,
-            "traces": simplified_traces,
+            "traces": truncated_traces,
         }
 
         with open(filepath, "w") as f:
@@ -141,10 +144,6 @@ class XPathTracer:
         return filepath
 
     def report_coverage(self) -> None:
-        """Print coverage report for debugging"""
-        if not is_debug_enabled():
-            return
-
         missing_methods: set[str] = self.failed_methods - self.successful_methods
 
         print("\n=== XPath Tracing Coverage Report ===")

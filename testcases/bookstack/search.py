@@ -2,6 +2,7 @@ from bookstack.conftest import (
     BookStackTestData,
 )
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
@@ -9,6 +10,7 @@ def test_global_search(
     created_global_search_page: Page, test_data: BookStackTestData
 ) -> None:
     page = created_global_search_page
+    insert_start_event_to_page(page)
 
     page.get_by_role("textbox", name="Search").click()
     page.get_by_role("textbox", name="Search").fill(f'"{test_data._unique_id}"')

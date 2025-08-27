@@ -2,8 +2,8 @@
   "test": "test_update_client",
   "app": "invoiceninja",
   "collection": "client",
-  "total_traces": 38,
-  "successful_traces": 38,
+  "total_traces": 8,
+  "successful_traces": 39,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -25,248 +25,55 @@
   },
   "traces": [
     {
-      "url": "about:blank",
+      "url": "http://localhost:8082/clients/Opnel5aKBz",
       "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8082/login"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button",
       "action": "click"
     },
     {
-      "url": "http://localhost:8082/login",
+      "url": "http://localhost:8082/clients/Opnel5aKBz/edit",
       "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
+      "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8082/clients/Opnel5aKBz/edit",
+      "action_type": "action",
+      "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
       "action": "fill",
-      "value": "admin@example.com"
+      "value": "company_name_updated343836"
     },
     {
-      "url": "http://localhost:8082/login",
+      "url": "http://localhost:8082/clients/Opnel5aKBz/edit",
       "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button",
       "action": "click"
     },
     {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "fill",
-      "value": "changeme!"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"headlessui-dialog-:r6:\"]/div/div[2]/div[2]/div/div[2]/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/dashboard",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[1]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[1]/dd/section/div/input",
-      "action": "fill",
-      "value": "company_name993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
-      "action": "fill",
-      "value": "company_number993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[5]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[5]/dd/section/div/input",
-      "action": "fill",
-      "value": "company_id993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[6]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[6]/dd/section/div/input",
-      "action": "fill",
-      "value": "vat_number993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[7]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[7]/dd/section/div/input",
-      "action": "fill",
-      "value": "website993003.com"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input",
-      "action": "fill",
-      "value": "09993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"first_name_0\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"first_name_0\"]",
-      "action": "fill",
-      "value": "first_name993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"last_name_0\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"last_name_0\"]",
-      "action": "fill",
-      "value": "last_name993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email_0\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"email_0\"]",
-      "action": "fill",
-      "value": "email993003@example.com"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"phone_0\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"phone_0\"]",
-      "action": "fill",
-      "value": "099993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/div/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl/edit",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl/edit",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
-      "action": "fill",
-      "value": "company_name_updated993003"
-    },
-    {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl/edit",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/div/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl/edit",
+      "url": "http://localhost:8082/clients/Opnel5aKBz/edit",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"_rht_toaster\"]/div/div/div[2]",
+      "xpath": "/html/body/div/div/div[1]/div/div/div[2]",
       "action": "to_be_visible"
     },
     {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl",
+      "url": "http://localhost:8082/clients/Opnel5aKBz",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a",
+      "xpath": "/html/body/div/div/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a",
       "action": "to_be_visible"
     },
     {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl",
+      "url": "http://localhost:8082/clients/Opnel5aKBz",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[1]/div/nav/ol",
+      "xpath": "/html/body/div/div/div[2]/div[3]/main/div[1]/div/nav/ol",
       "action": "to_contain_text",
-      "value": "company_name_updated993003"
+      "value": "company_name_updated343836"
     },
     {
-      "url": "http://localhost:8082/clients/wMvbmOeYAl",
+      "url": "http://localhost:8082/clients/Opnel5aKBz",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[1]/h2",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/h2",
       "action": "to_contain_text",
-      "value": "company_name_updated993003"
+      "value": "company_name_updated343836"
     }
   ]
 }

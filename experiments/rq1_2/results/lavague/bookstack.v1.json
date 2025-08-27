@@ -1,0 +1,2237 @@
+{
+    "summary": {
+        "total_runs": 28,
+        "success_rate": 0.6428571428571429,
+        "correct_trace_percentage": 0.7614032792604222,
+        "normal_tests": 28,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": false,
+            "current_step": 3,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div[2]/form/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div[2]/form/div/div/input",
+                            "value": "admin@admin.com"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div[2]/form/div/div[2]/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 4: Connection error.",
+            "runtime": 449.95947687499574,
+            "token_count": 69979,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.5,
+            "runtime_per_step": 112.48986921874894
+        },
+        {
+            "test_name": "02::Book Create",
+            "success": true,
+            "current_step": 14,
+            "total_step": 14,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": "Book"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[6]/div/div[2]/div[3]/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Description"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[2]/input",
+                            "value": "env"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[3]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[4]/div/div/div/div/div[3]/input",
+                            "value": "test"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[6]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1362.5569197500008,
+            "token_count": 748765,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 97.3254942678572
+        },
+        {
+            "test_name": "03::Book Read",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 412.42204733297694,
+            "token_count": 100306,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 82.4844094665954
+        },
+        {
+            "test_name": "04::Book Update",
+            "success": false,
+            "current_step": 5,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": "Book Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Description Updated"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 6: invalid syntax (<unknown>, line 11)",
+            "runtime": 674.5553067500005,
+            "token_count": 581541,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.5555555555555556,
+            "runtime_per_step": 112.42588445833341
+        },
+        {
+            "test_name": "05::Book Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/form/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 257.82618495900533,
+            "token_count": 79846,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 85.94206165300177
+        },
+        {
+            "test_name": "06::Chapter Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 113.66216337500373,
+            "token_count": 98309,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 113.66216337500373
+        },
+        {
+            "test_name": "07::Chapter Read",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [],
+            "error_message": null,
+            "runtime": 399.55280720899464,
+            "token_count": 40341,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 79.91056144179893
+        },
+        {
+            "test_name": "08::Chapter Update",
+            "success": true,
+            "current_step": 8,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": "Chapter Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[6]/div/div[2]/div[3]/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[6]/div/div[2]/div[3]/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Chapter Description Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Chapter Description Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Chapter Description Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[5]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 811.9751870830078,
+            "token_count": 474136,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 101.49689838537597
+        },
+        {
+            "test_name": "09::Chapter Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/form/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/form/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 285.246052707982,
+            "token_count": 140725,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 95.08201756932733
+        },
+        {
+            "test_name": "10::Page Create",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input",
+                            "value": "Page"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div[2]/div/div/div/div/div/div/div/div[3]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div[2]/div/div/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div/div[3]/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1063.9971971669875,
+            "token_count": 911893,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 106.39971971669874
+        },
+        {
+            "test_name": "11::Page Read",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 453.3072421250108,
+            "token_count": 173846,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 90.66144842500216
+        },
+        {
+            "test_name": "12::Page Update",
+            "success": true,
+            "current_step": 8,
+            "total_step": 8,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div/div/div/input",
+                            "value": "Page Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div/div[3]/div[2]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 868.5008391249867,
+            "token_count": 787403,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 108.56260489062333
+        },
+        {
+            "test_name": "13::Page Delete",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div[2]/form/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/form/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 371.31176537499414,
+            "token_count": 150886,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 92.82794134374853
+        },
+        {
+            "test_name": "14::Shelf Create",
+            "success": false,
+            "current_step": 9,
+            "total_step": 13,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": "Shelf"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div[2]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div/div[2]/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[5]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div/div[2]/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[5]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 10: invalid syntax (<unknown>, line 10)",
+            "runtime": 1127.021966875007,
+            "token_count": 936118,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.6923076923076923,
+            "runtime_per_step": 112.70219668750069
+        },
+        {
+            "test_name": "15::Shelf Read",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 497.0408758750127,
+            "token_count": 111416,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 82.84014597916878
+        },
+        {
+            "test_name": "16::Shelf Update",
+            "success": true,
+            "current_step": 9,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/input",
+                            "value": "Shelf Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fail",
+                        "args": {}
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/div/div/div/div/div/div/button[3]",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/label",
+                            "value": "Shelf Description Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[3]/div/ul/li/div[3]/button[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[3]/div[2]/ul/li/div[3]/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[3]/div/ul/li/div[3]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[3]/div/ul/li[2]/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[6]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 992.4285814999894,
+            "token_count": 815760,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 110.26984238888771
+        },
+        {
+            "test_name": "17::Shelf Delete",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/form/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 340.16262487499625,
+            "token_count": 89619,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 85.04065621874906
+        },
+        {
+            "test_name": "18::Move Page Into Chapter",
+            "success": false,
+            "current_step": 0,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[3]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/div/div[2]/div/a[2]/div/div/span"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 128.30537225000444,
+            "token_count": 135173,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 128.30537225000444
+        },
+        {
+            "test_name": "19::Move Chapter Between Books",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/form/div/div/div[2]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 122.97331454200321,
+            "token_count": 130995,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 122.97331454200321
+        },
+        {
+            "test_name": "20::Create and Use Page Template",
+            "success": true,
+            "current_step": 12,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div/div/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/label/span"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div/div[3]/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/main/div/div[2]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div/div/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div/div[2]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div/div[2]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div/div[2]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div[2]/div[2]/div/div[4]/div/div/div[2]/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/form/div/div/div[3]/div[2]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1233.7888465830183,
+            "token_count": 801159,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 102.81573721525153
+        },
+        {
+            "test_name": "21::Create Role with Permissions",
+            "success": false,
+            "current_step": 8,
+            "total_step": 14,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/nav/a[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input",
+                            "value": "Role"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div[2]/input",
+                            "value": "Role description"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div[2]/div/div/div/label/span"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 9: invalid syntax (<unknown>, line 10)",
+            "runtime": 921.4339257079992,
+            "token_count": 496140,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.5714285714285714,
+            "runtime_per_step": 102.3815473008888
+        },
+        {
+            "test_name": "22::Assign Role to User",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/nav/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/main/div[3]/div[2]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/section/form/div/div[2]/div/div/div[4]/label/span"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/section/form/div[2]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 445.4918044579972,
+            "token_count": 136381,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 89.09836089159944
+        },
+        {
+            "test_name": "23::Global Search with Filters",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/div[2]/form/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 126.42609787502442,
+            "token_count": 106572,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 126.42609787502442
+        },
+        {
+            "test_name": "24::Manual Sort Chapters and Pages",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/form/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[2]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[3]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[2]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li/div/div[3]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[2]/div/div[3]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[2]/div/div[3]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[2]/div/div[3]/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[3]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[3]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[3]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/ul/li[3]/div/div[3]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/form/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 717.0696253339993,
+            "token_count": 494920,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 119.51160422233322
+        },
+        {
+            "test_name": "25::Sort Content by Name",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div[2]/div/div/nav/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div[2]/div/div/div/aside/div[2]/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/div[2]/details/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div[2]/div/div/form/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 373.6050035840017,
+            "token_count": 160752,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 93.40125089600042
+        },
+        {
+            "test_name": "26::Create Sort Rules",
+            "success": true,
+            "current_step": 9,
+            "total_step": 9,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/header/nav/div/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div/nav/a[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div[2]/div[2]/div/div[2]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input",
+                            "value": "Rule"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div[2]/div/div[2]/ul/li[2]/div[3]/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div[2]/div/div[2]/ul/li[5]/div[3]/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div[2]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 888.4271639579965,
+            "token_count": 407227,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 98.71412932866627
+        },
+        {
+            "test_name": "27::Update Sort Rules",
+            "success": false,
+            "current_step": 3,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/div[2]/div[2]/div[2]/div/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input",
+                            "value": ""
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[4]/div/div/div/div/div/form/div/div/div[2]/div/input",
+                            "value": "Rule updated"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 4: invalid syntax (<unknown>, line 11)",
+            "runtime": 434.28714191602194,
+            "token_count": 350883,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.5,
+            "runtime_per_step": 108.57178547900548
+        },
+        {
+            "test_name": "28::Delete Sort Rules",
+            "success": false,
+            "current_step": 2,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Error at step 3: invalid syntax (<unknown>, line 1)",
+            "runtime": 356.5639549579937,
+            "token_count": 220124,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.5,
+            "runtime_per_step": 118.85465165266457
+        }
+    ]
+}

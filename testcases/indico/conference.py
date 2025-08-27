@@ -1,19 +1,21 @@
+from indico.conftest import IndicoTestData, create_conference
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
-from indico.conftest import IndicoTestData
 
+def test_create_conference(logged_in_page: Page, test_data: IndicoTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
 
-def test_create_conference(
-    created_conference_page: Page, test_data: IndicoTestData
-) -> None:
-    expect(created_conference_page.locator("#event-settings-data")).to_contain_text(
-        test_data.meeting_name
+    create_conference(logged_in_page, test_data)
+
+    expect(logged_in_page.locator("#event-settings-data")).to_contain_text(
+        test_data.conference_name
     )
-    expect(created_conference_page.locator("#event-settings-location")).to_contain_text(
+    expect(logged_in_page.locator("#event-settings-location")).to_contain_text(
         test_data.room_name
     )
-    expect(created_conference_page.locator("#event-settings-location")).to_contain_text(
+    expect(logged_in_page.locator("#event-settings-location")).to_contain_text(
         test_data.venue_name
     )
 
@@ -21,6 +23,8 @@ def test_create_conference(
 def test_lock_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("button", name=" ").click()
     created_conference_page.get_by_role("button", name="Lock").click()
     created_conference_page.get_by_role("button", name="Lock event").click()
@@ -36,6 +40,8 @@ def test_lock_conference(
 def test_unlock_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     # Lock first
     created_conference_page.get_by_role("button", name=" ").click()
     created_conference_page.get_by_role("button", name="Lock").click()
@@ -59,6 +65,8 @@ def test_unlock_conference(
 def test_add_track_to_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Programme").click()
     created_conference_page.get_by_role("link", name=" Add track", exact=True).click()
     created_conference_page.get_by_role("textbox", name="Title").fill(
@@ -82,6 +90,8 @@ def test_add_track_to_conference(
 def test_add_track_group_to_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Programme").click()
     created_conference_page.get_by_role("link", name=" Add track group").click()
     created_conference_page.get_by_role("textbox", name="Title").fill(
@@ -104,6 +114,8 @@ def test_add_track_group_to_conference(
 def test_enable_call_for_abstracts_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     # Open the collapsible menu
     created_conference_page.get_by_role("listitem").filter(
         has_text="Workflows Call for Abstracts"
@@ -128,6 +140,8 @@ def test_enable_call_for_abstracts_conference(
 def test_enable_notifications_for_call_for_abstracts_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     # Open the collapsible menu
     created_conference_page.get_by_role("listitem").filter(
         has_text="Workflows Call for Abstracts"
@@ -157,6 +171,8 @@ def test_enable_notifications_for_call_for_abstracts_conference(
 def test_enable_default_notifications_for_call_for_abstracts_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     # Open the collapsible menu
     created_conference_page.get_by_role("listitem").filter(
         has_text="Workflows Call for Abstracts"
@@ -176,6 +192,8 @@ def test_enable_default_notifications_for_call_for_abstracts_conference(
 def test_add_sessions_to_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Sessions").click()
 
     # Create session type
@@ -217,6 +235,8 @@ def test_add_sessions_to_conference(
 def test_edit_sessions_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Sessions").click()
 
     # Add new session
@@ -250,6 +270,8 @@ def test_edit_sessions_in_conference(
 def test_delete_sessions_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Sessions").click()
     expect(
         created_conference_page.locator("#sessions-wrapper div").first
@@ -283,6 +305,8 @@ def test_delete_sessions_in_conference(
 def test_add_contribution_session_to_timetable_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     # Go to timetable and add session to it
     created_conference_page.get_by_role("link", name=" Timetable").click()
 
@@ -301,6 +325,8 @@ def test_add_contribution_session_to_timetable_in_conference(
 def test_add_break_session_to_timetable_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name=" Timetable").click()
 
     created_conference_page.get_by_role("link", name="Add new ").click()
@@ -317,6 +343,8 @@ def test_add_break_session_to_timetable_in_conference(
 def test_payment_setup_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Registration").click()
 
     # Enable payments
@@ -356,6 +384,8 @@ def test_payment_setup_in_conference(
 def test_registration_setup_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Registration").click()
     created_conference_page.get_by_role("link", name=" Create form").click()
     created_conference_page.get_by_role("textbox", name="Title").click()
@@ -372,6 +402,8 @@ def test_registration_setup_in_conference(
 def test_registration_change_state_in_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("link", name="Registration").click()
     created_conference_page.get_by_role("link", name=" Create form").click()
     created_conference_page.get_by_role("textbox", name="Title").click()
@@ -407,6 +439,8 @@ def test_registration_change_state_in_conference(
 def test_delete_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("button", name=" ").click()
     expect(
         created_conference_page.locator("#event-action-menu-actions")
@@ -424,6 +458,8 @@ def test_delete_conference(
 def test_clone_conference(
     created_conference_page: Page, test_data: IndicoTestData
 ) -> None:
+    insert_start_event_to_page(created_conference_page)
+
     created_conference_page.get_by_role("button", name=" Clone").click()
     created_conference_page.get_by_label("Clone Event").locator("div").filter(
         has_text="Clone Event"

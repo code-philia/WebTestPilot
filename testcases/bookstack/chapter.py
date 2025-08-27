@@ -1,13 +1,17 @@
+from bookstack.conftest import BookStackTestData, create_chapter
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
-from bookstack.conftest import BookStackTestData
 
-
-def test_create_chapter(
-    created_chapter_page: Page, test_data: BookStackTestData
-) -> None:
+def test_create_chapter(created_book_page: Page, test_data: BookStackTestData) -> None:
     # Check content of the chapter page
+    insert_start_event_to_page(created_book_page)
+
+    created_chapter_page = create_chapter(
+        created_book_page, test_data.chapter_name, test_data.chapter_description
+    )
+
     expect(created_chapter_page.locator("h1")).to_contain_text(test_data.chapter_name)
     expect(created_chapter_page.get_by_role("main")).to_contain_text(
         test_data.chapter_description
@@ -32,6 +36,8 @@ def test_create_chapter(
 
 def test_read_chapter(created_chapter_page: Page, test_data: BookStackTestData) -> None:
     # Navigate back to the book, check the chapter
+    insert_start_event_to_page(created_chapter_page)
+
     created_chapter_page.get_by_label("Breadcrumb").get_by_role(
         "link", name=test_data.book_name
     ).click()
@@ -51,6 +57,8 @@ def test_read_chapter(created_chapter_page: Page, test_data: BookStackTestData) 
 def test_update_chapter(
     created_chapter_page: Page, test_data: BookStackTestData
 ) -> None:
+    insert_start_event_to_page(created_chapter_page)
+
     created_chapter_page.get_by_role("link", name="Edit").click()
 
     # Name
@@ -93,6 +101,8 @@ def test_update_chapter(
 
 
 def test_delete_chapter(created_chapter_page: Page) -> None:
+    insert_start_event_to_page(created_chapter_page)
+
     created_chapter_page.get_by_role("link", name="Delete").click()
     created_chapter_page.get_by_role("button", name="Confirm").click()
 

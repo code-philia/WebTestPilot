@@ -1,22 +1,28 @@
+from indico.conftest import IndicoTestData, create_lecture
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
-from indico.conftest import IndicoTestData
 
+def test_create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
 
-def test_create_lecture(created_lecture_page: Page, test_data: IndicoTestData) -> None:
-    expect(created_lecture_page.locator("#event-settings-data")).to_contain_text(
+    create_lecture(logged_in_page, test_data)
+
+    expect(logged_in_page.locator("#event-settings-data")).to_contain_text(
         test_data.lecture_name
     )
-    expect(created_lecture_page.locator("#event-settings-location")).to_contain_text(
+    expect(logged_in_page.locator("#event-settings-location")).to_contain_text(
         test_data.room_name
     )
-    expect(created_lecture_page.locator("#event-settings-location")).to_contain_text(
+    expect(logged_in_page.locator("#event-settings-location")).to_contain_text(
         test_data.venue_name
     )
 
 
 def test_delete_lecture(created_lecture_page: Page, test_data: IndicoTestData) -> None:
+    insert_start_event_to_page(created_lecture_page)
+
     created_lecture_page.get_by_role("button", name=" ").click()
     expect(created_lecture_page.locator("#event-action-menu-actions")).to_contain_text(
         "Delete"
@@ -32,6 +38,8 @@ def test_delete_lecture(created_lecture_page: Page, test_data: IndicoTestData) -
 
 
 def test_lock_lecture(created_lecture_page: Page) -> None:
+    insert_start_event_to_page(created_lecture_page)
+
     created_lecture_page.get_by_role("button", name=" ").click()
     created_lecture_page.get_by_role("button", name="Change type").click()
     created_lecture_page.get_by_role("button", name="Lock").click()
@@ -46,6 +54,8 @@ def test_lock_lecture(created_lecture_page: Page) -> None:
 
 
 def test_unlock_lecture(created_lecture_page: Page, test_data: IndicoTestData) -> None:
+    insert_start_event_to_page(created_lecture_page)
+
     # Lock first
     created_lecture_page.get_by_role("button", name=" ").click()
     created_lecture_page.get_by_role("button", name="Change type").click()
@@ -68,6 +78,8 @@ def test_unlock_lecture(created_lecture_page: Page, test_data: IndicoTestData) -
 
 
 def test_clone_lecture(created_lecture_page: Page, test_data: IndicoTestData) -> None:
+    insert_start_event_to_page(created_lecture_page)
+
     created_lecture_page.get_by_role("button", name=" Clone").click()
     created_lecture_page.get_by_label("Clone Event").locator("div").filter(
         has_text="Clone Event"

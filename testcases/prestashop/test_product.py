@@ -2,6 +2,7 @@ import re
 
 from playwright.sync_api import Page
 from prestashop.conftest import PrestaShopTestData, create_virtual_product
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 # 3 test cases
@@ -20,6 +21,7 @@ def test_create_standard_product(
     logged_in_page: Page, test_data: PrestaShopTestData
 ) -> None:
     page = logged_in_page
+    insert_start_event_to_page(page)
 
     page.get_by_role("link", name="store Catalog").click()
     page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()

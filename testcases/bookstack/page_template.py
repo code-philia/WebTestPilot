@@ -1,11 +1,14 @@
 from bookstack.conftest import BookStackTestData
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
 def test_create_page_template(
     created_data_template_page: Page, test_data: BookStackTestData
 ) -> None:
+    insert_start_event_to_page(created_data_template_page)
+
     # 1 is a template, 1 uses the template.
     page = created_data_template_page
 

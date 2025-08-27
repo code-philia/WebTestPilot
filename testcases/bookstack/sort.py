@@ -1,7 +1,9 @@
 from bookstack.conftest import (
     BookStackTestData,
+    create_sort_rule,
 )
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
@@ -9,6 +11,7 @@ def test_sort_chapter_book(
     created_data_for_sort_page: Page, test_data: BookStackTestData
 ) -> None:
     page = created_data_for_sort_page
+    insert_start_event_to_page(page)
 
     # Go back to book to start sorting.
     page.get_by_role("link", name=test_data.book_name).first.click()
@@ -33,6 +36,7 @@ def test_sort_by_name(
     created_data_for_sort_page: Page, test_data: BookStackTestData
 ) -> None:
     page = created_data_for_sort_page
+    insert_start_event_to_page(page)
 
     # Go back to book to start sorting.
     page.get_by_role("link", name=test_data.book_name).first.click()
@@ -44,17 +48,25 @@ def test_sort_by_name(
     ).to_be_visible(timeout=1000)
 
 
-def test_create_sort_rules(
-    created_sort_rule_page: Page, test_data: BookStackTestData
-) -> None:
+def test_create_sort_rules(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
+
+    logged_in_page = create_sort_rule(logged_in_page, test_data)
     expect(
-        created_sort_rule_page.get_by_role("link", name=test_data.sort_rule_name)
+        logged_in_page.get_by_role("alert").filter(
+            has_text="Sort rule successfully created"
+        )
+    ).to_be_visible(timeout=1000)
+    expect(
+        logged_in_page.get_by_role("link", name=test_data.sort_rule_name)
     ).to_be_attached()
 
 
 def test_update_sort_rules(
     created_sort_rule_page: Page, test_data: BookStackTestData
 ) -> None:
+    insert_start_event_to_page(created_sort_rule_page)
+
     created_sort_rule_page.get_by_role("link", name=test_data.sort_rule_name).click()
     created_sort_rule_page.get_by_role("textbox", name="Name").click()
     created_sort_rule_page.get_by_role("textbox", name="Name").fill(
@@ -81,6 +93,8 @@ def test_update_sort_rules(
 def test_delete_sort_rules(
     created_sort_rule_page: Page, test_data: BookStackTestData
 ) -> None:
+    insert_start_event_to_page(created_sort_rule_page)
+
     created_sort_rule_page.get_by_role("link", name=test_data.sort_rule_name).click()
     created_sort_rule_page.get_by_role("button", name="Delete").click()
 

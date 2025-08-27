@@ -1,13 +1,21 @@
+from bookstack.conftest import BookStackTestData, create_page
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
-from bookstack.conftest import BookStackTestData
 
+def test_create_page(created_book_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(created_book_page)
 
-def test_create_page(created_page_page: Page, test_data: BookStackTestData) -> None:
+    created_page_page = create_page(
+        created_book_page, test_data.page_name, test_data.page_description
+    )
+
     # Check content
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_description)
+    expect(created_page_page.get_by_role("main")).to_contain_text(
+        test_data.page_description
+    )
 
     # Navigate back to book page and check
     created_page_page.get_by_label("Breadcrumb").get_by_role(
@@ -17,6 +25,8 @@ def test_create_page(created_page_page: Page, test_data: BookStackTestData) -> N
 
 
 def test_read_page(created_page_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(created_page_page)
+
     # Navigate back to the book, check the page
     created_page_page.get_by_label("Breadcrumb").get_by_role(
         "link", name=test_data.book_name
@@ -27,16 +37,22 @@ def test_read_page(created_page_page: Page, test_data: BookStackTestData) -> Non
     created_page_page.get_by_role("link", name=test_data.page_name).first.click()
 
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_description)
+    expect(created_page_page.get_by_role("main")).to_contain_text(
+        test_data.page_description
+    )
 
 
 def test_update_page(created_page_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(created_page_page)
+
     created_page_page.get_by_role("link", name="Edit").click()
 
     # Title
     created_page_page.get_by_role("textbox", name="Page Title").click()
     created_page_page.get_by_role("textbox", name="Page Title").press("ControlOrMeta+a")
-    created_page_page.get_by_role("textbox", name="Page Title").fill(test_data.page_name_updated)
+    created_page_page.get_by_role("textbox", name="Page Title").fill(
+        test_data.page_name_updated
+    )
 
     # Content
     created_page_page.locator(
@@ -59,15 +75,21 @@ def test_update_page(created_page_page: Page, test_data: BookStackTestData) -> N
             has_text="Page successfully updated"
         )
     ).to_be_visible(timeout=1000)
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name_updated)
+    expect(created_page_page.get_by_role("main")).to_contain_text(
+        test_data.page_name_updated
+    )
     expect(created_page_page.get_by_role("main")).to_contain_text(
         test_data.page_description_updated
     )
 
-    expect(created_page_page.get_by_role("list")).to_contain_text(test_data.page_name_updated)
+    expect(created_page_page.get_by_role("list")).to_contain_text(
+        test_data.page_name_updated
+    )
 
 
 def test_delete_page(created_page_page: Page) -> None:
+    insert_start_event_to_page(created_page_page)
+
     created_page_page.get_by_role("link", name="Delete").click()
     created_page_page.get_by_role("button", name="Confirm").click()
 

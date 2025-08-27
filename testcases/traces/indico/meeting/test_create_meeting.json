@@ -2,8 +2,8 @@
   "test": "test_create_meeting",
   "app": "indico",
   "collection": "meeting",
-  "total_traces": 21,
-  "successful_traces": 21,
+  "total_traces": 22,
+  "successful_traces": 22,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -23,141 +23,95 @@
   },
   "traces": [
     {
-      "url": "about:blank",
+      "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8080"
+      "xpath": "/html/body/main/div/div/div[1]/div/div[2]/a",
+      "action": "click"
     },
     {
       "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "//*[@id=\"session-bar\"]/div/div/a",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[2]/div[2]/input",
+      "action": "fill",
+      "value": "Meeting718575"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "action_type": "action",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[4]/div[2]/div/div/ind-date-picker/input",
       "action": "click"
     },
     {
-      "url": "http://localhost:8080/login/",
+      "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "//*[@id=\"identifier\"]",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[4]/div[2]/div/div/ind-date-picker/input",
       "action": "fill",
-      "value": "admin@admin.com"
+      "value": "10/10/2040"
     },
     {
-      "url": "http://localhost:8080/login/",
+      "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[4]/div[2]/div/div/span/input",
       "action": "click"
     },
     {
-      "url": "http://localhost:8080/login/",
+      "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "fill",
-      "value": "webtestpilot"
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[6]/div[2]/div[1]/div/div[1]/div/input",
+      "action": "click"
     },
     {
-      "url": "http://localhost:8080/login/",
+      "url": "http://localhost:8080/",
       "action_type": "action",
-      "xpath": "/html/body/div[1]/main/div/div/div/div[1]/div[1]/button",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[6]/div[2]/div[1]/div/div[1]/div/input[1]",
+      "action": "fill",
+      "value": "Venue718575"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "action_type": "action",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[6]/div[2]/div[1]/div/div[2]/div/input",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "action_type": "action",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[6]/div[2]/div[1]/div/div[2]/div/input[1]",
+      "action": "fill",
+      "value": "Room718575"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "action_type": "action",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[7]/div[2]/div[1]/div[1]/label",
+      "action": "click"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "action_type": "action",
+      "xpath": "/html/body/div[7]/div[2]/div/form/div[8]/div[2]/input",
       "action": "click"
     },
     {
       "url": "http://localhost:8080/",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"global-menu\"]",
+      "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div/div[1]",
       "action": "to_contain_text",
-      "value": "My profile"
+      "value": "Meeting718575"
     },
     {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"category-toolbar\"]/div[2]/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"event-creation-title\"]",
-      "action": "fill",
-      "value": "Meeting141973"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"event-creation-end_dt\"]/ind-date-picker/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"event-creation-end_dt\"]/ind-date-picker/input",
-      "action": "fill",
-      "value": "30/07/2025"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"event-creation-end_dt\"]/span/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"location-venue-event-creation-location_data\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"location-venue-event-creation-location_data\"]",
-      "action": "fill",
-      "value": "Venue141973"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"location-room-event-creation-location_data\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"location-room-event-creation-location_data\"]",
-      "action": "fill",
-      "value": "Room141973"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"event-creation-protection_mode\"]/div[1]/label",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"ui-id-3\"]/div/form/div[8]/div[2]/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8080/",
+      "url": "http://localhost:8080/event/70/manage/",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"event-settings-data\"]",
+      "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div/div[3]",
       "action": "to_contain_text",
-      "value": "Meeting141973"
+      "value": "Room718575"
     },
     {
-      "url": "http://localhost:8080/event/221/manage/",
+      "url": "http://localhost:8080/event/70/manage/",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"event-settings-location\"]",
+      "xpath": "/html/body/main/div[2]/div/div[2]/div[2]/div[2]/div/div/div[3]",
       "action": "to_contain_text",
-      "value": "Room141973"
-    },
-    {
-      "url": "http://localhost:8080/event/221/manage/",
-      "action_type": "assertion",
-      "xpath": "//*[@id=\"event-settings-location\"]",
-      "action": "to_contain_text",
-      "value": "Venue141973"
+      "value": "Venue718575"
     }
   ]
 }

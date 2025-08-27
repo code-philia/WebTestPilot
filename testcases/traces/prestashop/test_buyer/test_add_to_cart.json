@@ -2,8 +2,8 @@
   "test": "test_add_to_cart",
   "app": "prestashop",
   "collection": "test_buyer",
-  "total_traces": 10,
-  "successful_traces": 10,
+  "total_traces": 11,
+  "successful_traces": 11,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -27,68 +27,35 @@
   },
   "traces": [
     {
-      "url": "about:blank",
-      "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8083/"
-    },
-    {
       "url": "http://localhost:8083/",
       "action_type": "action",
-      "xpath": "//*[@id=\"_desktop_user_info\"]/div/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"field-email\"]",
-      "action": "fill",
-      "value": "pub@prestashop.com"
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"field-password\"]",
-      "action": "fill",
-      "value": "testTEST123."
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"submit-login\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"content\"]/section[1]/div/div[1]/article/div/div[2]/h3/a",
+      "xpath": "/html/body/main/section/div/div/div/section/section/section[1]/div/div[1]/article/div/div[2]/h3/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/men/1-1-hummingbird-printed-t-shirt.html#/1-size-s/8-color-white",
       "action_type": "action",
-      "xpath": "//*[@id=\"group_1\"]",
+      "xpath": "/html/body/main/section/div/div/div/section/div[1]/div[2]/div[2]/div[2]/form/div[1]/div[1]/select",
       "action": "select_option",
       "value": "2"
     },
     {
       "url": "http://localhost:8083/men/1-1-hummingbird-printed-t-shirt.html#/1-size-s/8-color-white",
       "action_type": "action",
-      "xpath": "//*[@id=\"group_2\"]/li[2]/label/input",
+      "xpath": "/html/body/main/section/div/div/div/section/div[1]/div[2]/div[2]/div[2]/form/div[1]/div[2]/ul/li[2]/label/input",
       "action": "check",
       "value": "true"
     },
     {
       "url": "http://localhost:8083/men/1-1-hummingbird-printed-t-shirt.html#/1-size-s/8-color-white",
       "action_type": "action",
-      "xpath": "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[2]/button",
+      "xpath": "/html/body/main/section/div/div/div/section/div[1]/div[2]/div[2]/div[2]/form/div[2]/div/div[2]/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/men/1-1-hummingbird-printed-t-shirt.html#/1-size-s/8-color-white",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"myModalLabel\"]",
+      "xpath": "/html/body/div[1]/div/div/div[1]/h4",
       "action": "to_be_visible"
     }
   ]

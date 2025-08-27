@@ -2,10 +2,13 @@ from bookstack.conftest import (
     BookStackTestData,
 )
 from playwright.sync_api import Page
+from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
 def test_move_page(created_page_move_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(created_page_move_page)
+
     # Create book, create 1 chapter, create 1 page.
     # Move the page to the chapter.
     page = created_page_move_page
@@ -40,6 +43,8 @@ def test_move_page(created_page_move_page: Page, test_data: BookStackTestData) -
 def test_move_chapter(
     created_page_move_chapter: Page, test_data: BookStackTestData
 ) -> None:
+    insert_start_event_to_page(created_page_move_chapter)
+
     # Create 2 books, create 1 chapter in each book.
     # Move the chapter from book 1 to book 2.
     page = created_page_move_chapter

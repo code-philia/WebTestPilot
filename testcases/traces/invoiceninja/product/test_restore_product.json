@@ -2,8 +2,8 @@
   "test": "test_restore_product",
   "app": "invoiceninja",
   "collection": "product",
-  "total_traces": 22,
-  "successful_traces": 22,
+  "total_traces": 3,
+  "successful_traces": 23,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -23,143 +23,21 @@
   },
   "traces": [
     {
-      "url": "about:blank",
+      "url": "http://localhost:8082/products/GELe3Mb698/edit",
       "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8082/login"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/section[1]/div/input",
-      "action": "fill",
-      "value": "admin@example.com"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"password\"]",
-      "action": "fill",
-      "value": "changeme!"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/form/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/login",
-      "action_type": "action",
-      "xpath": "//*[@id=\"headlessui-dialog-:r6:\"]/div/div[2]/div[2]/div/div[2]/button",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/section/div/input",
-      "action": "fill",
-      "value": "product_name891303"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
-      "action": "fill",
-      "value": "product_description891303"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
-      "action": "fill",
-      "value": "891303"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
-      "action": "dblclick"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/section/div/input",
-      "action": "fill",
-      "value": "200"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
-      "action": "fill",
-      "value": "1000"
-    },
-    {
-      "url": "http://localhost:8082/products/create",
-      "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/button",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button",
       "action": "click"
     },
     {
       "url": "http://localhost:8082/products/GELe3Mb698/edit",
       "action_type": "action",
-      "xpath": "//*[@id=\"root\"]/div/div[2]/div[3]/div/div/div[2]/div/div/div/button",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button[5]",
       "action": "click"
     },
     {
       "url": "http://localhost:8082/products/GELe3Mb698/edit",
       "action_type": "action",
-      "xpath": "//*[@id=\"tippy-22\"]/div/button[5]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8082/products/GELe3Mb698/edit",
-      "action_type": "action",
-      "xpath": "//*[@id=\"tippy-22\"]/div/button",
+      "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button",
       "action": "click"
     }
   ]

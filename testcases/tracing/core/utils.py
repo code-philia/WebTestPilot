@@ -1,8 +1,6 @@
-"""
-Utility functions for tracing configuration and common operations.
-"""
-
 import os
+
+from tracing.core.tracer import TraceEntry
 
 
 def is_tracing_enabled() -> bool:
@@ -18,3 +16,8 @@ def get_trace_output_path() -> str:
 def is_debug_enabled() -> bool:
     """Check if debug mode is enabled for XPath tracing."""
     return os.getenv("XPATH_TRACE_DEBUG", "false").lower() == "true"
+
+
+def insert_start_event_to_page(page):
+    if hasattr(page, "_tracer") and page._tracer is not None:
+        page._tracer.traces.append(TraceEntry("START", "START", "START"))

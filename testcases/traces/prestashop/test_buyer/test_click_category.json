@@ -2,8 +2,8 @@
   "test": "test_click_category",
   "app": "prestashop",
   "collection": "test_buyer",
-  "total_traces": 11,
-  "successful_traces": 11,
+  "total_traces": 12,
+  "successful_traces": 12,
   "failed_traces": 0,
   "coverage_stats": {
     "attempted_methods": [
@@ -25,75 +25,42 @@
   },
   "traces": [
     {
-      "url": "about:blank",
-      "action_type": "action",
-      "xpath": "PAGE",
-      "action": "goto",
-      "value": "http://localhost:8083/"
-    },
-    {
       "url": "http://localhost:8083/",
       "action_type": "action",
-      "xpath": "//*[@id=\"_desktop_user_info\"]/div/a",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"field-email\"]",
-      "action": "fill",
-      "value": "pub@prestashop.com"
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"field-password\"]",
-      "action": "fill",
-      "value": "testTEST123."
-    },
-    {
-      "url": "http://localhost:8083/login?back=http%3A%2F%2Flocalhost%3A8083%2F",
-      "action_type": "action",
-      "xpath": "//*[@id=\"submit-login\"]",
-      "action": "click"
-    },
-    {
-      "url": "http://localhost:8083/",
-      "action_type": "action",
-      "xpath": "//*[@id=\"category-3\"]/a",
+      "xpath": "/html/body/main/header/div[2]/div/div[1]/div[2]/div[1]/ul/li[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/3-clothes",
       "action_type": "action",
-      "xpath": "//*[@id=\"subcategories\"]/ul/li[1]/div[1]/a",
+      "xpath": "/html/body/main/section/div/div/div[2]/section/div[2]/ul/li[1]/div[1]/a",
       "action": "click"
     },
     {
       "url": "http://localhost:8083/4-men",
       "action_type": "action",
-      "xpath": "//*[@id=\"facet_input_17607_0\"]",
+      "xpath": "/html/body/main/section/div/div/div[1]/div[4]/div[2]/section[1]/ul/li/label/span/input",
       "action": "check",
       "value": "true"
     },
     {
       "url": "http://localhost:8083/4-men",
       "action_type": "action",
-      "xpath": "//*[@id=\"facet_input_43840_0\"]",
+      "xpath": "/html/body/main/section/div/div/div[1]/div[4]/div[2]/section[2]/ul/li[1]/label/span/input",
       "action": "check",
       "value": "true"
     },
     {
       "url": "http://localhost:8083/4-men?q=Availability-In+stock",
       "action_type": "action",
-      "xpath": "//*[@id=\"facet_input_25096_1\"]",
+      "xpath": "/html/body/main/section/div/div/div[1]/div[4]/div[2]/section[4]/ul/li[2]/label/span/input",
       "action": "check",
       "value": "true"
     },
     {
       "url": "http://localhost:8083/4-men?q=Availability-In+stock/Selections-Discounted",
       "action_type": "assertion",
-      "xpath": "//*[@id=\"js-product-list-top\"]/div[1]/p",
+      "xpath": "/html/body/main/section/div/div/div[2]/section/section/div[1]/div[1]/p",
       "action": "to_be_visible"
     }
   ]
