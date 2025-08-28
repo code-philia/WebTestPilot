@@ -1,0 +1,213 @@
+{
+    "summary": {
+        "total_runs": 9,
+        "success_rate": 0.1111111111111111,
+        "correct_trace_percentage": 0.1111111111111111,
+        "normal_tests": 9,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "12::Meeting Lock",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div/div[2]/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8]/div[2]/div/form/div[3]/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 439.80349756777287,
+            "token_count": 92088,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 146.60116585592428
+        },
+        {
+            "test_name": "13::Meeting Unlock",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 150.9287245888263,
+            "token_count": 43535,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 150.9287245888263
+        },
+        {
+            "test_name": "14::Meeting Add Minutes",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [],
+            "error_message": "Error at step 1: Page.content: Unable to retrieve content because the page is navigating and changing the content.",
+            "runtime": 129.9322357228957,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 129.9322357228957
+        },
+        {
+            "test_name": "15::Meeting Clone",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 151.4280537730083,
+            "token_count": 43463,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 151.4280537730083
+        },
+        {
+            "test_name": "16::Conference Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/menu/li/ind-with-tooltip/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 179.16185189969838,
+            "token_count": 72915,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 179.16185189969838
+        },
+        {
+            "test_name": "17::Conference Delete",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: Page.content: Unable to retrieve content because the page is navigating and changing the content.",
+            "runtime": 131.10380005976185,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 131.10380005976185
+        },
+        {
+            "test_name": "18::Conference Lock",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 153.4613965949975,
+            "token_count": 40170,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 153.4613965949975
+        },
+        {
+            "test_name": "19::Conference Unlock",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 151.56110442010686,
+            "token_count": 40194,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 151.56110442010686
+        },
+        {
+            "test_name": "20::Conference Add Track",
+            "success": false,
+            "current_step": 0,
+            "total_step": 10,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 153.42127084126696,
+            "token_count": 40096,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 153.42127084126696
+        }
+    ]
+}

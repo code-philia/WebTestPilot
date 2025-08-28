@@ -1,0 +1,244 @@
+{
+    "summary": {
+        "total_runs": 9,
+        "success_rate": 0.7777777777777778,
+        "correct_trace_percentage": 0.7777777777777778,
+        "normal_tests": 9,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "07::Client Purge",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[3]/div/dt/div/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[2]/div/div/div/div/div[2]/div[2]/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 631.3095036973245,
+            "token_count": 196854,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 157.82737592433114
+        },
+        {
+            "test_name": "14::Invoice Update",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div/div/div/div/div/table/tbody/tr/td[4]/div/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div/div/div/div/div/table/tbody/tr/td[4]/div/section/div/input",
+                            "value": "10"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 749.9058392401785,
+            "token_count": 386630,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 149.98116784803568
+        },
+        {
+            "test_name": "15::Invoice Mark Sent",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": {
+                "code": "[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button[4]\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button[4]\"\n            }\n        }\n    }\n]    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n]    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n    def scroll_up(self):\n        self.execute_script(\"window.scrollBy(0, -window.innerHeight);\")\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[2]/div/div[2]/nav/div[4]/a\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/table/tbody/tr/td[3]/a\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": null,
+            "runtime": 554.3346378407441,
+            "token_count": 425101,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 184.77821261358136
+        },
+        {
+            "test_name": "16::Invoice Mark Paid",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": {
+                "code": "[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/div/a\"\n            }\n        }\n    }\n]    def back(self) -> None:\n        return self.page.go_back()\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[2]/div/div[2]/nav/div[6]/a\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div[2]/a[2]\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/div\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/div/div/div/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/div/div/div/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/div/div/div/input\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": null,
+            "runtime": 765.9895351547748,
+            "token_count": 582095,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 191.4973837886937
+        },
+        {
+            "test_name": "17::Invoice Send Email",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": {
+                "code": "    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/div[2]/div/nav/a[6]\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": "Action 1 failed",
+            "runtime": 214.57622492592782,
+            "token_count": 167717,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 214.57622492592782
+        },
+        {
+            "test_name": "18::Invoice Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": {
+                "code": "[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button[10]\"\n            }\n        }\n    }\n]    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n    def scroll_up(self):\n        self.execute_script(\"window.scrollBy(0, -window.innerHeight);\")\n    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[3]/div/div\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": null,
+            "runtime": 505.29864421114326,
+            "token_count": 244174,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 168.43288140371442
+        },
+        {
+            "test_name": "25::Expense Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": {
+                "code": "    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/div[2]/form/div[2]/div[8]/dd/section/div/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/div[2]/form/div[2]/div[8]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/div[2]/form/div[2]/div[8]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/div[2]/form/div[2]/div[8]/dd/section/div/input\",\n                \"value\": \"\"\n            }\n        }\n    },\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/div[2]/form/div[2]/div[8]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button\"\n            }\n        }\n    }\n]    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n"
+            },
+            "error_message": null,
+            "runtime": 691.9102300782688,
+            "token_count": 400115,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 172.9775575195672
+        },
+        {
+            "test_name": "28::Expense Delete",
+            "success": false,
+            "current_step": 0,
+            "total_step": 3,
+            "traces": {
+                "code": "[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n]    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": "Action 1 failed",
+            "runtime": 183.63230429170653,
+            "token_count": 142284,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 183.63230429170653
+        },
+        {
+            "test_name": "29::Expense Clone",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": {
+                "code": "[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/div/button\"\n            }\n        }\n    }\n]    def get_screenshots_whole_page(self, max_screenshots=30) -> list[str]:\n        \"\"\"Take screenshots of the whole page\"\"\"\n        screenshot_paths = []\n\n        current_screenshot_folder = self.get_current_screenshot_folder()\n\n        for i in range(max_screenshots):\n            # Saves a screenshot\n            screenshot_path = self.save_screenshot(current_screenshot_folder)\n            screenshot_paths.append(screenshot_path)\n            self.scroll_down()\n            self.wait_for_idle()\n\n            if self.is_bottom_of_page():\n                break\n\n        self.previously_scanned = True\n        return screenshot_paths\n    def scroll_down(self):\n        self.execute_script(\"window.scrollBy(0, window.innerHeight);\")\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/div[2]/form/div[2]/div[6]/dd/section/div/input\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[3]/div/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/div[2]/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[3]/div/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    },\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[3]/div/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"23.2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/div[2]/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"\"\n            }\n        }\n    },\n    {\n        \"action\": {\n            \"name\": \"setValue\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/div[2]/form/div[2]/div[6]/dd/section/div/input\",\n                \"value\": \"23,2340\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button\"\n            }\n        }\n    }\n][\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/div/div/div[2]/div[2]/div/div[2]/nav/div[13]/a\"\n            }\n        }\n    }\n]"
+            },
+            "error_message": null,
+            "runtime": 1085.8181175747886,
+            "token_count": 507410,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 155.11687393925553
+        }
+    ]
+}

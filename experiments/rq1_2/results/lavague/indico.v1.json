@@ -1,0 +1,232 @@
+{
+    "summary": {
+        "total_runs": 8,
+        "success_rate": 0.125,
+        "correct_trace_percentage": 0.125,
+        "normal_tests": 8,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]",
+                            "value": "admin@admin.com"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]",
+                            "value": "webtestpilot"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1050.8252985728905,
+            "token_count": 213311,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 150.1178997961272
+        },
+        {
+            "test_name": "02::Lecture Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div/div/div/div/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 633.3261653459631,
+            "token_count": 71291,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 633.3261653459631
+        },
+        {
+            "test_name": "04::Lecture Delete",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 151.67188586620614,
+            "token_count": 43083,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 151.67188586620614
+        },
+        {
+            "test_name": "05::Lecture Lock",
+            "success": false,
+            "current_step": 0,
+            "total_step": 4,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 152.1347697917372,
+            "token_count": 43158,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 152.1347697917372
+        },
+        {
+            "test_name": "06::Lecture Unlock",
+            "success": false,
+            "current_step": 0,
+            "total_step": 6,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 153.24638313194737,
+            "token_count": 43084,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 153.24638313194737
+        },
+        {
+            "test_name": "07::Lecture Clone",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 170.16119245206937,
+            "token_count": 43030,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 170.16119245206937
+        },
+        {
+            "test_name": "08::Meeting Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [],
+            "error_message": "Action 1 failed",
+            "runtime": 797.3148026200943,
+            "token_count": 71715,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 797.3148026200943
+        },
+        {
+            "test_name": "09::Meeting Delete",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: invalid syntax (<unknown>, line 1)",
+            "runtime": 160.02904426772147,
+            "token_count": 43593,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 160.02904426772147
+        }
+    ]
+}
