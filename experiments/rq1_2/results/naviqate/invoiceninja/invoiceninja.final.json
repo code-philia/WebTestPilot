@@ -1,0 +1,1793 @@
+{
+    "summary": {
+        "total_runs": 34,
+        "success_rate": 0.9117647058823529,
+        "correct_trace_percentage": 0.9204152249134948,
+        "normal_tests": 34,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "error_message": null,
+            "runtime": 21.499312708037905,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 3.071330386862558
+        },
+        {
+            "test_name": "02::Client Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 0,
+            "traces": [],
+            "error_message": "Message: no such window: target window already closed\nfrom unknown error: web view not found\n  (Session info: chrome=139.0.7258.139)\nStacktrace:\n0   chromedriver                        0x0000000104fe4c20 cxxbridge1$str$ptr + 2747652\n1   chromedriver                        0x0000000104fdcb20 cxxbridge1$str$ptr + 2714628\n2   chromedriver                        0x0000000104b250c8 cxxbridge1$string$len + 90536\n3   chromedriver                        0x0000000104afeea0 chromedriver + 143008\n4   chromedriver                        0x0000000104b946f4 cxxbridge1$string$len + 546772\n5   chromedriver                        0x0000000104bad4fc cxxbridge1$string$len + 648668\n6   chromedriver                        0x0000000104b60934 cxxbridge1$string$len + 334356\n7   chromedriver                        0x0000000104fa788c cxxbridge1$str$ptr + 2496880\n8   chromedriver                        0x0000000104faaab8 cxxbridge1$str$ptr + 2509724\n9   chromedriver                        0x0000000104f88510 cxxbridge1$str$ptr + 2369012\n10  chromedriver                        0x0000000104fab360 cxxbridge1$str$ptr + 2511940\n11  chromedriver                        0x0000000104f79610 cxxbridge1$str$ptr + 2307828\n12  chromedriver                        0x0000000104fcb230 cxxbridge1$str$ptr + 2642708\n13  chromedriver                        0x0000000104fcb3bc cxxbridge1$str$ptr + 2643104\n14  chromedriver                        0x0000000104fdc76c cxxbridge1$str$ptr + 2713680\n15  libsystem_pthread.dylib             0x000000019de96c0c _pthread_start + 136\n16  libsystem_pthread.dylib             0x000000019de91b80 thread_start + 8\n",
+            "runtime": 0.0,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 0
+        },
+        {
+            "test_name": "03::Client Read",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/table/tbody/tr/td[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div[1]/div[3]/div/dt/div/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div[3]/div/div[2]/div/div/div/table/thead/tr/th[2]/div/div"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 252.49175954202656,
+            "token_count": 62681,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 36.07025136314665
+        },
+        {
+            "test_name": "04::Client Update",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[2]/dd/section/div/input",
+                            "value": "company_name Updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 220.09741758403834,
+            "token_count": 58569,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 36.68290293067306
+        },
+        {
+            "test_name": "05::Client Delete",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div[3]/div/div[1]/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[1]/div[1]/div[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 69.93630712496815,
+            "token_count": 16442,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 34.968153562484076
+        },
+        {
+            "test_name": "06::Client Restore",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div[3]/div/div[1]/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[1]/div[1]/div[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 100.86624512495473,
+            "token_count": 25166,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 33.62208170831824
+        },
+        {
+            "test_name": "07::Client Purge",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[2]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[3]/nav/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 139.13160170800984,
+            "token_count": 35273,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 34.78290042700246
+        },
+        {
+            "test_name": "08::Product Create",
+            "success": true,
+            "current_step": 14,
+            "total_step": 14,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[3]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[7]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[7]/dd/section/div/input",
+                            "value": "product_name"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[2]/dd/section/div/textarea",
+                            "value": "product_description"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input",
+                            "value": "1"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[3]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[5]/dd/section/div/input",
+                            "value": "10"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[1]/div[2]/div/nav/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 455.8573875409784,
+            "token_count": 119324,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 32.561241967212744
+        },
+        {
+            "test_name": "09::Product Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[2]/div[2]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[2]/div[2]/dd/section/div/input",
+                            "value": "product_name_updated"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 162.69222358299885,
+            "token_count": 35050,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 40.67305589574971
+        },
+        {
+            "test_name": "10::Product Delete",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 73.81599479203578,
+            "token_count": 16553,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 36.90799739601789
+        },
+        {
+            "test_name": "11::Product Restore",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 102.82976804097416,
+            "token_count": 25452,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 34.276589346991386
+        },
+        {
+            "test_name": "12::Product Archive",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 65.81847016699612,
+            "token_count": 17105,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 32.90923508349806
+        },
+        {
+            "test_name": "13::Invoice Create",
+            "success": false,
+            "current_step": 5,
+            "total_step": 17,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[4]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div/div/div/div/div/input",
+                            "value": "company_name"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div[1]/div[1]/div/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": "WebDriver error at step 6: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\n0   chromedriver                        0x00000001010f4c20 cxxbridge1$str$ptr + 2747652\n1   chromedriver                        0x00000001010ecb20 cxxbridge1$str$ptr + 2714628\n2   chromedriver                        0x0000000100c34f3c cxxbridge1$string$len + 90140\n3   chromedriver                        0x0000000100c6fdf8 cxxbridge1$string$len + 331480\n4   chromedriver                        0x0000000100c983e4 cxxbridge1$string$len + 496836\n5   chromedriver                        0x0000000100c976ec cxxbridge1$string$len + 493516\n6   chromedriver                        0x0000000100c0419c chromedriver + 98716\n7   chromedriver                        0x00000001010b788c cxxbridge1$str$ptr + 2496880\n8   chromedriver                        0x00000001010baab8 cxxbridge1$str$ptr + 2509724\n9   chromedriver                        0x0000000101098510 cxxbridge1$str$ptr + 2369012\n10  chromedriver                        0x00000001010bb360 cxxbridge1$str$ptr + 2511940\n11  chromedriver                        0x0000000101089610 cxxbridge1$str$ptr + 2307828\n12  chromedriver                        0x0000000100c02434 chromedriver + 91188\n13  dyld                                0x000000019daf6b98 start + 6076\n",
+            "runtime": 214.32113324996317,
+            "token_count": 51950,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 0.29411764705882354,
+            "runtime_per_step": 35.72018887499386
+        },
+        {
+            "test_name": "14::Invoice Update",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div[1]/div/div/div/div/table/tbody/tr[1]/td[4]/div/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/div[4]/div/div[2]/div[1]/div/div/div/div/table/tbody/tr[1]/td[4]/div/section/div/input",
+                            "value": "10"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 266.2381257910165,
+            "token_count": 42484,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 53.2476251582033
+        },
+        {
+            "test_name": "15::Invoice Mark Sent",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div/div[2]/div[5]/form/div/div/div[2]/div[1]/div/div/div[1]/div[1]/div[1]/div/div[4]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/button[4]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 146.70794216595823,
+            "token_count": 30236,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 48.902647388652746
+        },
+        {
+            "test_name": "16::Invoice Mark Paid",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div/div[1]/div[2]/div/nav/a[7]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 184.97692529199412,
+            "token_count": 41731,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 46.24423132299853
+        },
+        {
+            "test_name": "17::Invoice Send Email",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div/div[1]/div[2]/div/nav/a[6]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[1]/div[2]/div/nav/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[4]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 159.1809782499913,
+            "token_count": 36187,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 39.79524456249783
+        },
+        {
+            "test_name": "18::Invoice Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/button[10]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/nav[1]/div[4]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 139.95628337503877,
+            "token_count": 30639,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 46.652094458346255
+        },
+        {
+            "test_name": "19::Payment Create",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/nav[1]/div[6]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[1]/dd/div/div/div/div/input",
+                            "value": "company_name"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[4]/dd/div/div/ul/li"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[10]/dd/div/div/div/div[1]/div[2]/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div/form/div[2]/div[7]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 404.9058881670353,
+            "token_count": 93297,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 40.49058881670353
+        },
+        {
+            "test_name": "20::Payment Update",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[2]/div[7]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[2]/div[7]/dd/section/div/input",
+                            "value": "123123"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div[1]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 131.33427787496476,
+            "token_count": 26200,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 43.778092624988254
+        },
+        {
+            "test_name": "21::Payment Email",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div[2]/div/div/div/button[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 77.60594087495701,
+            "token_count": 16974,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 38.80297043747851
+        },
+        {
+            "test_name": "22::Payment Archive",
+            "success": true,
+            "current_step": 2,
+            "total_step": 2,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[1]/div[1]/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 80.69334508304019,
+            "token_count": 17214,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 40.34667254152009
+        },
+        {
+            "test_name": "23::Payment Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div[2]/div/div/div/button[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div/div[2]/form/div[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 114.608391457994,
+            "token_count": 25647,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 38.202797152664665
+        },
+        {
+            "test_name": "24::Expense Create",
+            "success": true,
+            "current_step": 11,
+            "total_step": 11,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[4]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[3]/dd/div/div/div/div/input",
+                            "value": "company_name"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[3]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[6]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[6]/dd/section/div/input",
+                            "value": "2,3234"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[3]/div[1]/form/div[2]/div[3]/dd/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div/div[2]/form/div[2]/div[5]/dd/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 466.3309635000187,
+            "token_count": 104267,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 42.393723954547156
+        },
+        {
+            "test_name": "25::Expense Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/main/div[2]/div/div[2]/div/div[1]/div/div[2]/form/div[2]/div[8]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div[1]/div/div[2]/form/div[2]/div[8]/dd/section/div/input",
+                            "value": "23,2340"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 169.42898974998388,
+            "token_count": 39212,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 42.35724743749597
+        },
+        {
+            "test_name": "26::Expense Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 115.26484470895957,
+            "token_count": 28750,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 38.421614902986526
+        },
+        {
+            "test_name": "27::Expense Restore",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 206.23716354201315,
+            "token_count": 48472,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 41.24743270840263
+        },
+        {
+            "test_name": "28::Expense Delete",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[1]/div/nav/ol/li[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 114.16474175004987,
+            "token_count": 28333,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 38.05491391668329
+        },
+        {
+            "test_name": "29::Expense Clone",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[3]/div/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div[1]/div/div[2]/form/div[2]/div[8]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div[1]/div/div[2]/form/div[2]/div[8]/dd/section/div/input",
+                            "value": "23,2340"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/div/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[13]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/table/tbody/tr/td[2]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 266.185903042031,
+            "token_count": 67241,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 38.026557577432996
+        },
+        {
+            "test_name": "30::Credit Create",
+            "success": true,
+            "current_step": 16,
+            "total_step": 16,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div/div[2]/div[2]/div/div[2]/nav[1]/div[8]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[1]/div[2]/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div/div/div/div/div/input",
+                            "value": "company_name"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div[1]/div[1]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[3]/form/div/div[1]/dd/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[3]/form/div/div[1]/dd/section/div/input",
+                            "value": "123456"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr/td/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/ul/li[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/ul/li[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[2]/td/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[1]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/form/div/div/div/div[2]/div/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 667.2657663749997,
+            "token_count": 144826,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 41.70411039843748
+        },
+        {
+            "test_name": "31::Credit Update",
+            "success": true,
+            "current_step": 4,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[4]/div/div/div/div/table/tbody/tr[1]/td[4]/div/section/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "fill",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div[2]/form/div/div[3]/dd/section/div/input",
+                            "value": "10"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 162.13325316703413,
+            "token_count": 31837,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 40.53331329175853
+        },
+        {
+            "test_name": "32::Credit Mark Sent",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/button[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/main/div[1]/div/nav/ol/li[2]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 149.31531487498432,
+            "token_count": 29361,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 49.77177162499478
+        },
+        {
+            "test_name": "33::Credit Send Email",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[1]/div[1]/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[1]/div[1]/button[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/a[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/nav[1]/div[8]/a[1]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[1]/div[2]/div[3]/main/div[2]/div/div[2]/div/div/div/table/tbody/tr/td[3]/div/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 277.00867700000526,
+            "token_count": 59723,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 46.16811283333421
+        },
+        {
+            "test_name": "34::Credit Archive",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div/div[2]/div[3]/div[1]/div/div[2]/div/div/div/div/div/button[9]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/nav[1]/div[8]/a[1]"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 149.7847937500337,
+            "token_count": 30676,
+            "has_bug": false,
+            "bug_name": null,
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 49.92826458334457
+        }
+    ]
+}

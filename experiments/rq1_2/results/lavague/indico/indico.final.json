@@ -1,0 +1,982 @@
+{
+    "summary": {
+        "total_runs": 17,
+        "success_rate": 0.5882352941176471,
+        "correct_trace_percentage": 0.6029411764705882,
+        "normal_tests": 17,
+        "buggy_tests": 0,
+        "bug_detection_rate": 0.0
+    },
+    "results": [
+        {
+            "test_name": "01::Login",
+            "success": true,
+            "current_step": 7,
+            "total_step": 7,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[4]",
+                            "value": "admin@admin.com"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/div[2]/form/input[5]",
+                            "value": "webtestpilot"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/main/div/div/div/div/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1050.8252985728905,
+            "token_count": 213311,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 150.1178997961272,
+            "version": "v1"
+        },
+        {
+            "test_name": "02::Lecture Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 12,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div/div/div/div/div[2]/a"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 633.3261653459631,
+            "token_count": 71291,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 633.3261653459631,
+            "version": "v1"
+        },
+        {
+            "test_name": "04::Lecture Delete",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[3"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[3/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 754.7439293852076,
+            "token_count": 138754,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 150.94878587704153,
+            "version": "v3"
+        },
+        {
+            "test_name": "05::Lecture Lock",
+            "success": false,
+            "current_step": 1,
+            "total_step": 4,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Error at step 2: [Errno 2] No such file or directory: '/home/xiwen/WebTestPilot/screenshots/1200d241a06f29e74ad9328c3e00b4ee/04d56b98ca1ee6e85e020c893e8cbb55.png'",
+            "runtime": 303.624808549881,
+            "token_count": 35008,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.25,
+            "runtime_per_step": 151.8124042749405,
+            "version": "v4"
+        },
+        {
+            "test_name": "06::Lecture Unlock",
+            "success": true,
+            "current_step": 6,
+            "total_step": 6,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[4"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[4"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[2"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1022.4371303413063,
+            "token_count": 324029,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 170.40618839021772,
+            "version": "v3"
+        },
+        {
+            "test_name": "07::Lecture Clone",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: Page.content: Unable to retrieve content because the page is navigating and changing the content.",
+            "runtime": 131.02327745221555,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 131.02327745221555,
+            "version": "v3"
+        },
+        {
+            "test_name": "08::Meeting Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [],
+            "error_message": "Action 1 failed",
+            "runtime": 797.3148026200943,
+            "token_count": 71715,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 797.3148026200943,
+            "version": "v1"
+        },
+        {
+            "test_name": "09::Meeting Delete",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[3"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[3/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 741.2652275748551,
+            "token_count": 152252,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 148.253045514971,
+            "version": "v4"
+        },
+        {
+            "test_name": "12::Meeting Lock",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2]/div/div/div[2]/div/div[2]/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7]/div[2]/div/div/button[2]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8]/div[2]/div/form/div[3]/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 439.80349756777287,
+            "token_count": 92088,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 146.60116585592428,
+            "version": "v2"
+        },
+        {
+            "test_name": "13::Meeting Unlock",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 813.1902657803148,
+            "token_count": 303351,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 162.63805315606297,
+            "version": "v3"
+        },
+        {
+            "test_name": "14::Meeting Add Minutes",
+            "success": false,
+            "current_step": 0,
+            "total_step": 9,
+            "traces": [],
+            "error_message": "Error at step 1: Page.content: Unable to retrieve content because the page is navigating and changing the content.",
+            "runtime": 129.9322357228957,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 129.9322357228957,
+            "version": "v2"
+        },
+        {
+            "test_name": "15::Meeting Clone",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/form/div/fieldset/div/div/div[2/div/div/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/form/div[2/div/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/form/div[2/div/div/button[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/form/div[2/div/div/button[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/form/div[2/div/div/button[2"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 791.7403880162165,
+            "token_count": 224516,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 158.3480776032433,
+            "version": "v3"
+        },
+        {
+            "test_name": "16::Conference Create",
+            "success": false,
+            "current_step": 0,
+            "total_step": 16,
+            "traces": [
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/menu/li/ind-with-tooltip/a"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div/div[2]/div[2]/menu/li[2]/ind-menu/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": "Action 1 failed",
+            "runtime": 179.16185189969838,
+            "token_count": 72915,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 179.16185189969838,
+            "version": "v2"
+        },
+        {
+            "test_name": "17::Conference Delete",
+            "success": false,
+            "current_step": 0,
+            "total_step": 5,
+            "traces": [],
+            "error_message": "Error at step 1: Page.content: Unable to retrieve content because the page is navigating and changing the content.",
+            "runtime": 131.10380005976185,
+            "token_count": 0,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 0.0,
+            "runtime_per_step": 131.10380005976185,
+            "version": "v2"
+        },
+        {
+            "test_name": "18::Conference Lock",
+            "success": true,
+            "current_step": 3,
+            "total_step": 3,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[2"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 453.6989227030426,
+            "token_count": 93468,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 151.23297423434755,
+            "version": "v3"
+        },
+        {
+            "test_name": "19::Conference Unlock",
+            "success": true,
+            "current_step": 5,
+            "total_step": 5,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div/div[2/div/div[2/div/button\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/div/button[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[8/div[2/div/form/div[3/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div/div[2/div/div[2/div/button"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 788.0706607638858,
+            "token_count": 216502,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 157.61413215277716,
+            "version": "v3"
+        },
+        {
+            "test_name": "20::Conference Add Track",
+            "success": true,
+            "current_step": 10,
+            "total_step": 10,
+            "traces": [
+                {
+                    "action": {
+                        "name": "wait",
+                        "args": {
+                            "content": "    def wait(self, duration):\n        import time\n\n        time.sleep(duration)\n[\n    {\n        \"action\": {\n            \"name\": \"click\",\n            \"args\": {\n                \"xpath\": \"/html/body/main/div[2/div/div[2/div/div/div/ul/li[5/ul/li[4/a\"\n            }\n        }\n    }\n]"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/main/div[2/div/div[2/div[2/div[2/div/div[2/a[2"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div/div[2/input",
+                            "value": "Track"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[2/div[2/input"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[2/div[2/input",
+                            "value": "OC"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[5/div[2/div/div/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[5/div[2/div/div/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[5/div[2/div/div/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[5/div[2/div/div/textarea"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "setValue",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[5/div[2/div/div/textarea",
+                            "value": "Papers about"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "name": "click",
+                        "args": {
+                            "xpath": "/html/body/div[7/div[2/div/form/div[6/div[2/input"
+                        }
+                    }
+                }
+            ],
+            "error_message": null,
+            "runtime": 1576.7794540338218,
+            "token_count": 441359,
+            "has_bug": false,
+            "bug_name": null,
+            "assertor_results": [],
+            "correct_trace_percentage": 1.0,
+            "runtime_per_step": 157.67794540338218,
+            "version": "v4"
+        }
+    ]
+}
