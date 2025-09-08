@@ -2,9 +2,9 @@ Running baseline: lavague, app: bookstack
 Output directory: .//experiments//rq1_2/results/lavague
 Test directory: .//experiments//rq1_2/input/bookstack
 Rerunning tests: 1,4,6,14,21,27,28
-/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/utilities/version_checker.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/utilities/version_checker.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/__init__.py:21: UserWarning: [93mTelemetry is turned on. To turn off telemetry, set your LAVAGUE_TELEMETRY to 'NONE'[0m
+/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/__init__.py:21: UserWarning: [93mTelemetry is turned on. To turn off telemetry, set your LAVAGUE_TELEMETRY to 'NONE'[0m
   warnings.warn(warning_message, UserWarning)
 ================================================================================
 TEST EXECUTION CONFIGURATION
@@ -23,7 +23,9 @@ Starting test execution...
 Checkpoint folder: experiments/rq1_2/results/lavague/checkpoint_20250828_000324
 Running 7 normal test(s) (buggy tests disabled for lavague)...
 
-Test Suite Progress:   0%|[34m          [0m| 0/7 [00:00<?]01::Login:   0%|[34m          [0m| 0/7 [00:00<?]           Container bookstack-app-1  Stopping
+
+Test Suite Progress:   0%|[34m          [0m| 0/7 [00:00<?]
+01::Login:   0%|[34m          [0m| 0/7 [00:00<?]           Container bookstack-app-1  Stopping
  Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -64,11 +66,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 01::Login:   0%|[32m          [0m| 0/6 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/6 [00:00<?]    [A
-  Initializing LaVague:   0%|[32m          [0m| 0/6 [00:02<?][A2025-08-28 00:04:23,113 - INFO - Screenshot folder cleared
 
-  Step 1: Click in the email textbox labeled "Emai:   0%|[32m          [0m| 0/6 [00:03<?][A2025-08-28 00:04:36,664 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 01::Login:   0%|[32m          [0m| 0/6 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/6 [00:00<?]    [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/6 [00:02<?][A2025-08-28 00:04:23,113 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click in the email textbox labeled "Emai:   0%|[32m          [0m| 0/6 [00:03<?][A2025-08-28 00:04:36,664 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:04:36,680 - INFO - thoughts:
 - The objective is to click in the email textbox labeled "Email".
 - The screenshot shows a login form with two input fields: one labeled "Email" and one labeled "Password".
@@ -90,9 +96,12 @@ Instruction: The email textbox labeled "Email" is already selected. No further a
 2025-08-28 00:04:48,475 - INFO - Objective reached. Stopping...
 2025-08-28 00:06:03,655 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17776b9b0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click in the email textbox labeled "Emai:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A
-  Step 1: Click in the email textbox labeled "Emai:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A
-  Step 2: Type "admin@admin.com" in the email fiel:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A2025-08-28 00:07:04,139 - INFO - Retrying request to /chat/completions in 0.494965 seconds
+
+  Step 1: Click in the email textbox labeled "Emai:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A
+
+  Step 1: Click in the email textbox labeled "Emai:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A
+
+  Step 2: Type "admin@admin.com" in the email fiel:  17%|[32m█▋        [0m| 1/6 [01:44<08:40][A2025-08-28 00:07:04,139 - INFO - Retrying request to /chat/completions in 0.494965 seconds
 2025-08-28 00:08:06,301 - INFO - Retrying request to /chat/completions in 0.976113 seconds
 2025-08-28 00:08:17,404 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:08:17,419 - INFO - thoughts:
@@ -116,9 +125,12 @@ instruction: [NONE]
 2025-08-28 00:08:26,879 - INFO - Objective reached. Stopping...
 2025-08-28 00:09:42,231 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x177782c90>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Type "admin@admin.com" in the email fiel:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A
-  Step 2: Type "admin@admin.com" in the email fiel:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A
-  Step 3: Click in the password textbox labeled "P:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A2025-08-28 00:09:46,622 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Type "admin@admin.com" in the email fiel:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A
+
+  Step 2: Type "admin@admin.com" in the email fiel:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A
+
+  Step 3: Click in the password textbox labeled "P:  33%|[32m███▎      [0m| 2/6 [05:22<11:25][A2025-08-28 00:09:46,622 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:09:46,625 - INFO - thoughts:
 - The current screenshot shows a login form with two textboxes: one for "Email" (already filled with "admin@admin.com") and one for "Password".
 - The objective is to click in the password textbox labeled "Password".
@@ -167,9 +179,12 @@ instruction: Click in the empty textbox labeled "Password" directly below the "E
 2025-08-28 00:10:22,317 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:11:44,206 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1769f3cb0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Click in the password textbox labeled "P:  50%|[32m█████     [0m| 3/6 [07:24<07:26][A
-  Step 3: Click in the password textbox labeled "P:  50%|[32m█████     [0m| 3/6 [07:24<07:26][A
-  Step 4: Type "password" in the password field:  50%|[32m█████     [0m| 3/6 [07:24<07:26]   [A2025-08-28 00:11:53,365 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Click in the password textbox labeled "P:  50%|[32m█████     [0m| 3/6 [07:24<07:26][A
+
+  Step 3: Click in the password textbox labeled "P:  50%|[32m█████     [0m| 3/6 [07:24<07:26][A
+
+  Step 4: Type "password" in the password field:  50%|[32m█████     [0m| 3/6 [07:24<07:26]   [A2025-08-28 00:11:53,365 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:11:53,368 - INFO - thoughts:
 - The screenshot shows the login form for BookStack, with the email field already filled as "admin@admin.com".
 - The password field is empty and highlighted, indicating it is selected and ready for input.
@@ -191,9 +206,12 @@ instruction: [NONE]
 2025-08-28 00:12:01,821 - INFO - Objective reached. Stopping...
 2025-08-28 00:13:17,084 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1761a72c0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Type "password" in the password field:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13][A
-  Step 4: Type "password" in the password field:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13][A
-  Step 5: Click the "Log In" button:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13]            [A2025-08-28 00:13:22,601 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 4: Type "password" in the password field:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13][A
+
+  Step 4: Type "password" in the password field:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13][A
+
+  Step 5: Click the "Log In" button:  67%|[32m██████▋   [0m| 4/6 [08:57<04:13]            [A2025-08-28 00:13:22,601 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:13:22,603 - INFO - thoughts:
 - The current screenshot shows the login form for BookStack.
 - The email and password fields have been filled in with "admin@admin.com" and "password" respectively.
@@ -216,9 +234,12 @@ instruction: [NONE]
 2025-08-28 00:13:34,123 - INFO - Objective reached. Stopping...
 2025-08-28 00:14:49,407 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176f92750>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 5: Click the "Log In" button:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A
-  Step 5: Click the "Log In" button:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A
-  Step 6: Verify "Books" link is visible in naviga:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A2025-08-28 00:14:54,603 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 5: Click the "Log In" button:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A
+
+  Step 5: Click the "Log In" button:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A
+
+  Step 6: Verify "Books" link is visible in naviga:  83%|[32m████████▎ [0m| 5/6 [10:29<01:54][A2025-08-28 00:14:54,603 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:14:54,607 - INFO - thoughts:
 - The objective is to verify if the "Books" link is visible in the navigation.
 - The current screenshot shows the top navigation bar of the BookStack application.
@@ -230,9 +251,17 @@ instruction: The "Books" link is visible in the navigation bar.
 2025-08-28 00:14:54,607 - INFO - Objective reached. Stopping...
 2025-08-28 00:16:10,463 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176f93890>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 6: Verify "Books" link is visible in naviga: 100%|[32m██████████[0m| 6/6 [11:50<00:00][A
-  Step 6: Verify "Books" link is visible in naviga: 100%|[32m██████████[0m| 6/6 [11:50<00:00][A
-                                                                                      [A                                         01::Login:   0%|[34m          [0m| 0/7 [12:46<?]01::Login:  14%|[34m█▍        [0m| 1/7 [12:46<1:16:36]04::Book Update:  14%|[34m█▍        [0m| 1/7 [12:46<1:16:36] Container bookstack-app-1  Stopping
+
+  Step 6: Verify "Books" link is visible in naviga: 100%|[32m██████████[0m| 6/6 [11:50<00:00][A
+
+  Step 6: Verify "Books" link is visible in naviga: 100%|[32m██████████[0m| 6/6 [11:50<00:00][A
+
+                                                                                      [A
+                                         
+
+01::Login:   0%|[34m          [0m| 0/7 [12:46<?]
+01::Login:  14%|[34m█▍        [0m| 1/7 [12:46<1:16:36]
+04::Book Update:  14%|[34m█▍        [0m| 1/7 [12:46<1:16:36] Container bookstack-app-1  Stopping
  Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -275,11 +304,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 04::Book Update:   0%|[32m          [0m| 0/9 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/9 [00:00<?]          [A
-  Initializing LaVague:   0%|[32m          [0m| 0/9 [00:08<?][A2025-08-28 00:17:12,083 - INFO - Screenshot folder cleared
 
-  Step 1: Click "Edit" button in the book actions:   0%|[32m          [0m| 0/9 [00:08<?][A2025-08-28 00:17:16,760 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 04::Book Update:   0%|[32m          [0m| 0/9 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/9 [00:00<?]          [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/9 [00:08<?][A2025-08-28 00:17:12,083 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click "Edit" button in the book actions:   0%|[32m          [0m| 0/9 [00:08<?][A2025-08-28 00:17:16,760 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:17:16,766 - INFO - thoughts:
 - The objective is to click the "Edit" button in the book actions.
 - The screenshot shows a sidebar on the left with several action buttons, including "Edit" (with a pencil icon).
@@ -301,9 +334,12 @@ instruction: [NONE]
 2025-08-28 00:17:29,581 - INFO - Objective reached. Stopping...
 2025-08-28 00:18:44,718 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176f112b0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click "Edit" button in the book actions:  11%|[32m█         [0m| 1/9 [01:41<13:32][A
-  Step 1: Click "Edit" button in the book actions:  11%|[32m█         [0m| 1/9 [01:41<13:32][A
-  Step 2: Click in the "Name" textbox:  11%|[32m█         [0m| 1/9 [01:41<13:32]            [A2025-08-28 00:18:49,295 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 1: Click "Edit" button in the book actions:  11%|[32m█         [0m| 1/9 [01:41<13:32][A
+
+  Step 1: Click "Edit" button in the book actions:  11%|[32m█         [0m| 1/9 [01:41<13:32][A
+
+  Step 2: Click in the "Name" textbox:  11%|[32m█         [0m| 1/9 [01:41<13:32]            [A2025-08-28 00:18:49,295 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:18:49,298 - INFO - thoughts:
 - The objective is to click in the "Name" textbox.
 - The current screenshot shows the "Edit Book" page, with a "Name" textbox already visible and focused (blue border).
@@ -350,9 +386,12 @@ instruction: Click inside the textbox labeled "Name" at the top of the form, whi
 2025-08-28 00:19:37,164 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:20:54,150 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x177eaabd0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Click in the "Name" textbox:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A
-  Step 2: Click in the "Name" textbox:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A
-  Step 3: Clear the name field and type "Book Upda:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A2025-08-28 00:20:58,421 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Click in the "Name" textbox:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A
+
+  Step 2: Click in the "Name" textbox:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A
+
+  Step 3: Clear the name field and type "Book Upda:  22%|[32m██▏       [0m| 2/9 [03:50<13:45][A2025-08-28 00:20:58,421 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:20:58,425 - INFO - thoughts:
 - The objective is to clear the "Name" field and type "Book Updated".
 - The "Name" textbox is currently focused and contains the text "Book".
@@ -387,9 +426,12 @@ instruction: [NONE]
 2025-08-28 00:21:18,871 - INFO - Objective reached. Stopping...
 2025-08-28 00:22:34,143 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x177ec5670>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Clear the name field and type "Book Upda:  33%|[32m███▎      [0m| 3/9 [05:30<10:58][A
-  Step 3: Clear the name field and type "Book Upda:  33%|[32m███▎      [0m| 3/9 [05:30<10:58][A
-  Step 4: Click in the Rich Text Area iframe:  33%|[32m███▎      [0m| 3/9 [05:30<10:58]      [A2025-08-28 00:22:41,054 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Clear the name field and type "Book Upda:  33%|[32m███▎      [0m| 3/9 [05:30<10:58][A
+
+  Step 3: Clear the name field and type "Book Upda:  33%|[32m███▎      [0m| 3/9 [05:30<10:58][A
+
+  Step 4: Click in the Rich Text Area iframe:  33%|[32m███▎      [0m| 3/9 [05:30<10:58]      [A2025-08-28 00:22:41,054 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:22:41,057 - INFO - thoughts:
 - The objective is to click in the Rich Text Area iframe.
 - The current screenshot shows the "Edit Book" form, with a "Description" section that contains a rich text editor.
@@ -452,114 +494,114 @@ instruction: Click inside the editable area directly below the formatting toolba
 2025-08-28 00:23:25,917 - ERROR - Navigation error: No element found.
 2025-08-28 00:23:26,983 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 2025-08-28 00:23:26,993 - ERROR - Navigation error: No element found.
@@ -588,9 +630,12 @@ instruction: Click inside the iframe containing the rich text editor under the "
 2025-08-28 00:23:43,214 - ERROR - Navigation error: No element found.
 2025-08-28 00:24:58,498 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17832acf0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Click in the Rich Text Area iframe:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A
-  Step 4: Click in the Rich Text Area iframe:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A
-  Step 5: Clear existing content and type "Descrip:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A2025-08-28 00:25:09,727 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 4: Click in the Rich Text Area iframe:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A
+
+  Step 4: Click in the Rich Text Area iframe:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A
+
+  Step 5: Clear existing content and type "Descrip:  44%|[32m████▍     [0m| 4/9 [07:55<10:17][A2025-08-28 00:25:09,727 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:25:09,730 - INFO - thoughts:
 - The objective is to clear the existing content in the "Description" field and type "Description Updated".
 - Previous attempts to interact with the rich text editor failed, possibly due to targeting the wrong element or not focusing correctly.
@@ -649,9 +694,12 @@ instruction: Clear the existing content in the main editable area of the descrip
 2025-08-28 00:25:58,242 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:27:15,444 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1784a3350>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 5: Clear existing content and type "Descrip:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33][A
-  Step 5: Clear existing content and type "Descrip:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33][A
-  Step 6: Click "Save Book" button:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33]                [A2025-08-28 00:27:20,579 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 5: Clear existing content and type "Descrip:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33][A
+
+  Step 5: Clear existing content and type "Descrip:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33][A
+
+  Step 6: Click "Save Book" button:  56%|[32m█████▌    [0m| 5/9 [10:12<08:33]                [A2025-08-28 00:27:20,579 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:27:20,583 - INFO - thoughts:
 - The objective is to click the "Save Book" button.
 - The current screenshot shows the "Edit Book" form with the updated name and description fields.
@@ -670,114 +718,114 @@ instruction: Click the blue "Save Book" button at the bottom right of the "Edit 
 2025-08-28 00:27:27,909 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 2025-08-28 00:27:27,918 - ERROR - Navigation error: No element found.
@@ -830,9 +878,12 @@ instruction: Click the blue "Save Book" button at the bottom right of the "Edit 
 2025-08-28 00:27:58,321 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:29:24,767 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17863e7b0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 6: Click "Save Book" button:  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A
-  Step 6: Click "Save Book" button:  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A
-  Step 7: Verify alert message "Book successfully :  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A2025-08-28 00:29:30,012 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 6: Click "Save Book" button:  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A
+
+  Step 6: Click "Save Book" button:  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A
+
+  Step 7: Verify alert message "Book successfully :  67%|[32m██████▋   [0m| 6/9 [12:21<06:25][A2025-08-28 00:29:30,012 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:29:30,144 - INFO - thoughts:
 - The objective is to verify if the alert message "Book successfully updated" appears after saving changes to a book.
 - The current screenshot shows the updated book page with the new title "Book Updated".
@@ -866,9 +917,12 @@ instruction: Yes, the alert message "Book successfully updated" appears.
 2025-08-28 00:29:46,540 - INFO - Objective reached. Stopping...
 2025-08-28 00:31:03,896 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179b89ee0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 7: Verify alert message "Book successfully :  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A
-  Step 7: Verify alert message "Book successfully :  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A
-  Step 8: Verify page heading shows updated book n:  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A2025-08-28 00:31:12,742 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 7: Verify alert message "Book successfully :  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A
+
+  Step 7: Verify alert message "Book successfully :  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A
+
+  Step 8: Verify page heading shows updated book n:  78%|[32m███████▊  [0m| 7/9 [14:00<03:58][A2025-08-28 00:31:12,742 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:31:12,747 - INFO - thoughts:
 - The objective is to verify that the page heading shows the updated book name.
 - The heading at the top of the main content area clearly displays "Book Updated".
@@ -880,9 +934,12 @@ instruction: The page heading correctly shows the updated book name: "Book Updat
 2025-08-28 00:31:12,747 - INFO - Objective reached. Stopping...
 2025-08-28 00:32:28,169 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbf8c0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 8: Verify page heading shows updated book n:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A
-  Step 8: Verify page heading shows updated book n:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A
-  Step 9: Verify updated description text is visib:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A2025-08-28 00:32:33,562 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 8: Verify page heading shows updated book n:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A
+
+  Step 8: Verify page heading shows updated book n:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A
+
+  Step 9: Verify updated description text is visib:  89%|[32m████████▉ [0m| 8/9 [15:24<01:47][A2025-08-28 00:32:33,562 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:32:33,566 - INFO - thoughts:
 - The objective is to verify that the updated description text is visible.
 - The current screenshot shows the book title as "Book Updated", which matches the updated name.
@@ -896,9 +953,17 @@ instruction: The updated description text is not visible. The description area o
 2025-08-28 00:32:33,567 - INFO - Objective reached. Stopping...
 2025-08-28 00:33:49,209 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbc6e0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 9: Verify updated description text is visib: 100%|[32m██████████[0m| 9/9 [16:46<00:00][A
-  Step 9: Verify updated description text is visib: 100%|[32m██████████[0m| 9/9 [16:46<00:00][A
-                                                                                      [A                                                     04::Book Update:  14%|[34m█▍        [0m| 1/7 [30:24<1:16:36]04::Book Update:  29%|[34m██▊       [0m| 2/7 [30:24<1:18:11]06::Chapter Create:  29%|[34m██▊       [0m| 2/7 [30:24<1:18:11] Container bookstack-app-1  Stopping
+
+  Step 9: Verify updated description text is visib: 100%|[32m██████████[0m| 9/9 [16:46<00:00][A
+
+  Step 9: Verify updated description text is visib: 100%|[32m██████████[0m| 9/9 [16:46<00:00][A
+
+                                                                                      [A
+                                                     
+
+04::Book Update:  14%|[34m█▍        [0m| 1/7 [30:24<1:16:36]
+04::Book Update:  29%|[34m██▊       [0m| 2/7 [30:24<1:18:11]
+06::Chapter Create:  29%|[34m██▊       [0m| 2/7 [30:24<1:18:11] Container bookstack-app-1  Stopping
  Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -935,50 +1000,50 @@ instruction: The updated description text is not visible. The description area o
 ✅ Done.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
@@ -989,11 +1054,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 06::Chapter Create:   0%|[32m          [0m| 0/12 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/12 [00:00<?]             [A
-  Initializing LaVague:   0%|[32m          [0m| 0/12 [00:06<?][A2025-08-28 00:34:34,312 - INFO - Screenshot folder cleared
 
-  Step 1: Click "New Chapter" button:   0%|[32m          [0m| 0/12 [00:06<?][A2025-08-28 00:34:48,874 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 06::Chapter Create:   0%|[32m          [0m| 0/12 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/12 [00:00<?]             [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/12 [00:06<?][A2025-08-28 00:34:34,312 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click "New Chapter" button:   0%|[32m          [0m| 0/12 [00:06<?][A2025-08-28 00:34:48,874 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:34:48,882 - INFO - thoughts:
 - The objective is to click the "New Chapter" button.
 - On the current screenshot, there is no visible button labeled "New Chapter".
@@ -1045,8 +1114,15 @@ instruction: Click on the "+ New Chapter" button in the left sidebar under the "
 2025-08-28 00:35:30,510 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:36:47,910 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1780eee40>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click "New Chapter" button:   0%|[32m          [0m| 0/12 [02:20<?][A
-                                                                     [A                                                        06::Chapter Create:  29%|[34m██▊       [0m| 2/7 [33:23<1:18:11]06::Chapter Create:  43%|[34m████▎     [0m| 3/7 [33:23<39:25]  14::Shelf Create:  43%|[34m████▎     [0m| 3/7 [33:23<39:25]   Container bookstack-db-1  Stopping
+
+  Step 1: Click "New Chapter" button:   0%|[32m          [0m| 0/12 [02:20<?][A
+
+                                                                     [A
+                                                        
+
+06::Chapter Create:  29%|[34m██▊       [0m| 2/7 [33:23<1:18:11]
+06::Chapter Create:  43%|[34m████▎     [0m| 3/7 [33:23<39:25]  
+14::Shelf Create:  43%|[34m████▎     [0m| 3/7 [33:23<39:25]   Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -1088,11 +1164,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 14::Shelf Create:   0%|[32m          [0m| 0/13 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/13 [00:00<?]           [A
-  Initializing LaVague:   0%|[32m          [0m| 0/13 [00:06<?][A2025-08-28 00:37:31,398 - INFO - Screenshot folder cleared
 
-  Step 1: Click "Shelves" link in navigation:   0%|[32m          [0m| 0/13 [00:06<?][A2025-08-28 00:37:41,622 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 14::Shelf Create:   0%|[32m          [0m| 0/13 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/13 [00:00<?]           [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/13 [00:06<?][A2025-08-28 00:37:31,398 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click "Shelves" link in navigation:   0%|[32m          [0m| 0/13 [00:06<?][A2025-08-28 00:37:41,622 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:37:41,625 - INFO - thoughts:
 - The objective is to click the "Shelves" link in the navigation.
 - The screenshot shows a navigation bar at the top with a "Shelves" link clearly visible next to "Books" and before "Settings".
@@ -1117,9 +1197,12 @@ instruction: [NONE]
 2025-08-28 00:37:52,555 - INFO - Objective reached. Stopping...
 2025-08-28 00:39:07,771 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176ecafc0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click "Shelves" link in navigation:   8%|[32m▊         [0m| 1/13 [01:43<20:36][A
-  Step 1: Click "Shelves" link in navigation:   8%|[32m▊         [0m| 1/13 [01:43<20:36][A
-  Step 2: Click "New Shelf" button:   8%|[32m▊         [0m| 1/13 [01:43<20:36]          [A2025-08-28 00:39:14,369 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 1: Click "Shelves" link in navigation:   8%|[32m▊         [0m| 1/13 [01:43<20:36][A
+
+  Step 1: Click "Shelves" link in navigation:   8%|[32m▊         [0m| 1/13 [01:43<20:36][A
+
+  Step 2: Click "New Shelf" button:   8%|[32m▊         [0m| 1/13 [01:43<20:36]          [A2025-08-28 00:39:14,369 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:39:14,375 - INFO - thoughts:
 - The objective is to click the "New Shelf" button.
 - The current screenshot shows the "Shelves" page in BookStack.
@@ -1143,9 +1226,12 @@ Instruction: [NONE]
 2025-08-28 00:39:24,809 - INFO - Objective reached. Stopping...
 2025-08-28 00:40:39,992 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176efae10>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Click "New Shelf" button:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A
-  Step 2: Click "New Shelf" button:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A
-  Step 3: Click in the "Shelf Name" textbox:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A2025-08-28 00:40:43,866 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Click "New Shelf" button:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A
+
+  Step 2: Click "New Shelf" button:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A
+
+  Step 3: Click in the "Shelf Name" textbox:  15%|[32m█▌        [0m| 2/13 [03:15<17:43][A2025-08-28 00:40:43,866 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:40:43,869 - INFO - thoughts:
 - The objective is to click in the "Shelf Name" textbox.
 - The current screenshot shows the "Create New Shelf" page, with a clearly visible textbox labeled "Name" at the top of the form.
@@ -1198,9 +1284,12 @@ instruction: Click inside the "Name" textbox at the top of the "Create New Shelf
 2025-08-28 00:41:24,215 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:42:46,060 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176eff020>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Click in the "Shelf Name" textbox:  23%|[32m██▎       [0m| 3/13 [05:21<18:20][A
-  Step 3: Click in the "Shelf Name" textbox:  23%|[32m██▎       [0m| 3/13 [05:21<18:20][A
-  Step 4: Type "Shelf" in the name field:  23%|[32m██▎       [0m| 3/13 [05:21<18:20]   [A2025-08-28 00:42:55,785 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Click in the "Shelf Name" textbox:  23%|[32m██▎       [0m| 3/13 [05:21<18:20][A
+
+  Step 3: Click in the "Shelf Name" textbox:  23%|[32m██▎       [0m| 3/13 [05:21<18:20][A
+
+  Step 4: Type "Shelf" in the name field:  23%|[32m██▎       [0m| 3/13 [05:21<18:20]   [A2025-08-28 00:42:55,785 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:42:55,786 - INFO - thoughts:
 - The objective is to type "Shelf" in the name field of the "Create New Shelf" form.
 - The previous steps have successfully focused the "Name" textbox, which is now outlined in red, indicating it is active and ready for input.
@@ -1222,9 +1311,12 @@ instruction: [NONE]
 2025-08-28 00:43:05,572 - INFO - Objective reached. Stopping...
 2025-08-28 00:44:20,905 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179b8be30>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Type "Shelf" in the name field:  31%|[32m███       [0m| 4/13 [06:56<15:36][A
-  Step 4: Type "Shelf" in the name field:  31%|[32m███       [0m| 4/13 [06:56<15:36][A
-  Step 5: Click in the Rich Text Area iframe:  31%|[32m███       [0m| 4/13 [06:56<15:36][A2025-08-28 00:44:28,017 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 4: Type "Shelf" in the name field:  31%|[32m███       [0m| 4/13 [06:56<15:36][A
+
+  Step 4: Type "Shelf" in the name field:  31%|[32m███       [0m| 4/13 [06:56<15:36][A
+
+  Step 5: Click in the Rich Text Area iframe:  31%|[32m███       [0m| 4/13 [06:56<15:36][A2025-08-28 00:44:28,017 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:44:28,020 - INFO - thoughts:
 - The objective is to click in the Rich Text Area iframe, which is typically used for entering formatted text (WYSIWYG editor).
 - The current screenshot shows the "Create New Shelf" form, with a "Description" field below the "Name" field.
@@ -1301,114 +1393,114 @@ instruction: Click inside the large white editing area directly below the format
 2025-08-28 00:45:20,763 - ERROR - Navigation error: No element found.
 2025-08-28 00:45:22,411 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 2025-08-28 00:45:22,417 - ERROR - Navigation error: No element found.
@@ -1416,9 +1508,12 @@ ValueError: No element found.
 2025-08-28 00:45:23,529 - ERROR - Navigation error: No element found.
 2025-08-28 00:46:38,858 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176f2edb0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 5: Click in the Rich Text Area iframe:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A
-  Step 5: Click in the Rich Text Area iframe:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A
-  Step 6: Type "Shelf Description" in the rich tex:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A2025-08-28 00:46:45,913 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 5: Click in the Rich Text Area iframe:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A
+
+  Step 5: Click in the Rich Text Area iframe:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A
+
+  Step 6: Type "Shelf Description" in the rich tex:  38%|[32m███▊      [0m| 5/13 [09:14<15:30][A2025-08-28 00:46:45,913 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:46:45,915 - INFO - thoughts:
 - The objective is to type "Shelf Description" in the rich text area for the Description field in the "Create New Shelf" form.
 - Previous attempts to click inside the main editing area of the Description field have failed, possibly due to the presence of an iframe or a non-standard input mechanism.
@@ -1488,9 +1583,12 @@ instruction: Click in the top-left corner of the large white editing area direct
 2025-08-28 00:47:40,542 - ERROR - Navigation error: No element found.
 2025-08-28 00:49:00,859 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176d56090>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 6: Type "Shelf Description" in the rich tex:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A
-  Step 6: Type "Shelf Description" in the rich tex:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A
-  Step 7: Click "▸ Books" button to expand books s:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A2025-08-28 00:49:11,559 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 6: Type "Shelf Description" in the rich tex:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A
+
+  Step 6: Type "Shelf Description" in the rich tex:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A
+
+  Step 7: Click "▸ Books" button to expand books s:  46%|[32m████▌     [0m| 6/13 [11:36<14:35][A2025-08-28 00:49:11,559 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:49:11,566 - INFO - thoughts:
 - The objective is to click the "▸ Books" button to expand the books section.
 - The current screenshot shows the "Create New Shelf" form, with a section for adding books to the shelf.
@@ -1534,9 +1632,12 @@ next_engine: Navigation Controls
 instruction: SCROLL_DOWN
 2025-08-28 00:50:45,291 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176d54da0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 7: Click "▸ Books" button to expand books s:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49][A
-  Step 7: Click "▸ Books" button to expand books s:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49][A
-  Step 8: Click add button for Book1:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49]              [A2025-08-28 00:50:50,983 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 7: Click "▸ Books" button to expand books s:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49][A
+
+  Step 7: Click "▸ Books" button to expand books s:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49][A
+
+  Step 8: Click add button for Book1:  54%|[32m█████▍    [0m| 7/13 [13:20<11:49]              [A2025-08-28 00:50:50,983 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:50:50,989 - INFO - thoughts:
 - The objective is to click the add button for "Book1".
 - The current screenshot shows the "Create New Shelf" form.
@@ -1561,9 +1662,12 @@ instruction: "Book1" is already added to the shelf. No further action is needed.
 2025-08-28 00:51:02,271 - INFO - Objective reached. Stopping...
 2025-08-28 00:52:22,963 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176ebe990>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 8: Click add button for Book1:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A
-  Step 8: Click add button for Book1:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A
-  Step 9: Click add button for Book2:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A2025-08-28 00:52:35,618 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 8: Click add button for Book1:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A
+
+  Step 8: Click add button for Book1:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A
+
+  Step 9: Click add button for Book2:  62%|[32m██████▏   [0m| 8/13 [14:58<09:18][A2025-08-28 00:52:35,618 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:52:35,623 - INFO - thoughts:
 - The objective is to click the add button for "Book2".
 - The screenshot shows a "Create New Shelf" form with two columns: "Books on this shelf" (with Book1 already added) and "Add books to this shelf" (with Book2 listed).
@@ -1586,9 +1690,12 @@ instruction: [NONE]
 2025-08-28 00:52:46,412 - INFO - Objective reached. Stopping...
 2025-08-28 00:54:01,846 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176e87050>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 9: Click add button for Book2:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A
-  Step 9: Click add button for Book2:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A
-  Step 10: Click "Save Shelf" button:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A2025-08-28 00:54:07,118 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 9: Click add button for Book2:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A
+
+  Step 9: Click add button for Book2:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A
+
+  Step 10: Click "Save Shelf" button:  69%|[32m██████▉   [0m| 9/13 [16:37<07:10][A2025-08-28 00:54:07,118 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:54:07,122 - INFO - thoughts:
 - The objective is to click the "Save Shelf" button.
 - The current screenshot shows the "Create New Shelf" form, with the "Save Shelf" button clearly visible at the bottom right.
@@ -1609,9 +1716,12 @@ instruction: [NONE]
 2025-08-28 00:54:19,751 - INFO - Objective reached. Stopping...
 2025-08-28 00:55:35,352 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x178136300>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 10: Click "Save Shelf" button:  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A
-  Step 10: Click "Save Shelf" button:  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A
-  Step 11: Verify shelf page displays with correct :  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A2025-08-28 00:55:39,718 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 10: Click "Save Shelf" button:  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A
+
+  Step 10: Click "Save Shelf" button:  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A
+
+  Step 11: Verify shelf page displays with correct :  77%|[32m███████▋  [0m| 10/13 [18:10<05:09][A2025-08-28 00:55:39,718 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:55:39,725 - INFO - thoughts:
 - The objective is to verify that the shelf page displays with the correct name.
 - The current screenshot shows the shelf page with the title "Shelf" at the top, which matches the name entered earlier.
@@ -1623,9 +1733,12 @@ instruction: The shelf page displays with the correct name "Shelf".
 2025-08-28 00:55:39,725 - INFO - Objective reached. Stopping...
 2025-08-28 00:56:55,525 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1781f8bc0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 11: Verify shelf page displays with correct :  85%|[32m████████▍ [0m| 11/13 [19:30<03:12][A
-  Step 11: Verify shelf page displays with correct :  85%|[32m████████▍ [0m| 11/13 [19:30<03:12][A
-  Step 12: Verify Book1 is present in the shelf:  85%|[32m████████▍ [0m| 11/13 [19:30<03:12]    [A2025-08-28 00:56:59,354 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 11: Verify shelf page displays with correct :  85%|[32m████████▍ [0m| 11/13 [19:30<03:12][A
+
+  Step 11: Verify shelf page displays with correct :  85%|[32m████████▍ [0m| 11/13 [19:30<03:12][A
+
+  Step 12: Verify Book1 is present in the shelf:  85%|[32m████████▍ [0m| 11/13 [19:30<03:12]    [A2025-08-28 00:56:59,354 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:56:59,357 - INFO - thoughts:
 - The objective is to verify if "Book1" is present in the shelf.
 - The current screenshot clearly shows a shelf named "Shelf" with two books: "Book1" and "Book2".
@@ -1637,9 +1750,12 @@ instruction: Book1 is present in the shelf.
 2025-08-28 00:56:59,357 - INFO - Objective reached. Stopping...
 2025-08-28 00:58:15,050 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176dbc530>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 12: Verify Book1 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A
-  Step 12: Verify Book1 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A
-  Step 13: Verify Book2 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A2025-08-28 00:58:19,694 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 12: Verify Book1 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A
+
+  Step 12: Verify Book1 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A
+
+  Step 13: Verify Book2 is present in the shelf:  92%|[32m█████████▏[0m| 12/13 [20:50<01:31][A2025-08-28 00:58:19,694 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 00:58:20,023 - INFO - thoughts:
 - The objective is to verify if Book2 is present in the shelf.
 - The current screenshot clearly shows two books on the shelf: Book1 and Book2.
@@ -1651,9 +1767,17 @@ instruction: Book2 is present in the shelf.
 2025-08-28 00:58:20,028 - INFO - Objective reached. Stopping...
 2025-08-28 00:59:40,123 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x178136330>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 13: Verify Book2 is present in the shelf: 100%|[32m██████████[0m| 13/13 [22:15<00:00][A
-  Step 13: Verify Book2 is present in the shelf: 100%|[32m██████████[0m| 13/13 [22:15<00:00][A
-                                                                                     [A                                                    14::Shelf Create:  43%|[34m████▎     [0m| 3/7 [56:15<39:25]14::Shelf Create:  57%|[34m█████▋    [0m| 4/7 [56:15<44:59]21::Create Role with Permissions:  57%|[34m█████▋    [0m| 4/7 [56:15<44:59] Container bookstack-db-1  Stopping
+
+  Step 13: Verify Book2 is present in the shelf: 100%|[32m██████████[0m| 13/13 [22:15<00:00][A
+
+  Step 13: Verify Book2 is present in the shelf: 100%|[32m██████████[0m| 13/13 [22:15<00:00][A
+
+                                                                                     [A
+                                                    
+
+14::Shelf Create:  43%|[34m████▎     [0m| 3/7 [56:15<39:25]
+14::Shelf Create:  57%|[34m█████▋    [0m| 4/7 [56:15<44:59]
+21::Create Role with Permissions:  57%|[34m█████▋    [0m| 4/7 [56:15<44:59] Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -1690,90 +1814,90 @@ instruction: Book2 is present in the shelf.
 ✅ Done.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
@@ -1786,11 +1910,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 21::Create Role with Permissio:   0%|[32m          [0m| 0/14 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/14 [00:00<?]                         [A
-  Initializing LaVague:   0%|[32m          [0m| 0/14 [00:12<?][A2025-08-28 01:01:06,701 - INFO - Screenshot folder cleared
 
-  Step 1: Click "Settings" link in navigation:   0%|[32m          [0m| 0/14 [00:13<?][A2025-08-28 01:01:20,836 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 21::Create Role with Permissio:   0%|[32m          [0m| 0/14 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/14 [00:00<?]                         [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/14 [00:12<?][A2025-08-28 01:01:06,701 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click "Settings" link in navigation:   0%|[32m          [0m| 0/14 [00:13<?][A2025-08-28 01:01:20,836 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:01:20,845 - INFO - thoughts:
 - The objective is to click the "Settings" link in the navigation.
 - The screenshot shows a navigation bar at the top with several links, including "Shelves", "Books", "Settings", and an "Admin" dropdown.
@@ -1814,9 +1942,12 @@ instruction: [NONE]
 2025-08-28 01:01:44,826 - INFO - Objective reached. Stopping...
 2025-08-28 01:03:00,021 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1781fb6e0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click "Settings" link in navigation:   7%|[32m▋         [0m| 1/14 [02:06<27:24][A
-  Step 1: Click "Settings" link in navigation:   7%|[32m▋         [0m| 1/14 [02:06<27:24][A
-  Step 2: Click "Roles" in settings menu:   7%|[32m▋         [0m| 1/14 [02:06<27:24]     [A2025-08-28 01:03:07,319 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 1: Click "Settings" link in navigation:   7%|[32m▋         [0m| 1/14 [02:06<27:24][A
+
+  Step 1: Click "Settings" link in navigation:   7%|[32m▋         [0m| 1/14 [02:06<27:24][A
+
+  Step 2: Click "Roles" in settings menu:   7%|[32m▋         [0m| 1/14 [02:06<27:24]     [A2025-08-28 01:03:07,319 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:03:07,330 - INFO - - The current screenshot shows the "Settings" page of BookStack, with a horizontal menu at the top containing options such as Settings, Maintenance, Audit Log, Users, Roles, and Webhooks.
 - The objective is to click "Roles" in the settings menu.
 - The "Roles" option is clearly visible and is likely an interactable tab in the horizontal menu.
@@ -1839,9 +1970,12 @@ instruction: [NONE]
 2025-08-28 01:03:22,212 - INFO - Objective reached. Stopping...
 2025-08-28 01:04:37,375 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1782d4d70>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Click "Roles" in settings menu:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A
-  Step 2: Click "Roles" in settings menu:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A
-  Step 3: Click "Create New Role" button:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A2025-08-28 01:04:49,464 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Click "Roles" in settings menu:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A
+
+  Step 2: Click "Roles" in settings menu:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A
+
+  Step 3: Click "Create New Role" button:  14%|[32m█▍        [0m| 2/14 [03:43<21:52][A2025-08-28 01:04:49,464 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:04:49,470 - INFO - thoughts:
 - The current screenshot shows the "User Roles" page in the settings section.
 - The "Create New Role" button is clearly visible on the right side of the "User Roles" header.
@@ -1865,9 +1999,12 @@ instruction: [NONE]
 2025-08-28 01:05:01,855 - INFO - Objective reached. Stopping...
 2025-08-28 01:06:17,623 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1782eeed0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Click "Create New Role" button:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A
-  Step 3: Click "Create New Role" button:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A
-  Step 4: Click in the "Role Name" textbox:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A2025-08-28 01:06:24,103 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Click "Create New Role" button:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A
+
+  Step 3: Click "Create New Role" button:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A
+
+  Step 4: Click in the "Role Name" textbox:  21%|[32m██▏       [0m| 3/14 [05:24<19:17][A2025-08-28 01:06:24,103 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:06:24,109 - INFO - thoughts:
 - The objective is to click in the "Role Name" textbox.
 - The current screenshot shows the "Create New Role" page, with a visible textbox labeled "Role Name".
@@ -1920,9 +2057,12 @@ instruction: Click inside the textbox outlined in red to the right of the "Role 
 2025-08-28 01:07:13,109 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:08:33,696 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a5025d0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Click in the "Role Name" textbox:  29%|[32m██▊       [0m| 4/14 [07:40<19:33][A
-  Step 4: Click in the "Role Name" textbox:  29%|[32m██▊       [0m| 4/14 [07:40<19:33][A
-  Step 5: Type "Role" in the name field:  29%|[32m██▊       [0m| 4/14 [07:40<19:33]   [A2025-08-28 01:08:37,773 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 4: Click in the "Role Name" textbox:  29%|[32m██▊       [0m| 4/14 [07:40<19:33][A
+
+  Step 4: Click in the "Role Name" textbox:  29%|[32m██▊       [0m| 4/14 [07:40<19:33][A
+
+  Step 5: Type "Role" in the name field:  29%|[32m██▊       [0m| 4/14 [07:40<19:33]   [A2025-08-28 01:08:37,773 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:08:37,775 - INFO - thoughts:
 - The objective is to type "Role" in the name field.
 - The current screenshot shows the "Create New Role" form, with the "Role Name" textbox outlined in red, indicating it is active and ready for input.
@@ -1946,9 +2086,12 @@ instruction: [NONE]
 2025-08-28 01:08:47,642 - INFO - Objective reached. Stopping...
 2025-08-28 01:10:02,934 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a5f1fd0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 5: Type "Role" in the name field:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A
-  Step 5: Type "Role" in the name field:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A
-  Step 6: Click in the "Role Description" textbox:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A2025-08-28 01:10:08,785 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 5: Type "Role" in the name field:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A
+
+  Step 5: Type "Role" in the name field:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A
+
+  Step 6: Click in the "Role Description" textbox:  36%|[32m███▌      [0m| 5/14 [09:09<16:05][A2025-08-28 01:10:08,785 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:10:08,817 - INFO - thoughts:
 - The objective is to click in the "Role Description" textbox.
 - The previous steps have already filled in the "Role Name" textbox.
@@ -2002,9 +2145,12 @@ instruction: Click inside the "Short Description of Role" textbox located below 
 2025-08-28 01:11:01,209 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:12:20,232 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a9e7020>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 6: Click in the "Role Description" textbox:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A
-  Step 6: Click in the "Role Description" textbox:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A
-  Step 7: Type "Role description" in description f:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A2025-08-28 01:12:24,559 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 6: Click in the "Role Description" textbox:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A
+
+  Step 6: Click in the "Role Description" textbox:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A
+
+  Step 7: Type "Role description" in description f:  43%|[32m████▎     [0m| 6/14 [11:26<15:39][A2025-08-28 01:12:24,559 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:12:24,563 - INFO - thoughts:
 - The objective is to type "Role description" in the description field.
 - The previous steps have already focused the "Short Description of Role" textbox, which is currently empty and outlined in red, indicating it is ready for input.
@@ -2026,9 +2172,12 @@ instruction: [NONE]
 2025-08-28 01:12:36,182 - INFO - Objective reached. Stopping...
 2025-08-28 01:13:51,640 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17ad22360>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 7: Type "Role description" in description f:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A
-  Step 7: Type "Role description" in description f:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A
-  Step 8: Checkbox for the button "Manage all book:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A2025-08-28 01:14:01,610 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 7: Type "Role description" in description f:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A
+
+  Step 7: Type "Role description" in description f:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A
+
+  Step 8: Checkbox for the button "Manage all book:  50%|[32m█████     [0m| 7/14 [12:58<12:42][A2025-08-28 01:14:01,610 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:14:01,613 - INFO - thoughts:
 - The objective is to interact with the checkbox for the button labeled "Manage all book, chapter & page permissions".
 - The current screenshot shows the "Create New Role" form with a section titled "System Permissions".
@@ -2053,9 +2202,12 @@ instruction: The checkbox for "Manage all book, chapter & page permissions" is a
 2025-08-28 01:14:16,326 - INFO - Objective reached. Stopping...
 2025-08-28 01:15:31,718 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17ad91e50>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 8: Checkbox for the button "Manage all book:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A
-  Step 8: Checkbox for the button "Manage all book:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A
-  Step 9: Scrolldown and click "Toggle All" button:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A2025-08-28 01:15:36,633 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 8: Checkbox for the button "Manage all book:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A
+
+  Step 8: Checkbox for the button "Manage all book:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A
+
+  Step 9: Scrolldown and click "Toggle All" button:  57%|[32m█████▋    [0m| 8/14 [14:38<10:36][A2025-08-28 01:15:36,633 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:15:36,636 - INFO - thoughts:
 - The objective is to scroll down and click the "Toggle All" button under the "Shelves" text.
 - The current screenshot shows the "System Permissions" section with a "Toggle All" button, but this is not under the "Shelves" text.
@@ -2104,9 +2256,12 @@ instruction: Click on the "Toggle All" button under the "Shelves" text.
 2025-08-28 01:16:08,910 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:17:26,507 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17817fe00>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 9: Scrolldown and click "Toggle All" button:  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A
-  Step 9: Scrolldown and click "Toggle All" button:  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A
-  Step 10: Click "Toggle All" button under "Books" :  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A2025-08-28 01:17:33,900 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 9: Scrolldown and click "Toggle All" button:  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A
+
+  Step 9: Scrolldown and click "Toggle All" button:  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A
+
+  Step 10: Click "Toggle All" button under "Books" :  64%|[32m██████▍   [0m| 9/14 [16:32<09:04][A2025-08-28 01:17:33,900 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:17:33,904 - INFO - thoughts:
 - The objective is to click the "Toggle All" button under the "Books" text.
 - The screenshot shows the "Asset Permissions" section with rows for "Shelves", "Books", "Chapters", "Pages", and "Images".
@@ -2158,9 +2313,12 @@ instruction: Click on the "Toggle All" link in the "Books" row under the "Books"
 2025-08-28 01:18:11,630 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:19:29,493 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1784480b0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 10: Click "Toggle All" button under "Books" :  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A
-  Step 10: Click "Toggle All" button under "Books" :  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A
-  Step 11: Click "Toggle All" button under "Chapter:  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A2025-08-28 01:19:35,472 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 10: Click "Toggle All" button under "Books" :  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A
+
+  Step 10: Click "Toggle All" button under "Books" :  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A
+
+  Step 11: Click "Toggle All" button under "Chapter:  71%|[32m███████▏  [0m| 10/14 [18:35<07:32][A2025-08-28 01:19:35,472 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:19:35,477 - INFO - thoughts:
 - The objective is to click the "Toggle All" button under the "Chapters" text.
 - The screenshot shows the "Asset Permissions" section with rows for Shelves, Books, Chapters, Pages, etc.
@@ -2212,9 +2370,12 @@ instruction: Click on the "Toggle All" link under the "Chapters" text.
 2025-08-28 01:20:23,746 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:21:42,658 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a2e5490>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 11: Click "Toggle All" button under "Chapter:  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A
-  Step 11: Click "Toggle All" button under "Chapter:  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A
-  Step 12: Click "Toggle All" button under "Pages" :  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A2025-08-28 01:21:55,503 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 11: Click "Toggle All" button under "Chapter:  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A
+
+  Step 11: Click "Toggle All" button under "Chapter:  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A
+
+  Step 12: Click "Toggle All" button under "Pages" :  79%|[32m███████▊  [0m| 11/14 [20:49<05:57][A2025-08-28 01:21:55,503 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:21:55,508 - INFO - thoughts:
 - The objective is to click the "Toggle All" button under the "Pages" text.
 - The screenshot shows a permissions table with rows for Shelves, Books, Chapters, Pages, Images, Attachments, and Comments.
@@ -2266,9 +2427,12 @@ instruction: Click on the "Toggle All" button under the "Pages" text.
 2025-08-28 01:22:35,491 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:23:53,285 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17acecf50>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 12: Click "Toggle All" button under "Pages" :  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A
-  Step 12: Click "Toggle All" button under "Pages" :  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A
-  Step 13: Scroll down and click "Save Role" button:  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A2025-08-28 01:23:57,714 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 12: Click "Toggle All" button under "Pages" :  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A
+
+  Step 12: Click "Toggle All" button under "Pages" :  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A
+
+  Step 13: Scroll down and click "Save Role" button:  86%|[32m████████▌ [0m| 12/14 [22:59<04:05][A2025-08-28 01:23:57,714 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:23:57,717 - INFO - thoughts:
 - The objective is to scroll down and click the "Save Role" button.
 - The current screenshot shows the permissions table, but there is no "Save Role" button visible yet.
@@ -2299,9 +2463,12 @@ instruction: The "Save Role" button has already been clicked and the role was su
 2025-08-28 01:24:23,017 - INFO - Objective reached. Stopping...
 2025-08-28 01:25:43,937 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a34cf80>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 13: Scroll down and click "Save Role" button:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A
-  Step 13: Scroll down and click "Save Role" button:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A
-  Step 14: Verify role "Role" appears in roles list:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A2025-08-28 01:25:48,070 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 13: Scroll down and click "Save Role" button:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A
+
+  Step 13: Scroll down and click "Save Role" button:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A
+
+  Step 14: Verify role "Role" appears in roles list:  93%|[32m█████████▎[0m| 13/14 [24:50<01:59][A2025-08-28 01:25:48,070 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:25:48,074 - INFO - thoughts:
 - The objective is to verify that the role "Role" appears in the roles listing.
 - The current screenshot shows the "User Roles" page with a list of roles.
@@ -2313,9 +2480,17 @@ instruction: The role "Role" appears in the roles listing with the description "
 2025-08-28 01:25:48,074 - INFO - Objective reached. Stopping...
 2025-08-28 01:27:04,230 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a34ed50>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 14: Verify role "Role" appears in roles list: 100%|[32m██████████[0m| 14/14 [26:10<00:00][A
-  Step 14: Verify role "Role" appears in roles list: 100%|[32m██████████[0m| 14/14 [26:10<00:00][A
-                                                                                         [A                                                                    21::Create Role with Permissions:  57%|[34m█████▋    [0m| 4/7 [1:23:40<44:59]21::Create Role with Permissions:  71%|[34m███████▏  [0m| 5/7 [1:23:40<38:56]27::Update Sort Rules:  71%|[34m███████▏  [0m| 5/7 [1:23:40<38:56]            Container bookstack-app-1  Stopping
+
+  Step 14: Verify role "Role" appears in roles list: 100%|[32m██████████[0m| 14/14 [26:10<00:00][A
+
+  Step 14: Verify role "Role" appears in roles list: 100%|[32m██████████[0m| 14/14 [26:10<00:00][A
+
+                                                                                         [A
+                                                                    
+
+21::Create Role with Permissions:  57%|[34m█████▋    [0m| 4/7 [1:23:40<44:59]
+21::Create Role with Permissions:  71%|[34m███████▏  [0m| 5/7 [1:23:40<38:56]
+27::Update Sort Rules:  71%|[34m███████▏  [0m| 5/7 [1:23:40<38:56]            Container bookstack-app-1  Stopping
  Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -2358,11 +2533,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 27::Update Sort Rules:   0%|[32m          [0m| 0/6 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/6 [00:00<?]                [A
-  Initializing LaVague:   0%|[32m          [0m| 0/6 [00:09<?][A2025-08-28 01:28:12,719 - INFO - Screenshot folder cleared
 
-  Step 1: Click "Rule" in the rules list:   0%|[32m          [0m| 0/6 [00:09<?][A2025-08-28 01:28:24,307 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 27::Update Sort Rules:   0%|[32m          [0m| 0/6 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/6 [00:00<?]                [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/6 [00:09<?][A2025-08-28 01:28:12,719 - INFO - Screenshot folder cleared
+
+
+  Step 1: Click "Rule" in the rules list:   0%|[32m          [0m| 0/6 [00:09<?][A2025-08-28 01:28:24,307 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:28:24,312 - INFO - thoughts:
 - The objective is to click "Rule" in the rules list.
 - The screenshot shows a "Sort Rules" section with a table containing a row labeled "Rule".
@@ -2388,9 +2567,12 @@ instruction: The "Rule" is already selected as the name in the rules list. No fu
 2025-08-28 01:28:39,683 - INFO - Objective reached. Stopping...
 2025-08-28 01:29:55,075 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17a6539e0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Click "Rule" in the rules list:  17%|[32m█▋        [0m| 1/6 [01:51<09:17][A
-  Step 1: Click "Rule" in the rules list:  17%|[32m█▋        [0m| 1/6 [01:51<09:17][A
-  Step 2: Click in the "Name" textbox:  17%|[32m█▋        [0m| 1/6 [01:51<09:17]   [A2025-08-28 01:29:59,719 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 1: Click "Rule" in the rules list:  17%|[32m█▋        [0m| 1/6 [01:51<09:17][A
+
+  Step 1: Click "Rule" in the rules list:  17%|[32m█▋        [0m| 1/6 [01:51<09:17][A
+
+  Step 2: Click in the "Name" textbox:  17%|[32m█▋        [0m| 1/6 [01:51<09:17]   [A2025-08-28 01:29:59,719 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:29:59,723 - INFO - thoughts:
 - The objective is to click in the "Name" textbox.
 - The screenshot shows an "Edit Sort Rule" page with a "Name" textbox on the right side of the "Sort Rule Details" section.
@@ -2440,9 +2622,12 @@ instruction: Click inside the textbox labeled "Name" in the "Sort Rule Details" 
 2025-08-28 01:30:44,236 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:32:01,201 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbcef0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Click in the "Name" textbox:  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A
-  Step 2: Click in the "Name" textbox:  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A
-  Step 3: Clear and type "Rule updated":  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A2025-08-28 01:32:05,426 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Click in the "Name" textbox:  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A
+
+  Step 2: Click in the "Name" textbox:  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A
+
+  Step 3: Clear and type "Rule updated":  33%|[32m███▎      [0m| 2/6 [03:57<08:00][A2025-08-28 01:32:05,426 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:32:05,430 - INFO - thoughts:
 - The objective is to clear the textbox labeled "Name" and type "Rule updated".
 - The textbox is already focused and contains the text "Rule".
@@ -2476,9 +2661,12 @@ instruction: [NONE]
 2025-08-28 01:32:29,001 - INFO - Objective reached. Stopping...
 2025-08-28 01:33:44,313 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbc410>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Clear and type "Rule updated":  50%|[32m█████     [0m| 3/6 [05:40<05:37][A
-  Step 3: Clear and type "Rule updated":  50%|[32m█████     [0m| 3/6 [05:40<05:37][A
-  Step 4: Click button to add "Chapters First" to :  50%|[32m█████     [0m| 3/6 [05:40<05:37][A2025-08-28 01:33:52,069 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Clear and type "Rule updated":  50%|[32m█████     [0m| 3/6 [05:40<05:37][A
+
+  Step 3: Clear and type "Rule updated":  50%|[32m█████     [0m| 3/6 [05:40<05:37][A
+
+  Step 4: Click button to add "Chapters First" to :  50%|[32m█████     [0m| 3/6 [05:40<05:37][A2025-08-28 01:33:52,069 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:33:52,072 - INFO - thoughts:
 - The objective is to add "Chapters First" to the list, which likely refers to adding a sort operation related to chapters.
 - The current screenshot shows the "Edit Sort Rule" page, with two columns: "Configured Operations" and "Available Operations".
@@ -2515,9 +2703,12 @@ instruction: "The 'Chapters First' operation has been successfully added to the 
 2025-08-28 01:34:19,694 - INFO - Objective reached. Stopping...
 2025-08-28 01:35:39,899 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1782814f0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Click button to add "Chapters First" to :  67%|[32m██████▋   [0m| 4/6 [07:36<03:47][A
-  Step 4: Click button to add "Chapters First" to :  67%|[32m██████▋   [0m| 4/6 [07:36<03:47][A
-  Step 5: Click "Save" button:  67%|[32m██████▋   [0m| 4/6 [07:36<03:47]                     [A2025-08-28 01:35:51,825 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 4: Click button to add "Chapters First" to :  67%|[32m██████▋   [0m| 4/6 [07:36<03:47][A
+
+  Step 4: Click button to add "Chapters First" to :  67%|[32m██████▋   [0m| 4/6 [07:36<03:47][A
+
+  Step 5: Click "Save" button:  67%|[32m██████▋   [0m| 4/6 [07:36<03:47]                     [A2025-08-28 01:35:51,825 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:35:51,829 - INFO - thoughts:
 - The objective is to click the "Save" button.
 - The "Save" button is clearly visible at the bottom right of the "Sort Operations" section.
@@ -2539,9 +2730,12 @@ instruction: [NONE]
 2025-08-28 01:36:04,758 - INFO - Objective reached. Stopping...
 2025-08-28 01:37:20,213 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbebd0>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 5: Click "Save" button:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A
-  Step 5: Click "Save" button:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A
-  Step 6: Verify rule "Rule updated" appears in li:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A2025-08-28 01:37:25,428 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 5: Click "Save" button:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A
+
+  Step 5: Click "Save" button:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A
+
+  Step 6: Verify rule "Rule updated" appears in li:  83%|[32m████████▎ [0m| 5/6 [09:16<01:48][A2025-08-28 01:37:25,428 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:37:25,432 - INFO - thoughts:
 - The objective is to verify that the rule "Rule updated" appears in the listing.
 - The current screenshot shows the "Sorting" settings page in BookStack.
@@ -2554,9 +2748,17 @@ instruction: The rule "Rule updated" appears in the listing under Sort Rules.
 2025-08-28 01:37:25,432 - INFO - Objective reached. Stopping...
 2025-08-28 01:38:40,742 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x17832b350>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 6: Verify rule "Rule updated" appears in li: 100%|[32m██████████[0m| 6/6 [10:37<00:00][A
-  Step 6: Verify rule "Rule updated" appears in li: 100%|[32m██████████[0m| 6/6 [10:37<00:00][A
-                                                                                      [A                                                           27::Update Sort Rules:  71%|[34m███████▏  [0m| 5/7 [1:35:16<38:56]27::Update Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:35:16<16:47]28::Delete Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:35:16<16:47] Container bookstack-db-1  Stopping
+
+  Step 6: Verify rule "Rule updated" appears in li: 100%|[32m██████████[0m| 6/6 [10:37<00:00][A
+
+  Step 6: Verify rule "Rule updated" appears in li: 100%|[32m██████████[0m| 6/6 [10:37<00:00][A
+
+                                                                                      [A
+                                                           
+
+27::Update Sort Rules:  71%|[34m███████▏  [0m| 5/7 [1:35:16<38:56]
+27::Update Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:35:16<16:47]
+28::Delete Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:35:16<16:47] Container bookstack-db-1  Stopping
  Container bookstack-app-1  Stopping
  Container bookstack-app-1  Stopped
  Container bookstack-app-1  Removing
@@ -2601,11 +2803,15 @@ bookstack is giving error: Remote end closed connection without response
 bookstack is giving error: Remote end closed connection without response
 ✓ bookstack is ready
 
-  Steps for 28::Delete Sort Rules:   0%|[32m          [0m| 0/4 [00:00<?][A
-  Setting up page:   0%|[32m          [0m| 0/4 [00:00<?]                [A
-  Initializing LaVague:   0%|[32m          [0m| 0/4 [00:10<?][A2025-08-28 01:40:16,832 - INFO - Screenshot folder cleared
 
-  Step 1: Locate the sort rule "Rule":   0%|[32m          [0m| 0/4 [00:10<?][A2025-08-28 01:40:27,705 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+  Steps for 28::Delete Sort Rules:   0%|[32m          [0m| 0/4 [00:00<?][A
+
+  Setting up page:   0%|[32m          [0m| 0/4 [00:00<?]                [A
+
+  Initializing LaVague:   0%|[32m          [0m| 0/4 [00:10<?][A2025-08-28 01:40:16,832 - INFO - Screenshot folder cleared
+
+
+  Step 1: Locate the sort rule "Rule":   0%|[32m          [0m| 0/4 [00:10<?][A2025-08-28 01:40:27,705 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:40:27,849 - INFO - thoughts:
 - The objective is to locate the sort rule "Rule".
 - The screenshot shows the "Sorting" settings page in BookStack.
@@ -2619,9 +2825,12 @@ instruction: The sort rule "Rule" is located in the "Sort Rules" section at the 
 2025-08-28 01:40:27,850 - INFO - Objective reached. Stopping...
 2025-08-28 01:41:46,492 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176f90740>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 1: Locate the sort rule "Rule":  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A
-  Step 1: Locate the sort rule "Rule":  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A
-  Step 2: Click "Delete" button for the sort rule:  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A2025-08-28 01:41:54,791 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 1: Locate the sort rule "Rule":  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A
+
+  Step 1: Locate the sort rule "Rule":  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A
+
+  Step 2: Click "Delete" button for the sort rule:  25%|[32m██▌       [0m| 1/4 [01:40<05:01][A2025-08-28 01:41:54,791 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:41:54,794 - INFO - thoughts:
 - The objective is to click the "Delete" button for the sort rule.
 - In the "Sort Rules" section, there is a rule listed with the label "Name - Alphabetical (Asc), Created Date (Asc)".
@@ -2684,114 +2893,114 @@ instruction: Click on the small blue button with the trash bin icon to the right
 2025-08-28 01:42:39,374 - ERROR - Navigation error: No element found.
 2025-08-28 01:42:41,023 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 2025-08-28 01:42:41,033 - ERROR - Navigation error: No element found.
@@ -2821,9 +3030,12 @@ instruction: Click on the small blue square with the white trash bin icon to the
 2025-08-28 01:43:04,897 - ERROR - Navigation error: No element found.
 2025-08-28 01:44:20,104 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x179bbc590>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 2: Click "Delete" button for the sort rule:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A
-  Step 2: Click "Delete" button for the sort rule:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A
-  Step 3: Click "Confirm" button in confirmation d:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A2025-08-28 01:44:29,223 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 2: Click "Delete" button for the sort rule:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A
+
+  Step 2: Click "Delete" button for the sort rule:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A
+
+  Step 3: Click "Confirm" button in confirmation d:  50%|[32m█████     [0m| 2/4 [04:14<04:23][A2025-08-28 01:44:29,223 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:44:29,226 - INFO - thoughts:
 - The objective is to click the "Confirm" button in a confirmation dialog.
 - Previous attempts focused on deleting a sort rule by clicking the trash bin icon, but all failed, likely because the confirmation dialog did not appear or was not interacted with.
@@ -2864,114 +3076,114 @@ instruction: Click on the small blue square with the white trash bin icon to the
 2025-08-28 01:44:50,894 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 2025-08-28 01:44:50,908 - ERROR - Navigation error: No element found.
@@ -3027,9 +3239,12 @@ instruction: Click on the small blue square with the white trash bin icon to the
 2025-08-28 01:45:22,347 - ERROR - Navigation error: No element found.
 2025-08-28 01:46:37,588 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x175d9c470>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 3: Click "Confirm" button in confirmation d:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A
-  Step 3: Click "Confirm" button in confirmation d:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A
-  Step 4: Verify rule no longer appears in listing:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A2025-08-28 01:46:46,778 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+  Step 3: Click "Confirm" button in confirmation d:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A
+
+  Step 3: Click "Confirm" button in confirmation d:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A
+
+  Step 4: Verify rule no longer appears in listing:  75%|[32m███████▌  [0m| 3/4 [06:31<02:14][A2025-08-28 01:46:46,778 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-08-28 01:46:46,782 - INFO - thoughts:
 - The objective is to verify that the rule "Name - Alphabetical (Asc), Created Date (Asc)" no longer appears in the listing.
 - The previous attempts to delete the rule have failed, as indicated by the repeated [FAILED] steps.
@@ -3041,103 +3256,111 @@ instruction: The rule "Name - Alphabetical (Asc), Created Date (Asc)" still appe
 2025-08-28 01:46:46,783 - INFO - Objective reached. Stopping...
 2025-08-28 01:48:02,134 - WARNING - Telemetry failed with HTTPSConnectionPool(host='telemetrylavague.mithrilsecurity.io', port=443): Max retries exceeded with url: /telemetry_new (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x176923c50>, 'Connection to telemetrylavague.mithrilsecurity.io timed out. (connect timeout=None)'))
 
-  Step 4: Verify rule no longer appears in listing: 100%|[32m██████████[0m| 4/4 [07:56<00:00][A
-  Step 4: Verify rule no longer appears in listing: 100%|[32m██████████[0m| 4/4 [07:56<00:00][A
-                                                                                      [A                                                           28::Delete Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:44:37<16:47]28::Delete Sort Rules: 100%|[34m██████████[0m| 7/7 [1:44:37<00:00]28::Delete Sort Rules: 100%|[34m██████████[0m| 7/7 [1:44:37<00:00]
+
+  Step 4: Verify rule no longer appears in listing: 100%|[32m██████████[0m| 4/4 [07:56<00:00][A
+
+  Step 4: Verify rule no longer appears in listing: 100%|[32m██████████[0m| 4/4 [07:56<00:00][A
+
+                                                                                      [A
+                                                           
+
+28::Delete Sort Rules:  86%|[34m████████▌ [0m| 6/7 [1:44:37<16:47]
+28::Delete Sort Rules: 100%|[34m██████████[0m| 7/7 [1:44:37<00:00]
+28::Delete Sort Rules: 100%|[34m██████████[0m| 7/7 [1:44:37<00:00]
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
 Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/core/navigation.py", line 497, in execute_instruction
     vision_data = self.driver.get_highlighted_element(action)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
+  File "/home/user/WebTestPilot/baselines/.venv-lavague/lib/python3.12/site-packages/lavague/drivers/playwright/base.py", line 182, in get_highlighted_element
     raise ValueError("No element found.")
 ValueError: No element found.
 
@@ -3160,7 +3383,7 @@ Normal Test Runs:
 [92m✓[0m 27::Update Sort Rules                        : Steps= 6/6  (1.0)
 [92m✓[0m 28::Delete Sort Rules                        : Steps= 4/4  (1.0)
 ================================================================================Traceback (most recent call last):
-  File "/Users/abcbum/Desktop/Projects/Cophi/WebTestPilot/.//baselines/evaluate.py", line 230, in main
+  File "/home/user/WebTestPilot/.//baselines/evaluate.py", line 230, in main
     raise typer.Exit(code=1)
 click.exceptions.Exit
 
