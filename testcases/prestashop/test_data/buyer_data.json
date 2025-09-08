@@ -1,0 +1,20 @@
+[
+    {
+        "product_name": "Hummingbird printed t-shirt",
+        "size": "M",
+        "size_cnt": "2",
+        "color": "Black",
+
+        "star": "5",
+        "title": "Good thing",
+        "review": "very confortable!",
+        
+        "main_category": "Clothes",
+        "sub_category": "Men",
+        "filters": {
+            "availability": "In stock",
+            "selection": "Discounted",
+            "size": "M"
+        }
+    }
+]
