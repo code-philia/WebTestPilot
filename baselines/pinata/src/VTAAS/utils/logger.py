@@ -39,7 +39,7 @@ def get_logger(name: str, start_time: float, output_folder: str) -> logging.Logg
     console_handler.setFormatter(formatter)
 
     log_file = os.path.join(output_folder, "execution.log")
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')  # <--- 修正行
+    file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setFormatter(formatter)
 
     logger.addHandler(console_handler)

@@ -1,5 +1,4 @@
-// --- 顶部控制块，确保只执行一次 ---
-if (!window._pinataCustomCssAndLabelsInjected) { // 使用一个新的全局变量作为标志，涵盖样式和labels
+if (!window._pinataCustomCssAndLabelsInjected) {
     const customCSS = `
         ::-webkit-scrollbar {
             width: 10px;
@@ -20,30 +19,25 @@ if (!window._pinataCustomCssAndLabelsInjected) { // 使用一个新的全局变�
     styleTag.textContent = customCSS;
     document.head.append(styleTag);
 
-    window.labels = []; // 将 labels 声明为全局变量，并确保只声明一次
-    // 在这个顶层作用域声明的函数也会被保留，因为它们是在全局作用域定义的
+    window.labels = [];
     window.unmarkPage = function() {
         // Unmark page logic
-        for (const label of window.labels) { // 使用 window.labels
+        for (const label of window.labels) {
             document.body.removeChild(label);
         }
-        window.labels = []; // 重置时也要使用 window.labels
+        window.labels = [];
         document.querySelectorAll("[data-mark]").forEach((element) => {
             element.removeAttribute("data-mark");
         });
     };
 
-    window._pinataCustomCssAndLabelsInjected = true; // 设置标志
+    window._pinataCustomCssAndLabelsInjected = true;
 }
-// --- 顶部控制块结束 ---
 
-// markPage 函数本身需要能够在每次调用时重置或更新，所以它不应该被一次性注入
-// 它的定义应该在全局变量 _pinataCustomCssAndLabelsInjected 检查之外
-// 确保 markPage 每次都能重新获取并标记元素
 function markPage() {
-  window.unmarkPage(); // 调用全局的 unmarkPage
+  window.unmarkPage();
 
-  // var bodyRect = document.body.getBoundingClientRect(); // 这行是注释掉的，无需改动
+  // var bodyRect = document.body.getBoundingClientRect();
 
   var items = Array.prototype.slice
     .call(document.querySelectorAll("*"))
@@ -110,7 +104,7 @@ function markPage() {
     (x) => !items.some((y) => x.element.contains(y.element) && !(x == y)),
   );
 
-  // Function to generate random colors (这个函数可以放在内部，或者如果它也是全局复用的，也可以移到上面)
+  // Function to generate random colors
   function getRandomColor() {
     var letters = "0123456789ABCDEF";
     var color = "#";
@@ -123,7 +117,7 @@ function markPage() {
   // Lets create a floating border on top of these elements that will always be visible
   items.forEach(function (item, index) {
     item.rects.forEach((bbox) => {
-      newElement = document.createElement("div"); // 这里没有用 let/const，会自动变成全局变量，但因为每次markPage都会创建新的div，所以通常不是问题
+      newElement = document.createElement("div");
       var borderColor = getRandomColor();
       newElement.style.outline = `2px dashed ${borderColor}`;
       newElement.style.position = "fixed";
@@ -152,7 +146,7 @@ function markPage() {
       newElement.appendChild(label);
 
       document.body.appendChild(newElement);
-      window.labels.push(newElement); // 注意这里，改为 window.labels
+      window.labels.push(newElement);
       // item.element.setAttribute("-ai-label", label.textContent);
     });
     item.element.setAttribute("data-mark", `${index}`);
@@ -169,4 +163,4 @@ function markPage() {
   return coordinates;
 }
 
-window.markPage = markPage; // 这行保持不变，确保 markPage 函数被正确挂载到全局 window 对象上
+window.markPage = markPage;
