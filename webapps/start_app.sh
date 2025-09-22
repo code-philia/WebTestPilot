@@ -51,8 +51,8 @@ patch_level=$(echo "$app_config" | awk '{print $NF}')
 echo "🔄 Resetting $app_name environment..."
 (
     cd "$SCRIPT_DIR/$app_name"
-    docker compose down -v
-    sleep 3
+    docker compose down -v --remove-orphans
+    sleep 5
     docker compose up -d
 )
 
