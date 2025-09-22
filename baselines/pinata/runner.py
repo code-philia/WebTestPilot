@@ -168,6 +168,8 @@ class PinataTestRunner(BaseTestRunner):
                         model_name=self.model,
                         name=test_case.name,
                     )
+                    
+                    time.sleep(2)
 
                     # Monkey-patch orchestrator to update progress bar
                     original_process = orchestrator.process_testcase

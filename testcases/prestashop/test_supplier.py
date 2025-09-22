@@ -25,3 +25,4 @@ def test_delete_supplier(
     page.get_by_role("link", name="delete Delete").click()
     page.get_by_role("button", name="Delete").click()
     expect(page.get_by_text("Successful deletion")).to_be_visible()
+    expect(page.get_by_text(test_data.supplier_name)).not_to_be_visible()
