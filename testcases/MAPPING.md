@@ -1,6 +1,6 @@
 [TOC]
 
-| 应用         | demo展示页面                                                 |
+| App         | Demo Website                                                 |
 | ------------ | ------------------------------------------------------------ |
 | bookstack    | https://demo.bookstackapp.com/                               |
 | invoiceninja | https://app.invoicing.co/#/dashboard                         |
@@ -139,13 +139,9 @@ Typically you would only use one or two operations, since most would override th
 
 ### 2.1BookStack provides a flexible editing environment to meet different user preferences: default WYSIWYG Editor and optional Markdown Editor.
 
-- **默认所见即所得 (WYSIWYG) 编辑器**：平台的主要编辑器是一个“所见即所得”界面，对于熟悉标准文字处理软件的用户而言非常直观 。  
+- **(WYSIWYG) Editor**：https://www.bookstackapp.com/docs/user/wysiwyg-editor/
 
-  https://www.bookstackapp.com/docs/user/wysiwyg-editor/
-
-- **可选的 Markdown 编辑器**：为更偏好技术的用户提供了一个功能齐全的 Markdown 编辑器作为替代方案。它支持 CommonMark 标准，并带有表格和任务列表等扩展 。拥有相应权限的用户可以在页面级别切换编辑器 。  
-
-​	https://www.bookstackapp.com/docs/user/markdown-editor/
+- **Markdown Editor**: https://www.bookstackapp.com/docs/user/markdown-editor/
 
 ### 2.2 Both the default WYSIWYG Editor and the optional Markdown Editor support inserting diagrams.
 
