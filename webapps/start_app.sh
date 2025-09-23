@@ -1,5 +1,52 @@
 #!/bin/bash
 
+wait_for_application() {
+    local app_name="$1"
+    local max_wait=${2:-240}  # Default 4 minutes
+    local start_time=$(date +%s)
+    local url=""
+    local check_text=""
+    
+    # Map application to URL and readiness check text
+    case "$app_name" in
+        "indico")
+            url="http://localhost:8080"
+            check_text="All events"
+            ;;
+        "invoiceninja")
+            url="http://localhost:8082"
+            check_text="Invoice Ninja"
+            ;;
+        "prestashop")
+            url="http://localhost:8083"
+            check_text="Ecommerce software by PrestaShop"
+            ;;
+        "bookstack")
+            url="http://localhost:8081/"
+            check_text="Redirecting to"
+            ;;
+        *)
+            echo "Error: Unknown application '$app_name' for wait check"
+            return 1
+            ;;
+    esac
+    
+    echo "⏳ Waiting for $app_name to be ready at $url..."
+    
+    while [ $(( $(date +%s) - start_time )) -lt $max_wait ]; do
+        if curl -s "$url" 2>/dev/null | grep -q "$check_text"; then
+            echo "✅ $app_name is ready"
+            return 0
+        else
+            echo "   ... $app_name not ready, retrying in 15s"
+            sleep 15
+        fi
+    done
+    
+    echo "Warning: $app_name may not be fully ready after ${max_wait}s"
+    return 1
+}
+
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     echo "Usage: $0 <app_name> [patch_file]"
@@ -56,26 +103,10 @@ echo "🔄 Resetting $app_name environment..."
     docker compose up -d
 )
 
+wait_for_application "$app_name"
+
 # If patch provided → inject bug
 if [[ -n "$patch_name" ]]; then
-    if [[ "$app_name" == "indico" ]]; then
-        echo "⏳ Waiting for Indico setup to complete..."
-        until curl -s http://localhost:8080 | grep -q "All events"; do
-            echo "   ... Indico not ready yet, retrying in 5s"
-            sleep 5
-        done
-        echo "✅ Indico is ready, continuing with patch"
-    fi
-
-    if [[ "$app_name" == "prestashop" ]]; then
-        echo "⏳ Waiting for Prestashop setup to complete..."
-        until curl -s http://localhost:8083 | grep -q "PrestaShop"; do
-            echo "   ... Prestashop not ready yet, retrying in 5s"
-            sleep 5
-        done
-        echo "✅ Prestashop is ready, continuing with patch"
-    fi
-
     echo "📦 Injecting patch: $patch_name into $app_name"
     docker cp "$patch_path" "$container:/tmp/change.patch"
     docker exec -w "$workdir" "$container" patch "$patch_level" -i /tmp/change.patch --fuzz=10 --verbose
@@ -93,19 +124,17 @@ if [[ -n "$patch_name" ]]; then
         fi
     )
     
+    echo "Checking after injecting bug for $app_name..."
+    wait_for_application "$app_name"
 else
     echo "ℹ️  No patch provided. Skipping bug injection."
 fi
 
-# Create buyer user for PrestaShop at the beginning
+# Create buyer user for PrestaShop, by this point, app is always ready.
 if [[ "$app_name" == "prestashop" ]]; then
-    until curl -s http://localhost:8083 > /dev/null 2>&1; do
-        echo "Waiting for PrestaShop to ready..."
-        sleep 10
-    done
-    
-    echo "PrestaShop is ready, creating buyer user..."
+    echo "👤 Creating buyer user..."
     docker exec "$container" php /var/www/html/tools/create_user.php
+    echo "👤 Created buyer user..."
 fi
 
-echo "✅ Done."
+echo "$app_name start script done!"

@@ -399,61 +399,18 @@ class BaseTestRunner(ABC):
                 return {}
         return {}
 
-    def wait_for_application(self, application: ApplicationEnum, max_wait: int = 240):
-        """Wait for application to be accessible via HTTP."""
-
-        READY_CHECKS: dict[str, Callable[[str], bool]] = {
-            "indico": lambda text: "All events" in text,
-            "invoiceninja": lambda text: "Invoice Ninja" in text,
-            "prestashop": lambda text: "Ecommerce software by PrestaShop" in text,
-            "bookstack": lambda text: "BookStack" in text,  # adjust as needed
-        }
-
-        url = self.APPLICATION_URLS.get(application)
-        assert url, f"URL for {application} not found"
-
-        print(f"Waiting for {application} to be ready at {url}...")
-        start_time = time.time()
-        check_func: Callable[[str], bool] = READY_CHECKS.get(
-            application, lambda _: True
-        )
-
-        while time.time() - start_time < max_wait:
-            try:
-                response = urllib.request.urlopen(url, timeout=5)
-                text = response.read().decode("utf-8", errors="ignore")
-
-                if check_func(text):
-                    print(f"✓ {application} is ready")
-                    return
-            except Exception as e:
-                print(f"{application} is giving error: {e}")
-
-            time.sleep(15)
-
-        print(f"Warning: {application} may not be fully ready after {max_wait}s")
-
     def restart_application(
         self, application: ApplicationEnum, patch_file: Optional[str] = None
     ):
         """Restart the specified application with optional bug injection."""
         WEBAPPS_DIR = Path(__file__).parent.parent / "webapps"
 
-        # Stop the application
-        subprocess.run(
-            ["bash", str(WEBAPPS_DIR / "stop_app.sh"), application],
-            text=True,
-        )
-
-        # Start with optional bug injection
+        # Example: bash webapps/start_app.sh invoiceninja credit-mark-1.patch
         cmd = ["bash", str(WEBAPPS_DIR / "start_app.sh"), application]
         if patch_file:
             cmd.append(patch_file)
 
         _ = subprocess.run(cmd, text=True, check=True)
-
-        # Wait for application to be accessible
-        self.wait_for_application(application)
 
     def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
