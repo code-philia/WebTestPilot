@@ -98,7 +98,21 @@ patch_level=$(echo "$app_config" | awk '{print $NF}')
 echo "🔄 Resetting $app_name environment..."
 (
     cd "$SCRIPT_DIR/$app_name"
-    docker compose down -v --remove-orphans
+    if [[ "$app_name" == "indico" ]]; then
+        # Special handling for Indico to retry down on volume mkdir error
+        success=false
+        while ! $success; do
+            output=$(docker compose down -v --remove-orphans 2>&1)
+            if echo "$output" | grep -q "failed to mkdir.*file exists"; then
+                echo "Detected Indico volume mkdir error during down, retrying in 5s..."
+                sleep 5
+            else
+                success=true
+            fi
+        done
+    else
+        docker compose down -v --remove-orphans
+    fi
     sleep 5
     docker compose up -d
 )
