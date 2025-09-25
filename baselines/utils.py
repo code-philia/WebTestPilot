@@ -153,13 +153,13 @@ def setup_indico_page(page: Page, setup_function: str) -> Page:
         return logged_in_page
 
     elif setup_function == "created_lecture_page":
-        return create_lecture(logged_in_page, test_data)
+        return create_lecture(logged_in_page)
 
     elif setup_function == "created_meeting_page":
-        return create_meeting(logged_in_page, test_data)
+        return create_meeting(logged_in_page)
 
     elif setup_function == "created_conference_page":
-        return create_conference(logged_in_page, test_data)
+        return create_conference(logged_in_page)
 
     else:
         raise ValueError(f"Unknown indico setup function: {setup_function}")

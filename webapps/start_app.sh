@@ -47,6 +47,18 @@ wait_for_application() {
     return 1
 }
 
+load_indico_seed_data() {
+    local seed_file="$SCRIPT_DIR/indico/seed.sql"
+    echo "🌱 Loading seed data for Indico..."
+    docker exec -i indico-postgres-1 psql -U "$PGUSER" -d "$PGDATABASE" < "$seed_file"
+    if [ $? -eq 0 ]; then
+        echo "✅ Seed data loaded successfully"
+    else
+        echo "❌ Failed to load seed data"
+        return 1
+    fi
+}
+
 # Usage check
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     echo "Usage: $0 <app_name> [patch_file]"
@@ -58,6 +70,12 @@ patch_name="${2:-}"   # optional
 
 # Resolve script directory (absolute path, independent of where script is called)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Load environment variables from .env file if it exists
+if [[ -f "$SCRIPT_DIR/indico/.env" ]]; then
+    source "$SCRIPT_DIR/indico/.env"
+    echo "📝 Loaded environment variables from $SCRIPT_DIR/indico/.env"
+fi
 
 # Supported apps
 case "$app_name" in
@@ -98,26 +116,28 @@ patch_level=$(echo "$app_config" | awk '{print $NF}')
 echo "🔄 Resetting $app_name environment..."
 (
     cd "$SCRIPT_DIR/$app_name"
-    if [[ "$app_name" == "indico" ]]; then
-        # Special handling for Indico to retry down on volume mkdir error
-        success=false
-        while ! $success; do
-            output=$(docker compose down -v --remove-orphans 2>&1)
-            if echo "$output" | grep -q "failed to mkdir.*file exists"; then
-                echo "Detected Indico volume mkdir error during down, retrying in 5s..."
-                sleep 5
-            else
-                success=true
-            fi
-        done
-    else
-        docker compose down -v --remove-orphans
-    fi
+    docker compose down -v --remove-orphans
+
     sleep 5
-    docker compose up -d
+
+    # Add retries to make sure app will start
+    success=false
+    while ! $success; do
+        if docker compose up -d 2>&1 | tee /dev/tty | grep -iE "mkdir|failed|error"; then
+            echo "Detected error during compose up, retrying in 5s..."
+            sleep 5
+        else
+            success=true
+        fi
+    done
 )
 
 wait_for_application "$app_name"
+
+# Load seed data
+if [[ "$app_name" == "indico" ]]; then
+    load_indico_seed_data
+fi
 
 # If patch provided → inject bug
 if [[ -n "$patch_name" ]]; then

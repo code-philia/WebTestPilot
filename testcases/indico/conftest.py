@@ -157,24 +157,44 @@ def logged_in_page(page: Page) -> Page:
 
 
 @pytest.fixture
+def seed(logged_in_page: Page):
+    create_lecture(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(INDICO_HOST)
+    create_meeting(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(INDICO_HOST)
+    create_conference(logged_in_page)
+    return logged_in_page
+
+
+@pytest.fixture
 def created_lecture_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_lecture(logged_in_page, test_data)
+    return create_lecture(
+        logged_in_page,
+        test_data.lecture_name,
+        test_data.venue_name,
+        test_data.room_name,
+    )
 
 
-def create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+def create_lecture(
+    logged_in_page: Page,
+    name: str = "Lecture",
+    venue_name: str = "Venue",
+    room_name: str = "Room",
+) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Lecture").first.click()
 
     # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.lecture_name
-    )
+    logged_in_page.get_by_role("textbox", name="Event title").fill(name)
 
     # Venue and Room
     logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
+    logged_in_page.get_by_role("textbox", name="Venue").fill(venue_name)
     logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
+    logged_in_page.get_by_role("textbox", name="Room").fill(room_name)
 
     # Event protection mode
     logged_in_page.locator("#event-creation-protection_mode").get_by_text(
@@ -187,17 +207,29 @@ def create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> Page:
 
 @pytest.fixture
 def created_meeting_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_meeting(logged_in_page, test_data)
+    return create_meeting(
+        logged_in_page,
+        test_data.meeting_name,
+        test_data.end_date,
+        test_data.end_time,
+        test_data.venue_name,
+        test_data.room_name,
+    )
 
 
-def create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+def create_meeting(
+    logged_in_page: Page,
+    name: str = "Meeting",
+    end_date: str = "10/10/2040",
+    end_time: str = "12",
+    venue_name: str = "Venue",
+    room_name: str = "Room",
+) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Meeting").first.click()
 
     # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.meeting_name
-    )
+    logged_in_page.get_by_role("textbox", name="Event title").fill(name)
 
     # End date
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
@@ -205,19 +237,19 @@ def create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> Page:
     ).click()
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
         "textbox", name="DD/MM/YYYY"
-    ).fill(test_data.end_date)
+    ).fill(end_date)
 
     # End time
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
         "textbox", name="--:--"
     ).click()
-    logged_in_page.get_by_role("button", name=test_data.end_time).first.click()
+    logged_in_page.get_by_role("button", name=end_time).first.click()
 
     # Venue and Room
     logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
+    logged_in_page.get_by_role("textbox", name="Venue").fill(venue_name)
     logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
+    logged_in_page.get_by_role("textbox", name="Room").fill(room_name)
 
     # Event protection mode
     logged_in_page.locator("#event-creation-protection_mode").get_by_text(
@@ -230,17 +262,29 @@ def create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> Page:
 
 @pytest.fixture
 def created_conference_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_conference(logged_in_page, test_data)
+    return create_conference(
+        logged_in_page,
+        test_data.conference_name,
+        test_data.end_date,
+        test_data.end_time,
+        test_data.venue_name,
+        test_data.room_name,
+    )
 
 
-def create_conference(logged_in_page: Page, test_data: IndicoTestData) -> Page:
+def create_conference(
+    logged_in_page: Page,
+    name: str = "Conference",
+    end_date: str = "10/10/2040",
+    end_time: str = "12",
+    venue_name: str = "Venue",
+    room_name: str = "Room",
+) -> Page:
     logged_in_page.get_by_role("link", name="Create event ").click()
     logged_in_page.get_by_role("link", name="Conference").first.click()
 
     # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.conference_name
-    )
+    logged_in_page.get_by_role("textbox", name="Event title").fill(name)
 
     # End date
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
@@ -248,19 +292,19 @@ def create_conference(logged_in_page: Page, test_data: IndicoTestData) -> Page:
     ).click()
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
         "textbox", name="DD/MM/YYYY"
-    ).fill(test_data.end_date)
+    ).fill(end_date)
 
     # End time
     logged_in_page.locator("#event-creation-end_dt").get_by_role(
         "textbox", name="--:--"
     ).click()
-    logged_in_page.get_by_role("button", name=test_data.end_time).first.click()
+    logged_in_page.get_by_role("button", name=end_time).first.click()
 
     # Venue and Room
     logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
+    logged_in_page.get_by_role("textbox", name="Venue").fill(venue_name)
     logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
+    logged_in_page.get_by_role("textbox", name="Room").fill(room_name)
 
     # Event protection mode
     logged_in_page.locator("#event-creation-protection_mode").get_by_text(
