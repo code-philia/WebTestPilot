@@ -17,24 +17,23 @@ def detect_app_from_test_path(test_path: str):
 @pytest.hookimpl(tryfirst=True)
 def pytest_runtest_setup(item):
     """Restart app from fresh before all tests."""
-    test_path = str(item.fspath)
-    app_name = detect_app_from_test_path(test_path)
+    app_name = detect_app_from_test_path(str(item.fspath))
 
-    if app_name:
-        print(f"Detected application: {app_name} for test: {item.name}")
-        SCRIPT_PATH = Path(__file__).parent.parent / "webapps" / "start_app.sh"
+    if not app_name:
+        return
 
-        result = subprocess.run(
-            ["bash", SCRIPT_PATH, app_name],
-            capture_output=True,
-            text=True,
-            timeout=600,
-        )
+    SCRIPT_PATH = Path(__file__).parent.parent / "webapps" / "start_app.sh"
+    result = subprocess.run(
+        ["bash", SCRIPT_PATH, app_name],
+        stdout=subprocess.DEVNULL,
+        check=True,
+    )
 
-        if result.returncode != 0:
-            print(f"Failed to start application {app_name}")
-            if result.stderr:
-                print(f"Script error: {result.stderr}")
-            pytest.fail(f"Failed to start application: {app_name}")
+    if result.returncode != 0:
+        print(f"Failed to start application {app_name}")
+        if result.stderr:
+            print(f"Script error: {result.stderr}")
+        pytest.fail(f"Failed to start application: {app_name}")
+        return
 
-        print(f"Application {app_name} started successfully.")
+    print(f"Application {app_name} started successfully.")

@@ -112,3 +112,21 @@ def create_conference(
 
     logged_in_page.get_by_role("button", name="Create event", exact=True).click()
     return logged_in_page
+
+
+def navigate_to_conference_edit_page(page: Page) -> None:
+    # From homepage, go to conference edit page
+    page.get_by_role("link", name="Conference").click()
+    page.get_by_role("link", name="").click()
+
+
+def navigate_to_meeting_edit_page(page: Page) -> None:
+    # From homepage, go to meeting edit page
+    page.get_by_role("link", name="Meeting").click()
+    page.get_by_role("link", name="").click()
+
+
+def navigate_to_lecture_edit_page(page: Page) -> None:
+    # From homepage, go to lecture edit page
+    page.get_by_role("link", name="Lecture").click()
+    page.get_by_role("link", name="").click()
