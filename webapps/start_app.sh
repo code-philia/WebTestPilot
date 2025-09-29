@@ -166,9 +166,7 @@ fi
 
 # Create buyer user for PrestaShop, by this point, app is always ready.
 if [[ "$app_name" == "prestashop" ]]; then
-    echo "👤 Creating buyer user..."
     docker exec "$container" php /var/www/html/tools/create_user.php
-    echo "👤 Created buyer user..."
 fi
 
 echo "$app_name start script done!"
