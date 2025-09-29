@@ -48,41 +48,20 @@ wait_for_application() {
 }
 
 seed_data() {
-    local app_name="$1"
-    local seed_file=""
-    local db_container=""
-    local db_command=""
-    
-    case "$app_name" in
-        "indico")
-            seed_file="$SCRIPT_DIR/indico/seed.sql"
-            db_container="indico-postgres-1"
-            db_command="psql -U \"$PGUSER\" -d \"$PGDATABASE\""
-            ;;
-        "prestashop")
-            seed_file="$SCRIPT_DIR/prestashop/seed.sql"
-            db_container="prestashop-db-1"
-            db_command="mysql -u root -proot prestashop"
-            ;;
-        "bookstack")
-            seed_file="$SCRIPT_DIR/bookstack/seed.sql"
-            db_container="bookstack-db-1"
-            db_command="mysql -u admin -padmin bookstack"
-            ;;
-        "invoiceninja")
-            seed_file="$SCRIPT_DIR/invoiceninja/seed.sql"
-            db_container="invoiceninja-mysql-1"
-            db_command="mysql -u \"$DB_USERNAME\" -p\"$DB_PASSWORD\" \"$DB_DATABASE\""
-            ;;
+    SEED_FILE="$SCRIPT_DIR/$1/seed.sql"
+
+    case "$1" in
+        "indico") docker exec -i indico-postgres-1 psql -U "$PGUSER" -d "$PGDATABASE" < "$SEED_FILE" ;;
+        "prestashop") docker exec -i prestashop-db-1 mysql -u root -proot prestashop < "$SEED_FILE" ;;
+        "bookstack") docker exec -i bookstack-db-1 mysql -u admin -padmin bookstack < "$SEED_FILE" ;;
+        "invoiceninja") docker exec -i invoiceninja-mysql-1 mysql -u "$DB_USERNAME" -p"$DB_PASSWORD" "$DB_DATABASE" < "$SEED_FILE" ;;
+        *) echo "Error: No seed data available for app '$1'"; return 1 ;;
     esac
     
-    echo "🌱 Loading seed data for $app_name..."
-    docker exec -i "$db_container" $db_command < "$seed_file"
-    
     if [ $? -eq 0 ]; then
-        echo "✅ Seed data loaded successfully"
+        echo "✅ Seed data loaded successfully for $1"
     else
-        echo "❌ Failed to load seed data"
+        echo "❌ Failed to load seed data for $1"
         return 1
     fi
 }

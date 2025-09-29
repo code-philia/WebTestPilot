@@ -10,6 +10,16 @@ from playwright.sync_api import Page
 sys.path.append(str(Path(__file__).parent.parent))
 
 from tracing_api import create_traced_page
+from .utilities import (
+    create_attribute,
+    create_feature,
+    create_brand,
+    create_parent_category,
+    create_child_category,
+    create_customer,
+    create_virtual_product,
+    create_supplier,
+)
 
 pytest_plugins = ["pytest_xpath_plugin"]
 
@@ -371,8 +381,7 @@ def go_to_buyer_page(page: Page) -> Page:
 def logged_in_page(page: Page) -> Page:
     page = create_traced_page(page, enable_tracing=True)
     page = login_to_prestashop(page)
-    yield page
-    page.save_traces()
+    return page
 
 
 def login_to_prestashop(page: Page) -> Page:
@@ -394,8 +403,7 @@ def login_to_prestashop(page: Page) -> Page:
 def logged_in_buyer_page(page: Page) -> Page:
     page = create_traced_page(page, enable_tracing=True)
     page = login_to_prestashop_as_buyer(page)
-    yield page
-    page.save_traces()
+    return page
 
 
 def login_to_prestashop_as_buyer(page: Page) -> Page:
@@ -410,31 +418,9 @@ def login_to_prestashop_as_buyer(page: Page) -> Page:
     return page
 
 
-def create_attribute(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create an attribute in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Attributes & Features").click()
-    page.get_by_role("link", name="Add new attribute").click()
-    page.locator("#name_1").fill(test_data.attribute_name)
-    page.locator("#public_name_1").fill(test_data.attribute_public_name)
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
-def create_feature(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a feature in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Attributes & Features").click()
-    page.get_by_role("link", name="Features", exact=True).click()
-    page.get_by_role("link", name=" Add new feature", exact=True).click()
-    page.locator("#name_1").fill(test_data.feature_name)
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_attribute_tests(page: Page, test_data: PrestaShopTestData) -> Page:
     """Setup data for attribute tests - creates attribute from test data and navigates to attributes page."""
-    create_attribute(page, test_data)
+    create_attribute(page, test_data.attribute_name, test_data.attribute_public_name)
     # Navigate back to the attributes page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Attributes & Features").click()
@@ -443,7 +429,7 @@ def setup_data_for_attribute_tests(page: Page, test_data: PrestaShopTestData) ->
 
 def setup_data_for_feature_tests(page: Page, test_data: PrestaShopTestData) -> Page:
     """Setup data for feature tests - creates feature from test data and navigates to features page."""
-    create_feature(page, test_data)
+    create_feature(page, test_data.feature_name)
     # Navigate back to the features page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Attributes & Features").click()
@@ -451,31 +437,9 @@ def setup_data_for_feature_tests(page: Page, test_data: PrestaShopTestData) -> P
     return page
 
 
-def create_brand(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a brand in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Brands & Suppliers").click()
-    page.get_by_role(
-        "link", name="add_circle_outline Add new brand", exact=True
-    ).click()
-
-    page.get_by_role("textbox", name="manufacturer_name input").fill(
-        test_data.brand_name
-    )
-    page.locator("#manufacturer_description_1_ifr").content_frame.locator(
-        "#tinymce"
-    ).fill(test_data.brand_description)
-    # page.get_by_role("button", name="Logo Choose file(s) Browse").set_input_files(
-    #     test_data.brand_logo_file
-    # )
-
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_brand_tests(page: Page, test_data: PrestaShopTestData) -> Page:
     """Setup data for brand tests - creates brand from test data and navigates to brands page."""
-    create_brand(page, test_data)
+    create_brand(page, test_data.brand_name, test_data.brand_description)
     # Navigate back to the brands page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Brands & Suppliers").click()
@@ -557,73 +521,11 @@ def created_wishlist_item_page(
     return setup_data_for_wishlist_tests(logged_in_buyer_page, test_data)
 
 
-def create_parent_category(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a parent category in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Categories").click()
-    page.get_by_role("link", name="add_circle_outline Add new").click()
-
-    page.get_by_role("textbox", name="category_name_1 input").fill(
-        test_data.parent_category_name
-    )
-    page.get_by_text("expand_more Expand").click()
-    page.get_by_text(test_data.parent_category_parent, exact=True).click()
-    page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
-        test_data.parent_category_description
-    )
-    # page.locator("#category_cover_image").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
-    # page.locator("#category_thumbnail_image").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
-    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
-    page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
-        test_data.parent_category_link_rewrite
-    )
-
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
-def create_child_category(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a child category in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Categories").click()
-    page.get_by_role("link", name="add_circle_outline Add new").click()
-
-    page.get_by_role("textbox", name="category_name_1 input").fill(
-        test_data.child_category_name
-    )
-    page.get_by_text("expand_more Expand").click()
-    page.get_by_text(test_data.child_category_parent, exact=True).click()
-    page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
-        test_data.child_category_description
-    )
-    # page.locator("#category_cover_image").set_input_files(
-    #     test_data.child_category_image_file
-    # )
-    # page.locator("#category_thumbnail_image").set_input_files(
-    #     test_data.child_category_image_file
-    # )
-    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-    #     test_data.child_category_image_file
-    # )
-    page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
-        test_data.child_category_link_rewrite
-    )
-
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_parent_category_tests(
     page: Page, test_data: PrestaShopTestData
 ) -> Page:
     """Setup data for parent category tests - creates parent category from test data."""
-    create_parent_category(page, test_data)
+    create_parent_category(page)
     # Navigate back to categories page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Categories").click()
@@ -635,9 +537,9 @@ def setup_data_for_child_category_tests(
 ) -> Page:
     """Setup data for child category tests - creates both parent and child categories."""
     # Create parent category first
-    create_parent_category(page, test_data)
+    create_parent_category(page)
     # Create child category
-    create_child_category(page, test_data)
+    create_child_category(page)
     # Navigate back to categories page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Categories").click()
@@ -660,36 +562,9 @@ def created_child_category_page(
     return setup_data_for_child_category_tests(logged_in_page, test_data)
 
 
-def create_customer(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a customer in PrestaShop."""
-    page.get_by_role("link", name="account_circle Customers").click()
-    page.get_by_role("link", name="Customers", exact=True).click()
-    page.get_by_role("link", name="add_circle_outline Add new").click()
-
-    page.locator("label").filter(has_text=test_data.customer_social_title).locator(
-        "i"
-    ).click()
-    page.get_by_role("textbox", name="customer_first_name input").fill(
-        test_data.customer_first_name
-    )
-    page.get_by_role("textbox", name="customer_last_name input").fill(
-        test_data.customer_last_name
-    )
-    page.get_by_role("textbox", name="* Email").fill(test_data.customer_email)
-    page.get_by_role("textbox", name="Password").fill(test_data.customer_password)
-    page.locator("#customer_birthday_year").select_option(test_data.customer_birth_year)
-    page.locator("#customer_birthday_month").select_option(
-        test_data.customer_birth_month
-    )
-    page.locator("#customer_birthday_day").select_option(test_data.customer_birth_day)
-
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_customer_tests(page: Page, test_data: PrestaShopTestData) -> Page:
     """Setup data for customer tests - creates customer from test data and navigates to customers page."""
-    create_customer(page, test_data)
+    create_customer(page)
     # Navigate back to customers page
     page.get_by_role("link", name="account_circle Customers").click()
     page.get_by_role("link", name="Customers", exact=True).click()
@@ -702,87 +577,11 @@ def created_customer_page(logged_in_page: Page, test_data: PrestaShopTestData) -
     return setup_data_for_customer_tests(logged_in_page, test_data)
 
 
-def create_virtual_product(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a virtual product in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
-    page.get_by_role("link", name="add_circle_outline New product").click()
-    page.frame_locator('iframe[name="modal-create-product-iframe"]')
-    page.wait_for_timeout(1000)
-    page.get_by_role("button", name="Virtual product qr_code").click()
-    page.get_by_role("button", name="Add new product").click()
-
-    page.get_by_role("textbox", name="product_header_name_1 input").fill(
-        test_data.virtual_product_name
-    )
-    page.locator("#product_description_description_1_ifr").content_frame.locator(
-        "#tinymce"
-    ).fill(test_data.virtual_product_description)
-    page.locator("#product_description_description_short_1_ifr").content_frame.locator(
-        "#tinymce"
-    ).fill(test_data.virtual_product_short_description)
-    page.get_by_role("button", name="Add categories").click()
-    page.get_by_text(test_data.virtual_product_category, exact=True).click()
-    page.get_by_role("button", name="Apply").click()
-    page.get_by_role("textbox", name="No brand").click()
-    page.get_by_role("option", name=test_data.virtual_product_brand).click()
-
-    page.get_by_role("tab", name="Details").click()
-    page.get_by_role("textbox", name="product_details_references_reference input").fill(
-        test_data.virtual_product_reference
-    )
-
-    page.get_by_role("tab", name="Virtual product").click()
-    page.get_by_role("spinbutton", name="Add or subtract items").fill(
-        test_data.virtual_product_quantity
-    )
-
-    page.get_by_role("tab", name="Pricing").click()
-    page.get_by_role("textbox", name="Retail price (tax excl.)").fill(
-        test_data.virtual_product_price_tax_excl
-    )
-    page.locator("#product_pricing_wholesale_price").fill(
-        test_data.virtual_product_wholesale_price
-    )
-
-    page.get_by_role("tab", name="SEO").click()
-    page.get_by_role("textbox", name="product_seo_link_rewrite_1").fill(
-        test_data.virtual_product_link_rewrite
-    )
-    page.get_by_label("Redirection when offline").select_option(
-        test_data.virtual_product_offline_redirection
-    )
-
-    page.get_by_role("tab", name="Options").click()
-    page.locator("#product_options_suppliers_supplier_ids").get_by_text(
-        "Accessories supplier"
-    ).click()
-    page.locator("#product_options_suppliers_supplier_ids").get_by_text(
-        "Fashion supplier"
-    ).click()
-
-    page.get_by_role(
-        "textbox", name="product_options_product_suppliers_1_reference input"
-    ).fill(test_data.virtual_product_fashion_supplier_ref)
-    page.locator("#product_options_product_suppliers_1_price_tax_excluded").fill(
-        test_data.virtual_product_fashion_supplier_price
-    )
-    page.get_by_role(
-        "textbox", name="product_options_product_suppliers_2_reference input"
-    ).fill(test_data.virtual_product_accessories_supplier_ref)
-    page.locator("#product_options_product_suppliers_2_price_tax_excluded").fill(
-        test_data.virtual_product_accessories_supplier_price
-    )
-
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_product_delete_tests(
     page: Page, test_data: PrestaShopTestData
 ) -> Page:
     """Setup data for product delete tests - creates virtual product from test data and navigates to products page."""
-    create_virtual_product(page, test_data)
+    create_virtual_product(page)
     # Navigate back to products page
     page.get_by_role("link", name="store Catalog").click()
     page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
@@ -797,44 +596,9 @@ def created_product_for_delete_page(
     return setup_data_for_product_delete_tests(logged_in_page, test_data)
 
 
-def create_supplier(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a supplier in PrestaShop."""
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Brands & Suppliers").click()
-    page.get_by_role("link", name="Suppliers", exact=True).click()
-    page.get_by_role("link", name="add_circle_outline Add new").click()
-
-    page.get_by_role("textbox", name="supplier_name input").fill(
-        test_data.supplier_name
-    )
-    page.get_by_role("textbox", name="supplier_phone input").fill(
-        test_data.supplier_phone
-    )
-    page.get_by_role("textbox", name="supplier_address input").fill(
-        test_data.supplier_address
-    )
-    page.get_by_role("textbox", name="supplier_city input").fill(
-        test_data.supplier_city
-    )
-
-    page.get_by_role("textbox", name="United Kingdom").click()
-    page.get_by_role("option", name=test_data.supplier_country).click()
-
-    # Handle dynamic state selection
-    # page.get_by_role("textbox", name="Aichi").click()
-    # can't use this, because the value of state is different each time the page is opened
-    state_container = page.locator(".js-supplier-state")
-    state_container.get_by_role("combobox").click()
-    page.get_by_role("option", name=test_data.supplier_state).click()
-
-    page.get_by_role("radio", name=test_data.supplier_logo_active).check()
-    page.get_by_role("button", name="Save").click()
-    return page
-
-
 def setup_data_for_supplier_tests(page: Page, test_data: PrestaShopTestData) -> Page:
     """Setup data for supplier tests - creates supplier from test data and navigates to suppliers page."""
-    create_supplier(page, test_data)
+    create_supplier(page)
     # Navigate back to suppliers page
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Brands & Suppliers").click()
@@ -846,3 +610,34 @@ def setup_data_for_supplier_tests(page: Page, test_data: PrestaShopTestData) -> 
 def created_supplier_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
     """Create a supplier and return to suppliers page."""
     return setup_data_for_supplier_tests(logged_in_page, test_data)
+
+
+@pytest.fixture
+def seed(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
+    """Seed minimal data for prestashop tests."""
+    create_attribute(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_feature(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_brand(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_parent_category(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_child_category(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_virtual_product(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
+    create_supplier(logged_in_page)
+    return logged_in_page
