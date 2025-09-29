@@ -169,13 +169,3 @@ def seed(logged_in_page: Page):
 
     create_conference(logged_in_page)
     return logged_in_page
-
-
-@pytest.fixture
-def created_lecture_page(logged_in_page: TracedPage) -> TracedPage:
-    return create_lecture(logged_in_page)
-
-
-@pytest.fixture
-def created_meeting_page(logged_in_page: TracedPage) -> TracedPage:
-    return create_meeting(logged_in_page)
