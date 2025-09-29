@@ -47,10 +47,38 @@ wait_for_application() {
     return 1
 }
 
-load_indico_seed_data() {
-    local seed_file="$SCRIPT_DIR/indico/seed.sql"
-    echo "🌱 Loading seed data for Indico..."
-    docker exec -i indico-postgres-1 psql -U "$PGUSER" -d "$PGDATABASE" < "$seed_file"
+seed_data() {
+    local app_name="$1"
+    local seed_file=""
+    local db_container=""
+    local db_command=""
+    
+    case "$app_name" in
+        "indico")
+            seed_file="$SCRIPT_DIR/indico/seed.sql"
+            db_container="indico-postgres-1"
+            db_command="psql -U \"$PGUSER\" -d \"$PGDATABASE\""
+            ;;
+        "prestashop")
+            seed_file="$SCRIPT_DIR/prestashop/seed.sql"
+            db_container="prestashop-db-1"
+            db_command="mysql -u root -proot prestashop"
+            ;;
+        "bookstack")
+            seed_file="$SCRIPT_DIR/bookstack/seed.sql"
+            db_container="bookstack-db-1"
+            db_command="mysql -u admin -padmin bookstack"
+            ;;
+        "invoiceninja")
+            seed_file="$SCRIPT_DIR/invoiceninja/seed.sql"
+            db_container="invoiceninja-mysql-1"
+            db_command="mysql -u \"$DB_USERNAME\" -p\"$DB_PASSWORD\" \"$DB_DATABASE\""
+            ;;
+    esac
+    
+    echo "🌱 Loading seed data for $app_name..."
+    docker exec -i "$db_container" $db_command < "$seed_file"
+    
     if [ $? -eq 0 ]; then
         echo "✅ Seed data loaded successfully"
     else
@@ -134,10 +162,8 @@ echo "🔄 Resetting $app_name environment..."
 
 wait_for_application "$app_name"
 
-# Load seed data
-if [[ "$app_name" == "indico" ]]; then
-    load_indico_seed_data
-fi
+# Load seed data for all applications
+seed_data "$app_name"
 
 # If patch provided → inject bug
 if [[ -n "$patch_name" ]]; then
