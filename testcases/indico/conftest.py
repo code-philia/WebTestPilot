@@ -1,7 +1,6 @@
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import randint
 
 import pytest
 from playwright.sync_api import Page
@@ -20,44 +19,41 @@ PASSWORD = "webtestpilot"
 
 @dataclass
 class IndicoTestData:
-    def __post_init__(self):
-        self._unique_id = str(randint(100000, 999999))
-
     @property
     def lecture_name(self) -> str:
-        return f"Lecture{self._unique_id}"
+        return "Lecture"
 
     @property
     def venue_name(self) -> str:
-        return f"Venue{self._unique_id}"
+        return "Venue"
 
     @property
     def room_name(self) -> str:
-        return f"Room{self._unique_id}"
+        return "Room"
 
     @property
     def meeting_name(self) -> str:
-        return f"Meeting{self._unique_id}"
+        return "Meeting"
 
     @property
     def meeting_minute_name(self) -> str:
-        return f"Meeting Minute{self._unique_id}"
+        return "Meeting Minute"
 
     @property
     def meeting_contribution_name(self) -> str:
-        return f"Meeting Contribution{self._unique_id}"
+        return "Meeting Contribution"
 
     @property
     def meeting_contribution_description(self) -> str:
-        return f"Description{self._unique_id}"
+        return "Description"
 
     @property
     def break_name(self) -> str:
-        return f"Break{self._unique_id}"
+        return "Break"
 
     @property
     def break_description(self) -> str:
-        return f"Description{self._unique_id}"
+        return "Description"
 
     @property
     def end_date(self) -> str:
@@ -69,59 +65,59 @@ class IndicoTestData:
 
     @property
     def conference_name(self) -> str:
-        return f"Conference{self._unique_id}"
+        return "Conference"
 
     @property
     def conference_track_name(self) -> str:
-        return f"Track{self._unique_id}"
+        return "Track"
 
     @property
     def conference_track_group_name(self) -> str:
-        return f"Track group{self._unique_id}"
+        return "Track group"
 
     @property
     def conference_track_code(self) -> str:
-        return f"T{self._unique_id}"
+        return "T"
 
     @property
     def conference_track_description(self) -> str:
-        return f"Papers about{self._unique_id}"
+        return "Papers about"
 
     @property
     def conference_track_group_description(self) -> str:
-        return f"Many papers about{self._unique_id}"
+        return "Many papers about"
 
     @property
     def email_notification_title(self) -> str:
-        return f"Email{self._unique_id}"
+        return "Email"
 
     @property
     def email_notification_rule_set(self) -> str:
-        return f"Notification rule{self._unique_id}"
+        return "Notification rule"
 
     @property
     def session_type(self) -> str:
-        return f"Session type{self._unique_id}"
+        return "Session type"
 
     @property
     def session_title(self) -> str:
-        return f"Session title{self._unique_id}"
+        return "Session title"
 
     @property
     def session_title_updated(self) -> str:
-        return f"Session title updated{self._unique_id}"
+        return "Session title updated"
 
     @property
     def session_description(self) -> str:
-        return f"Session description{self._unique_id}"
+        return "Session description"
 
     @property
     def session_contribution_name(self) -> str:
-        return f"Session Contribution{self._unique_id}"
+        return "Session Contribution"
 
     @property
     def session_contribution_description(self) -> str:
-        return f"Description{self._unique_id}"
+        return "Description"
 
     @property
     def registration_form_name(self) -> str:
