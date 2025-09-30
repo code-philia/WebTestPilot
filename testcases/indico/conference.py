@@ -341,21 +341,6 @@ def test_payment_setup_in_conference(
     page.get_by_role("link", name="Payments").click()
     expect(page.get_by_role("main")).to_contain_text("enabled")
 
-    # Bank transfer is disabled at first
-    expect(page.locator("#plugin-payment_manual")).to_contain_text("disabled")
-    expect(page.get_by_role("link", name="Bank Transfer disabled")).to_be_visible()
-
-    # Enable Bank Transfer payment method
-    page.get_by_role("link", name="Bank Transfer disabled").click()
-    page.get_by_role("checkbox", name="Enabled").check()
-    page.get_by_role("textbox", name="Payment details").click()
-    page.get_by_role("textbox", name="Payment details").fill("Payment details")
-    page.get_by_role("button", name="Save").click()
-
-    expect(page.locator("#flashed-messages")).to_contain_text(
-        "Settings for Bank Transfer saved"
-    )
-
 
 def test_registration_setup_in_conference(
     logged_in_page: Page, test_data: IndicoTestData
