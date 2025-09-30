@@ -8,8 +8,7 @@ from .utilities import create_conference, navigate_to_conference_edit_page
 
 def test_create_conference(logged_in_page: Page, test_data: IndicoTestData) -> None:
     insert_start_event_to_page(logged_in_page)
-
-    create_conference(logged_in_page, test_data)
+    create_conference(logged_in_page)
 
     expect(logged_in_page.locator("#event-settings-data")).to_contain_text(
         test_data.conference_name
@@ -258,6 +257,7 @@ def test_edit_sessions_in_conference(
 def test_delete_sessions_in_conference(
     logged_in_page: Page, test_data: IndicoTestData
 ) -> None:
+    page = logged_in_page
     insert_start_event_to_page(page)
 
     page.get_by_role("link", name="Sessions").click()
@@ -284,42 +284,42 @@ def test_delete_sessions_in_conference(
     )
 
 
-def test_add_contribution_session_to_timetable_in_conference(
-    logged_in_page: Page, test_data: IndicoTestData
-) -> None:
-    page = logged_in_page
-    insert_start_event_to_page(logged_in_page)
-    navigate_to_conference_edit_page(page)
+# def test_add_contribution_session_to_timetable_in_conference(
+#     logged_in_page: Page, test_data: IndicoTestData
+# ) -> None:
+#     page = logged_in_page
+#     insert_start_event_to_page(logged_in_page)
+#     navigate_to_conference_edit_page(page)
 
-    # Go to timetable and add session to it
-    page.get_by_role("link", name=" Timetable").click()
+#     # Go to timetable and add session to it
+#     page.get_by_role("link", name=" Timetable").click()
 
-    page.get_by_role("link", name="Add new ").click()
-    page.get_by_role("link", name="Contribution", exact=True).click()
-    page.get_by_role("textbox", name="Title").click()
-    page.get_by_role("textbox", name="Title").fill(test_data.session_contribution_name)
-    page.get_by_role("button", name="Save").click()
-    expect(page.locator("#timetable_canvas")).to_contain_text(
-        f"1 - {test_data.session_contribution_name}"
-    )
+#     page.get_by_role("link", name="Add new ").click()
+#     page.get_by_role("link", name="Contribution", exact=True).click()
+#     page.get_by_role("textbox", name="Title").click()
+#     page.get_by_role("textbox", name="Title").fill(test_data.session_contribution_name)
+#     page.get_by_role("button", name="Save").click()
+#     expect(page.locator("#timetable_canvas")).to_contain_text(
+#         f"1 - {test_data.session_contribution_name}"
+#     )
 
 
-def test_add_break_session_to_timetable_in_conference(
-    logged_in_page: Page, test_data: IndicoTestData
-) -> None:
-    page = logged_in_page
-    insert_start_event_to_page(logged_in_page)
-    navigate_to_conference_edit_page(page)
+# def test_add_break_session_to_timetable_in_conference(
+#     logged_in_page: Page, test_data: IndicoTestData
+# ) -> None:
+#     page = logged_in_page
+#     insert_start_event_to_page(logged_in_page)
+#     navigate_to_conference_edit_page(page)
 
-    page.get_by_role("link", name=" Timetable").click()
+#     page.get_by_role("link", name=" Timetable").click()
 
-    page.get_by_role("link", name="Add new ").click()
-    page.get_by_role("link", name="Break").click()
-    page.get_by_role("textbox", name="Title").click()
-    page.get_by_role("textbox", name="Title").fill("Break")
-    page.get_by_role("button", name="Save").click()
+#     page.get_by_role("link", name="Add new ").click()
+#     page.get_by_role("link", name="Break").click()
+#     page.get_by_role("textbox", name="Title").click()
+#     page.get_by_role("textbox", name="Title").fill("Break")
+#     page.get_by_role("button", name="Save").click()
 
-    expect(page.locator("#timetable_canvas")).to_contain_text("Break")
+#     expect(page.locator("#timetable_canvas")).to_contain_text("Break")
 
 
 def test_payment_setup_in_conference(

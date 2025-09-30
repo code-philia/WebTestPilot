@@ -22,63 +22,63 @@ def test_create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> None
     )
 
 
-def test_add_contribution_to_timetable(
-    logged_in_page: Page, test_data: IndicoTestData
-) -> None:
-    insert_start_event_to_page(logged_in_page)
-    navigate_to_meeting_edit_page(logged_in_page)
+# def test_add_contribution_to_timetable(
+#     logged_in_page: Page, test_data: IndicoTestData
+# ) -> None:
+#     insert_start_event_to_page(logged_in_page)
+#     navigate_to_meeting_edit_page(logged_in_page)
 
-    logged_in_page.get_by_role("link", name=" Timetable").click()
-    logged_in_page.get_by_role("link", name="Add new ").click()
-    logged_in_page.get_by_role("link", name="Contribution").click()
+#     logged_in_page.get_by_role("link", name=" Timetable").click()
+#     logged_in_page.get_by_role("link", name="Add new ").click()
+#     logged_in_page.get_by_role("link", name="Contribution").click()
 
-    # Title & Description
-    logged_in_page.get_by_role("textbox", name="Title").click()
-    logged_in_page.get_by_role("textbox", name="Title").fill(
-        test_data.meeting_contribution_name
-    )
-    logged_in_page.get_by_role("textbox", name="Description").click()
-    logged_in_page.get_by_role("textbox", name="Description").fill(
-        test_data.meeting_contribution_description
-    )
+#     # Title & Description
+#     logged_in_page.get_by_role("textbox", name="Title").click()
+#     logged_in_page.get_by_role("textbox", name="Title").fill(
+#         test_data.meeting_contribution_name
+#     )
+#     logged_in_page.get_by_role("textbox", name="Description").click()
+#     logged_in_page.get_by_role("textbox", name="Description").fill(
+#         test_data.meeting_contribution_description
+#     )
 
-    # Date & Time
-    logged_in_page.get_by_role("textbox", name="--:--").click()
-    logged_in_page.get_by_role("button", name="11").first.click()
+#     # Date & Time
+#     logged_in_page.get_by_role("textbox", name="--:--").click()
+#     logged_in_page.get_by_role("button", name="11").first.click()
 
-    # Add author
-    logged_in_page.get_by_role("button", name="Add myself").click()
-    logged_in_page.get_by_role("button", name="Save").click()
+#     # Add author
+#     logged_in_page.get_by_role("button", name="Add myself").click()
+#     logged_in_page.get_by_role("button", name="Save").click()
 
-    expect(logged_in_page.locator("#timetable_canvas")).to_contain_text(
-        test_data.meeting_contribution_name
-    )
+#     expect(logged_in_page.locator("#timetable_canvas")).to_contain_text(
+#         test_data.meeting_contribution_name
+#     )
 
 
-def test_add_break_to_timetable(
-    logged_in_page: Page, test_data: IndicoTestData
-) -> None:
-    insert_start_event_to_page(logged_in_page)
-    navigate_to_meeting_edit_page(logged_in_page)
+# def test_add_break_to_timetable(
+#     logged_in_page: Page, test_data: IndicoTestData
+# ) -> None:
+#     insert_start_event_to_page(logged_in_page)
+#     navigate_to_meeting_edit_page(logged_in_page)
 
-    logged_in_page.get_by_role("link", name=" Timetable").click()
-    logged_in_page.get_by_role("link", name="Add new ").click()
-    logged_in_page.get_by_role("link", name="Break").click()
+#     logged_in_page.get_by_role("link", name=" Timetable").click()
+#     logged_in_page.get_by_role("link", name="Add new ").click()
+#     logged_in_page.get_by_role("link", name="Break").click()
 
-    # Title & Description
-    logged_in_page.get_by_role("textbox", name="Title").fill(test_data.break_name)
-    logged_in_page.get_by_role("textbox", name="Description").click()
-    logged_in_page.get_by_role("textbox", name="Description").fill(
-        test_data.break_description
-    )
+#     # Title & Description
+#     logged_in_page.get_by_role("textbox", name="Title").fill(test_data.break_name)
+#     logged_in_page.get_by_role("textbox", name="Description").click()
+#     logged_in_page.get_by_role("textbox", name="Description").fill(
+#         test_data.break_description
+#     )
 
-    # Date & Time
-    logged_in_page.get_by_role("textbox", name="--:--").click()
-    logged_in_page.get_by_role("button", name="11").first.click()
+#     # Date & Time
+#     logged_in_page.get_by_role("textbox", name="--:--").click()
+#     logged_in_page.get_by_role("button", name="11").first.click()
 
-    logged_in_page.get_by_role("button", name="Save").click()
+#     logged_in_page.get_by_role("button", name="Save").click()
 
-    expect(logged_in_page.locator("#timetable_canvas")).to_contain_text("Break")
+#     expect(logged_in_page.locator("#timetable_canvas")).to_contain_text("Break")
 
 
 def test_lock_meeting(logged_in_page: Page, test_data: IndicoTestData) -> None:

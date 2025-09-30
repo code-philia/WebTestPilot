@@ -7,13 +7,7 @@ from .utilities import create_lecture, navigate_to_lecture_edit_page
 
 def test_create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> None:
     insert_start_event_to_page(logged_in_page)
-
-    create_lecture(
-        logged_in_page,
-        test_data.lecture_name,
-        test_data.venue_name,
-        test_data.room_name,
-    )
+    create_lecture(logged_in_page)
 
     expect(logged_in_page.locator("#event-settings-data")).to_contain_text(
         test_data.lecture_name
