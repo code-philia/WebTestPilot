@@ -57,7 +57,13 @@ seed_data() {
         "invoiceninja") docker exec -i invoiceninja-mysql-1 mysql -u "$DB_USERNAME" -p"$DB_PASSWORD" "$DB_DATABASE" < "$SEED_FILE" ;;
         *) echo "Error: No seed data available for app '$1'"; return 1 ;;
     esac
-    
+
+    # Special case: Create buyer user for PrestaShop
+    # TODO: Put this in seed.sql file?
+    if [[ "$1" == "prestashop" ]]; then
+        docker exec "$container" php /var/www/html/tools/create_user.php
+    fi
+
     if [ $? -eq 0 ]; then
         echo "✅ Seed data loaded successfully for $1"
     else
@@ -140,8 +146,6 @@ echo "🔄 Resetting $app_name environment..."
 )
 
 wait_for_application "$app_name"
-
-# Load seed data for all applications
 seed_data "$app_name"
 
 # If patch provided → inject bug
@@ -167,11 +171,6 @@ if [[ -n "$patch_name" ]]; then
     wait_for_application "$app_name"
 else
     echo "ℹ️  No patch provided. Skipping bug injection."
-fi
-
-# Create buyer user for PrestaShop, by this point, app is always ready.
-if [[ "$app_name" == "prestashop" ]]; then
-    docker exec "$container" php /var/www/html/tools/create_user.php
 fi
 
 echo "$app_name start script done!"

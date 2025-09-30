@@ -1,4 +1,3 @@
-import asyncio
 import re
 import sys
 import time
@@ -6,11 +5,9 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
-import nest_asyncio
 from base_runner import BaseTestRunner, TestResult
 from const import ApplicationEnum, MethodEnum, TestCase
 from playwright.async_api import async_playwright
-from playwright.sync_api import Page
 from tqdm import tqdm
 
 # Add project directory
@@ -27,6 +24,7 @@ from baselines.pinata.src.VTAAS.llm.llm_client import LLMProvider
 from baselines.pinata.src.VTAAS.orchestrator.orchestrator import Orchestrator
 from baselines.pinata.src.VTAAS.schemas.verdict import Status
 from baselines.pinata.src.VTAAS.workers.browser import Browser
+from baselines.utils import setup_page_state
 
 
 class PinataTestRunner(BaseTestRunner):
@@ -105,9 +103,7 @@ class PinataTestRunner(BaseTestRunner):
             output_folder=str(self.test_output_path.parent),
         )
 
-    async def run_test_case_async(
-        self, test_case: TestCase, sync_initial_page: Page
-    ) -> TestResult:
+    async def run_test_case(self, test_case: TestCase) -> TestResult:
         test_name = test_case.name
         pinata_test_case = self.convert_test_case_to_pinata_format(test_case)
         result = TestResult(
@@ -136,29 +132,9 @@ class PinataTestRunner(BaseTestRunner):
                         trace_folder=str(self.test_output_path.parent),
                         name=test_case.name,
                     )
-                    initial_url = sync_initial_page.url
-
-                    # OVERRIDEN implementation over browser.initialize() -> extracted out and override.
-                    # This is to make sure all the setup and login is in place.
-                    # Has to do this work-around because our setup and LaVague only support Playwright sync, but Pinata is Async
-                    browser._context = await browser._browser.new_context(
-                        bypass_csp=True,
-                        storage_state=sync_initial_page.context.storage_state(),
+                    await setup_page_state(
+                        browser.page, test_case.setup_function, self.application
                     )
-                    browser._context.set_default_timeout(browser._params["timeout"])
-                    if browser._params["tracer"]:
-                        browser.logger.info(
-                            f"Setting Playwright tracing ON: {browser._params['trace_folder']}"
-                        )
-                        await browser._context.tracing.start(
-                            screenshots=True, snapshots=True
-                        )
-                    browser._page = await browser._context.new_page()
-                    browser._page.on("load", lambda load: browser.load_js())
-                    browser._page.on("framenavigated", lambda load: browser.load_js())
-
-                    # Go to the setup URL.
-                    await browser._page.goto(initial_url)
 
                     orchestrator = Orchestrator(
                         browser=browser,
@@ -168,7 +144,7 @@ class PinataTestRunner(BaseTestRunner):
                         model_name=self.model,
                         name=test_case.name,
                     )
-                    
+
                     time.sleep(2)
 
                     # Monkey-patch orchestrator to update progress bar
@@ -228,12 +204,3 @@ class PinataTestRunner(BaseTestRunner):
                 traceback.print_exc()
 
         return result
-
-    def run_test_case(self, test_case: TestCase) -> TestResult:
-        """Run a single test case using Pinata agent."""
-        sync_initial_page: Page = self.get_initial_page(test_case.setup_function)
-
-        nest_asyncio.apply()
-        return asyncio.get_event_loop().run_until_complete(
-            self.run_test_case_async(test_case, sync_initial_page)
-        )

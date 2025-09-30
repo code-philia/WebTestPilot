@@ -1,8 +1,10 @@
 import sys
 from pathlib import Path
 
-from const import ApplicationEnum
+from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
+
+from .const import ApplicationEnum
 
 # Add project directory
 PROJECT_DIR = Path(__file__).parent.parent
@@ -26,12 +28,10 @@ from testcases.bookstack.conftest import (
     setup_data_for_sort_chapter_and_page,
 )
 from testcases.indico.conftest import (
-    IndicoTestData,
-    create_conference,
-    create_lecture,
-    create_meeting,
     go_to_indico,
+    go_to_indico_async,
     login_to_indico,
+    login_to_indico_async,
 )
 from testcases.invoiceninja.conftest import (
     InvoiceNinjaTestData,
@@ -65,29 +65,19 @@ from testcases.prestashop.conftest import (
 )
 
 
-def setup_page_state(
-    page: Page, setup_function: str, application: ApplicationEnum
-) -> Page:
-    """Set up the page state based on the application and setup function.
-
-    Args:
-        page: The Playwright page object
-        setup_function: The setup function name from test case
-        application: The application type
-
-    Returns:
-        The configured page object
-    """
+async def setup_page_state(
+    page: Page | AsyncPage, setup_function: str, application: ApplicationEnum
+) -> Page | AsyncPage:
     if application == ApplicationEnum.bookstack:
-        return setup_bookstack_page(page, setup_function)
+        return await setup_bookstack_page(page, setup_function)
     elif application == ApplicationEnum.invoiceninja:
-        return setup_invoiceninja_page(page, setup_function)
+        return await setup_invoiceninja_page(page, setup_function)
     elif application == ApplicationEnum.indico:
-        return setup_indico_page(page, setup_function)
+        return await setup_indico_page(page, setup_function)
     elif application == ApplicationEnum.prestashop:
-        return setup_prestashop_page(page, setup_function)
-
-    raise ValueError(f"Unknown application type: {application}")
+        return await setup_prestashop_page(page, setup_function)
+    else:
+        raise ValueError(f"Unknown application type: {application}")
 
 
 def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
@@ -138,18 +128,21 @@ def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
         raise ValueError(f"Unknown invoiceninja setup function: {setup_function}")
 
 
-def setup_indico_page(page: Page, setup_function: str) -> Page:
-    """Set up Indico page based on setup function."""
-    # No setup.
-    if setup_function == "":
-        return go_to_indico(page)
-
-    logged_in_page = login_to_indico(page)
-
-    if setup_function == "logged_in_page":
-        return logged_in_page
+async def setup_indico_page(
+    page: Page | AsyncPage, setup_function: str
+) -> Page | AsyncPage:
+    if isinstance(page, Page):
+        if setup_function == "":
+            return go_to_indico(page)
+        elif setup_function == "logged_in_page":
+            return login_to_indico(page)
     else:
-        raise ValueError(f"Unknown indico setup function: {setup_function}")
+        if setup_function == "":
+            return await go_to_indico_async(page)
+        elif setup_function == "logged_in_page":
+            return await login_to_indico_async(page)
+
+    raise ValueError(f"Unknown indico setup function: {setup_function}")
 
 
 def setup_prestashop_page(page: Page, setup_function: str) -> Page:

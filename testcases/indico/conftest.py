@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 from playwright.sync_api import Page
+from playwright.async_api import Page as AsyncPage
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -135,6 +136,11 @@ def go_to_indico(page: TracedPage | Page) -> TracedPage | Page:
     return page
 
 
+async def go_to_indico_async(page: AsyncPage) -> AsyncPage:
+    await page.goto(INDICO_HOST)
+    return page
+
+
 def login_to_indico(page: TracedPage | Page) -> TracedPage | Page:
     go_to_indico(page)
     page.get_by_role("link", name=" Login").click()
@@ -142,6 +148,16 @@ def login_to_indico(page: TracedPage | Page) -> TracedPage | Page:
     page.get_by_role("textbox", name="Password").click()
     page.get_by_role("textbox", name="Password").fill(PASSWORD)
     page.get_by_role("button", name="Login with Indico").click()
+    return page
+
+
+async def login_to_indico_async(page: AsyncPage) -> AsyncPage:
+    await go_to_indico_async(page)
+    await page.get_by_role("link", name=" Login").click()
+    await page.get_by_role("textbox", name="Username or email").fill(USER)
+    await page.get_by_role("textbox", name="Password").click()
+    await page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    await page.get_by_role("button", name="Login with Indico").click()
     return page
 
 

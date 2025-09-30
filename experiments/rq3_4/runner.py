@@ -46,7 +46,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
         self.headless = headless
         self.config = config
 
-    def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
+    def _load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
         test_cases: list[TestCase] = []
 

@@ -5,11 +5,14 @@ Usage:
     python evaluate.py naviqate bookstack
 """
 
+import asyncio
+from functools import partial, wraps
+import inspect
 import os
 import sys
 import traceback
 from pathlib import Path
-from typing import Optional
+from typing import Any, Callable, Optional
 
 import typer
 from const import ApplicationEnum, MethodEnum, ModelEnum, ProviderEnum
@@ -23,7 +26,31 @@ os.environ["PYTHONUNBUFFERED"] = "1"
 PROJECT_DIR = Path(__file__).parent.parent
 sys.path.append(str(PROJECT_DIR))
 
-cli = typer.Typer(
+# Source: https://github.com/fastapi/typer/issues/950#issuecomment-2646361943
+class AsyncTyper(typer.Typer):
+    @staticmethod
+    def maybe_run_async(decorator: Callable, func: Callable) -> Any:
+        if inspect.iscoroutinefunction(func):
+
+            @wraps(func)
+            def runner(*args: Any, **kwargs: Any) -> Any:
+                return asyncio.run(func(*args, **kwargs))
+
+            decorator(runner)
+        else:
+            decorator(func)
+        return func
+
+    def callback(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().callback(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
+    def command(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().command(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
+
+cli = AsyncTyper(
     help="Run test cases using different agent implementations",
     no_args_is_help=True,
 )
@@ -54,7 +81,7 @@ def get_runner_class(method: MethodEnum):
 
 
 @cli.command()
-def main(
+async def main(
     method: Annotated[
         MethodEnum,
         typer.Argument(help="The test method/agent to use for running tests"),
@@ -218,7 +245,7 @@ def main(
         runner = RunnerClass(**runner_kwargs)
 
         print("Starting test execution...")
-        results = runner.run_all_test_cases(filter_pattern=filter)
+        results = await runner.run_all_test_cases(filter_pattern=filter)
 
         # Exit with appropriate code
         if results.success_rate == 1.0:
