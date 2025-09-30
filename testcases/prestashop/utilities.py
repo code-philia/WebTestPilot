@@ -234,3 +234,47 @@ def create_supplier(
     page.get_by_role("radio", name=logo_active).check()
     page.get_by_role("button", name="Save").click()
     return page
+
+
+# Functions used for navigation in tests
+def go_to_attribute_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Attributes & Features").click()
+
+
+def go_to_brand_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Brands & Suppliers").click()
+
+
+def go_to_customer_page(page: Page) -> None:
+    page.get_by_role("link", name="account_circle Customers").click()
+    page.get_by_role("link", name="Customers", exact=True).click()
+
+
+def go_to_product_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
+
+
+def go_to_category_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Categories").click()
+
+
+def go_to_supplier_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Brands & Suppliers").click()
+    page.get_by_role("link", name="Suppliers", exact=True).click()
+
+
+def add_product_to_wishlist(
+    page: Page, search_name: str = "Hummingbird printed t-shirt"
+) -> Page:
+    """Add a product to the wishlist."""
+    page.get_by_role("textbox", name="Search").fill(search_name)
+    page.get_by_role("textbox", name="Search").press("Enter")
+    product_article = page.get_by_role("article").filter(has_text=search_name)
+    product_article.locator(".wishlist-button-add").click()
+    page.wait_for_timeout(1000)
+    return page

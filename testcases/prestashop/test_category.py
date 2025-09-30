@@ -3,6 +3,8 @@ from prestashop.conftest import PrestaShopTestData
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import go_to_category_page
+
 # 3 test cases
 
 
@@ -22,15 +24,6 @@ def test_create_category(logged_in_page: Page, test_data: PrestaShopTestData) ->
     page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
         test_data.parent_category_description
     )
-    # page.locator("#category_cover_image").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
-    # page.locator("#category_thumbnail_image").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
-    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-    #     test_data.parent_category_image_file
-    # )
     page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
         test_data.parent_category_link_rewrite
     )
@@ -40,9 +33,9 @@ def test_create_category(logged_in_page: Page, test_data: PrestaShopTestData) ->
 
 
 def test_create_son_category(
-    created_parent_category_page: Page, test_data: PrestaShopTestData
+    logged_in_page: Page, test_data: PrestaShopTestData
 ) -> None:
-    page = created_parent_category_page
+    page = logged_in_page
     insert_start_event_to_page(page)
 
     page.get_by_role("link", name="store Catalog").click()
@@ -61,15 +54,6 @@ def test_create_son_category(
     page.locator("#category_description_1_ifr").content_frame.locator("#tinymce").fill(
         test_data.child_category_description
     )
-    # page.locator("#category_cover_image").set_input_files(
-    #     test_data.child_category_image_file
-    # )
-    # page.locator("#category_thumbnail_image").set_input_files(
-    #     test_data.child_category_image_file
-    # )
-    # page.get_by_role("button", name="Choose file(s) Browse").set_input_files(
-    #     test_data.child_category_image_file
-    # )
     page.get_by_role("textbox", name="category_link_rewrite_1 input").fill(
         test_data.child_category_link_rewrite
     )
@@ -78,11 +62,10 @@ def test_create_son_category(
     expect(page.get_by_text("Successful creation")).to_be_visible()
 
 
-def test_delete_category(
-    created_parent_category_page: Page, test_data: PrestaShopTestData
-) -> None:
-    page = created_parent_category_page
+def test_delete_category(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
+    page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_category_page(page)
 
     row = page.get_by_role("row").filter(has_text=test_data.parent_category_name)
     row.locator("a").nth(2).click()

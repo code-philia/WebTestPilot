@@ -3,6 +3,8 @@ from prestashop.conftest import PrestaShopTestData
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import go_to_brand_page
+
 # 2 testcases
 
 
@@ -30,9 +32,10 @@ def test_create_brand(logged_in_page: Page, test_data: PrestaShopTestData) -> No
     expect(page.locator("#main-div")).to_contain_text("Successful creation")
 
 
-def test_delete_brand(created_brand_page: Page, test_data: PrestaShopTestData) -> None:
-    page = created_brand_page
+def test_delete_brand(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
+    page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_brand_page(page)
 
     # by human
     row = page.get_by_role("row").filter(has_text=test_data.brand_name)

@@ -5,14 +5,15 @@ from prestashop.conftest import PrestaShopTestData, create_virtual_product
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import go_to_product_page
+
 # 3 test cases
 
 
-def test_create_virtual_product(
-    logged_in_page: Page, test_data: PrestaShopTestData
-) -> None:
+def test_create_virtual_product(logged_in_page: Page) -> None:
     page = logged_in_page
-    page = create_virtual_product(page, test_data)
+    insert_start_event_to_page(page)
+    page = create_virtual_product(page)
 
     expect(page.get_by_text("Successful update")).to_be_visible()
 
@@ -116,9 +117,11 @@ def test_create_standard_product(
 
 
 def test_delete_one_product(
-    created_product_for_delete_page: Page, test_data: PrestaShopTestData
+    logged_in_page: Page, test_data: PrestaShopTestData
 ) -> None:
-    page = created_product_for_delete_page
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_product_page(page)
 
     page.get_by_role("textbox", name="product_name input").fill(
         test_data.delete_product_name

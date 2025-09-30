@@ -1,8 +1,6 @@
-import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import randint
 
 import pytest
 from playwright.sync_api import Page
@@ -10,355 +8,128 @@ from playwright.sync_api import Page
 sys.path.append(str(Path(__file__).parent.parent))
 
 from tracing_api import create_traced_page
+
 from .utilities import (
     create_attribute,
-    create_feature,
     create_brand,
-    create_parent_category,
     create_child_category,
     create_customer,
-    create_virtual_product,
+    create_feature,
+    create_parent_category,
     create_supplier,
+    create_virtual_product,
 )
 
 pytest_plugins = ["pytest_xpath_plugin"]
 
 BASE_URL = "http://localhost:8083"
-# BASE_URL = "http://49.232.8.242:8083"
 
 
+@dataclass
 @dataclass
 class PrestaShopTestData:
     """
     Thread-safe test data factory for PrestaShop entities.
     Each instance gets unique identifiers to prevent race conditions.
-    Supports _unique_id = "" for deterministic baseline testing.
     """
 
-    def __post_init__(self):
-        self._unique_id = str(randint(100000, 999999))
-
     # Attribute properties
-    @property
-    def attribute_name(self) -> str:
-        return f"Weight{self._unique_id}"
-
-    @property
-    def attribute_public_name(self) -> str:
-        return f"Weight{self._unique_id}"
-
-    @property
-    def attribute_value(self) -> str:
-        return "500g"
+    attribute_name: str = "Weight"
+    attribute_public_name: str = "Weight"
+    attribute_value: str = "500g"
 
     # Feature properties
-    @property
-    def feature_name(self) -> str:
-        return f"Season{self._unique_id}"
-
-    @property
-    def feature_value(self) -> str:
-        return "autumn"
+    feature_name: str = "Season"
+    feature_value: str = "autumn"
 
     # Brand properties
-    @property
-    def brand_name(self) -> str:
-        return f"Nike{self._unique_id}"
-
-    @property
-    def brand_description(self) -> str:
-        return "Description"
-
-    @property
-    def brand_logo_file(self) -> str:
-        return "prestashop/test_data/pictures/nike logo.jpg"
+    brand_name: str = "Nike"
+    brand_description: str = "Description"
+    brand_logo_file: str = "prestashop/test_data/pictures/nike logo.jpg"
 
     # Category properties
-    @property
-    def parent_category_name(self) -> str:
-        return f"Shoes{self._unique_id}"
-
-    @property
-    def parent_category_parent(self) -> str:
-        return "Home"
-
-    @property
-    def parent_category_description(self) -> str:
-        return "Description"
-
-    @property
-    def parent_category_image_file(self) -> str:
-        return "prestashop/test_data/pictures/shoes.png"
-
-    @property
-    def parent_category_link_rewrite(self) -> str:
-        return f"shoes{self._unique_id}"
-
-    @property
-    def child_category_name(self) -> str:
-        return f"Sports shoes{self._unique_id}"
-
-    @property
-    def child_category_parent(self) -> str:
-        return f"Shoes{self._unique_id}"
-
-    @property
-    def child_category_description(self) -> str:
-        return "Description"
-
-    @property
-    def child_category_image_file(self) -> str:
-        return "prestashop/test_data/pictures/sports shoes.jpg"
-
-    @property
-    def child_category_link_rewrite(self) -> str:
-        return f"sports-shoes{self._unique_id}"
+    parent_category_name: str = "Shoes"
+    parent_category_parent: str = "Home"
+    parent_category_description: str = "Description"
+    parent_category_image_file: str = "prestashop/test_data/pictures/shoes.png"
+    parent_category_link_rewrite: str = "shoes"
+    child_category_name: str = "Sports shoes"
+    child_category_parent: str = "Shoes"
+    child_category_description: str = "Description"
+    child_category_image_file: str = "prestashop/test_data/pictures/sports shoes.jpg"
+    child_category_link_rewrite: str = "sports-shoes"
 
     # Customer properties
-    @property
-    def customer_social_title(self) -> str:
-        return "Mr."
-
-    @property
-    def customer_first_name(self) -> str:
-        return "Jones"
-
-    @property
-    def customer_last_name(self) -> str:
-        return "Jonathan"
-
-    @property
-    def customer_email(self) -> str:
-        return f"test{self._unique_id}@test.com"
-
-    @property
-    def customer_password(self) -> str:
-        return "testTEST123."
-
-    @property
-    def customer_birth_year(self) -> str:
-        return "2003"
-
-    @property
-    def customer_birth_month(self) -> str:
-        return "1"
-
-    @property
-    def customer_birth_day(self) -> str:
-        return "1"
-
-    @property
-    def customer_default_group(self) -> str:
-        return "Customer"
+    customer_social_title: str = "Mr."
+    customer_first_name: str = "Jones"
+    customer_last_name: str = "Jonathan"
+    customer_email: str = "test@test.com"
+    customer_password: str = "testTEST123."
+    customer_birth_year: str = "2003"
+    customer_birth_month: str = "1"
+    customer_birth_day: str = "1"
+    customer_default_group: str = "Customer"
 
     # Virtual product properties
-    @property
-    def virtual_product_name(self) -> str:
-        return f"bird{self._unique_id}"
-
-    @property
-    def virtual_product_image_file(self) -> str:
-        return "prestashop/test_data/pictures/bird.jpg"
-
-    @property
-    def virtual_product_description(self) -> str:
-        return "Description"
-
-    @property
-    def virtual_product_short_description(self) -> str:
-        return "Vector graphic, format: svg. Download for personal, private and non-commercial use."
-
-    @property
-    def virtual_product_category(self) -> str:
-        return "Art"
-
-    @property
-    def virtual_product_brand(self) -> str:
-        return "Graphic Corner"
-
-    @property
-    def virtual_product_reference(self) -> str:
-        return f"test1{self._unique_id}"
-
-    @property
-    def virtual_product_quantity(self) -> str:
-        return "300"
-
-    @property
-    def virtual_product_price_tax_excl(self) -> str:
-        return "9.000000"
-
-    @property
-    def virtual_product_wholesale_price(self) -> str:
-        return "5.490000"
-
-    @property
-    def virtual_product_link_rewrite(self) -> str:
-        return f"bird-vector-graphics{self._unique_id}"
-
-    @property
-    def virtual_product_offline_redirection(self) -> str:
-        return "default"
-
-    @property
-    def virtual_product_fashion_supplier_ref(self) -> str:
-        return f"test1{self._unique_id}"
-
-    @property
-    def virtual_product_fashion_supplier_price(self) -> str:
-        return "6.490000"
-
-    @property
-    def virtual_product_accessories_supplier_ref(self) -> str:
-        return f"test1{self._unique_id}"
-
-    @property
-    def virtual_product_accessories_supplier_price(self) -> str:
-        return "5.490000"
+    virtual_product_name: str = "bird"
+    virtual_product_image_file: str = "prestashop/test_data/pictures/bird.jpg"
+    virtual_product_description: str = "Description"
+    virtual_product_short_description: str = "Vector graphic, format: svg. Download for personal, private and non-commercial use."
+    virtual_product_category: str = "Art"
+    virtual_product_brand: str = "Graphic Corner"
+    virtual_product_reference: str = "test1"
+    virtual_product_quantity: str = "300"
+    virtual_product_price_tax_excl: str = "9.000000"
+    virtual_product_wholesale_price: str = "5.490000"
+    virtual_product_link_rewrite: str = "bird-vector-graphics"
+    virtual_product_offline_redirection: str = "default"
+    virtual_product_fashion_supplier_ref: str = "test1"
+    virtual_product_fashion_supplier_price: str = "6.490000"
+    virtual_product_accessories_supplier_ref: str = "test1"
+    virtual_product_accessories_supplier_price: str = "5.490000"
 
     # Standard product properties
-    @property
-    def standard_product_name(self) -> str:
-        return f"cat notebook{self._unique_id}"
+    standard_product_name: str = "cat notebook"
+    standard_product_image_file: str = "prestashop/test_data/pictures/cat notebook.jpg"
+    standard_product_description: str = "Description"
+    standard_product_short_description: str = "Short description"
+    standard_product_category_search: str = "Stationery"
+    standard_product_default_category: str = "Stationery"
+    standard_product_brand: str = "Graphic Corner"
+    standard_product_reference: str = "test2"
+    standard_product_feature_composition: str = "Recycled cardboard"
+    standard_product_feature_property: str = "pages"
+    standard_product_quantity: str = "300"
+    standard_product_price_tax_excl: str = "12.900000"
+    standard_product_wholesale_price: str = "5.490000"
+    standard_product_weight: str = "0.3"
+    standard_product_link_rewrite: str = "cat-notebook-vector-graphics"
 
-    @property
-    def standard_product_image_file(self) -> str:
-        return "prestashop/test_data/pictures/cat notebook.jpg"
-
-    @property
-    def standard_product_description(self) -> str:
-        return "Description"
-
-    @property
-    def standard_product_short_description(self) -> str:
-        return "Short description"
-
-    @property
-    def standard_product_category_search(self) -> str:
-        return "Stationery"
-
-    @property
-    def standard_product_default_category(self) -> str:
-        return "Stationery"
-
-    @property
-    def standard_product_brand(self) -> str:
-        return "Graphic Corner"
-
-    @property
-    def standard_product_reference(self) -> str:
-        return f"test2{self._unique_id}"
-
-    @property
-    def standard_product_feature_composition(self) -> str:
-        return "Recycled cardboard"
-
-    @property
-    def standard_product_feature_property(self) -> str:
-        return "pages"
-
-    @property
-    def standard_product_quantity(self) -> str:
-        return "300"
-
-    @property
-    def standard_product_price_tax_excl(self) -> str:
-        return "12.900000"
-
-    @property
-    def standard_product_wholesale_price(self) -> str:
-        return "5.490000"
-
-    @property
-    def standard_product_weight(self) -> str:
-        return "0.3"
-
-    @property
-    def standard_product_link_rewrite(self) -> str:
-        return f"cat-notebook-vector-graphics{self._unique_id}"
-
-    # Delete product name (reference to virtual product)
-    @property
-    def delete_product_name(self) -> str:
-        return f"bird{self._unique_id}"
+    # Delete product name
+    delete_product_name: str = "bird"
 
     # Supplier properties
-    @property
-    def supplier_name(self) -> str:
-        return f"Shoes supplier{self._unique_id}"
+    supplier_name: str = "Shoes supplier"
+    supplier_phone: str = "090-1234-5678"
+    supplier_address: str = "Nishi-Shinjuku 1-25-1"
+    supplier_city: str = "Tokyo"
+    supplier_country: str = "Japan"
+    supplier_state: str = "Aichi"
+    supplier_logo_active: str = "Yes"
 
-    @property
-    def supplier_phone(self) -> str:
-        return "090-1234-5678"
-
-    @property
-    def supplier_address(self) -> str:
-        return "Nishi-Shinjuku 1-25-1"
-
-    @property
-    def supplier_city(self) -> str:
-        return "Tokyo"
-
-    @property
-    def supplier_country(self) -> str:
-        return "Japan"
-
-    @property
-    def supplier_state(self) -> str:
-        return "Aichi"
-
-    @property
-    def supplier_logo_active(self) -> str:
-        return "Yes"
-
-    # Buyer properties (these remain static as they reference existing products)
-    @property
-    def buyer_product_name(self) -> str:
-        return "Hummingbird printed t-shirt"
-
-    @property
-    def buyer_size(self) -> str:
-        return "M"
-
-    @property
-    def buyer_size_cnt(self) -> str:
-        return "2"
-
-    @property
-    def buyer_color(self) -> str:
-        return "Black"
-
-    @property
-    def buyer_star(self) -> str:
-        return "5"
-
-    @property
-    def buyer_title(self) -> str:
-        return "Good thing"
-
-    @property
-    def buyer_review(self) -> str:
-        return "very comfortable!"
-
-    @property
-    def buyer_main_category(self) -> str:
-        return "Clothes"
-
-    @property
-    def buyer_sub_category(self) -> str:
-        return "Men"
-
-    @property
-    def buyer_filter_availability(self) -> str:
-        return "In stock"
-
-    @property
-    def buyer_filter_selection(self) -> str:
-        return "Discounted"
-
-    @property
-    def buyer_filter_size(self) -> str:
-        return "M"
+    # Buyer properties
+    buyer_product_name: str = "Hummingbird printed t-shirt"
+    buyer_size: str = "M"
+    buyer_size_cnt: str = "2"
+    buyer_color: str = "Black"
+    buyer_star: str = "5"
+    buyer_title: str = "Good thing"
+    buyer_review: str = "very comfortable!"
+    buyer_main_category: str = "Clothes"
+    buyer_sub_category: str = "Men"
+    buyer_filter_availability: str = "In stock"
+    buyer_filter_selection: str = "Discounted"
+    buyer_filter_size: str = "M"
 
 
 @pytest.fixture
@@ -418,203 +189,13 @@ def login_to_prestashop_as_buyer(page: Page) -> Page:
     return page
 
 
-def setup_data_for_attribute_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for attribute tests - creates attribute from test data and navigates to attributes page."""
-    create_attribute(page, test_data.attribute_name, test_data.attribute_public_name)
-    # Navigate back to the attributes page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Attributes & Features").click()
-    return page
-
-
-def setup_data_for_feature_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for feature tests - creates feature from test data and navigates to features page."""
-    create_feature(page, test_data.feature_name)
-    # Navigate back to the features page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Attributes & Features").click()
-    page.get_by_role("link", name="Features", exact=True).click()
-    return page
-
-
-def setup_data_for_brand_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for brand tests - creates brand from test data and navigates to brands page."""
-    create_brand(page, test_data.brand_name, test_data.brand_description)
-    # Navigate back to the brands page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Brands & Suppliers").click()
-    return page
-
-
-@pytest.fixture
-def created_attribute_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create an attribute and return to attributes page."""
-    return setup_data_for_attribute_tests(logged_in_page, test_data)
-
-
-@pytest.fixture
-def created_feature_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a feature and return to features page."""
-    return setup_data_for_feature_tests(logged_in_page, test_data)
-
-
-@pytest.fixture
-def created_brand_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a brand and return to brands page."""
-    return setup_data_for_brand_tests(logged_in_page, test_data)
-
-
-def add_product_to_cart(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Add a product to the shopping cart."""
-    page.get_by_role("link", name=test_data.buyer_product_name).nth(1).click()
-    page.get_by_label("Size").select_option(test_data.buyer_size)
-    page.get_by_role("radio", name=test_data.buyer_color).check()
-    page.get_by_role("button", name=" Add to cart").click()
-    # Wait for the modal to appear and close it
-    page.wait_for_timeout(1000)
-    # Check if Continue shopping button exists, if so click it
-    continue_btn = page.get_by_role("button", name="Continue shopping")
-    if continue_btn.is_visible():
-        continue_btn.click()
-    return page
-
-
-def add_product_to_wishlist(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Add a product to the wishlist."""
-    page.get_by_role("textbox", name="Search").fill(test_data.buyer_product_name)
-    page.get_by_role("textbox", name="Search").press("Enter")
-    product_article = page.get_by_role("article").filter(
-        has_text=test_data.buyer_product_name
-    )
-    product_article.locator(".wishlist-button-add").click()
-    page.wait_for_timeout(1000)
-    return page
-
-
-def setup_data_for_cart_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for cart tests - adds product to cart from test data."""
-    add_product_to_cart(page, test_data)
-    # Navigate to cart page
-    page.get_by_role("link", name="Shopping cart link containing").click()
-    return page
-
-
-def setup_data_for_wishlist_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for wishlist tests - adds product to wishlist from test data."""
-    add_product_to_wishlist(page, test_data)
-    return page
-
-
-@pytest.fixture
-def created_cart_item_page(
-    logged_in_buyer_page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Add item to cart and navigate to cart page."""
-    return setup_data_for_cart_tests(logged_in_buyer_page, test_data)
-
-
-@pytest.fixture
-def created_wishlist_item_page(
-    logged_in_buyer_page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Add item to wishlist."""
-    return setup_data_for_wishlist_tests(logged_in_buyer_page, test_data)
-
-
-def setup_data_for_parent_category_tests(
-    page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Setup data for parent category tests - creates parent category from test data."""
-    create_parent_category(page)
-    # Navigate back to categories page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Categories").click()
-    return page
-
-
-def setup_data_for_child_category_tests(
-    page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Setup data for child category tests - creates both parent and child categories."""
-    # Create parent category first
-    create_parent_category(page)
-    # Create child category
-    create_child_category(page)
-    # Navigate back to categories page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Categories").click()
-    return page
-
-
-@pytest.fixture
-def created_parent_category_page(
-    logged_in_page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Create parent category and return to categories page."""
-    return setup_data_for_parent_category_tests(logged_in_page, test_data)
-
-
-@pytest.fixture
-def created_child_category_page(
-    logged_in_page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Create both parent and child categories and return to categories page."""
-    return setup_data_for_child_category_tests(logged_in_page, test_data)
-
-
-def setup_data_for_customer_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for customer tests - creates customer from test data and navigates to customers page."""
-    create_customer(page)
-    # Navigate back to customers page
-    page.get_by_role("link", name="account_circle Customers").click()
-    page.get_by_role("link", name="Customers", exact=True).click()
-    return page
-
-
-@pytest.fixture
-def created_customer_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a customer and return to customers page."""
-    return setup_data_for_customer_tests(logged_in_page, test_data)
-
-
-def setup_data_for_product_delete_tests(
-    page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Setup data for product delete tests - creates virtual product from test data and navigates to products page."""
-    create_virtual_product(page)
-    # Navigate back to products page
-    page.get_by_role("link", name="store Catalog").click()
-    page.locator("#subtab-AdminProducts").get_by_role("link", name="Products").click()
-    return page
-
-
-@pytest.fixture
-def created_product_for_delete_page(
-    logged_in_page: Page, test_data: PrestaShopTestData
-) -> Page:
-    """Create a virtual product for deletion and return to products page."""
-    return setup_data_for_product_delete_tests(logged_in_page, test_data)
-
-
-def setup_data_for_supplier_tests(page: Page, test_data: PrestaShopTestData) -> Page:
-    """Setup data for supplier tests - creates supplier from test data and navigates to suppliers page."""
-    create_supplier(page)
-    # Navigate back to suppliers page
-    page.get_by_role("link", name="store Catalog").click()
-    page.get_by_role("link", name="Brands & Suppliers").click()
-    page.get_by_role("link", name="Suppliers", exact=True).click()
-    return page
-
-
-@pytest.fixture
-def created_supplier_page(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
-    """Create a supplier and return to suppliers page."""
-    return setup_data_for_supplier_tests(logged_in_page, test_data)
-
-
 @pytest.fixture
 def seed(logged_in_page: Page, test_data: PrestaShopTestData) -> Page:
     """Seed minimal data for prestashop tests."""
+    create_customer(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
+
     create_attribute(logged_in_page)
     logged_in_page.wait_for_timeout(1000)
     logged_in_page.goto(f"{BASE_URL}/webtestpilot/")
