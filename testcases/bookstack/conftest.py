@@ -600,3 +600,11 @@ def created_page_move_chapter(
     logged_in_page: Page, test_data: BookStackTestData
 ) -> Page:
     return setup_data_for_page_move_chapter(logged_in_page, test_data)
+
+
+@pytest.fixture
+def seed(logged_in_page: Page):
+    # Seed data is created in individual fixtures as needed.
+    # Run this to start seeding: pytest ./bookstack/seed.py::test_seed -v --tb=short -s --headed
+    # TODO: Jingyu setup the data.
+    pass
