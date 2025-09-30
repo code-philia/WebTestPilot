@@ -20,109 +20,47 @@ PASSWORD = "webtestpilot"
 
 @dataclass
 class IndicoTestData:
-    @property
-    def lecture_name(self) -> str:
-        return "Lecture"
+    # Lecture properties
+    lecture_name: str = "Lecture"
 
-    @property
-    def venue_name(self) -> str:
-        return "Venue"
+    # Venue properties
+    venue_name: str = "Venue"
+    room_name: str = "Room"
 
-    @property
-    def room_name(self) -> str:
-        return "Room"
+    # Meeting properties
+    meeting_name: str = "Meeting"
+    meeting_minute_name: str = "Meeting Minute"
+    meeting_contribution_name: str = "Meeting Contribution"
+    meeting_contribution_description: str = "Description"
+    break_name: str = "Break"
+    break_description: str = "Description"
 
-    @property
-    def meeting_name(self) -> str:
-        return "Meeting"
+    # Date/time properties
+    end_date: str = "10/10/2040"
+    end_time: str = "12"
 
-    @property
-    def meeting_minute_name(self) -> str:
-        return "Meeting Minute"
+    # Conference properties
+    conference_name: str = "Conference"
+    conference_track_name: str = "Track"
+    conference_track_group_name: str = "Track group"
+    conference_track_code: str = "T"
+    conference_track_description: str = "Papers about"
+    conference_track_group_description: str = "Many papers about"
 
-    @property
-    def meeting_contribution_name(self) -> str:
-        return "Meeting Contribution"
+    # Notification properties
+    email_notification_title: str = "Email"
+    email_notification_rule_set: str = "Notification rule"
 
-    @property
-    def meeting_contribution_description(self) -> str:
-        return "Description"
+    # Session properties
+    session_type: str = "Session type"
+    session_title: str = "Session title"
+    session_title_updated: str = "Session title updated"
+    session_description: str = "Session description"
+    session_contribution_name: str = "Session Contribution"
+    session_contribution_description: str = "Description"
 
-    @property
-    def break_name(self) -> str:
-        return "Break"
-
-    @property
-    def break_description(self) -> str:
-        return "Description"
-
-    @property
-    def end_date(self) -> str:
-        return "10/10/2040"
-
-    @property
-    def end_time(self) -> str:
-        return "12"
-
-    @property
-    def conference_name(self) -> str:
-        return "Conference"
-
-    @property
-    def conference_track_name(self) -> str:
-        return "Track"
-
-    @property
-    def conference_track_group_name(self) -> str:
-        return "Track group"
-
-    @property
-    def conference_track_code(self) -> str:
-        return "T"
-
-    @property
-    def conference_track_description(self) -> str:
-        return "Papers about"
-
-    @property
-    def conference_track_group_description(self) -> str:
-        return "Many papers about"
-
-    @property
-    def email_notification_title(self) -> str:
-        return "Email"
-
-    @property
-    def email_notification_rule_set(self) -> str:
-        return "Notification rule"
-
-    @property
-    def session_type(self) -> str:
-        return "Session type"
-
-    @property
-    def session_title(self) -> str:
-        return "Session title"
-
-    @property
-    def session_title_updated(self) -> str:
-        return "Session title updated"
-
-    @property
-    def session_description(self) -> str:
-        return "Session description"
-
-    @property
-    def session_contribution_name(self) -> str:
-        return "Session Contribution"
-
-    @property
-    def session_contribution_description(self) -> str:
-        return "Description"
-
-    @property
-    def registration_form_name(self) -> str:
-        return "Registration Form"
+    # Registration properties
+    registration_form_name: str = "Registration Form"
 
 
 @pytest.fixture
