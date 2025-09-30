@@ -1,7 +1,10 @@
+import asyncio
+import inspect
 import sys
-from pathlib import Path
 from enum import Enum
-from typing import Optional
+from functools import partial, wraps
+from pathlib import Path
+from typing import Any, Callable, Optional
 
 # Add project directory
 PROJECT_DIR = Path(__file__).parent.parent.parent
@@ -14,11 +17,11 @@ if str(WEBTESTPILOT_DIR) not in sys.path:
     sys.path.append(str(WEBTESTPILOT_DIR))
 
 import typer
-from typing_extensions import Annotated
 from baselines.const import ApplicationEnum
-from runner import WebTestPilotTestRunner
-
 from main import Config
+from typing_extensions import Annotated
+
+from runner import WebTestPilotTestRunner
 
 
 class TransformationEnum(str, Enum):
@@ -29,14 +32,38 @@ class TransformationEnum(str, Enum):
     summarize = "summarize"
 
 
-cli = typer.Typer(
+# Source: https://github.com/fastapi/typer/issues/950#issuecomment-2646361943
+class AsyncTyper(typer.Typer):
+    @staticmethod
+    def maybe_run_async(decorator: Callable, func: Callable) -> Any:
+        if inspect.iscoroutinefunction(func):
+
+            @wraps(func)
+            def runner(*args: Any, **kwargs: Any) -> Any:
+                return asyncio.run(func(*args, **kwargs))
+
+            decorator(runner)
+        else:
+            decorator(func)
+        return func
+
+    def callback(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().callback(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
+    def command(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().command(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
+
+cli = AsyncTyper(
     help="Run test cases using different agent implementations",
     no_args_is_help=True,
 )
 
 
 @cli.command()
-def main(
+async def main(
     application: Annotated[
         ApplicationEnum, typer.Argument(help="The application to test")
     ],
@@ -71,9 +98,9 @@ def main(
         application=application.value,
         model=None,
         headless=True,
-        config=config
+        config=config,
     )
-    runner.run_all_test_cases()
+    await runner.run_all_test_cases()
 
 
 if __name__ == "__main__":
