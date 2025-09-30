@@ -110,7 +110,7 @@ class LavagueTestRunner(BaseTestRunner):
         except Exception:
             return code
 
-    def run_test_case(self, test_case: TestCase) -> TestResult:
+    async def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using LaVague agent."""
         actions = test_case.actions
         test_name = test_case.name

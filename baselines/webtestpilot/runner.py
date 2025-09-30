@@ -45,7 +45,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
         )
         self.headless = headless
 
-    def run_test_case(self, test_case: TestCase, is_buggy: bool, config = None) -> TestResult:
+    async def run_test_case(self, test_case: TestCase, is_buggy: bool, config = None) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
         actions = test_case.actions
         test_name = test_case.name
