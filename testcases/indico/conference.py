@@ -259,6 +259,7 @@ def test_delete_sessions_in_conference(
 ) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
+    navigate_to_conference_edit_page(page)
 
     page.get_by_role("link", name="Sessions").click()
     expect(page.locator("#sessions-wrapper div").first).to_contain_text(
