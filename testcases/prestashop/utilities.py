@@ -1,4 +1,61 @@
+from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
+
+BASE_URL = "http://localhost:8083"
+
+
+def login_to_prestashop(page: Page) -> Page:
+    page.goto(f"{BASE_URL}/webtestpilot/")
+    page.get_by_role("textbox", name="Email address").click()
+    page.get_by_role("textbox", name="Email address").fill("admin@admin.com")
+    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").fill("admin12345")
+    page.get_by_role("button", name="Log in").click()
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Products", exact=True).first.click()
+    page.get_by_title("Close Toolbar").click()
+    page.get_by_role("link", name="trending_up Dashboard").click()
+    # expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+    return page
+
+
+def login_to_prestashop_as_buyer(page: Page) -> Page:
+    page.goto(f"{BASE_URL}/")
+    page.get_by_role("link", name=" Sign in").click()
+
+    # Must create user with docker exec -it prestashop-app-1 php /var/www/html/tools/create_user.php
+    # See webapps/prestashop/Dockerfile for more info
+    page.get_by_role("textbox", name="Email").fill("auto.customer@example.com")
+    page.get_by_role("textbox", name="Password input").fill("mypassword")
+    page.get_by_role("button", name="Sign in").click()
+    return page
+
+
+async def login_to_prestashop_async(page: AsyncPage) -> AsyncPage:
+    await page.goto(f"{BASE_URL}/webtestpilot/")
+    await page.get_by_role("textbox", name="Email address").click()
+    await page.get_by_role("textbox", name="Email address").fill("admin@admin.com")
+    await page.get_by_role("textbox", name="Password").click()
+    await page.get_by_role("textbox", name="Password").fill("admin12345")
+    await page.get_by_role("button", name="Log in").click()
+    await page.get_by_role("link", name="store Catalog").click()
+    await page.get_by_role("link", name="Products", exact=True).first.click()
+    await page.get_by_title("Close Toolbar").click()
+    await page.get_by_role("link", name="trending_up Dashboard").click()
+    # expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+    return page
+
+
+async def login_to_prestashop_as_buyer_async(page: AsyncPage) -> AsyncPage:
+    await page.goto(f"{BASE_URL}/")
+    await page.get_by_role("link", name=" Sign in").click()
+
+    # Must create user with docker exec -it prestashop-app-1 php /var/www/html/tools/create_user.php
+    # See webapps/prestashop/Dockerfile for more info
+    await page.get_by_role("textbox", name="Email").fill("auto.customer@example.com")
+    await page.get_by_role("textbox", name="Password input").fill("mypassword")
+    await page.get_by_role("button", name="Sign in").click()
+    return page
 
 
 def create_attribute(
@@ -242,7 +299,6 @@ def go_to_attribute_page(page: Page) -> None:
     page.get_by_role("link", name="Attributes & Features").click()
 
 
-# Functions used for navigation in tests
 def go_to_feature_page(page: Page) -> None:
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Attributes & Features").click()
