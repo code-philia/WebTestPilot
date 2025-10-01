@@ -2,6 +2,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 
 INSERT INTO `ps_address` VALUES (7,11,270,0,0,3,0,'supplier','','supplier','supplier','Nishi-Shinjuku 1-25-1','','','Tokyo','','090-1234-5678','','','','2025-09-29 10:46:52','2025-09-29 10:46:52',1,0);
 
+INSERT INTO `ps_customer` VALUES (3,1,1,1,3,1,0,NULL,NULL,NULL,'Jones','Jonathan','test@test.com','$2y$10$vGm9PHZuakY0yN4sodgAsOT7i1zqSLUs7xudXua6nFsNPnGFWRolq','2025-09-30 21:31:40','2003-01-01',0,NULL,'0000-00-00 00:00:00',0,NULL,0.000000,0,0,'aa7ef13e058d57f5c118a6680f36bf68',NULL,1,0,0,'2025-10-01 03:31:40','2025-10-01 03:31:40',NULL,'0000-00-00 00:00:00');
+INSERT INTO `ps_customer_group` VALUES (3,1);
+INSERT INTO `ps_customer_group` VALUES (3,2);
+
+
 INSERT INTO `ps_attribute_group` VALUES (5,0,'select',4);
 INSERT INTO `ps_attribute_group_lang` VALUES (5,1,'Weight','Weight');
 INSERT INTO `ps_attribute_group_shop` VALUES (5,1);

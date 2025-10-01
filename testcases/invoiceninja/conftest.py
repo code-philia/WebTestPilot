@@ -2,7 +2,6 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import randint
 
 import pytest
 from playwright.sync_api import Page
@@ -27,110 +26,41 @@ class InvoiceNinjaTestData:
     Each instance gets unique identifiers to prevent race conditions.
     """
 
-    def __post_init__(self):
-        self._unique_id = str(randint(100000, 999999))
-
     # Company
-    @property
-    def company_name(self) -> str:
-        return f"company_name{self._unique_id}"
-
-    @property
-    def company_name_updated(self) -> str:
-        return f"company_name_updated{self._unique_id}"
-
-    @property
-    def company_number(self) -> str:
-        return f"company_number{self._unique_id}"
-
-    @property
-    def company_id(self) -> str:
-        return f"company_id{self._unique_id}"
-
-    @property
-    def vat_number(self) -> str:
-        return f"vat_number{self._unique_id}"
-
-    @property
-    def company_website(self) -> str:
-        return f"website{self._unique_id}.com"
-
-    @property
-    def company_phone(self) -> str:
-        return "0987654321"
+    company_name: str = "company_name"
+    company_name_updated: str = "company_name_updated"
+    company_number: str = "company_number"
+    company_id: str = "company_id"
+    vat_number: str = "vat_number"
+    company_website: str = "website.com"
+    company_phone: str = "0987654321"
 
     # Contact
-    @property
-    def contact_first_name(self) -> str:
-        return f"first_name{self._unique_id}"
-
-    @property
-    def contact_last_name(self) -> str:
-        return f"last_name{self._unique_id}"
-
-    @property
-    def contact_email(self) -> str:
-        return f"email{self._unique_id}@example.com"
-
-    @property
-    def contact_phone(self) -> str:
-        return "0912345678"
+    contact_first_name: str = "first_name"
+    contact_last_name: str = "last_name"
+    contact_email: str = "email@example.com"
+    contact_phone: str = "0912345678"
 
     # Product
-    @property
-    def product_name(self) -> str:
-        return f"product_name{self._unique_id}"
-
-    @property
-    def product_name1(self) -> str:
-        return self.product_name + "1"
-
-    @property
-    def product_name2(self) -> str:
-        return self.product_name + "2"
-
-    @property
-    def product_name_updated(self) -> str:
-        return f"product_name_updated{self._unique_id}"
-
-    @property
-    def product_description(self) -> str:
-        return f"product_description{self._unique_id}"
-
-    @property
-    def product_price(self) -> str:
-        return "60000"
-
-    @property
-    def product_default_quantity(self) -> str:
-        return "200"
-
-    @property
-    def product_max_quantity(self) -> str:
-        return "1000"
+    product_name: str = "product_name"
+    product_name1: str = "product_name1"
+    product_name2: str = "product_name2"
+    product_name_updated: str = "product_name_updated"
+    product_description: str = "product_description"
+    product_price: str = "60000"
+    product_default_quantity: str = "200"
+    product_max_quantity: str = "1000"
 
     # Invoice
-    @property
-    def invoice_number(self) -> str:
-        return str(self._unique_id) if self._unique_id else "123456"
-
-    @property
-    def invoice_date(self) -> str:
-        return "2025-07-15"
+    invoice_number: str = "123456"
+    invoice_date: str = "2025-07-15"
 
     # Expense
-    @property
-    def expense_amount(self) -> str:
-        return "2,3234"
-
-    @property
-    def expense_amount_updated(self) -> str:
-        return "23,2340"
+    expense_amount: str = "2,3234"
+    expense_amount_updated: str = "23,2340"
 
     # Credit
-    @property
-    def credit_number(self) -> str:
-        return str(self._unique_id) if self._unique_id else "123456"
+    credit_number: str = "123456"
 
 
 @pytest.fixture
@@ -558,3 +488,45 @@ def setup_data_for_credit_create(logged_in_page: Page, test_data: InvoiceNinjaTe
     create_client(logged_in_page, test_data.company_name, test_data)
     create_product(logged_in_page, test_data.product_name1, test_data)
     create_product(logged_in_page, test_data.product_name2, test_data)
+
+
+@pytest.fixture
+def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
+    """Seed minimal data for InvoiceNinja tests."""
+    # Create base data: 1 client and 2 products (needed for invoices/credits)
+    logged_in_page = create_client(logged_in_page, test_data.company_name, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create first product
+    logged_in_page = create_product(logged_in_page, test_data.product_name1, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create second product
+    logged_in_page = create_product(logged_in_page, test_data.product_name2, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create invoice with line items
+    logged_in_page = create_invoice(logged_in_page, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Mark invoice as sent (required for payment creation)
+    logged_in_page.locator("div").filter(
+        has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
+    ).get_by_role("button").nth(2).click()
+    logged_in_page.get_by_role("button", name="Mark Sent").click()
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create payment linked to the invoice
+    logged_in_page = create_payment(logged_in_page, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create expense linked to the client (need to setup client first)
+    page_with_client = setup_data_for_expense_create(logged_in_page, test_data)
+    page_with_client = create_expense(page_with_client, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Navigate back to dashboard
+    logged_in_page.get_by_role("link", name="Dashboard").click()
+    logged_in_page.wait_for_timeout(1000)
+
+    return logged_in_page
