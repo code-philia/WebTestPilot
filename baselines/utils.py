@@ -49,19 +49,10 @@ from testcases.invoiceninja.conftest import (
     setup_for_payment_page,
 )
 from testcases.prestashop.conftest import (
-    PrestaShopTestData,
     login_to_prestashop,
     login_to_prestashop_as_buyer,
-    setup_data_for_attribute_tests,
-    setup_data_for_brand_tests,
-    setup_data_for_cart_tests,
-    setup_data_for_child_category_tests,
-    setup_data_for_customer_tests,
-    setup_data_for_feature_tests,
-    setup_data_for_parent_category_tests,
-    setup_data_for_product_delete_tests,
-    setup_data_for_supplier_tests,
-    setup_data_for_wishlist_tests,
+    login_to_prestashop_as_buyer_async,
+    login_to_prestashop_async,
 )
 
 
@@ -83,7 +74,6 @@ async def setup_page_state(
 def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
     """Set up InvoiceNinja page based on setup function."""
     test_data = InvoiceNinjaTestData()
-    test_data._unique_id = ""
 
     # No setup.
     if setup_function == "":
@@ -145,59 +135,27 @@ async def setup_indico_page(
     raise ValueError(f"Unknown indico setup function: {setup_function}")
 
 
-def setup_prestashop_page(page: Page, setup_function: str) -> Page:
-    """Set up PrestaShop page based on setup function."""
-    test_data = PrestaShopTestData()
-    test_data._unique_id = ""
+async def setup_prestashop_page(
+    page: Page | AsyncPage, setup_function: str
+) -> Page | AsyncPage:
+    if isinstance(page, Page):
+        if setup_function == "logged_in_buyer_page":
+            logged_in_page = login_to_prestashop_as_buyer(page)
+        else:
+            logged_in_page = login_to_prestashop(page)
 
-    # Login once for all other functions
-    if (
-        setup_function == "logged_in_buyer_page"
-        or setup_function == "created_cart_item_page"
-        or setup_function == "created_wishlist_item_page"
-    ):
-        logged_in_page = login_to_prestashop_as_buyer(page)
+        if setup_function in ("logged_in_page", "logged_in_buyer_page"):
+            return logged_in_page
     else:
-        logged_in_page = login_to_prestashop(page)
+        if setup_function == "logged_in_buyer_page":
+            logged_in_page = await login_to_prestashop_as_buyer_async(page)
+        else:
+            logged_in_page = await login_to_prestashop_async(page)
 
-    if setup_function == "logged_in_page":
-        return logged_in_page
+        if setup_function in ("logged_in_page", "logged_in_buyer_page"):
+            return logged_in_page
 
-    if setup_function == "logged_in_buyer_page":
-        return logged_in_page
-
-    elif setup_function == "created_cart_item_page":
-        return setup_data_for_cart_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_wishlist_item_page":
-        return setup_data_for_wishlist_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_attribute_page":
-        return setup_data_for_attribute_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_feature_page":
-        return setup_data_for_feature_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_brand_page":
-        return setup_data_for_brand_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_parent_category_page":
-        return setup_data_for_parent_category_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_child_category_page":
-        return setup_data_for_child_category_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_customer_page":
-        return setup_data_for_customer_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_product_for_delete_page":
-        return setup_data_for_product_delete_tests(logged_in_page, test_data)
-
-    elif setup_function == "created_supplier_page":
-        return setup_data_for_supplier_tests(logged_in_page, test_data)
-
-    else:
-        raise ValueError(f"Unknown prestashop setup function: {setup_function}")
+    raise ValueError(f"Unknown prestashop setup function: {setup_function}")
 
 
 def setup_bookstack_page(page: Page, setup_function: str) -> Page:
