@@ -26,7 +26,6 @@ BASE_URL = "http://localhost:8083"
 
 
 @dataclass
-@dataclass
 class PrestaShopTestData:
     """
     Thread-safe test data factory for PrestaShop entities.

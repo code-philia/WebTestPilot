@@ -242,6 +242,13 @@ def go_to_attribute_page(page: Page) -> None:
     page.get_by_role("link", name="Attributes & Features").click()
 
 
+# Functions used for navigation in tests
+def go_to_feature_page(page: Page) -> None:
+    page.get_by_role("link", name="store Catalog").click()
+    page.get_by_role("link", name="Attributes & Features").click()
+    page.get_by_role("link", name="Features", exact=True).click()
+
+
 def go_to_brand_page(page: Page) -> None:
     page.get_by_role("link", name="store Catalog").click()
     page.get_by_role("link", name="Brands & Suppliers").click()
