@@ -44,9 +44,7 @@ def test_update_invoice(
     ).to_have_value("10")
 
 
-def test_mark_sent_invoice(
-    created_invoice_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
+def test_mark_sent_invoice(created_invoice_page: Page) -> None:
     insert_start_event_to_page(created_invoice_page)
 
     expect(created_invoice_page.get_by_role("main")).to_contain_text(
@@ -62,9 +60,7 @@ def test_mark_sent_invoice(
     expect(created_invoice_page.get_by_role("main")).to_contain_text("Sent")
 
 
-def test_mark_paid_invoice(
-    created_invoice_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
+def test_mark_paid_invoice(created_invoice_page: Page) -> None:
     insert_start_event_to_page(created_invoice_page)
 
     expect(created_invoice_page.get_by_role("main")).to_contain_text(

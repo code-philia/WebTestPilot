@@ -13,6 +13,10 @@ To develop seed.sql, few ways:
 - Populate data through web UI / Run existing Playwright setup scripts to create data. / Use data seeder such as db:seed.
 - (Optional) might need to open the port in docker-compose.yml to access it from host.
 - Dump the sql database.
+- Dump command:
+- ```
+mysqldump --host=127.0.0.1 --port=3306 --default-character-set=utf8 --user=root --protocol=tcp --extended-insert=FALSE --single-transaction=TRUE --column-statistics=0 --skip-triggers "prestashop"
+```
 - Pick the relevant insert statements.
 
 Existing implementation:

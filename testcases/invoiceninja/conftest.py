@@ -111,16 +111,10 @@ def logged_in_page(page: Page) -> Page:
     return traced_page
 
 
-
-
-
 @pytest.fixture
 def created_client_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page = create_client(logged_in_page, test_data.company_name, test_data)
     return logged_in_page
-
-
-
 
 
 @pytest.fixture
@@ -148,9 +142,6 @@ def setup_for_invoice_page(
     return logged_in_page
 
 
-
-
-
 def setup_data_for_create_invoice(logged_in_page, test_data: InvoiceNinjaTestData):
     create_client(logged_in_page, test_data.company_name, test_data)
     create_product(logged_in_page, test_data.product_name1, test_data)
@@ -174,9 +165,6 @@ def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData
     created_invoice_page = setup_data_for_create_payment(logged_in_page, test_data)
     created_payment_page = create_payment(created_invoice_page, test_data)
     return created_payment_page
-
-
-
 
 
 def setup_data_for_create_payment(
@@ -212,9 +200,6 @@ def setup_for_expense_page(
     return created_expense_page
 
 
-
-
-
 def setup_data_for_expense_create(
     logged_in_page: Page, test_data: InvoiceNinjaTestData
 ):
@@ -241,9 +226,6 @@ def setup_for_credit_page(
     logged_in_page = create_credit(logged_in_page, test_data)
 
     return logged_in_page
-
-
-
 
 
 def setup_data_for_credit_create(logged_in_page: Page, test_data: InvoiceNinjaTestData):
@@ -283,7 +265,7 @@ def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page.wait_for_timeout(1000)
 
     # Create expense linked to the client (need to setup client first)
-    page_with_client = setup_data_for_expense_create(logged_in_page, test_data)
+    page_with_client = create_client(logged_in_page, test_data.company_name, test_data)
     page_with_client = create_expense(page_with_client, test_data)
     logged_in_page.wait_for_timeout(1000)
 
