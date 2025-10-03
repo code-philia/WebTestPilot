@@ -12,7 +12,7 @@ def test_create_customer(logged_in_page: Page, test_data: PrestaShopTestData) ->
     page = logged_in_page
     insert_start_event_to_page(page)
 
-    page = create_customer(page)
+    page = create_customer(page, email="test_new@test.com")
     expect(page.get_by_text("Successful creation")).to_be_visible()
 
 
