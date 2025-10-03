@@ -28,8 +28,6 @@ from testcases.bookstack.conftest import (
     setup_data_for_sort_chapter_and_page,
 )
 from testcases.indico.conftest import (
-    go_to_indico,
-    go_to_indico_async,
     login_to_indico,
     login_to_indico_async,
 )
@@ -71,7 +69,7 @@ async def setup_page_state(
         raise ValueError(f"Unknown application type: {application}")
 
 
-def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
+async def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
     """Set up InvoiceNinja page based on setup function."""
     test_data = InvoiceNinjaTestData()
 
@@ -122,17 +120,9 @@ async def setup_indico_page(
     page: Page | AsyncPage, setup_function: str
 ) -> Page | AsyncPage:
     if isinstance(page, Page):
-        if setup_function == "":
-            return go_to_indico(page)
-        elif setup_function == "logged_in_page":
-            return login_to_indico(page)
+        return login_to_indico(page)
     else:
-        if setup_function == "":
-            return await go_to_indico_async(page)
-        elif setup_function == "logged_in_page":
-            return await login_to_indico_async(page)
-
-    raise ValueError(f"Unknown indico setup function: {setup_function}")
+        return await login_to_indico_async(page)
 
 
 async def setup_prestashop_page(
@@ -158,10 +148,9 @@ async def setup_prestashop_page(
     raise ValueError(f"Unknown prestashop setup function: {setup_function}")
 
 
-def setup_bookstack_page(page: Page, setup_function: str) -> Page:
+async def setup_bookstack_page(page: Page, setup_function: str) -> Page:
     """Set up BookStack page based on setup function."""
     test_data = BookStackTestData()
-    test_data._unique_id = ""
 
     # No setup.
     if setup_function == "":
