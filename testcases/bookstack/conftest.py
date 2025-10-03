@@ -12,6 +12,8 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from tracing_api import create_traced_page
 from tracing_api import traced_expect as expect
+from .utilities import Create_book, Create_chapter, Create_page, Create_shelf
+
 
 pytest_plugins = ["pytest_xpath_plugin"]
 BOOKSTACK_HOST = "http://localhost:8081/"
@@ -25,12 +27,12 @@ class BookStackTestData:
     """
 
     def __post_init__(self):
-        self._unique_id = str(randint(100000, 999999))
+        self._unique_id = ""
 
     # Book properties
     @property
     def book_name(self) -> str:
-        return f"Book{self._unique_id}"
+        return f"Book"
 
     @property
     def book_name1(self) -> str:
@@ -46,7 +48,7 @@ class BookStackTestData:
 
     @property
     def book_name_updated(self) -> str:
-        return f"Book Updated {self._unique_id}"
+        return f"Book Updated"
 
     @property
     def book_description_updated(self) -> str:
@@ -55,7 +57,7 @@ class BookStackTestData:
     # Chapter properties
     @property
     def chapter_name(self) -> str:
-        return f"Chapter{self._unique_id}"
+        return f"Chapter"
 
     @property
     def chapter_name1(self) -> str:
@@ -71,7 +73,7 @@ class BookStackTestData:
 
     @property
     def chapter_name_updated(self) -> str:
-        return f"Chapter Updated{self._unique_id}"
+        return f"Chapter Updated"
 
     @property
     def chapter_description_updated(self) -> str:
@@ -80,7 +82,7 @@ class BookStackTestData:
     # Page properties
     @property
     def page_name(self) -> str:
-        return f"Page{self._unique_id}"
+        return f"Page"
 
     @property
     def page_name1(self) -> str:
@@ -96,7 +98,7 @@ class BookStackTestData:
 
     @property
     def page_name_updated(self) -> str:
-        return f"Page Updated{self._unique_id}"
+        return f"Page Updated"
 
     # Page template properties
     @property
@@ -114,7 +116,7 @@ class BookStackTestData:
     # Shelf properties
     @property
     def shelf_name(self) -> str:
-        return f"Shelf{self._unique_id}"
+        return f"Shelf"
 
     @property
     def shelf_description(self) -> str:
@@ -122,7 +124,7 @@ class BookStackTestData:
 
     @property
     def shelf_name_updated(self) -> str:
-        return f"Shelf Updated{self._unique_id}"
+        return f"Shelf Updated"
 
     @property
     def shelf_description_updated(self) -> str:
@@ -131,19 +133,19 @@ class BookStackTestData:
     # Sort rule properties
     @property
     def sort_rule_name(self) -> str:
-        return f"Rule{self._unique_id}"
+        return f"Rule"
 
     @property
     def sort_rule_name_updated(self) -> str:
-        return f"Rule updated{self._unique_id}"
+        return f"Rule updated"
 
     @property
     def role_name(self) -> str:
-        return f"Role{self._unique_id}"
+        return f"Role"
 
     @property
     def role_description(self) -> str:
-        return f"Role description{self._unique_id}"
+        return f"Role description"
 
 
 @pytest.fixture
@@ -607,4 +609,37 @@ def seed(logged_in_page: Page):
     # Seed data is created in individual fixtures as needed.
     # Run this to start seeding: pytest ./bookstack/seed.py::test_seed -v --tb=short -s --headed
     # TODO: Jingyu setup the data.
-    pass
+    data = BookStackTestData()
+
+    # create book1
+    logged_in_page = Create_book(logged_in_page, data.book_name1, data.book_description)
+    # create chapter for book1
+    logged_in_page = Create_chapter(
+        logged_in_page, data.chapter_name1, data.chapter_description
+    )
+    # create page for book1
+    logged_in_page = Create_page(logged_in_page, data.page_name1, data.page_description)
+
+    logged_in_page.goto(BOOKSTACK_HOST)
+    logged_in_page.wait_for_timeout(1000)
+
+    # create book2
+    logged_in_page = Create_book(logged_in_page, data.book_name2, data.book_description)
+    # create chapter for book1
+    logged_in_page = Create_chapter(
+        logged_in_page, data.chapter_name2, data.chapter_description
+    )
+    # create page for book1
+    logged_in_page = Create_page(logged_in_page, data.page_name2, data.page_description)
+
+    logged_in_page.goto(BOOKSTACK_HOST)
+    logged_in_page.wait_for_timeout(1000)
+
+    # create shelf
+    logged_in_page = Create_shelf(
+        logged_in_page,
+        data.shelf_name,
+        data.shelf_description,
+        [data.book_name1, data.book_name2],
+    )
+    return logged_in_page

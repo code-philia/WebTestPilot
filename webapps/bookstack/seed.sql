@@ -1,0 +1,5 @@
+INSERT INTO `books` VALUES (1,'Book1','book1','Description','2025-10-03 09:07:30','2025-10-03 09:07:30',1,1,NULL,NULL,1,NULL,'<p>Description</p>',NULL),(2,'Book2','book2','Description','2025-10-03 09:07:35','2025-10-03 09:07:35',1,1,NULL,NULL,1,NULL,'<p>Description</p>',NULL);
+INSERT INTO `chapters` VALUES (1,1,'chapter-1','Chapter 1','Description',2,'2025-10-03 09:07:31','2025-10-03 09:07:31',1,1,NULL,1,'<p>Description</p>',NULL),(2,2,'chapter-2','Chapter 2','Description',2,'2025-10-03 09:07:36','2025-10-03 09:07:36',1,1,NULL,1,'<p>Description</p>',NULL);
+INSERT INTO `pages` VALUES (1,1,1,'Page 1','page-1','<p id=\"bkmrk-page-description\">Page Description</p>','Page Description',1,'2025-10-03 09:07:32','2025-10-03 09:07:33',1,1,0,'',1,0,NULL,1,'wysiwyg'),(2,2,2,'Page 2','page-2','<p id=\"bkmrk-page-description\">Page Description</p>','Page Description',1,'2025-10-03 09:07:37','2025-10-03 09:07:37',1,1,0,'',1,0,NULL,1,'wysiwyg');
+INSERT INTO `bookshelves` VALUES (1,'Shelf','shelf','Shelf Description',1,1,NULL,'2025-10-03 09:07:39','2025-10-03 09:07:39',NULL,1,'<p>Shelf Description</p>');
+INSERT INTO `bookshelves_books` VALUES (1,1,0),(1,2,1);
