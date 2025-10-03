@@ -1,7 +1,7 @@
 from playwright.sync_api import Page
 
 
-def Create_shelf(
+def create_shelf_test(
     logged_in_page: Page,
     shelf_name: str,
     shelf_description: str,
@@ -32,7 +32,7 @@ def Create_shelf(
     return logged_in_page
 
 
-def Create_book(logged_in_page: Page, book_name: str, book_description: str) -> Page:
+def create_book_test(logged_in_page: Page, book_name: str, book_description: str) -> Page:
     # To make sure when called multiple times, it starts fresh
     # Navigate to books and create a new book
     logged_in_page.get_by_role("link", name="Books", exact=True).click()
@@ -58,7 +58,7 @@ def Create_book(logged_in_page: Page, book_name: str, book_description: str) -> 
 
     return logged_in_page
 
-def Create_chapter(
+def create_chapter_test(
     created_book_page: Page, chapter_name: str, chapter_description: str
 ) -> Page:
     created_book_page.get_by_role("link", name="New Chapter").click()
@@ -87,7 +87,7 @@ def Create_chapter(
     created_book_page.get_by_role("button", name="Save Chapter").click()
     return created_book_page
 
-def Create_page(
+def create_page_test(
     created_book_page: Page,
     page_name: str,
     page_description: str,

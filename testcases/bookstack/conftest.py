@@ -12,7 +12,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from tracing_api import create_traced_page
 from tracing_api import traced_expect as expect
-from .utilities import Create_book, Create_chapter, Create_page, Create_shelf
+from .utilities import create_book_test,create_chapter_test,create_page_test,create_shelf_test
 
 
 pytest_plugins = ["pytest_xpath_plugin"]
@@ -612,31 +612,31 @@ def seed(logged_in_page: Page):
     data = BookStackTestData()
 
     # create book1
-    logged_in_page = Create_book(logged_in_page, data.book_name1, data.book_description)
+    logged_in_page = create_book_test(logged_in_page, data.book_name1, data.book_description)
     # create chapter for book1
-    logged_in_page = Create_chapter(
+    logged_in_page = create_chapter_test(
         logged_in_page, data.chapter_name1, data.chapter_description
     )
     # create page for book1
-    logged_in_page = Create_page(logged_in_page, data.page_name1, data.page_description)
+    logged_in_page = create_page_test(logged_in_page, data.page_name1, data.page_description)
 
     logged_in_page.goto(BOOKSTACK_HOST)
     logged_in_page.wait_for_timeout(1000)
 
     # create book2
-    logged_in_page = Create_book(logged_in_page, data.book_name2, data.book_description)
+    logged_in_page = create_book_test(logged_in_page, data.book_name2, data.book_description)
     # create chapter for book1
-    logged_in_page = Create_chapter(
+    logged_in_page = create_chapter_test(
         logged_in_page, data.chapter_name2, data.chapter_description
     )
     # create page for book1
-    logged_in_page = Create_page(logged_in_page, data.page_name2, data.page_description)
+    logged_in_page = create_page_test(logged_in_page, data.page_name2, data.page_description)
 
     logged_in_page.goto(BOOKSTACK_HOST)
     logged_in_page.wait_for_timeout(1000)
 
     # create shelf
-    logged_in_page = Create_shelf(
+    logged_in_page = create_shelf_test(
         logged_in_page,
         data.shelf_name,
         data.shelf_description,
