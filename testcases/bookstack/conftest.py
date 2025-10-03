@@ -1,7 +1,6 @@
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import randint
 
 import pytest
 
@@ -10,10 +9,15 @@ from playwright.sync_api import Page
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from tracing_api import create_traced_page
+from tracing_api import TracedPage, create_traced_page
 from tracing_api import traced_expect as expect
-from .utilities import create_book_test,create_chapter_test,create_page_test,create_shelf_test
 
+from .utilities import (
+    create_book_test,
+    create_chapter_test,
+    create_page_test,
+    create_shelf_test,
+)
 
 pytest_plugins = ["pytest_xpath_plugin"]
 BOOKSTACK_HOST = "http://localhost:8081/"
@@ -26,126 +30,47 @@ class BookStackTestData:
     Each instance gets unique identifiers to prevent race conditions.
     """
 
-    def __post_init__(self):
-        self._unique_id = ""
-
     # Book properties
-    @property
-    def book_name(self) -> str:
-        return f"Book"
-
-    @property
-    def book_name1(self) -> str:
-        return self.book_name + "1"
-
-    @property
-    def book_name2(self) -> str:
-        return self.book_name + "2"
-
-    @property
-    def book_description(self) -> str:
-        return "Description"
-
-    @property
-    def book_name_updated(self) -> str:
-        return f"Book Updated"
-
-    @property
-    def book_description_updated(self) -> str:
-        return "Description Updated"
+    book_name: str = "Book"
+    book_name1: str = "Book1"
+    book_name2: str = "Book2"
+    book_description: str = "Description"
+    book_name_updated: str = "Book Updated"
+    book_description_updated: str = "Description Updated"
 
     # Chapter properties
-    @property
-    def chapter_name(self) -> str:
-        return f"Chapter"
-
-    @property
-    def chapter_name1(self) -> str:
-        return self.chapter_name + " 1"
-
-    @property
-    def chapter_name2(self) -> str:
-        return self.chapter_name + " 2"
-
-    @property
-    def chapter_description(self) -> str:
-        return "Description"
-
-    @property
-    def chapter_name_updated(self) -> str:
-        return f"Chapter Updated"
-
-    @property
-    def chapter_description_updated(self) -> str:
-        return "Description Updated"
+    chapter_name: str = "Chapter"
+    chapter_name1: str = "Chapter 1"
+    chapter_name2: str = "Chapter 2"
+    chapter_description: str = "Description"
+    chapter_name_updated: str = "Chapter Updated"
+    chapter_description_updated: str = "Description Updated"
 
     # Page properties
-    @property
-    def page_name(self) -> str:
-        return f"Page"
-
-    @property
-    def page_name1(self) -> str:
-        return self.page_name + " 1"
-
-    @property
-    def page_name2(self) -> str:
-        return self.page_name + " 2"
-
-    @property
-    def page_description(self) -> str:
-        return "Page Description"
-
-    @property
-    def page_name_updated(self) -> str:
-        return f"Page Updated"
+    page_name: str = "Page"
+    page_name1: str = "Page 1"
+    page_name2: str = "Page 2"
+    page_description: str = "Page Description"
+    page_name_updated: str = "Page Updated"
+    page_description_updated: str = "Page Description Updated"
 
     # Page template properties
-    @property
-    def page_template_name(self) -> str:
-        return self.page_name + " Template"
-
-    @property
-    def page_template_description(self) -> str:
-        return self.page_description + " Template"
-
-    @property
-    def page_description_updated(self) -> str:
-        return "Page Description Updated"
+    page_template_name: str = "Page Template"
+    page_template_description: str = "Page Description Template"
 
     # Shelf properties
-    @property
-    def shelf_name(self) -> str:
-        return f"Shelf"
-
-    @property
-    def shelf_description(self) -> str:
-        return "Shelf Description"
-
-    @property
-    def shelf_name_updated(self) -> str:
-        return f"Shelf Updated"
-
-    @property
-    def shelf_description_updated(self) -> str:
-        return "Shelf Description Updated"
+    shelf_name: str = "Shelf"
+    shelf_description: str = "Shelf Description"
+    shelf_name_updated: str = "Shelf Updated"
+    shelf_description_updated: str = "Shelf Description Updated"
 
     # Sort rule properties
-    @property
-    def sort_rule_name(self) -> str:
-        return f"Rule"
+    sort_rule_name: str = "Rule"
+    sort_rule_name_updated: str = "Rule updated"
 
-    @property
-    def sort_rule_name_updated(self) -> str:
-        return f"Rule updated"
-
-    @property
-    def role_name(self) -> str:
-        return f"Role"
-
-    @property
-    def role_description(self) -> str:
-        return f"Role description"
+    # Role properties
+    role_name: str = "Role"
+    role_description: str = "Role description"
 
 
 @pytest.fixture
@@ -154,13 +79,13 @@ def test_data() -> BookStackTestData:
     return BookStackTestData()
 
 
-def go_to_bookstack(page: Page) -> Page:
+def go_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
     page.set_viewport_size({"width": 1280, "height": 720})
     page.goto(BOOKSTACK_HOST)
     return page
 
 
-def login_to_bookstack(page: Page) -> Page:
+def login_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
     """
     Login to BookStack and return a traced page.
     Can be used outside of pytest fixtures.
@@ -519,13 +444,13 @@ def setup_data_for_create_page_template(
     )
 
     # Create 1 more page, 1 is a template, 1 uses the template.
-    page_template_description = test_data.page_template_description
+    page_template_description = test_data.page_description + " Template"
     created_page_page.get_by_role(
         "link", name=test_data.book_name, exact=True
     ).first.click()
     created_page_page = create_page(
         created_page_page,
-        test_data.page_template_name,
+        test_data.page_name + " Template",
         page_template_description,
     )
 
@@ -612,25 +537,33 @@ def seed(logged_in_page: Page):
     data = BookStackTestData()
 
     # create book1
-    logged_in_page = create_book_test(logged_in_page, data.book_name1, data.book_description)
+    logged_in_page = create_book_test(
+        logged_in_page, data.book_name1, data.book_description
+    )
     # create chapter for book1
     logged_in_page = create_chapter_test(
         logged_in_page, data.chapter_name1, data.chapter_description
     )
     # create page for book1
-    logged_in_page = create_page_test(logged_in_page, data.page_name1, data.page_description)
+    logged_in_page = create_page_test(
+        logged_in_page, data.page_name1, data.page_description
+    )
 
     logged_in_page.goto(BOOKSTACK_HOST)
     logged_in_page.wait_for_timeout(1000)
 
     # create book2
-    logged_in_page = create_book_test(logged_in_page, data.book_name2, data.book_description)
+    logged_in_page = create_book_test(
+        logged_in_page, data.book_name2, data.book_description
+    )
     # create chapter for book1
     logged_in_page = create_chapter_test(
         logged_in_page, data.chapter_name2, data.chapter_description
     )
     # create page for book1
-    logged_in_page = create_page_test(logged_in_page, data.page_name2, data.page_description)
+    logged_in_page = create_page_test(
+        logged_in_page, data.page_name2, data.page_description
+    )
 
     logged_in_page.goto(BOOKSTACK_HOST)
     logged_in_page.wait_for_timeout(1000)
