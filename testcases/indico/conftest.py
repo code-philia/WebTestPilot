@@ -3,12 +3,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
-from playwright.sync_api import Page
 from playwright.async_api import Page as AsyncPage
+from playwright.sync_api import Page
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from tracing_api import TracedPage, create_traced_page, traced_expect as expect
+from tracing_api import TracedPage, create_traced_page
+from tracing_api import traced_expect as expect
+
 from .utilities import create_conference, create_lecture, create_meeting
 
 pytest_plugins = ["pytest_xpath_plugin"]
@@ -69,18 +71,8 @@ def test_data() -> IndicoTestData:
     return IndicoTestData()
 
 
-def go_to_indico(page: TracedPage | Page) -> TracedPage | Page:
-    page.goto(INDICO_HOST)
-    return page
-
-
-async def go_to_indico_async(page: AsyncPage) -> AsyncPage:
-    await page.goto(INDICO_HOST)
-    return page
-
-
 def login_to_indico(page: TracedPage | Page) -> TracedPage | Page:
-    go_to_indico(page)
+    page.goto(INDICO_HOST)
     page.get_by_role("link", name=" Login").click()
     page.get_by_role("textbox", name="Username or email").fill(USER)
     page.get_by_role("textbox", name="Password").click()
@@ -90,7 +82,7 @@ def login_to_indico(page: TracedPage | Page) -> TracedPage | Page:
 
 
 async def login_to_indico_async(page: AsyncPage) -> AsyncPage:
-    await go_to_indico_async(page)
+    await page.goto(INDICO_HOST)
     await page.get_by_role("link", name=" Login").click()
     await page.get_by_role("textbox", name="Username or email").fill(USER)
     await page.get_by_role("textbox", name="Password").click()

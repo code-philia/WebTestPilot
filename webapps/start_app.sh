@@ -85,9 +85,9 @@ patch_name="${2:-}"   # optional
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Load environment variables from .env file if it exists
-if [[ -f "$SCRIPT_DIR/indico/.env" ]]; then
-    source "$SCRIPT_DIR/indico/.env"
-    echo "📝 Loaded environment variables from $SCRIPT_DIR/indico/.env"
+if [[ -f "$SCRIPT_DIR/$app_name/.env" ]]; then
+    source "$SCRIPT_DIR/$app_name/.env"
+    echo "📝 Loaded environment variables from $SCRIPT_DIR/$app_name/.env"
 fi
 
 # Supported apps
