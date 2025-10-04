@@ -5,6 +5,8 @@ from playwright.sync_api import Page
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import go_to_client_detail_page
+
 
 def test_create_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
     insert_start_event_to_page(logged_in_page)
@@ -27,125 +29,104 @@ def test_create_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) ->
     )
 
 
-def test_read_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
-    insert_start_event_to_page(created_client_page)
+def test_read_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_client_detail_page(page, test_data)
 
-    # Go back to listing page and check
-    created_client_page.get_by_label("Breadcrumb").get_by_role(
-        "link", name="Clients"
+    page.get_by_role("textbox", name="Filter").click()
+    page.get_by_role("textbox", name="Filter").fill(test_data.company_name)
+
+    page.get_by_role("link", name=test_data.company_name).click(timeout=10000)
+    page.wait_for_timeout(5000)
+    expect(page.get_by_role("list")).to_contain_text(test_data.company_name)
+    expect(page.get_by_role("main")).to_contain_text(test_data.company_website)
+    expect(page.get_by_text(test_data.contact_email)).to_be_visible()
+    expect(page.get_by_role("main")).to_contain_text(test_data.contact_email)
+
+
+def test_update_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_client_detail_page(page, test_data)
+
+    page.get_by_role("button", name="Edit").click()
+
+    page.locator("div").filter(has_text=re.compile(r"^Name$")).get_by_role(
+        "textbox"
     ).click()
-    created_client_page.get_by_role("textbox", name="Filter").click()
-    created_client_page.get_by_role("textbox", name="Filter").fill(
-        test_data.company_name
-    )
+    page.locator("div").filter(has_text=re.compile(r"^Name$")).get_by_role(
+        "textbox"
+    ).fill(test_data.company_name_updated)
 
-    created_client_page.get_by_role("link", name=test_data.company_name).click(
-        timeout=10000
-    )
-    expect(created_client_page.get_by_role("list")).to_contain_text(
-        test_data.company_name
-    )
-    expect(created_client_page.get_by_role("main")).to_contain_text(
-        test_data.company_website
-    )
-    expect(created_client_page.get_by_text(test_data.contact_email)).to_be_visible()
-    expect(created_client_page.get_by_role("main")).to_contain_text(
-        test_data.contact_email
-    )
+    page.get_by_role("button", name="Save").click()
 
-
-def test_update_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
-    insert_start_event_to_page(created_client_page)
-
-    created_client_page.get_by_role("button", name="Edit").click()
-
-    created_client_page.locator("div").filter(
-        has_text=re.compile(r"^Name$")
-    ).get_by_role("textbox").click()
-    created_client_page.locator("div").filter(
-        has_text=re.compile(r"^Name$")
-    ).get_by_role("textbox").fill(test_data.company_name_updated)
-
-    created_client_page.get_by_role("button", name="Save").click()
-
+    expect(page.get_by_text("Successfully updated client")).to_be_visible()
     expect(
-        created_client_page.get_by_text("Successfully updated client")
+        page.get_by_role("link", name=test_data.company_name_updated)
     ).to_be_visible()
-    expect(
-        created_client_page.get_by_role("link", name=test_data.company_name_updated)
-    ).to_be_visible()
-    expect(created_client_page.get_by_role("list")).to_contain_text(
-        test_data.company_name_updated
-    )
-    expect(created_client_page.get_by_role("heading")).to_contain_text(
-        test_data.company_name_updated
-    )
+    expect(page.get_by_role("list")).to_contain_text(test_data.company_name_updated)
+    expect(page.get_by_role("heading")).to_contain_text(test_data.company_name_updated)
 
 
-def test_delete_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
-    insert_start_event_to_page(created_client_page)
+def test_delete_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_client_detail_page(page, test_data)
 
-    created_client_page.locator("div").filter(
+    page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
     ).get_by_role("button").nth(2).click()
 
-    created_client_page.get_by_role("button", name="Delete").click()
+    page.get_by_role("button", name="Delete").click()
     expect(
-        created_client_page.locator("div")
+        page.locator("div")
         .filter(has_text=re.compile(r"^Successfully deleted client$"))
         .first
     ).to_be_visible()
 
 
-def test_restore_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
-    insert_start_event_to_page(created_client_page)
+def test_restore_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_client_detail_page(page, test_data)
 
     # Delete first
-    created_client_page.locator("div").filter(
+    page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
     ).get_by_role("button").nth(2).click()
-    created_client_page.get_by_role("button", name="Delete").click()
+    page.get_by_role("button", name="Delete").click()
     expect(
-        created_client_page.locator("div")
+        page.locator("div")
         .filter(has_text=re.compile(r"^Successfully deleted client$"))
         .first
     ).to_be_visible()
 
     # Restore
-    created_client_page.get_by_role("button", name="Restore").click()
+    page.get_by_role("button", name="Restore").click()
     expect(
-        created_client_page.locator("div")
+        page.locator("div")
         .filter(has_text=re.compile(r"^Successfully restored client$"))
         .first
     ).to_be_visible()
 
 
-def test_purge_client(
-    created_client_page: Page, test_data: InvoiceNinjaTestData
-) -> None:
-    insert_start_event_to_page(created_client_page)
+def test_purge_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
+    page = logged_in_page
+    insert_start_event_to_page(page)
+    go_to_client_detail_page(page, test_data)
 
-    created_client_page.locator("div").filter(
+    page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeEdit$")
     ).get_by_role("button").nth(2).click()
 
     # Delete
-    created_client_page.get_by_role("button", name="Purge").click()
-    created_client_page.get_by_role("button", name="Continue").click()
+    page.get_by_role("button", name="Purge").click()
+    page.get_by_role("button", name="Continue").click()
     expect(
-        created_client_page.locator("div")
+        page.locator("div")
         .filter(has_text=re.compile(r"^Successfully purged client$"))
         .first
     ).to_be_visible()
 
-    expect(created_client_page.locator("tbody")).not_to_contain_text(
-        test_data.company_name
-    )
+    expect(page.locator("tbody")).not_to_contain_text(test_data.company_name)

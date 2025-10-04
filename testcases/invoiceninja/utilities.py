@@ -271,3 +271,47 @@ def create_credit(logged_in_page: Page, test_data: "InvoiceNinjaTestData") -> Pa
     logged_in_page.wait_for_timeout(2000)
 
     return logged_in_page
+
+
+def go_to_credit_detail_page(
+    logged_in_page: Page, test_data: "InvoiceNinjaTestData"
+) -> Page:
+    logged_in_page.get_by_role("link", name="Credits", exact=True).click()
+    logged_in_page.get_by_role("link", name=test_data.credit_number).click()
+    return logged_in_page
+
+
+def go_to_client_detail_page(
+    logged_in_page: Page, test_data: "InvoiceNinjaTestData"
+) -> Page:
+    logged_in_page.get_by_role("link", name="Clients").click()
+    logged_in_page.get_by_role("link", name=test_data.company_name).click()
+    return logged_in_page
+
+
+def go_to_expense_detail_page(logged_in_page: Page) -> Page:
+    logged_in_page.get_by_role("link", name="Expenses").first.click()
+    logged_in_page.get_by_role("link", name="0001").click()
+    return logged_in_page
+
+
+def go_to_invoice_detail_page(
+    logged_in_page: Page, test_data: "InvoiceNinjaTestData"
+) -> Page:
+    logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
+    logged_in_page.get_by_role("link", name=test_data.invoice_number).click()
+    return logged_in_page
+
+
+def go_to_payment_detail_page(logged_in_page: Page) -> Page:
+    logged_in_page.get_by_role("link", name="Payments").click()
+    logged_in_page.get_by_role("link", name="Edit").first.click()
+    return logged_in_page
+
+
+def go_to_product_detail_page(
+    logged_in_page: Page, test_data: "InvoiceNinjaTestData"
+) -> Page:
+    logged_in_page.get_by_role("link", name="Products").first.click()
+    logged_in_page.get_by_role("link", name=test_data.product_name).click()
+    return logged_in_page

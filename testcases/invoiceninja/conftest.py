@@ -253,6 +253,10 @@ def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page = create_invoice(logged_in_page, test_data)
     logged_in_page.wait_for_timeout(1000)
 
+    # Create credit with line items
+    logged_in_page = create_credit(logged_in_page, test_data)
+    logged_in_page.wait_for_timeout(1000)
+
     # Mark invoice as sent (required for payment creation)
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
