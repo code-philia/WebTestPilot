@@ -1,4 +1,34 @@
+from bookstack.conftest import BOOKSTACK_HOST
 from playwright.sync_api import Page
+
+
+def navigate_to_book(logged_in_page: Page, book_name: str) -> Page:
+    logged_in_page.goto(BOOKSTACK_HOST)
+    logged_in_page.get_by_role("link", name="Books", exact=True).click()
+    logged_in_page.locator("h2", has_text=book_name).click()
+    return logged_in_page
+
+
+def navigate_to_chapter(logged_in_page: Page, book_name: str, chapter_name: str) -> Page:
+    navigate_to_book(logged_in_page, book_name)
+    logged_in_page.get_by_role("link", name=chapter_name).first.click()
+    return logged_in_page
+
+
+def navigate_back_to_book_from_chapter(page: Page, book_name: str) -> Page:
+    page.get_by_label("Breadcrumb").get_by_role("link", name=book_name).click()
+    return page
+
+
+def navigate_to_page(logged_in_page: Page, book_name: str, page_name: str) -> Page:
+    navigate_to_book(logged_in_page, book_name)
+    logged_in_page.get_by_role("link", name=page_name).first.click()
+    return logged_in_page
+
+
+def navigate_back_to_book_from_page(page: Page, book_name: str) -> Page:
+    page.get_by_label("Breadcrumb").get_by_role("link", name=book_name).click()
+    return page
 
 
 def create_shelf_test(
