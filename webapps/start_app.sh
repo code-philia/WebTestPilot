@@ -73,13 +73,23 @@ seed_data() {
 }
 
 # Usage check
-if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-    echo "Usage: $0 <app_name> [patch_file]"
+if [ $# -lt 1 ] || [ $# -gt 3 ]; then
+    echo "Usage: $0 <app_name> [patch_file] [--no-seed]"
+    echo "  --no-seed: Skip seeding initial data (default: seed data)"
     return 1
 fi
 
 app_name="$1"
 patch_name="${2:-}"   # optional
+no_seed=false
+
+# Check for --no-seed flag
+if [[ "$2" == "--no-seed" ]]; then
+    no_seed=true
+    patch_name=""
+elif [[ "$3" == "--no-seed" ]]; then
+    no_seed=true
+fi
 
 # Resolve script directory (absolute path, independent of where script is called)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -146,7 +156,11 @@ echo "🔄 Resetting $app_name environment..."
 )
 
 wait_for_application "$app_name"
-seed_data "$app_name"
+if [[ "$no_seed" == false ]]; then
+    seed_data "$app_name"
+else
+    echo "ℹ️  Skipping seed data loading due to --no-seed flag"
+fi
 
 # If patch provided → inject bug
 if [[ -n "$patch_name" ]]; then

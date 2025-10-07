@@ -124,7 +124,9 @@ def create_product(
     return logged_in_page
 
 
-def create_invoice(logged_in_page: Page, test_data: "InvoiceNinjaTestData") -> Page:
+def create_invoice(
+    logged_in_page: Page, invoice_number: str, test_data: "InvoiceNinjaTestData"
+) -> Page:
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
     logged_in_page.get_by_role("link", name="New Invoice").click()
 
@@ -135,7 +137,7 @@ def create_invoice(logged_in_page: Page, test_data: "InvoiceNinjaTestData") -> P
 
     # Invoice number
     logged_in_page.locator("#number").click()
-    logged_in_page.locator("#number").fill(test_data.invoice_number)
+    logged_in_page.locator("#number").fill(invoice_number)
 
     # Add invoice line items
     logged_in_page.get_by_role("button", name="Add Item").click()
@@ -299,7 +301,9 @@ def go_to_invoice_detail_page(
     logged_in_page: Page, test_data: "InvoiceNinjaTestData"
 ) -> Page:
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
-    logged_in_page.get_by_role("link", name=test_data.invoice_number).click()
+    logged_in_page.get_by_role(
+        "link", name=test_data.invoice_number_draft, exact=True
+    ).click()
     return logged_in_page
 
 
@@ -313,5 +317,5 @@ def go_to_product_detail_page(
     logged_in_page: Page, test_data: "InvoiceNinjaTestData"
 ) -> Page:
     logged_in_page.get_by_role("link", name="Products").first.click()
-    logged_in_page.get_by_role("link", name=test_data.product_name).click()
+    logged_in_page.get_by_role("link", name=test_data.product_name, exact=True).click()
     return logged_in_page

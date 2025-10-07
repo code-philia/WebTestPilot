@@ -14,7 +14,9 @@ from .utilities import go_to_invoice_detail_page
 def test_create_invoice(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
     insert_start_event_to_page(logged_in_page)
 
-    created_invoice_page = create_invoice(logged_in_page, test_data)
+    created_invoice_page = create_invoice(
+        logged_in_page, test_data.invoice_number_new, test_data
+    )
 
     expect(created_invoice_page.get_by_role("list")).to_contain_text("Edit Invoice")
 

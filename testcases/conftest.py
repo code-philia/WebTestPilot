@@ -4,6 +4,15 @@ from pathlib import Path
 import pytest
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--no-seed",
+        action="store_true",
+        default=False,
+        help="Skip seeding initial data when starting applications",
+    )
+
+
 def detect_app_from_test_path(test_path: str):
     path = Path(test_path)
 
@@ -23,8 +32,13 @@ def pytest_runtest_setup(item):
         return
 
     SCRIPT_PATH = Path(__file__).parent.parent / "webapps" / "start_app.sh"
+
+    cmd = ["bash", str(SCRIPT_PATH), app_name]
+    if item.config.getoption("--no-seed"):
+        cmd.append("--no-seed")
+
     result = subprocess.run(
-        ["bash", SCRIPT_PATH, app_name],
+        cmd,
         stdout=subprocess.DEVNULL,
         check=True,
     )

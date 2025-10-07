@@ -62,6 +62,8 @@ class InvoiceNinjaTestData:
 
     # Invoice
     invoice_number: str = "123456"
+    invoice_number_new: str = "123456_new"
+    invoice_number_draft: str = "123456_draft"
     invoice_date: str = "2025-07-15"
 
     # Expense
@@ -237,31 +239,33 @@ def setup_data_for_credit_create(logged_in_page: Page, test_data: InvoiceNinjaTe
 @pytest.fixture
 def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     """Seed minimal data for InvoiceNinja tests."""
-    # Create base data: 1 client and 2 products (needed for invoices/credits)
+    # Create base data: 1 client and 3 products (needed for invoices/credits)
     logged_in_page = create_client(logged_in_page, test_data.company_name, test_data)
     logged_in_page.wait_for_timeout(1000)
-
-    # Create first product
+    logged_in_page = create_product(logged_in_page, test_data.product_name, test_data)
+    logged_in_page.wait_for_timeout(1000)
     logged_in_page = create_product(logged_in_page, test_data.product_name1, test_data)
     logged_in_page.wait_for_timeout(1000)
-
-    # Create second product
     logged_in_page = create_product(logged_in_page, test_data.product_name2, test_data)
     logged_in_page.wait_for_timeout(1000)
 
-    # Create invoice with line items
-    logged_in_page = create_invoice(logged_in_page, test_data)
-    logged_in_page.wait_for_timeout(1000)
-
-    # Create credit with line items
-    logged_in_page = create_credit(logged_in_page, test_data)
-    logged_in_page.wait_for_timeout(1000)
-
-    # Mark invoice as sent (required for payment creation)
+    # Create invoice with line items + mark as paid
+    logged_in_page = create_invoice(logged_in_page, test_data.invoice_number, test_data)
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
     ).get_by_role("button").nth(2).click()
     logged_in_page.get_by_role("button", name="Mark Sent").click()
+
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page = go_to_invoiceninja(logged_in_page)
+    logged_in_page = create_invoice(
+        logged_in_page, test_data.invoice_number_draft, test_data
+    )
+    logged_in_page = go_to_invoiceninja(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+
+    # Create credit with line items
+    logged_in_page = create_credit(logged_in_page, test_data)
     logged_in_page.wait_for_timeout(1000)
 
     # Create payment linked to the invoice
