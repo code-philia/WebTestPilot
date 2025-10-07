@@ -1,10 +1,8 @@
+import difflib
 import os
 import subprocess
 import sys
-import difflib
-import argparse
 from pathlib import Path
-from datetime import datetime
 
 # Configuration for all applications
 APPS_CONFIG = {
@@ -100,7 +98,10 @@ def run_seed_test(app_name: str):
 
 
 def generate_seed_sql(
-    initial_file: str, populated_file: str, seed_output_file: str
+    initial_file: str,
+    populated_file: str,
+    seed_output_file: str,
+    db_type: str = "mysql",
 ) -> int:
     """Compare dumps and generate seed.sql using difflib"""
     with open(initial_file, "r") as f:
@@ -142,6 +143,14 @@ def generate_seed_sql(
             count = 0  # to avoid accumulating
 
     with open(seed_output_file, "w") as f:
+        if db_type == "mysql":
+            f.write("""
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+""")
+        elif db_type == "postgres":
+            pass
+
         for line in addition_lines:
             f.write(line)
 
@@ -178,8 +187,12 @@ def dump_app(app_name: str):
     dump_database(app_name, str(populated_file))
 
     print("5. Generating seed.sql...")
+    db_type = APPS_CONFIG[app_name]["db_type"]
     insert_count = generate_seed_sql(
-        str(initial_file), str(populated_file), str(seed_output_file)
+        str(initial_file),
+        str(populated_file),
+        str(seed_output_file),
+        db_type=str(db_type),
     )
 
     print(f"Done! Generated {insert_count} line additions")

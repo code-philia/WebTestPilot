@@ -1,5 +1,3 @@
-SET client_encoding = 'UTF8';
-
 INSERT INTO events.events VALUES (1, false, false, 1, 0, NULL, NULL, NULL, '', '2025-09-25 08:40:22.275012', '2025-09-25 09:00:00', '2025-09-25 11:00:00', 'Europe/Zurich', 1, NULL, '{}', NULL, 'null', NULL, 'null', NULL, NULL, '', NULL, true, 0, 0, 0, 'Lecture', '', NULL, NULL, 'Venue', 'Room', '', 0, '', '');
 INSERT INTO events.events VALUES (2, false, false, 1, 0, NULL, NULL, NULL, '', '2025-09-25 08:40:24.114101', '2025-09-25 09:00:00', '2040-10-10 11:00:00', 'Europe/Zurich', 2, NULL, '{}', NULL, 'null', NULL, 'null', NULL, NULL, '', NULL, true, 0, 0, 0, 'Meeting', '', NULL, NULL, 'Venue', 'Room', '', 0, '', '');
 INSERT INTO events.events VALUES (3, false, false, 1, 0, NULL, NULL, NULL, '', '2025-09-25 08:40:26.077258', '2025-09-25 09:00:00', '2040-10-10 11:00:00', 'Europe/Zurich', 3, NULL, '{}', NULL, 'null', NULL, 'null', NULL, NULL, '', NULL, true, 0, 0, 0, 'Conference', '', NULL, NULL, 'Venue', 'Room', '', 0, '', '');

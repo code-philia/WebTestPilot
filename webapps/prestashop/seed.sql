@@ -1,4 +1,5 @@
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 INSERT INTO `ps_address` VALUES (7,11,270,0,0,3,0,'supplier','','supplier','supplier','Nishi-Shinjuku 1-25-1','','','Tokyo','','090-1234-5678','','','','2025-09-29 10:46:52','2025-09-29 10:46:52',1,0);
 
@@ -10,6 +11,13 @@ INSERT INTO `ps_customer_group` VALUES (3,2);
 INSERT INTO `ps_attribute_group` VALUES (5,0,'select',4);
 INSERT INTO `ps_attribute_group_lang` VALUES (5,1,'Weight','Weight');
 INSERT INTO `ps_attribute_group_shop` VALUES (5,1);
+
+INSERT INTO `ps_admin_filter` VALUES (1,1,1,'','','{\"limit\":20,\"orderBy\":\"id_product\",\"sortOrder\":\"desc\",\"filters\":[]}','product');
+INSERT INTO `ps_admin_filter` VALUES (2,1,1,'','','{\"limit\":50,\"orderBy\":\"date_add\",\"sortOrder\":\"DESC\",\"filters\":[]}','customer');
+INSERT INTO `ps_admin_filter` VALUES (3,1,1,'','','{\"limit\":10,\"orderBy\":\"name\",\"sortOrder\":\"asc\",\"filters\":[]}','manufacturer');
+INSERT INTO `ps_admin_filter` VALUES (4,1,1,'','','{\"limit\":10,\"orderBy\":\"id_address\",\"sortOrder\":\"desc\",\"filters\":[]}','manufacturer_address');
+INSERT INTO `ps_admin_filter` VALUES (5,1,1,'','','{\"orderBy\":\"position\",\"sortOrder\":\"asc\",\"limit\":50,\"filters\":{\"id_category_parent\":10}}','category');
+INSERT INTO `ps_admin_filter` VALUES (6,1,1,'','','{\"limit\":50,\"orderBy\":\"name\",\"sortOrder\":\"asc\",\"filters\":[]}','supplier');
 
 INSERT INTO `ps_category` VALUES (10,2,1,2,17,20,1,'2025-09-29 10:46:36','2025-09-29 10:46:36',3,0);
 INSERT INTO `ps_category` VALUES (11,10,1,3,18,19,1,'2025-09-29 10:46:39','2025-09-29 10:46:39',0,0);
