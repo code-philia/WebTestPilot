@@ -2,7 +2,6 @@ from bookstack.conftest import BookStackTestData, create_chapter
 from bookstack.utilities import (
     navigate_to_book,
     navigate_to_chapter,
-    navigate_back_to_book_from_chapter,
 )
 from playwright.sync_api import Page
 from tracing_api import insert_start_event_to_page
@@ -31,7 +30,9 @@ def test_create_chapter(logged_in_page: Page, test_data: BookStackTestData) -> N
     )
 
     # Navigate back to book page and check
-    navigate_back_to_book_from_chapter(created_chapter_page, test_data.book_name)
+    created_chapter_page.get_by_label("Breadcrumb").get_by_role(
+        "link", name=test_data.book_name
+    ).click()
     expect(created_chapter_page.get_by_role("main")).to_contain_text(
         test_data.book_name
     )

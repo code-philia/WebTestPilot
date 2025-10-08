@@ -17,6 +17,7 @@ from .utilities import (
     create_chapter_test,
     create_page_test,
     create_shelf_test,
+    navigate_to_book,
 )
 
 pytest_plugins = ["pytest_xpath_plugin"]
@@ -400,7 +401,7 @@ def setup_data_for_create_page_template(
     ).first.click()
     created_page_page = create_page(
         created_page_page,
-        test_data.page_name + " Template",
+        test_data.page_template_name,
         page_template_description,
     )
 
@@ -468,107 +469,83 @@ def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
 
     # === BOOK CREATION ===
     # Create Book1 - Primary book with multiple chapters and pages
-    book1_page = create_book(
+    book1 = create_book(
         logged_in_page, test_data.book_name1, test_data.book_description
     )
 
     # Create Book2 - Secondary book for move operations and shelf assignments
-    book2_page = create_book(
-        book1_page, test_data.book_name2, test_data.book_description
-    )
+    book2 = create_book(book1, test_data.book_name2, test_data.book_description)
 
-    # Create Book3 - Additional book for complex scenarios
-    book3_page = create_book(
-        book2_page, test_data.book_name, test_data.book_description
-    )
+    # Create Book - Additional book for complex scenarios
+    book = create_book(book2, test_data.book_name, test_data.book_description)
 
     # === CHAPTER CREATION ===
     # Create Chapter1 in Book1
-    book3_page.goto(BOOKSTACK_HOST)
-    book3_page.get_by_role("link", name="Books", exact=True).click()
-    book3_page.locator("h2", has_text=test_data.book_name1).click()
-    chapter1_page = create_chapter(
-        book3_page, test_data.chapter_name1, test_data.chapter_description
+    book.goto(BOOKSTACK_HOST)
+    book.get_by_role("link", name="Books", exact=True).click()
+    book.locator("h2", has_text=test_data.book_name1).click()
+    chapter1 = create_chapter(
+        book, test_data.chapter_name1, test_data.chapter_description
     )
 
     # Create Chapter2 in Book1 (for sorting tests)
-    chapter1_page.goto(BOOKSTACK_HOST)
-    chapter1_page.get_by_role("link", name="Books", exact=True).click()
-    chapter1_page.locator("h2", has_text=test_data.book_name1).click()
-    chapter2_page = create_chapter(
-        chapter1_page, test_data.chapter_name2, test_data.chapter_description
+    chapter1.goto(BOOKSTACK_HOST)
+    chapter1.get_by_role("link", name="Books", exact=True).click()
+    chapter1.locator("h2", has_text=test_data.book_name1).click()
+    chapter2 = create_chapter(
+        chapter1, test_data.chapter_name2, test_data.chapter_description
     )
 
     # Create Chapter3 in Book2 (for move operations)
-    chapter2_page.goto(BOOKSTACK_HOST)
-    chapter2_page.get_by_role("link", name="Books", exact=True).click()
-    chapter2_page.locator("h2", has_text=test_data.book_name2).click()
-    chapter3_page = create_chapter(
-        chapter2_page, test_data.chapter_name, test_data.chapter_description
+    chapter2.goto(BOOKSTACK_HOST)
+    chapter2.get_by_role("link", name="Books", exact=True).click()
+    chapter2.locator("h2", has_text=test_data.book_name2).click()
+    chapter3 = create_chapter(
+        chapter2, test_data.chapter_name, test_data.chapter_description
     )
 
     # Create Chapter4 in Book2 (additional chapter)
-    chapter3_page.goto(BOOKSTACK_HOST)
-    chapter3_page.get_by_role("link", name="Books", exact=True).click()
-    chapter3_page.locator("h2", has_text=test_data.book_name2).click()
+    chapter3.goto(BOOKSTACK_HOST)
+    chapter3.get_by_role("link", name="Books", exact=True).click()
+    chapter3.locator("h2", has_text=test_data.book_name2).click()
     chapter4_page = create_chapter(
-        chapter3_page, test_data.chapter_name, test_data.chapter_description
+        chapter3, test_data.chapter_name, test_data.chapter_description
     )
 
     # === PAGE CREATION ===
     # Create Page1 in Book1 (basic CRUD)
-    chapter4_page.goto(BOOKSTACK_HOST)
-    chapter4_page.get_by_role("link", name="Books", exact=True).click()
-    chapter4_page.locator("h2", has_text=test_data.book_name1).click()
-    page1_page = create_page(
-        chapter4_page, test_data.page_name1, test_data.page_description
-    )
+    navigate_to_book(chapter4_page, test_data.book_name1)
+    page1 = create_page(chapter4_page, test_data.page_name1, test_data.page_description)
 
     # Create Page2 in Book1 (for sorting tests)
-    page1_page.goto(BOOKSTACK_HOST)
-    page1_page.get_by_role("link", name="Books", exact=True).click()
-    page1_page.locator("h2", has_text=test_data.book_name1).click()
-    page2_page = create_page(
-        page1_page, test_data.page_name2, test_data.page_description
-    )
+    navigate_to_book(page1, test_data.book_name1)
+    page2 = create_page(page1, test_data.page_name2, test_data.page_description)
 
     # Create Page3 in Chapter1 of Book1 (for move operations)
-    page2_page.goto(BOOKSTACK_HOST)
-    page2_page.get_by_role("link", name="Books", exact=True).click()
-    page2_page.locator("h2", has_text=test_data.book_name1).click()
-    page2_page.get_by_role("link", name=test_data.chapter_name1).first.click()
-    page3_page = create_page(
-        page2_page, test_data.page_name, test_data.page_description
-    )
+    navigate_to_book(page2, test_data.book_name1)
+    page2.get_by_role("link", name=test_data.chapter_name1).first.click()
+    page3 = create_page(page2, test_data.page_name, test_data.page_description)
 
     # Create Page4 in Book2 (cross-book operations)
-    page3_page.goto(BOOKSTACK_HOST)
-    page3_page.get_by_role("link", name="Books", exact=True).click()
-    page3_page.locator("h2", has_text=test_data.book_name2).click()
-    page4_page = create_page(
-        page3_page, test_data.page_name1, test_data.page_description
-    )
+    navigate_to_book(page3, test_data.book_name2)
+    page4 = create_page(page3, test_data.page_name1, test_data.page_description)
 
     # Create Page5 in Book3 (template page)
-    page4_page.goto(BOOKSTACK_HOST)
-    page4_page.get_by_role("link", name="Books", exact=True).click()
-    page4_page.locator("h2", has_text=test_data.book_name).click()
-    page5_page = create_page(
-        page4_page, test_data.page_template_name, test_data.page_template_description
+    navigate_to_book(page4, test_data.book_name)
+    page5 = create_page(
+        page4, test_data.page_template_name, test_data.page_template_description
     )
 
     # Create Page6 in Book3 (template user page)
-    page5_page.goto(BOOKSTACK_HOST)
-    page5_page.get_by_role("link", name="Books", exact=True).click()
-    page5_page.locator("h2", has_text=test_data.book_name).click()
-    page6_page = create_page(
-        page5_page, test_data.page_name, test_data.page_description
-    )
+    page5.goto(BOOKSTACK_HOST)
+    page5.get_by_role("link", name="Books", exact=True).click()
+    page5.locator("h2", has_text=test_data.book_name).click()
+    page6 = create_page(page5, test_data.page_name, test_data.page_description)
 
     # === SHELF CREATION ===
     # Create shelf with Book1 and Book2 assigned
     shelf_page = create_shelf(
-        page6_page,
+        page6,
         test_data.shelf_name,
         test_data.shelf_description,
         [test_data.book_name1, test_data.book_name2],

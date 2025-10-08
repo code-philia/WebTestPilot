@@ -1,6 +1,5 @@
 from bookstack.conftest import BookStackTestData, create_page
 from bookstack.utilities import (
-    navigate_back_to_book_from_page,
     navigate_to_book,
     navigate_to_page,
 )
@@ -23,7 +22,9 @@ def test_create_page(logged_in_page: Page, test_data: BookStackTestData) -> None
         test_data.page_description
     )
 
-    navigate_back_to_book_from_page(created_page_page, test_data.book_name)
+    created_page_page.get_by_label("Breadcrumb").get_by_role(
+        "link", name=test_data.book_name
+    ).click()
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
 
 

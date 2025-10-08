@@ -1,16 +1,18 @@
 from bookstack.conftest import BookStackTestData
 from playwright.sync_api import Page
+from .utilities import navigate_to_page
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
 def test_create_page_template(
-    created_data_template_page: Page, test_data: BookStackTestData
+    logged_in_page: Page, test_data: BookStackTestData
 ) -> None:
-    insert_start_event_to_page(created_data_template_page)
+    insert_start_event_to_page(logged_in_page)
 
     # 1 is a template, 1 uses the template.
-    page = created_data_template_page
+    page = logged_in_page
+    navigate_to_page(logged_in_page, test_data.book_name, test_data.page_template_name)
 
     # Convert it to template
     page.get_by_role("link", name="Edit").click()
