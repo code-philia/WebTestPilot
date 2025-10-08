@@ -125,7 +125,10 @@ def create_product(
 
 
 def create_invoice(
-    logged_in_page: Page, invoice_number: str, test_data: "InvoiceNinjaTestData"
+    logged_in_page: Page,
+    invoice_number: str,
+    test_data: "InvoiceNinjaTestData",
+    status: str = "draft",
 ) -> Page:
     logged_in_page.get_by_role("link", name="Invoices", exact=True).click()
     logged_in_page.get_by_role("link", name="New Invoice").click()
@@ -161,10 +164,20 @@ def create_invoice(
     logged_in_page.get_by_role("button", name="Save").click()
     logged_in_page.wait_for_timeout(2000)
 
+    if status == "sent":
+        # Mark sent
+        logged_in_page.locator("div").filter(
+            has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
+        ).get_by_role("button").nth(2).click()
+        logged_in_page.get_by_role("button", name="Mark Sent").click()
+        logged_in_page.wait_for_timeout(2000)
+
     return logged_in_page
 
 
-def create_payment(created_invoice_page: Page, test_data: "InvoiceNinjaTestData"):
+def create_payment(
+    created_invoice_page: Page, invoice_number: str, test_data: "InvoiceNinjaTestData"
+):
     # Navigate
     created_invoice_page.get_by_role("link", name="Payments").click()
     created_invoice_page.wait_for_timeout(500)
@@ -181,12 +194,12 @@ def create_payment(created_invoice_page: Page, test_data: "InvoiceNinjaTestData"
     # Choose invoice
     created_invoice_page.get_by_test_id("combobox-input-field").nth(1).click()
     created_invoice_page.get_by_test_id("combobox-input-field").nth(1).fill(
-        test_data.invoice_number
+        invoice_number
     )
     created_invoice_page.wait_for_timeout(2000)
-    created_invoice_page.get_by_text(
-        f"Invoice #{test_data.invoice_number}"
-    ).first.click(timeout=3000)
+    created_invoice_page.get_by_text(f"Invoice #{invoice_number}").first.click(
+        timeout=3000
+    )
 
     # Payment type
     created_invoice_page.locator("div").filter(
@@ -311,7 +324,7 @@ def go_to_invoice_detail_page(
 
 def go_to_payment_detail_page(logged_in_page: Page) -> Page:
     logged_in_page.get_by_role("link", name="Payments").click()
-    logged_in_page.get_by_role("link", name="Edit").first.click()
+    logged_in_page.get_by_role("link", name="0001").first.click()
     return logged_in_page
 
 

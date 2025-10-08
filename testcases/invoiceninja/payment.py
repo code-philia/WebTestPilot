@@ -14,7 +14,9 @@ from .utilities import go_to_payment_detail_page
 def test_create_payment(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
     insert_start_event_to_page(logged_in_page)
 
-    created_payment_page = create_payment(logged_in_page, test_data)
+    created_payment_page = create_payment(
+        logged_in_page, test_data.invoice_number_sent, test_data
+    )
 
     expect(created_payment_page.get_by_role("list")).to_contain_text("Edit Payment")
 

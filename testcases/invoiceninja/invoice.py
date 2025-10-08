@@ -91,7 +91,7 @@ def test_send_email_invoice(
 
     # Go back to invoice page and check the status
     logged_in_page.get_by_role(
-        "link", name=test_data.invoice_number, exact=True
+        "link", name=test_data.invoice_number_paid, exact=True
     ).first.click()
     expect(logged_in_page.get_by_role("main")).to_contain_text("Sent")
 

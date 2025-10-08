@@ -60,7 +60,8 @@ class InvoiceNinjaTestData:
     product_max_quantity: str = "1000"
 
     # Invoice
-    invoice_number: str = "123456"
+    invoice_number_paid: str = "123456"
+    invoice_number_sent: str = "123456_sent"  # used for creating new payment
     invoice_number_new: str = "123456_new"
     invoice_number_draft: str = "123456_draft"
     invoice_date: str = "2025-07-15"
@@ -249,27 +250,35 @@ def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page = create_product(logged_in_page, test_data.product_name2, test_data)
     logged_in_page.wait_for_timeout(1000)
 
-    # Create invoice with line items + mark as paid
-    logged_in_page = create_invoice(logged_in_page, test_data.invoice_number, test_data)
-    logged_in_page.locator("div").filter(
-        has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
-    ).get_by_role("button").nth(2).click()
-    logged_in_page.get_by_role("button", name="Mark Sent").click()
-
-    logged_in_page.wait_for_timeout(1000)
+    # Create 1 sent invoice for payment seed
+    logged_in_page = create_invoice(
+        logged_in_page, test_data.invoice_number_paid, test_data, status="sent"
+    )
     logged_in_page = go_to_invoiceninja(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+
+    # 1 sent invoice for new payment create test.
+    logged_in_page = create_invoice(
+        logged_in_page, test_data.invoice_number_sent, test_data, status="sent"
+    )
+    logged_in_page = go_to_invoiceninja(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+
+    # 1 sent draft invoice invoice RUD tests.
     logged_in_page = create_invoice(
         logged_in_page, test_data.invoice_number_draft, test_data
     )
     logged_in_page = go_to_invoiceninja(logged_in_page)
     logged_in_page.wait_for_timeout(1000)
 
-    # Create credit with line items
+    # Create credit
     logged_in_page = create_credit(logged_in_page, test_data.credit_number, test_data)
     logged_in_page.wait_for_timeout(1000)
 
     # Create payment linked to the invoice
-    logged_in_page = create_payment(logged_in_page, test_data)
+    logged_in_page = create_payment(
+        logged_in_page, test_data.invoice_number_paid, test_data
+    )
     logged_in_page.wait_for_timeout(1000)
 
     # Create expense linked to the client (need to setup client first)
