@@ -17,7 +17,7 @@ def test_create_credit(logged_in_page: Page, test_data: InvoiceNinjaTestData) ->
     logged_in_page.wait_for_timeout(500)
     insert_start_event_to_page(logged_in_page)
 
-    page = create_credit(logged_in_page, test_data)
+    page = create_credit(logged_in_page, test_data.credit_number_new, test_data)
 
     expect(page.get_by_role("list")).to_contain_text("Edit Credit", timeout=10000)
 

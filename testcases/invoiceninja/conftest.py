@@ -37,9 +37,8 @@ class InvoiceNinjaTestData:
 
     # Company
     company_name: str = "company_name"
+    company_name_new: str = "company_name_new"
     company_name_updated: str = "company_name_updated"
-    company_number: str = "company_number"
-    company_id: str = "company_id"
     vat_number: str = "vat_number"
     company_website: str = "website.com"
     company_phone: str = "0987654321"
@@ -72,6 +71,7 @@ class InvoiceNinjaTestData:
 
     # Credit
     credit_number: str = "123456"
+    credit_number_new: str = "123456_new"
 
 
 @pytest.fixture
@@ -265,7 +265,7 @@ def seed(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
     logged_in_page.wait_for_timeout(1000)
 
     # Create credit with line items
-    logged_in_page = create_credit(logged_in_page, test_data)
+    logged_in_page = create_credit(logged_in_page, test_data.credit_number, test_data)
     logged_in_page.wait_for_timeout(1000)
 
     # Create payment linked to the invoice

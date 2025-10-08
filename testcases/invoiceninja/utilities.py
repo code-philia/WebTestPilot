@@ -26,14 +26,14 @@ def create_client(
     ).click()
     logged_in_page.locator("div").filter(has_text=re.compile(r"^Number$")).get_by_role(
         "textbox"
-    ).fill(test_data.company_number)
+    ).fill(company_name)
 
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^ID Number$")
     ).get_by_role("textbox").click()
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^ID Number$")
-    ).get_by_role("textbox").fill(test_data.company_id)
+    ).get_by_role("textbox").fill(company_name)
     logged_in_page.locator("div").filter(
         has_text=re.compile(r"^VAT Number$")
     ).get_by_role("textbox").click()
@@ -239,7 +239,9 @@ def create_expense(
     return created_client_page
 
 
-def create_credit(logged_in_page: Page, test_data: "InvoiceNinjaTestData") -> Page:
+def create_credit(
+    logged_in_page: Page, credit_number: str, test_data: "InvoiceNinjaTestData"
+) -> Page:
     logged_in_page.get_by_role("link", name="Credits", exact=True).click()
     logged_in_page.get_by_role("link", name="Enter Credit").click()
 
@@ -248,7 +250,7 @@ def create_credit(logged_in_page: Page, test_data: "InvoiceNinjaTestData") -> Pa
     logged_in_page.get_by_role("option", name=test_data.company_name).click()
 
     logged_in_page.locator("#number").click()
-    logged_in_page.locator("#number").fill(test_data.credit_number)
+    logged_in_page.locator("#number").fill(credit_number)
 
     # Add items
     logged_in_page.get_by_role("button", name="Add Item").click()

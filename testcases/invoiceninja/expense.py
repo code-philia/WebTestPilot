@@ -43,6 +43,7 @@ def test_update_expense(logged_in_page: Page, test_data: InvoiceNinjaTestData) -
 def test_archive_expense(logged_in_page: Page) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_expense_detail_page(page)
 
     page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
@@ -61,7 +62,9 @@ def test_archive_expense(logged_in_page: Page) -> None:
 def test_restore_expense(logged_in_page: Page) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_expense_detail_page(page)
 
+    # Archive and then restore.
     page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
     ).get_by_role("button").nth(2).click()
@@ -88,6 +91,7 @@ def test_restore_expense(logged_in_page: Page) -> None:
 def test_delete_expense(logged_in_page: Page) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_expense_detail_page(page)
 
     page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
@@ -105,6 +109,7 @@ def test_delete_expense(logged_in_page: Page) -> None:
 def test_clone_expense(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_expense_detail_page(page)
 
     page.locator("div").filter(
         has_text=re.compile(r"^Purchase White LabelUpgradeSave$")

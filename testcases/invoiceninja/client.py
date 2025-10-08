@@ -10,23 +10,18 @@ from .utilities import go_to_client_detail_page
 
 def test_create_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
     insert_start_event_to_page(logged_in_page)
+    company_name = test_data.company_name_new
 
-    created_client_page = create_client(
-        logged_in_page, test_data.company_name, test_data
-    )
-    expect(created_client_page.get_by_role("list")).to_contain_text(
-        test_data.company_name
-    )
+    created_client_page = create_client(logged_in_page, company_name, test_data)
+    expect(created_client_page.get_by_role("list")).to_contain_text(company_name)
     expect(
         created_client_page.locator("div")
         .filter(has_text=re.compile(r"^Successfully created client$"))
         .first
     ).to_be_visible()
 
-    created_client_page.get_by_role("heading", name=test_data.company_name).click()
-    expect(created_client_page.get_by_role("heading")).to_contain_text(
-        test_data.company_name
-    )
+    created_client_page.get_by_role("heading", name=company_name).click()
+    expect(created_client_page.get_by_role("heading")).to_contain_text(company_name)
 
 
 def test_read_client(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> None:
