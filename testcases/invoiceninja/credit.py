@@ -3,7 +3,6 @@ import re
 from invoiceninja.conftest import (
     InvoiceNinjaTestData,
     create_credit,
-    setup_data_for_credit_create,
 )
 from playwright.sync_api import Page
 from tracing_api import insert_start_event_to_page

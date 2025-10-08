@@ -1,5 +1,6 @@
-from bookstack.conftest import BOOKSTACK_HOST
 from playwright.sync_api import Page
+
+BOOKSTACK_HOST = "http://localhost:8081/"
 
 
 def navigate_to_book(logged_in_page: Page, book_name: str) -> Page:
@@ -9,7 +10,9 @@ def navigate_to_book(logged_in_page: Page, book_name: str) -> Page:
     return logged_in_page
 
 
-def navigate_to_chapter(logged_in_page: Page, book_name: str, chapter_name: str) -> Page:
+def navigate_to_chapter(
+    logged_in_page: Page, book_name: str, chapter_name: str
+) -> Page:
     navigate_to_book(logged_in_page, book_name)
     logged_in_page.get_by_role("link", name=chapter_name).first.click()
     return logged_in_page
@@ -31,14 +34,19 @@ def navigate_back_to_book_from_page(page: Page, book_name: str) -> Page:
     return page
 
 
+def navigate_to_shelf(logged_in_page: Page, shelf_name: str) -> Page:
+    logged_in_page.goto(BOOKSTACK_HOST)
+    logged_in_page.get_by_role("link", name="Shelves").click()
+    logged_in_page.locator("h2", has_text=shelf_name).click()
+    return logged_in_page
+
+
 def create_shelf_test(
     logged_in_page: Page,
     shelf_name: str,
     shelf_description: str,
     book_names: list[str],
 ):
-    
-
     logged_in_page.get_by_role("link", name="Shelves").click()
     logged_in_page.get_by_role("link", name="New Shelf").click()
 
@@ -62,8 +70,10 @@ def create_shelf_test(
     return logged_in_page
 
 
-def create_book_test(logged_in_page: Page, book_name: str, book_description: str) -> Page:
+def create_book(logged_in_page: Page, book_name: str, book_description: str) -> Page:
     # To make sure when called multiple times, it starts fresh
+    logged_in_page.goto(BOOKSTACK_HOST)
+
     # Navigate to books and create a new book
     logged_in_page.get_by_role("link", name="Books", exact=True).click()
     logged_in_page.get_by_role("link", name="Create New Book").click()
@@ -87,6 +97,7 @@ def create_book_test(logged_in_page: Page, book_name: str, book_description: str
     logged_in_page.get_by_role("button", name="Save Book").click()
 
     return logged_in_page
+
 
 def create_chapter_test(
     created_book_page: Page, chapter_name: str, chapter_description: str
@@ -116,6 +127,7 @@ def create_chapter_test(
 
     created_book_page.get_by_role("button", name="Save Chapter").click()
     return created_book_page
+
 
 def create_page_test(
     created_book_page: Page,

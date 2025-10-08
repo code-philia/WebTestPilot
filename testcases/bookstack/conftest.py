@@ -13,7 +13,7 @@ from tracing_api import TracedPage, create_traced_page
 from tracing_api import traced_expect as expect
 
 from .utilities import (
-    create_book_test,
+    create_book,
     create_chapter_test,
     create_page_test,
     create_shelf_test,
@@ -66,6 +66,7 @@ class BookStackTestData:
 
     # Sort rule properties
     sort_rule_name: str = "Rule"
+    sort_rule_name_new: str = "Rule New"
     sort_rule_name_updated: str = "Rule updated"
 
     # Role properties
@@ -80,7 +81,6 @@ def test_data() -> BookStackTestData:
 
 
 def go_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
-    page.set_viewport_size({"width": 1280, "height": 720})
     page.goto(BOOKSTACK_HOST)
     return page
 
@@ -124,36 +124,6 @@ def logged_in_page(page: Page) -> Page:
     """
     traced_page = create_traced_page(page)
     return login_to_bookstack(traced_page)
-
-
-def create_book(logged_in_page: Page, book_name: str, book_description: str) -> Page:
-    # To make sure when called multiple times, it starts fresh
-    logged_in_page.goto(BOOKSTACK_HOST)
-
-    # Navigate to books and create a new book
-    logged_in_page.get_by_role("link", name="Books", exact=True).click()
-    expect(logged_in_page.get_by_role("link", name="Create New Book")).to_be_visible()
-    logged_in_page.get_by_role("link", name="Create New Book").click()
-
-    # Title and Description
-    logged_in_page.get_by_role("textbox", name="Name").click()
-    logged_in_page.get_by_role("textbox", name="Name").fill(book_name)
-    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
-        text="Rich Text Area. Press ALT-0"
-    ).click()
-    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
-        "Rich Text Area. Press ALT-0"
-    ).fill(book_description)
-
-    # Book Tags
-    logged_in_page.get_by_role("button", name="▸ Book Tags").click()
-    logged_in_page.get_by_role("textbox", name="Tag Name").fill("env")
-    logged_in_page.locator('input[name="tags[0][value]"]').fill("test")
-
-    # Save
-    logged_in_page.get_by_role("button", name="Save Book").click()
-
-    return logged_in_page
 
 
 @pytest.fixture
@@ -250,26 +220,6 @@ def created_page_page(created_book_page: Page, test_data: BookStackTestData) -> 
     return created_page_page
 
 
-@pytest.fixture
-def created_shelf_page(logged_in_page: Page, test_data: BookStackTestData) -> Page:
-    logged_in_page = create_shelf(
-        logged_in_page,
-        test_data.shelf_name,
-        test_data.shelf_description,
-        [test_data.book_name1, test_data.book_name2],
-        test_data.book_description,
-    )
-    expect(
-        logged_in_page.get_by_role("alert").filter(
-            has_text="Shelf successfully created"
-        )
-    ).to_be_visible(timeout=1000)
-    expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name1)
-    expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.book_name2)
-
-    return logged_in_page
-
-
 def create_shelf(
     logged_in_page: Page,
     shelf_name: str,
@@ -323,14 +273,14 @@ def created_sort_rule_page(logged_in_page: Page, test_data: BookStackTestData) -
     return logged_in_page
 
 
-def create_sort_rule(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+def create_sort_rule(logged_in_page: Page, name: str) -> Page:
     logged_in_page.get_by_role("link", name="Settings", exact=True).click()
     logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
     logged_in_page.get_by_role("link", name="Create Sort Rule", exact=True).click()
 
     # Name
     logged_in_page.get_by_role("textbox", name="Name").click()
-    logged_in_page.get_by_role("textbox", name="Name").fill(test_data.sort_rule_name)
+    logged_in_page.get_by_role("textbox", name="Name").fill(name)
 
     # Sort rule configs
     logged_in_page.get_by_role("listitem").filter(
@@ -457,26 +407,6 @@ def setup_data_for_create_page_template(
     return created_page_page
 
 
-def setup_data_for_global_search_page(
-    logged_in_page: Page, test_data: BookStackTestData
-) -> Page:
-    created_book_page = create_book(
-        logged_in_page, test_data.book_name, test_data.book_description
-    )
-    created_chapter_page = create_chapter(
-        created_book_page, test_data.chapter_name, test_data.chapter_description
-    )
-    created_chapter_page.goto(BOOKSTACK_HOST)
-    return created_chapter_page
-
-
-@pytest.fixture
-def created_global_search_page(
-    logged_in_page: Page, test_data: BookStackTestData
-) -> Page:
-    return setup_data_for_global_search_page(logged_in_page, test_data)
-
-
 def setup_data_for_page_move_page(
     logged_in_page: Page, test_data: BookStackTestData
 ) -> Page:
@@ -530,49 +460,131 @@ def created_page_move_chapter(
 
 
 @pytest.fixture
-def seed(logged_in_page: Page):
-    # Seed data is created in individual fixtures as needed.
-    # Run this to start seeding: pytest ./bookstack/seed.py::test_seed -v --tb=short -s --headed
-    # TODO: Jingyu setup the data.
-    data = BookStackTestData()
+def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
+    """
+    Comprehensive seed function that creates all necessary test data for BookStack test suite.
+    Creates 3 books, 4 chapters, 6 pages, 1 shelf, 1 sort rule, 1 role, and 2 page templates.
+    """
 
-    # create book1
-    logged_in_page = create_book_test(
-        logged_in_page, data.book_name1, data.book_description
-    )
-    # create chapter for book1
-    logged_in_page = create_chapter_test(
-        logged_in_page, data.chapter_name1, data.chapter_description
-    )
-    # create page for book1
-    logged_in_page = create_page_test(
-        logged_in_page, data.page_name1, data.page_description
+    # === BOOK CREATION ===
+    # Create Book1 - Primary book with multiple chapters and pages
+    book1_page = create_book(
+        logged_in_page, test_data.book_name1, test_data.book_description
     )
 
-    logged_in_page.goto(BOOKSTACK_HOST)
-    logged_in_page.wait_for_timeout(1000)
-
-    # create book2
-    logged_in_page = create_book_test(
-        logged_in_page, data.book_name2, data.book_description
-    )
-    # create chapter for book1
-    logged_in_page = create_chapter_test(
-        logged_in_page, data.chapter_name2, data.chapter_description
-    )
-    # create page for book1
-    logged_in_page = create_page_test(
-        logged_in_page, data.page_name2, data.page_description
+    # Create Book2 - Secondary book for move operations and shelf assignments
+    book2_page = create_book(
+        book1_page, test_data.book_name2, test_data.book_description
     )
 
-    logged_in_page.goto(BOOKSTACK_HOST)
-    logged_in_page.wait_for_timeout(1000)
-
-    # create shelf
-    logged_in_page = create_shelf_test(
-        logged_in_page,
-        data.shelf_name,
-        data.shelf_description,
-        [data.book_name1, data.book_name2],
+    # Create Book3 - Additional book for complex scenarios
+    book3_page = create_book(
+        book2_page, test_data.book_name, test_data.book_description
     )
-    return logged_in_page
+
+    # === CHAPTER CREATION ===
+    # Create Chapter1 in Book1
+    book3_page.goto(BOOKSTACK_HOST)
+    book3_page.get_by_role("link", name="Books", exact=True).click()
+    book3_page.locator("h2", has_text=test_data.book_name1).click()
+    chapter1_page = create_chapter(
+        book3_page, test_data.chapter_name1, test_data.chapter_description
+    )
+
+    # Create Chapter2 in Book1 (for sorting tests)
+    chapter1_page.goto(BOOKSTACK_HOST)
+    chapter1_page.get_by_role("link", name="Books", exact=True).click()
+    chapter1_page.locator("h2", has_text=test_data.book_name1).click()
+    chapter2_page = create_chapter(
+        chapter1_page, test_data.chapter_name2, test_data.chapter_description
+    )
+
+    # Create Chapter3 in Book2 (for move operations)
+    chapter2_page.goto(BOOKSTACK_HOST)
+    chapter2_page.get_by_role("link", name="Books", exact=True).click()
+    chapter2_page.locator("h2", has_text=test_data.book_name2).click()
+    chapter3_page = create_chapter(
+        chapter2_page, test_data.chapter_name, test_data.chapter_description
+    )
+
+    # Create Chapter4 in Book2 (additional chapter)
+    chapter3_page.goto(BOOKSTACK_HOST)
+    chapter3_page.get_by_role("link", name="Books", exact=True).click()
+    chapter3_page.locator("h2", has_text=test_data.book_name2).click()
+    chapter4_page = create_chapter(
+        chapter3_page, test_data.chapter_name, test_data.chapter_description
+    )
+
+    # === PAGE CREATION ===
+    # Create Page1 in Book1 (basic CRUD)
+    chapter4_page.goto(BOOKSTACK_HOST)
+    chapter4_page.get_by_role("link", name="Books", exact=True).click()
+    chapter4_page.locator("h2", has_text=test_data.book_name1).click()
+    page1_page = create_page(
+        chapter4_page, test_data.page_name1, test_data.page_description
+    )
+
+    # Create Page2 in Book1 (for sorting tests)
+    page1_page.goto(BOOKSTACK_HOST)
+    page1_page.get_by_role("link", name="Books", exact=True).click()
+    page1_page.locator("h2", has_text=test_data.book_name1).click()
+    page2_page = create_page(
+        page1_page, test_data.page_name2, test_data.page_description
+    )
+
+    # Create Page3 in Chapter1 of Book1 (for move operations)
+    page2_page.goto(BOOKSTACK_HOST)
+    page2_page.get_by_role("link", name="Books", exact=True).click()
+    page2_page.locator("h2", has_text=test_data.book_name1).click()
+    page2_page.get_by_role("link", name=test_data.chapter_name1).first.click()
+    page3_page = create_page(
+        page2_page, test_data.page_name, test_data.page_description
+    )
+
+    # Create Page4 in Book2 (cross-book operations)
+    page3_page.goto(BOOKSTACK_HOST)
+    page3_page.get_by_role("link", name="Books", exact=True).click()
+    page3_page.locator("h2", has_text=test_data.book_name2).click()
+    page4_page = create_page(
+        page3_page, test_data.page_name1, test_data.page_description
+    )
+
+    # Create Page5 in Book3 (template page)
+    page4_page.goto(BOOKSTACK_HOST)
+    page4_page.get_by_role("link", name="Books", exact=True).click()
+    page4_page.locator("h2", has_text=test_data.book_name).click()
+    page5_page = create_page(
+        page4_page, test_data.page_template_name, test_data.page_template_description
+    )
+
+    # Create Page6 in Book3 (template user page)
+    page5_page.goto(BOOKSTACK_HOST)
+    page5_page.get_by_role("link", name="Books", exact=True).click()
+    page5_page.locator("h2", has_text=test_data.book_name).click()
+    page6_page = create_page(
+        page5_page, test_data.page_name, test_data.page_description
+    )
+
+    # === SHELF CREATION ===
+    # Create shelf with Book1 and Book2 assigned
+    shelf_page = create_shelf(
+        page6_page,
+        test_data.shelf_name,
+        test_data.shelf_description,
+        [test_data.book_name1, test_data.book_name2],
+        test_data.book_description,
+    )
+
+    # === SORT RULE CREATION ===
+    # Create sort rule for sorting tests
+    sort_rule_page = create_sort_rule(shelf_page, test_data.sort_rule_name)
+
+    # === ROLE CREATION ===
+    # Create role with permissions for permission tests
+    role_page = create_role(sort_rule_page, test_data)
+
+    # Return to home page and wait for stability
+    role_page.goto(BOOKSTACK_HOST)
+    role_page.wait_for_timeout(1000)
+
+    return role_page
