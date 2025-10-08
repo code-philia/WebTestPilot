@@ -23,7 +23,7 @@ def test_create_page(logged_in_page: Page, test_data: BookStackTestData) -> None
     )
 
     created_page_page.get_by_label("Breadcrumb").get_by_role(
-        "link", name=test_data.book_name
+        "link", name=test_data.book_name, exact=True
     ).click()
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
 

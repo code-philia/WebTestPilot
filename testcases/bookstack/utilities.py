@@ -22,7 +22,7 @@ def navigate_to_chapter(
 
 def navigate_to_page(logged_in_page: Page, book_name: str, page_name: str) -> Page:
     navigate_to_book(logged_in_page, book_name)
-    logged_in_page.get_by_role("link", name=page_name).first.click()
+    logged_in_page.get_by_role("link", name=page_name, exact=True).first.click()
     return logged_in_page
 
 
