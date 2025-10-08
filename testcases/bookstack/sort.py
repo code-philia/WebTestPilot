@@ -56,17 +56,18 @@ def test_create_sort_rules(logged_in_page: Page, test_data: BookStackTestData) -
         )
     ).to_be_visible(timeout=1000)
     expect(
-        logged_in_page.get_by_role("link", name=test_data.sort_rule_name)
+        logged_in_page.get_by_role("link", name=test_data.sort_rule_name_new)
     ).to_be_attached()
 
 
 def test_update_sort_rules(logged_in_page: Page, test_data: BookStackTestData) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
-    logged_in_page.get_by_role("link", name="Settings", exact=True).click()
-    logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
 
-    page.get_by_role("link", name=test_data.sort_rule_name).click()
+    page.get_by_role("link", name="Settings", exact=True).click()
+    page.get_by_role("link", name="Sorting", exact=True).click()
+
+    page.get_by_role("link", name=test_data.sort_rule_name, exact=True).click()
     page.get_by_role("textbox", name="Name").click()
     page.get_by_role("textbox", name="Name").fill(test_data.sort_rule_name_updated)
 
@@ -88,10 +89,11 @@ def test_update_sort_rules(logged_in_page: Page, test_data: BookStackTestData) -
 def test_delete_sort_rules(logged_in_page: Page, test_data: BookStackTestData) -> None:
     page = logged_in_page
     insert_start_event_to_page(page)
-    logged_in_page.get_by_role("link", name="Settings", exact=True).click()
-    logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
 
-    page.get_by_role("link", name=test_data.sort_rule_name).click()
+    page.get_by_role("link", name="Settings", exact=True).click()
+    page.get_by_role("link", name="Sorting", exact=True).click()
+
+    page.get_by_role("link", name=test_data.sort_rule_name, exact=True).click()
     page.get_by_role("button", name="Delete").click()
 
     expect(
