@@ -6,7 +6,9 @@ BOOKSTACK_HOST = "http://localhost:8081/"
 def navigate_to_book(logged_in_page: Page, book_name: str) -> Page:
     logged_in_page.goto(BOOKSTACK_HOST)
     logged_in_page.get_by_role("link", name="Books", exact=True).click()
-    logged_in_page.locator("h2", has_text=book_name).click()
+    logged_in_page.locator("#main-content").get_by_role(
+        "link", name=book_name + " Description"
+    ).click()
     return logged_in_page
 
 

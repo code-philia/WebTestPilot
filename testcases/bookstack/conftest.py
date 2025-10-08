@@ -307,7 +307,7 @@ def created_role_page(logged_in_page: Page, test_data: BookStackTestData) -> Pag
 
 def create_role(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     # Navigate
-    logged_in_page.get_by_role("link", name="Settings").click()
+    logged_in_page.locator("#header").get_by_role("link", name="Settings").click()
     logged_in_page.get_by_role("link", name="Roles").click()
     logged_in_page.get_by_role("link", name="Create New Role").click()
 
@@ -537,9 +537,7 @@ def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
     )
 
     # Create Page6 in Book3 (template user page)
-    page5.goto(BOOKSTACK_HOST)
-    page5.get_by_role("link", name="Books", exact=True).click()
-    page5.locator("h2", has_text=test_data.book_name).click()
+    navigate_to_book(page5, test_data.book_name)
     page6 = create_page(page5, test_data.page_name, test_data.page_description)
 
     # === SHELF CREATION ===
