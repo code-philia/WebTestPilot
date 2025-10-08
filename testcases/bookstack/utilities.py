@@ -16,7 +16,7 @@ def navigate_to_chapter(
     logged_in_page: Page, book_name: str, chapter_name: str
 ) -> Page:
     navigate_to_book(logged_in_page, book_name)
-    logged_in_page.get_by_role("link", name=chapter_name).first.click()
+    logged_in_page.get_by_role("link", name=chapter_name, exact=True).first.click()
     return logged_in_page
 
 

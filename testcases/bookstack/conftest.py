@@ -481,33 +481,29 @@ def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
 
     # === CHAPTER CREATION ===
     # Create Chapter1 in Book1
-    book.goto(BOOKSTACK_HOST)
-    book.get_by_role("link", name="Books", exact=True).click()
-    book.locator("h2", has_text=test_data.book_name1).click()
+    navigate_to_book(book, test_data.book_name)
     chapter1 = create_chapter(
-        book, test_data.chapter_name1, test_data.chapter_description
+        book, test_data.chapter_name, test_data.chapter_description
     )
 
     # Create Chapter2 in Book1 (for sorting tests)
-    chapter1.goto(BOOKSTACK_HOST)
-    chapter1.get_by_role("link", name="Books", exact=True).click()
-    chapter1.locator("h2", has_text=test_data.book_name1).click()
+    navigate_to_book(chapter1, test_data.book_name1)
     chapter2 = create_chapter(
         chapter1, test_data.chapter_name2, test_data.chapter_description
     )
 
     # Create Chapter3 in Book2 (for move operations)
-    chapter2.goto(BOOKSTACK_HOST)
-    chapter2.get_by_role("link", name="Books", exact=True).click()
-    chapter2.locator("h2", has_text=test_data.book_name2).click()
+    navigate_to_book(chapter2, test_data.book_name2)
     chapter3 = create_chapter(
-        chapter2, test_data.chapter_name, test_data.chapter_description
+        chapter2, test_data.chapter_name1, test_data.chapter_description
+    )
+    navigate_to_book(chapter2, test_data.book_name2)
+    chapter3 = create_chapter(
+        chapter2, test_data.chapter_name2, test_data.chapter_description
     )
 
     # Create Chapter4 in Book2 (additional chapter)
-    chapter3.goto(BOOKSTACK_HOST)
-    chapter3.get_by_role("link", name="Books", exact=True).click()
-    chapter3.locator("h2", has_text=test_data.book_name2).click()
+    navigate_to_book(chapter3, test_data.book_name2)
     chapter4_page = create_chapter(
         chapter3, test_data.chapter_name, test_data.chapter_description
     )
@@ -523,7 +519,6 @@ def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
 
     # Create Page3 in Chapter1 of Book1 (for move operations)
     navigate_to_book(page2, test_data.book_name1)
-    page2.get_by_role("link", name=test_data.chapter_name1).first.click()
     page3 = create_page(page2, test_data.page_name, test_data.page_description)
 
     # Create Page4 in Book2 (cross-book operations)
