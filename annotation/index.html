@@ -1,131 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Issue Data Annotation Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Screen 1: Issue Listing -->
     <div id="listing-screen" class="screen active">
         <header>
             <h1>GitHub Issue Data Annotation Tool</h1>
-            
+
             <!-- Level 1: Workspace Buttons -->
             <div class="workspace-buttons">
-                <button class="workspace-btn active" data-workspace="minh">
+                <button class="btn workspace-btn active" data-workspace="minh">
                     Minh (<span class="annotated">0</span>/<span class="total">0</span>)
                 </button>
-                <button class="workspace-btn" data-workspace="jingyu">
+                <button class="btn workspace-btn" data-workspace="jingyu">
                     Jingyu (<span class="annotated">0</span>/<span class="total">0</span>)
                 </button>
-                <button class="workspace-btn" data-workspace="xiwen">
+                <button class="btn workspace-btn" data-workspace="xiwen">
                     Xiwen (<span class="annotated">0</span>/<span class="total">0</span>)
                 </button>
             </div>
-            
-            <!-- Level 2: Application Buttons -->
-            <div class="application-buttons">
-                <button class="app-btn active" data-app="bookstack">
-                    BookStack (<span class="annotated">0</span>/<span class="total">0</span>)
-                </button>
-                <button class="app-btn" data-app="indico">
-                    Indico (<span class="annotated">0</span>/<span class="total">0</span>)
-                </button>
-                <button class="app-btn" data-app="invoiceninja">
-                    InvoiceNinja (<span class="annotated">0</span>/<span class="total">0</span>)
-                </button>
-                <button class="app-btn" data-app="prestashop">
-                    PrestaShop (<span class="annotated">0</span>/<span class="total">0</span>)
-                </button>
-            </div>
-            
-            <!-- Search and Stats -->
-            <div class="controls">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Search by title or issue number...">
-                    <button id="clear-search">Clear</button>
+
+            <!-- Compact Controls Row -->
+            <div class="controls-row">
+                <!-- Application Buttons -->
+                <div class="application-buttons">
+                    <button class="btn app-btn active" data-app="bookstack">
+                        BookStack (<span class="annotated">0</span>/<span class="total">0</span>)
+                    </button>
+                    <button class="btn app-btn" data-app="indico">
+                        Indico (<span class="annotated">0</span>/<span class="total">0</span>)
+                    </button>
+                    <button class="btn app-btn" data-app="invoiceninja">
+                        InvoiceNinja (<span class="annotated">0</span>/<span class="total">0</span>)
+                    </button>
+                    <button class="btn app-btn" data-app="prestashop">
+                        PrestaShop (<span class="annotated">0</span>/<span class="total">0</span>)
+                    </button>
                 </div>
-                <div class="stats">
-                    <span id="total-issues">0</span> total | 
-                    <span id="annotated-issues">0</span> annotated | 
-                    <span id="remaining-issues">0</span> remaining
+
+                <!-- Filter Buttons -->
+                <div class="filter-buttons">
+                    <button class="filter-btn btn active" data-filter="all">
+                        All Issues
+                    </button>
+                    <button class="filter-btn btn" data-filter="annotated">
+                        Annotated
+                    </button>
+                    <button class="filter-btn btn" data-filter="todos">
+                        To Dos
+                    </button>
                 </div>
+
+                <!-- Search and Stats -->
+                <div class="search-controls">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search by title or issue number...">
+                        <button id="clear-search" class="btn">Clear</button>
+                    </div>
+                    <div class="stats">
+                        <span id="total-issues">0</span> total |
+                        <span id="annotated-issues">0</span> annotated |
+                        <span id="remaining-issues">0</span> remaining
+                    </div>
+                </div>
+
+                <button id="cleanup-btn" class="btn" title="Clean up backup files">🧹 Cleanup</button>
                 <div id="save-status" class="save-status"></div>
             </div>
         </header>
-        
+
         <main>
             <section class="issues-list">
                 <div id="issues-container">
                     <div class="loading">Loading issues...</div>
                 </div>
             </section>
-            
-            <section class="annotated-issues">
-                <h3>Annotated Issues by Application</h3>
-                <div class="annotated-list" id="annotated-list">
-                    <div class="loading">Loading annotated issues...</div>
-                </div>
-            </section>
+
+
         </main>
     </div>
-    
+
     <!-- Screen 2: Annotation Interface -->
     <div id="annotation-screen" class="screen">
         <header>
-            <button id="back-to-list" class="back-button">← Back to List</button>
+            <div class="annotation-nav">
+                <button id="back-to-list" class="btn">← Back to List</button>
+                <div class="nav-position" id="nav-position">1 / 1</div>
+                <div class="nav-buttons">
+                    <button id="prev-issue" class="nav-button" disabled>← Previous</button>
+                    <button id="next-issue" class="nav-button" disabled>Next →</button>
+                </div>
+            </div>
             <h1>Issue Annotation</h1>
+            <div class="keyboard-hints">
+                <small>💡 Use ← → arrow keys to navigate, Ctrl+S to save</small>
+            </div>
+            <div id="annotation-save-status" class="save-status"></div>
         </header>
-        
+
         <main class="annotation-layout">
             <section class="issue-details">
                 <div class="issue-header">
                     <h2 id="issue-title"></h2>
                     <div class="issue-meta">
-                        <span id="issue-number"></span> | 
-                        <span id="issue-state"></span> | 
+                        <span id="issue-number"></span> |
+                        <span id="issue-state"></span> |
                         <span id="issue-date"></span>
                         <a id="issue-link" target="_blank" class="github-link">View on GitHub</a>
                     </div>
                 </div>
-                
+
                 <div class="issue-body">
                     <h3>Description</h3>
                     <div id="issue-body-content"></div>
                 </div>
+
+                <div class="github-preview">
+                    <div class="preview-header">
+                        <h3>GitHub Issue Preview</h3>
+                        <button id="toggle-iframe" class="btn toggle-button">Show Preview</button>
+                    </div>
+                    <div id="iframe-container" class="iframe-container" style="display: none;">
+                        <iframe id="github-iframe" src=""
+                            sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                    </div>
+                </div>
             </section>
-            
+
             <section class="annotation-panel">
                 <h3>Assign Labels</h3>
-                
+
                 <div class="existing-labels">
                     <h4>Existing Labels</h4>
                     <div id="labels-list" class="labels-container">
                         <div class="loading">Loading labels...</div>
                     </div>
                 </div>
-                
+
                 <div class="new-label">
                     <h4>Create New Label</h4>
                     <input type="text" id="new-label-input" placeholder="Enter new label name...">
-                    <button id="add-label-btn">Add Label</button>
+                    <button id="add-label-btn" class="btn">Add Label</button>
                 </div>
-                
+
                 <div class="selected-labels">
                     <h4>Selected Labels</h4>
                     <div id="selected-labels" class="labels-container"></div>
                 </div>
-                
+
                 <div class="actions">
                     <button id="save-annotation" class="save-button">Save Annotation</button>
                     <button id="clear-selection" class="clear-button">Clear Selection</button>
                 </div>
             </section>
+
+
         </main>
     </div>
-    
+
     <script src="app.js"></script>
 </body>
+
 </html>

@@ -25,7 +25,7 @@ def test_create_page_template(
     page.get_by_role("button", name="Save Page").click()
 
     page.get_by_label("Breadcrumb").get_by_role(
-        "link", name=test_data.book_name
+        "link", name=test_data.book_name, exact=True
     ).click()
     page.get_by_role("link", name=test_data.page_name, exact=True).click()
 

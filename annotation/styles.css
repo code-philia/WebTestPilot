@@ -34,76 +34,90 @@ header h1 {
     margin-bottom: 1rem;
 }
 
-/* Level 1: Workspace Buttons - Primary */
+/* Button Container */
 .workspace-buttons {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
     padding: 0.5rem 0;
-    border-bottom: 2px solid #f6f8fa;
+    border-bottom: 1px solid #e1e4e8;
 }
 
-.workspace-btn {
-    padding: 0.75rem 1.5rem;
-    background: #f6f8fa;
-    border: 2px solid #d1d9e0;
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-    color: #24292f;
-}
-
-.workspace-btn:hover {
-    background: #f3f4f6;
-    border-color: #0969da;
-}
-
-.workspace-btn.active {
-    background: #0969da;
-    color: white;
-    border-color: #0969da;
-}
-
-/* Level 2: Application Buttons - Secondary */
-.application-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-}
-
-.app-btn {
+/* Base Button Styles */
+.btn {
     padding: 0.5rem 1rem;
-    background: white;
+    background: #f6f8fa;
     border: 1px solid #d1d9e0;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: all 0.2s;
+    font-weight: 500;
     color: #24292f;
 }
 
-.app-btn:hover:not(.active) {
-    background: #f6f8fa;
+.btn:hover {
+    background: #f3f4f6;
     border-color: #0969da;
 }
 
-.app-btn.active {
+.btn.active {
     background: #0969da;
     color: white;
     border-color: #0969da;
 }
 
-/* Controls Section */
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    gap: 1rem;
+/* Workspace Buttons */
+.workspace-btn {
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
 }
+
+/* Controls Row */
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+/* Button Groups */
+.application-buttons,
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Application Buttons */
+.app-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+/* Filter Buttons */
+.filter-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+.filter-btn.active {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Search Controls */
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+
 
 .stats {
     font-size: 0.9rem;
@@ -121,91 +135,67 @@ header h1 {
     opacity: 1;
 }
 
+/* Annotation screen specific save status */
+#annotation-save-status {
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    background: rgba(22, 163, 74, 0.1);
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+#annotation-save-status.error {
+    background: rgba(220, 38, 38, 0.1);
+}
 
 
-.back-button {
-    padding: 0.75rem 1.5rem;
-    background: #f6f8fa;
-    border: 1px solid #d1d9e0;
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-button {
+    padding: 0.5rem 1rem;
+    background: #0969da;
+    color: white;
+    border: none;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s;
-}
-
-.back-button:hover {
-    background: #f3f4f6;
-}
-
-/* Annotated Issues Section */
-.annotated-issues {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: white;
-    border: 1px solid #d1d9e0;
-    border-radius: 8px;
-}
-
-.annotated-issues h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #24292f;
-}
-
-.annotated-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.annotated-app {
-    padding: 1rem;
-    background: #f6f8fa;
-    border: 1px solid #e1e4e8;
-    border-radius: 6px;
-}
-
-.annotated-app h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #24292f;
-    text-transform: capitalize;
-}
-
-.annotated-count {
     font-size: 0.9rem;
-    color: #656d76;
-    margin-bottom: 0.5rem;
 }
 
-.annotated-app .progress-bar {
-    width: 100%;
-    height: 6px;
-    background: #e1e4e8;
-    border-radius: 3px;
-    overflow: hidden;
+.nav-button:hover:not(:disabled) {
+    background: #0860ca;
 }
 
-.annotated-app .progress-fill {
-    height: 100%;
-    background: #0969da;
-    transition: width 0.3s ease;
+.nav-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-.back-button {
+/* Annotation Navigation */
+.annotation-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.nav-position {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #24292f;
     background: #f6f8fa;
-    border: 1px solid #d1d9e0;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.back-button:hover {
-    background: #f3f4f6;
+    border: 1px solid #d1d9e0;
+    min-width: 80px;
+    text-align: center;
 }
 
 /* Main Layout */
@@ -251,28 +241,24 @@ main {
 .search-box {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
 }
 
 .search-box input {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.4rem 0.8rem;
     border: 1px solid #d1d9e0;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #0969da;
 }
 
 .search-box button {
-    padding: 0.5rem 1rem;
-    background: #f6f8fa;
-    border: 1px solid #d1d9e0;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.search-box button:hover {
-    background: #f3f4f6;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
 }
 
 /* Issues List */
@@ -411,6 +397,61 @@ main {
     overflow-y: auto;
 }
 
+/* GitHub Preview Section within Issue Details */
+.github-preview {
+    margin-top: 1.5rem;
+    border: 1px solid #d1d9e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #d1d9e0;
+    background: #f6f8fa;
+}
+
+.preview-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #24292f;
+    margin: 0;
+}
+
+.toggle-button {
+    padding: 0.4rem 0.8rem;
+    background: #0969da;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.toggle-button:hover {
+    background: #0860ca;
+}
+
+.toggle-button.active {
+    background: #28a745;
+}
+
+.iframe-container {
+    height: 300px;
+    border-top: 1px solid #d1d9e0;
+}
+
+#github-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
 .annotation-panel h3 {
     margin-bottom: 1rem;
     color: #24292f;
@@ -438,11 +479,14 @@ main {
     border: 1px solid #d1d9e0;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
 .label-item:hover {
     background: #f6f8fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .label-item.selected {
@@ -483,6 +527,16 @@ main {
 .selected-labels .label-item {
     background: #dcfce7;
     border-color: #16a34a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.selected-labels .label-item:hover {
+    background: #bbf7d0;
+    border-color: #15803d;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .actions {
@@ -504,6 +558,12 @@ main {
 
 .save-button:hover {
     background: #15803d;
+}
+
+.save-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .clear-button {
@@ -537,6 +597,23 @@ main {
     .annotation-layout {
         grid-template-columns: 1fr;
         height: auto;
+    }
+    
+    .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .application-buttons,
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    .search-controls {
+        margin-left: 0;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
     
     .app-filters {
