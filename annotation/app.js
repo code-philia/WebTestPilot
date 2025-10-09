@@ -48,48 +48,54 @@ class IssueAnnotationTool {
     }
 
     async loadWorkspaceData(workspace) {
+        this.issues = [];
+        this.annotations = [];
+        this.labels = [];
+        
+        await this.loadIssues(workspace);
+        await this.loadAnnotations(workspace);
+        await this.loadLabels(workspace);
+    }
+
+    async loadIssues(workspace) {
+        const loadPromises = this.applications.map(async (app) => {
+            try {
+                const response = await fetch(`data/splits/${workspace}/${app}.json`);
+                const appIssues = await response.json();
+                this.issues.push(...appIssues.map(issue => ({ ...issue, application: app })));
+            } catch (e) {
+                console.warn(`Could not load ${app} issues for workspace ${workspace}:`, e);
+            }
+        });
+        
+        await Promise.all(loadPromises);
+    }
+
+    async loadAnnotations(workspace) {
         try {
-            this.issues = [];
+            const response = await fetch(`data/splits/${workspace}/annotations.json`);
+            this.annotations = await response.json();
+        } catch (e) {
             this.annotations = [];
-            this.labels = [];
-            
-            // Load issues from selected workspace
-            for (const app of this.applications) {
-                try {
-                    const response = await fetch(`data/splits/${workspace}/${app}.json`);
-                    const appIssues = await response.json();
-                    this.issues.push(...appIssues.map(issue => ({ ...issue, application: app })));
-                } catch (e) {
-                    console.warn(`Could not load ${app} issues for workspace ${workspace}:`, e);
-                }
-            }
+        }
+    }
 
-            // Load annotations from workspace
-            try {
-                const annotationsResponse = await fetch(`data/splits/${workspace}/annotations.json`);
-                this.annotations = await annotationsResponse.json();
-            } catch (e) {
-                this.annotations = [];
-            }
+    async loadLabels(workspace) {
+        try {
+            const response = await fetch(`data/splits/${workspace}/labels.json`);
+            this.labels = await response.json();
+        } catch (e) {
+            await this.loadDefaultLabels(workspace);
+        }
+    }
 
-            // Load labels from workspace
-            try {
-                const labelsResponse = await fetch(`data/splits/${workspace}/labels.json`);
-                this.labels = await labelsResponse.json();
-            } catch (e) {
-                // Try to copy from original if workspace doesn't have labels yet
-                try {
-                    const originalLabelsResponse = await fetch('data/original/labels.json');
-                    this.labels = await originalLabelsResponse.json();
-                    // Save to workspace for future use
-                    await this.saveLabels();
-                } catch (e2) {
-                    this.labels = ['bug', 'feature', 'enhancement', 'documentation', 'performance', 'security', 'ui', 'api'];
-                }
-            }
-        } catch (error) {
-            console.error('Error loading workspace data:', error);
-            alert('Error loading workspace data. Please check that all JSON files are present.');
+    async loadDefaultLabels(workspace) {
+        try {
+            const response = await fetch('data/original/labels.json');
+            this.labels = await response.json();
+            await this.saveLabels();
+        } catch (e) {
+            this.labels = ['bug', 'feature', 'enhancement', 'documentation', 'performance', 'security', 'ui', 'api'];
         }
     }
 
@@ -166,36 +172,45 @@ class IssueAnnotationTool {
         }
 
         // Keyboard shortcuts for annotation screen
-        document.addEventListener('keydown', (e) => {
-            // Only handle shortcuts when on annotation screen
-            if (!document.getElementById('annotation-screen').classList.contains('active')) {
-                return;
-            }
-            
-            // Arrow key navigation for issues
-            if (e.key === 'ArrowLeft' && !e.target.matches('input, textarea')) {
+        document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
+    }
+
+    handleKeyboardShortcuts(e) {
+        if (!this.isAnnotationScreenActive()) return;
+        
+        const shortcuts = {
+            'ArrowLeft': () => this.navigateIssue('prev'),
+            'ArrowRight': () => this.navigateIssue('next'),
+            's': () => this.saveAnnotation(),
+            ' ': () => this.toggleFocusedLabel(e)
+        };
+        
+        const isModifierKey = e.ctrlKey || e.metaKey;
+        const isInputField = e.target.matches('input, textarea');
+        
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            if (!isInputField) {
                 e.preventDefault();
-                this.navigateIssue('prev');
-            } else if (e.key === 'ArrowRight' && !e.target.matches('input, textarea')) {
-                e.preventDefault();
-                this.navigateIssue('next');
+                shortcuts[e.key]();
             }
-            
-            // Ctrl/Cmd + S to save
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                this.saveAnnotation();
-            }
-            
-            // Space to toggle label when label item is focused
-            if (e.key === ' ' && e.target.matches('.label-item')) {
-                e.preventDefault();
-                const label = e.target.dataset.label;
-                if (label) {
-                    this.toggleLabel(label);
-                }
-            }
-        });
+        } else if (e.key === 's' && isModifierKey) {
+            e.preventDefault();
+            shortcuts[e.key]();
+        } else if (e.key === ' ' && e.target.matches('.label-item')) {
+            e.preventDefault();
+            shortcuts[e.key]();
+        }
+    }
+
+    isAnnotationScreenActive() {
+        return document.getElementById('annotation-screen').classList.contains('active');
+    }
+
+    toggleFocusedLabel(e) {
+        const label = e.target.dataset.label;
+        if (label) {
+            this.toggleLabel(label);
+        }
 
         // GitHub preview toggle
         const toggleIframe = document.getElementById('toggle-iframe');
@@ -203,11 +218,7 @@ class IssueAnnotationTool {
             toggleIframe.addEventListener('click', () => this.toggleGithubPreview());
         }
 
-        // Cleanup button
-        const cleanupBtn = document.getElementById('cleanup-btn');
-        if (cleanupBtn) {
-            cleanupBtn.addEventListener('click', () => this.triggerCleanup(true));
-        }
+
     }
 
     setupWorkspaceButtons() {
@@ -672,12 +683,7 @@ class IssueAnnotationTool {
                 this.updateStats();
                 this.renderIssuesList();
                 this.showSaveStatus('Annotations saved!');
-                
-                // Periodically trigger cleanup (every 10 saves)
-                this.saveCount = (this.saveCount || 0) + 1;
-                if (this.saveCount % 10 === 0) {
-                    this.triggerCleanup();
-                }
+
             } else {
                 throw new Error(result.error || 'Save failed');
             }
@@ -773,27 +779,7 @@ class IssueAnnotationTool {
         }
     }
 
-    // Backup cleanup
-    async triggerCleanup(showFeedback = false) {
-        try {
-            const response = await fetch('/cleanup-backups', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const result = await response.json();
-            if (result.success) {
-                console.log('🧹 Backup cleanup completed');
-                if (showFeedback) {
-                    this.showSaveStatus('🧹 Backup cleanup completed');
-                }
-            }
-        } catch (error) {
-            console.warn('Failed to trigger cleanup:', error);
-            if (showFeedback) {
-                this.showSaveStatus('Error: Failed to cleanup backups', true);
-            }
-        }
-    }
+
 
     // Real-time stats refresh
     async refreshStats() {

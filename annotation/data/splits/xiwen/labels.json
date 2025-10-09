@@ -1,4 +1,6 @@
-[
-  "label1",
-  "label2"
-]
+{
+  "labels": [
+    "confirmed_bug",
+    "not_bug"
+  ]
+}

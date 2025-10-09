@@ -1,13 +1,7 @@
-#!/usr/bin/env python3
 import http.server
 import json
 import socketserver
 from pathlib import Path
-import shutil
-import os
-import re
-import threading
-import time
 
 
 class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
@@ -31,9 +25,7 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
         elif self.path.startswith("/save-labels/"):
             workspace = self.path.split("/")[-1]
             self.save_json_file("labels.json", workspace)
-        elif self.path == "/cleanup-backups":
-            self.cleanup_all_dangling_backups()
-            self.send_json_response({"success": True, "message": "Backup cleanup completed"})
+
         else:
             self.send_error(404)
 
@@ -62,7 +54,19 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
 
     def calculate_workspace_stats(self, workspace):
         workspace_dir = self.server_dir / "data" / "splits" / workspace
-        stats = {
+        stats = self._initialize_stats()
+
+        if not workspace_dir.exists():
+            return stats
+
+        url_to_app = self._load_issues_and_map_urls(workspace_dir, stats)
+        self._count_annotations(workspace_dir, url_to_app, stats)
+        self._calculate_final_stats(stats)
+
+        return stats
+
+    def _initialize_stats(self):
+        return {
             "total_issues": 0,
             "annotated_issues": 0,
             "remaining_issues": 0,
@@ -70,148 +74,89 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
             "progress_by_app": {},
         }
 
-        if not workspace_dir.exists():
-            return stats
-
-        # Load all issues and create URL to app mapping
+    def _load_issues_and_map_urls(self, workspace_dir, stats):
         applications = ["bookstack", "indico", "invoiceninja", "prestashop"]
         url_to_app = {}
-        
+
         for app in applications:
             app_file = workspace_dir / f"{app}.json"
-            if app_file.exists():
-                try:
-                    with open(app_file, "r", encoding="utf-8") as f:
-                        issues = json.load(f)
-                        app_total = len(issues)
-                        stats["progress_by_app"][app] = {
-                            "total": app_total,
-                            "annotated": 0,
-                        }
-                        stats["total_issues"] += app_total
-                        
-                        # Map each issue URL to its app
-                        for issue in issues:
-                            if "url" in issue:
-                                url_to_app[issue["url"]] = app
-                except:
-                    stats["progress_by_app"][app] = {"total": 0, "annotated": 0}
+            if not app_file.exists():
+                stats["progress_by_app"][app] = {"total": 0, "annotated": 0}
+                continue
 
-        # Count annotated issues per app using the URL mapping
+            issues = self._safe_load_json(app_file)
+            if not issues:
+                stats["progress_by_app"][app] = {"total": 0, "annotated": 0}
+                continue
+
+            app_total = len(issues)
+            stats["progress_by_app"][app] = {"total": app_total, "annotated": 0}
+            stats["total_issues"] += app_total
+
+            # Map each issue URL to its app
+            for issue in issues:
+                if "url" in issue:
+                    url_to_app[issue["url"]] = app
+
+        return url_to_app
+
+    def _count_annotations(self, workspace_dir, url_to_app, stats):
         annotations_file = workspace_dir / "annotations.json"
-        if annotations_file.exists():
-            try:
-                with open(annotations_file, "r", encoding="utf-8") as f:
-                    annotations = json.load(f)
-                    stats["annotated_issues"] = len(annotations)
+        if not annotations_file.exists():
+            return
 
-                    # Count annotated per app using exact URL matching
-                    for annotation in annotations:
-                        issue_url = annotation.get("issue_id", "")
-                        if issue_url in url_to_app:
-                            app = url_to_app[issue_url]
-                            if app in stats["progress_by_app"]:
-                                stats["progress_by_app"][app]["annotated"] += 1
-            except:
-                pass
+        annotations = self._safe_load_json(annotations_file)
+        if not annotations:
+            return
 
-        # Calculate remaining and percentage
+        stats["annotated_issues"] = len(annotations)
+
+        # Count annotated per app using exact URL matching
+        for annotation in annotations:
+            issue_url = annotation.get("issue_id", "")
+            app = url_to_app.get(issue_url)
+            if app and app in stats["progress_by_app"]:
+                stats["progress_by_app"][app]["annotated"] += 1
+
+    def _calculate_final_stats(self, stats):
         stats["remaining_issues"] = stats["total_issues"] - stats["annotated_issues"]
         if stats["total_issues"] > 0:
             stats["progress_percentage"] = round(
                 (stats["annotated_issues"] / stats["total_issues"]) * 100, 1
             )
 
-        return stats
+    def _safe_load_json(self, file_path):
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError, OSError):
+            return None
 
     def save_json_file(self, filename, workspace):
         try:
-            content_length = int(self.headers["Content-Length"])
-            post_data = self.rfile.read(content_length)
-            data = json.loads(post_data.decode("utf-8"))
+            data = self._parse_request_data()
+            file_path = self._prepare_file_path(filename, workspace)
 
-            # Save to workspace folder
-            workspace_dir = self.server_dir / "data" / "splits" / workspace
-            workspace_dir.mkdir(parents=True, exist_ok=True)
-            file_path = workspace_dir / filename
-
-            # Clean up old backup files before creating new one
-            self.cleanup_backup_files(file_path)
-
-            # Create backup only if original file exists and is different
-            if file_path.exists():
-                try:
-                    with open(file_path, "r", encoding="utf-8") as f:
-                        existing_data = json.load(f)
-                    
-                    # Only create backup if data is actually different
-                    if existing_data != data:
-                        backup_path = file_path.with_suffix(f".json.bak")
-                        shutil.copy2(file_path, backup_path)
-                except (json.JSONDecodeError, FileNotFoundError):
-                    # If existing file is corrupted, still create backup
-                    backup_path = file_path.with_suffix(f".json.bak")
-                    shutil.copy2(file_path, backup_path)
-
-            # Write new data
-            with open(file_path, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
+            self._write_json_file(file_path, data)
 
             self.send_json_response({"success": True})
 
         except Exception as e:
             self.send_error_response(str(e))
 
-    def cleanup_backup_files(self, file_path):
-        """Clean up backup files, keeping only the most recent one"""
-        try:
-            workspace_dir = file_path.parent
-            base_name = file_path.stem
-            backup_pattern = f"{base_name}.json.bak*"
-            
-            # Find all backup files for this specific file
-            backup_files = list(workspace_dir.glob(backup_pattern))
-            
-            if len(backup_files) > 1:
-                # Sort by modification time, newest first
-                backup_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
-                
-                # Keep only the newest backup, remove others
-                for backup_file in backup_files[1:]:
-                    try:
-                        backup_file.unlink()
-                    except OSError:
-                        # Ignore files that can't be deleted (might be locked)
-                        pass
-                        
-        except Exception:
-            # Don't let cleanup errors break the main functionality
-            pass
+    def _parse_request_data(self):
+        content_length = int(self.headers["Content-Length"])
+        post_data = self.rfile.read(content_length)
+        return json.loads(post_data.decode("utf-8"))
 
-    def cleanup_all_dangling_backups(self):
-        """Clean up all dangling .bak files that don't have corresponding main files"""
-        try:
-            splits_dir = self.server_dir / "data" / "splits"
-            if not splits_dir.exists():
-                return
-                
-            for workspace_dir in splits_dir.iterdir():
-                if not workspace_dir.is_dir():
-                    continue
-                    
-                for backup_file in workspace_dir.glob("*.json.bak"):
-                    # Check if corresponding main file exists
-                    main_file = backup_file.with_suffix('').with_suffix('.json')
-                    if not main_file.exists():
-                        try:
-                            backup_file.unlink()
-                        except OSError:
-                            pass
-                            
-        except Exception:
-            pass
+    def _prepare_file_path(self, filename, workspace):
+        workspace_dir = self.server_dir / "data" / "splits" / workspace
+        workspace_dir.mkdir(parents=True, exist_ok=True)
+        return workspace_dir / filename
 
-
+    def _write_json_file(self, file_path, data):
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
 
     def send_json_response(self, data):
         self.send_response(200)
@@ -232,34 +177,14 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
-def periodic_cleanup():
-    """Run periodic cleanup every hour"""
-    handler = AnnotationHandler()
-    while True:
-        try:
-            time.sleep(3600)  # 1 hour
-            handler.cleanup_all_dangling_backups()
-            print("🧹 Periodic backup cleanup completed")
-        except Exception as e:
-            print(f"⚠️  Error during periodic cleanup: {e}")
-
 def main():
     port = 8000
 
     print("🚀 Annotation Tool Server")
     print(f"📁 Serving from: {Path(__file__).parent.resolve()}")
     print(f"🌐 Open: http://localhost:{port}")
-    print(f"⏹️  Press Ctrl+C to stop")
-    
-    # Clean up dangling backup files on startup
-    handler = AnnotationHandler()
-    handler.cleanup_all_dangling_backups()
-    print("🧹 Cleaned up dangling backup files")
-    
-    # Start periodic cleanup thread
-    cleanup_thread = threading.Thread(target=periodic_cleanup, daemon=True)
-    cleanup_thread.start()
-    print("🔄 Started periodic backup cleanup (every hour)")
+    print("⏹️  Press Ctrl+C to stop")
+
     print()
 
     with socketserver.TCPServer(("", port), AnnotationHandler) as httpd:
