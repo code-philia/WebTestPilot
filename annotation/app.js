@@ -659,8 +659,7 @@ class IssueAnnotationTool {
     // Load and render comments
     this.loadComments();
 
-    // Setup GitHub preview iframe
-    this.setupGithubPreview();
+
 
     // Render labels
     this.renderLabelsList();
@@ -924,24 +923,6 @@ class IssueAnnotationTool {
 
     this.renderLabelsList();
     this.renderSelectedLabels();
-  }
-
-  setupGithubPreview() {
-    if (!this.currentIssue) return;
-
-    const iframe = document.getElementById("github-iframe");
-    const toggleButton = document.getElementById("toggle-iframe");
-    const iframeContainer = document.getElementById("iframe-container");
-
-    if (iframe && this.currentIssue.html_url) {
-      // Set iframe src to GitHub issue URL
-      iframe.src = this.currentIssue.html_url;
-
-      // Reset toggle state
-      iframeContainer.style.display = "none";
-      toggleButton.textContent = "Show Preview";
-      toggleButton.classList.remove("active");
-    }
   }
 
   toggleGithubPreview() {

@@ -472,10 +472,7 @@ main {
     background: #28a745;
 }
 
-.iframe-container {
-    height: 300px;
-    border-top: 1px solid #d1d9e0;
-}
+
 
 #github-iframe {
     width: 100%;
