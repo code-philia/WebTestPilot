@@ -1,4 +1,9 @@
+from typing import TYPE_CHECKING
+
 from playwright.sync_api import Page
+
+if TYPE_CHECKING:
+    from .conftest import BookStackTestData
 
 BOOKSTACK_HOST = "http://localhost:8081/"
 
@@ -91,7 +96,7 @@ def create_book(logged_in_page: Page, book_name: str, book_description: str) -> 
     return logged_in_page
 
 
-def create_chapter_test(
+def create_chapter(
     created_book_page: Page, chapter_name: str, chapter_description: str
 ) -> Page:
     created_book_page.get_by_role("link", name="New Chapter").click()
@@ -121,7 +126,7 @@ def create_chapter_test(
     return created_book_page
 
 
-def create_page_test(
+def create_page(
     created_book_page: Page,
     page_name: str,
     page_description: str,
@@ -143,3 +148,102 @@ def create_page_test(
     created_book_page.get_by_role("button", name="Save Page").click()
 
     return created_book_page
+
+
+def create_shelf(
+    logged_in_page: Page,
+    shelf_name: str,
+    shelf_description: str,
+    book_names: list[str],
+    book_description: str,
+):
+    setup_data_for_shelf_create(logged_in_page, book_names, book_description)
+
+    logged_in_page.get_by_role("link", name="Shelves").click()
+    logged_in_page.get_by_role("link", name="New Shelf").click()
+
+    # Name & Description
+    logged_in_page.get_by_role("textbox", name="Name").fill(shelf_name)
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).click()
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).fill(shelf_description)
+
+    # Add books to shelf
+    for book_name in book_names:
+        # Add position to make sure it clicks the button, not the scroll.
+        logged_in_page.get_by_role("listitem").filter(
+            has_text=book_name
+        ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
+
+    logged_in_page.get_by_role("button", name="Save Shelf").click()
+    return logged_in_page
+
+
+def setup_data_for_shelf_create(
+    logged_in_page: Page, book_names: list[str], book_description: str
+):
+    for book_name in book_names:
+        create_book(logged_in_page, book_name, book_description)
+
+    return logged_in_page
+
+
+def create_sort_rule(logged_in_page: Page, name: str) -> Page:
+    logged_in_page.get_by_role("link", name="Settings", exact=True).click()
+    logged_in_page.get_by_role("link", name="Sorting", exact=True).click()
+    logged_in_page.get_by_role("link", name="Create Sort Rule", exact=True).click()
+
+    # Name
+    logged_in_page.get_by_role("textbox", name="Name").click()
+    logged_in_page.get_by_role("textbox", name="Name").fill(name)
+
+    # Sort rule configs
+    logged_in_page.get_by_role("listitem").filter(
+        has_text="Name - Alphabetical (Asc)"
+    ).get_by_role("button").click()
+    logged_in_page.get_by_role("listitem").filter(
+        has_text="Created Date (Asc)"
+    ).get_by_role("button").click()
+
+    logged_in_page.get_by_role("button", name="Save").click()
+    return logged_in_page
+
+
+def create_role(logged_in_page: Page, test_data: "BookStackTestData") -> Page:
+    # Navigate
+    logged_in_page.locator("#header").get_by_role("link", name="Settings").click()
+    logged_in_page.get_by_role("link", name="Roles").click()
+    logged_in_page.get_by_role("link", name="Create New Role").click()
+
+    # Name
+    logged_in_page.get_by_role("textbox", name="Role Name").click()
+    logged_in_page.get_by_role("textbox", name="Role Name").fill(test_data.role_name)
+
+    # Description
+    logged_in_page.get_by_role("textbox", name="Short Description of Role").click()
+    logged_in_page.get_by_role("textbox", name="Short Description of Role").fill(
+        test_data.role_description
+    )
+
+    # Add permissions to role
+    logged_in_page.get_by_text("Manage all book, chapter &").click()
+
+    # Use "toggle all" to select all permissions
+    logged_in_page.locator(
+        ".item-list-row.flex-container-row.items-center.wrap > .flex.py-s.px-m.min-width-s > .text-small"
+    ).first.click()
+    logged_in_page.locator(
+        "div:nth-child(3) > .flex.py-s.px-m.min-width-s > .text-small"
+    ).click()
+    logged_in_page.locator(
+        "div:nth-child(4) > .flex.py-s.px-m.min-width-s > .text-small"
+    ).click()
+    logged_in_page.locator(
+        "div:nth-child(5) > .flex.py-s.px-m.min-width-s > .text-small"
+    ).click()
+
+    logged_in_page.get_by_role("button", name="Save Role").click()
+    return logged_in_page

@@ -13,7 +13,7 @@ def test_create_chapter(logged_in_page: Page, test_data: BookStackTestData) -> N
     navigate_to_book(logged_in_page, test_data.book_name)
 
     created_chapter_page = create_chapter(
-        logged_in_page, test_data.chapter_name, test_data.chapter_description
+        logged_in_page, test_data.chapter_name_new, test_data.chapter_description
     )
 
     expect(created_chapter_page.locator("h1")).to_contain_text(test_data.chapter_name)
@@ -23,10 +23,10 @@ def test_create_chapter(logged_in_page: Page, test_data: BookStackTestData) -> N
 
     # Check the book's chapter list
     created_chapter_page.get_by_label("Book Navigation").get_by_role(
-        "link", name=test_data.chapter_name
+        "link", name=test_data.chapter_name_new, exact=True
     ).click()
     expect(created_chapter_page.get_by_role("list")).to_contain_text(
-        test_data.chapter_name
+        test_data.chapter_name_new
     )
 
     # Navigate back to book page and check

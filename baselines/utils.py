@@ -11,40 +11,16 @@ PROJECT_DIR = Path(__file__).parent.parent
 sys.path.append(str(PROJECT_DIR))
 
 from testcases.bookstack.conftest import (
-    BookStackTestData,
-    create_book,
-    create_chapter,
-    create_page,
-    create_role,
-    create_shelf,
-    create_sort_rule,
     go_to_bookstack,
     login_to_bookstack,
-    setup_data_for_create_page_template,
-    setup_data_for_global_search_page,
-    setup_data_for_page_move_chapter,
-    setup_data_for_page_move_page,
-    setup_data_for_shelf_create,
-    setup_data_for_sort_chapter_and_page,
 )
 from testcases.indico.conftest import (
     login_to_indico,
     login_to_indico_async,
 )
 from testcases.invoiceninja.conftest import (
-    InvoiceNinjaTestData,
-    create_client,
-    create_product,
     go_to_invoiceninja,
     login_to_invoiceninja,
-    setup_data_for_create_invoice,
-    setup_data_for_create_payment,
-    setup_data_for_credit_create,
-    setup_data_for_expense_create,
-    setup_for_credit_page,
-    setup_for_expense_page,
-    setup_for_invoice_page,
-    setup_for_payment_page,
 )
 from testcases.prestashop.conftest import (
     login_to_prestashop,
@@ -71,7 +47,6 @@ async def setup_page_state(
 
 async def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
     """Set up InvoiceNinja page based on setup function."""
-    test_data = InvoiceNinjaTestData()
 
     # No setup.
     if setup_function == "":
@@ -81,36 +56,6 @@ async def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
 
     if setup_function == "logged_in_page":
         return logged_in_page
-
-    elif setup_function == "created_client_page":
-        return create_client(logged_in_page, test_data.company_name, test_data)
-
-    elif setup_function == "created_product_page":
-        return create_product(logged_in_page, test_data.product_name, test_data)
-
-    elif setup_function == "created_invoice_page":
-        return setup_for_invoice_page(logged_in_page, test_data)
-
-    elif setup_function == "setup_data_for_create_invoice":
-        return setup_data_for_create_invoice(logged_in_page, test_data)
-
-    elif setup_function == "created_payment_page":
-        return setup_for_payment_page(logged_in_page, test_data)
-
-    elif setup_function == "setup_data_for_create_payment":
-        return setup_data_for_create_payment(logged_in_page, test_data)
-
-    elif setup_function == "created_expense_page":
-        return setup_for_expense_page(logged_in_page, test_data)
-
-    elif setup_function == "setup_data_for_expense_create":
-        return setup_data_for_expense_create(logged_in_page, test_data)
-
-    elif setup_function == "created_credit_page":
-        return setup_for_credit_page(logged_in_page, test_data=test_data)
-
-    elif setup_function == "setup_data_for_credit_create":
-        return setup_data_for_credit_create(logged_in_page, test_data=test_data)
 
     else:
         raise ValueError(f"Unknown invoiceninja setup function: {setup_function}")
@@ -150,7 +95,6 @@ async def setup_prestashop_page(
 
 async def setup_bookstack_page(page: Page, setup_function: str) -> Page:
     """Set up BookStack page based on setup function."""
-    test_data = BookStackTestData()
 
     # No setup.
     if setup_function == "":
@@ -160,63 +104,6 @@ async def setup_bookstack_page(page: Page, setup_function: str) -> Page:
 
     if setup_function == "logged_in_page":
         return logged_in_page
-
-    elif setup_function == "created_book_page":
-        return create_book(
-            logged_in_page, test_data.book_name, test_data.book_description
-        )
-
-    elif setup_function == "created_chapter_page":
-        book_page = create_book(
-            logged_in_page, test_data.book_name, test_data.book_description
-        )
-        return create_chapter(
-            book_page, test_data.chapter_name, test_data.chapter_description
-        )
-
-    elif setup_function == "created_page_page":
-        book_page = create_book(
-            logged_in_page, test_data.book_name, test_data.book_description
-        )
-        return create_page(book_page, test_data.page_name, test_data.page_description)
-
-    elif setup_function == "created_shelf_page":
-        return create_shelf(
-            logged_in_page,
-            test_data.shelf_name,
-            test_data.shelf_description,
-            [test_data.book_name1, test_data.book_name2],
-            test_data.book_description,
-        )
-    elif (
-        setup_function == "setup_data_for_shelf_create"
-    ):  # Custom for add test case only.
-        book_names = [test_data.book_name1, test_data.book_name2]
-        setup_data_for_shelf_create(
-            logged_in_page, book_names, test_data.book_description
-        )
-        return go_to_bookstack(logged_in_page)
-
-    elif setup_function == "created_sort_rule_page":
-        return create_sort_rule(logged_in_page, test_data)
-
-    elif setup_function == "created_role_page":
-        return create_role(logged_in_page, test_data)
-
-    elif setup_function == "created_data_template_page":
-        return setup_data_for_create_page_template(logged_in_page, test_data)
-
-    elif setup_function == "created_data_for_sort_page":
-        return setup_data_for_sort_chapter_and_page(logged_in_page, test_data)
-
-    elif setup_function == "created_global_search_page":
-        return setup_data_for_global_search_page(logged_in_page, test_data)
-
-    elif setup_function == "created_page_move_page":
-        return setup_data_for_page_move_page(logged_in_page, test_data)
-
-    elif setup_function == "created_page_move_chapter":
-        return setup_data_for_page_move_chapter(logged_in_page, test_data)
 
     else:
         raise ValueError(f"Unknown bookstack setup function: {setup_function}")

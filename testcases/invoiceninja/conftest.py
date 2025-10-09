@@ -1,4 +1,3 @@
-import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -9,7 +8,6 @@ from playwright.sync_api import Page
 sys.path.append(str(Path(__file__).parent.parent))
 
 from tracing_api import create_traced_page
-from tracing_api import traced_expect as expect
 
 from .utilities import (
     create_client,
@@ -112,129 +110,6 @@ def logged_in_page(page: Page) -> Page:
     traced_page = create_traced_page(page)
     traced_page = login_to_invoiceninja(traced_page)
     return traced_page
-
-
-@pytest.fixture
-def created_client_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    logged_in_page = create_client(logged_in_page, test_data.company_name, test_data)
-    return logged_in_page
-
-
-@pytest.fixture
-def created_product_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    create_product(logged_in_page, test_data.product_name, test_data)
-    return logged_in_page
-
-
-@pytest.fixture
-def created_invoice_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    # Data setup
-    logged_in_page = setup_for_invoice_page(logged_in_page, test_data)
-    return logged_in_page
-
-
-def setup_for_invoice_page(
-    logged_in_page: Page, test_data: InvoiceNinjaTestData
-) -> Page:
-    setup_data_for_create_invoice(logged_in_page, test_data)
-
-    # Navigate
-    logged_in_page.wait_for_timeout(1000)
-    logged_in_page = create_invoice(logged_in_page, test_data)
-
-    return logged_in_page
-
-
-def setup_data_for_create_invoice(logged_in_page, test_data: InvoiceNinjaTestData):
-    create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name1, test_data)
-    create_product(logged_in_page, test_data.product_name2, test_data)
-
-
-@pytest.fixture
-def created_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    # Invoice has to be sent to be chosen in payment
-    created_invoice_page = setup_for_payment_page(logged_in_page, test_data)
-    expect(
-        created_invoice_page.locator("div")
-        .filter(has_text=re.compile(r"^Successfully created payment$"))
-        .first
-    ).to_be_visible(timeout=2000)
-
-    return created_invoice_page
-
-
-def setup_for_payment_page(logged_in_page: Page, test_data: InvoiceNinjaTestData):
-    created_invoice_page = setup_data_for_create_payment(logged_in_page, test_data)
-    created_payment_page = create_payment(created_invoice_page, test_data)
-    return created_payment_page
-
-
-def setup_data_for_create_payment(
-    logged_in_page: Page, test_data: InvoiceNinjaTestData
-):
-    created_invoice_page = setup_for_invoice_page(logged_in_page, test_data)
-
-    created_invoice_page.locator("div").filter(
-        has_text=re.compile(r"^Purchase White LabelUpgradeSave$")
-    ).get_by_role("button").nth(2).click()
-    created_invoice_page.get_by_role("button", name="Mark Sent").click()
-
-    created_invoice_page.wait_for_timeout(1000)
-    expect(created_invoice_page.get_by_role("main")).to_contain_text(
-        "Sent", timeout=5000
-    )
-
-    return created_invoice_page
-
-
-@pytest.fixture
-def created_expense_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    created_client_page = setup_for_expense_page(logged_in_page, test_data)
-    return created_client_page
-
-
-def setup_for_expense_page(
-    logged_in_page: Page, test_data: InvoiceNinjaTestData
-) -> Page:
-    created_expense_page = setup_data_for_expense_create(logged_in_page, test_data)
-    created_expense_page.wait_for_timeout(500)
-    created_expense_page = create_expense(created_expense_page, test_data)
-    return created_expense_page
-
-
-def setup_data_for_expense_create(
-    logged_in_page: Page, test_data: InvoiceNinjaTestData
-):
-    created_client_page = create_client(
-        logged_in_page, test_data.company_name, test_data
-    )
-
-    return created_client_page
-
-
-@pytest.fixture
-def created_credit_page(logged_in_page: Page, test_data: InvoiceNinjaTestData) -> Page:
-    logged_in_page = setup_for_credit_page(logged_in_page, test_data)
-    return logged_in_page
-
-
-def setup_for_credit_page(
-    logged_in_page: Page, test_data: InvoiceNinjaTestData
-) -> Page:
-    setup_data_for_credit_create(logged_in_page, test_data)
-
-    logged_in_page.wait_for_timeout(500)
-
-    logged_in_page = create_credit(logged_in_page, test_data)
-
-    return logged_in_page
-
-
-def setup_data_for_credit_create(logged_in_page: Page, test_data: InvoiceNinjaTestData):
-    create_client(logged_in_page, test_data.company_name, test_data)
-    create_product(logged_in_page, test_data.product_name1, test_data)
-    create_product(logged_in_page, test_data.product_name2, test_data)
 
 
 @pytest.fixture
