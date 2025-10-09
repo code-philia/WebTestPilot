@@ -656,6 +656,9 @@ class IssueAnnotationTool {
     const bodyContent = this.renderMarkdown(this.currentIssue.body || "");
     document.getElementById("issue-body-content").innerHTML = bodyContent;
 
+    // Load and render comments
+    this.loadComments();
+
     // Setup GitHub preview iframe
     this.setupGithubPreview();
 
@@ -679,6 +682,146 @@ class IssueAnnotationTool {
       .replace(/^\n/, "<p>")
       .replace(/\n$/, "</p>")
       .replace(/\n/g, "<br>");
+  }
+
+  async fetchGitHubComments(commentsUrl) {
+    if (!commentsUrl) return [];
+    
+    try {
+      const response = await fetch(commentsUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+      return null; // Signal error state
+    }
+  }
+
+  renderComments(comments) {
+    const container = document.getElementById('comments-container');
+    const countElement = document.getElementById('comments-count');
+    
+    if (!comments) {
+      container.innerHTML = '<div class="error">Failed to load comments</div>';
+      countElement.textContent = '';
+      return;
+    }
+    
+    if (comments.length === 0) {
+      container.innerHTML = '<div class="no-comments">No comments on this issue</div>';
+      countElement.textContent = '0';
+      return;
+    }
+    
+    countElement.textContent = comments.length;
+    
+    container.innerHTML = comments.map(comment => `
+      <div class="comment" id="comment-${comment.id}">
+        <div class="comment-header">
+          <img src="${comment.user.avatar_url}" alt="${comment.user.login}" class="comment-avatar">
+          <div class="comment-meta">
+            <div class="comment-meta-left">
+              <a href="${comment.user.html_url}" target="_blank" class="comment-author">
+                ${this.escapeHtml(comment.user.login)}
+              </a>
+              <span class="comment-date" title="${comment.created_at}">
+                on ${new Date(comment.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+            </div>
+            <div class="comment-meta-right">
+              <span class="comment-association">${comment.author_association}</span>
+              <button class="comment-menu-btn" aria-label="Comment menu">⋯</button>
+            </div>
+          </div>
+        </div>
+        <div class="comment-body">
+          ${this.renderCommentMarkdown(comment.body)}
+        </div>
+        <div class="comment-footer">
+          <button class="reaction-btn" aria-label="Add reaction">
+            <span class="emoji">☺️</span>
+          </button>
+        </div>
+        ${comment.reactions && comment.reactions.total_count > 0 ? this.renderReactions(comment.reactions) : ''}
+      </div>
+    `).join('');
+  }
+
+  renderCommentMarkdown(text) {
+    if (!text) return '';
+    
+    // First do basic markdown conversion
+    let html = text
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`(.+?)`/g, '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    
+    // Handle GitHub-style mentions and issue references
+    html = html
+      .replace(/@([\w-]+)/g, '<a href="https://github.com/$1" target="_blank" style="color: #0969da; text-decoration: none;">@$1</a>')
+      .replace(/#(\d+)/g, '<a href="https://github.com/BookStackApp/BookStack/issues/$1" target="_blank" style="color: #0969da; text-decoration: none;">#$1</a>');
+    
+    // Convert newlines to paragraphs
+    html = html.replace(/\n\n/g, '</p><p>').replace(/^\n/, '<p>').replace(/\n$/, '</p>');
+    if (!html.startsWith('<p>')) html = '<p>' + html;
+    if (!html.endsWith('</p>')) html = html + '</p>';
+    
+    return html;
+  }
+
+  formatRelativeDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return 'today';
+    if (diffDays === 1) return 'yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+    return date.toLocaleDateString();
+  }
+
+  renderReactions(reactions) {
+    const reactionTypes = [
+      { emoji: '👍', key: '+1' },
+      { emoji: '👎', key: '-1' },
+      { emoji: '😄', key: 'laugh' },
+      { emoji: '🎉', key: 'hooray' },
+      { emoji: '😕', key: 'confused' },
+      { emoji: '❤️', key: 'heart' },
+      { emoji: '🚀', key: 'rocket' },
+      { emoji: '👀', key: 'eyes' }
+    ];
+
+    const activeReactions = reactionTypes.filter(r => reactions[r.key] > 0);
+    
+    if (activeReactions.length === 0) return '';
+
+    return `
+      <div class="comment-reactions">
+        ${activeReactions.map(r => `
+          <div class="reaction">
+            <span>${r.emoji}</span>
+            <span>${reactions[r.key]}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  async loadComments() {
+    const container = document.getElementById('comments-container');
+    container.innerHTML = '<div class="loading">Loading comments...</div>';
+    
+    const comments = await this.fetchGitHubComments(this.currentIssue.comments_url);
+    this.renderComments(comments);
   }
 
   renderLabelsList() {
