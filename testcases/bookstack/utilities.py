@@ -155,10 +155,7 @@ def create_shelf(
     shelf_name: str,
     shelf_description: str,
     book_names: list[str],
-    book_description: str,
 ):
-    setup_data_for_shelf_create(logged_in_page, book_names, book_description)
-
     logged_in_page.get_by_role("link", name="Shelves").click()
     logged_in_page.get_by_role("link", name="New Shelf").click()
 
@@ -179,15 +176,6 @@ def create_shelf(
         ).first.get_by_role("button", name="Add").click(position={"x": 0, "y": 0})
 
     logged_in_page.get_by_role("button", name="Save Shelf").click()
-    return logged_in_page
-
-
-def setup_data_for_shelf_create(
-    logged_in_page: Page, book_names: list[str], book_description: str
-):
-    for book_name in book_names:
-        create_book(logged_in_page, book_name, book_description)
-
     return logged_in_page
 
 

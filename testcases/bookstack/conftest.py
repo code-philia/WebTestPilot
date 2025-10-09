@@ -206,7 +206,6 @@ def seed(logged_in_page: Page, test_data: BookStackTestData) -> Page:
         test_data.shelf_name,
         test_data.shelf_description,
         [test_data.book_name1, test_data.book_name2],
-        test_data.book_description,
     )
 
     # === SORT RULE CREATION ===

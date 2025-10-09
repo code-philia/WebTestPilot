@@ -46,11 +46,11 @@ def test_move_page(logged_in_page: Page, test_data: BookStackTestData) -> None:
 
 
 def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> None:
-    # Move Chapter1 from Book1 to Book.
+    # Move Chapter1 from Book2 to Book.
     page = logged_in_page
     insert_start_event_to_page(page)
 
-    navigate_to_chapter(page, test_data.book_name1, test_data.chapter_name1)
+    navigate_to_chapter(page, test_data.book_name2, test_data.chapter_name1)
 
     # Move the chapter from book 2 to book 1.
     page.get_by_role("link", name="Move").click()
@@ -62,7 +62,9 @@ def test_move_chapter(logged_in_page: Page, test_data: BookStackTestData) -> Non
     )
     page.wait_for_timeout(1000)  # Wait for search results to load
 
-    page.get_by_role("link", name=test_data.book_name, exact=True).click()
+    page.get_by_role(
+        "link", name=test_data.book_name + f" {test_data.book_description}", exact=True
+    ).click()
     page.get_by_role("button", name="Move Chapter").click()
 
     # Go to book & verify the chapter was moved successfully.

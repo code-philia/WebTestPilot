@@ -13,7 +13,6 @@ def test_create_shelf(logged_in_page: Page, test_data: BookStackTestData) -> Non
         test_data.shelf_name,
         test_data.shelf_description,
         [test_data.book_name1, test_data.book_name2],
-        test_data.book_description,
     )
     expect(
         logged_in_page.get_by_role("alert").filter(
