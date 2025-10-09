@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
+from playwright.async_api import Page as AsyncPage
 
 # from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
@@ -89,17 +90,12 @@ def go_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
     return page
 
 
+async def go_to_bookstack_async(page: AsyncPage) -> AsyncPage:
+    await page.goto(BOOKSTACK_HOST)
+    return page
+
+
 def login_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
-    """
-    Login to BookStack and return a traced page.
-    Can be used outside of pytest fixtures.
-
-    Args:
-        page: A Playwright page object
-
-    Returns:
-        Page: A traced page object with user logged in
-    """
     page = go_to_bookstack(page)
 
     # Perform login
@@ -110,6 +106,24 @@ def login_to_bookstack(page: Page | TracedPage) -> Page | TracedPage:
     page.get_by_role("textbox", name="Password").click()
     page.get_by_role("textbox", name="Password").fill("password")
     page.get_by_role("button", name="Log In").click()
+
+    # Verify login was successful by checking for Books link
+    expect(page.get_by_role("link", name="Books", exact=True)).to_be_visible()
+
+    return page
+
+
+async def login_to_bookstack_async(page: AsyncPage) -> AsyncPage:
+    page = await go_to_bookstack_async(page)
+
+    # Perform login
+    await page.get_by_role("link", name="Log in").click()
+
+    await page.get_by_role("textbox", name="Email").click()
+    await page.get_by_role("textbox", name="Email").fill("admin@admin.com")
+    await page.get_by_role("textbox", name="Password").click()
+    await page.get_by_role("textbox", name="Password").fill("password")
+    await page.get_by_role("button", name="Log In").click()
 
     # Verify login was successful by checking for Books link
     expect(page.get_by_role("link", name="Books", exact=True)).to_be_visible()

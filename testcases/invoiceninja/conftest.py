@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
+from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
 
 sys.path.append(str(Path(__file__).parent.parent))
@@ -85,6 +86,12 @@ def go_to_invoiceninja(page: Page) -> Page:
     return page
 
 
+async def go_to_invoiceninja_async(page: AsyncPage) -> AsyncPage:
+    await page.set_viewport_size({"width": 1280, "height": 720})
+    await page.goto(f"{INVOICE_NINJA_HOST}/login")
+    return page
+
+
 def login_to_invoiceninja(page: Page) -> Page:
     page = go_to_invoiceninja(page)
 
@@ -95,6 +102,20 @@ def login_to_invoiceninja(page: Page) -> Page:
     page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
     page.get_by_role("button", name="Login").click()
     page.get_by_role("button", name="Save").click()
+
+    return page
+
+
+async def login_to_invoiceninja_async(page: AsyncPage) -> AsyncPage:
+    page = await go_to_invoiceninja_async(page)
+
+    # Perform login
+    await page.locator('input[name="email"]').click()
+    await page.locator('input[name="email"]').fill(INITIAL_USER)
+    await page.get_by_role("textbox", name="Password").click()
+    await page.get_by_role("textbox", name="Password").fill(INITIAL_PASSWORD)
+    await page.get_by_role("button", name="Login").click()
+    await page.get_by_role("button", name="Save").click()
 
     return page
 

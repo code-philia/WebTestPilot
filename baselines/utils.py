@@ -12,7 +12,9 @@ sys.path.append(str(PROJECT_DIR))
 
 from testcases.bookstack.conftest import (
     go_to_bookstack,
+    go_to_bookstack_async,
     login_to_bookstack,
+    login_to_bookstack_async,
 )
 from testcases.indico.conftest import (
     login_to_indico,
@@ -20,7 +22,9 @@ from testcases.indico.conftest import (
 )
 from testcases.invoiceninja.conftest import (
     go_to_invoiceninja,
+    go_to_invoiceninja_async,
     login_to_invoiceninja,
+    login_to_invoiceninja_async,
 )
 from testcases.prestashop.conftest import (
     login_to_prestashop,
@@ -45,20 +49,21 @@ async def setup_page_state(
         raise ValueError(f"Unknown application type: {application}")
 
 
-async def setup_invoiceninja_page(page: Page, setup_function: str) -> Page:
+async def setup_invoiceninja_page(
+    page: Page | AsyncPage, setup_function: str
+) -> Page | AsyncPage:
     """Set up InvoiceNinja page based on setup function."""
 
-    # No setup.
-    if setup_function == "":
-        return go_to_invoiceninja(page)
+    if isinstance(page, Page):
+        if setup_function == "":
+            return go_to_invoiceninja(page)
 
-    logged_in_page = login_to_invoiceninja(page)
-
-    if setup_function == "logged_in_page":
-        return logged_in_page
-
+        return login_to_invoiceninja(page)
     else:
-        raise ValueError(f"Unknown invoiceninja setup function: {setup_function}")
+        if setup_function == "":
+            return await go_to_invoiceninja_async(page)
+
+        return await login_to_invoiceninja_async(page)
 
 
 async def setup_indico_page(
@@ -79,31 +84,30 @@ async def setup_prestashop_page(
         else:
             logged_in_page = login_to_prestashop(page)
 
-        if setup_function in ("logged_in_page", "logged_in_buyer_page"):
-            return logged_in_page
+        return logged_in_page
     else:
         if setup_function == "logged_in_buyer_page":
             logged_in_page = await login_to_prestashop_as_buyer_async(page)
         else:
             logged_in_page = await login_to_prestashop_async(page)
 
-        if setup_function in ("logged_in_page", "logged_in_buyer_page"):
-            return logged_in_page
-
-    raise ValueError(f"Unknown prestashop setup function: {setup_function}")
-
-
-async def setup_bookstack_page(page: Page, setup_function: str) -> Page:
-    """Set up BookStack page based on setup function."""
-
-    # No setup.
-    if setup_function == "":
-        return go_to_bookstack(page)
-
-    logged_in_page = login_to_bookstack(page)
-
-    if setup_function == "logged_in_page":
         return logged_in_page
 
+
+async def setup_bookstack_page(
+    page: Page | AsyncPage, setup_function: str
+) -> Page | AsyncPage:
+    """Set up BookStack page based on setup function."""
+
+    if isinstance(page, Page):
+        # No setup.
+        if setup_function == "":
+            return go_to_bookstack(page)
+
+        return login_to_bookstack(page)
     else:
-        raise ValueError(f"Unknown bookstack setup function: {setup_function}")
+        # No setup.
+        if setup_function == "":
+            return await go_to_bookstack_async(page)
+
+        return await login_to_bookstack_async(page)
