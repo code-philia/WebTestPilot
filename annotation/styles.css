@@ -135,19 +135,7 @@ header h1 {
     opacity: 1;
 }
 
-/* Annotation screen specific save status */
-#annotation-save-status {
-    font-size: 0.9rem;
-    padding: 0.5rem 0;
-    text-align: center;
-    background: rgba(22, 163, 74, 0.1);
-    border-radius: 6px;
-    margin-top: 0.5rem;
-}
 
-#annotation-save-status.error {
-    background: rgba(220, 38, 38, 0.1);
-}
 
 
 
@@ -184,6 +172,38 @@ header h1 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+/* Annotation Header Row */
+.annotation-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.annotation-header-row h1 {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.annotation-header-row .keyboard-hints {
+    flex-shrink: 0;
+}
+
+.annotation-header-row #annotation-save-status {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    background: rgba(22, 163, 74, 0.1);
+    border-radius: 6px;
+}
+
+.annotation-header-row #annotation-save-status.error {
+    background: rgba(220, 38, 38, 0.1);
 }
 
 .nav-position {
@@ -524,6 +544,26 @@ main {
     background: #f3f4f6;
 }
 
+.version-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.version-field input {
+    padding: 0.5rem;
+    border: 1px solid #d1d9e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.version-field input:focus {
+    outline: none;
+    border-color: #0969da;
+    box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.1);
+}
+
 .selected-labels .label-item {
     background: #dcfce7;
     border-color: #16a34a;
@@ -554,6 +594,7 @@ main {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .save-button:hover {

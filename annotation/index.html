@@ -97,11 +97,13 @@
                     <button id="next-issue" class="nav-button" disabled>Next →</button>
                 </div>
             </div>
-            <h1>Issue Annotation</h1>
-            <div class="keyboard-hints">
-                <small>💡 Use ← → arrow keys to navigate, Ctrl+S to save</small>
+            <div class="annotation-header-row">
+                <h1>Issue Annotation</h1>
+                <div class="keyboard-hints">
+                    <small>💡 Use ← → arrow keys to navigate, Ctrl+S to save</small>
+                    <div id="annotation-save-status" class="save-status"></div>
+                </div>
             </div>
-            <div id="annotation-save-status" class="save-status"></div>
         </header>
 
         <main class="annotation-layout">
@@ -127,8 +129,7 @@
                         <button id="toggle-iframe" class="btn toggle-button">Show Preview</button>
                     </div>
                     <div id="iframe-container" class="iframe-container" style="display: none;">
-                        <iframe id="github-iframe" src=""
-                            sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                        <iframe id="github-iframe" src="" sandbox="allow-scripts allow-forms"></iframe>
                     </div>
                 </div>
             </section>
@@ -147,6 +148,11 @@
                     <h4>Create New Label</h4>
                     <input type="text" id="new-label-input" placeholder="Enter new label name...">
                     <button id="add-label-btn" class="btn">Add Label</button>
+                </div>
+
+                <div class="version-field">
+                    <h4>Version</h4>
+                    <input type="text" id="version-input" placeholder="version when bug">
                 </div>
 
                 <div class="selected-labels">
