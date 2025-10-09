@@ -56,7 +56,6 @@ def dump_database_mysql(config, output_file: str):
         --password={config["password"]} \
         --extended-insert=FALSE \
         --single-transaction=TRUE \
-        --column-statistics=0 \
         --skip-triggers \
         "{config["database"]}" > {output_file}"""
 
