@@ -30,8 +30,6 @@ services:
     volumes:
       - db:/var/lib/mysql
     restart: unless-stopped
-    ports:
-      - "3306:3306"
 
 volumes:
   app_config:
