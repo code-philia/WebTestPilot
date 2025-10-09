@@ -137,9 +137,15 @@ def generate_seed_sql(
         elif line.startswith("-") and not line.startswith("---"):
             count -= 1
 
+        # Handle pg sequences next id for Postgres. Example:
+        # - SELECT pg_catalog.setval('events.events_id_seq', 1, false);
+        # + SELECT pg_catalog.setval('events.events_id_seq', 3, true);
+        if count == 0 and "SELECT pg_catalog.setval" in line:
+            addition_lines.append(line[1:] + "\n")
+
         if count > 0:
             addition_lines.append(line[1:] + "\n")  # Remove leading '+'
-            count = 0  # to avoid accumulating
+            count = 0  # to avoid accumulating after chunks
 
     with open(seed_output_file, "w") as f:
         if db_type == "mysql":
