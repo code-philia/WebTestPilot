@@ -17,6 +17,12 @@ class IssueAnnotationTool {
     this.init();
   }
 
+  // Helper function to add cache-busting parameter to URLs
+  noCacheUrl(url) {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}_=${Date.now()}`;
+  }
+
   async init() {
     await this.loadWorkspaces();
     this.setupEventListeners();
@@ -64,7 +70,9 @@ class IssueAnnotationTool {
     // Load issues and build URL to app mapping
     for (const app of applications) {
       try {
-        const response = await fetch(`data/splits/${workspace}/${app}.json`);
+        const response = await fetch(
+          this.noCacheUrl(`data/splits/${workspace}/${app}.json`)
+        );
         const issues = await response.json();
 
         stats.progress_by_app[app] = { total: 0, annotated: 0 };
@@ -86,7 +94,9 @@ class IssueAnnotationTool {
 
     // Load annotations and count them
     try {
-      const response = await fetch(`data/splits/${workspace}/annotations.json`);
+      const response = await fetch(
+        this.noCacheUrl(`data/splits/${workspace}/annotations.json`)
+      );
       const annotations = await response.json();
 
       if (annotations && annotations.length > 0) {
@@ -139,7 +149,9 @@ class IssueAnnotationTool {
   async loadIssues(workspace) {
     const loadPromises = this.applications.map(async (app) => {
       try {
-        const response = await fetch(`data/splits/${workspace}/${app}.json`);
+        const response = await fetch(
+          this.noCacheUrl(`data/splits/${workspace}/${app}.json`)
+        );
         const appIssues = await response.json();
         this.issues.push(
           ...appIssues.map((issue) => ({ ...issue, application: app }))
@@ -157,7 +169,9 @@ class IssueAnnotationTool {
 
   async loadAnnotations(workspace) {
     try {
-      const response = await fetch(`data/splits/${workspace}/annotations.json`);
+      const response = await fetch(
+        this.noCacheUrl(`data/splits/${workspace}/annotations.json`)
+      );
       this.annotations = await response.json();
     } catch (e) {
       this.annotations = [];
@@ -167,7 +181,9 @@ class IssueAnnotationTool {
   async loadLabels(workspace) {
     try {
       console.log(`Loading labels for workspace: ${workspace}`);
-      const response = await fetch(`data/splits/${workspace}/labels.json`);
+      const response = await fetch(
+        this.noCacheUrl(`data/splits/${workspace}/labels.json`)
+      );
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
@@ -183,7 +199,9 @@ class IssueAnnotationTool {
 
   async loadDefaultLabels(workspace) {
     try {
-      const response = await fetch("data/original/labels.json");
+      const response = await fetch(
+        this.noCacheUrl("data/original/labels.json")
+      );
       const data = await response.json();
       this.labels = data.labels || data;
     } catch (e) {
@@ -659,8 +677,6 @@ class IssueAnnotationTool {
     // Load and render comments
     this.loadComments();
 
-
-
     // Render labels
     this.renderLabelsList();
     this.renderSelectedLabels();
@@ -685,7 +701,7 @@ class IssueAnnotationTool {
 
   async fetchGitHubComments(commentsUrl) {
     if (!commentsUrl) return [];
-    
+
     try {
       const response = await fetch(commentsUrl);
       if (!response.ok) {
@@ -693,44 +709,57 @@ class IssueAnnotationTool {
       }
       return await response.json();
     } catch (error) {
-      console.error('Error fetching comments:', error);
+      console.error("Error fetching comments:", error);
       return null; // Signal error state
     }
   }
 
   renderComments(comments) {
-    const container = document.getElementById('comments-container');
-    const countElement = document.getElementById('comments-count');
-    
+    const container = document.getElementById("comments-container");
+    const countElement = document.getElementById("comments-count");
+
     if (!comments) {
       container.innerHTML = '<div class="error">Failed to load comments</div>';
-      countElement.textContent = '';
+      countElement.textContent = "";
       return;
     }
-    
+
     if (comments.length === 0) {
-      container.innerHTML = '<div class="no-comments">No comments on this issue</div>';
-      countElement.textContent = '0';
+      container.innerHTML =
+        '<div class="no-comments">No comments on this issue</div>';
+      countElement.textContent = "0";
       return;
     }
-    
+
     countElement.textContent = comments.length;
-    
-    container.innerHTML = comments.map(comment => `
+
+    container.innerHTML = comments
+      .map(
+        (comment) => `
       <div class="comment" id="comment-${comment.id}">
         <div class="comment-header">
-          <img src="${comment.user.avatar_url}" alt="${comment.user.login}" class="comment-avatar">
+          <img src="${comment.user.avatar_url}" alt="${
+          comment.user.login
+        }" class="comment-avatar">
           <div class="comment-meta">
             <div class="comment-meta-left">
-              <a href="${comment.user.html_url}" target="_blank" class="comment-author">
+              <a href="${
+                comment.user.html_url
+              }" target="_blank" class="comment-author">
                 ${this.escapeHtml(comment.user.login)}
               </a>
               <span class="comment-date" title="${comment.created_at}">
-                on ${new Date(comment.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                on ${new Date(comment.created_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </span>
             </div>
             <div class="comment-meta-right">
-              <span class="comment-association">${comment.author_association}</span>
+              <span class="comment-association">${
+                comment.author_association
+              }</span>
               <button class="comment-menu-btn" aria-label="Comment menu">⋯</button>
             </div>
           </div>
@@ -743,34 +772,52 @@ class IssueAnnotationTool {
             <span class="emoji">☺️</span>
           </button>
         </div>
-        ${comment.reactions && comment.reactions.total_count > 0 ? this.renderReactions(comment.reactions) : ''}
+        ${
+          comment.reactions && comment.reactions.total_count > 0
+            ? this.renderReactions(comment.reactions)
+            : ""
+        }
       </div>
-    `).join('');
+    `
+      )
+      .join("");
   }
 
   renderCommentMarkdown(text) {
-    if (!text) return '';
-    
+    if (!text) return "";
+
     // First do basic markdown conversion
     let html = text
-      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/`(.+?)`/g, '<code>$1</code>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-    
+      .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+      .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+      .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.+?)\*/g, "<em>$1</em>")
+      .replace(/`(.+?)`/g, "<code>$1</code>")
+      .replace(
+        /\[([^\]]+)\]\(([^)]+)\)/g,
+        '<a href="$2" target="_blank">$1</a>'
+      );
+
     // Handle GitHub-style mentions and issue references
     html = html
-      .replace(/@([\w-]+)/g, '<a href="https://github.com/$1" target="_blank" style="color: #0969da; text-decoration: none;">@$1</a>')
-      .replace(/#(\d+)/g, '<a href="https://github.com/BookStackApp/BookStack/issues/$1" target="_blank" style="color: #0969da; text-decoration: none;">#$1</a>');
-    
+      .replace(
+        /@([\w-]+)/g,
+        '<a href="https://github.com/$1" target="_blank" style="color: #0969da; text-decoration: none;">@$1</a>'
+      )
+      .replace(
+        /#(\d+)/g,
+        '<a href="https://github.com/BookStackApp/BookStack/issues/$1" target="_blank" style="color: #0969da; text-decoration: none;">#$1</a>'
+      );
+
     // Convert newlines to paragraphs
-    html = html.replace(/\n\n/g, '</p><p>').replace(/^\n/, '<p>').replace(/\n$/, '</p>');
-    if (!html.startsWith('<p>')) html = '<p>' + html;
-    if (!html.endsWith('</p>')) html = html + '</p>';
-    
+    html = html
+      .replace(/\n\n/g, "</p><p>")
+      .replace(/^\n/, "<p>")
+      .replace(/\n$/, "</p>");
+    if (!html.startsWith("<p>")) html = "<p>" + html;
+    if (!html.endsWith("</p>")) html = html + "</p>";
+
     return html;
   }
 
@@ -779,9 +826,9 @@ class IssueAnnotationTool {
     const now = new Date();
     const diffMs = now - date;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 0) return 'today';
-    if (diffDays === 1) return 'yesterday';
+
+    if (diffDays === 0) return "today";
+    if (diffDays === 1) return "yesterday";
     if (diffDays < 7) return `${diffDays} days ago`;
     if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
     return date.toLocaleDateString();
@@ -789,37 +836,43 @@ class IssueAnnotationTool {
 
   renderReactions(reactions) {
     const reactionTypes = [
-      { emoji: '👍', key: '+1' },
-      { emoji: '👎', key: '-1' },
-      { emoji: '😄', key: 'laugh' },
-      { emoji: '🎉', key: 'hooray' },
-      { emoji: '😕', key: 'confused' },
-      { emoji: '❤️', key: 'heart' },
-      { emoji: '🚀', key: 'rocket' },
-      { emoji: '👀', key: 'eyes' }
+      { emoji: "👍", key: "+1" },
+      { emoji: "👎", key: "-1" },
+      { emoji: "😄", key: "laugh" },
+      { emoji: "🎉", key: "hooray" },
+      { emoji: "😕", key: "confused" },
+      { emoji: "❤️", key: "heart" },
+      { emoji: "🚀", key: "rocket" },
+      { emoji: "👀", key: "eyes" },
     ];
 
-    const activeReactions = reactionTypes.filter(r => reactions[r.key] > 0);
-    
-    if (activeReactions.length === 0) return '';
+    const activeReactions = reactionTypes.filter((r) => reactions[r.key] > 0);
+
+    if (activeReactions.length === 0) return "";
 
     return `
       <div class="comment-reactions">
-        ${activeReactions.map(r => `
+        ${activeReactions
+          .map(
+            (r) => `
           <div class="reaction">
             <span>${r.emoji}</span>
             <span>${reactions[r.key]}</span>
           </div>
-        `).join('')}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
 
   async loadComments() {
-    const container = document.getElementById('comments-container');
+    const container = document.getElementById("comments-container");
     container.innerHTML = '<div class="loading">Loading comments...</div>';
-    
-    const comments = await this.fetchGitHubComments(this.currentIssue.comments_url);
+
+    const comments = await this.fetchGitHubComments(
+      this.currentIssue.comments_url
+    );
     this.renderComments(comments);
   }
 

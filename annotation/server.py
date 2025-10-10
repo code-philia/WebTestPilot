@@ -15,6 +15,14 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
         else:
             super().do_GET()
 
+    def end_headers(self):
+        # Add no-cache headers for all JSON files
+        if self.path.endswith(".json") or "?_=" in self.path:
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
+        super().end_headers()
+
     def do_POST(self):
         if self.path.startswith("/save-annotations/"):
             workspace = self.path.split("/")[-1]
@@ -76,13 +84,13 @@ class AnnotationHandler(http.server.SimpleHTTPRequestHandler):
 
     def send_json_response(self, data):
         self.send_response(200)
-        self.send_header("Content-type", "application/json")
+        self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
 
     def send_error_response(self, error_message):
         self.send_response(500)
-        self.send_header("Content-type", "application/json")
+        self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(
             json.dumps({"success": False, "error": error_message}).encode()
