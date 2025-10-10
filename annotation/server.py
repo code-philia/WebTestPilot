@@ -1,6 +1,6 @@
 import http.server
 import json
-import socketserver
+from http.server import ThreadingHTTPServer
 from pathlib import Path
 
 
@@ -111,7 +111,7 @@ def main():
 
     print()
 
-    with socketserver.TCPServer(("", port), AnnotationHandler) as httpd:
+    with ThreadingHTTPServer(("", port), AnnotationHandler) as httpd:
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
