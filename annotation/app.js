@@ -558,6 +558,12 @@ class IssueAnnotationTool {
       versionInput.value = "";
     }
 
+    // Clear commit field initially
+    const commitInput = document.getElementById("commit-input");
+    if (commitInput) {
+      commitInput.value = "";
+    }
+
     // Load existing annotations if any
     const annotation = this.getAnnotation(issue);
     if (annotation) {
@@ -566,6 +572,11 @@ class IssueAnnotationTool {
       // Load existing version if any
       if (versionInput && annotation.version) {
         versionInput.value = annotation.version;
+      }
+
+      // Load existing commit_id if any
+      if (commitInput && annotation.commit_id) {
+        commitInput.value = annotation.commit_id;
       }
     }
 
@@ -974,6 +985,12 @@ class IssueAnnotationTool {
       versionInput.value = "";
     }
 
+    // Clear commit field
+    const commitInput = document.getElementById("commit-input");
+    if (commitInput) {
+      commitInput.value = "";
+    }
+
     this.renderLabelsList();
     this.renderSelectedLabels();
   }
@@ -1009,10 +1026,12 @@ class IssueAnnotationTool {
     saveButton.disabled = true;
 
     const versionInput = document.getElementById("version-input");
+    const commitInput = document.getElementById("commit-input");
     const annotationData = {
       issue_id: this.currentIssue.url,
       annotations: Array.from(this.selectedLabels),
       version: versionInput ? versionInput.value.trim() : "",
+      commit_id: commitInput ? commitInput.value.trim() : "",
       annotated_at: new Date().toISOString(),
     };
 
