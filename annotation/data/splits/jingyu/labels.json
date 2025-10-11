@@ -1,6 +1,12 @@
-{
-  "labels": [
-    "confirmed_bug",
-    "not_bug"
-  ]
-}
+[
+  "confirmed_bug",
+  "not_bug",
+  "wonfix",
+  "missing features",
+  "Lack of data synchronization",
+  "fixed",
+  "third-party library usage issue",
+  "need-discussion",
+  "duplicate",
+  "improper exception handling"
+]

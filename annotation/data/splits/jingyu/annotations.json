@@ -1,1 +1,156 @@
-[]
+[
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/3750",
+    "annotations": [
+      "wonfix",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T03:13:56.513Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/7074",
+    "annotations": [
+      "missing features",
+      "confirmed_bug",
+      "Lack of data synchronization"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T03:25:06.567Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/9719",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "missing features"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T03:33:17.229Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/10351",
+    "annotations": [
+      "confirmed_bug",
+      "Lack of data synchronization",
+      "fixed"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T03:34:31.995Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/149",
+    "annotations": [
+      "confirmed_bug",
+      "Lack of data synchronization",
+      "fixed"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T03:35:45.801Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/10786",
+    "annotations": [
+      "missing features",
+      "confirmed_bug",
+      "fixed",
+      "third-party library usage issue"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:02:58.723Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/9236",
+    "annotations": [
+      "not_bug",
+      "need-discussion"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:05:57.707Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/783",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "missing features"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:07:06.246Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/7258",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "missing features",
+      "Lack of data synchronization"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:08:13.402Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/7403",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "missing features"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:10:01.748Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/8816",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "third-party library usage issue"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:12:47.490Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/5036",
+    "annotations": [
+      "fixed",
+      "duplicate",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:13:31.102Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/5721",
+    "annotations": [
+      "confirmed_bug",
+      "fixed",
+      "improper exception handling"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:15:01.253Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1499",
+    "annotations": [
+      "missing features",
+      "fixed",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-11T04:17:41.455Z"
+  }
+]
