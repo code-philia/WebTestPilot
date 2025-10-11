@@ -1,6 +1,36 @@
-{
-  "labels": [
-    "confirmed_bug",
-    "not_bug"
-  ]
-}
+[
+  "confirmed_bug",
+  "not_bug",
+  "edge case handling",
+  "overlapping feature (1 feature affects another)",
+  "no response",
+  "third-party",
+  "duplicate",
+  "cli",
+  "permissions",
+  "handle missing case",
+  "editor",
+  "change-route",
+  "regression",
+  "wrong-render",
+  "upstream",
+  "responsive",
+  "not_supported",
+  "needs-discussion",
+  "wrong-behaviour",
+  "browser",
+  "usability",
+  "file-related",
+  "element overlay (prevent the underlying element)",
+  "not fixing",
+  "feature",
+  "flaky",
+  "string parsing",
+  "removed-feature",
+  "routing-related",
+  "system shows success (but actually failed)",
+  "language-related",
+  "data-display-no-update",
+  "device-related",
+  "not-implemented-feature"
+]
