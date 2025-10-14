@@ -154,583 +154,469 @@
     "annotated_at": "2025-10-11T04:17:41.455Z"
   },
   {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1672",
-    "annotations": [
-      "missing features",
-      "fixed",
-      "Lack of data synchronization",
-      "confirmed_bug",
-      "non-render"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T08:14:04.034Z"
-  },
-  {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/888",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "missing features",
-      "non-render"
+      "Group1"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:14:20.077Z"
+    "annotated_at": "2025-10-14T11:50:26.635Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1672",
+    "annotations": [
+      "Group1"
+    ],
+    "version": "",
+    "commit_id": "Group2",
+    "annotated_at": "2025-10-14T11:53:14.211Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3787",
     "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed",
-      "UI-alignment"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:18:16.939Z"
+    "annotated_at": "2025-10-14T11:54:07.767Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1428",
     "annotations": [
-      "need-discussion",
-      "confirmed_bug",
-      "fixed"
+      "Group3"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:19:18.157Z"
+    "annotated_at": "2025-10-14T11:55:18.655Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1238",
     "annotations": [
-      "UI-alignment",
-      "fixed",
-      "confirmed_bug",
-      "need-discussion"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:21:13.387Z"
+    "annotated_at": "2025-10-14T11:56:06.167Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/640",
     "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed"
+      "Group4"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:22:35.271Z"
+    "annotated_at": "2025-10-14T11:57:13.556Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2061",
     "annotations": [
-      "fixed",
-      "confirmed_bug",
-      "missing features"
+      "Group5"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:23:48.012Z"
+    "annotated_at": "2025-10-14T11:59:51.851Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3963",
     "annotations": [
-      "fixed",
-      "confirmed_bug",
-      "UI-alignment"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T08:27:54.527Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5134",
-    "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "non-render",
-      "missing features"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T08:42:38.266Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3920",
-    "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed",
-      "no_response"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:01:10.062Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1650",
-    "annotations": [
-      "third-party library usage issue",
-      "improper exception handling",
-      "confirmed_bug",
-      "fixed"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:05:40.240Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/884",
-    "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "missing features"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:07:09.512Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3597",
-    "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "UI-behaviour",
-      "fixed"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:10:48.829Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3931",
-    "annotations": [
-      "UI-behaviour",
-      "duplicate",
-      "fixed",
-      "confirmed_bug"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:13:40.921Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/892",
-    "annotations": [
-      "duplicate",
-      "UI-behaviour",
-      "confirmed_bug",
-      "fixed"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:14:23.691Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3702",
-    "annotations": [
-      "confirmed_bug",
-      "design",
-      "UI-alignment",
-      "fixed"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:15:53.099Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4939",
-    "annotations": [
-      "not_bug",
-      "design"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:19:30.755Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3303",
-    "annotations": [
-      "not_bug",
-      "need-discussion"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:20:02.904Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2684",
-    "annotations": [
-      "confirmed_bug",
-      "fixed"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:22:37.413Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/605",
-    "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed",
-      "UI-behaviour"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:23:28.485Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/203",
-    "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "missing features",
-      "UI-alignment",
-      "UI-behaviour"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:24:47.185Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/751",
-    "annotations": [
-      "Unexpected behavior",
-      "UI-behaviour",
-      "confirmed_bug",
-      "fixed",
-      "cursor-position"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:27:14.821Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/874",
-    "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "need-discussion"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:28:16.527Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4531",
-    "annotations": [
-      "undefined",
-      "confirmed_bug",
-      "fixed",
-      "improper exception handling"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:30:03.904Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4109",
-    "annotations": [
-      "confirmed_bug",
-      "missing features",
-      "Unexpected behavior"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:30:41.596Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4474",
-    "annotations": [
-      "not_bug",
-      "need-discussion",
-      "missing features"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:32:45.113Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/105",
-    "annotations": [
-      "need-discussion",
-      "missing features"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:33:51.263Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3720",
-    "annotations": [
-      "confirmed_bug",
-      "missing features",
-      "fixed",
-      "need-discussion"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:37:56.120Z"
-  },
-  {
-    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3975",
-    "annotations": [
-      "missing features",
-      "need-discussion"
-    ],
-    "version": "",
-    "commit_id": "",
-    "annotated_at": "2025-10-13T09:41:06.384Z"
+    "annotated_at": "2025-10-14T12:01:23.537Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3922",
     "annotations": [
-      "confirmed_bug",
-      "missing features",
-      "Unexpected behavior"
+      "Group5"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:41:51.089Z"
+    "annotated_at": "2025-10-14T12:02:31.330Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5134",
+    "annotations": [
+      "Group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:02:52.590Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3920",
+    "annotations": [
+      "Group7"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:04:16.921Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1650",
+    "annotations": [
+      "Group8"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:05:39.373Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/884",
+    "annotations": [
+      "Group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:06:31.203Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3597",
+    "annotations": [
+      "Group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:06:52.538Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3931",
+    "annotations": [
+      "Group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:07:12.061Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/892",
+    "annotations": [
+      "Group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:07:35.005Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3702",
+    "annotations": [
+      "Group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:08:38.678Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4939",
+    "annotations": [
+      "Group9"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:09:14.805Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3303",
+    "annotations": [
+      "Group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:09:28.832Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2684",
+    "annotations": [
+      "Group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:10:34.210Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/605",
+    "annotations": [
+      "Group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:10:57.426Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/203",
+    "annotations": [
+      "Group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:11:10.314Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/751",
+    "annotations": [
+      "Group7"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:11:41.616Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/874",
+    "annotations": [
+      "Group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:11:57.616Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4531",
+    "annotations": [
+      "Group10"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:12:25.631Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4109",
+    "annotations": [
+      "Group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:13:19.830Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4474",
+    "annotations": [
+      "Group7"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:13:42.922Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/105",
+    "annotations": [
+      "Group9"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:14:51.441Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3720",
+    "annotations": [
+      "Group11"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:16:13.729Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3975",
+    "annotations": [
+      "Group9"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:16:25.006Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4535",
     "annotations": [
-      "missing cases",
-      "confirmed_bug",
-      "fixed"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:44:02.804Z"
+    "annotated_at": "2025-10-14T12:17:00.929Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4466",
     "annotations": [
-      "confirmed_bug",
-      "missing features",
-      "UI-behaviour",
-      "no_response"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:45:28.360Z"
+    "annotated_at": "2025-10-14T12:17:23.658Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1877",
     "annotations": [
-      "Unexpected behavior",
-      "confirmed_bug",
-      "fixed"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:46:06.037Z"
+    "annotated_at": "2025-10-14T12:17:42.973Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4006",
     "annotations": [
-      "non-render",
-      "confirmed_bug",
-      "fixed"
+      "Group1"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:46:32.933Z"
+    "annotated_at": "2025-10-14T12:18:01.822Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2854",
     "annotations": [
-      "design",
-      "confirmed_bug",
-      "fixed",
-      "Unexpected behavior"
+      "Group4"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:48:07.565Z"
+    "annotated_at": "2025-10-14T12:18:26.219Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4337",
     "annotations": [
-      "Unexpected behavior",
-      "confirmed_bug",
-      "fixed",
-      "UI-behaviour"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-13T09:48:51.243Z"
+    "annotated_at": "2025-10-14T12:18:42.334Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3170",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "missing cases"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:30:41.967Z"
+    "annotated_at": "2025-10-14T12:19:26.589Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/97",
     "annotations": [
-      "confirmed_bug",
-      "missing features",
-      "fixed"
+      "Group4"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:32:25.258Z"
+    "annotated_at": "2025-10-14T12:19:47.505Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3028",
     "annotations": [
-      "third-party library usage issue",
-      "confirmed_bug",
-      "fixed"
+      "Group8"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:33:18.044Z"
+    "annotated_at": "2025-10-14T12:20:03.537Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2496",
     "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed"
+      "Group5"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:35:26.501Z"
+    "annotated_at": "2025-10-14T12:20:22.838Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3135",
     "annotations": [
-      "duplicate",
-      "UI-alignment",
-      "confirmed_bug",
-      "fixed"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:36:06.442Z"
+    "annotated_at": "2025-10-14T12:20:38.858Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3470",
     "annotations": [
-      "need-discussion",
-      "missing features"
+      "Group9"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:37:50.349Z"
+    "annotated_at": "2025-10-14T12:20:56.121Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1218",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "design",
-      "UI-behaviour"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:39:32.459Z"
+    "annotated_at": "2025-10-14T12:21:14.310Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4227",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "cursor-position",
-      "missing cases"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:40:47.969Z"
+    "annotated_at": "2025-10-14T12:21:34.578Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/429",
     "annotations": [
-      "missing features",
-      "confirmed_bug",
-      "fixed"
+      "Group1"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:42:02.281Z"
+    "annotated_at": "2025-10-14T12:22:30.109Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/179",
     "annotations": [
-      "design",
-      "UI-alignment",
-      "confirmed_bug",
-      "fixed"
+      "Group2"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:42:23.969Z"
+    "annotated_at": "2025-10-14T12:22:44.523Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1771",
     "annotations": [
-      "Unexpected behavior",
-      "confirmed_bug",
-      "fixed"
+      "Group6"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:43:09.399Z"
+    "annotated_at": "2025-10-14T12:22:58.884Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1587",
     "annotations": [
-      "not_bug"
+      "Group9"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:43:57.583Z"
+    "annotated_at": "2025-10-14T12:23:16.713Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/153",
     "annotations": [
-      "non-render",
-      "confirmed_bug",
-      "fixed"
+      "Group1"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:44:45.083Z"
+    "annotated_at": "2025-10-14T12:23:31.720Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/796",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "improper exception handling"
+      "Group10"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:45:42.250Z"
+    "annotated_at": "2025-10-14T12:23:57.991Z"
   },
   {
     "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1434",
     "annotations": [
-      "confirmed_bug",
-      "fixed",
-      "UI-behaviour",
-      "design"
+      "Group7"
     ],
     "version": "",
     "commit_id": "",
-    "annotated_at": "2025-10-14T04:46:30.812Z"
+    "annotated_at": "2025-10-14T12:24:45.621Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2154",
+    "annotations": [],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-14T12:24:51.697Z"
   }
 ]
