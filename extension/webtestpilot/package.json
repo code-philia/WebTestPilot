@@ -61,6 +61,16 @@
       {
         "command": "webtestpilot.createFolderRoot",
         "title": "New Folder"
+      },
+      {
+        "command": "webtestpilot.import",
+        "title": "Import",
+        "icon": "$(arrow-down)"
+      },
+      {
+        "command": "webtestpilot.testCdpConnection",
+        "title": "WebTestPilot: Test CDP Connection",
+        "icon": "$(plug)"
       }
     ],
     "views": {
@@ -81,6 +91,12 @@
       ]
     },
     "menus": {
+      "commandPalette": [
+        {
+          "command": "webtestpilot.import",
+          "when": "true"
+        }
+      ],
       "view/title": [
         {
           "command": "webtestpilot.createTestRoot",
@@ -89,6 +105,11 @@
         },
         {
           "command": "webtestpilot.createFolderRoot",
+          "when": "view == webtestpilot.treeView",
+          "group": "navigation"
+        },
+        {
+          "command": "webtestpilot.import",
           "when": "view == webtestpilot.treeView",
           "group": "navigation"
         }
@@ -120,6 +141,11 @@
           "group": "1_folderActions"
         },
         {
+          "command": "webtestpilot.runTest",
+          "when": "view == webtestpilot.treeView && viewItem == test",
+          "group": "inline@1"
+        },
+        {
           "command": "webtestpilot.deleteItem",
           "when": "view == webtestpilot.treeView",
           "group": "2_modification"
@@ -131,7 +157,18 @@
         "view": "webtestpilot.treeView",
         "contents": "No WebTestPilot items found. [Create a test](command:webtestpilot.createTestRoot) or [create a folder](command:webtestpilot.createFolderRoot) to get started."
       }
-    ]
+    ],
+    "configuration": {
+      "title": "WebTestPilot",
+      "properties": {
+        "webtestpilot.cdpEndpoint": {
+          "type": "string",
+          "default": "http://localhost:9222",
+          "description": "Chrome DevTools Protocol (CDP) endpoint for connecting to a remote browser. Used by Python Playwright scripts for test automation.",
+          "order": 1
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
@@ -146,6 +183,9 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "vscode-test"
+  },
+  "dependencies": {
+    "playwright-core": "^1.40.0"
   },
   "devDependencies": {
     "@types/vscode": "^1.105.0",

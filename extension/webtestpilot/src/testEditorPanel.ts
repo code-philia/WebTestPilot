@@ -36,9 +36,8 @@ export class TestEditorPanel {
                         this._testItem = { ...this._testItem, ...message.data };
                         return;
                     case 'runTest':
-                        vscode.window.showInformationMessage(`Test case "${message.data.name}" running...`, {
-                            detail: `Running test with ${message.data.actionCount} action(s)`
-                        });
+                        // Execute the actual runTest command
+                        vscode.commands.executeCommand('webtestpilot.runTest', this._testItem);
                         return;
                     case 'close':
                         this.dispose();
@@ -104,6 +103,16 @@ export class TestEditorPanel {
     private _getHtmlForWebview(webview: vscode.Webview) {
         const testItem = this._testItem;
         const actions = testItem.actions || [];
+        
+        // Helper function to escape HTML attributes
+        const escapeHtml = (text: string): string => {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
 
         return `<!DOCTYPE html>
 <html lang="en">
@@ -278,12 +287,12 @@ export class TestEditorPanel {
 
         <div class="form-group">
             <label for="testName">Test Name:</label>
-            <input type="text" id="testName" value="${testItem.name}" />
+            <input type="text" id="testName" value="${escapeHtml(testItem.name)}" />
         </div>
 
         <div class="form-group">
             <label for="testUrl">URL:</label>
-            <input type="url" id="testUrl" value="${testItem.url || ''}" placeholder="https://example.com" />
+            <input type="url" id="testUrl" value="${escapeHtml(testItem.url || '')}" placeholder="https://example.com" />
         </div>
 
         <div class="actions-section">
@@ -297,12 +306,12 @@ export class TestEditorPanel {
                     <div class="action-item compact" data-index="${index}">
                         <div class="action-row">
                             <span class="action-number">${index + 1}.</span>
-                            <input type="text" class="action-text compact" placeholder="Action" value="${action.action}" />
+                            <input type="text" class="action-text compact" placeholder="Action" value="${escapeHtml(action.action || '')}" />
                             <button class="btn btn-danger compact" onclick="removeAction(${index})">×</button>
                         </div>
                         <div class="action-row">
                             <span class="action-number">→</span>
-                            <input type="text" class="expected-result compact" placeholder="Expected result" value="${action.expectedResult}" />
+                            <input type="text" class="expected-result compact" placeholder="Expected result" value="${escapeHtml(action.expectedResult || '')}" />
                         </div>
                     </div>
                 `).join('')}

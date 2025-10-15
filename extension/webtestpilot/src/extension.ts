@@ -4,6 +4,8 @@ import * as vscode from 'vscode';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
+import { TestRunnerPanel } from './testRunnerPanel';
+import { ImportPanel, ImportData } from './importPanel';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -149,107 +151,23 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (test: TestItem) => {
-		console.log('runTestCommand called for test:', test.name);
+		console.log('runTestCommand called for test:', test);
 		
-		// Load the actual test data from file to get the complete test with URL
+		// Validate test item
+		if (!test || !test.id) {
+			vscode.window.showErrorMessage('Invalid test item');
+			return;
+		}
+		
+		// Get workspace root
 		const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
 		if (!workspaceRoot) {
 			vscode.window.showErrorMessage('No workspace folder found');
 			return;
 		}
 
-		const testFilePath = require('path').join(workspaceRoot, '.webtestpilot', test.id);
-		console.log('Test file path:', testFilePath);
-		
-		try {
-			const fs = require('fs').promises;
-			const content = await fs.readFile(testFilePath, 'utf-8');
-			const testData = JSON.parse(content);
-			console.log('Test data loaded:', testData);
-			
-			// Get the URL from the test data
-			const url = testData.url || test.url;
-			if (!url) {
-				vscode.window.showErrorMessage(`No URL found for test "${test.name}"`);
-				return;
-			}
-
-			console.log('URL found:', url);
-
-			// Create webview panel to render the website
-			const panel = vscode.window.createWebviewPanel(
-				'testRunner',
-				`Running: ${test.name}`,
-				vscode.ViewColumn.One,
-				{
-					enableScripts: true,
-					retainContextWhenHidden: true
-				}
-			);
-
-			console.log('Webview panel created');
-
-			// Generate HTML with iframe to load the website
-			panel.webview.html = `
-				<!DOCTYPE html>
-				<html lang="en">
-				<head>
-					<meta charset="UTF-8">
-					<meta name="viewport" content="width=device-width, initial-scale=1.0">
-					<title>Running: ${test.name}</title>
-					<style>
-						body, html {
-							margin: 0;
-							padding: 0;
-							height: 100%;
-							overflow: hidden;
-						}
-						iframe {
-							width: 100%;
-							height: calc(100vh - 60px);
-							border: none;
-						}
-						.header {
-							background-color: var(--vscode-editor-background);
-							padding: 10px;
-							border-bottom: 1px solid var(--vscode-panel-border);
-							display: flex;
-							justify-content: space-between;
-							align-items: center;
-							height: 60px;
-							box-sizing: border-box;
-						}
-						.title {
-							font-family: var(--vscode-font-family);
-							font-size: 14px;
-							color: var(--vscode-foreground);
-							font-weight: bold;
-						}
-						.url {
-							font-family: var(--vscode-font-family);
-							font-size: 12px;
-							color: var(--vscode-descriptionForeground);
-						}
-					</style>
-				</head>
-				<body>
-					<div class="header">
-						<div>
-							<div class="title">Running: ${test.name}</div>
-							<div class="url">${url}</div>
-						</div>
-					</div>
-					<iframe src="${url}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"></iframe>
-				</body>
-				</html>
-			`;
-
-			console.log('Webview HTML set');
-
-		} catch (error) {
-			console.error('Error in runTestCommand:', error);
-			vscode.window.showErrorMessage(`Failed to load test data: ${error}`);
-		}
+		// Use TestRunnerPanel to run the test
+		await TestRunnerPanel.createOrShow(test, workspaceRoot);
 	});
 
 	const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {
@@ -277,6 +195,74 @@ export function activate(context: vscode.ExtensionContext) {
 		// For now, just show the message
 	});
 
+	const importCommand = vscode.commands.registerCommand('webtestpilot.import', async () => {
+		console.log('Import command triggered');
+		vscode.window.showInformationMessage('Import command triggered!');
+		
+		ImportPanel.createOrShow(
+			context.extensionUri,
+			async (data: ImportData) => {
+				console.log('Import data received:', data);
+				// Create a new test based on the imported data
+				const testName = `${data.appName} - Imported Test`;
+				
+				// Create the test with basic information and get the created test
+				const newTest = await treeDataProvider.createTest(testName, undefined);
+				
+				// Update the test with the imported data
+				const updatedTest: TestItem = {
+					...newTest,
+					url: data.url,
+					actions: data.requirements ? [{
+						action: `Verify requirements: ${data.requirements}`,
+						expectedResult: "Requirements should be met"
+					}] : []
+				};
+				
+				await treeDataProvider.updateTest(newTest.id, updatedTest);
+				
+				// Open the test editor for further customization
+				TestEditorPanel.createOrShow(
+					context.extensionUri,
+					updatedTest,
+					async (testItem: TestItem) => {
+						await treeDataProvider.updateTest(testItem.id, testItem);
+					}
+				);
+			}
+		);
+	});
+
+	const testCdpConnectionCommand = vscode.commands.registerCommand('webtestpilot.testCdpConnection', async () => {
+		const cdpEndpoint = TestRunnerPanel.getCdpEndpoint();
+		vscode.window.withProgress({
+			location: vscode.ProgressLocation.Notification,
+			title: `Testing CDP connection to ${cdpEndpoint}...`,
+			cancellable: false
+		}, async () => {
+			const isConnected = await TestRunnerPanel.testCdpConnection();
+			if (isConnected) {
+				vscode.window.showInformationMessage(
+					`✅ CDP connection successful!`,
+					{ detail: `Connected to: ${cdpEndpoint}\n\nYour Python automation scripts can use this endpoint.` }
+				);
+			} else {
+				vscode.window.showErrorMessage(
+					`❌ CDP connection failed`,
+					{
+						modal: true,
+						detail: `Could not connect to: ${cdpEndpoint}\n\nMake sure Chrome/Chromium is running with remote debugging enabled:\n\ngoogle-chrome --remote-debugging-port=9222`
+					},
+					'Open Settings'
+				).then(selection => {
+					if (selection === 'Open Settings') {
+						vscode.commands.executeCommand('workbench.action.openSettings', 'webtestpilot.cdpEndpoint');
+					}
+				});
+			}
+		});
+	});
+
 	// Add all disposables to context
 	context.subscriptions.push(
 		treeView,
@@ -290,6 +276,8 @@ export function activate(context: vscode.ExtensionContext) {
 		addTestCaseCommand,
 		addFolderCommand,
 		runFolderCommand,
+		importCommand,
+		testCdpConnectionCommand,
 		treeDataProvider // Dispose the tree provider to clean up file watchers
 	);
 }
