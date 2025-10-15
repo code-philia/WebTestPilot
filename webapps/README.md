@@ -2,6 +2,11 @@
 
 This folder contains Docker images of all 4 web applications used in the benchmark.
 
+## To generate seeding data
+```bash
+python3 webapps/generate_seed.py indico
+```
+
 ## Details
 
 |Web App.|Version|Port|Platform|Source|
