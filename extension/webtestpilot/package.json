@@ -1,0 +1,163 @@
+{
+  "name": "webtestpilot",
+  "displayName": "webtestpilot",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:webtestpilot.treeView"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "webtestpilot.createTest",
+        "title": "New Test",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "webtestpilot.createFolder",
+        "title": "New Folder",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "webtestpilot.addTestCase",
+        "title": "Add Test Case",
+        "icon": "$(add)"
+      },
+      {
+        "command": "webtestpilot.addFolder",
+        "title": "Add Folder", 
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "webtestpilot.runFolder",
+        "title": "Run All Tests",
+        "icon": "$(run-all)"
+      },
+      {
+        "command": "webtestpilot.deleteItem",
+        "title": "Delete",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "webtestpilot.openTest",
+        "title": "Open Test"
+      },
+      {
+        "command": "webtestpilot.runTest",
+        "title": "Run Test",
+        "icon": "$(play)"
+      },
+      {
+        "command": "webtestpilot.createTestRoot",
+        "title": "New Test"
+      },
+      {
+        "command": "webtestpilot.createFolderRoot",
+        "title": "New Folder"
+      }
+    ],
+    "views": {
+      "webtestpilot": [
+        {
+          "id": "webtestpilot.treeView",
+          "name": "WebTestPilot"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "webtestpilot",
+          "title": "WebTestPilot",
+          "icon": "resources/activity-bar-logo.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "webtestpilot.createTestRoot",
+          "when": "view == webtestpilot.treeView",
+          "group": "navigation"
+        },
+        {
+          "command": "webtestpilot.createFolderRoot",
+          "when": "view == webtestpilot.treeView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "webtestpilot.addTestCase",
+          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "group": "inline@1"
+        },
+        {
+          "command": "webtestpilot.addFolder",
+          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "group": "inline@2"
+        },
+        {
+          "command": "webtestpilot.runFolder",
+          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "group": "inline@3"
+        },
+        {
+          "command": "webtestpilot.createTest",
+          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "group": "1_folderActions"
+        },
+        {
+          "command": "webtestpilot.createFolder",
+          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "group": "1_folderActions"
+        },
+        {
+          "command": "webtestpilot.deleteItem",
+          "when": "view == webtestpilot.treeView",
+          "group": "2_modification"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "webtestpilot.treeView",
+        "contents": "No WebTestPilot items found. [Create a test](command:webtestpilot.createTestRoot) or [create a folder](command:webtestpilot.createFolderRoot) to get started."
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "yarn run check-types && yarn run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "yarn run check-types && yarn run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.105.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.36.0",
+    "esbuild": "^0.25.10",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
