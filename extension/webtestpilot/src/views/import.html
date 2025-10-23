@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Web App</title>
+    <style>
+        body {
+            font-family: var(--vscode-font-family);
+            font-size: var(--vscode-font-size);
+            color: var(--vscode-foreground);
+            background-color: var(--vscode-editor-background);
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--vscode-panel-border);
+        }
+        .title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--vscode-foreground);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--vscode-foreground);
+        }
+        input[type="text"], input[type="url"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--vscode-input-border);
+            background-color: var(--vscode-input-background);
+            color: var(--vscode-input-foreground);
+            font-family: var(--vscode-font-family);
+            font-size: var(--vscode-font-size);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--vscode-font-family);
+            font-size: var(--vscode-font-size);
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+        }
+        .btn-primary:hover {
+            background-color: var(--vscode-button-hoverBackground);
+        }
+        .btn-secondary {
+            background-color: var(--vscode-button-secondaryBackground);
+            color: var(--vscode-button-secondaryForeground);
+        }
+        .btn-secondary:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        .description {
+            color: var(--vscode-descriptionForeground);
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .required {
+            color: var(--vscode-errorForeground);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">Import Web App</div>
+        </div>
+
+        <div class="description">
+            Import a web application to create automated tests. Provide the app details and requirements below.
+        </div>
+
+        <div class="form-group">
+            <label for="appName">App Name <span class="required">*</span></label>
+            <input type="text" id="appName" placeholder="My Web App" required />
+        </div>
+
+        <div class="form-group">
+            <label for="appUrl">App URL <span class="required">*</span></label>
+            <input type="url" id="appUrl" placeholder="https://example.com" required />
+        </div>
+
+        <div class="form-group">
+            <label for="requirements">Requirements</label>
+            <textarea id="requirements" placeholder="Describe what you want to test on this webpage..."></textarea>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-secondary" onclick="closePanel()">Cancel</button>
+            <button class="btn btn-primary" onclick="importApp()">Import</button>
+        </div>
+    </div>
+
+    <script>
+        const vscode = acquireVsCodeApi();
+        
+        function importApp() {
+            const appName = document.getElementById('appName').value.trim();
+            const appUrl = document.getElementById('appUrl').value.trim();
+            const requirements = document.getElementById('requirements').value.trim();
+            
+            if (!appName) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'App name is required'
+                });
+                return;
+            }
+            
+            if (!appUrl) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'App URL is required'
+                });
+                return;
+            }
+            
+            // Basic URL validation
+            try {
+                new URL(appUrl);
+            } catch (e) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Please enter a valid URL'
+                });
+                return;
+            }
+            
+            vscode.postMessage({
+                command: 'import',
+                data: {
+                    appName,
+                    appUrl,
+                    requirements
+                }
+            });
+        }
+        
+        function closePanel() {
+            vscode.postMessage({
+                command: 'close'
+            });
+        }
+        
+        // Allow Enter key to submit when in input fields
+        document.getElementById('appName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('appUrl').focus();
+            }
+        });
+        
+        document.getElementById('appUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('requirements').focus();
+            }
+        });
+        
+        document.getElementById('requirements').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                importApp();
+            }
+        });
+    </script>
+</body>
+</html>

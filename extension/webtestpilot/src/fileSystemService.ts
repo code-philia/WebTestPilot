@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, TestAction } from './models';
+import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
 
 export class FileSystemService {
     private webTestPilotDir: string;
@@ -142,8 +142,28 @@ export class FileSystemService {
     }
 
     async updateTest(testPath: string, testItem: TestItem): Promise<void> {
-        const filePath = path.join(this.webTestPilotDir, testPath);
-        await this.writeTestFile(filePath, testItem);
+        try {
+            const filePath = path.join(this.webTestPilotDir, testPath);
+            
+            // Ensure the directory exists
+            const dir = path.dirname(filePath);
+            await fs.mkdir(dir, { recursive: true });
+            
+            await this.writeTestFile(filePath, testItem);
+        } catch (error) {
+            console.error('FileSystemService.updateTest failed:', error);
+            
+            // Provide more specific error messages
+            if (error instanceof Error && 'code' in error) {
+                const errorCode = (error as any).code;
+                if (errorCode === 'EACCES') {
+                    throw new Error(`Permission denied: Cannot write to file. Please check file permissions for: ${this.webTestPilotDir}`);
+                } else if (errorCode === 'ENOENT') {
+                    throw new Error(`Directory not found: ${this.webTestPilotDir}. Please ensure the workspace directory exists.`);
+                }
+            }
+            throw error;
+        }
     }
 
     private async writeTestFile(filePath: string, testItem: TestItem): Promise<void> {
@@ -155,7 +175,15 @@ export class FileSystemService {
             updatedAt: testItem.updatedAt.toISOString()
         };
 
-        await fs.writeFile(filePath, JSON.stringify(testContent, null, 2), 'utf-8');
+        try {
+            // Write to a temporary file first, then rename to avoid corruption
+            const tempFilePath = filePath + '.tmp';
+            await fs.writeFile(tempFilePath, JSON.stringify(testContent, null, 2), 'utf-8');
+            await fs.rename(tempFilePath, filePath);
+        } catch (error) {
+            console.error('Failed to write test file:', error);
+            throw error;
+        }
     }
 
     private generateTestFileName(name: string): string {
@@ -172,9 +200,9 @@ export class FileSystemService {
 
         this.fileWatcher = vscode.workspace.createFileSystemWatcher(
             new vscode.RelativePattern(this.webTestPilotDir, '**/*'),
-            true, // ignoreCreateEvents (we'll handle through directory reading)
-            true, // ignoreChangeEvents
-            false // don't ignoreDeleteEvents
+            false,
+            false,
+            false
         );
 
         this.fileWatcher.onDidCreate(() => callback());

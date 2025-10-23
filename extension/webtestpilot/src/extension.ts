@@ -5,7 +5,7 @@ import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataPr
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
 import { TestRunnerPanel } from './testRunnerPanel';
-import { ImportPanel, ImportData } from './importPanel';
+import { ImportPanel } from './importPanel';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -119,10 +119,7 @@ export function activate(context: vscode.ExtensionContext) {
 			TestEditorPanel.createOrShow(
 				context.extensionUri,
 				fullTestItem,
-				async (updatedTest: TestItem) => {
-					// Save the updated test
-					await treeDataProvider.updateTest(test.id, updatedTest);
-				}
+				treeDataProvider
 			);
 		} catch (error) {
 			// If file doesn't exist, create a new test with default actions
@@ -134,10 +131,7 @@ export function activate(context: vscode.ExtensionContext) {
 			TestEditorPanel.createOrShow(
 				context.extensionUri,
 				newTestItem,
-				async (updatedTest: TestItem) => {
-					// Save the updated test
-					await treeDataProvider.updateTest(test.id, updatedTest);
-				}
+				treeDataProvider
 			);
 		}
 	});
@@ -197,70 +191,33 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const importCommand = vscode.commands.registerCommand('webtestpilot.import', async () => {
 		console.log('Import command triggered');
-		vscode.window.showInformationMessage('Import command triggered!');
-		
-		ImportPanel.createOrShow(
-			context.extensionUri,
-			async (data: ImportData) => {
-				console.log('Import data received:', data);
-				// Create a new test based on the imported data
-				const testName = `${data.appName} - Imported Test`;
-				
-				// Create the test with basic information and get the created test
-				const newTest = await treeDataProvider.createTest(testName, undefined);
-				
-				// Update the test with the imported data
-				const updatedTest: TestItem = {
-					...newTest,
-					url: data.url,
-					actions: data.requirements ? [{
-						action: `Verify requirements: ${data.requirements}`,
-						expectedResult: "Requirements should be met"
-					}] : []
-				};
-				
-				await treeDataProvider.updateTest(newTest.id, updatedTest);
-				
-				// Open the test editor for further customization
-				TestEditorPanel.createOrShow(
-					context.extensionUri,
-					updatedTest,
-					async (testItem: TestItem) => {
-						await treeDataProvider.updateTest(testItem.id, testItem);
-					}
-				);
-			}
-		);
+		ImportPanel.createOrShow(context.extensionUri, context, treeDataProvider);
 	});
 
-	const testCdpConnectionCommand = vscode.commands.registerCommand('webtestpilot.testCdpConnection', async () => {
-		const cdpEndpoint = TestRunnerPanel.getCdpEndpoint();
-		vscode.window.withProgress({
-			location: vscode.ProgressLocation.Notification,
-			title: `Testing CDP connection to ${cdpEndpoint}...`,
-			cancellable: false
-		}, async () => {
-			const isConnected = await TestRunnerPanel.testCdpConnection();
-			if (isConnected) {
-				vscode.window.showInformationMessage(
-					`✅ CDP connection successful!`,
-					{ detail: `Connected to: ${cdpEndpoint}\n\nYour Python automation scripts can use this endpoint.` }
-				);
-			} else {
-				vscode.window.showErrorMessage(
-					`❌ CDP connection failed`,
-					{
-						modal: true,
-						detail: `Could not connect to: ${cdpEndpoint}\n\nMake sure Chrome/Chromium is running with remote debugging enabled:\n\ngoogle-chrome --remote-debugging-port=9222`
-					},
-					'Open Settings'
-				).then(selection => {
-					if (selection === 'Open Settings') {
-						vscode.commands.executeCommand('workbench.action.openSettings', 'webtestpilot.cdpEndpoint');
-					}
-				});
-			}
-		});
+
+
+	const setWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.setWorkspaceRoot', async () => {
+		const options: vscode.OpenDialogOptions = {
+			canSelectMany: false,
+			canSelectFolders: true,
+			openLabel: 'Select WebTestPilot Workspace Root'
+		};
+
+		const folderUri = await vscode.window.showOpenDialog(options);
+		if (folderUri && folderUri[0]) {
+			const { WorkspaceRootService } = await import('./workspaceRootService.js');
+			await WorkspaceRootService.setWorkspaceRoot(folderUri[0].fsPath);
+		}
+	});
+
+	const showWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.showWorkspaceRoot', async () => {
+		const { WorkspaceRootService } = await import('./workspaceRootService.js');
+		const root = WorkspaceRootService.getWorkspaceRoot();
+		if (root) {
+			vscode.window.showInformationMessage(`WebTestPilot workspace root: ${root}`);
+		} else {
+			vscode.window.showWarningMessage('No WebTestPilot workspace root configured');
+		}
 	});
 
 	// Add all disposables to context
@@ -277,7 +234,8 @@ export function activate(context: vscode.ExtensionContext) {
 		addFolderCommand,
 		runFolderCommand,
 		importCommand,
-		testCdpConnectionCommand,
+		setWorkspaceRootCommand,
+		showWorkspaceRootCommand,
 		treeDataProvider // Dispose the tree provider to clean up file watchers
 	);
 }

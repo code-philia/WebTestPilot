@@ -1,22 +1,22 @@
 import * as vscode from 'vscode';
-import { TestItem, TestAction } from './models';
+import { TestItem } from './models';
+import { WebTestPilotTreeDataProvider } from './treeDataProvider';
 
 export class TestEditorPanel {
     public static currentPanel: TestEditorPanel | undefined;
     private readonly _panel: vscode.WebviewPanel;
     private _disposables: vscode.Disposable[] = [];
     private _testItem: TestItem;
-    private _onDidSave: (testItem: TestItem) => void;
+    private _treeDataProvider: WebTestPilotTreeDataProvider;
 
     private constructor(
         panel: vscode.WebviewPanel,
-        extensionUri: vscode.Uri,
         testItem: TestItem,
-        onDidSave: (testItem: TestItem) => void
+        treeDataProvider: WebTestPilotTreeDataProvider
     ) {
         this._panel = panel;
         this._testItem = { ...testItem };
-        this._onDidSave = onDidSave;
+        this._treeDataProvider = treeDataProvider;
 
         // Set the webview's initial html content
         this._update();
@@ -52,7 +52,7 @@ export class TestEditorPanel {
     public static createOrShow(
         extensionUri: vscode.Uri,
         testItem: TestItem,
-        onDidSave: (testItem: TestItem) => void
+        treeDataProvider: WebTestPilotTreeDataProvider
     ) {
         const column = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
@@ -62,6 +62,7 @@ export class TestEditorPanel {
         if (TestEditorPanel.currentPanel) {
             TestEditorPanel.currentPanel._panel.reveal(column);
             TestEditorPanel.currentPanel._testItem = { ...testItem };
+            TestEditorPanel.currentPanel._treeDataProvider = treeDataProvider;
             TestEditorPanel.currentPanel._update();
             return;
         }
@@ -79,15 +80,16 @@ export class TestEditorPanel {
             }
         );
 
-        TestEditorPanel.currentPanel = new TestEditorPanel(panel, extensionUri, testItem, onDidSave);
+        TestEditorPanel.currentPanel = new TestEditorPanel(panel, testItem, treeDataProvider);
     }
 
     private _update() {
-        const webview = this._panel.webview;
-        this._panel.webview.html = this._getHtmlForWebview(webview);
+        this._getHtmlForWebview().then(html => {
+            this._panel.webview.html = html;
+        });
     }
 
-    private _saveTest(data: any) {
+    private async _saveTest(data: any) {
         this._testItem = {
             ...this._testItem,
             name: data.name,
@@ -96,11 +98,17 @@ export class TestEditorPanel {
             updatedAt: new Date()
         };
         
-        this._onDidSave(this._testItem);
-        vscode.window.showInformationMessage('Test saved successfully!');
+        try {
+            await this._treeDataProvider.updateTest(this._testItem.id, this._testItem);
+            vscode.window.showInformationMessage('Test saved successfully!');
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            vscode.window.showErrorMessage(`Failed to save test: ${errorMessage}`);
+            console.error('Save error:', error);
+        }
     }
 
-    private _getHtmlForWebview(webview: vscode.Webview) {
+    private async _getHtmlForWebview(): Promise<string> {
         const testItem = this._testItem;
         const actions = testItem.actions || [];
         
@@ -114,343 +122,33 @@ export class TestEditorPanel {
                 .replace(/'/g, '&#39;');
         };
 
-        return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Test: ${testItem.name}</title>
-    <style>
-        body {
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            color: var(--vscode-foreground);
-            background-color: var(--vscode-editor-background);
-            padding: 20px;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--vscode-foreground);
-        }
-        input[type="text"], input[type="url"], textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--vscode-input-border);
-            background-color: var(--vscode-input-background);
-            color: var(--vscode-input-foreground);
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            box-sizing: border-box;
-        }
-        textarea {
-            min-height: 60px;
-            resize: vertical;
-        }
-        .actions-section {
-            margin-top: 30px;
-        }
-        .action-item {
-            border: 1px solid var(--vscode-panel-border);
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: var(--vscode-editor-background);
-        }
-        .action-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .action-number {
-            font-weight: bold;
-            color: var(--vscode-descriptionForeground);
-        }
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-        }
-        .btn-primary {
-            background-color: var(--vscode-button-background);
-            color: var(--vscode-button-foreground);
-        }
-        .btn-primary:hover {
-            background-color: var(--vscode-button-hoverBackground);
-        }
-        .btn-secondary {
-            background-color: var(--vscode-button-secondaryBackground);
-            color: var(--vscode-button-secondaryForeground);
-        }
-        .btn-secondary:hover {
-            background-color: var(--vscode-button-secondaryHoverBackground);
-        }
-        .btn-danger {
-            background-color: var(--vscode-errorBackground);
-            color: var(--vscode-button-foreground);
-        }
-        .btn-danger:hover {
-            background-color: var(--vscode-button-hoverBackground);
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--vscode-panel-border);
-            position: sticky;
-            top: 0;
-            background-color: var(--vscode-editor-background);
-            z-index: 10;
-        }
-        .title {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: var(--vscode-foreground);
-        }
-        .button-group {
-            display: flex;
-            gap: 8px;
-        }
-        .action-item.compact {
-            border: 1px solid var(--vscode-panel-border);
-            border-radius: 4px;
-            padding: 8px;
-            margin-bottom: 8px;
-            background-color: var(--vscode-editor-background);
-        }
-        .action-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-        .action-row:last-child {
-            margin-bottom: 0;
-        }
-        .action-number {
-            font-weight: bold;
-            color: var(--vscode-descriptionForeground);
-            min-width: 20px;
-            text-align: right;
-        }
-        .action-text.compact, .expected-result.compact {
-            flex: 1;
-            padding: 4px 6px;
-            border: 1px solid var(--vscode-input-border);
-            background-color: var(--vscode-input-background);
-            color: var(--vscode-input-foreground);
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            min-height: 24px;
-        }
-        .btn.compact {
-            padding: 4px 8px;
-            font-size: 12px;
-            min-width: 24px;
-            border-radius: 3px;
-        }
-        .btn-danger.compact {
-            background-color: var(--vscode-errorBackground);
-            color: var(--vscode-button-foreground);
-            border: none;
-        }
-        .btn-danger.compact:hover {
-            background-color: var(--vscode-button-hoverBackground);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="title">Edit Test: ${testItem.name}</div>
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="saveTest()">Save Test</button>
-                <button class="btn btn-secondary" onclick="runTest()">Run Test</button>
-                <button class="btn btn-secondary" onclick="closePanel()">Close</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="testName">Test Name:</label>
-            <input type="text" id="testName" value="${escapeHtml(testItem.name)}" />
-        </div>
-
-        <div class="form-group">
-            <label for="testUrl">URL:</label>
-            <input type="url" id="testUrl" value="${escapeHtml(testItem.url || '')}" placeholder="https://example.com" />
-        </div>
-
-        <div class="actions-section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <h3>Actions</h3>
-                <button class="btn btn-secondary" onclick="addAction()">Add Action</button>
-            </div>
-            
-            <div id="actionsList">
-                ${actions.map((action, index) => `
-                    <div class="action-item compact" data-index="${index}">
-                        <div class="action-row">
-                            <span class="action-number">${index + 1}.</span>
-                            <input type="text" class="action-text compact" placeholder="Action" value="${escapeHtml(action.action || '')}" />
-                            <button class="btn btn-danger compact" onclick="removeAction(${index})">×</button>
-                        </div>
-                        <div class="action-row">
-                            <span class="action-number">→</span>
-                            <input type="text" class="expected-result compact" placeholder="Expected result" value="${escapeHtml(action.expectedResult || '')}" />
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const vscode = acquireVsCodeApi();
-        
-        function addAction() {
-            const actionsList = document.getElementById('actionsList');
-            const actionCount = actionsList.children.length;
-            
-            const actionItem = document.createElement('div');
-            actionItem.className = 'action-item compact';
-            actionItem.dataset.index = actionCount;
-            
-            actionItem.innerHTML = \`
+        // Generate actions list HTML
+        const actionsListHtml = actions.map((action, index) => `
+            <div class="action-item compact" data-index="${index}">
                 <div class="action-row">
-                    <span class="action-number">\${actionCount + 1}.</span>
-                    <input type="text" class="action-text compact" placeholder="Action" />
-                    <button class="btn btn-danger compact" onclick="removeAction(\${actionCount})">×</button>
+                    <span class="action-number">${index + 1}.</span>
+                    <input type="text" class="action-text compact" placeholder="Action" value="${escapeHtml(action.action || '')}" />
+                    <button class="btn btn-danger compact" onclick="removeAction(${index})">×</button>
                 </div>
                 <div class="action-row">
                     <span class="action-number">→</span>
-                    <input type="text" class="expected-result compact" placeholder="Expected result" />
+                    <input type="text" class="expected-result compact" placeholder="Expected result" value="${escapeHtml(action.expectedResult || '')}" />
                 </div>
-            \`;
-            
-            actionsList.appendChild(actionItem);
-            updateActionNumbers();
-        }
+            </div>
+        `).join('');
+
+        // Read HTML template from file
+        const fs = require('fs').promises;
+        const htmlPath = require('path').join(__dirname, 'views', 'test-editor.html');
+        let htmlContent = await fs.readFile(htmlPath, 'utf-8');
         
-        function removeAction(index) {
-            const actionItem = document.querySelector(\`.action-item.compact[data-index="\${index}"]\`);
-            if (actionItem) {
-                actionItem.remove();
-                updateActionNumbers();
-            }
-        }
+        // Replace placeholders
+        htmlContent = htmlContent.replace(/\{\{TEST_NAME\}\}/g, escapeHtml(testItem.name));
+        htmlContent = htmlContent.replace(/\{\{TEST_NAME_VALUE\}\}/g, escapeHtml(testItem.name));
+        htmlContent = htmlContent.replace(/\{\{TEST_URL_VALUE\}\}/g, escapeHtml(testItem.url || ''));
+        htmlContent = htmlContent.replace(/\{\{ACTIONS_LIST\}\}/g, actionsListHtml);
         
-        function updateActionNumbers() {
-            const actionItems = document.querySelectorAll('.action-item.compact');
-            actionItems.forEach((item, index) => {
-                item.dataset.index = index;
-                const numberSpans = item.querySelectorAll('.action-number');
-                if (numberSpans[0]) {
-                    numberSpans[0].textContent = \`\${index + 1}.\`;
-                }
-                const removeBtn = item.querySelector('.btn-danger.compact');
-                if (removeBtn) {
-                    removeBtn.setAttribute('onclick', \`removeAction(\${index})\`);
-                }
-            });
-        }
-        
-        function getActionsData() {
-            const actionItems = document.querySelectorAll('.action-item.compact');
-            const actions = [];
-            
-            actionItems.forEach(item => {
-                const actionText = item.querySelector('.action-text.compact').value.trim();
-                const expectedResult = item.querySelector('.expected-result.compact').value.trim();
-                
-                if (actionText || expectedResult) {
-                    actions.push({
-                        action: actionText,
-                        expectedResult: expectedResult
-                    });
-                }
-            });
-            
-            return actions;
-        }
-        
-        function saveTest() {
-            const name = document.getElementById('testName').value.trim();
-            const url = document.getElementById('testUrl').value.trim();
-            const actions = getActionsData();
-            
-            if (!name) {
-                vscode.postMessage({
-                    command: 'showError',
-                    text: 'Test name is required'
-                });
-                return;
-            }
-            
-            vscode.postMessage({
-                command: 'save',
-                data: {
-                    name,
-                    url,
-                    actions
-                }
-            });
-        }
-        
-        function closePanel() {
-            vscode.postMessage({
-                command: 'close'
-            });
-        }
-        
-        function runTest() {
-            const name = document.getElementById('testName').value.trim();
-            const actions = getActionsData();
-            
-            vscode.postMessage({
-                command: 'runTest',
-                data: {
-                    name,
-                    actionCount: actions.length
-                }
-            });
-        }
-        
-        // Auto-save on input changes
-        document.getElementById('testName').addEventListener('input', function() {
-            vscode.postMessage({
-                command: 'updateTest',
-                data: {
-                    name: this.value.trim()
-                }
-            });
-        });
-        
-        document.getElementById('testUrl').addEventListener('input', function() {
-            vscode.postMessage({
-                command: 'updateTest',
-                data: {
-                    url: this.value.trim()
-                }
-            });
-        });
-    </script>
-</body>
-</html>`;
+        return htmlContent;
     }
 
     public dispose() {

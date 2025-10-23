@@ -60,13 +60,18 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     private async initialize(): Promise<void> {
-        await this.fileSystemService.initialize();
-        await this.loadFromFileSystem();
-        
-        // Start watching for file changes
-        this.fileSystemService.startWatching(() => {
-            this.loadFromFileSystem();
-        });
+        try {
+            await this.fileSystemService.initialize();
+            await this.loadFromFileSystem();
+            
+            // Start watching for file changes
+            this.fileSystemService.startWatching(() => {
+                this.loadFromFileSystem();
+            });
+        } catch (error) {
+            console.error('Failed to initialize TreeDataProvider:', error);
+            vscode.window.showErrorMessage(`Failed to initialize WebTestPilot: ${error instanceof Error ? error.message : String(error)}`);
+        }
     }
 
     private async loadFromFileSystem(): Promise<void> {
@@ -154,8 +159,13 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     async updateTest(testPath: string, testItem: TestItem): Promise<void> {
-        await this.fileSystemService.updateTest(testPath, testItem);
-        await this.loadFromFileSystem();
+        try {
+            await this.fileSystemService.updateTest(testPath, testItem);
+            await this.loadFromFileSystem();
+        } catch (error) {
+            console.error('TreeDataProvider.updateTest failed:', error);
+            throw error;
+        }
     }
 
     getChildrenTests(folderId?: string): TestItem[] {

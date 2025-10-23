@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Browser: {{TEST_NAME}}</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            font-family: var(--vscode-font-family);
+        }
+        .header {
+            background-color: var(--vscode-editor-background);
+            padding: 10px;
+            border-bottom: 1px solid var(--vscode-panel-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title {
+            font-size: 14px;
+            color: var(--vscode-foreground);
+            font-weight: bold;
+        }
+        .status {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+        }
+        .url-bar {
+            font-size: 11px;
+            color: var(--vscode-textLink-foreground);
+            padding: 5px 10px;
+            background-color: var(--vscode-input-background);
+            border-radius: 3px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .stop-button {
+            background-color: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: var(--vscode-font-family);
+            display: none;
+        }
+        .stop-button:hover {
+            background-color: var(--vscode-button-hoverBackground);
+        }
+        .stop-button:active {
+            background-color: var(--vscode-button-secondaryBackground);
+        }
+        .stop-button.visible {
+            display: block;
+        }
+        .content {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #2d2d2d;
+        }
+        #screenshot {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        .loading {
+            color: var(--vscode-foreground);
+            font-size: 14px;
+            text-align: center;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background-color: var(--vscode-statusBar-background);
+            color: var(--vscode-statusBar-foreground);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 11px;
+        }
+        .console-log {
+            max-height: 100px;
+            overflow-y: auto;
+            font-family: var(--vscode-editor-font-family);
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+        }
+        .fps {
+            margin-left: auto;
+            color: var(--vscode-statusBar-foreground);
+        }
+        .error {
+            color: var(--vscode-errorForeground);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="title">🔴 Live: {{TEST_NAME}}</div>
+            <div class="status" id="status">Connecting to browser...</div>
+        </div>
+        <div class="controls">
+            <button id="stop-button" class="stop-button" title="Stop test execution">⏹️ Stop Test</button>
+            <div class="url-bar" id="url-bar">-</div>
+        </div>
+    </div>
+    <div class="content" id="content">
+        <div class="loading" id="loading">Connecting to remote browser...</div>
+        <img id="screenshot" style="display: none;" />
+    </div>
+    <div class="footer">
+        <span id="footer-text">Waiting for connection...</span>
+        <span class="fps" id="fps"></span>
+    </div>
+    <script>
+        const vscode = acquireVsCodeApi();
+        const screenshot = document.getElementById('screenshot');
+        const loading = document.getElementById('loading');
+        const status = document.getElementById('status');
+        const urlBar = document.getElementById('url-bar');
+        const footerText = document.getElementById('footer-text');
+        const fpsElement = document.getElementById('fps');
+        const stopButton = document.getElementById('stop-button');
+
+        let frameCount = 0;
+        let lastFpsUpdate = Date.now();
+
+        // Stop button click handler
+        stopButton.addEventListener('click', () => {
+            vscode.postMessage({ type: 'stopTest' });
+            stopButton.disabled = true;
+            stopButton.textContent = '⏹️ Stopping...';
+        });
+
+        // Notify extension that webview is ready
+        vscode.postMessage({ type: 'ready' });
+
+        // Handle messages from extension
+        window.addEventListener('message', event => {
+            const message = event.data;
+            
+            switch (message.type) {
+                case 'connected':
+                    status.textContent = '🟢 Connected';
+                    status.style.color = '#4EC9B0';
+                    loading.style.display = 'none';
+                    urlBar.textContent = message.url || 'about:blank';
+                    footerText.textContent = 'Streaming live from remote browser';
+                    break;
+                
+                case 'screenshot':
+                    screenshot.src = 'data:image/png;base64,' + message.data;
+                    screenshot.style.display = 'block';
+                    loading.style.display = 'none';
+                    
+                    // Update FPS counter
+                    frameCount++;
+                    const now = Date.now();
+                    if (now - lastFpsUpdate >= 1000) {
+                        const fps = Math.round(frameCount / ((now - lastFpsUpdate) / 1000));
+                        fpsElement.textContent = fps + ' fps';
+                        frameCount = 0;
+                        lastFpsUpdate = now;
+                    }
+                    break;
+                
+                case 'navigation':
+                    urlBar.textContent = message.url;
+                    break;
+                
+                case 'console':
+                    console.log('[Browser ' + message.level + ']:', message.text);
+                    break;
+                
+                case 'testStarted':
+                    stopButton.classList.add('visible');
+                    stopButton.disabled = false;
+                    stopButton.textContent = '⏹️ Stop Test';
+                    footerText.textContent = 'Test running... Click Stop to cancel';
+                    break;
+                
+                case 'testFinished':
+                case 'testStopped':
+                    stopButton.classList.remove('visible');
+                    stopButton.disabled = false;
+                    stopButton.textContent = '⏹️ Stop Test';
+                    if (message.type === 'testStopped') {
+                        footerText.textContent = 'Test stopped by user';
+                    } else {
+                        footerText.textContent = 'Test finished';
+                    }
+                    break;
+                
+                case 'error':
+                    loading.innerHTML = '<div class="error">❌ ' + message.message + '</div>';
+                    status.textContent = '🔴 Disconnected';
+                    status.style.color = 'var(--vscode-errorForeground)';
+                    footerText.textContent = 'Connection failed';
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>

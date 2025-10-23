@@ -1,4 +1,6 @@
 const esbuild = require("esbuild");
+const path = require("path");
+const fs = require("fs");
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
@@ -23,6 +25,27 @@ const esbuildProblemMatcherPlugin = {
 	},
 };
 
+function copyHtmlFiles() {
+	const srcDir = path.join(__dirname, 'src', 'views');
+	const destDir = path.join(__dirname, 'dist', 'views');
+	
+	// Create destination directory if it doesn't exist
+	if (!fs.existsSync(destDir)) {
+		fs.mkdirSync(destDir, { recursive: true });
+	}
+	
+	// Copy all HTML files
+	const files = fs.readdirSync(srcDir);
+	files.forEach(file => {
+		if (file.endsWith('.html')) {
+			const srcPath = path.join(srcDir, file);
+			const destPath = path.join(destDir, file);
+			fs.copyFileSync(srcPath, destPath);
+			console.log(`Copied ${file} to dist/views/`);
+		}
+	});
+}
+
 async function main() {
 	const ctx = await esbuild.context({
 		entryPoints: [
@@ -42,11 +65,16 @@ async function main() {
 			esbuildProblemMatcherPlugin,
 		],
 	});
+	
 	if (watch) {
 		await ctx.watch();
+		// Copy HTML files initially in watch mode
+		copyHtmlFiles();
 	} else {
 		await ctx.rebuild();
 		await ctx.dispose();
+		// Copy HTML files after build
+		copyHtmlFiles();
 	}
 }
 

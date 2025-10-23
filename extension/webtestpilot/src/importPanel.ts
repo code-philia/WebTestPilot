@@ -1,4 +1,7 @@
 import * as vscode from 'vscode';
+import { TestItem } from './models';
+import { WebTestPilotTreeDataProvider } from './treeDataProvider';
+import { TestEditorPanel } from './testEditorPanel';
 
 export interface ImportData {
     appName: string;
@@ -10,15 +13,14 @@ export class ImportPanel {
     public static currentPanel: ImportPanel | undefined;
     private readonly _panel: vscode.WebviewPanel;
     private _disposables: vscode.Disposable[] = [];
-    private _onDidImport: (data: ImportData) => void;
 
     private constructor(
         panel: vscode.WebviewPanel,
         extensionUri: vscode.Uri,
-        onDidImport: (data: ImportData) => void
+        private context: vscode.ExtensionContext,
+        private treeDataProvider: WebTestPilotTreeDataProvider
     ) {
         this._panel = panel;
-        this._onDidImport = onDidImport;
 
         // Set the webview's initial html content
         this._update();
@@ -46,7 +48,8 @@ export class ImportPanel {
 
     public static createOrShow(
         extensionUri: vscode.Uri,
-        onDidImport: (data: ImportData) => void
+        context: vscode.ExtensionContext,
+        treeDataProvider: WebTestPilotTreeDataProvider
     ) {
         const column = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
@@ -71,225 +74,61 @@ export class ImportPanel {
             }
         );
 
-        ImportPanel.currentPanel = new ImportPanel(panel, extensionUri, onDidImport);
+        ImportPanel.currentPanel = new ImportPanel(panel, extensionUri, context, treeDataProvider);
     }
 
     private _update() {
-        const webview = this._panel.webview;
-        this._panel.webview.html = this._getHtmlForWebview(webview);
+        this._getHtmlForWebview().then(html => {
+            this._panel.webview.html = html;
+        });
     }
 
-    private _handleImport(data: ImportData) {
+    private async _handleImport(data: ImportData) {
         if (!data.appName || !data.url) {
             vscode.window.showErrorMessage('App name and URL are required');
             return;
         }
 
-        this._onDidImport(data);
-        vscode.window.showInformationMessage(`Successfully imported "${data.appName}"!`);
-        this.dispose();
+        try {
+            console.log('Import data received:', data);
+            // Create a new test based on the imported data
+            const testName = `${data.appName} - Imported Test`;
+            
+            // Create the test with basic information and get the created test
+            const newTest = await this.treeDataProvider.createTest(testName, undefined);
+            
+            // Update the test with the imported data
+            const updatedTest: TestItem = {
+                ...newTest,
+                url: data.url,
+                actions: data.requirements ? [{
+                    action: `Verify requirements: ${data.requirements}`,
+                    expectedResult: "Requirements should be met"
+                }] : []
+            };
+            
+            await this.treeDataProvider.updateTest(newTest.id, updatedTest);
+            
+            // Open the test editor for further customization
+            TestEditorPanel.createOrShow(
+                this.context.extensionUri,
+                updatedTest,
+                this.treeDataProvider
+            );
+
+            vscode.window.showInformationMessage(`Successfully imported "${data.appName}"!`);
+            this.dispose();
+        } catch (error) {
+            console.error('Error during import:', error);
+            vscode.window.showErrorMessage(`Failed to import "${data.appName}": ${error}`);
+        }
     }
 
-    private _getHtmlForWebview(webview: vscode.Webview) {
-        return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Import Web App</title>
-    <style>
-        body {
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            color: var(--vscode-foreground);
-            background-color: var(--vscode-editor-background);
-            padding: 20px;
-            margin: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--vscode-panel-border);
-        }
-        .title {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: var(--vscode-foreground);
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--vscode-foreground);
-        }
-        input[type="text"], input[type="url"], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--vscode-input-border);
-            background-color: var(--vscode-input-background);
-            color: var(--vscode-input-foreground);
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--vscode-font-family);
-            font-size: var(--vscode-font-size);
-            font-weight: 500;
-        }
-        .btn-primary {
-            background-color: var(--vscode-button-background);
-            color: var(--vscode-button-foreground);
-        }
-        .btn-primary:hover {
-            background-color: var(--vscode-button-hoverBackground);
-        }
-        .btn-secondary {
-            background-color: var(--vscode-button-secondaryBackground);
-            color: var(--vscode-button-secondaryForeground);
-        }
-        .btn-secondary:hover {
-            background-color: var(--vscode-button-secondaryHoverBackground);
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 30px;
-        }
-        .description {
-            color: var(--vscode-descriptionForeground);
-            font-size: 0.9em;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        .required {
-            color: var(--vscode-errorForeground);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="title">Import Web App</div>
-        </div>
-
-        <div class="description">
-            Import a web application to create automated tests. Provide the app details and requirements below.
-        </div>
-
-        <div class="form-group">
-            <label for="appName">App Name <span class="required">*</span></label>
-            <input type="text" id="appName" placeholder="My Web App" required />
-        </div>
-
-        <div class="form-group">
-            <label for="appUrl">App URL <span class="required">*</span></label>
-            <input type="url" id="appUrl" placeholder="https://example.com" required />
-        </div>
-
-        <div class="form-group">
-            <label for="requirements">Requirements</label>
-            <textarea id="requirements" placeholder="Describe what you want to test on this webpage..."></textarea>
-        </div>
-
-        <div class="button-group">
-            <button class="btn btn-secondary" onclick="closePanel()">Cancel</button>
-            <button class="btn btn-primary" onclick="importApp()">Import</button>
-        </div>
-    </div>
-
-    <script>
-        const vscode = acquireVsCodeApi();
-        
-        function importApp() {
-            const appName = document.getElementById('appName').value.trim();
-            const appUrl = document.getElementById('appUrl').value.trim();
-            const requirements = document.getElementById('requirements').value.trim();
-            
-            if (!appName) {
-                vscode.postMessage({
-                    command: 'showError',
-                    text: 'App name is required'
-                });
-                return;
-            }
-            
-            if (!appUrl) {
-                vscode.postMessage({
-                    command: 'showError',
-                    text: 'App URL is required'
-                });
-                return;
-            }
-            
-            // Basic URL validation
-            try {
-                new URL(appUrl);
-            } catch (e) {
-                vscode.postMessage({
-                    command: 'showError',
-                    text: 'Please enter a valid URL'
-                });
-                return;
-            }
-            
-            vscode.postMessage({
-                command: 'import',
-                data: {
-                    appName,
-                    appUrl,
-                    requirements
-                }
-            });
-        }
-        
-        function closePanel() {
-            vscode.postMessage({
-                command: 'close'
-            });
-        }
-        
-        // Allow Enter key to submit when in input fields
-        document.getElementById('appName').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('appUrl').focus();
-            }
-        });
-        
-        document.getElementById('appUrl').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('requirements').focus();
-            }
-        });
-        
-        document.getElementById('requirements').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && e.ctrlKey) {
-                importApp();
-            }
-        });
-    </script>
-</body>
-</html>`;
+    private async _getHtmlForWebview(): Promise<string> {
+        // Read HTML template from file
+        const fs = require('fs').promises;
+        const htmlPath = require('path').join(__dirname, 'views', 'import.html');
+        return await fs.readFile(htmlPath, 'utf-8');
     }
 
     public dispose() {
