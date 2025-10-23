@@ -1,4 +1,0 @@
-name: 21::Conference Add Track Group
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 'Programme' -> Programme sect opens. Click 'Add track grp' -> Form opens. Click 'Title' box -> Focused. Type 'Track grp'. Title has uniq name. Click 'Desc' box -> Focused. Type 'Many papers abt'. Desc has txt. Click 'Save' -> Track grp created & saved. Verify grp in list cont. List shows new grp. Verify desc vis. Desc disp.

@@ -1,4 +1,0 @@
-name: 08::Chapter Update
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: Click 'Edit' -> Chap edit frm opens w/ curr vals. Focus on 'Chap Name' txtbx. Clear & type 'Chap Upd'. Click Rich Txt Area iframe -> Clear & type 'Desc Upd'. Click 'Save Chap'. Verif pg heading & desc show updates. Rough draft.

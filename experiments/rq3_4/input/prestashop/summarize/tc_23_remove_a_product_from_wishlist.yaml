@@ -1,4 +1,0 @@
-name: 23::Remove A Product From Wishlist
-url: http://localhost:8083/
-setup_function: created_wishlist_item_page
-description: "Quick draft: Enter 'Hummingbird printed t-shirt' in Search box. Hit Enter or click search icon. Results page loads & shows prod. Click heart (Add to Wishlist) on prod card. Select 'My wishlist'. 'Prod added' msg appears. Click active heart on card. 'Prod removed' msg shows."

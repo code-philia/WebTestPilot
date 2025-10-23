@@ -1,4 +1,0 @@
-name: 09::Chapter Delete
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: Click 'Del' ln chp actns. Del conf dlg pops up. Click 'Conf' btn. Chp del confd. Ver usr redir frm del chp pg. Usr not on del chp pg anymore.

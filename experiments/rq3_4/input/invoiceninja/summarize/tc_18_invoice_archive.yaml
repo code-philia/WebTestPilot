@@ -1,4 +1,0 @@
-name: 18::Invoice Archive
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click 'More Acts'/'Acts' ddwn. Menu pops up. Hit 'Arch'. Conf dialog shows. Chk inv status -> 'Arch'. Status upd post arch.

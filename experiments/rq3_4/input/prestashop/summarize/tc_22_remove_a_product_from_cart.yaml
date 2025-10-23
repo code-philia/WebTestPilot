@@ -1,4 +1,0 @@
-name: 22::Remove A Product From Cart
-url: http://localhost:8083/
-setup_function: created_cart_item_page
-description: Click prod link "Hummingbird printed t-shirt" -> Prod detail pg opens -> Click size dd -> DD opens -> Select size 'M' -> Size M chosen -> Check color Black -> Color Black selected -> Click "Add to cart" -> Conf modal appears -> Click "Cont shop"/close modal -> Modal closes -> Click cart icon -> Cart pg loads -> Verify prod name, color, size in cart -> Prod details correct -> Click "del" link/icon -> Prod line disappears -> Verify cart empty -> Msg "No more items" disp.

@@ -1,4 +1,0 @@
-name: 11::Delete A Category
-url: http://localhost:8083/
-setup_function: created_parent_category_page
-description: Find 'Shoes' row -> Click 3-dot btn -> Dropdown -> Click 'Delete' -> Modal w/ opts -> Sel 'assoc w/ parent & offline' rb -> Click 'Delete' -> 'Success msg' shown

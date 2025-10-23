@@ -1,4 +1,0 @@
-name: 31::Credit Update
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Clickcate the first line item quantity field. Line item quantity field is visible. Change the quantity of first line from default to "10". Quantity field shows updated as 10. Click "Save" button. Credit changes are saved. Verify updated quantity of 10 for first line item. Credit shows updated first line item quantity

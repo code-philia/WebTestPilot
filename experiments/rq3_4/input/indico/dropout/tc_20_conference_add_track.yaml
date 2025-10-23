@@ -1,4 +1,0 @@
-name: 20::Conference Add Track
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Programme" link in navigation. Programme section opens. Track creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Track" in the title field. Title field contains unique track name. Click in the "Code" textbox. Code field is focused. Type "OC" in the code field. Code field contains track code. Click in the "Description" textbox. Description field is focused. Type "Papers about" in the description field. Description field contains text. Click "Save" button. Verify track appears in track list container. Track list shows the new track.

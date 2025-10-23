@@ -1,4 +1,0 @@
-name: 31::Conference Registration State Management
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click Reg link -> Reg sect opens -> Click Start now btn -> Reg init -> Click Close now lnk -> Reg close init -> Click Reopen now btn -> Confirm dialog pops -> Click OK btn -> Reg reopen conf

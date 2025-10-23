@@ -1,4 +1,0 @@
-name: 22::Assign Role to User
-url: http://localhost:8081/
-setup_function: created_role_page
-description: Click 'Users' in setts menu. Users mgmt sectn opens. Selct user Guest guest@example.com. User dets pg or edit frm opens. Selct 'Role'. Role selctd & chked. Click 'Save' btn. User role assgnmnt saved. Vrfy role 'Role' assgned to Guest. Guest shws assgned role 'Role'

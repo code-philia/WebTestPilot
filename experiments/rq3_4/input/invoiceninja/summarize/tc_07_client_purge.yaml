@@ -1,4 +1,0 @@
-name: 07::Client Purge
-url: http://localhost:8082/
-setup_function: created_client_page
-description: "Find client 2 b del. Client shld b visible. Hit 'More Acts' or ctx menu. Adv acts menu pops up. Select 'Purge'/'Del Perm'. Conf dialog shows. Hit 'Cont'. Perm del confirmed. #roughdraft"

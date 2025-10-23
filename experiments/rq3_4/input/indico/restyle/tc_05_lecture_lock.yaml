@@ -1,4 +1,0 @@
-name: 05::Lecture Lock
-url: http://localhost:8080/
-setup_function: created_lecture_page
-description: To begin, you'll want to interact with the action menu button, which is represented by three dots. Next, ensure that the action menu dropdown has successfully opened up for you. For your reference, after opening the dropdown, select the 'Change type' option from the list provided. Understand that once you click 'Change type', a new submenu will appear, expanding your options. If you encounter any issues, simply troubleshoot by verifying that the 'Lock' option is visible and clickable within the submenu. Once everything is set, proceed with clicking the 'Lock' option, and watch as the lock confirmation dialog pops up like a surprise in a story. Finally, in a relaxed manner, just tap the 'Lock event' button, and voila! The lecture locking process is now confirmed.

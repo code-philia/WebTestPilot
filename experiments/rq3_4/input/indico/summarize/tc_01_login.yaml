@@ -1,4 +1,0 @@
-name: 01::Login
-url: http://localhost:8080/
-setup_function: ''
-description: Click 'Login' -> Auth opts appear -> Click username/email box -> Focus on username -> Type admin@admin.com -> Username shown -> Click pwd box -> Focus on pwd -> Type webtestpilot -> Masked chars shown -> Click 'Login w/ Indico' -> Redirect to dashboard -> Verify 'My profile' in nav -> Confirms login success

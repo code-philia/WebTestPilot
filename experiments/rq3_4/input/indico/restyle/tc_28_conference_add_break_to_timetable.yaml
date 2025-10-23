@@ -1,5 +1,0 @@
-name: 28::Conference Add Break to Timetable
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: To access the timetable, simply click on the "Timetable" link found within the navigation bar. Next, you'll observe the Timetable view opening up before your eyes. For adding a new entry, proceed to click the "Add new" dropdown button now. The Add new menu will then appear, ready for your selection. Should you encounter any issues, ensure you're clicking the "Break" option correctly to open the Break creation form. Once inside the form, focus shifts to the "Title" textbox where you should click. The Title field becomes active, awaiting your input with bated breath. Now, type "Break" into the title field, filling it with the necessary text. Confirm that the title field indeed contains the break text you just entered. Afterward, click the "Save" button to finalize the process. The Break is now created and saved, seamlessly integrated into your schedule. Lastly, to verify everything went smoothly, check if "Break" has appeared in the timetable canvas. And there you have it; 
-  the timetable now proudly displays the break entry.

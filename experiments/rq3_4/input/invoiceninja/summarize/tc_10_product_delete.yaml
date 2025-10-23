@@ -1,4 +1,0 @@
-name: 10::Product Delete
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click 'More Acts'/'Acts' ddwn. Acts menu pops. Click 'Del'. Del conf dlg shows up.

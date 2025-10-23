@@ -1,5 +1,0 @@
-name: 19::Conference Unlock
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: "To begin, you'll want to focus on the interface where the action menu button, marked by three dots, is located. Next, follow these steps carefully: after clicking the button, ensure the action menu dropdown has fully opened. For your reference, the 'Lock' option within this dropdown is crucial for proceeding with the next phase of the operation. Understanding why the lock confirmation dialog appears is key—it ensures that the user intentionally wants to secure the conference. If you encounter any issues, simply click the 'Lock event' button to confirm the conference locking process. Once locked, a narrative unfolds where the user revisits the action menu button, again represented by the three dots icon. In a technical sense, the action menu dropdown reopens, presenting the same options as before. To unlock, one must select the 'Unlock' option, which initiates the unlocking mechanism. Finally, in a more casual tone, just hit the 'Unlock' option and watch as the system triggers
-  the unlock action seamlessly."

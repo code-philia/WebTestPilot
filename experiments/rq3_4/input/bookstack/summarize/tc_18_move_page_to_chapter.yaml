@@ -1,4 +1,0 @@
-name: 18::Move Page Into Chapter
-url: http://localhost:8081/
-setup_function: created_page_move_page
-description: Click 'Move' btn. Pg move op starts. Click search txt bx. Search bx gets focus. Type 'Chap'. Results filter by 'Chap'. Sel 'Chap' from dd. Chap set as dest. Click 'Move Pg' btn. Move op confirmed. Ver 'Pg' in menu. 'Pg' listed in menu. Ver breadcrumb has 'Bk'. 'Bk' lnk in breadcrumb. Ver breadcrumb has 'Chap'. 'Chap' lnk in breadcrumb. Ver breadcrumb has 'Pg'. 'Pg' lnk in breadcrumb. Nav back to chap via breadcrumb lnk. Orig chap pg shows. Ver pg name 'Pg' in main cntnt. 'Pg' disp in main cntnt.

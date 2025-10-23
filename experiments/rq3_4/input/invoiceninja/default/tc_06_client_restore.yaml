@@ -1,4 +1,0 @@
-name: 06::Client Restore
-url: http://localhost:8082/
-setup_function: created_client_page
-description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Delete" option. Delete confirmation dialog appears. Click "Restore" button or action for the deleted client. Restore action is available

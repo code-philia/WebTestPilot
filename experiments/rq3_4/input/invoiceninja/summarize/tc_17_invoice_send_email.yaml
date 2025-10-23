@@ -1,4 +1,0 @@
-name: 17::Invoice Send Email
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click 'Email Invoice' -> Email dlg opens -> Click 'Send Email' -> Email sends -> Click '123456' lnk -> Invoice details pg shows -> Vrfy status = 'Sent'. Status updates post-email.

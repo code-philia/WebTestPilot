@@ -1,4 +1,0 @@
-name: 10::Meeting Add Contribution to Timetable
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click TT lnk -> TT view opens -> Click 'Add new' ddn -> Add new menu -> Click 'Contri' opt -> Contri form opens -> Click 'Title' tbx -> Title fld focused -> Type 'Meet Contr' -> Title fld has uniq name -> Click 'Desc' tbx -> Desc fld focused -> Type 'Desc' -> Desc fld has txt -> Click '--:--' time fld -> Time picker opens -> Sel '11' -> Start time = 11:00 -> Click 'Add me' btn -> Curr user added as auth -> Click 'Save' btn -> Contri created & saved -> Verify 'Meet Contr' in TT canvas -> TT shows new contri

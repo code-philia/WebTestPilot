@@ -1,4 +1,0 @@
-name: 16::Shelf Update
-url: http://localhost:8081/
-setup_function: created_shelf_page
-description: Click 'Edit' -> Shelf edit frm opens w/ curr vals. Focus on 'Shelf Name' txtbx; clr & type "Shelf Updated". Focus on RTA iframe; clr & type "Shelf Desc Updated". Update book sel. Click 'Save Shelf'. Verify pg heading & desc show updates. Rough draft.

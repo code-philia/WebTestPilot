@@ -1,4 +1,0 @@
-name: 16::Invoice Mark Paid
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click "More Actions" or status change dropdown. Actions menu opens. Click "Mark Paid" option. Verify payment details are populated or can be entered. Payment information fields are available. Verify invoice status changes to "Paid". Invoice status indicator shows ""Paid"".

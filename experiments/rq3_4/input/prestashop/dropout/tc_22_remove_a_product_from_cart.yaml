@@ -1,4 +1,0 @@
-name: 22::Remove A Product From Cart
-url: http://localhost:8083/
-setup_function: created_cart_item_page
-description: The product detail page for that item is displayed. Click the size dropdown. The size dropdown is opened. Select a size 'M' from the dropdown. Size M is chosen from the dropdown. Check color Black in the colour options. The color Black is successfully selected. Click the "Add to cart" button. A confirmation modal appears. The modal closes. Click the shopping cart icon at the top of the page. The shopping cart page is loaded. Verify the product name "Hummingbird printed t-shirt", selected color, and selected size are displayed in the cart. The product name, color, and size are correctly displayed in the cart. Click the "delete" link or icon next to the product line item. The product line item disappears from the cart. Verify the cart is now empty. A message such as "There are no more items in" is displayed.

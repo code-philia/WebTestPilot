@@ -1,4 +1,0 @@
-name: 05::Book Delete
-url: http://localhost:8081/
-setup_function: created_book_page
-description: Click "Delete" link in the book actions. Delete confirmation dialog appears. Click "Confirm" button in the confirmation dialog. Book deletion is confirmed. Verify user is redirected away from deleted book page. User is no longer on the deleted book page

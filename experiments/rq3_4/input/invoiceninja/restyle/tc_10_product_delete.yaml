@@ -1,4 +1,0 @@
-name: 10::Product Delete
-url: http://localhost:8082/
-setup_function: created_product_page
-description: To proceed with the task, you should click on either the "More Actions" or "Actions" dropdown menu. Note that once you do this, the Actions menu will open up, revealing various options. If you're looking for the next step, simply locate and click the "Delete" option within the menu. Should you encounter any issues, remember that after selecting delete, a confirmation dialog is supposed to appear, prompting you to confirm your action.

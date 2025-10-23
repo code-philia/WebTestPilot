@@ -1,4 +1,0 @@
-name: 05::Lecture Lock
-url: http://localhost:8080/
-setup_function: created_lecture_page
-description: Click the action menu button (three dots icon). Action menu dropdown opens. Click "Change type" option. Change type submenu appears. Click "Lock" option. Lock confirmation dialog appears. Click "Lock event" button. Lecture locking is confirmed

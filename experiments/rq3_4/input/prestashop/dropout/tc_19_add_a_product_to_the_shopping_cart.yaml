@@ -1,4 +1,0 @@
-name: 19::Add A Product To The Shopping Cart
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: Click on a product link of "Hummingbird printed t-shirt". The product detail page for that item is displayed. Click the size dropdown. The size dropdown is opened. Size M is chosen from the dropdown. Check color Black in the colour options. The color Black is successfully selected. Click the "Add to cart" button. A heading with the title "Product successfully added" appears.

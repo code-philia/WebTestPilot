@@ -1,4 +1,0 @@
-name: 28::Expense Delete
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'More Actions' ddn btn. Menu pops up. Select 'Delete'. Exp shows 'Deleted'. Confirm exp status is 'Deleted'. Pg displays exp status as 'Deleted'

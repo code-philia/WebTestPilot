@@ -1,4 +1,0 @@
-name: 15::Shelf Read
-url: http://localhost:8081/
-setup_function: created_shelf_page
-description: Click "Shelves" link in navigation. Shelves listing page shows all available shelves. Click on the shelf with title "Shelf". Shelf detail page opens. Verify shelf name appears in page heading. Shelf name is displayed as main heading. Verify shelf description content is visible. Shelf description text is shown on the page. Verify Book1 is present in the shelf. Book1 is listed in the shelf. Verify Book2 is present in the shelf. Book2 is listed in the shelf

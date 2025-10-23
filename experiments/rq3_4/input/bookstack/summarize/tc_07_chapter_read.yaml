@@ -1,4 +1,0 @@
-name: 07::Chapter Read
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: "Click 'Chapter' -> Chap detail pg opens. Vfy chap name in pg heading (main hding). Vfy desc content vis. Desc txt on pg. Vfy nav els pres. Nav shows bk struct. Vfy bcrd nav shows bk > chap. Bcrd shows hier nav. #roughdraft"

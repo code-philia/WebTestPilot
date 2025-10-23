@@ -1,4 +1,0 @@
-name: 25::Expense Update
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click in the "Amount" textbox. Amount field is focused and contains current amount. Type "23,2340" in the amount field. Amount field contains value "23,2340". Click "Save" button. Expense changes are saved. Verify updated amount "23,2340" appears in expense detail. Expense page shows "23,2340" amount

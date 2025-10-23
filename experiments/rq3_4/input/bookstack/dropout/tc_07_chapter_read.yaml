@@ -1,4 +1,0 @@
-name: 07::Chapter Read
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: Click on the chapter with title "Chapter". Chapter detail page opens. Verify chapter name appears in page heading. Chapter name is displayed as main heading. Verify chapter description content is visible. Chapter description text is shown on the page. Verify chapter navigation elements are present. Verify breadcrumb navigation shows book > chapter. Breadcrumb shows hierarchical navigation.

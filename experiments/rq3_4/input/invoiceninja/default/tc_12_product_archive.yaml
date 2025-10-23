@@ -1,4 +1,0 @@
-name: 12::Product Archive
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click "More Actions" or "Actions" dropdown. Actions menu opens. Click "Archive" option. The page shows product is archived

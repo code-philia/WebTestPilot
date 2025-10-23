@@ -1,4 +1,0 @@
-name: 09::Create A New Parent Category
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click 'Catalog' -> 'Categories'. New cat page opens. Click 'Add new'. Enter cat name 'Shoes'. Expand 'Parent Cat', select 'Home'. Fill desc in RT editor. Upload img. Enter URL 'shoes'. Click 'Save'. Success msg shown.

@@ -1,4 +1,0 @@
-name: 02::Create A New Value For An Attribute
-url: http://localhost:8083/
-setup_function: created_attribute_page
-description: Click 'Catalog' -> 'Attributes & Features'. On Attr & Feats pg, click 'Add new val'. New pg w/ form opens. Select 'Weight' from 'Attr grp' dd. Enter '500g' in 'Val' fld. Click 'Save'. 'Success msg' shld appear @ top.

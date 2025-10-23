@@ -1,4 +1,0 @@
-name: 24::Expense Create
-url: http://localhost:8082/
-setup_function: setup_data_for_expense_create
-description: Click "Expenses" link in navigation menu. Expenses listing page appears. Click "Enter Expense" button. Expense creation form opens. Click the Client field. The client field is focused. Dropdown options show to choose client. Choose option "company_name". Client "company_name" is chosen for the Client field. Click in the "Amount" textbox. Amount field is focused. Amount field contains value ""2,324". Click the "Currency" field. The option dropdown to choose currency shows. Choose option "Australian Dollar (AUD)". Australian Dollar (AUD) is chosen for currency. Click "Save" button. Expense is created and saved. Verify that the page now contains "Edit Expense". The page has "Edit Expense" text meaning expense is created.

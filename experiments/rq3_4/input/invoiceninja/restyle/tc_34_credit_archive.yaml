@@ -1,4 +1,0 @@
-name: 34::Credit Archive
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: To begin, you'll want to interact with the interface by clicking on the "More Actions" dropdown button. Once the actions menu appears, proceed to select the "Archive" option from the list. Note that upon successful execution, the system will update the credit's status to 'Archived'. If you encounter any issues where the status does not reflect this change, ensure that all previous steps were followed correctly. In a thrilling turn of events, our protagonist, the user, watches as the credit status indicator magically transforms to display "Archived". Just for kicks, let's casually mention that you should now see the credit status marked as "Archived".

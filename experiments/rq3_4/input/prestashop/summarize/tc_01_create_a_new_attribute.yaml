@@ -1,4 +1,0 @@
-name: 01::Create A New Attribute
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click 'Catalog' -> 'Attributes & Features'. Add new attr on top-right. Enter 'Weight' in Name & Public name fields. Click Save. Success msg shown; back to attrs list.

@@ -1,4 +1,0 @@
-name: 15::Invoice Mark Sent
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click 'More Actions' or status chng dd. Actions menu pops up. Hit 'Mark Sent'. Conf dialog shws. Chk inv status = 'Sent'. Status ind shows 'Sent'.

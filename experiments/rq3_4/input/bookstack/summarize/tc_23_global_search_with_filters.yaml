@@ -1,4 +1,0 @@
-name: 23::Global Search with Filters
-url: http://localhost:8081/
-setup_function: created_global_search_page
-description: Click global search box @ top. Focus on input. Type "". Field has term. Click 'Search'. Results page shows. Verify 'Book' & 'Chapter' in list. Uncheck 'Chapter' box. Click 'Update Search'. Only books shown. Verify no chapters. Books still in list. Rough draft.

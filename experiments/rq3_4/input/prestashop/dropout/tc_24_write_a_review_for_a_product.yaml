@@ -1,4 +1,0 @@
-name: 24::Write A Review For A Product
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: Navigate to a specific product detail page. The product detail page is displayed correctly. Click the "Be the first to write your review" link. A form for writing a review appears. The corresponding stars are highlighted. Enter a review title 'Good thing' in the "Title" field. The title is entered successfully. Enter the review content 'very comfortable!' in the "Review" field. The review content is entered successfully. Click the "Send" button. A success message "Your comment has been" is displayed.

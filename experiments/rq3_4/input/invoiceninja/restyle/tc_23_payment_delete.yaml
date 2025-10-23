@@ -1,4 +1,0 @@
-name: 23::Payment Delete
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: "To proceed, you should click the \"More Actions\" button now. Once the Actions menu opens, it's time to select the \"Delete\" option from the list. Note for reference: After clicking delete, the system updates the payment to show a deleted status. If you're wondering how to confirm this change, simply check that the payment status reads \"Deleted\". Imagine a scenario where you're reviewing the payment page, and there it is—the status clearly marked as \"Deleted\". Just a heads-up, if you don't see the \"Deleted\" status, make sure you followed all the steps correctly."

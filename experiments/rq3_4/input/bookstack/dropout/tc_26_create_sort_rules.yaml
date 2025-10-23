@@ -1,4 +1,0 @@
-name: 26::Create Sort Rules
-url: http://localhost:8081/
-setup_function: logged_in_page
-description: Click "Settings" link in navigation. Settings page is displayed. Click "Sorting" or equivalent option. Sort rules management section opens. Click "Create Sort Rule" button. Sort rule creation form opens. Click in the "Name" textbox. Name field is focused. Type "Rule" in the name field. Name field contains the name. Click button to add "Name - Alphabetical (Asc)" to the list. The option is added to the list. Click button to add "Created Date (Asc)". The option is added to the list. Click "Save" button. Sort rule is created and saved. New sort rule is listed in rules table.

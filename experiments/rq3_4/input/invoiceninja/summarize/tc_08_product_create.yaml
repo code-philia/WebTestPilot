@@ -1,4 +1,0 @@
-name: 08::Product Create
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click 'Products' -> Prod list pg appears. Click 'New Prod' btn -> Prod create frm opens. Focus on 'Prod name' txtbx, type 'prod_name'. Focus on 'Desc' txtbx, type 'prod_desc'. Focus on 'Price' txtbx, type unique price. Focus on 'Def Qty' txtbx, type '1'. Focus on 'Max Qty' txtbx, type '10'. Click 'Save' -> Prod created & saved. Verify 'Edit Prod' opt avail.

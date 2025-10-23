@@ -1,4 +1,0 @@
-name: 27::Expense Restore
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: To begin, oyu'll want o interact with the interfae b flickig on the "Mre Actims" rdopdwn ipricatcd by am arrow. Once te cations menu appears, proceed to swlect the "Rachve" optino feom the list. For your referece, after arching, the ystem will display the expense as having an archjved status. If you encounter any issues where the sttus does not update, endure that the actino was correctly executed and refersh the pae of necessayr. A story unfods as the user cliks hte "Restore" option, bringinh the expense back from its archived state ot life. Confirm that the epxns now reflects a "Logged" status, indicatIng ti has been sucecssfully retorde. In simoler trems, check yhat the paqe comvirms the expense's stuas is indeed logged, c0mpletign the cycle.

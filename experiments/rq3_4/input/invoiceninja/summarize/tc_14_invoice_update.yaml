@@ -1,4 +1,0 @@
-name: 14::Invoice Update
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: "Click 'Edit' -> Inv edit frm opens w/ curr vals. Find 1st line qty fld. Qty fld vis. Update prod_name1 qty to '10'. Qty fld shows new val. Click 'Save'. Changes saved. Verify prod_name1 qty=10. Prod line shows upd qty. #roughdraft"

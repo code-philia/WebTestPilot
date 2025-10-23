@@ -1,4 +1,0 @@
-name: 09::Product Update
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click prod name txtbox. Name fld focused & has curr name. Clear & type "product_name_updated". Name fld shows upd name. Click Save btn. Prod chngs saved. Verify upd name in prod detail. Prod pg shows new name.

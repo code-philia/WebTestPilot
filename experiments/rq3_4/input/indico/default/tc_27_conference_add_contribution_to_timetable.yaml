@@ -1,4 +1,0 @@
-name: 27::Conference Add Contribution to Timetable
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Timetable" link in navigation. Timetable view opens. Click "Add new" dropdown button. Add new menu appears. Click "Contribution" option. Contribution creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Session Contribution" in the title field. Title field contains unique contribution name. Click "Save" button. Contribution is created and saved. Verify contribution appears in timetable canvas with number prefix. Timetable shows numbered contribution

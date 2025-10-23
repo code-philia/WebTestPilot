@@ -1,4 +1,0 @@
-name: 29::Expense Clone
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'More Actions' -> Dropdown opens. Select 'Clone'. Initiate clone. Focus on 'Amt' txtbox. Enter "23,2340". Amt field shows "23,2340". Hit 'Save'. Verify new clone in exp list. Check logged status. Page confirms logged.

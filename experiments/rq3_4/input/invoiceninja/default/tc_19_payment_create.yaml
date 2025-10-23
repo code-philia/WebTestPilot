@@ -1,4 +1,0 @@
-name: 19::Payment Create
-url: http://localhost:8082/
-setup_function: setup_data_for_create_payment
-description: Click "Payments" link in navigation menu. Payments listing page appears. Click "Enter Payment" button. Payment creation form opens. Click in the client selection field. Client dropdown or combobox is focused. Select or type "company_name" to choose client. Client is selected for the payment. Click in the invoice selection field. Invoice dropdown shows client invoices. Select a invoice with number "123456" from the dropdown. Invoice "123456" is chosen. Click payment type choose field. Shows payment type options. Click payment type "Bank Transfer". Bank Transfer payment type is chosen. Click "Save" button. Payment is created and saved. Verify that the page has "Edit Payment" text. The page has Edit Payment meaning it's created

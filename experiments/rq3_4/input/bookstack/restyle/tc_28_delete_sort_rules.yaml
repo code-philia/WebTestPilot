@@ -1,4 +1,0 @@
-name: 28::Delete Sort Rules
-url: http://localhost:8081/
-setup_function: created_sort_rule_page
-description: To find the sort rule named 'Rule', you'll need to carefully scan through the list until it catches your eye. Next, proceed to click the "Delete" button associated with the targeted sort rule, ensuring precision in your action. For technical reference, the expected behavior upon clicking delete is the appearance of a delete confirmation dialog box. If you're puzzled by what to do next, simply locate and click the "Confirm" button within the confirmation dialog to proceed. Once the confirmation is clicked, the system acknowledges the deletion of the sort rule, completing the task at hand. Imagine a scenario where the rule once listed is now conspicuously absent, confirming its removal. In a casual tone, just double-check that the pesky rule you wanted gone is indeed missing from the rules table.

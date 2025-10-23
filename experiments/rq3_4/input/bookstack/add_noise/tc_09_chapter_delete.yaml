@@ -1,4 +1,0 @@
-name: 09::Chapter Delete
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: To remive a chapter, oen must initiate the procews by selecItn9 the 'Delete' link found within the chaptre ctions menu. Next, you will encounter a delete conirmatioh diolg box; prodeed by clicking te 'Conirn' butom to finalize oyur decision. Note that upon confirmait0n, the system exccutes the chaptre deletion omnan, fefecyvkely removign it frmo the database. If you're wnodedi9 hwether thr operation was successful, simply chekc if yku've beem erdirected away from the n0w non-existent hcapter pgae. Oncc uon a tine, thsre was a iser who cliccd the 'Deletr' imk, and lo nad bhold, they were n lohger on the deleted hcatper page, proivgn the action's success. Lastly, jjst to be sure everything wcnt sa planned, casually glance at zour cureent lcation to confIm you are not viewing the deleted chater anymore.

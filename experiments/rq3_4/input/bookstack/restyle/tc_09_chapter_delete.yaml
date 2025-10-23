@@ -1,4 +1,0 @@
-name: 09::Chapter Delete
-url: http://localhost:8081/
-setup_function: created_chapter_page
-description: To remove a chapter, one must initiate the process by selecting the 'Delete' link found within the chapter actions menu. Next, you will encounter a delete confirmation dialog box; proceed by clicking the 'Confirm' button to finalize your decision. Note that upon confirmation, the system executes the chapter deletion command, effectively removing it from the database. If you're wondering whether the operation was successful, simply check if you've been redirected away from the now non-existent chapter page. Once upon a time, there was a user who clicked the 'Delete' link, and lo and behold, they were no longer on the deleted chapter page, proving the action's success. Lastly, just to be sure everything went as planned, casually glance at your current location to confirm you are not viewing the deleted chapter anymore.

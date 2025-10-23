@@ -1,4 +1,0 @@
-name: 19::Move Chapter Between Books
-url: http://localhost:8081/
-setup_function: created_page_move_chapter
-description: Click 'Move' -> Move chp dialog opens -> Click search box -> Box focused -> Type 'Book1' -> Results filtered -> Select 'Book1' from dropdown -> 'Book1' dest -> Click 'Move Chp' -> Op confirmed -> Click 'Books' nav btn -> Book list pg -> Click 'Book1' from 'Recent' -> 'Book1' pg opens -> Verify 'Chp 1' in main content -> 'Chp 1' displayed -> Verify 'Chp 2' in main content -> 'Chp 2' displayed

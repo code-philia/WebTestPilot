@@ -1,4 +1,0 @@
-name: 20::Search For A Product Using A Keyword
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: "Imagine embarking on a journey where you must type 'Hummingbird printed t-shirt' into the mystical \"Search\" box atop the webpage. For technical reference, ensure the string 'Hummingbird printed t-shirt' is accurately placed within the designated search field. Next, follow these instructions: hit the \"Enter\" key or tap the search icon to proceed with your quest. Understand that upon submission, the system will load the search results page, unveiling a treasure trove of products. Should you encounter issues, check if the product card for 'Hummingbird printed t-shirt' has materialized on the page; it's a common glitch otherwise. In the end, the narrative unfolds as at least one card featuring 'Hummingbird printed t-shirt' makes its appearance among the search results."

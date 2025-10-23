@@ -1,4 +1,0 @@
-name: 19::Add A Product To The Shopping Cart
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: Click prod link "Hummingbird printed t-shirt" -> Prod detail pg displays -> Click size dd -> DD opens -> Select size 'M' -> Size M chosen -> Check color Black -> Color Black selected -> Click "Add to cart" btn -> Heading "Prod successfully added" appears

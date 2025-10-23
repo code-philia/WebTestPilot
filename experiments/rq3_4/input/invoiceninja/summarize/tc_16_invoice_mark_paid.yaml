@@ -1,4 +1,0 @@
-name: 16::Invoice Mark Paid
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click 'More Actions' or status chng ddn. Actions menu pops up. Hit 'Mark Paid'. Mark paid dlg/form shows. Chk paymnt dets popld/enterable. Pay info flds avail. Vrf invc status chngs to 'Paid'. Status ind shows 'Paid'.

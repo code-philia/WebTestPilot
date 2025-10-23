@@ -1,4 +1,0 @@
-name: 01::Create A New Attribute
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click "Catalog" menu item. Catalog submenu items expand. Click "Attributes & Features" submenu item. The Attributes & Features page is displayed. Click "Add new attribute" in the top-right corner. A new page appears containing a form to create a new attribute. Enter "Weight" in the "Name" field. Enter "Weight" in the "Public name" field. The attribute name as displayed to the customers "Weight" is entered in the field. Click the "Save" button. A "Successful creation" message is displayed at the top of the page and the user is returned to the attributes list.

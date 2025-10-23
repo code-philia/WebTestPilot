@@ -1,5 +1,0 @@
-name: 08::Product Create
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click "Products" link in navigation menu. Products listing page appears. Click "New Product" button. Product creation form opens. Click in the "Product" name textbox. Product name field is focused. Type "product_name" in the name field. Product name field contains unique product name. Click in the "Description" textbox. Description field is focused. Type "product_description" in description field. Description field contains unique description. Click in the "Price" textbox. Price field is focused. Type "" in the price field. Price field contains unique price value. Click in the "Default Quantity" textbox. Default quantity field is focused. Type "1" in the default quantity field. Default quantity field contains value. Click in the "Max Quantity" textbox. Max quantity field is focused. Type "10" in the max quantity field. Max quantity field contains maximum value. Click "Save" button. Product is created and saved. Verify there is an "Edit Product" option. Edit Product option 
-  is available for the new product

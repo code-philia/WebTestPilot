@@ -1,4 +1,0 @@
-name: 05::Create A New Value For A Feature
-url: http://localhost:8083/
-setup_function: created_feature_page
-description: Click "Catalog" menu item. Catalog submenu items expand. Click "Attributes & Features" submenu item. The Attributes & Features page is displayed. Click the "Features" tab at the top of the page. The page switches to the features list. Click "Add new feature value" in the top-right corner. Select "Season" from the "Feature" drop-down list. The dropdown list shows "Season" as the selected feature. Enter a specific value e.g. "Spring/Summer" in the "Value" field. The value "Spring/Summer" is entered in the field. Click the "Save" button. A "Successful creation" message is displayed at the top of the page.

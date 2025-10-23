@@ -1,4 +1,0 @@
-name: 16::Delete A Product
-url: http://localhost:8083/
-setup_function: created_product_for_delete_page
-description: Enter 'bird' into the product name filter. The product name filter is populated. Click the 'Search' button in product list. The list refreshes to show only products with a matching name. Click the data row for 'bird'. The target row is correctly located. Click the 'more actions' button (three-dot icon) on that row. A dropdown menu with a 'Delete' option appears. Click the 'Delete' option from the dropdown menu. Click the final 'Delete' button in the dialog to confirm. A 'Successful deletion' message is displayed, and the product is removed from the list.

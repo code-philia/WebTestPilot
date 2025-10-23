@@ -1,4 +1,0 @@
-name: 01::Login
-url: http://localhost:8082/
-setup_function: ''
-description: Click email txtbx -> focus & type admin@example.com -> disp email. Click pwd txtbx -> focus & type changeme! -> mask chars. Click Login btn -> auth proc. Click Save on conf screen -> auth & redirect to dash. Verify dash elmnts -> show nav menu & main cntnt.

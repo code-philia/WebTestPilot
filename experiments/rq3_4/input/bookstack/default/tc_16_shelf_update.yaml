@@ -1,4 +1,0 @@
-name: 16::Shelf Update
-url: http://localhost:8081/
-setup_function: created_shelf_page
-description: Click "Edit" link in the shelf actions. Shelf edit form opens with current values. Click in the "Shelf Name" textbox. Name field is focused and contains current name. Clear the name field and type "Shelf Updated". Name field shows updated shelf name. Click in the Rich Text Area iframe. Rich text editor is focused. Clear existing content and type "Shelf Description Updated". Rich text area contains updated description. Modify book selections in the books section. Book selections are updated. Click "Save Shelf" button. Shelf changes are saved. Verify page heading shows updated shelf name. Shelf page shows new name in heading. Verify updated description text is visible. Updated description is displayed on page

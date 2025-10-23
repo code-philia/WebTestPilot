@@ -1,4 +1,0 @@
-name: 10::Page Create
-url: http://localhost:8081/
-setup_function: created_book_page
-description: Click "New Page" button. Click in the "Page Title" textbox. Type "Page" in the title field. Page title field contains unique page title. Click in the Rich Text Area iframe. Rich text editor is focused. Type "Page Content" in the rich text area. Rich text area contains "Page Content". Click "Save Page" button. Page is created and saved. Verify page appears in book navigation. Page is listed in book structure. Verify page displays with correct name and content. Page shows correct name and content. Click the "Book" link in the breadcrumb. User is taken back to the book page. Verify that the page "Page" is shown on the page content. Page information is displayed correctly.

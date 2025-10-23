@@ -1,4 +1,0 @@
-name: 19::Payment Create
-url: http://localhost:8082/
-setup_function: setup_data_for_create_payment
-description: "Click 'Pmts' lnk -> Pmts list pg -> Click 'Enter Pmt' btn -> Pmt frm opens -> Click client sel fld -> Client ddbox fcsd -> Sel/type 'co_nm' -> Clnt selctd -> Click inv sel fld -> Inv ddbox shows clnt invs -> Sel inv # '123456' -> Inv '123456' chsn -> Click pmt typ sel fld -> Pmt typ opts shwn -> Click 'Bank Xfer' -> Bank Xfer typ chsn -> Click 'Save' btn -> Pmt crtd/svd -> Vrfy pg has 'Edit Pmt' txt -> Pg has Edit Pmt -> Pmt crtd"

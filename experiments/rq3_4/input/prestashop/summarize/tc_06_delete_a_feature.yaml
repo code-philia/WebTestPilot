@@ -1,4 +1,0 @@
-name: 06::Delete A Feature
-url: http://localhost:8083/
-setup_function: created_feature_page
-description: NAV to 'Catalog' -> 'Attrs & Feats'. Click 'Feats' tab. Page shows feats list. Locate 'Season' feat row. Hit 'more acts' btn on right. Dropdown w/ 'Edit', 'Del' opts appears. Select 'Del'. Confirm del dialog pops up. Click 'Yes'. 'Success del' msg shown.

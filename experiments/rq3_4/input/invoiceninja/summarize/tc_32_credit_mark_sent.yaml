@@ -1,4 +1,0 @@
-name: 32::Credit Mark Sent
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click 'More Actions' ddn btn. Actions menu pops up. Select 'Mark Sent'. Crdt status shld update to 'Sent'. Confirm crdt status = 'Sent'. Status indtr displays 'Sent'.

@@ -1,4 +1,0 @@
-name: 27::Update Sort Rules
-url: http://localhost:8081/
-setup_function: created_sort_rule_page
-description: Click 'Rule' -> tgt sort rule visible -> click 'Name' txtbx -> name fld focused w/ curr name -> clr & type 'Rule updated' -> name fld shows updated name -> click btn to add 'Chaps First' -> opt added -> click 'Save' -> changes saved -> verify 'Rule updated' in list -> rules list shows updated details

@@ -1,4 +1,0 @@
-name: 06::Delete A Feature
-url: http://localhost:8083/
-setup_function: created_feature_page
-description: Navigate to "Catalog". then "Attributes & Features".. Click the "Features" tab at the top of the page.. The page switches to the features list.. Find the row for the feature named "Season" and click the "more actions" button on the right side of that row.. A dropdown menu with options like "Edit" and "Delete" appears.. Click the "Delete" option from the dropdown menu.. A confirmation dialog appears.. Click the "Yes" button in the dialog to confirm the deletion.. A "Successful deletion" message is displayed

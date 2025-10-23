@@ -1,4 +1,0 @@
-name: 28::Expense Delete
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click "More Actions" dropdown button. Click "Delete" option. Expense shows "Deleted" status. Verify expense has Deleted status. The page shows expense's status is Deleted.

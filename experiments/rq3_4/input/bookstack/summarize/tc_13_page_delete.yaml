@@ -1,4 +1,0 @@
-name: 13::Page Delete
-url: http://localhost:8081/
-setup_function: created_page_page
-description: Click 'Del' lnk -> Del conf dialog pops up -> Click 'Conf' btn -> Page del confirmed -> Verify usr redir away frm del page -> Confirm page not in book nav -> Page rmvd frm book struct

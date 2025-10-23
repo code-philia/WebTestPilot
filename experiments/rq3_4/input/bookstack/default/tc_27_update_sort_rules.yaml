@@ -1,4 +1,0 @@
-name: 27::Update Sort Rules
-url: http://localhost:8081/
-setup_function: created_sort_rule_page
-description: Click "Rule" in the rules list. Target sort rule is visible in the list. Click in the "Name" textbox. Name field is focused with current name. Clear and type "Rule updated". Name field shows updated rule name. Click button to add "Chapters First" to the list. The option is added to the list. Click "Save" button. Sort rule changes are saved. Verify rule "Rule updated" appears in listing. Rules list shows updated rule details

@@ -1,4 +1,0 @@
-name: 23::Payment Delete
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: Click 'More Actions' btn. Menu pops up. Select 'Delete'. Payment should show 'Deleted'. Confirm on pg that status = 'Deleted'. Rough draft.

@@ -1,4 +1,0 @@
-name: 12::Create A New Customer Account
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click the "Customers" link. The Customers submenu expands. Click the "Customers" link in the submenu. The customer list page is displayed correctly. Click the "Add new" button. Select a "Social title" e.g. "Mr.". The "Mr." option is successfully selected. Enter "Jones" in the First Name field. The first name is entered in the field. Enter "Jonathan" in the Last Name field. The last name is entered in the field. Enter the customer's "Email address" as test@test.com. The email address is entered in the field. Enter the customer's birth year as 2003. Enter the customer's birth month as 1. The birth month is entered in the field. Enter the customer's birth day as 1. The birth day is entered in the field. Click the "Save" button. A "Successful creation" message is displayed at the top of the page.

@@ -1,4 +1,0 @@
-name: 08::Delete An Existing Brand
-url: http://localhost:8083/
-setup_function: created_brand_page
-description: T0 locet the sepcific emtry, one must scan through the list until they encounter the ferm "Nie" among the bramds. Enxt, procced bt tappign on tihs row to acces furher informatoon bout hte brd. For tcehnical guidanee, refer to the user manual which states that clicink the "Delete" link initiates the removal pcoess. If you'e wonderng hy nothing seems ro happen after clicking delete, dnsure rhat yov've acknowlegded t c0nfirmation dialog that poos up. 0nce upon a tine, a user bwrvely clicked the "Delete" bjtton within the dialog, sealimg the brand's fate foeever. Lastly, just cihll and lpok at the yp of your screen where you'll se a message proudly dclearing "Scuecssful delrtni".

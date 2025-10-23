@@ -1,4 +1,0 @@
-name: 18::Delete An Existing Supplier
-url: http://localhost:8083/
-setup_function: created_supplier_page
-description: Click 3-dot 'more actions' btn on 'Shoes supplier'. Dropdown w/ 'Delete' opts appears. Select 'Delete'. Confirm dialog pops up. Click last 'Delete' btn. 'Success msg' shld show. Rough draft.

@@ -1,4 +1,0 @@
-name: 25::Sort Content by Name
-url: http://localhost:8081/
-setup_function: created_data_for_sort_page
-description: Click the book "Book". Book detail page with content list is displayed. Click "Sort" button. Sort interface or dropdown opens. Select "Sort by Name" option. Name sorting option is selected. Click "Apply" or confirm sort selection. Sort by name operation is executed

@@ -1,4 +1,0 @@
-name: 13::Delete A Customer Account
-url: http://localhost:8083/
-setup_function: created_customer_page
-description: Find cust w/ email 'test@test.com'. Confirm correct cust. Click 'Delete' link. Dialog pops up. Click 'Delete' btn in dialog. 'Success msg' shld appear.

@@ -1,4 +1,0 @@
-name: 09::Product Update
-url: http://localhost:8082/
-setup_function: created_product_page
-description: To begin, focus your attention on the "Product" name textbox, where you'll find the current product name already entered. Next, proceed to clear the existing text and carefully input "product_name_updated" into the designated field. Note that once you've typed the new name, the system should immediately reflect "product_name_updated" within the name field. If you encounter any issues with the name not updating, ensure there are no hidden characters or errors in the input process. After confirming the new name is displayed correctly, click the "Save" button to commit the changes. Once saved, the product's details will refresh, showcasing the newly updated name in all its glory. Finally, take a moment to casually check if the product page now proudly displays the updated name, completing our little adventure in product renaming.

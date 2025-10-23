@@ -1,4 +1,0 @@
-name: 24::Expense Create
-url: http://localhost:8082/
-setup_function: setup_data_for_expense_create
-description: Click 'Expenses' -> Expenses list pg. Click 'Enter Expense' -> Form opens. Focus on Client fld. Enter 'company_name'. Dropdown shows -> Select 'company_name'. Focus on Amount fld. Enter '2,3234' -> Shows '2,324'. Click Currency fld. Dropdown shows -> Select 'AUD'. Click Save -> Expense saved. Verify 'Edit Expense' txt exists -> Confirms creation.

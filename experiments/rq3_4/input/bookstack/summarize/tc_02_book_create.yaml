@@ -1,4 +1,0 @@
-name: 02::Book Create
-url: http://localhost:8081/
-setup_function: logged_in_page
-description: From dash, click 'Books' -> verify 'Create New Book' link -> click it -> form opens -> focus 'Name' txtbx -> type 'Book' -> focus RTA iframe -> type 'Description' -> expand 'Book Tags' -> focus 'Tag Name' -> type 'env' -> focus tag val -> type 'test' -> click 'Save Book' -> verify pg heading = 'Book' -> verify desc = 'Description'

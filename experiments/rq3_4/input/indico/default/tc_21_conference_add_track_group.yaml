@@ -1,4 +1,0 @@
-name: 21::Conference Add Track Group
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click "Programme" link in navigation. Programme section opens. Click "Add track group" link. Track group creation form opens. Click in the "Title" textbox. Title field is focused for input. Type "Track group" in the title field. Title field contains unique track group name. Click in the "Description" textbox. Description field is focused. Type "Many papers about" in the description field. Description field contains text. Click "Save" button. Track group is created and saved. Verify track group appears in track list container. Track list shows the new track group. Verify track group description is visible. Track group description is displayed

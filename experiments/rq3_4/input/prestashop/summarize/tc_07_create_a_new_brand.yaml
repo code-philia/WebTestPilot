@@ -1,4 +1,0 @@
-name: 07::Create A New Brand
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click 'Catalog' -> 'Brands & Suppliers'. New page loads. Hit 'Add new brand'. Enter brand name (e.g., Nike) & desc in fields. Save. Success msg shown.

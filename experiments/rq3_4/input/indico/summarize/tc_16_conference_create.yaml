@@ -1,4 +1,0 @@
-name: 16::Conference Create
-url: http://localhost:8080/
-setup_function: logged_in_page
-description: Click 'Create event' -> Conf dropdown -> Click 'Conf' -> Conf form opens -> Click 'Event title' -> Focus -> Type 'Conf' -> Title = 'Conf' -> Click 'End date' -> Date picker -> Enter '10/10/2040' -> End date = '10/10/2040' -> Click 'End time' -> Time picker -> Select '12' -> End time = '12:00' -> Click 'Venue' -> Focus -> Type 'Venue' -> Venue = 'Venue' -> Click 'Room' -> Focus -> Type 'Room' -> Room = 'Room' -> Click 'Public' -> Public mode sel -> Click 'Create event' -> Conf created -> Verify conf name in heading -> Conf page w/ correct name -> Verify venue & room -> Loc details shown

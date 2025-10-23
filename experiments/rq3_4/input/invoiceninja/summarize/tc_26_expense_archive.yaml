@@ -1,4 +1,0 @@
-name: 26::Expense Archive
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'More Actions' dropdw/ w/ arrow. Menu pops up. Hit 'Archive'. Page shld show archived state. Confirm exp is archived. Pg displays exp status as archived.

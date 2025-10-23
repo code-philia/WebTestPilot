@@ -1,4 +1,0 @@
-name: 13::Delete A Customer Account
-url: http://localhost:8083/
-setup_function: created_customer_page
-description: To locate the specific data row, one must search for the customer whose email address is "test@test.com". Next, proceed by clicking on the "Delete" link found on the webpage. For your reference, a confirmation dialog box will pop up after you initiate the deletion process. If you're wondering how to finalize this action, simply click the "Delete" button within the dialog to confirm your choice. Once completed, the system narrates a tale of success by displaying a "Successful deletion" message.

@@ -1,4 +1,0 @@
-name: 33::Credit Send Email
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click 'More Actions' -> Drop-down opens -> Click 'Email Credit' -> Draft email pg appears -> Click 'Send Email' -> Client details pg -> Click 'Send Email' again -> Client details w/ credit list pg -> Click '123456' link -> Credit detail pg -> Verify status = 'Sent' -> Status indicator shows 'Sent'

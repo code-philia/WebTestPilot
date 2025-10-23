@@ -1,4 +1,0 @@
-name: 10::Create A New Child Category
-url: http://localhost:8083/
-setup_function: created_parent_category_page
-description: Click 'Catalog', then 'Categories' in back-off menu. Click 'Add new cat' btn. New cat page appears. Enter sub-cat name 'Sports shoes' in 'Name' fld. Cat name entered. Click 'Expand' btn in 'Parent Cat' area. Cat tree expands. Select 'Shoes' as parent cat. 'Shoes' selected. Enter desc in 'Desc' area. Desc filled in RT editor. Enter custom URL 'sports-shoes' in 'Friendly URL' fld. URL entered. Click 'Save' btn. 'Success msg' disp at top.

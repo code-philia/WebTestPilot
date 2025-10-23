@@ -1,4 +1,0 @@
-name: 13::Invoice Create
-url: http://localhost:8082/
-setup_function: setup_data_for_create_invoice
-description: Click 'Invs' lnk -> Invs list pg -> Click 'New Inv' btn -> Inv crtn frm -> Clnt sel fld -> Clnt ddn/focused -> Sel/type 'cmpny_nm' -> Clnt sel'd -> Chs cmpny_nm opt -> Clnt opt chsn -> Click inv num fld -> Inv num fld fcsd -> Fill '123456' -> Inv num fld flld -> Click 'Add Itm'/line itms sect -> Line itms sect avail -> Click prod sel fld (1st li) -> Prod sel fld fcsd -> Fill prod_nm1 -> Prod ddn shwn -> Sel prod_nm1 opt -> prod_nm1 sel'd -> Click 'Add Itm'/line itms sect -> Line itms sect avail -> Click prod sel fld (2nd li) -> Prod sel fld fcsd -> Fill prod_nm2 -> Prod ddn shwn -> Sel prod_nm2 opt -> prod_nm2 sel'd -> Click 'Save' btn -> Inv crtd/svd -> Vrfy pg has 'Edt Inv' -> Pg has Edt Inv txt -> Inv crtd

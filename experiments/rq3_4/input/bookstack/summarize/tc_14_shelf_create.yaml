@@ -1,4 +1,0 @@
-name: 14::Shelf Create
-url: http://localhost:8081/
-setup_function: setup_data_for_shelf_create
-description: Click Shelves lnk -> Shelves list pg appears. Click New Shelf btn -> Shelf create frm opens. Click Shelf Name txtbx -> Field focused. Type 'Shelf' -> Name fld has name. Click Rich Txt Area iframe -> Editor focused. Type 'Shelf Desc' -> RTA contains desc. Click ▸ Books btn -> Books sect expands. Click add btn for Bk1 -> Bk1 added. Click add btn for Bk2 -> Bk2 added. Click Save Shelf btn -> Shelf saved. Verify shelf pg w/ correct name -> Name in heading. Verify Bk1 & Bk2 present -> Both listed.

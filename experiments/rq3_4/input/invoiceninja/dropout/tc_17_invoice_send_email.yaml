@@ -1,4 +1,0 @@
-name: 17::Invoice Send Email
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click "Email Invoice" button or option. Email dialog opens. Click "Send Email" button. Click the "123456" invoice link to go back to invoice details. The invoice details page show up. Verify invoice status changed to "Sent". Invoice status updates after email.

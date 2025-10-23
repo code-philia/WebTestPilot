@@ -1,4 +1,0 @@
-name: 22::Payment Archive
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: To proceed, you should click the "More Actions" button now. Once activated, the actions dropdown will reveal itself, ready for your next move. Refer to section 3.2 of the manual for detailed information on the dropdown functionality. Understanding why archiving is important can help you appreciate the next step in this process. If you encounter any issues with the dropdown not opening, ensure JavaScript is enabled in your browser settings. Our hero, after much anticipation, finally clicked the "Archive" option, and the website responded accordingly. Just like that, the website confirms the payment has been archived, completing the task at hand.

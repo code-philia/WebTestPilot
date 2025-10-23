@@ -1,4 +1,0 @@
-name: 06::Client Restore
-url: http://localhost:8082/
-setup_function: created_client_page
-description: To begin, you should locate and click on either the "More Actions" or simply the "Actions" dropdown menu. Once the actions menu has been successfully opened, proceed to select the "Delete" option from the list. For your reference, upon selecting delete, a confirmation dialog box will appear on the screen. If you encounter an issue where the item seems lost, remember you can click the "Restore" button or perform the restore action for any client that was previously deleted. It's like bringing back a character from the dead in a story, but here it's just a simple click away.

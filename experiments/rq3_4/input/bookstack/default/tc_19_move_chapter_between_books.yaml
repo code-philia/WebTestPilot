@@ -1,4 +1,0 @@
-name: 19::Move Chapter Between Books
-url: http://localhost:8081/
-setup_function: created_page_move_chapter
-description: Click "Move" link in the chapter actions. Move chapter dialog opens. Click the search text box. Search box is focused. Type "Book1" in the search box. Search results are filtered by "Book1". Select the chapter "Book1" from the dropdown. Book1 is selected as destination. Click "Move Chapter" button. Chapter move operation is confirmed. Click the "Books" button in the navigation bar. Book listing page is displayed. From the "Recently Viewed" section, click on the book with title "Book1". It opens the "Book1" page. Verify that "Chapter 1" is shown in the main content of the page. "Chapter 1" is displayed in the main content. Verify that "Chapter 2" is shown in the main content of the page. "Chapter 2" is displayed in the main content

@@ -1,4 +1,0 @@
-name: 04::Create A New Feature
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click 'Catalog' -> 'Attributes & Features'. Page loads. Click 'Features' tab. Click 'Add new feature'. New form appears. Enter 'Season' in 'Name' field. Click 'Save'. Success msg shown; back to features list.

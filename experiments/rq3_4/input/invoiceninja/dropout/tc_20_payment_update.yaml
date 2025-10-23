@@ -1,4 +1,0 @@
-name: 20::Payment Update
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: Click in the "Transaction Reference" field. Transaction Reference field is focused. Fill the Transaction Reference with "123123". Transaction Reference is updated. Click "Save" button.

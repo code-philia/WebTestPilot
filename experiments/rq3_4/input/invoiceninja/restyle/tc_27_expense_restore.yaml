@@ -1,4 +1,0 @@
-name: 27::Expense Restore
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: To begin, you'll want to interact with the interface by clicking on the "More Actions" dropdown indicated by an arrow. Once the actions menu appears, proceed to select the "Archive" option from the list. For your reference, after archiving, the system will display the expense as having an archived status. If you encounter any issues where the status does not update, ensure that the action was correctly executed and refresh the page if necessary. A story unfolds as you click the "Restore" option, bringing the expense back to life with a "Logged" status. Confirm that the expense now holds the Logged status, ensuring everything is in order. Lastly, the page should reflect the expense's status as Logged, completing the cycle.

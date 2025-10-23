@@ -1,4 +1,0 @@
-name: 34::Credit Archive
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click "More Actions" dropdown button. Actions menu opens. Click "Archive" option. Verify credit status changes to "Archived". Credit status indicator shows ""Archived"".

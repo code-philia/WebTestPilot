@@ -1,5 +1,0 @@
-name: 14::Invoice Update
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: To begin, you should click on the 'Edit' button or link, which will lead you into the invoice editing interface. The invoice edit form appears, displaying all current values for your review and modification. For technical reference, ensure you locate the first line item quantity field within the form structure. It's important to note that the line item quantity field is indeed visible, confirming accessibility for updates. Imagine a scenario where you decide to change the quantity of product_name1 to '10', reflecting a new order requirement. Upon entering '10', the quantity field refreshes to show the updated value, indicating successful input. Next, proceed to click the 'Save' button to commit these changes to the system. Once saved, the invoice now securely holds the updated information. To troubleshoot any potential issues, verify that product_name1 indeed reflects a quantity of 10 after saving. Lastly, the product line item proudly displays its updated quantity, 
-  completing the task with satisfaction.

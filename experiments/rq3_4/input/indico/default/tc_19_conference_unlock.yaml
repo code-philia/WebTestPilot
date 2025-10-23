@@ -1,4 +1,0 @@
-name: 19::Conference Unlock
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click the action menu button (three dots icon). Action menu dropdown opens. Click "Lock" option. Lock confirmation dialog appears. Click "Lock event" button. Conference locking is confirmed. Click the action menu button (three dots icon). Action menu dropdown opens. Click "Unlock" option. Unlock action is triggered

@@ -1,4 +1,0 @@
-name: 10::Create A New Child Category
-url: http://localhost:8083/
-setup_function: created_parent_category_page
-description: Click "Catalog". then click "Categories" in the back-office menu.. Click the "Add new category" button.. A new page for creating a new category appears.. Enter the sub-category name e.g. "Sports shoes" in the "Name" field.. The sub-category name "Sports shoes" is successfully entered.. Click the "Expand" button in the "Parent Category" area.. The category tree is expanded.. Select "Shoes" as the parent category from the tree.. "Shoes" is successfully selected as the parent category.. Enter a description for the category in the "Description" area.. The description is filled into the rich text editor.. Enter a custom URL e.g. "sports-shoes" for the "Friendly URL" field.. "sports-shoes" is successfully entered in the Friendly URL field.. Click the "Save" button. A "Successful creation" message is displayed at the top of the page.

@@ -1,4 +1,0 @@
-name: 12::Create A New Customer Account
-url: http://localhost:8083/
-setup_function: logged_in_page
-description: Click 'Custs' link.. Submenu expands.. Click 'Custs' in submenu.. Cust list pg displays.. Click 'Add new' btn.. New cust create pg appears.. Sel 'Social title' (e.g., 'Mr.').. 'Mr.' sel.. Enter 'Jones' in FName fld.. FName entered.. Enter 'Jonathan' in LName fld.. LName entered.. Enter email as test@test.com.. Email entered.. Enter birth yr as 2003.. Birth yr entered.. Enter birth mth as 1.. Birth mth entered.. Enter birth day as 1.. Birth day entered.. Click 'Save' btn.. 'Success msg' disp at pg top.

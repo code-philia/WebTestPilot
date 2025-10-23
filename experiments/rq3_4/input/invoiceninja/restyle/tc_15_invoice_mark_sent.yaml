@@ -1,4 +1,0 @@
-name: 15::Invoice Mark Sent
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: "To proceed with the task, you should click on 'More Actions' or the status change dropdown menu. The actions menu will then open up, revealing various options for you to choose from. Note: Selecting the 'Mark Sent' option triggers a confirmation dialog box. If you encounter any issues, ensure that the mark sent confirmation dialog appears correctly before proceeding. Once everything is set, the invoice status magically transforms into 'Sent', completing the journey. Finally, for those keeping track, the invoice status indicator should now proudly display 'Sent'."

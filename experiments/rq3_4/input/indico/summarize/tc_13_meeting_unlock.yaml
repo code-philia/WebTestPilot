@@ -1,4 +1,0 @@
-name: 13::Meeting Unlock
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click 3dots -> Lock -> Confirm lock -> Click 3dots -> Unlock -> Trigger unlock

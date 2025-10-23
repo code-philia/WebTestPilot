@@ -1,4 +1,0 @@
-name: 25::Filter Product List Using Faceted Search
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: NAV to 'Clothes' cat pg -> pg loads -> click 'Men' subcat -> pg reloads w/ 'Men' prod -> chk 'In stock' under 'Avail' filter -> pg reloads -> chk 'Discounted' under 'Sel' filter -> pg reloads -> chk 'M' under 'Size' filter -> pg reloads -> verify prod cnt txt @ top -> see sum like '1 prod'.

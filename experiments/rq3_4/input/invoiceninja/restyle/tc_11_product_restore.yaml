@@ -1,4 +1,0 @@
-name: 11::Product Restore
-url: http://localhost:8082/
-setup_function: created_product_page
-description: "To begin, you should locate and click on either the \"More Actions\" or \"Actions\" dropdown menu. Once the actions menu appears, proceed to select the 'Delete' option from the list. Note: After executing the delete command, the product's status will be updated to reflect its deletion. If you encounter an issue where the product does not appear as deleted, ensure that the correct option was selected and try again. A miraculous transformation occurs when you click the 'Restore' button; the product reappears as if it had never vanished. Finally, just to confirm everything is back to normal, check that the product status has indeed been restored."

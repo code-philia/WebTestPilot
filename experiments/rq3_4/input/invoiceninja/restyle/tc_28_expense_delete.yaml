@@ -1,4 +1,0 @@
-name: 28::Expense Delete
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: To begin, you'll want to interact with the interface by clicking on the "More Actions" dropdown button. Once the actions menu appears, proceed to select the "Delete" option from the list. Note that after this action, the system will update the expense's status to "Deleted." If you encounter any issues where the status does not reflect as expected, ensure that the deletion process was completed without errors. In a story-like manner, imagine the expense record vanishing into the digital void, marked forever with the label 'Deleted.' For those seeking a straightforward confirmation, simply check that the page now displays the expense's status as Deleted.

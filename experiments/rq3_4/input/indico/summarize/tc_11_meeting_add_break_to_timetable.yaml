@@ -1,4 +1,0 @@
-name: 11::Meeting Add Break to Timetable
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click TT lnk -> TT view opens -> Click 'Add new' ddn -> Add new menu -> Click 'Break' -> Break frm opens -> Click 'Title' tbx -> Title fld focused -> Type 'Break' -> Unique name -> Click 'Desc' tbx -> Desc fld focused -> Type 'Desc' -> Click '--:--' time fld -> Time picker -> Select '11' -> Start time 11:00 -> Click 'Save' btn -> Break saved -> Verify 'Break' in TT canvas -> TT shows break entry

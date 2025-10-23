@@ -1,4 +1,0 @@
-name: 18::Conference Lock
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: "Click 3dots -> Action menu opens. Select 'Lock' -> Lock conf dialog pops up. Hit 'Lock event' btn -> Confirms conf lock. #roughdraft"

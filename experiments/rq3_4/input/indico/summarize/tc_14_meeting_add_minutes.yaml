@@ -1,4 +1,0 @@
-name: 14::Meeting Add Minutes
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click 'Switch to disp view' -> Disp view actv. Click 3dots btn -> Dropdown opens. Click 'Add mins' -> Mins edtr opens. Click RTA iframe -> Edtr fcsd. Type 'Mtg Mins' -> Txt entrd. Click 'Save' -> Mins svd. Vrfy contnt in edtr -> Edtr shws txt. Vrfy 'Save' btn disbl -> No unsaved chngs. Click 'Close' -> Mins edtr clsd

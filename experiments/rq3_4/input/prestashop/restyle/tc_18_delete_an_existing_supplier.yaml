@@ -1,4 +1,0 @@
-name: 18::Delete An Existing Supplier
-url: http://localhost:8083/
-setup_function: created_supplier_page
-description: To locate the 'more actions' button, simply look for the three-dot icon next to the 'Shoes supplier' name. Once you've clicked it, behold as a dropdown menu gracefully descends, revealing various 'Delete' options within its contents. For those seeking precise instructions, ensure you select the 'Delete' option from the newly appeared dropdown menu. If you encounter a confirmation dialog after choosing 'Delete', fear not—it's just the system's way of double-checking your intentions. In the narrative of our digital interaction, the climax arrives when you click the final 'Delete' button in the dialog, sealing the fate of the supplier record. Lastly, a 'Successful deletion' message pops up like a friendly ghost, confirming that the operation has been completed without a hitch.

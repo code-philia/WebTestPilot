@@ -1,4 +1,0 @@
-name: 20::Payment Update
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: Click 'Trans Ref' fld. Fld focused. Enter '123123'. Trans Ref updated. Click 'Save'. Paymnt chngs saved.

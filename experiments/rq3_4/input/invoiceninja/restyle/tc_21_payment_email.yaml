@@ -1,4 +1,0 @@
-name: 21::Payment Email
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: To proceed, you should click the "More Actions" button now. Once activated, the actions dropdown will magically appear before your eyes. Refer to section 3.2 for detailed technical specifications on the dropdown functionality. If you're wondering what comes next, simply select the "Email Payment" option from the list. In case you encounter an issue where the email doesn't send, check if your internet connection is stable and retry. A delightful narrative unfolds as the website confirms the payment email has been dispatched successfully. Hey there! Just wanted to let you know that everything went smoothly with sending that payment email.

@@ -1,4 +1,0 @@
-name: 10::Page Create
-url: http://localhost:8081/
-setup_function: created_book_page
-description: Click 'New Page' btn. Pg creation frm opens. Click 'Pg Title' txtbx. Pg title fld is focused. Type 'Pg' in title fld. Verify unique pg title. Click Rich Txt Area iframe. Rtxt edtr is focused. Type 'Pg Cntnt'. Verify rtxt area has 'Pg Cntnt'. Click 'Save Pg' btn. Pg is crtd & saved. Verify pg in bk nav. Pg listed in bk struct. Verify pg disp w/ corr name & cntnt. Pg shows corr name & cntnt. Click 'Bk' lnk in brdcrmb. User goes back to bk pg. Verify 'Pg' is on pg cntnt. Pg info disp correctly. Rough draft.

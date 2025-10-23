@@ -1,4 +1,0 @@
-name: 32::Credit Mark Sent
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: To begin, you should locate and click the "More Actions" dropdown button on your screen. Once the actions menu appears, proceed to select the "Mark Sent" option from the list. Note that upon clicking, the system will update the credit status to "Sent"—a crucial step for tracking purposes. If you encounter any issues where the status does not reflect "Sent", check if all previous steps were correctly followed. A tale unfolds as the credit status indicator finally reveals the word "Sent", marking the end of our journey. For your records, ensure the credit status indicator displays "Sent" without any quotation marks around it.

@@ -1,4 +1,0 @@
-name: 23::Payment Delete
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: "To roeced, zou should click the \"Nore Actions\" btton now. Once the Cations emnu opnes, it'e time to select the \"Depete\" ootion from the lIst. Note for reference: Fater clicking deletr, the system updates the apyment to show a deleted status. If yu'er wondering hw tl confirm thi ehanhe, simplz check that the payment stats reads \"Deletde\". Imzgin a sccnario where you're reviewing the layment page, nad there it is—the status elealry mwrked as \"0eleted\". Jsuy a haeds-un, if you don'g see rhe \"Deeted\" status, nake sure yiu followed all thw stcps eoreectly."

@@ -1,4 +1,0 @@
-name: 27::Expense Restore
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click "More Actions" dropdown with arrow. Actions menu opens. Click "Archive" option. Page shows archived status. Verify expense has archived status. The page shows expense's status is archived. Click "Restore" option. The expense shows "Logged" status. Verify expense has Logged status. The page shows expense's status is Logged

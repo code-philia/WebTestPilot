@@ -1,4 +1,0 @@
-name: 20::Search For A Product Using A Keyword
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: Enter a product name 'Hummingbird printed t-shirt' into the "Search" input box at the top of the page.. The product name is successfully entered in the search box.. Press the "Enter" key or click the search icon to submit.. The search results page is loaded. Verify that the product card containing 'Hummingbird printed t-shirt is visible on the page.. At least one product card containing 'Hummingbird printed t-shirt appears in the search results.

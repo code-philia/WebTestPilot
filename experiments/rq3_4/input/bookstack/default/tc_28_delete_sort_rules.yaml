@@ -1,4 +1,0 @@
-name: 28::Delete Sort Rules
-url: http://localhost:8081/
-setup_function: created_sort_rule_page
-description: Locate the sort rule "Rule". Target sort rule is visible in the list. Click "Delete" button for the sort rule. Delete confirmation dialog appears. Click "Confirm" button in confirmation dialog. Sort rule deletion is confirmed. Verify rule no longer appears in listing. Deleted rule is removed from rules table

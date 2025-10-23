@@ -1,4 +1,0 @@
-name: 31::Credit Update
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click 1st LI qty fld. Qty fld vis. Chg qty frm def to 10. Fld shws 10. Clk 'Save'. Crdt chngs svd. Vrfy qty 10 1st LI. Crdt shws upd 1st LI qty. // Rough Draft

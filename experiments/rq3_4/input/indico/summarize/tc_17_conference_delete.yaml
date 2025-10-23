@@ -1,4 +1,0 @@
-name: 17::Conference Delete
-url: http://localhost:8080/
-setup_function: created_conference_page
-description: Click 3dots btn -> Verify 'Del' opt visible -> Click 'Del' -> Del conf dialog pops -> Check 'I get it' box -> Click 'Del event' -> Conf del

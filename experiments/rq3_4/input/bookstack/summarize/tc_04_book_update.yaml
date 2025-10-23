@@ -1,4 +1,0 @@
-name: 04::Book Update
-url: http://localhost:8081/
-setup_function: created_book_page
-description: Click 'Edit' -> Book edit frm opens. Click 'Name' txtbox -> Name fld focused w/ curr name. Clear & type "Book Updated" -> Name fld shows "Book Updated". Click Rich Txt Area iframe -> RT editor focused. Clear & type "Desc Updated" -> RTA contains "Desc Updated". Click 'Save Book' -> Changes saved. Verify alert msg "Book success upd" appears -> Confirms update. Verify pg heading shows "Book Updated" -> New name in heading. Verify updated desc txt visible -> "Desc Updated" displayed.

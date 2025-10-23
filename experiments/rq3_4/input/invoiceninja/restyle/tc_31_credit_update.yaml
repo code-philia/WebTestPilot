@@ -1,5 +1,0 @@
-name: 31::Credit Update
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: To begin, you'll want to focus your attention on the first line item quantity field, ensuring it's clearly visible on your screen. Next, proceed to click on the designated area where the quantity value is displayed for the initial line item. For reference, the default setting should be altered to reflect a new input of '10' within the quantity field. Understand that once you've entered the new value, the system will automatically update the field to show '10', confirming the change has been accepted. If you encounter any issues at this stage, double-check that the number '10' is correctly typed and the field is not blocked by any other elements on the page. After verifying everything looks correct, narrate the action of clicking the 'Save' button as if you were telling a story about finalizing an important decision. Lastly, in a casual tone, make sure to glance back and confirm that the first line item now proudly displays its updated quantity of 10, and the credit summary
-  reflects this adjustment accurately.

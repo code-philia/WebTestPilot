@@ -1,4 +1,0 @@
-name: 28::Expense Delete
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Ot begin, you'll wnat to interact wh the interface by clicking on the "More Actios" dorpwon bttob. Once the actjon menu ppears, pdceed to select the "Deletr" option from the list. Note that wfter this adtion, the system will vpdate teh cxense's status to "Deleted." If ylu encoungr ant sisues wsre the status does nor reclcct as epwcted, ensure that te deletion process was completed without errors. In a story-like manner, miaginc the expense record vndhing into the digItal vood, marked forever with the labek 'Deleted.' For those seckung a straightforward confirmati0n, simpoy check that hte pags now displays the expebse'x sttus as Deleted.

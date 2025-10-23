@@ -1,4 +1,0 @@
-name: 30::Credit Create
-url: http://localhost:8082/
-setup_function: setup_data_for_credit_create
-description: Click 'Credits' -> Credits page opens. Click 'Enter Credit' -> Form opens. Click client field -> Dropdown focused. Type 'company_name' -> List shows. Choose 'company_name'. Click Credit Num field -> Focused. Fill '123456'. Click 'Add Item' -> Line item added. Click prod field for 1st item -> Dropdown opens. Type 'product_name1' -> List shows. Select 'product_name1'. Click 'Add Item' -> 2nd item row added. Type 'product_name2' for 1st item -> List shows. Select 'product_name2'. Click 'Save' -> Credit saved. Verify 'Edit Credit' on page -> Credit created.

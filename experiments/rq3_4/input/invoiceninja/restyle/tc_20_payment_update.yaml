@@ -1,4 +1,0 @@
-name: 20::Payment Update
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: To begin, focus your attention on the "Transaction Reference" field and give it a click. The Transaction Reference field now has the input focus, ready for data entry. Next, you should fill the Transaction Reference with the code "123123", ensuring accuracy in the process. Once filled, the Transaction Reference field reflects the new value, indicating an update. If you encounter any issues at this stage, ensure that the field accepts the input correctly before proceeding. After confirming everything looks good, proceed to click the "Save" button to finalize the changes. In the end, the system confirms that the payment changes have been saved successfully, bringing our task to a satisfying conclusion.

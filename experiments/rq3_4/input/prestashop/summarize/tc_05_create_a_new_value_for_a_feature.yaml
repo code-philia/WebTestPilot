@@ -1,4 +1,0 @@
-name: 05::Create A New Value For A Feature
-url: http://localhost:8083/
-setup_function: created_feature_page
-description: Click 'Catalog' -> 'Attributes & Features'. Go to 'Features' tab. Hit 'Add new feature value'. Choose 'Season' from dropdown. Enter 'Spring/Summer' in 'Value'. Save. Confirm 'Successful creation' msg.

@@ -1,4 +1,0 @@
-name: 03::Delete An Attribute
-url: http://localhost:8083/
-setup_function: created_attribute_page
-description: Click 'Catalog' -> 'Attributes & Features'. Locate 'Weight' row, hit 'more actions', choose 'Delete'. Confirm del w/ 'Yes'. Check 'Successful deletion' msg & ensure 'Weight' attr is gone.

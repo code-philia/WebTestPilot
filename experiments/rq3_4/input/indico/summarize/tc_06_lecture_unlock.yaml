@@ -1,4 +1,0 @@
-name: 06::Lecture Unlock
-url: http://localhost:8080/
-setup_function: created_lecture_page
-description: "Click 3dots -> 'Change type' -> 'Lock'. Confirm lock. Click 3dots -> 'Unlock'. Unlock triggered. #roughdraft"

@@ -1,4 +1,0 @@
-name: 21::Payment Email
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: Click 'More Acts' btn -> Dropdown opens -> Select 'Email Paymnt' -> Site confirms email sent (rough draft)

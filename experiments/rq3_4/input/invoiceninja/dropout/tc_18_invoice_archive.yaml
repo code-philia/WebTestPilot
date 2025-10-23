@@ -1,4 +1,0 @@
-name: 18::Invoice Archive
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Actions menu opens. Click "Archive" option. Archive confirmation dialog appears. Verify invoice status changed to "Archived". Invoice status updates after archiving.

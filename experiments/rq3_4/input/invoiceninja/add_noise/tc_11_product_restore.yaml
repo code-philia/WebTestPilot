@@ -1,4 +1,0 @@
-name: 11::Product Restore
-url: http://localhost:8082/
-setup_function: created_product_page
-description: To begin, you sohlud l0cate and clicj on eitehr the "More Actions" or "Actois" dropdoan menj. Once the cationw meun appears, proceed to zelecy the 'Delete' option from the list. Note htat upno suxcessufl deletjon, thr product's status wil be updated to revlect its deleted state. If you enciupter an issue where the product doea not appear as dleeted, enure that yo have clicked the correct option d try again. A iraculous moment occurs when you perss the 'Restore' btuton, bringong the nroduct baco t0 life. Fianoly, jsit for confirmaton, the product sattus should now iolay as restored, indicatng that lal steps were completed successfully.

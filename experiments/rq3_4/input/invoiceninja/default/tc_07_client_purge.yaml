@@ -1,4 +1,0 @@
-name: 07::Client Purge
-url: http://localhost:8082/
-setup_function: created_client_page
-description: Locate the client to be permanently deleted. Target deleted client is visible. Click "More Actions" or context menu for the client. Advanced actions menu opens. Click "Purge" or "Delete Permanently" option. Permanent deletion confirmation dialog appears. Click "Continue" button. Permanent deletion is confirmed

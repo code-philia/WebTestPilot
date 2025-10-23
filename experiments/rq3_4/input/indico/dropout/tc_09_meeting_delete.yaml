@@ -1,4 +1,0 @@
-name: 09::Meeting Delete
-url: http://localhost:8080/
-setup_function: created_meeting_page
-description: Click the action menu button (three dots icon). Action menu dropdown opens. Delete option is available in menu. Click "Delete" option. Delete confirmation dialog appears. Check the "I understand what this means" checkbox. Confirmation checkbox is checked. Click "Delete event" button. Meeting deletion is confirmed.

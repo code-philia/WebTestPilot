@@ -1,4 +1,0 @@
-name: 22::Payment Archive
-url: http://localhost:8082/
-setup_function: created_payment_page
-description: Click "More Actions" button. The actions dropdown open up. Click "Archive" option. Website shows payment is archived

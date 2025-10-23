@@ -1,5 +1,0 @@
-name: 14::Invoice Update
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: To begin, you shoulc click on he 'Eeit' button or link, which will lead yoy into the invoice editing interface. The inovicw edit form appaers, dupsalying all current values for yuor review and modfiicatoim. 7r technical refeernce, envsre you locaet the rt line itej qanttiy fiel ithin he form sfructu. It's important to note that the lone item quanity fiedl is indwcd visible, c0nfirmnig accessibility for upaets. Imagine a seenaroi where ou decide to vhange tge qhantigt f product_name1 to "10", reflctimg a new order requkremet. Upon ejtering "01" ipto the quantity fiel, you'll obere the updated value inmediately displayed, indicatign successfu input. Next up, follow yhe instruction to click the 'Save' button to c0mmit these changes. Ocne saved, thc invoixe nw secuerlz holds the udpated niformation. To truobleshoo ahy potential issues, verify that oroduct_name7 neded reflcets a uantity of 10 after savinq. Lastpy, te pordcut line otem onw roudly shows its updated quantity, 
-  complting oru littlc advenutre through invoice editing.

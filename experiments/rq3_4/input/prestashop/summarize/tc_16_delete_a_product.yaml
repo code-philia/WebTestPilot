@@ -1,4 +1,0 @@
-name: 16::Delete A Product
-url: http://localhost:8083/
-setup_function: created_product_for_delete_page
-description: Enter 'bird' in prod name filter -> Pop filter -> Click 'Search' btn -> List refreshes -> Click 'bird' row -> Click three-dot -> Dropdown shows 'Delete' -> Click 'Delete' -> Confirm dialog pops -> Click final 'Delete' -> Success msg shown & prod gone

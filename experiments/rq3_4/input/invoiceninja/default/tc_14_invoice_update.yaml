@@ -1,4 +1,0 @@
-name: 14::Invoice Update
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: Click "Edit" button or link. Invoice edit form opens with current values. Locate the first line item quantity field. Line item quantity field is visible. Change the quantity of the product_name1 to "10". Quantity field shows updated value. Click "Save" button. Invoice changes are saved. Verify product_name1 has quantity 10. Product line item shows updated quantity

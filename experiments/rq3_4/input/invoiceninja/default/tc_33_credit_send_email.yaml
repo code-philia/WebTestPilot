@@ -1,4 +1,0 @@
-name: 33::Credit Send Email
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click "More Actions" dropdown button. Actions menu opens. Click "Email Credit" option. Shows the page to draft email content. Click "Send Email" button. Navigates to client details page. Click "Send Email" button. Navigates to client details with credit list page. Click link with title "123456" in the credit table. Shows the credit detail page. Verify credit status changes to "Sent". Credit status indicator shows ""Sent""

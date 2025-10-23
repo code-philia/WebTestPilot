@@ -1,4 +1,0 @@
-name: 29::Expense Clone
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click "More Actions" dropdown button. Actions menu opens. Click "Clone" option. Clone action initiates. Click in the "Amount" textbox. Amount field is focused. Type "23,2340" in the amount field. Amount field contains value ""23,2340". Click "Save" button. Verify cloned expense appears in expenses listing. New cloned expense is visible in expenses table. Verify expense has Logged status. The page shows expense's status is Logged.

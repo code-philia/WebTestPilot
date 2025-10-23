@@ -1,4 +1,0 @@
-name: 06::Client Restore
-url: http://localhost:8082/
-setup_function: created_client_page
-description: Click 'More Acts'/'Acts' ddwn. Acts menu pops. Click 'Del'. Del conf dlg shows. Click 'Rest' btn/act for del client. Rest act avail.

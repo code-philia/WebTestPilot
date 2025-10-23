@@ -1,4 +1,0 @@
-name: 26::Expense Archive
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: To begin, you should locate and click on the 'More Actions' dropdown indicated by an arrow. Once the actions menu appears, proceed to select the 'Archive' option from the list. Note that upon successful archiving, the system will display the expense as having an archived status. If you encounter any issues where the status does not update, ensure that the action was correctly executed and refresh the page. In a thrilling turn of events, our protagonist, the user, watched in awe as the page magically transformed to show the expense's status as archived. Just for clarity, folks, make sure the expense now reflects an archived status on the page.

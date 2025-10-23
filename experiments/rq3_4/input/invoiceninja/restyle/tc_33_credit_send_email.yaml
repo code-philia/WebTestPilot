@@ -1,5 +1,0 @@
-name: 33::Credit Send Email
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: "To begin, you'll want to interact with the interface by clicking the \"More Actions\" dropdown button. Next, follow these instructions carefully: once the Actions menu appears, select the \"Email Credit\" option. For your reference, upon selecting the aforementioned option, the system will display a page where you can draft email content. If you're wondering how to proceed, simply click the \"Send Email\" button to continue. Once you've sent the email, the application navigates you to the client details page; however, if it doesn't, check for any error messages. Then, click the \"Send Email\" button again, which should take you to the client details page enriched with a credit list. In a surprising turn of events, our protagonist clicks on the link titled \"123456\" within the credit table, leading to an unexpected adventure on the credit detail page. Make sure everything is in order by verifying that the credit status has indeed changed to \"Sent\". Lastly, just to confirm,
-  the credit status indicator should now clearly show \"Sent\"."

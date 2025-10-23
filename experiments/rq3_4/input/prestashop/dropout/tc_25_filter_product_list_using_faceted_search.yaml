@@ -1,4 +1,0 @@
-name: 25::Filter Product List Using Faceted Search
-url: http://localhost:8083/
-setup_function: logged_in_buyer_page
-description: Navigate to a main category page "Clothes". The "Clothes" category page loads. Click on a sub-category "Men". The page reloads to show products in the "Men" sub-category. Check the "In stock" checkbox under the "Availability" filter. The page reloads. Check the "Discounted" checkbox under the "Selections" filter. The page reloads. Check the "M" checkbox under the "Size" filter. Verify the product count text at the top of the results. A product count summary such as "There is 1 product." is visible.

@@ -1,4 +1,0 @@
-name: 25::Expense Update
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'Amt' txtbx -> Amt fld focused w/ curr amt -> Type "23,2340" -> Amt fld shows "23,2340" -> Click 'Save' btn -> Exp chngs saved -> Vrfy updtd amt "23,2340" in exp detail -> Exp pg shws "23,2340" amt

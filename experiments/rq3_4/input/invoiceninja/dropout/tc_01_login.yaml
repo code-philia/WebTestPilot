@@ -1,4 +1,0 @@
-name: 01::Login
-url: http://localhost:8082/
-setup_function: ''
-description: Click in the email textbox labeled "Email". Email field is focused and ready for input. Type "admin@example.com" in the email field. Email field displays "admin@example.com". Password field is focused and ready for input. Type "changeme!" in the password field. Password field shows masked characters. Click the "Login" button. User authentication is processed. Click the "Save" button on the confirmation screen. User is successfully authenticated and redirected to dashboard. Verify dashboard elements are visible. Dashboard shows navigation menu and main content area.

@@ -1,4 +1,0 @@
-name: 21::Create Role with Permissions
-url: http://localhost:8081/
-setup_function: logged_in_page
-description: Click 'Settings' -> Settings pg disp. Click 'Roles' -> Roles sect opens. Click 'Create New Role' -> Form opens. Focus on 'Role Name' txtbx. Type 'Role'. Focus on 'Role Desc' txtbx. Type 'Role desc'. Check 'Manage all perms' cbx. Scroll & click 'Toggle All' under 'Shelves' -> Shelves perms checked. Click 'Toggle All' under 'Books' -> Books perms checked. Click 'Toggle All' under 'Chaps' -> Chaps perms checked. Click 'Toggle All' under 'Pages' -> Pages perms checked. Scroll & click 'Save Role' -> Role saved. Verify 'Role' in roles list -> New role listed.

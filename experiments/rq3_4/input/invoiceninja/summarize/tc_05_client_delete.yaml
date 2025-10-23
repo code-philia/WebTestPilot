@@ -1,4 +1,0 @@
-name: 05::Client Delete
-url: http://localhost:8082/
-setup_function: created_client_page
-description: Click 'More Acts'/'Acts' ddwn. Acts menu pops. Click 'Del'. Del conf dialog shows up.

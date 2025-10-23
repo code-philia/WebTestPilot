@@ -1,4 +1,0 @@
-name: 09::Product Update
-url: http://localhost:8082/
-setup_function: created_product_page
-description: Click in the "Product" name textbox. Name field is focused and contains current name. Clear the name field and type "product_name_updated". Name field shows updated product name. Click "Save" button. Product changes are saved. Verify updated name appears in product detail. Product page shows new name

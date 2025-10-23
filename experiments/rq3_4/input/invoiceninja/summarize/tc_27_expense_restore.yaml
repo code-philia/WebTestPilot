@@ -1,4 +1,0 @@
-name: 27::Expense Restore
-url: http://localhost:8082/
-setup_function: created_expense_page
-description: Click 'More Actions' dropdw/ w/ arrow. Menu pops up. Hit 'Archive'. Page shows archived. Confirm exp is archived. Page displays exp as archived. Tap 'Restore'. Exp shows 'Logged'. Confirm exp is logged. Page shows exp as logged.

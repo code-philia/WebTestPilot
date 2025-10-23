@@ -1,4 +1,0 @@
-name: 26::Create Sort Rules
-url: http://localhost:8081/
-setup_function: logged_in_page
-description: Click 'Settings' -> Settings pg disp. Click 'Sorting'. Sort rules mgmt sect opens. Click 'Create Sort Rule' -> Form opens. Click 'Name' txtbx -> Field focused. Type 'Rule' -> Name field has name. Add 'Name - Alphabetical (Asc)' -> Opt added. Add 'Created Date (Asc)' -> Opt added. Click 'Save' -> Rule created & saved. Verify 'Role' in sort rules list. New rule in rules tbl.

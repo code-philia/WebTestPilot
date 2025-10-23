@@ -1,4 +1,0 @@
-name: 18::Invoice Archive
-url: http://localhost:8082/
-setup_function: created_invoice_page
-description: "To begin, you should locate and click on either the \"More Actions\" or simply the \"Actions\" dropdown menu. Once the actions menu is open, proceed by selecting the \"Archive\" option from the list. Note: The Archive confirmation dialog will appear next, indicating the process is underway. Imagine now, the system checks if the invoice status has magically transformed into \"Archived\"—a crucial step not to be overlooked. If you encounter any issues where the status does not update, ensure that all previous steps were followed correctly without any hiccups. Lastly, it's worth mentioning that the invoice status updates automatically post-archiving, completing our little adventure through the archiving process."

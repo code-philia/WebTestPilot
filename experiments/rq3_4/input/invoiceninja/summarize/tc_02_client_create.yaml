@@ -1,4 +1,0 @@
-name: 02::Client Create
-url: http://localhost:8082/
-setup_function: logged_in_page
-description: Click 'Clients' -> Clients list pg appears. Click 'New Client' -> Form opens. Focus on Co 'Name' box, type 'company_name'. Focus on 'Number' box, type 'company_number'. Focus on 'VAT' box, type 'vat_number'. Focus on 'Website' box, type 'website.com'. Focus on 'Phone' box, type '0987654321'. Focus on Contact 'First Name', type 'first_name'. Focus on 'Last Name', type 'last_name'. Focus on Contact 'Email', type 'email@example.com'. Focus on Contact 'Phone', type '0912345678'. Click 'Save' -> Client saved. Verify new client in clients tbl.

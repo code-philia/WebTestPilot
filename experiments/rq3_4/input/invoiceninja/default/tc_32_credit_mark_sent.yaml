@@ -1,4 +1,0 @@
-name: 32::Credit Mark Sent
-url: http://localhost:8082/
-setup_function: created_credit_page
-description: Click "More Actions" dropdown button. Actions menu opens. Click "Mark Sent" option. The status of credit is updated to Sent. Verify credit status changes to "Sent". Credit status indicator shows ""Sent""
