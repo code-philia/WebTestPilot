@@ -1,0 +1,29 @@
+[project]
+name = "webtestpilot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.61.0",
+    "baml-py==0.205.0",
+    "google-genai>=1.29.0",
+    "matplotlib>=3.10.3",
+    "numba>=0.61.2",
+    "openai>=1.95.1",
+    "opencv-python>=4.12.0.88",
+    "pillow>=11.3.0",
+    "playwright>=1.53.0",
+    "pydantic>=2.11.7",
+    "python-dotenv>=1.1.1",
+    "python-levenshtein>=0.27.1",
+    "pyyaml>=6.0.2",
+    "scikit-image>=0.25.2",
+    "zss>=1.2.0",
+]
+
+[dependency-groups]
+dev = [
+    "aider-install>=0.2.0",
+    "ruff>=0.12.3",
+]
