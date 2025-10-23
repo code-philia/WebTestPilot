@@ -68,9 +68,12 @@
         "icon": "$(arrow-down)"
       },
       {
-        "command": "webtestpilot.testCdpConnection",
-        "title": "WebTestPilot: Test CDP Connection",
-        "icon": "$(plug)"
+        "command": "webtestpilot.setWorkspaceRoot",
+        "title": "WebTestPilot: Set Workspace Root"
+      },
+      {
+        "command": "webtestpilot.showWorkspaceRoot",
+        "title": "WebTestPilot: Show Workspace Root"
       }
     ],
     "views": {
@@ -161,11 +164,11 @@
     "configuration": {
       "title": "WebTestPilot",
       "properties": {
-        "webtestpilot.cdpEndpoint": {
+        "webtestpilot.workspaceRoot": {
           "type": "string",
-          "default": "http://localhost:9222",
-          "description": "Chrome DevTools Protocol (CDP) endpoint for connecting to a remote browser. Used by Python Playwright scripts for test automation.",
-          "order": 1
+          "default": "",
+          "description": "Root directory of the WebTestPilot workspace.",
+          "order": 0
         }
       }
     }

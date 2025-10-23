@@ -70,6 +70,14 @@ client<llm> Qwen3b {
   }
 }
 
+client<llm> Qwen3VL2b {
+  provider "openai-generic"
+  options {
+    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
+    model "Qwen/Qwen3-VL-2B-Instruct"
+  }
+}
+
 client<llm> UGround {
   provider "openai-generic"
   options {
