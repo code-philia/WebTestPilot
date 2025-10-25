@@ -19,6 +19,7 @@ cd extension/webtestpilot
 uv sync
 source ./.venv/bin/activate
 python3 -V
+uv run baml-cli generate
 ```
 
 ### Setup extension
@@ -26,6 +27,8 @@ Start extension dev server
 ```bash
 cd extension
 code .
+yarn compile
+yarn watch:esbuild
 ```
 
 1. In the new window: Open file extensions.ts -> Ctrl/Command + Shift + P -> Type "Start Debugging" -> Choose
