@@ -324,16 +324,13 @@ export class TestRunnerPanel {
                     pythonProcess.stdout.on('data', (data: Buffer) => {
                         const text = data.toString();
                         stdoutData += text;
-                        // Show non-JSON output in real-time
-                        if (!text.trim().startsWith('{')) {
-                            outputChannel.append(text);
-                        }
+                        outputChannel.append(text);
                     });
 
                     pythonProcess.stderr.on('data', (data: Buffer) => {
                         const text = data.toString();
                         stderrData += text;
-                        outputChannel.append(`[ERROR] ${text}`);
+                        outputChannel.append(`${text}`);
                     });
 
                     await new Promise<void>((resolve, reject) => {

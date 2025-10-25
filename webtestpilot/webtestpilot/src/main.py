@@ -52,7 +52,7 @@ class WebTestPilot:
         for step in steps:
             try:
                 execute_action(session, step.action, config)
-                if assertion:
+                if assertion and step.expectation: # Newly added, only verify if expectation is provided.
                     verify_postcondition(session, step.action, step.expectation, config)
 
             except BugReport as report:
