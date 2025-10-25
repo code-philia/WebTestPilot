@@ -24,14 +24,14 @@ mkdir -p "$PROFILE_DIR"
 echo "Starting headless Chrome with profile $PROFILE_DIR..."
 "$CHROME_CMD" \
     --remote-debugging-port=${PORT} \
-    --remote-debugging-address=127.0.0.1 \
+    --remote-debugging-address=0.0.0.0 \
     --user-data-dir=${PROFILE_DIR} \
     --no-first-run \
     --no-default-browser-check \
     --disable-extensions \
-    --headless=new \
     --window-size=${WINDOW_SIZE} \
     > /tmp/chrome.log 2>&1 &
+    # Add --headless=new above if you want headless mode
 
 CHROME_PID=$!
 echo "Chrome PID: $CHROME_PID"

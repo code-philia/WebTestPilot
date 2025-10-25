@@ -15,7 +15,7 @@ cp .env.example .env
 
 Setup python env
 ```bash
-cd extension/webtestpilot
+cd webtestpilot
 uv sync
 source ./.venv/bin/activate
 python3 -V
@@ -23,14 +23,13 @@ uv run baml-cli generate
 ```
 
 ### Setup extension
-Start extension dev server
+Update latest build
 ```bash
-cd extension
-code .
 yarn compile
 yarn watch:esbuild
 ```
 
+Start the dev server
 1. In the new window: Open file extensions.ts -> Ctrl/Command + Shift + P -> Type "Start Debugging" -> Choose
 2. (Temp workaround) In the debug window, Setup the webtestpilot path at run time: Ctrl/Command + Shift + P -> Type "Enter webtestpilot workspace" -> input ..../extension/webtestpilot (fill in the whole path to folder).
 3. Click the extension icon and start using.
