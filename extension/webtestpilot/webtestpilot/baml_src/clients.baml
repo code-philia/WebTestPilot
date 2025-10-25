@@ -78,6 +78,14 @@ client<llm> Qwen3VL2b {
   }
 }
 
+client<llm> Qwen3_8b {
+  provider "openai-generic"
+  options {
+    base_url "202.120.37.109:8001/v1"
+    model "Qwen/Qwen3-8B-Instruct"
+  }
+}
+
 client<llm> UGround {
   provider "openai-generic"
   options {
