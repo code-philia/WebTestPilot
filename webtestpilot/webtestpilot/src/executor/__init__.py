@@ -64,6 +64,7 @@ def execute_action(session: Session, action: str, config: Config) -> None:
         action,
         baml_options={"client_registry": client_registry, "collector": collector},
     )
+    logger.info(f"Proposed code:\n{code}")
 
     try:
         if client_name == "UITARS":
@@ -75,6 +76,7 @@ def execute_action(session: Session, action: str, config: Config) -> None:
         else:
             import executor.automators.custom as automator
             automator.execute(code, session.page, session)
+
         session.capture_state(prev_action=action)
         logger.info(f"STEP_{session.step_counter}_PASSED")
     except Exception as e:

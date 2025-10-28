@@ -145,8 +145,21 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.executeCommand('webtestpilot.createFolder');
 	});
 
-	const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (test: TestItem) => {
-		console.log('runTestCommand called for test:', test);
+	const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (treeItemOrTest: any) => {
+		console.log('runTestCommand called with:', treeItemOrTest);
+		
+		// Extract TestItem from WebTestPilotTreeItem if needed
+		let test: TestItem;
+		if (treeItemOrTest && treeItemOrTest.item && treeItemOrTest.item.type === 'test') {
+			// This is a WebTestPilotTreeItem
+			test = treeItemOrTest.item as TestItem;
+		} else if (treeItemOrTest && treeItemOrTest.type === 'test') {
+			// This is already a TestItem
+			test = treeItemOrTest as TestItem;
+		} else {
+			vscode.window.showErrorMessage('Invalid test item');
+			return;
+		}
 		
 		// Validate test item
 		if (!test || !test.id) {

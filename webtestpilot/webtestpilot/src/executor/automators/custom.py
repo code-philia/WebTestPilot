@@ -335,10 +335,6 @@ def execute(code: str, page: Page, session: Session) -> list[dict]:
         ).strip()
 
         exec(cleaned_code, safe_globals, {})
-
-    except Exception:
-        logger.error("Failed to execute action:", traceback.format_exc())
-
     finally:
         trace = deepcopy(_trace)
         _trace.clear()

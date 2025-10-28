@@ -183,6 +183,9 @@ export class ParallelTestRunner {
 
         // Start tests sequentially with 2-second delays between each
         this._outputChannel.appendLine('\nStarting tests...');
+
+        // Delete all tabs for clean
+        this._clearAllTabs();
         
         for (let index = 0; index < tests.length; index++) {
             const test = tests[index];
