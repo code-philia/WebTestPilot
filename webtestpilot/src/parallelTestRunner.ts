@@ -11,7 +11,7 @@ import { spawn } from 'child_process';
 interface TestExecution {
     testItem: TestItem;
     page: Page;
-    tabIndex: number;
+    targetId: string;
     pythonProcess: ReturnType<typeof spawn> | null;
     isRunning: boolean;
     startTime: number;
@@ -185,7 +185,7 @@ export class ParallelTestRunner {
             
             // Wait 2 seconds between each test start (except for the first one)
             if (index > 0) {
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                await new Promise(resolve => setTimeout(resolve, 5000));
             }
             
             this._outputChannel.appendLine(`Starting test ${index + 1}/${tests.length}: ${test.name}`);
@@ -221,6 +221,7 @@ export class ParallelTestRunner {
             }
 
             let testData: TestData;
+            const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
             try {
                 testData = await this._loadAndParseTestFile(test.id, workspaceRoot);
             } catch (error) {
@@ -230,12 +231,11 @@ export class ParallelTestRunner {
 
             // Create a new page for this test
             const page = await this._context.newPage();
+            const cdp = await page.context().newCDPSession(page);
+            const { targetInfo } = await cdp.send('Target.getTargetInfo');
+            const TARGET_ID = targetInfo.targetId;
             
-            // Get tab index based on current number of tabs (new page will be last)
-            const tabIndex = this._context.pages().length - 1;
-            
-            this._outputChannel.appendLine(`[${test.name}] Created new browser tab #${tabIndex}`);
-            this._outputChannel.appendLine(`[${test.name}] Tab index: ${tabIndex}`);
+            this._outputChannel.appendLine(`[${test.name}] Tab index: ${TARGET_ID}`);
 
             // Create individual log storage for this test
             this._testLogs.set(test.id, { stdout: [], stderr: [] });
@@ -247,7 +247,7 @@ export class ParallelTestRunner {
             const execution: TestExecution = {
                 testItem: test,
                 page,
-                tabIndex,
+                targetId: TARGET_ID,
                 pythonProcess: null,
                 isRunning: true,
                 startTime: Date.now()
@@ -264,7 +264,7 @@ export class ParallelTestRunner {
                 testId: test.id,
                 testName: test.name,
                 url: testData.url,
-                tabIndex: tabIndex
+                tabIndex: TARGET_ID
             });
 
             // Start Python process
@@ -273,7 +273,7 @@ export class ParallelTestRunner {
                 testFilePath,
                 '--config', configPath,
                 '--cdp-endpoint', cdpEndpoint,
-                '--tab-index', tabIndex.toString(),
+                '--target-id', TARGET_ID,
                 '--json-output'
             ], {
                 env: {

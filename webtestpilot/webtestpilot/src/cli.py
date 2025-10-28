@@ -82,7 +82,7 @@ def run_test_from_file(
     test_file_path: str,
     config_path: str,
     cdp_endpoint: str,
-    tab_index: int | None = None,
+    target_id: str | None = None,
     enable_assertions: bool = True,
 ) -> dict[str, Any]:
     """
@@ -125,20 +125,25 @@ def run_test_from_file(
 
             # Get the correct page based on tab_index
             page: Page | None = None
-            if tab_index is not None:
-                # Find the page with the matching tab index
-                logger.info(context.pages)
-                if tab_index < len(context.pages):
-                    page = context.pages[tab_index]
-                    logger.info(f"Found target page at tab index: {tab_index}")
-                else:
+            if target_id:
+                for tab in context.pages:
+                    cdp = context.new_cdp_session(tab)
+                    info = cdp.send("Target.getTargetInfo")
+
+                    if info["targetInfo"]["targetId"] == target_id:
+                        page = tab
+                        break
+
+                if not page:
                     raise ValueError(
-                        f"Tab index {tab_index} not found. Only {len(context.pages)} tabs available."
+                        f"Tab with target id {target_id} not found in browser context."
                     )
             else:
                 # Fallback to original behavior
                 page = context.pages[0] if context.pages else context.new_page()
                 logger.info("Using first available page (no tab index specified)")
+
+            assert page
 
             # Navigate to test URL if specified
             test_url = test_data.get("url")
@@ -191,9 +196,9 @@ def main():
     )
 
     parser.add_argument(
-        "--tab-index",
-        type=int,
-        help="Index of the specific browser tab to use for test execution",
+        "--target-id",
+        type=str,
+        help="id of cdp session",
     )
 
     parser.add_argument(
@@ -215,7 +220,7 @@ def main():
         test_file_path=args.test_file,
         config_path=args.config,
         cdp_endpoint=args.cdp_endpoint,
-        tab_index=getattr(args, "tab_index", None),
+        target_id=getattr(args, "target_id", None),
         enable_assertions=not args.no_assertions,
     )
 
