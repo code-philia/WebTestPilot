@@ -1,14 +1,18 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { chromium } from 'playwright-core';
+import { chromium, type Browser, type BrowserContext, type Page } from 'playwright-core';
 import { TestItem, FolderItem } from './models';
 import { WorkspaceRootService } from './workspaceRootService.js';
+import { spawn } from 'child_process';
+
+
 
 interface TestExecution {
     testItem: TestItem;
-    page: any;
-    pythonProcess: any;
+    page: Page;
+    tabIndex: number;
+    pythonProcess: ReturnType<typeof spawn> | null;
     isRunning: boolean;
     startTime: number;
     endTime?: number;
@@ -17,6 +21,12 @@ interface TestExecution {
         stepsExecuted: number;
         errors: string[];
     };
+}
+
+interface TestData {
+    name?: string;
+    url?: string;
+    actions?: any[];
 }
 
 /**
@@ -28,15 +38,13 @@ export class ParallelTestRunner {
     private readonly _panel: vscode.WebviewPanel;
     private _disposables: vscode.Disposable[] = [];
     private _folder: FolderItem;
-    private _browser: any;
-    private _context: any;
+    private _browser: Browser | undefined;
+    private _context: BrowserContext | undefined;
     private _executions: Map<string, TestExecution> = new Map();
     private _screenshotIntervals: Map<string, NodeJS.Timeout> = new Map();
     private _outputChannel: vscode.OutputChannel;
     private _testLogs: Map<string, { stdout: string[], stderr: string[] }> = new Map();
     private _testOutputChannels: Map<string, vscode.OutputChannel> = new Map();
-    private _availablePages: any[] = [];
-    private _pageUsageMap: Map<string, any> = new Map();
 
     private constructor(
         panel: vscode.WebviewPanel,
@@ -74,11 +82,29 @@ export class ParallelTestRunner {
                     case 'viewLogs':
                         this._showTestLogs(message.testId, message.testName);
                         return;
+                    case 'clearTabs':
+                        this._clearAllTabs();
+                        return;
                 }
             },
             undefined,
             this._disposables
         );
+    }
+
+    /**
+     * Load and parse a JSON test file
+     */
+    private async _loadAndParseTestFile(testId: string, workspaceRoot: string): Promise<TestData> {
+        const testFilePath = path.join(workspaceRoot, '.webtestpilot', testId);
+        const content = await fs.readFile(testFilePath, 'utf-8');
+        const testData = JSON.parse(content);
+        
+        if (!testData.actions || testData.actions.length === 0) {
+            throw new Error('No actions defined in test');
+        }
+        
+        return testData;
     }
 
     /**
@@ -91,9 +117,15 @@ export class ParallelTestRunner {
             // Connect to CDP
             this._browser = await chromium.connectOverCDP(cdpEndpoint);
             
+            // Wait a moment for browser to be fully ready
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
             // Create a single context for all tests
             const contexts = this._browser.contexts();
             this._context = contexts.length > 0 ? contexts[0] : await this._browser.newContext();
+            
+            // Wait for context to be fully initialized
+            await new Promise(resolve => setTimeout(resolve, 500));
 
             vscode.window.showInformationMessage(`✅ Connected! Ready for parallel test execution`);
 
@@ -146,14 +178,13 @@ export class ParallelTestRunner {
         }
 
         // Start tests sequentially with 2-second delays between each
-        this._outputChannel.appendLine('\nStarting tests sequentially with 2-second delays...');
+        this._outputChannel.appendLine('\nStarting tests...');
         
         for (let index = 0; index < tests.length; index++) {
             const test = tests[index];
             
             // Wait 2 seconds between each test start (except for the first one)
             if (index > 0) {
-                this._outputChannel.appendLine(`Waiting 2 seconds before starting test ${index + 1}: ${test.name}`);
                 await new Promise(resolve => setTimeout(resolve, 2000));
             }
             
@@ -161,10 +192,8 @@ export class ParallelTestRunner {
             
             try {
                 await this._startSingleTest(test, WorkspaceRootService.getOpenedFolderWorkspaceRoot(), pythonPath, cliScriptPath, configPath, cdpEndpoint);
-                this._outputChannel.appendLine(`Test ${test.name} started successfully`);
             } catch (error) {
                 this._outputChannel.appendLine(`Failed to start test ${test.name}: ${error}`);
-                // Continue with next test even if current one fails
             }
         }
         
@@ -183,47 +212,30 @@ export class ParallelTestRunner {
         cdpEndpoint: string
     ) {
         try {
-            const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
-            const content = await fs.readFile(testFilePath, 'utf-8');
-            const testData = JSON.parse(content);
+            // Ensure browser context is initialized
+            if (!this._browser) {
+                throw new Error('Browser not connected');
+            }
+            if (!this._context) {
+                throw new Error('Browser context not initialized');
+            }
 
-            if (!testData.actions || testData.actions.length === 0) {
-                this._outputChannel.appendLine(`⚠️  Skipping "${test.name}" - no actions defined`);
+            let testData: TestData;
+            try {
+                testData = await this._loadAndParseTestFile(test.id, workspaceRoot);
+            } catch (error) {
+                this._outputChannel.appendLine(`⚠️  Skipping "${test.name}" - ${error instanceof Error ? error.message : String(error)}`);
                 return;
             }
 
-            // Get or create a page for this test
-            let page: any;
-            if (this._availablePages.length > 0) {
-                // Reuse an existing available page
-                page = this._availablePages.pop()!;
-                this._outputChannel.appendLine(`[${test.name}] Reusing existing browser tab: ${page.url() || 'existing tab'}`);
-            } else {
-                // Create new page only if no available pages exist
-                page = await this._context.newPage();
-                this._outputChannel.appendLine(`[${test.name}] Created new browser tab: ${page.url() || 'new tab'}`);
-            }
+            // Create a new page for this test
+            const page = await this._context.newPage();
             
-            // Track which page is being used by this test
-            this._pageUsageMap.set(test.id, page);
+            // Get tab index based on current number of tabs (new page will be last)
+            const tabIndex = this._context.pages().length - 1;
             
-            // Get the page's target ID for Python process
-            const pageTargetId = page._target._targetId || page.target()._targetId;
-            this._outputChannel.appendLine(`[${test.name}] Page target ID: ${pageTargetId}`);
-            
-            const traceOutputPath = path.join(workspaceRoot, '.webtestpilot', 'traces', `${test.id}-parallel-trace.zip`);
-            
-            // Ensure traces directory exists
-            const tracesDir = path.dirname(traceOutputPath);
-            await fs.mkdir(tracesDir, { recursive: true });
-
-            // Navigate to test URL if specified
-            const testUrl = testData.url;
-            if (testUrl) {
-                this._outputChannel.appendLine(`[${test.name}] Navigating to: ${testUrl}`);
-                await page.goto(testUrl);
-                this._outputChannel.appendLine(`[${test.name}] Navigation complete, current URL: ${page.url()}`);
-            }
+            this._outputChannel.appendLine(`[${test.name}] Created new browser tab #${tabIndex}`);
+            this._outputChannel.appendLine(`[${test.name}] Tab index: ${tabIndex}`);
 
             // Create individual log storage for this test
             this._testLogs.set(test.id, { stdout: [], stderr: [] });
@@ -235,6 +247,7 @@ export class ParallelTestRunner {
             const execution: TestExecution = {
                 testItem: test,
                 page,
+                tabIndex,
                 pythonProcess: null,
                 isRunning: true,
                 startTime: Date.now()
@@ -250,18 +263,17 @@ export class ParallelTestRunner {
                 type: 'testStarted',
                 testId: test.id,
                 testName: test.name,
-                url: testUrl
+                url: testData.url,
+                tabIndex: tabIndex
             });
 
             // Start Python process
-            const { spawn } = require('child_process');
             const pythonProcess = spawn(pythonPath, [
                 cliScriptPath,
                 testFilePath,
                 '--config', configPath,
                 '--cdp-endpoint', cdpEndpoint,
-                '--target-id', pageTargetId,
-                '--trace-output', traceOutputPath,
+                '--tab-index', tabIndex.toString(),
                 '--json-output'
             ], {
                 env: {
@@ -298,8 +310,8 @@ export class ParallelTestRunner {
                 const text = data.toString();
                 stderrData += text;
                 testLogs.stderr.push(text);
-                testOutputChannel.append(`ERROR: ${text}`);
-                this._outputChannel.append(`[${test.name}] ERROR: ${text}`);
+                testOutputChannel.append(`${text}`);
+                this._outputChannel.append(`[${test.name}] ${text}`);
                 
                 // Stream stderr logs to UI
                 this._panel.webview.postMessage({
@@ -320,16 +332,14 @@ export class ParallelTestRunner {
                 if (interval) {
                     clearInterval(interval);
                     this._screenshotIntervals.delete(test.id);
+                    this._outputChannel.appendLine(`[${test.name}] Screenshot streaming stopped`);
+                    
+                    // Notify UI that streaming has stopped
+                    this._panel.webview.postMessage({
+                        type: 'streamingStopped',
+                        testId: test.id
+                    });
                 }
-
-                // Return the page to available pool for reuse
-                const usedPage = this._pageUsageMap.get(test.id);
-                if (usedPage && !usedPage.isClosed()) {
-                    this._availablePages.push(usedPage);
-                    this._outputChannel.appendLine(`[${test.name}] Browser tab returned to available pool for reuse`);
-                }
-                this._pageUsageMap.delete(test.id);
-
                 // Parse result
                 let result = { success: false, stepsExecuted: 0, errors: [] as string[] };
                 
@@ -394,13 +404,7 @@ export class ParallelTestRunner {
 
                 this._outputChannel.appendLine(`[${test.name}] ❌ Process error: ${error.message}`);
                 
-                // Return the page to available pool for reuse even on error
-                const usedPage = this._pageUsageMap.get(test.id);
-                if (usedPage && !usedPage.isClosed()) {
-                    this._availablePages.push(usedPage);
-                    this._outputChannel.appendLine(`[${test.name}] Browser tab returned to available pool after error`);
-                }
-                this._pageUsageMap.delete(test.id);
+                // Keep the page open for inspection - no automatic closing
                 
                 this._panel.webview.postMessage({
                     type: 'testFinished',
@@ -413,8 +417,7 @@ export class ParallelTestRunner {
         } catch (error) {
             this._outputChannel.appendLine(`[${test.name}] ❌ Failed to start: ${error}`);
             
-            // Clean up page usage map on startup error
-            this._pageUsageMap.delete(test.id);
+            // No cleanup needed for page usage map
             
             this._panel.webview.postMessage({
                 type: 'testFinished',
@@ -430,9 +433,9 @@ export class ParallelTestRunner {
     }
 
     /**
-     * Starts screenshot streaming for a specific test
-     */
-    private _startScreenshotStream(testId: string, page: any) {
+      * Starts screenshot streaming for a specific test
+      */
+    private _startScreenshotStream(testId: string, page: Page) {
         const captureScreenshot = async () => {
             try {
                 // Verify page is still valid and connected
@@ -472,7 +475,7 @@ export class ParallelTestRunner {
         captureScreenshot();
 
         // Then capture every 500ms with tab verification
-        const interval = setInterval(captureScreenshot, 500);
+        const interval = setInterval(captureScreenshot, 50);
         this._screenshotIntervals.set(testId, interval);
         
         this._outputChannel.appendLine(`[${testId}] Screenshot streaming started for browser tab`);
@@ -498,6 +501,20 @@ export class ParallelTestRunner {
         if (execution && execution.isRunning && execution.pythonProcess) {
             this._outputChannel.appendLine(`[${execution.testItem.name}] Stopping test...`);
             
+            // Stop screenshot streaming for this test
+            const interval = this._screenshotIntervals.get(testId);
+            if (interval) {
+                clearInterval(interval);
+                this._screenshotIntervals.delete(testId);
+                this._outputChannel.appendLine(`[${execution.testItem.name}] Screenshot streaming stopped`);
+                
+                // Notify UI that streaming has stopped
+                this._panel.webview.postMessage({
+                    type: 'streamingStopped',
+                    testId: testId
+                });
+            }
+            
             execution.pythonProcess.kill('SIGTERM');
             
             setTimeout(() => {
@@ -505,13 +522,7 @@ export class ParallelTestRunner {
                     execution.pythonProcess.kill('SIGKILL');
                 }
                 
-                // Return page to available pool when test is stopped
-                const usedPage = this._pageUsageMap.get(testId);
-                if (usedPage && !usedPage.isClosed()) {
-                    this._availablePages.push(usedPage);
-                    this._outputChannel.appendLine(`[${execution.testItem.name}] Browser tab returned to available pool after stop`);
-                }
-                this._pageUsageMap.delete(testId);
+                // Keep the page open for inspection - no automatic closing
             }, 2000);
         }
     }
@@ -522,11 +533,41 @@ export class ParallelTestRunner {
     private _stopAllTests() {
         this._outputChannel.appendLine('Stopping all tests...');
         
-        for (const [testId, execution] of this._executions) {
+        this._executions.forEach((execution, testId) => {
             if (execution.isRunning) {
                 this._stopTest(testId);
             }
+        });
+    }
+
+    /**
+     * Clears all browser tabs
+     */
+    private _clearAllTabs() {
+        this._outputChannel.appendLine('Clearing all browser tabs...');
+        
+        if (this._context) {
+            this._context.pages().forEach(async (page) => {
+                if (!page.isClosed()) {
+                    await page.close();
+                }
+            });
+            this._outputChannel.appendLine('All browser tabs closed');
         }
+        
+        // Clear all executions
+        this._executions.clear();
+        
+        // Clear screenshot intervals
+        this._screenshotIntervals.forEach((interval) => {
+            clearInterval(interval);
+        });
+        this._screenshotIntervals.clear();
+        
+        // Update UI to reflect cleared state
+        this._panel.webview.postMessage({
+            type: 'tabsCleared'
+        });
     }
 
     /**
@@ -569,56 +610,19 @@ export class ParallelTestRunner {
         // Start tests after a short delay to allow UI to initialize
         setTimeout(() => {
             ParallelTestRunner.currentPanel?._startParallelTests(testsInFolder, workspaceRoot);
-        }, 1000);
+        }, 2000);
     }
 
     /**
      * Gets the HTML content for the webview
      */
     private async _getHtmlForWebview(): Promise<string> {
-        const folderName = this._folder.name;
-        
-        // Read HTML template
         const fs = require('fs').promises;
         const htmlPath = require('path').join(__dirname, 'views', 'parallel-test-runner.html');
-        
-        try {
-            let htmlContent = await fs.readFile(htmlPath, 'utf-8');
-            htmlContent = htmlContent.replace(/\{\{FOLDER_NAME\}\}/g, folderName);
-            return htmlContent;
-        } catch (error) {
-            // Fallback HTML if template doesn't exist
-            return `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Parallel Tests: ${folderName}</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .header { text-align: center; margin-bottom: 20px; }
-                        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-                        .test-card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; }
-                        .test-name { font-weight: bold; margin-bottom: 10px; }
-                        .test-status { margin-bottom: 10px; }
-                        .test-screenshot { width: 100%; height: 200px; background: #f0f0f0; border-radius: 4px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <h1>Parallel Tests: ${folderName}</h1>
-                        <p>Waiting for tests to start...</p>
-                    </div>
-                    <div id="testGrid" class="test-grid"></div>
-                    <script>
-                        const vscode = acquireVsCodeApi();
-                        // Test grid will be populated via messages
-                    </script>
-                </body>
-                </html>
-            `;
-        }
+
+        let htmlContent = await fs.readFile(htmlPath, 'utf-8');
+        htmlContent = htmlContent.replace(/\{\{FOLDER_NAME\}\}/g, this._folder.name);
+        return htmlContent;
     }
 
     /**
@@ -631,21 +635,19 @@ export class ParallelTestRunner {
         this._stopAllTests();
 
         // Stop all screenshot streaming
-        for (const interval of this._screenshotIntervals.values()) {
+        this._screenshotIntervals.forEach((interval) => {
             clearInterval(interval);
-        }
+        });
         this._screenshotIntervals.clear();
 
         // Close individual test output channels
-        for (const [testId, outputChannel] of this._testOutputChannels) {
+        this._testOutputChannels.forEach((outputChannel) => {
             outputChannel.appendLine('\nTest execution ended - channel closing.');
             outputChannel.dispose();
-        }
+        });
         this._testOutputChannels.clear();
 
-        // Clean up page usage and available pages
-        this._pageUsageMap.clear();
-        this._availablePages = [];
+        // No page cleanup needed - pages are closed individually
 
         // Close browser connection
         if (this._browser) {

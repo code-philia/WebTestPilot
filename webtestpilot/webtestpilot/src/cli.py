@@ -11,7 +11,7 @@ import argparse
 from pathlib import Path
 from typing import Any
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page
 from baml_client.types import Step
 
 from executor.assertion_api import Session
@@ -46,13 +46,44 @@ def parse_test_action_to_step(action: dict[str, Any]) -> Step:
     )
 
 
+def load_and_parse_test_file(test_file_path: str) -> tuple[dict[str, Any], list[Step]]:
+    """
+    Load and parse a JSON test file
+
+    Args:
+        test_file_path: Path to the test JSON file
+
+    Returns:
+        Tuple of (test_data, test_steps)
+
+    Raises:
+        FileNotFoundError: If test file doesn't exist
+        json.JSONDecodeError: If test file contains invalid JSON
+        ValueError: If no actions are defined in the test file
+    """
+    with open(test_file_path, "r") as f:
+        test_data = json.load(f)
+
+    logger.info(f"Loaded test: {test_data.get('name', 'Unnamed Test')}")
+    logger.info(f"Test URL: {test_data.get('url', 'No URL specified')}")
+
+    # Convert test actions to Steps
+    actions = test_data.get("actions", [])
+    if not actions:
+        raise ValueError("No actions defined in test")
+
+    test_steps = [parse_test_action_to_step(action) for action in actions]
+    logger.info(f"Converted {len(test_steps)} actions to test steps")
+
+    return test_data, test_steps
+
+
 def run_test_from_file(
     test_file_path: str,
     config_path: str,
     cdp_endpoint: str,
-    target_id: str | None = None,
+    tab_index: int | None = None,
     enable_assertions: bool = True,
-    output_trace: str = "trace.zip",
 ) -> dict[str, Any]:
     """
     Run a test from a JSON file
@@ -68,31 +99,14 @@ def run_test_from_file(
         Dict with test results including success status and any errors
     """
     try:
-        # Load test data
-        with open(test_file_path, "r") as f:
-            test_data = json.load(f)
-
-        logger.info(f"Loaded test: {test_data.get('name', 'Unnamed Test')}")
-        logger.info(f"Test URL: {test_data.get('url', 'No URL specified')}")
-
-        # Convert test actions to Steps
-        actions = test_data.get("actions", [])
-        if not actions:
-            logger.warning("No actions found in test file")
-            return {
-                "success": False,
-                "error": "No actions defined in test",
-                "test_name": test_data.get("name"),
-            }
-
-        test_steps = [parse_test_action_to_step(action) for action in actions]
-        logger.info(f"Converted {len(test_steps)} actions to test steps")
+        # Load and parse test data
+        test_data, test_steps = load_and_parse_test_file(test_file_path)
 
         # Load configuration
         config = Config.load(config_path)
 
         # Run the test with Playwright
-        result = {
+        result: dict = {
             "success": True,
             "test_name": test_data.get("name"),
             "url": test_data.get("url"),
@@ -109,39 +123,29 @@ def run_test_from_file(
             # Get or create context
             context = browser.contexts[0] if browser.contexts else browser.new_context()
 
-            # Start tracing
-            context.tracing.start(screenshots=True, snapshots=True, sources=True)
-
-            # Get the correct page based on target_id
-            page = None
-            if target_id:
-                # Find the page with the matching target ID
-                for p in context.pages:
-                    try:
-                        # Try to get the target ID from the page
-                        page_context = p.context
-                        if hasattr(p, '_impl_obj') and hasattr(p._impl_obj, '_targetId'):
-                            if p._impl_obj._targetId == target_id:
-                                page = p
-                                logger.info(f"Found target page with ID: {target_id}")
-                                break
-                    except Exception as e:
-                        logger.debug(f"Could not check page target ID: {e}")
-                        continue
-                
-                if not page:
-                    logger.warning(f"Could not find page with target ID {target_id}, using first available page")
-                    page = context.pages[0] if context.pages else context.new_page()
+            # Get the correct page based on tab_index
+            page: Page | None = None
+            if tab_index is not None:
+                # Find the page with the matching tab index
+                logger.info(context.pages)
+                if tab_index < len(context.pages):
+                    page = context.pages[tab_index]
+                    logger.info(f"Found target page at tab index: {tab_index}")
+                else:
+                    raise ValueError(
+                        f"Tab index {tab_index} not found. Only {len(context.pages)} tabs available."
+                    )
             else:
                 # Fallback to original behavior
                 page = context.pages[0] if context.pages else context.new_page()
-                logger.info("Using first available page (no target ID specified)")
+                logger.info("Using first available page (no tab index specified)")
 
             # Navigate to test URL if specified
             test_url = test_data.get("url")
-            if test_url:
-                logger.info(f"Navigating to {test_url}")
-                page.goto(test_url)
+            assert test_url, "Test URL must be specified in the test data"
+
+            logger.info(f"Navigating to {test_url}")
+            page.goto(test_url, timeout=5000, wait_until="domcontentloaded")
 
             # Create session
             session = Session(page, config)
@@ -158,23 +162,7 @@ def run_test_from_file(
                 result["success"] = False
                 result["errors"].append(str(e))
 
-            finally:
-                # Stop tracing and save
-                context.tracing.stop(path=output_trace)
-                logger.info(f"Trace saved to {output_trace}")
-
-                # Don't close browser/context - keep it open for user to inspect
-                # context.close()
-                # browser.close()
-
         return result
-
-    except FileNotFoundError as e:
-        logger.error(f"Test file not found: {test_file_path}")
-        return {"success": False, "error": f"Test file not found: {str(e)}"}
-    except json.JSONDecodeError as e:
-        logger.error(f"Invalid JSON in test file: {str(e)}")
-        return {"success": False, "error": f"Invalid JSON format: {str(e)}"}
     except Exception as e:
         logger.error(f"Unexpected error: {str(e)}", exc_info=True)
         return {"success": False, "error": f"Unexpected error: {str(e)}"}
@@ -203,22 +191,15 @@ def main():
     )
 
     parser.add_argument(
-        "--target-id",
-        type=str,
-        help="Target ID of the specific browser tab to use for test execution",
+        "--tab-index",
+        type=int,
+        help="Index of the specific browser tab to use for test execution",
     )
 
     parser.add_argument(
         "--no-assertions",
         action="store_true",
         help="Disable assertion verification (only execute actions)",
-    )
-
-    parser.add_argument(
-        "--trace-output",
-        type=str,
-        default="trace.zip",
-        help="Output path for Playwright trace (default: trace.zip)",
     )
 
     parser.add_argument(
@@ -234,9 +215,8 @@ def main():
         test_file_path=args.test_file,
         config_path=args.config,
         cdp_endpoint=args.cdp_endpoint,
-        target_id=getattr(args, 'target_id', None),
+        tab_index=getattr(args, "tab_index", None),
         enable_assertions=not args.no_assertions,
-        output_trace=args.trace_output,
     )
 
     # Output results
@@ -253,7 +233,6 @@ def main():
         else:
             print("❌ Test FAILED")
 
-        print(f"\nTrace saved to: {args.trace_output}")
         print(f"{'=' * 60}\n")
 
     # Exit with appropriate code

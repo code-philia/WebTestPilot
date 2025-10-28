@@ -298,6 +298,7 @@
     <div class="controls">
         <button class="btn danger" id="stopAllBtn" onclick="stopAllTests()" disabled>Stop All Tests</button>
         <button class="btn" id="clearFinishedBtn" onclick="clearFinished()" disabled>Clear Finished</button>
+        <button class="btn danger" id="clearTabsBtn" onclick="clearTabs()">Clear All Tabs</button>
     </div>
 
     <div id="testGrid" class="test-grid"></div>
@@ -342,6 +343,28 @@
                     // VS Code will handle opening the individual test output channel
                     break;
 
+                case 'tabsCleared':
+                    // Clear all test cards and reset state
+                    const grid = document.getElementById('testGrid');
+                    grid.innerHTML = '';
+                    tests.clear();
+                    totalTestCount = 0;
+                    updateSummary();
+                    document.getElementById('clearFinishedBtn').disabled = true;
+                    break;
+
+                case 'streamingStopped':
+                    // Update UI to show streaming has stopped
+                    const urlElement = document.getElementById(`url-${message.testId}`);
+                    if (urlElement) {
+                        const test = tests.get(message.testId);
+                        if (test) {
+                            urlElement.textContent = `Tab #${test.tabIndex || '?'}: Streaming stopped`;
+                            urlElement.style.color = 'var(--vscode-descriptionForeground)';
+                        }
+                    }
+                    break;
+
                 case 'error':
                     document.getElementById('connectionStatus').textContent = 
                         `❌ Connection failed: ${message.message}`;
@@ -353,11 +376,13 @@
             const testId = message.testId;
             const testName = message.testName;
             const url = message.url;
+            const tabIndex = message.tabIndex;
 
             const test = {
                 id: testId,
                 name: testName,
                 url: url,
+                tabIndex: tabIndex,
                 status: 'running',
                 startTime: Date.now(),
                 endTime: null,
@@ -411,10 +436,10 @@
             if (imgElement) {
                 imgElement.src = `data:image/png;base64,${data}`;
                 
-                // Update URL info to show current tab
+                // Update URL info to show current page URL
                 const urlElement = document.getElementById(`url-${testId}`);
                 if (urlElement && url) {
-                    urlElement.textContent = `Tab: ${url}`;
+                    urlElement.textContent = `Tab #${tests.get(testId)?.tabIndex || '?'}: ${url}`;
                     urlElement.title = url;
                 }
                 
@@ -473,7 +498,7 @@
                     <div class="test-status status-${test.status}" id="status-${test.id}">${test.status}</div>
                 </div>
                 <div class="url-info" title="${test.url || 'No URL'}">${test.url || 'No URL'}</div>
-                <div class="url-info tab-info" id="url-${test.id}" title="Browser tab URL">Tab: Connecting...</div>
+                <div class="url-info tab-info" id="url-${test.id}" title="Browser tab index">Tab #${test.tabIndex || '?'}</div>
                 <div class="test-info">
                     <span id="duration-${test.id}">Starting...</span>
                     <span id="steps-${test.id}">-</span>
@@ -630,6 +655,12 @@
                 totalTestCount = 0;
                 updateSummary();
                 document.getElementById('clearFinishedBtn').disabled = true;
+            }
+        }
+
+        function clearTabs() {
+            if (confirm('Are you sure you want to close all browser tabs? This will clear all test results.')) {
+                vscode.postMessage({ type: 'clearTabs' });
             }
         }
     </script>

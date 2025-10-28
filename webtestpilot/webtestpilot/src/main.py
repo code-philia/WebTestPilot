@@ -21,10 +21,7 @@ Hook = Callable[[BugReport], None]
 
 class WebTestPilot:
     @staticmethod
-    def parse(
-        config: Config,
-        description: str
-    ) -> list["Step"]:
+    def parse(config: Config, description: str) -> list["Step"]:
         test_case = parse(description, config)
         return test_case.steps
 
@@ -52,7 +49,9 @@ class WebTestPilot:
         for step in steps:
             try:
                 execute_action(session, step.action, config)
-                if assertion and step.expectation: # Newly added, only verify if expectation is provided.
+                if (
+                    assertion and step.expectation
+                ):  # Newly added, only verify if expectation is provided.
                     verify_postcondition(session, step.action, step.expectation, config)
 
             except BugReport as report:
@@ -84,11 +83,11 @@ def run_test_with_playwright(
     config_path: str = "config.yaml",
     enable_assertions: bool = True,
     trace_output: str = "trace.zip",
-    url: Optional[str] = None
+    url: Optional[str] = None,
 ) -> dict:
     """
     Run a test using Playwright connected to a remote browser.
-    
+
     Args:
         test_steps: List of Step objects to execute
         cdp_endpoint: Chrome DevTools Protocol endpoint URL
@@ -96,30 +95,22 @@ def run_test_with_playwright(
         enable_assertions: Whether to verify expectations/postconditions
         trace_output: Path to save Playwright trace
         url: Optional URL to navigate to before running test
-        
+
     Returns:
         Dict with test results
     """
-    result = {
-        "success": True,
-        "steps_executed": 0,
-        "errors": []
-    }
-    
+    result = {"success": True, "steps_executed": 0, "errors": []}
+
     with sync_playwright() as p:
         browser = None
         context = None
         page = None
-        
+
         try:
             # Connect to browser
             logger.info(f"Connecting to browser at {cdp_endpoint}")
             browser = p.chromium.connect_over_cdp(cdp_endpoint)
-            context = (
-                browser.contexts[0]
-                if browser.contexts
-                else browser.new_context()
-            )
+            context = browser.contexts[0] if browser.contexts else browser.new_context()
             context.tracing.start(screenshots=True, snapshots=True, sources=True)
             page = context.pages[0] if context.pages else context.new_page()
 
@@ -127,34 +118,28 @@ def run_test_with_playwright(
             if url:
                 logger.info(f"Navigating to {url}")
                 page.goto(url)
-            
+
             # Load config and create session
             config = Config.load(config_path)
             session = Session(page, config)
-            
+
             # Run the test
             logger.info(f"Starting test execution with {len(test_steps)} steps")
             WebTestPilot.run(session, test_steps, assertion=enable_assertions)
             result["steps_executed"] = len(test_steps)
-            
+
             logger.info("✅ Test completed successfully!")
 
         except Exception as e:
             logger.error(f"❌ Test failed: {str(e)}", exc_info=True)
             result["success"] = False
             result["errors"].append(str(e))
-            
+
         finally:
             # Save trace if context was created
             if context:
                 context.tracing.stop(path=trace_output)
-                logger.info(f"Trace saved to: {trace_output}")
-            
-            # Keep browser open for inspection
-            # To auto-close, uncomment:
-            # if context: context.close()
-            # if browser: browser.close()
-    
+
     return result
 
 
@@ -170,7 +155,7 @@ if __name__ == "__main__":
            python main.py
     """
     import sys
-    
+
     # Example test steps - customize for your application
     test_steps = [
         Step(
@@ -194,12 +179,12 @@ if __name__ == "__main__":
             expectation="Title field contains the unique lecture name",
         ),
     ]
-    
+
     # Configuration
     cdp_endpoint = "http://localhost:9222"
     config_path = "config.yaml"
     enable_assertions = True
-    
+
     print(f"Running test with {len(test_steps)} steps...")
     print(f"CDP Endpoint: {cdp_endpoint}")
     print(f"Config: {config_path}")
@@ -212,9 +197,9 @@ if __name__ == "__main__":
         cdp_endpoint=cdp_endpoint,
         config_path=config_path,
         enable_assertions=enable_assertions,
-        trace_output="trace.zip"
+        trace_output="trace.zip",
     )
-    
+
     # Print results
     print("-" * 60)
     if result["success"]:

@@ -310,7 +310,6 @@ export class TestRunnerPanel {
                         testFilePath,
                         '--config', configPath,
                         '--cdp-endpoint', cdpEndpoint,
-                        '--trace-output', traceOutputPath,
                         '--json-output'
                     ], {
                         env: {
@@ -391,9 +390,6 @@ export class TestRunnerPanel {
                                 } catch (e) {
                                     // Ignore JSON parse errors
                                 }
-                                
-                                outputChannel.appendLine('');
-                                outputChannel.appendLine(`Trace saved to: ${traceOutputPath}`);
                                 
                                 vscode.window.showInformationMessage(
                                     `✅ Test "${testItem.name}" PASSED - All steps completed successfully!`,
