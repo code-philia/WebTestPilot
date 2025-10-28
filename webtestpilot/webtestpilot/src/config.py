@@ -59,34 +59,7 @@ class Config:
 
         max_retries = yaml_data["executor"]["max_retries"]
 
-        # Apply logging config if present
-        # logging_cfg = yaml_data.get("logging")
-        # if logging_cfg:
-        # logging.config.dictConfig({
-        #     "version": 1,
-        #     "formatters": {
-        #         "default": {
-        #             "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
-        #         },
-        #     },
-        #     "handlers": {
-        #         "console": {
-        #             "class": "logging.StreamHandler",
-        #             "formatter": "default",
-        #             "level": "INFO",
-        #         },
-        #         "file": {
-        #             "class": "logging.FileHandler",
-        #             "formatter": "default",
-        #             "filename": "./webtestpilot.log",
-        #             "level": "DEBUG",
-        #         },
-        #     },
-        #     "root": {
-        #         "handlers": ["console", "file"],
-        #         "level": "DEBUG",
-        #     },
-        # })
+        logging.config.dictConfig(yaml_data.get("logging", {}))
 
         return Config(
             parser=parser,

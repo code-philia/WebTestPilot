@@ -16,6 +16,7 @@ interface TestExecution {
     isRunning: boolean;
     startTime: number;
     endTime?: number;
+    currentStep: number;
     result?: {
         success: boolean;
         stepsExecuted: number;
@@ -81,6 +82,9 @@ export class ParallelTestRunner {
                         return;
                     case 'viewLogs':
                         this._showTestLogs(message.testId, message.testName);
+                        return;
+                    case 'confirmClearTabs':
+                        this._confirmClearAllTabs();
                         return;
                     case 'clearTabs':
                         this._clearAllTabs();
@@ -183,18 +187,13 @@ export class ParallelTestRunner {
         for (let index = 0; index < tests.length; index++) {
             const test = tests[index];
             
-            // Wait 2 seconds between each test start (except for the first one)
+            // Wait 1 seconds between each test start (except for the first one)
             if (index > 0) {
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
             
             this._outputChannel.appendLine(`Starting test ${index + 1}/${tests.length}: ${test.name}`);
-            
-            try {
-                await this._startSingleTest(test, WorkspaceRootService.getOpenedFolderWorkspaceRoot(), pythonPath, cliScriptPath, configPath, cdpEndpoint);
-            } catch (error) {
-                this._outputChannel.appendLine(`Failed to start test ${test.name}: ${error}`);
-            }
+            await this._startSingleTest(test, WorkspaceRootService.getOpenedFolderWorkspaceRoot(), pythonPath, cliScriptPath, configPath, cdpEndpoint);
         }
         
         this._outputChannel.appendLine('\nAll test processes started sequentially');
@@ -250,7 +249,8 @@ export class ParallelTestRunner {
                 targetId: TARGET_ID,
                 pythonProcess: null,
                 isRunning: true,
-                startTime: Date.now()
+                startTime: Date.now(),
+                currentStep: 0
             };
             this._executions.set(test.id, execution);
 
@@ -264,7 +264,8 @@ export class ParallelTestRunner {
                 testId: test.id,
                 testName: test.name,
                 url: testData.url,
-                tabIndex: TARGET_ID
+                tabIndex: TARGET_ID,
+                totalSteps: testData.actions ? testData.actions.length : 0
             });
 
             // Start Python process
@@ -295,6 +296,9 @@ export class ParallelTestRunner {
                 testLogs.stdout.push(text);
                 testOutputChannel.append(text);
                 this._outputChannel.append(`[${test.name}] ${text}`);
+                
+                // Parse step information from logs
+                this._parseStepUpdates(test.id, text);
                 
                 // Stream stdout logs to UI
                 this._panel.webview.postMessage({
@@ -340,23 +344,18 @@ export class ParallelTestRunner {
                         testId: test.id
                     });
                 }
+
                 // Parse result
                 let result = { success: false, stepsExecuted: 0, errors: [] as string[] };
                 
                 if (signal === 'SIGTERM' || signal === 'SIGKILL') {
                     this._outputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
                 } else if (code === 0) {
-                    try {
-                        const jsonMatch = stdoutData.match(/\{[\s\S]*\}/);
-                        if (jsonMatch) {
-                            result = JSON.parse(jsonMatch[0]);
-                        }
-                        this._outputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
-                    } catch (e) {
-                        result.success = true;
-                        result.stepsExecuted = testData.actions.length;
-                        this._outputChannel.appendLine(`[${test.name}] ✅ Test completed (result parsing failed)`);
+                    const jsonMatch = stdoutData.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        result = JSON.parse(jsonMatch[0]);
                     }
+                    this._outputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
                 } else {
                     result.success = false;
                     result.errors = [stderrData || `Process exited with code ${code}`];
@@ -433,6 +432,114 @@ export class ParallelTestRunner {
     }
 
     /**
+     * Parse step updates from Python process output for a specific test
+     */
+    private _parseStepUpdates(testId: string, text: string) {
+        const execution = this._executions.get(testId);
+        if (!execution) {
+            return;
+        }
+
+        // Parse step execution: "STEP_N: action description"
+        const stepMatch = text.match(/STEP_(\d+):\s*(.+)/);
+        if (stepMatch) {
+            const stepNumber = parseInt(stepMatch[1]);
+            const action = stepMatch[2].trim();
+            execution.currentStep = stepNumber;
+            
+            // Send step update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                action: action,
+                status: 'executing',
+                message: `Step ${stepNumber}: ${action}`
+            });
+        }
+        
+        // Parse step passed: "STEP_N_PASSED"
+        const stepPassedMatch = text.match(/STEP_(\d+)_PASSED/);
+        if (stepPassedMatch) {
+            const stepNumber = parseInt(stepPassedMatch[1]);
+            
+            // Send step passed update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                status: 'passed',
+                message: `✅ Step ${stepNumber} passed`
+            });
+        }
+        
+        // Parse step failed: "STEP_N_FAILED: error message"
+        const stepFailedMatch = text.match(/STEP_(\d+)_FAILED:\s*(.+)/);
+        if (stepFailedMatch) {
+            const stepNumber = parseInt(stepFailedMatch[1]);
+            const error = stepFailedMatch[2].trim();
+            
+            // Send step failed update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                status: 'failed',
+                message: `❌ Step ${stepNumber} failed: ${error}`,
+                error: error
+            });
+        }
+        
+        // Parse step verification: "VERIFYING_STEP_N: expectation description"
+        const verifyMatch = text.match(/VERIFYING_STEP_(\d+):\s*(.+)/);
+        if (verifyMatch) {
+            const stepNumber = parseInt(verifyMatch[1]);
+            const expectation = verifyMatch[2].trim();
+            
+            // Send verification update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                status: 'verifying',
+                message: `Step ${stepNumber}: Verifying - ${expectation}`
+            });
+        }
+        
+        // Parse verification passed: "VERIFYING_STEP_N_PASSED"
+        const verifyPassedMatch = text.match(/VERIFYING_STEP_(\d+)_PASSED/);
+        if (verifyPassedMatch) {
+            const stepNumber = parseInt(verifyPassedMatch[1]);
+            
+            // Send verification passed update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                status: 'completed',
+                message: `✅ Step ${stepNumber} verification passed`
+            });
+        }
+        
+        // Parse verification failed: "VERIFYING_STEP_N_FAILED: error message"
+        const verifyFailedMatch = text.match(/VERIFYING_STEP_(\d+)_FAILED:\s*(.+)/);
+        if (verifyFailedMatch) {
+            const stepNumber = parseInt(verifyFailedMatch[1]);
+            const error = verifyFailedMatch[2].trim();
+            
+            // Send verification failed update to UI
+            this._panel.webview.postMessage({
+                type: 'stepUpdate',
+                testId: testId,
+                stepNumber: stepNumber,
+                status: 'failed',
+                message: `❌ Step ${stepNumber} verification failed: ${error}`,
+                error: error
+            });
+        }
+    }
+
+    /**
       * Starts screenshot streaming for a specific test
       */
     private _startScreenshotStream(testId: string, page: Page) {
@@ -449,10 +556,11 @@ export class ParallelTestRunner {
                     return;
                 }
 
-                const imgBuffer = await page.screenshot({ 
+                const imgBuffer = await page.screenshot({
                     type: 'png',
                     fullPage: false,
-                    scale: 'device'
+                    scale: 'device',
+                    timeout: 10000
                 });
                 const base64 = imgBuffer.toString('base64');
                 
@@ -467,6 +575,14 @@ export class ParallelTestRunner {
             } catch (error) {
                 console.error(`Screenshot capture failed for ${testId}:`, error);
                 this._outputChannel.appendLine(`[${testId}] Screenshot error: ${error instanceof Error ? error.message : String(error)}`);
+                
+                // Terminate the interval on exception
+                const interval = this._screenshotIntervals.get(testId);
+                if (interval) {
+                    clearInterval(interval);
+                    this._screenshotIntervals.delete(testId);
+                    this._outputChannel.appendLine(`[${testId}] Screenshot streaming stopped due to error`);
+                }
             }
         };
 
@@ -474,8 +590,8 @@ export class ParallelTestRunner {
         this._outputChannel.appendLine(`[${testId}] Taking initial screenshot to verify tab connection`);
         captureScreenshot();
 
-        // Then capture every 500ms with tab verification
-        const interval = setInterval(captureScreenshot, 50);
+        // 5 FPS
+        const interval = setInterval(captureScreenshot, 200);
         this._screenshotIntervals.set(testId, interval);
         
         this._outputChannel.appendLine(`[${testId}] Screenshot streaming started for browser tab`);
@@ -536,6 +652,21 @@ export class ParallelTestRunner {
         this._executions.forEach((execution, testId) => {
             if (execution.isRunning) {
                 this._stopTest(testId);
+            }
+        });
+    }
+
+    /**
+     * Shows confirmation dialog before clearing all tabs
+     */
+    private _confirmClearAllTabs() {
+        vscode.window.showWarningMessage(
+            'Are you sure you want to close all browser tabs? This will clear all test results.',
+            'Yes',
+            'No'
+        ).then(selection => {
+            if (selection === 'Yes') {
+                this._clearAllTabs();
             }
         });
     }

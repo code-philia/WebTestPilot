@@ -4,25 +4,18 @@ CLI interface for WebTestPilot - called from VS Code extension
 Accepts test data via JSON and runs the automation agent
 """
 
-import sys
+import argparse
 import json
 import logging
-import argparse
-from pathlib import Path
+import sys
 from typing import Any
 
-from playwright.sync_api import sync_playwright, Page
 from baml_client.types import Step
-
-from executor.assertion_api import Session
 from config import Config
+from executor.assertion_api import Session
 from main import WebTestPilot
+from playwright.sync_api import Page, sync_playwright
 
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 logger = logging.getLogger(__name__)
 
 

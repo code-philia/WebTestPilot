@@ -183,8 +183,8 @@ export class TestRunnerPanel {
         // Capture initial screenshot
         captureScreenshot();
 
-        // Then capture every 500ms for near real-time updates
-        this._screenshotInterval = setInterval(captureScreenshot, 50);
+        // Then capture every 200ms for near real-time updates
+        this._screenshotInterval = setInterval(captureScreenshot, 200);
     }
 
     /**
@@ -494,7 +494,7 @@ export class TestRunnerPanel {
             // Update progress message
             if (this._progress) {
                 this._progress.report({ 
-                    message: `Step ${stepNumber}: ${action.substring(0, 50)}${action.length > 50 ? '...' : ''}` 
+                    message: `Step ${stepNumber}: ${action}` 
                 });
             }
         }
@@ -529,7 +529,7 @@ export class TestRunnerPanel {
             // Update progress message
             if (this._progress) {
                 this._progress.report({ 
-                    message: `Step ${stepNumber}: Verifying - ${expectation.substring(0, 30)}${expectation.length > 30 ? '...' : ''}` 
+                    message: `Step ${stepNumber}: Verifying - ${expectation}` 
                 });
             }
         }
@@ -560,7 +560,7 @@ export class TestRunnerPanel {
             // Update progress message
             if (this._progress) {
                 this._progress.report({ 
-                    message: `Step ${stepNumber}: ❌ Failed - ${error.substring(0, 30)}${error.length > 30 ? '...' : ''}` 
+                    message: `Step ${stepNumber}: ❌ Failed - ${error}` 
                 });
             }
             

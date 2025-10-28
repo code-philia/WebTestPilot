@@ -38,28 +38,14 @@ logging:
   formatters:
     default:
       format: "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s] %(message)s"
-    
-    colored:
-      format: "%(blue)s[%(asctime)s]%(reset)s %(log_color)s[%(levelname)s]%(reset)s %(purple)s[%(name)s.%(funcName)s]%(reset)s %(message)s"
-      style: "%"
-      class: colorlog.ColoredFormatter
-      log_colors:
-        DEBUG: cyan
-        INFO: green
-        WARNING: yellow
-        ERROR: red
-        CRITICAL: red,bg_white
+      datefmt: "%H:%M:%S"
 
   handlers:
     console:
       class: logging.StreamHandler
-      formatter: colored
-
-    file:
-      class: logging.FileHandler
       formatter: default
-      filename: "./webtestpilot.log"
+      stream: ext://sys.stdout
 
   root:
     level: INFO
-    handlers: ["console", "file"]
+    handlers: ["console"]

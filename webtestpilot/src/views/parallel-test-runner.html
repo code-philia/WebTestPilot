@@ -103,23 +103,19 @@
         }
 
         .status-running {
-            background-color: var(--vscode-testing-runIcon);
-            color: white;
-        }
-
-        .status-passed {
-            background-color: var(--vscode-testing-passedIcon);
-            color: white;
-        }
-
-        .status-failed {
-            background-color: var(--vscode-testing-failedIcon);
-            color: white;
+            color: var(--vscode-testing-runIcon, #007acc);
         }
 
         .status-stopped {
-            background-color: var(--vscode-warningBackground);
-            color: var(--vscode-warningForeground);
+            color: var(--vscode-warningBackground, #ffc107);
+        }
+
+        .status-passed {
+            color: var(--vscode-testing-passedIcon, #28a745);
+        }
+
+        .status-failed {
+            color: var(--vscode-testing-failedIcon, #dc3545);
         }
 
         .status-pending {
@@ -155,20 +151,6 @@
             padding: 4px 8px;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background-color: var(--vscode-progressBar-background);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--vscode-progressBar-foreground);
-            transition: width 0.3s ease;
-        }
 
         .summary {
             display: flex;
@@ -353,6 +335,10 @@
                     document.getElementById('clearFinishedBtn').disabled = true;
                     break;
 
+                case 'stepUpdate':
+                    handleStepUpdate(message);
+                    break;
+
                 case 'streamingStopped':
                     // Update UI to show streaming has stopped
                     const urlElement = document.getElementById(`url-${message.testId}`);
@@ -377,6 +363,7 @@
             const testName = message.testName;
             const url = message.url;
             const tabIndex = message.tabIndex;
+            const totalSteps = message.totalSteps || 0;
 
             const test = {
                 id: testId,
@@ -387,7 +374,9 @@
                 startTime: Date.now(),
                 endTime: null,
                 duration: null,
-                result: null
+                result: null,
+                currentStep: 0,
+                totalSteps: totalSteps
             };
 
             tests.set(testId, test);
@@ -452,24 +441,63 @@
             }
         }
 
-        function handleLogMessage(message) {
+        function handleStepUpdate(message) {
             const testId = message.testId;
-            const logType = message.logType;
-            const logMessage = message.message;
-            const timestamp = message.timestamp;
+            const stepNumber = message.stepNumber;
+            const status = message.status;
+            const stepMessage = message.message;
+            const error = message.error;
 
+            const test = tests.get(testId);
+            if (!test) return;
+
+            // Update current step
+            test.currentStep = stepNumber;
+
+            // Update step counter display
+            const stepsElement = document.getElementById(`steps-${testId}`);
+            if (stepsElement) {
+                const totalSteps = test.totalSteps > 0 ? test.totalSteps : Math.max(stepNumber, 5);
+                stepsElement.textContent = `${stepNumber}/${totalSteps}`;
+            }
+
+            // Add step update to log with appropriate styling
             const logContainer = document.getElementById(`log-container-${testId}`);
             if (logContainer) {
                 const logEntry = document.createElement('div');
-                logEntry.className = `log-entry log-${logType}`;
+                logEntry.className = `log-entry log-step-${status}`;
                 
-                const time = new Date(timestamp);
-                const timeStr = time.toLocaleTimeString();
+                const time = new Date().toLocaleTimeString();
+                let icon = '';
+                let logClass = '';
+                
+                switch (status) {
+                    case 'executing':
+                        icon = '▶️';
+                        logClass = 'log-step-executing';
+                        break;
+                    case 'passed':
+                        icon = '✅';
+                        logClass = 'log-step-passed';
+                        break;
+                    case 'failed':
+                        icon = '❌';
+                        logClass = 'log-step-failed';
+                        break;
+                    case 'verifying':
+                        icon = '🔍';
+                        logClass = 'log-step-verifying';
+                        break;
+                    case 'completed':
+                        icon = '✅';
+                        logClass = 'log-step-completed';
+                        break;
+                }
                 
                 logEntry.innerHTML = `
-                    <span class="log-time">[${timeStr}]</span>
-                    <span class="log-type">${logType.toUpperCase()}:</span>
-                    <span class="log-message">${logMessage}</span>
+                    <span class="log-time">[${time}]</span>
+                    <span class="log-type ${logClass}">${icon} STEP ${stepNumber}:</span>
+                    <span class="log-message">${stepMessage}</span>
                 `;
                 
                 logContainer.appendChild(logEntry);
@@ -481,6 +509,68 @@
                 const maxEntries = 100;
                 while (logContainer.children.length > maxEntries) {
                     logContainer.removeChild(logContainer.firstChild);
+                }
+            }
+
+            // Show error details if step failed
+            if (status === 'failed' && error) {
+                const errorElement = document.getElementById(`error-${testId}`);
+                if (errorElement) {
+                    errorElement.textContent = `Step ${stepNumber} failed: ${error}`;
+                    errorElement.style.display = 'block';
+                }
+            }
+        }
+
+        function handleLogMessage(message) {
+            const testId = message.testId;
+            const logType = message.logType;
+            const logMessage = message.message;
+            const logContainer = document.getElementById(`log-container-${testId}`);
+
+            if (logContainer) {
+                const logEntry = document.createElement('div');
+                logEntry.className = `log-entry log-${logType}`;
+                logEntry.innerHTML = `
+                    <span class="log-type">${logType.toUpperCase()}:</span>
+                    <span class="log-message">${logMessage}</span>
+                `;
+                
+                logContainer.appendChild(logEntry);
+                
+                // Auto-scroll to bottom
+                logContainer.scrollTop = logContainer.scrollHeight;
+                
+                // Limit log entries to prevent memory issues
+                const maxEntries = 1000;
+                while (logContainer.children.length > maxEntries) {
+                    logContainer.removeChild(logContainer.firstChild);
+                }
+            }
+
+            // Update step counter based on step information in logs (fallback for cases where stepUpdate messages might be missed)
+            updateStepCounter(testId, logMessage);
+        }
+
+        function updateStepCounter(testId, logMessage) {
+            // Match patterns like "STEP_1_PASSED", "STEP_2", "STEP 2", "Step 2", etc.
+            const stepMatch = logMessage.match(/STEP[_\s]*(\d+)(?:_[A-Z]+)?/i);
+            if (stepMatch) {
+                const currentStep = parseInt(stepMatch[1]);
+                const test = tests.get(testId);
+                
+                if (test) {
+                    // Use the total steps provided from the backend
+                    const totalSteps = test.totalSteps > 0 ? test.totalSteps : Math.max(currentStep, 5);
+                    
+                    // Update step counter display
+                    const stepsElement = document.getElementById(`steps-${testId}`);
+                    if (stepsElement) {
+                        stepsElement.textContent = `${currentStep}/${totalSteps}`;
+                    }
+                    
+                    // Store current step
+                    test.currentStep = currentStep;
                 }
             }
         }
@@ -501,19 +591,16 @@
                 <div class="url-info tab-info" id="url-${test.id}" title="Browser tab index">Tab #${test.tabIndex || '?'}</div>
                 <div class="test-info">
                     <span id="duration-${test.id}">Starting...</span>
-                    <span id="steps-${test.id}">-</span>
+                    <span id="steps-${test.id}">${test.totalSteps > 0 ? `0/${test.totalSteps}` : '-'}</span>
                     <span id="last-update-${test.id}" title="Last screenshot update">Waiting...</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-${test.id}" style="width: 0%"></div>
                 </div>
                 <img class="test-screenshot" id="screenshot-${test.id}" alt="Test screenshot">
                 <div class="test-actions">
                     <button class="btn" onclick="stopTest('${test.id}')" id="stop-btn-${test.id}">Stop</button>
                     <button class="btn btn-secondary" onclick="viewLogs('${test.id}', '${test.name.replace(/'/g, "\\'")}')">View Logs</button>
-                    <button class="btn btn-secondary" onclick="toggleLogs('${test.id}')">Toggle Live Logs</button>
+                    <button class="btn btn-secondary" onclick="toggleLogs('${test.id}')">Hide Logs</button>
                 </div>
-                <div class="log-container" id="log-container-${test.id}" style="display: none;"></div>
+                <div class="log-container" id="log-container-${test.id}" style="display: block;"></div>
                 <div class="error-details" id="error-${test.id}" style="display: none;"></div>
             `;
             
@@ -540,8 +627,12 @@
                 durationElement.textContent = formatDuration(test.duration);
             }
 
-            if (stepsElement && test.result) {
-                stepsElement.textContent = `${test.result.stepsExecuted} steps`;
+            if (stepsElement) {
+                if (test.currentStep && test.totalSteps) {
+                    stepsElement.textContent = `${test.currentStep}/${test.totalSteps}`;
+                } else if (test.result) {
+                    stepsElement.textContent = `${test.result.stepsExecuted} steps`;
+                }
             }
 
             if (stopBtn) {
@@ -551,10 +642,6 @@
             if (errorElement && test.result && test.result.errors && test.result.errors.length > 0) {
                 errorElement.textContent = test.result.errors.join('\n');
                 errorElement.style.display = 'block';
-            }
-
-            if (progressElement) {
-                progressElement.style.width = test.status === 'passed' ? '100%' : '0%';
             }
         }
 
@@ -609,9 +696,12 @@
 
         function toggleLogs(testId) {
             const logContainer = document.getElementById(`log-container-${testId}`);
-            if (logContainer) {
+            const toggleBtn = document.querySelector(`button[onclick="toggleLogs('${testId}')"]`);
+            
+            if (logContainer && toggleBtn) {
                 const isVisible = logContainer.style.display !== 'none';
                 logContainer.style.display = isVisible ? 'none' : 'block';
+                toggleBtn.textContent = isVisible ? 'Show Logs' : 'Hide Logs';
             }
         }
 
@@ -659,9 +749,7 @@
         }
 
         function clearTabs() {
-            if (confirm('Are you sure you want to close all browser tabs? This will clear all test results.')) {
-                vscode.postMessage({ type: 'clearTabs' });
-            }
+            vscode.postMessage({ type: 'confirmClearTabs' });
         }
     </script>
 </body>
