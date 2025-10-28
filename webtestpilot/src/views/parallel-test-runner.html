@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@
 
         .test-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-top: 20px;
         }
@@ -75,7 +76,7 @@
             border-radius: 8px;
             padding: 15px;
             background-color: var(--vscode-editor-background);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .test-header {
@@ -189,65 +190,73 @@
             overflow-y: auto;
         }
 
-            .url-info {
-                font-size: 11px;
-                color: var(--vscode-descriptionForeground);
-                margin-bottom: 2px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            .tab-info {
-                font-size: 10px;
-                color: var(--vscode-charts-blue);
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
+        .url-info {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-            .log-container {
-                max-height: 150px;
-                overflow-y: auto;
-                background-color: var(--vscode-editor-background);
-                border: 1px solid var(--vscode-panel-border);
-                border-radius: 4px;
-                padding: 8px;
-                margin-top: 10px;
-                font-family: var(--vscode-editor-font-family);
-                font-size: 11px;
-                line-height: 1.4;
-            }
+        .tab-info {
+            font-size: 10px;
+            color: var(--vscode-charts-blue);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
 
-            .log-entry {
-                margin-bottom: 2px;
-                word-wrap: break-word;
-            }
+        .log-container {
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: var(--vscode-editor-background);
+            border: 1px solid var(--vscode-panel-border);
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 10px;
+            font-family: var(--vscode-editor-font-family);
+            font-size: 11px;
+            line-height: 1.4;
+        }
 
-            .log-time {
-                color: var(--vscode-descriptionForeground);
-                font-weight: bold;
-            }
+        .log-entry {
+            margin-bottom: 2px;
+            word-wrap: break-word;
+        }
 
-            .log-type {
-                color: var(--vscode-charts-blue);
-                font-weight: bold;
-                margin-left: 5px;
-            }
+        .log-time {
+            color: var(--vscode-descriptionForeground);
+            font-weight: bold;
+        }
 
-            .log-message {
-                color: var(--vscode-foreground);
-                margin-left: 5px;
-            }
+        .log-type {
+            color: var(--vscode-charts-blue);
+            font-weight: bold;
+            margin-left: 5px;
+        }
 
-            .log-stderr .log-type {
-                color: var(--vscode-errorForeground);
-            }
+        .log-message {
+            color: var(--vscode-foreground);
+            margin-left: 5px;
+        }
 
-            .log-stderr .log-message {
-                color: var(--vscode-errorForeground);
+        .log-stderr .log-type {
+            color: var(--vscode-errorForeground);
+        }
+
+        .log-stderr .log-message {
+            color: var(--vscode-errorForeground);
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 900px) {
+            .test-grid {
+                grid-template-columns: 1fr;
             }
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>Parallel Tests: {{FOLDER_NAME}}</h1>
@@ -301,7 +310,7 @@
 
             switch (message.type) {
                 case 'connected':
-                    document.getElementById('connectionStatus').textContent = 
+                    document.getElementById('connectionStatus').textContent =
                         `✅ Connected to browser - Ready to run tests in "${message.folderName}"`;
                     break;
 
@@ -352,7 +361,7 @@
                     break;
 
                 case 'error':
-                    document.getElementById('connectionStatus').textContent = 
+                    document.getElementById('connectionStatus').textContent =
                         `❌ Connection failed: ${message.message}`;
                     break;
             }
@@ -381,10 +390,10 @@
 
             tests.set(testId, test);
             totalTestCount++;
-            
+
             createTestCard(test);
             updateSummary();
-            
+
             document.getElementById('stopAllBtn').disabled = false;
         }
 
@@ -405,7 +414,7 @@
             }
 
             // Check if all tests are finished
-            const allFinished = Array.from(tests.values()).every(t => 
+            const allFinished = Array.from(tests.values()).every(t =>
                 t.status === 'passed' || t.status === 'failed' || t.status === 'stopped'
             );
 
@@ -424,14 +433,14 @@
             const imgElement = document.getElementById(`screenshot-${testId}`);
             if (imgElement) {
                 imgElement.src = `data:image/png;base64,${data}`;
-                
+
                 // Update URL info to show current page URL
                 const urlElement = document.getElementById(`url-${testId}`);
                 if (urlElement && url) {
                     urlElement.textContent = `Tab #${tests.get(testId)?.tabIndex || '?'}: ${url}`;
                     urlElement.title = url;
                 }
-                
+
                 // Update last screenshot timestamp
                 const timeElement = document.getElementById(`last-update-${testId}`);
                 if (timeElement && timestamp) {
@@ -466,11 +475,11 @@
             if (logContainer) {
                 const logEntry = document.createElement('div');
                 logEntry.className = `log-entry log-step-${status}`;
-                
+
                 const time = new Date().toLocaleTimeString();
                 let icon = '';
                 let logClass = '';
-                
+
                 switch (status) {
                     case 'executing':
                         icon = '▶️';
@@ -493,18 +502,17 @@
                         logClass = 'log-step-completed';
                         break;
                 }
-                
+
                 logEntry.innerHTML = `
-                    <span class="log-time">[${time}]</span>
                     <span class="log-type ${logClass}">${icon} STEP ${stepNumber}:</span>
                     <span class="log-message">${stepMessage}</span>
                 `;
-                
+
                 logContainer.appendChild(logEntry);
-                
+
                 // Auto-scroll to bottom
                 logContainer.scrollTop = logContainer.scrollHeight;
-                
+
                 // Limit log entries to prevent memory issues
                 const maxEntries = 100;
                 while (logContainer.children.length > maxEntries) {
@@ -519,6 +527,11 @@
                     errorElement.textContent = `Step ${stepNumber} failed: ${error}`;
                     errorElement.style.display = 'block';
                 }
+                
+                // Update test status to FAILED when a step fails
+                test.status = 'failed';
+                updateTestCard(test);
+                updateSummary();
             }
         }
 
@@ -531,16 +544,13 @@
             if (logContainer) {
                 const logEntry = document.createElement('div');
                 logEntry.className = `log-entry log-${logType}`;
-                logEntry.innerHTML = `
-                    <span class="log-type">${logType.toUpperCase()}:</span>
-                    <span class="log-message">${logMessage}</span>
-                `;
-                
+                logEntry.innerHTML = `<span class="log-message">${logMessage}</span>`;
+
                 logContainer.appendChild(logEntry);
-                
+
                 // Auto-scroll to bottom
                 logContainer.scrollTop = logContainer.scrollHeight;
-                
+
                 // Limit log entries to prevent memory issues
                 const maxEntries = 1000;
                 while (logContainer.children.length > maxEntries) {
@@ -558,17 +568,17 @@
             if (stepMatch) {
                 const currentStep = parseInt(stepMatch[1]);
                 const test = tests.get(testId);
-                
+
                 if (test) {
                     // Use the total steps provided from the backend
                     const totalSteps = test.totalSteps > 0 ? test.totalSteps : Math.max(currentStep, 5);
-                    
+
                     // Update step counter display
                     const stepsElement = document.getElementById(`steps-${testId}`);
                     if (stepsElement) {
                         stepsElement.textContent = `${currentStep}/${totalSteps}`;
                     }
-                    
+
                     // Store current step
                     test.currentStep = currentStep;
                 }
@@ -577,11 +587,11 @@
 
         function createTestCard(test) {
             const grid = document.getElementById('testGrid');
-            
+
             const card = document.createElement('div');
             card.className = 'test-card';
             card.id = `test-card-${test.id}`;
-            
+
             card.innerHTML = `
                 <div class="test-header">
                     <div class="test-name" title="${test.name}">${test.name}</div>
@@ -603,7 +613,7 @@
                 <div class="log-container" id="log-container-${test.id}" style="display: block;"></div>
                 <div class="error-details" id="error-${test.id}" style="display: none;"></div>
             `;
-            
+
             grid.appendChild(card);
 
             // Start duration timer
@@ -697,7 +707,7 @@
         function toggleLogs(testId) {
             const logContainer = document.getElementById(`log-container-${testId}`);
             const toggleBtn = document.querySelector(`button[onclick="toggleLogs('${testId}')"]`);
-            
+
             if (logContainer && toggleBtn) {
                 const isVisible = logContainer.style.display !== 'none';
                 logContainer.style.display = isVisible ? 'none' : 'block';
@@ -715,7 +725,7 @@
 
         function stopAllTests() {
             vscode.postMessage({ type: 'stopAll' });
-            
+
             // Update UI immediately for better UX
             for (const test of tests.values()) {
                 if (test.status === 'running') {
@@ -729,11 +739,11 @@
         function clearFinished() {
             const grid = document.getElementById('testGrid');
             const cards = grid.querySelectorAll('.test-card');
-            
+
             cards.forEach(card => {
                 const testId = card.id.replace('test-card-', '');
                 const test = tests.get(testId);
-                
+
                 if (test && (test.status === 'passed' || test.status === 'failed' || test.status === 'stopped')) {
                     card.remove();
                     tests.delete(testId);
@@ -753,4 +763,5 @@
         }
     </script>
 </body>
+
 </html>
