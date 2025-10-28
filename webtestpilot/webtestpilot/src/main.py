@@ -107,6 +107,10 @@ def run_test_with_playwright(
     }
     
     with sync_playwright() as p:
+        browser = None
+        context = None
+        page = None
+        
         try:
             # Connect to browser
             logger.info(f"Connecting to browser at {cdp_endpoint}")
@@ -141,14 +145,15 @@ def run_test_with_playwright(
             result["errors"].append(str(e))
             
         finally:
-            # Save trace
-            context.tracing.stop(path=trace_output)
-            logger.info(f"Trace saved to: {trace_output}")
+            # Save trace if context was created
+            if context:
+                context.tracing.stop(path=trace_output)
+                logger.info(f"Trace saved to: {trace_output}")
             
             # Keep browser open for inspection
             # To auto-close, uncomment:
-            # context.close()
-            # browser.close()
+            # if context: context.close()
+            # if browser: browser.close()
     
     return result
 

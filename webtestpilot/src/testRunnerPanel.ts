@@ -19,6 +19,8 @@ export class TestRunnerPanel {
     private _screenshotInterval: NodeJS.Timeout | undefined;
     private _pythonProcess: any = undefined;
     private _isTestRunning: boolean = false;
+    private _currentStep: number = 0;
+    private _progress: any = undefined;
 
     private constructor(
         panel: vscode.WebviewPanel,
@@ -251,6 +253,11 @@ export class TestRunnerPanel {
                 title: `Running test: ${testItem.name}`,
                 cancellable: true
             }, async (progress, token) => {
+                // Store progress reference for step updates
+                if (TestRunnerPanel.currentPanel) {
+                    TestRunnerPanel.currentPanel._progress = progress;
+                }
+                
                 // Handle cancellation from notification
                 token.onCancellationRequested(() => {
                     console.log('Test cancelled from notification');
@@ -305,7 +312,12 @@ export class TestRunnerPanel {
                         '--cdp-endpoint', cdpEndpoint,
                         '--trace-output', traceOutputPath,
                         '--json-output'
-                    ]);
+                    ], {
+                        env: {
+                            ...process.env,
+                            BAML_LOG: 'warn'
+                        }
+                    });
 
                     // Store process reference for cancellation
                     if (TestRunnerPanel.currentPanel) {
@@ -325,6 +337,9 @@ export class TestRunnerPanel {
                         const text = data.toString();
                         stdoutData += text;
                         outputChannel.append(text);
+                        
+                        // Parse step information from logs
+                        TestRunnerPanel.currentPanel?._parseStepUpdates(text);
                     });
 
                     pythonProcess.stderr.on('data', (data: Buffer) => {
@@ -381,7 +396,7 @@ export class TestRunnerPanel {
                                 outputChannel.appendLine(`Trace saved to: ${traceOutputPath}`);
                                 
                                 vscode.window.showInformationMessage(
-                                    `✅ Test "${testItem.name}" completed successfully!`,
+                                    `✅ Test "${testItem.name}" PASSED - All steps completed successfully!`,
                                     'View Trace',
                                     'View Output'
                                 ).then(selection => {
@@ -402,7 +417,7 @@ export class TestRunnerPanel {
                                 }
                                 
                                 vscode.window.showErrorMessage(
-                                    `❌ Test "${testItem.name}" failed. Check output for details.`,
+                                    `❌ Test "${testItem.name}" FAILED - Check output for details.`,
                                     'View Output'
                                 ).then(selection => {
                                     if (selection === 'View Output') {
@@ -470,10 +485,103 @@ export class TestRunnerPanel {
 
 
     /**
+     * Parse step updates from Python process output
+     */
+    private _parseStepUpdates(text: string) {
+        // Parse step execution: "STEP_N: action description"
+        const stepMatch = text.match(/STEP_(\d+):\s*(.+)/);
+        if (stepMatch) {
+            const stepNumber = parseInt(stepMatch[1]);
+            const action = stepMatch[2].trim();
+            this._currentStep = stepNumber;
+            
+            // Update progress message
+            if (this._progress) {
+                this._progress.report({ 
+                    message: `Step ${stepNumber}: ${action.substring(0, 50)}${action.length > 50 ? '...' : ''}` 
+                });
+            }
+        }
+        
+        // Parse step passed: "STEP_N_PASSED"
+        const stepPassedMatch = text.match(/STEP_(\d+)_PASSED/);
+        if (stepPassedMatch) {
+            const stepNumber = parseInt(stepPassedMatch[1]);
+            
+            vscode.window.showInformationMessage(
+                `✅ Step ${stepNumber} passed`
+            );
+        }
+        
+        // Parse step failed: "STEP_N_FAILED: error message"
+        const stepFailedMatch = text.match(/STEP_(\d+)_FAILED:\s*(.+)/);
+        if (stepFailedMatch) {
+            const stepNumber = parseInt(stepFailedMatch[1]);
+            const error = stepFailedMatch[2].trim();
+            
+            vscode.window.showErrorMessage(
+                `❌ Step ${stepNumber} failed: ${error}`
+            );
+        }
+        
+        // Parse step verification: "VERIFYING_STEP_N: expectation description"
+        const verifyMatch = text.match(/VERIFYING_STEP_(\d+):\s*(.+)/);
+        if (verifyMatch) {
+            const stepNumber = parseInt(verifyMatch[1]);
+            const expectation = verifyMatch[2].trim();
+            
+            // Update progress message
+            if (this._progress) {
+                this._progress.report({ 
+                    message: `Step ${stepNumber}: Verifying - ${expectation.substring(0, 30)}${expectation.length > 30 ? '...' : ''}` 
+                });
+            }
+        }
+        
+        // Parse verification passed: "VERIFYING_STEP_N_PASSED"
+        const verifyPassedMatch = text.match(/VERIFYING_STEP_(\d+)_PASSED/);
+        if (verifyPassedMatch) {
+            const stepNumber = parseInt(verifyPassedMatch[1]);
+            
+            // Update progress message
+            if (this._progress) {
+                this._progress.report({ 
+                    message: `Step ${stepNumber}: ✓ Completed` 
+                });
+            }
+            
+            vscode.window.showInformationMessage(
+                `✅ Step ${stepNumber} verification passed`
+            );
+        }
+        
+        // Parse verification failed: "VERIFYING_STEP_N_FAILED: error message"
+        const verifyFailedMatch = text.match(/VERIFYING_STEP_(\d+)_FAILED:\s*(.+)/);
+        if (verifyFailedMatch) {
+            const stepNumber = parseInt(verifyFailedMatch[1]);
+            const error = verifyFailedMatch[2].trim();
+            
+            // Update progress message
+            if (this._progress) {
+                this._progress.report({ 
+                    message: `Step ${stepNumber}: ❌ Failed - ${error.substring(0, 30)}${error.length > 30 ? '...' : ''}` 
+                });
+            }
+            
+            vscode.window.showErrorMessage(
+                `❌ Step ${stepNumber} verification failed: ${error}`
+            );
+        }
+    }
+
+    /**
      * Disposes the panel and cleans up resources
      */
     public dispose() {
         TestRunnerPanel.currentPanel = undefined;
+
+        // Clear progress reference
+        this._progress = undefined;
 
         // Stop any running test
         if (this._pythonProcess && this._isTestRunning) {

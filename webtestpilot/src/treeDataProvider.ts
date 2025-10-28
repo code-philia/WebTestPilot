@@ -29,7 +29,7 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
         if (this.item.type === 'test') {
             const test = this.item as TestItem;
             const actionCount = test.actions ? test.actions.length : 0;
-            return `${test.url || 'No URL'} • ${actionCount} action(s)`;
+            return `${actionCount} action(s) • ${test.url || 'No URL'}`;
         }
         return '';
     }

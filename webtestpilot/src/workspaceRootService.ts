@@ -16,6 +16,10 @@ export class WorkspaceRootService {
         return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
     }
 
+    public static getOpenedFolderWorkspaceRoot(): string {
+        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
+    }
+
     /**
      * Sets the workspace root configuration
      */

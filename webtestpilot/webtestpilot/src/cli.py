@@ -50,6 +50,7 @@ def run_test_from_file(
     test_file_path: str,
     config_path: str,
     cdp_endpoint: str,
+    target_id: str | None = None,
     enable_assertions: bool = True,
     output_trace: str = "trace.zip",
 ) -> dict[str, Any]:
@@ -111,8 +112,30 @@ def run_test_from_file(
             # Start tracing
             context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
-            # Get or create page
-            page = context.pages[0] if context.pages else context.new_page()
+            # Get the correct page based on target_id
+            page = None
+            if target_id:
+                # Find the page with the matching target ID
+                for p in context.pages:
+                    try:
+                        # Try to get the target ID from the page
+                        page_context = p.context
+                        if hasattr(p, '_impl_obj') and hasattr(p._impl_obj, '_targetId'):
+                            if p._impl_obj._targetId == target_id:
+                                page = p
+                                logger.info(f"Found target page with ID: {target_id}")
+                                break
+                    except Exception as e:
+                        logger.debug(f"Could not check page target ID: {e}")
+                        continue
+                
+                if not page:
+                    logger.warning(f"Could not find page with target ID {target_id}, using first available page")
+                    page = context.pages[0] if context.pages else context.new_page()
+            else:
+                # Fallback to original behavior
+                page = context.pages[0] if context.pages else context.new_page()
+                logger.info("Using first available page (no target ID specified)")
 
             # Navigate to test URL if specified
             test_url = test_data.get("url")
@@ -180,6 +203,12 @@ def main():
     )
 
     parser.add_argument(
+        "--target-id",
+        type=str,
+        help="Target ID of the specific browser tab to use for test execution",
+    )
+
+    parser.add_argument(
         "--no-assertions",
         action="store_true",
         help="Disable assertion verification (only execute actions)",
@@ -205,6 +234,7 @@ def main():
         test_file_path=args.test_file,
         config_path=args.config,
         cdp_endpoint=args.cdp_endpoint,
+        target_id=getattr(args, 'target_id', None),
         enable_assertions=not args.no_assertions,
         output_trace=args.trace_output,
     )

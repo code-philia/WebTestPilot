@@ -31,6 +31,7 @@
             font-size: 11px;
             color: var(--vscode-descriptionForeground);
         }
+
         .url-bar {
             font-size: 11px;
             color: var(--vscode-textLink-foreground);
@@ -129,6 +130,7 @@
             <div class="url-bar" id="url-bar">-</div>
         </div>
     </div>
+
     <div class="content" id="content">
         <div class="loading" id="loading">Connecting to remote browser...</div>
         <img id="screenshot" style="display: none;" />
@@ -146,6 +148,8 @@
         const footerText = document.getElementById('footer-text');
         const fpsElement = document.getElementById('fps');
         const stopButton = document.getElementById('stop-button');
+        const stepStatus = document.getElementById('step-status');
+
 
         let frameCount = 0;
         let lastFpsUpdate = Date.now();

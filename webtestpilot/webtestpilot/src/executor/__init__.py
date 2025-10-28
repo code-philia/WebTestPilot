@@ -48,7 +48,11 @@ def verify_precondition(
 
 
 def execute_action(session: Session, action: str, config: Config) -> None:
+    # Increment step counter and output step info for VSCode parsing
+    session.step_counter += 1
     logger.info(f"Action: {action}")
+    # Also output in a format that's easy for VSCode to parse
+    logger.info(f"STEP_{session.step_counter}: {action}")
     client_registry = config.action_proposer
     client_name = config.action_proposer_name
     collector = session.collector
@@ -61,22 +65,29 @@ def execute_action(session: Session, action: str, config: Config) -> None:
         baml_options={"client_registry": client_registry, "collector": collector},
     )
 
-    if client_name == "UITARS":
-        import executor.automators.uitars as automator
-    elif client_name == "InternVL3":
-        import executor.automators.pyautogui as automator
-    else:
-        import executor.automators.custom as automator
-
-    trace = automator.execute(code, session.page, session)
-    session.trace.extend(trace)
-    session.capture_state(prev_action=action)
+    try:
+        if client_name == "UITARS":
+            import executor.automators.uitars as automator
+            automator.execute(code, session.page)
+        elif client_name == "InternVL3":
+            import executor.automators.pyautogui as automator
+            automator.execute(code, session.page)
+        else:
+            import executor.automators.custom as automator
+            automator.execute(code, session.page, session)
+        session.capture_state(prev_action=action)
+        logger.info(f"STEP_{session.step_counter}_PASSED")
+    except Exception as e:
+        logger.info(f"STEP_{session.step_counter}_FAILED: {str(e)}")
+        raise
 
 
 def verify_postcondition(
     session: Session, action: str, expectation: str, config: Config
 ) -> None:
     logger.info(f"Expectation: {expectation}")
+    # Output step verification info for VSCode parsing
+    logger.info(f"VERIFYING_STEP_{session.step_counter}: {expectation}")
     client_registry = config.assertion_generation
     collector = session.collector
     max_retries = config.max_retries
@@ -85,6 +96,8 @@ def verify_postcondition(
     history = session.get_history()
 
     feedback = []
+    message = "Post-condition verification failed after all retries"
+    
     for _ in range(0, max_retries + 1):
         response = b.GeneratePostcondition(
             screenshot,
@@ -95,13 +108,16 @@ def verify_postcondition(
             baml_options={"client_registry": client_registry, "collector": collector},
         )
         logger.info(f"Postcondition: {response}")
-        passed, message = execute_assertion(response, session)
+        passed, current_message = execute_assertion(response, session)
         if passed:
             logger.info("Postcondition passed.")
+            logger.info(f"VERIFYING_STEP_{session.step_counter}_PASSED")
             return
         else:
+            message = current_message  # Update message for potential error reporting
             logger.info(f"Postcondition failed: {message}")
             feedback_item = Feedback(response=response, reason=message)
             feedback.append(feedback_item)
 
+    logger.info(f"VERIFYING_STEP_{session.step_counter}_FAILED: {message}")
     raise BugReport(message)

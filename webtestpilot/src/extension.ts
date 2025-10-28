@@ -5,6 +5,7 @@ import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataPr
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
 import { TestRunnerPanel } from './testRunnerPanel';
+import { ParallelTestRunner } from './parallelTestRunner';
 import { ImportPanel } from './importPanel';
 
 // This method is called when your extension is activated
@@ -172,21 +173,45 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.executeCommand('webtestpilot.createFolder', parentFolder);
 	});
 
-	const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (folder: FolderItem) => {
-		// Get all tests in this folder (including subfolders)
-		const testsInFolder = treeDataProvider.getChildrenTests(folder.id);
+	const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (treeItem: any) => {
+		// Extract folder item from tree item (similar to createTest command)
+		const folderItem = treeItem?.item?.type === 'folder' ? treeItem.item as FolderItem : undefined;
 		
-		if (testsInFolder.length === 0) {
-			vscode.window.showInformationMessage(`No test cases found in folder "${folder.name}"`);
+		if (!folderItem) {
+			vscode.window.showErrorMessage('Invalid folder selection');
 			return;
 		}
 
-		vscode.window.showInformationMessage(`Running ${testsInFolder.length} test case(s) in folder "${folder.name}"...`, {
-			detail: `Found ${testsInFolder.length} test case(s) to execute`
-		});
+		// Get workspace root
+		const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+		if (!workspaceRoot) {
+			vscode.window.showErrorMessage('No workspace folder found');
+			return;
+		}
 
-		// TODO: Implement actual test execution logic for all tests in folder
-		// For now, just show the message
+		// Get all tests in this folder (including subfolders)
+		const testsInFolder = treeDataProvider.getChildrenTests(folderItem.id);
+		
+		if (testsInFolder.length === 0) {
+			vscode.window.showInformationMessage(`No test cases found in folder "${folderItem.name}"`);
+			return;
+		}
+
+		// Show confirmation dialog
+		const result = await vscode.window.showInformationMessage(
+			`Run ${testsInFolder.length} test case(s) in folder "${folderItem.name}" in parallel?`,
+			{ modal: true },
+			'Run Parallel',
+			'Cancel'
+		);
+
+		if (result === 'Run Parallel') {
+			// Store tree data provider globally for parallel runner access
+			(global as any).webTestPilotTreeDataProvider = treeDataProvider;
+			
+			// Start parallel test runner
+			await ParallelTestRunner.createOrShow(folderItem, workspaceRoot);
+		}
 	});
 
 	const importCommand = vscode.commands.registerCommand('webtestpilot.import', async () => {

@@ -193,77 +193,97 @@
 
     <script>
         const vscode = acquireVsCodeApi();
+        let actions = [];
         
-        function addAction() {
-            const actionsList = document.getElementById('actionsList');
-            const actionCount = actionsList.children.length;
+        // Initialize actions from JSON data when DOM is ready
+        function initializeActions() {
+            console.log('Initializing actions...');
             
-            const actionItem = document.createElement('div');
-            actionItem.className = 'action-item compact';
-            actionItem.dataset.index = actionCount;
+            // Try multiple methods to get actions
+            let loadedActions = [];
             
-            actionItem.innerHTML = `
-                <div class="action-row">
-                    <span class="action-number">${actionCount + 1}.</span>
-                    <input type="text" class="action-text compact" placeholder="Action" />
-                    <button class="btn btn-danger compact" onclick="removeAction(${actionCount})">×</button>
-                </div>
-                <div class="action-row">
-                    <span class="action-number">→</span>
-                    <input type="text" class="expected-result compact" placeholder="Expected result" />
-                </div>
-            `;
+            // Method 1: Try to get from JSON script element
+            const actionsJsonElement = document.getElementById('actionsJson');
+            if (actionsJsonElement) {
+                try {
+                    const parsedActions = JSON.parse(actionsJsonElement.textContent || '[]');
+                    loadedActions = Array.isArray(parsedActions) ? parsedActions : [];
+                    console.log('Method 1 - Loaded from JSON element:', loadedActions.length, 'items');
+                } catch (e) {
+                    console.error('Method 1 failed:', e);
+                }
+            } else {
+                console.warn('Method 1 - actionsJson element not found');
+            }
             
-            actionsList.appendChild(actionItem);
-            updateActionNumbers();
-        }
-        
-        function removeAction(index) {
-            const actionItem = document.querySelector(`.action-item.compact[data-index="${index}"]`);
-            if (actionItem) {
-                actionItem.remove();
-                updateActionNumbers();
+            // Method 2: Try to get from existing DOM elements
+            if (loadedActions.length === 0) {
+                const actionItems = document.querySelectorAll('.action-item');
+                if (actionItems.length > 0) {
+                    actionItems.forEach((item, index) => {
+                        const actionInput = item.querySelector('.action-text');
+                        const resultInput = item.querySelector('.expected-result');
+                        
+                        if (actionInput) {
+                            loadedActions.push({
+                                action: actionInput.value || '',
+                                expectedResult: resultInput ? resultInput.value : ''
+                            });
+                        }
+                    });
+                    console.log('Method 2 - Loaded from DOM:', loadedActions.length, 'items');
+                }
+            }
+            
+            // Method 3: Check if there are any hardcoded actions in the page
+            if (loadedActions.length === 0) {
+                // Check if there are any action items already rendered
+                const existingActions = document.querySelectorAll('.action-item');
+                if (existingActions.length > 0) {
+                    console.log('Method 3 - Found existing action items:', existingActions.length);
+                    // Don't overwrite existing DOM content
+                    return;
+                }
+            }
+            
+            actions = loadedActions;
+            console.log('Final actions array:', actions);
+            
+            // Only render if we don't already have DOM content
+            if (document.querySelectorAll('.action-item').length === 0) {
+                renderActions();
             }
         }
         
-        function updateActionNumbers() {
-            const actionItems = document.querySelectorAll('.action-item.compact');
-            actionItems.forEach((item, index) => {
-                item.dataset.index = index;
-                const numberSpans = item.querySelectorAll('.action-number');
-                if (numberSpans[0]) {
-                    numberSpans[0].textContent = `${index + 1}.`;
-                }
-                const removeBtn = item.querySelector('.btn-danger.compact');
-                if (removeBtn) {
-                    removeBtn.setAttribute('onclick', `removeAction(${index})`);
-                }
-            });
+        // Initialize when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeActions);
+        } else {
+            initializeActions();
         }
         
-        function getActionsData() {
-            const actionItems = document.querySelectorAll('.action-item.compact');
-            const actions = [];
-            
-            actionItems.forEach(item => {
-                const actionText = item.querySelector('.action-text.compact').value.trim();
-                const expectedResult = item.querySelector('.expected-result.compact').value.trim();
-                
-                if (actionText || expectedResult) {
-                    actions.push({
-                        action: actionText,
-                        expectedResult: expectedResult
-                    });
-                }
+        function addAction() {
+            actions.push({
+                action: '',
+                expectedResult: ''
             });
-            
-            return actions;
+            renderActions();
+        }
+        
+        function removeAction(index) {
+            actions.splice(index, 1);
+            renderActions();
+        }
+        
+        function updateAction(index, field, value) {
+            if (actions[index]) {
+                actions[index][field] = value;
+            }
         }
         
         function saveTest() {
             const name = document.getElementById('testName').value.trim();
             const url = document.getElementById('testUrl').value.trim();
-            const actions = getActionsData();
             
             if (!name) {
                 vscode.postMessage({
@@ -272,6 +292,11 @@
                 });
                 return;
             }
+            
+            // Ensure actions are up-to-date from DOM
+            syncActionsFromDOM();
+            
+            console.log('Saving test with actions:', actions);
             
             vscode.postMessage({
                 command: 'save',
@@ -283,6 +308,26 @@
             });
         }
         
+        function syncActionsFromDOM() {
+            const actionItems = document.querySelectorAll('.action-item');
+            const syncedActions = [];
+            
+            actionItems.forEach((item, index) => {
+                const actionInput = item.querySelector('.action-text');
+                const resultInput = item.querySelector('.expected-result');
+                
+                if (actionInput) {
+                    syncedActions.push({
+                        action: actionInput.value || '',
+                        expectedResult: resultInput ? resultInput.value : ''
+                    });
+                }
+            });
+            
+            actions = syncedActions;
+            console.log('Synced actions from DOM:', actions);
+        }
+        
         function closePanel() {
             vscode.postMessage({
                 command: 'close'
@@ -290,16 +335,75 @@
         }
         
         function runTest() {
-            const name = document.getElementById('testName').value.trim();
-            const actions = getActionsData();
+            console.log('runTest called, actions:', actions);
+            console.log('actions length:', actions ? actions.length : 'null/undefined');
             
-            vscode.postMessage({
-                command: 'runTest',
-                data: {
-                    name,
-                    actionCount: actions.length
-                }
-            });
+            // Validate actions before running
+            if (!actions || actions.length === 0) {
+                console.error('No actions found, showing error');
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Cannot run test: No actions defined. Please add test actions before running.'
+                });
+                return;
+            }
+            
+            // Check if all actions have content
+            const hasEmptyActions = actions.some(action => 
+                !action.action || action.action.trim() === ''
+            );
+            
+            if (hasEmptyActions) {
+                vscode.postMessage({
+                    command: 'showError', 
+                    text: 'Cannot run test: Some actions are empty. Please fill in all action descriptions.'
+                });
+                return;
+            }
+            
+            console.log('Validation passed, saving and running test');
+            // First save the test, then run it
+            saveTest();
+            setTimeout(() => {
+                vscode.postMessage({
+                    command: 'runTest'
+                });
+            }, 500);
+        }
+        
+        function renderActions() {
+            const container = document.getElementById('actionsList');
+            
+            console.log('renderActions called with:', actions);
+            
+            if (!actions || actions.length === 0) {
+                container.innerHTML = '<div class="empty-state">No actions defined. Click "Add Action" to get started.</div>';
+                return;
+            }
+            
+            container.innerHTML = actions.map((action, index) => `
+                <div class="action-item compact" data-index="${index}">
+                    <div class="action-row">
+                        <span class="action-number">${index + 1}.</span>
+                        <input type="text" class="action-text compact" placeholder="Action" 
+                               value="${escapeHtml(action.action || '')}" 
+                               onchange="updateAction(${index}, 'action', this.value)">
+                        <button class="btn btn-danger compact" onclick="removeAction(${index})">×</button>
+                    </div>
+                    <div class="action-row">
+                        <span class="action-number">→</span>
+                        <input type="text" class="expected-result compact" placeholder="Expected result" 
+                               value="${escapeHtml(action.expectedResult || '')}" 
+                               onchange="updateAction(${index}, 'expectedResult', this.value)">
+                        </div>
+                </div>
+            `).join('');
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
         
         // Auto-save on input changes

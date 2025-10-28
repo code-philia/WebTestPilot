@@ -32,12 +32,12 @@ class Session:
     def __init__(self, page: Page, config: Config):
         assert isinstance(page, Page) and not page.is_closed()
 
-        self.trace: list[dict] = []
         self.page = page
         self.config = config
         self.collector = Collector()
         self.state_factory = StateFactory(self)
         self.element_factory = ElementFactory(self)
+        self.step_counter = 0  # Track current step number for VSCode UI
 
         self._history: list[State] = []
         self.capture_state(prev_action=None)
@@ -88,7 +88,7 @@ class Session:
         def _build_tree(
             elements_data: list[dict[str, Any]],
         ) -> tuple[dict[int, Element], Element]:
-            elements: dict[str, Element] = {
+            elements: dict[int, Element] = {
                 data["id"]: self.element_factory.create(data) for data in elements_data
             }
             root = None
@@ -99,7 +99,7 @@ class Session:
                         parent.children.append(el)
                 else:
                     root = el
-            return elements, root
+            return elements, root  # type: ignore  # type: ignore
 
         elements_data = self.page.evaluate("""
             (() => {
@@ -118,7 +118,7 @@ class Session:
 
                     nodes.push({
                         id,
-                        parentId,
+                        parentId: parentId,  // Ensure this is explicitly set
                         tagName: node.tagName,
                         outerHTML: node.outerHTML,
                         x: rect.x,
