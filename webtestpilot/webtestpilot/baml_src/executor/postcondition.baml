@@ -22,9 +22,9 @@ template_string PostconditionIntro() #"
         def postcondition(session: Session):
             ...
         ```
-    
+
     # Reminder
-    - Schema has to be BaseModel.
+    - `schema` must be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
 "#
 
 template_string PostconditionExample() #"

@@ -24,7 +24,7 @@ template_string PreconditionIntro() #"
         ```
 
     # Reminder
-    - Schema has to be BaseModel.
+    - `schema` must be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
 "#
 
 template_string PreconditionExample() #"
