@@ -19,36 +19,39 @@ template_string PostconditionIntro() #"
 
     - Write the assertion as a Python block:
         ```python
-        def position(session: Session):
+        def postcondition(session: Session):
             ...
         ```
+    
+    # Reminder
+    - Schema has to be BaseModel.
 "#
 
 template_string PostconditionExample() #"
     # Example
     __input__
     History:
-        State (0): 
-            Page: Cart page; 
+        State (0):
+            Page: Cart page;
             Action: User clicks "Continue Shopping"
         ...
-        State (4): 
+        State (4):
             Page: Product detail view
             Action: User adds the item to cart
 
-    Current: Cart page (After action) 
+    Current: Cart page (After action)
     Assert: Cart is correctly updated
 
     __output__
     ```python
     def postcondition(session: Session):
         # Define data models
-        class Product(BaseModel): 
+        class Product(BaseModel):
             title: str = Field(..., description="The name of the product")
             price: float = Field(..., description="The unit price of the product in local currency")
             quantity: Optional[int] = Field(None, "The quantity of this product (used in cart contexts). None indicates unlimited or not specified")
         
-        class Cart(BaseModel): 
+        class Cart(BaseModel):
             items: List[Product] = Field(default_factory=list, description="List of products in the cart with their respective quantities")
 
         # Extract product from latest state
@@ -66,13 +69,12 @@ template_string PostconditionExample() #"
 function GeneratePostcondition(screenshot: image, history: History[], action: string, verify: string, feedback: Feedback[]) -> string {
     client "Base"
     prompt #"
-        {{_.role("user")}}
+        {{_.role("system")}}
         {{ PostconditionIntro() }}
-
         {{ Specification() }}
-
         {{ PostconditionExample() }}
-        
+
+        {{_.role("user")}}
         {{ screenshot }}
 
         {{ FormatHistory(history) }}

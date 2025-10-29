@@ -2,8 +2,11 @@ class Output {
     @@dynamic
 }
 
+type Primitives = string | int | float | bool
+type ExtractedData = Output | Primitives | Output[] | Primitives[]
 
-function ExtractFromState(screenshot: image, instruction: string) -> Output {
+
+function ExtractFromState(screenshot: image, instruction: string) -> ExtractedData {
     client "Base"
     prompt #"
         {{_.role("user")}}
@@ -17,7 +20,7 @@ function ExtractFromState(screenshot: image, instruction: string) -> Output {
     "#
 }
 
-function ExtractFromElement(screenshot: image, html: string, instruction: string) -> Output {
+function ExtractFromElement(screenshot: image, html: string, instruction: string) -> ExtractedData {
     client "Base"
     prompt #"
         {{_.role("user")}}
