@@ -62,7 +62,7 @@ class WebTestPilot:
                     except Exception:
                         logger.error("Exception in hook:", traceback.format_exc())
                         raise
-
+                raise report
             except Exception:
                 logger.error("Exception in test session:", traceback.format_exc())
                 raise

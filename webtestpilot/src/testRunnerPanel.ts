@@ -70,8 +70,6 @@ export class TestRunnerPanel {
      */
     private async _connectToBrowser(cdpEndpoint: string) {
         try {
-            vscode.window.showInformationMessage(`Connecting to browser at ${cdpEndpoint}...`);
-            
             // Connect to CDP
             this._browser = await chromium.connectOverCDP(cdpEndpoint);
             

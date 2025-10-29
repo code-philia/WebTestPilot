@@ -116,8 +116,6 @@ export class ParallelTestRunner {
      */
     private async _connectToBrowser(cdpEndpoint: string) {
         try {
-            vscode.window.showInformationMessage(`Connecting to browser for parallel execution...`);
-            
             // Connect to CDP
             this._browser = await chromium.connectOverCDP(cdpEndpoint);
             
