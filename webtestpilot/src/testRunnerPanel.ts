@@ -406,12 +406,6 @@ export class TestRunnerPanel {
                                 resolve();
                             } else {
                                 outputChannel.appendLine(`❌ Test execution failed with exit code: ${code}`);
-                                if (stderrData) {
-                                    outputChannel.appendLine('');
-                                    outputChannel.appendLine('Error Output:');
-                                    outputChannel.appendLine(stderrData);
-                                }
-                                
                                 vscode.window.showErrorMessage(
                                     `❌ Test "${testItem.name}" FAILED - Check output for details.`,
                                     'View Output'
