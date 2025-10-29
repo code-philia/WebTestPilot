@@ -26,19 +26,18 @@ _trace: list[dict] = []
 # -------------------------
 # Helpers
 # -------------------------
-def _parse_coordinates(coordinates: str, screenshot: Image) -> tuple[int, int]:
-    match = re.match(r"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)", coordinates)
-    if match:
-        x, y = map(int, match.groups())
-    else:
-        raise ValueError("Invalid coordinate format")
-
-    image, _ = screenshot.as_base64()
-    image = PIL.Image.open(io.BytesIO(base64.b64decode(image)))
-    width, height = image.width, image.height
-    x = x / 1000 * width
-    y = y / 1000 * height
-    return x, y
+def _parse_coordinates(output_text: str) -> tuple[int, int]:
+    # Note: this assumes screenshot is 1920 * 1080px
+    box = eval(output_text)
+    input_height = 1092
+    input_width = 1932
+    abs_x1 = float(box[0]) / input_width
+    abs_y1 = float(box[1]) / input_height
+    abs_x2 = float(box[2]) / input_width
+    abs_y2 = float(box[3]) / input_height
+    bbox = [abs_x1, abs_y1, abs_x2, abs_y2]
+    point = [(bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2]
+    return point[0] * 1920, point[1] * 1080
 
 
 def _get_element(page: Page, x: int, y: int) -> ElementHandle:
@@ -141,7 +140,7 @@ def click(cr: ClientRegistry, collector: Collector, target_description: str):
         target_description,
         baml_options={"client_registry": cr, "collector": collector},
     )
-    x, y = _parse_coordinates(coordinates, screenshot)
+    x, y = _parse_coordinates(coordinates)
 
     _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)
@@ -162,7 +161,7 @@ def type(
         target_description,
         baml_options={"client_registry": cr, "collector": collector},
     )
-    x, y = _parse_coordinates(coordinates, screenshot)
+    x, y = _parse_coordinates(coordinates)
 
     _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)

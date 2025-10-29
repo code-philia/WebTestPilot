@@ -21,7 +21,7 @@ executor:
     action_proposer: "GPT"
 
     # Locates UI elements (x, y) from a UI description
-    ui_locator: "UGround"
+    ui_locator: "UIVenus"
 
     # For tracking same logical pages across states
     page_reidentification: "GPT"

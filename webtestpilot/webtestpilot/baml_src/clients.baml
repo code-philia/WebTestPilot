@@ -86,12 +86,12 @@ client<llm> Qwen3_8b {
   }
 }
 
-client<llm> UGround {
+client<llm> UIVenus {
   provider "openai-generic"
   options {
-    base_url "https://3c65f7d4b9c8.ngrok-free.app/v1"
+    base_url "https://7b45fdfd7206.ngrok-free.app/v1"
     api_key "token-abc123"
-    model "osunlp/UGround-V1-7B"
+    model "inclusionAI/UI-Venus-Ground-7B"
   }
 }
 
