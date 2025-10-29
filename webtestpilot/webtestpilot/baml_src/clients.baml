@@ -78,18 +78,12 @@ client<llm> Qwen3VL2b {
   }
 }
 
-client<llm> Qwen3_8b {
-  provider "openai-generic"
-  options {
-    base_url "202.120.37.109:8001/v1"
-    model "Qwen/Qwen3-8B-Instruct"
-  }
-}
 
 client<llm> UIVenus {
   provider "openai-generic"
   options {
     base_url "https://7b45fdfd7206.ngrok-free.app/v1"
+    // base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
   }

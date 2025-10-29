@@ -359,8 +359,16 @@ export class ParallelTestRunner {
                     this._outputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
                 } else {
                     result.success = false;
-                    result.errors = [stderrData || `Process exited with code ${code}`];
-                    this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with code ${code}`);
+                    
+                    // Extract BugReport messages from stdout
+                    const bugMessages = this._parseBugReports(stdoutData);
+                    if (bugMessages.length > 0) {
+                        result.errors = bugMessages;
+                        this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with BugReport: ${bugMessages.join('; ')}`);
+                    } else {
+                        result.errors = [stderrData || `Process exited with code ${code}`];
+                        this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with code ${code}`);
+                    }
                 }
 
                 execution.result = result;
@@ -430,6 +438,19 @@ export class ParallelTestRunner {
                 duration: 0
             });
         }
+    }
+
+    /**
+     * Parse BugReport messages from stderr output
+     */
+    private _parseBugReports(stderrData: string): string[] {
+        const bugReportMatches = stderrData.match(/Bug reported: ([\s\S]*?)(?=\n|$)/g);
+        if (bugReportMatches && bugReportMatches.length > 0) {
+            return bugReportMatches.map(match => 
+                match.replace(/^Bug reported:\s*/, '').trim()
+            );
+        }
+        return [];
     }
 
     /**

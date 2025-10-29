@@ -12,6 +12,7 @@ from typing import Any
 
 from baml_client.types import Step
 from config import Config
+from executor import BugReport
 from executor.assertion_api import Session
 from main import WebTestPilot
 from playwright.sync_api import Page, sync_playwright
@@ -151,6 +152,9 @@ def run_test_from_file(
                 WebTestPilot.run(session, test_steps, assertion=enable_assertions)
                 result["steps_executed"] = len(test_steps)
                 logger.info("Test execution completed successfully")
+            except BugReport as report:
+                result["success"] = False
+                result["errors"].append(str(report))
             except Exception as e:
                 logger.error(f"Test execution failed: {str(e)}", exc_info=True)
                 result["success"] = False
