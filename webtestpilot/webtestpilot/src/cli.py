@@ -18,6 +18,8 @@ from main import WebTestPilot
 from playwright.sync_api import Page, sync_playwright
 
 logger = logging.getLogger(__name__)
+VIEWPORT_WIDTH = 1920
+VIEWPORT_HEIGHT = 1080
 
 
 def parse_test_action_to_step(action: dict[str, Any]) -> Step:
@@ -135,6 +137,14 @@ def run_test_from_file(
                 logger.info("Using first available page (no tab index specified)")
 
             assert page
+
+            # This is important for consistent grounding results.
+            page.set_viewport_size(
+                {
+                    "width": VIEWPORT_WIDTH,
+                    "height": VIEWPORT_HEIGHT,
+                }
+            )
 
             # Navigate to test URL if specified
             test_url = test_data.get("url")
