@@ -1,3 +1,4 @@
+import logging
 import re
 import sys
 import pprint
@@ -14,7 +15,7 @@ from executor.assertion_api.element import Element
 
 
 PRIMITIVE_TYPES = (int, float, str, bool, type(None))
-
+logger = logging.getLogger(__name__)
 
 def _run_assertion_with_trace(
     assertion_func: Callable[[Session], Any], session: Session
@@ -115,6 +116,7 @@ def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
     local_vars = {}
 
     # Execute the dynamic code
+    logger.debug("Executing assertion code:\n" + code)
     exec(code, allowed_globals, local_vars)
 
     # Find the assertion function

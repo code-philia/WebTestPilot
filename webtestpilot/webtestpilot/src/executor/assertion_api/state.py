@@ -4,13 +4,14 @@ import logging
 from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING
 
-from pydantic import BaseModel
 from baml_py import Image, ClientRegistry, Collector
 from xml.etree.ElementTree import Element as XMLElement
 
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
 from executor.assertion_api.pydantic_schema import build_from_pydantic
+from executor.assertion_api.type_utils import convert_extracted_data
+from baml_client.types import ExtractedData
 
 
 if TYPE_CHECKING:
@@ -40,20 +41,20 @@ class State:
     _cr_ui_locator: ClientRegistry
     _collector: Collector
 
-    def extract(self, instruction: str, schema: type[BaseModel]) -> BaseModel:
+    def extract(self, instruction: str, schema: ExtractedData) -> ExtractedData:
         """
-        Extract structured data from the state using a Pydantic schema.
+        Extract structured data from the state using a schema.
 
         Args:
             instruction (str):
                 A natural language description of the information to extract.
                 Example: `"get product detail"` or `"extract cart summary"`.
-            schema (type[BaseModel]):
-                A Pydantic model class defining the expected structure of the output.
+            schema (ExtractedData):
+                A BaseModel class, primitive type, or collection type defining the expected output.
 
         Returns:
-            BaseModel:
-                An instance of the provided `schema` containing validated extracted data.
+            ExtractedData:
+                An instance of the provided `schema` type containing validated extracted data.
 
         Example:
             >>> class Product(BaseModel):
@@ -61,13 +62,15 @@ class State:
             ...     price: float
             ...
             >>> data = session.extract("get product detail", schema=Product)
+            >>> text = session.extract("get visible text", schema=str)
+            >>> items = session.extract("get all items", schema=list)
             >>> data
             {'title': 'Sample Item', 'price': 9.99}
         """
         tb = TypeBuilder()
-        field_types = build_from_pydantic([schema], tb)
-        for field_type in field_types:
-            tb.Output.add_property("schema", field_type)
+        field_type = build_from_pydantic(schema, tb)
+        tb.Output.add_property("schema", field_type)
+        # TODO: Check BAML if possible to dynamic type both @@ and others.
 
         screenshot = Image.from_base64("image/png", self.screenshot)
         output = b.ExtractFromState(
@@ -79,7 +82,7 @@ class State:
                 "collector": self._collector,
             },
         )
-        data = schema.model_validate(output.model_dump().get("schema", {}))
+        data = convert_extracted_data(schema, output)
         logger.info(f"Extracted data: {data}")
         return data
 

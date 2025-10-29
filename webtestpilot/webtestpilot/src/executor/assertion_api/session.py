@@ -88,7 +88,7 @@ class Session:
         def _build_tree(
             elements_data: list[dict[str, Any]],
         ) -> tuple[dict[int, Element], Element]:
-            elements: dict[int, Element] = {
+            elements: dict[str, Element] = {
                 data["id"]: self.element_factory.create(data) for data in elements_data
             }
             root = None

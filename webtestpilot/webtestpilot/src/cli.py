@@ -94,11 +94,8 @@ def run_test_from_file(
     try:
         # Load and parse test data
         test_data, test_steps = load_and_parse_test_file(test_file_path)
-
-        # Load configuration
         config = Config.load(config_path)
 
-        # Run the test with Playwright
         result: dict = {
             "success": True,
             "test_name": test_data.get("name"),
@@ -154,7 +151,6 @@ def run_test_from_file(
                 WebTestPilot.run(session, test_steps, assertion=enable_assertions)
                 result["steps_executed"] = len(test_steps)
                 logger.info("Test execution completed successfully")
-
             except Exception as e:
                 logger.error(f"Test execution failed: {str(e)}", exc_info=True)
                 result["success"] = False

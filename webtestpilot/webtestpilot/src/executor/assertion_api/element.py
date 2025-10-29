@@ -1,17 +1,18 @@
 from __future__ import annotations
-import io
+
 import base64
+import io
 import logging
-from typing import Optional, Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Optional
 
 import PIL.Image
-from pydantic import BaseModel
-from baml_py import Image, ClientRegistry, Collector
-
 from baml_client.sync_client import b
 from baml_client.type_builder import TypeBuilder
-from executor.assertion_api.pydantic_schema import build_from_pydantic
+from baml_client.types import ExtractedData
+from baml_py import ClientRegistry, Collector, Image
 
+from executor.assertion_api.pydantic_schema import build_from_pydantic
+from executor.assertion_api.type_utils import convert_extracted_data
 
 if TYPE_CHECKING:
     from executor.assertion_api.session import Session
@@ -50,7 +51,7 @@ class Element:
 
         self.client_registry = client_registry
         self.collector = collector
-        self.state: "State" = None
+        self.state: Optional["State"] = None
 
     def contains(self, px: float, py: float) -> bool:
         """
@@ -62,25 +63,35 @@ class Element:
             and self.y <= py <= self.y + self.height
         )
 
-    def extract(self, instruction: str, schema: type[BaseModel]) -> BaseModel:
+    def extract(self, instruction: str, schema: ExtractedData) -> ExtractedData:
         """
-        Extract structured data from the element using a Pydantic schema.
+        Extract structured data from the element using a schema.
 
         Args:
             instruction (str):
-                A natural language description of the information to extract.
+                A natural language description of information to extract.
                 Example: `"get product detail"` or `"extract cart summary"`.
-            schema (type[BaseModel]):
-                A Pydantic model class defining the expected structure of the output.
+            schema (ExtractedData):
+                A BaseModel class, primitive type, or collection type defining the expected output.
 
         Returns:
-            BaseModel:
-                An instance of the provided `schema` containing validated extracted data.
+            ExtractedData:
+                An instance of the provided `schema` type containing validated extracted data.
+
+        Example:
+            >>> class Product(BaseModel):
+            ...     title: str
+            ...     price: float
+            ...
+            >>> data = element.extract("get product detail", schema=Product)
+            >>> text = element.extract("get visible text", schema=str)
+            >>> items = element.extract("get all items", schema=list)
+            >>> data
+            {'title': 'Sample Item', 'price': 9.99}
         """
         tb = TypeBuilder()
-        field_types = build_from_pydantic([schema], tb)
-        for field_type in field_types:
-            tb.Output.add_property("schema", field_type)
+        field_type = build_from_pydantic(schema, tb)
+        tb.Output.add_property("schema", field_type)
 
         # Decode screenshot from base64
         image_bytes = base64.b64decode(self.state.screenshot)
@@ -112,7 +123,7 @@ class Element:
                 "collector": self.collector,
             },
         )
-        data = schema.model_validate(output.model_dump().get("schema", {}))
+        data = convert_extracted_data(schema, output)
         logger.info(f"Extracted data: {data}")
         return data
 
