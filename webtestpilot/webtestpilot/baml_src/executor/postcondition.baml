@@ -24,7 +24,8 @@ template_string PostconditionIntro() #"
         ```
 
     # Reminder
-    - `schema` must be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
+    - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
+    - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
 "#
 
 template_string PostconditionExample() #"

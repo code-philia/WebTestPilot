@@ -44,12 +44,14 @@ def convert_extracted_data(
     Returns:
         Converted data matching schema type
     """
-    logger.debug("Converting extracted data")
+    logger.debug(f"Converting extracted data for schema: {schema}, output: {output}")
 
     # Handle generic types like list[BaseModel]
     origin = get_origin(schema)
+    logger.debug(f"Origin: {origin}")
     if origin is list:
         args = get_args(schema)
+        logger.debug(f"List args: {args}, ")
         if args and is_basemodel_type(args[0]):
             # Handle list[BaseModel]
             model_class = args[0]
@@ -74,6 +76,9 @@ def convert_extracted_data(
             return list(output) if output else []
     elif is_basemodel_type(schema):
         extracted_data = output.model_dump().get("schema", {})
+        logger.debug(
+            f"Checking type of extracted data {type(extracted_data)} {extracted_data} {schema=}"
+        )
         return schema.model_validate(extracted_data)
 
     return output

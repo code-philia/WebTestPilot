@@ -26,7 +26,7 @@ function IsSameLogicalPage(page_a: image, page_b: image) -> bool {
         - One contains different dynamic data but with the same type, structure, and placement.
         - One has pre-filled or empty form fields, as long as the underlying form is the same.
 
-    {{ ctx.output_format }}
+    {{ ctx.output_format }} with only "True" or "False".
 
     {{ page_a }}
 

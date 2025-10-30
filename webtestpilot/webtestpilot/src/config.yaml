@@ -3,7 +3,7 @@
 
 parser:
   # Semantic parsing of text descriptions into (condition, action, expectation) test steps
-  llm_client: "GPT"
+  llm_client: "LocalModel"
 
   # Automatically infer <unknown> placeholders in parsed test steps
   # If false, throw exception and inform user
@@ -12,22 +12,22 @@ parser:
 executor:
   llm_clients:
     # Generates pre- and post-conditions using the assertion API
-    assertion_generation: "GPT"
+    assertion_generation: "LocalModel"
 
     # Executes assertion API methods (e.g., extract() from state and element)
-    assertion_api: "GPT"
+    assertion_api: "LocalModel"
 
     # Proposes actions given a natural language action description
-    action_proposer: "GPT"
+    action_proposer: "LocalModel"
 
     # Locates UI elements (x, y) from a UI description
     ui_locator: "UIVenus"
 
     # For tracking same logical pages across states
-    page_reidentification: "GPT"
+    page_reidentification: "LocalModel"
 
   # When a postcondition assertion fails, how many times to retry assertion generation before reporting as a bug
-  max_retries: 1
+  max_retries: 2
 
 # Logging dict configs
 logging:
@@ -47,5 +47,5 @@ logging:
       stream: ext://sys.stdout
 
   root:
-    level: INFO
+    level: DEBUG
     handlers: ["console"]

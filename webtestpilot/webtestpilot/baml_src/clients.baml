@@ -78,6 +78,22 @@ client<llm> Qwen3VL2b {
   }
 }
 
+client<llm> OpenRouter {
+  provider "openai-generic"
+  options {
+    base_url "https://openrouter.ai/api/v1"
+    model "qwen/qwen2.5-vl-32b-instruct:free"
+    api_key env.OPENROUTER_API_KEY
+  }
+}
+
+client<llm> LocalModel {
+  provider "openai-generic"
+  options {
+    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
+    model "Qwen/Qwen3-VL-32B-A3B-Thinking"
+  }
+}
 
 client<llm> UIVenus {
   provider "openai-generic"
