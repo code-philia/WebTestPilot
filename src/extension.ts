@@ -6,7 +6,6 @@ import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
 import { TestRunnerPanel } from './testRunnerPanel';
 import { ParallelTestRunner } from './parallelTestRunner';
-import { ImportPanel } from './importPanel';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -227,13 +226,6 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	const importCommand = vscode.commands.registerCommand('webtestpilot.import', async () => {
-		console.log('Import command triggered');
-		ImportPanel.createOrShow(context.extensionUri, context, treeDataProvider);
-	});
-
-
-
 	const setWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.setWorkspaceRoot', async () => {
 		const options: vscode.OpenDialogOptions = {
 			canSelectMany: false,
@@ -271,7 +263,6 @@ export function activate(context: vscode.ExtensionContext) {
 		addTestCaseCommand,
 		addFolderCommand,
 		runFolderCommand,
-		importCommand,
 		setWorkspaceRootCommand,
 		showWorkspaceRootCommand,
 		treeDataProvider // Dispose the tree provider to clean up file watchers

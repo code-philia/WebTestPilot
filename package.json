@@ -97,11 +97,6 @@
         "title": "New Folder"
       },
       {
-        "command": "webtestpilot.import",
-        "title": "Import",
-        "icon": "$(arrow-down)"
-      },
-      {
         "command": "webtestpilot.setWorkspaceRoot",
         "title": "WebTestPilot: Set Workspace Root"
       },
@@ -133,12 +128,6 @@
       ]
     },
     "menus": {
-      "commandPalette": [
-        {
-          "command": "webtestpilot.import",
-          "when": "true"
-        }
-      ],
       "view/title": [
         {
           "command": "webtestpilot.createTestRoot",
@@ -147,11 +136,6 @@
         },
         {
           "command": "webtestpilot.createFolderRoot",
-          "when": "view == webtestpilot.treeView",
-          "group": "navigation"
-        },
-        {
-          "command": "webtestpilot.import",
           "when": "view == webtestpilot.treeView",
           "group": "navigation"
         }
