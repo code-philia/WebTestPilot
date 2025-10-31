@@ -91,14 +91,15 @@ client<llm> LocalModel {
   provider "openai-generic"
   options {
     base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
-    model "Qwen/Qwen3-VL-32B-A3B-Thinking"
+    model "Qwen/Qwen3-VL-30B-A3B-Thinking"
   }
 }
 
 client<llm> UIVenus {
   provider "openai-generic"
   options {
-    base_url "https://7b45fdfd7206.ngrok-free.app/v1"
+    base_url "https://24x723l6jtk1.share.zrok.io/v1"
+    // base_url "https://7b45fdfd7206.ngrok-free.app/v1"
     // base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"

@@ -26,8 +26,8 @@ executor:
     # For tracking same logical pages across states
     page_reidentification: "LocalModel"
 
-  # When a postcondition assertion fails, how many times to retry assertion generation before reporting as a bug
-  max_retries: 2
+  # How many times in total to try post-condition generation.
+  max_tries: 1
 
 # Logging dict configs
 logging:

@@ -92,7 +92,7 @@ def verify_postcondition(
     logger.info(f"VERIFYING_STEP_{session.step_counter}: {expectation}")
     client_registry = config.assertion_generation
     collector = session.collector
-    max_retries = config.max_retries
+    max_tries = config.max_tries
     screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot = Image.from_base64("image/png", screenshot)
     history = session.get_history()
@@ -100,7 +100,7 @@ def verify_postcondition(
     feedback = []
     message = "Post-condition verification failed after all retries"
     
-    for _ in range(0, max_retries + 1):
+    for _ in range(1, max_tries + 1):
         response = b.GeneratePostcondition(
             screenshot,
             history,
