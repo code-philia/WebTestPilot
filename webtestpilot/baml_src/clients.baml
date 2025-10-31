@@ -90,7 +90,8 @@ client<llm> OpenRouter {
 client<llm> LocalModel {
   provider "openai-generic"
   options {
-    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
+    // base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
+    base_url "https://dgh8bwp6wn5g.share.zrok.io/v1"
     model "Qwen/Qwen3-VL-30B-A3B-Thinking"
   }
 }

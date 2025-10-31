@@ -1,11 +1,14 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
+import { promises as fs } from 'fs';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './panels/testEditorPanel';
 import { TestRunnerPanel } from './panels/testRunnerPanel';
 import { ParallelTestPanel } from './panels/parallelTestPanel';
+import { WorkspaceRootService } from './workspaceRootService';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -102,10 +105,9 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		const testFilePath = require('path').join(workspaceRoot, '.webtestpilot', test.id);
-		
+		const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
+
 		try {
-			const fs = require('fs').promises;
 			const content = await fs.readFile(testFilePath, 'utf-8');
 			const testData = JSON.parse(content);
 			
@@ -174,7 +176,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		// Use TestRunnerPanel to run the test
-		await TestRunnerPanel.createOrShow(test, workspaceRoot);
+		await TestRunnerPanel.createOrShow(test, workspaceRoot, context.extensionUri);
 	});
 
 	const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {
@@ -235,16 +237,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const folderUri = await vscode.window.showOpenDialog(options);
 		if (folderUri && folderUri[0]) {
-			const { WorkspaceRootService } = await import('./workspaceRootService.js');
 			await WorkspaceRootService.setWorkspaceRoot(folderUri[0].fsPath);
 		}
 	});
 
 	const showWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.showWorkspaceRoot', async () => {
-		const { WorkspaceRootService } = await import('./workspaceRootService.js');
 		const root = WorkspaceRootService.getWorkspaceRoot();
 		if (root) {
-			vscode.window.showInformationMessage(`WebTestPilot workspace root: ${root}`);
+			vscode.window.showInformationMessage(`${root}`);
 		} else {
 			vscode.window.showWarningMessage('No WebTestPilot workspace root configured');
 		}

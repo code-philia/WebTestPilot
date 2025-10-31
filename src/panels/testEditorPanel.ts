@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
 import { TestItem } from "../models";
 import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
+import { loadWebviewHtml } from "../utils/webviewLoader";
 
 /**
  * TestEditorPanel provides a webview interface for editing test cases
@@ -162,111 +162,7 @@ export class TestEditorPanel {
   }
 
   private _getHtmlForWebview(): string {
-    const webview = this._panel.webview;
-    const distUri = vscode.Uri.joinPath(
-      this._extensionUri,
-      "webview-ui",
-      "dist"
-    );
-    const indexHtmlUri = vscode.Uri.joinPath(distUri, "index.html");
-
-    // Load the built index.html
-    let html = fs.readFileSync(indexHtmlUri.fsPath, "utf-8");
-
-    // Generate a nonce for CSP and script tags
-    const nonce = this._getNonce();
-
-    // Build the CSP meta tag using the webview's cspSource and the nonce
-    const cspMeta = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} https: data:; style-src ${webview.cspSource} 'unsafe-inline'; font-src ${webview.cspSource}; script-src 'nonce-${nonce}'; connect-src ${webview.cspSource} https:;">`;
-
-    // Insert the CSP meta tag before the closing head tag
-    html = html.replace("</head>", `${cspMeta}</head>`);
-
-    // Inject page identifier script with nonce
-    const pageScript = `<script nonce="${nonce}">window.__PAGE__ = 'testEditor';</script>`;
-
-    // Insert the page script before the closing body tag
-    html = html.replace("</body>", `${pageScript}</body>`);
-
-    // Add nonce attribute to all script tags so bundled scripts are allowed by the CSP
-    html = html.replace(/<script(\s)/g, `<script nonce="${nonce}"$1`);
-
-    html = this._rewriteResourceUrls(html, distUri, webview, nonce);
-    return html;
-  }
-
-  private _rewriteResourceUrls(
-    html: string,
-    distUri: vscode.Uri,
-    webview: vscode.Webview,
-    nonce: string
-  ): string {
-    const scriptPattern = /<script([^>]*)src="([^"]+)"([^>]*)><\/script>/gi;
-    html = html.replace(scriptPattern, (match, preAttrs, src, postAttrs) => {
-      if (this._isExternalResource(src)) {
-        return match;
-      }
-
-      const resolvedSrc = this._resolveWebviewUri(webview, distUri, src);
-      let rebuilt = `<script${preAttrs || ""} src="${resolvedSrc}"${
-        postAttrs || ""
-      }></script>`;
-      if (/nonce\s*=/.test(rebuilt)) {
-        rebuilt = rebuilt.replace(/nonce\s*=\s*"[^"]*"/i, `nonce="${nonce}"`);
-      } else {
-        rebuilt = rebuilt.replace("<script", `<script nonce="${nonce}"`);
-      }
-      return rebuilt;
-    });
-
-    const linkPattern = /<link([^>]*)href="([^"]+)"([^>]*)>/gi;
-    html = html.replace(linkPattern, (match, preAttrs, href, postAttrs) => {
-      if (this._isExternalResource(href)) {
-        return match;
-      }
-
-      const resolvedHref = this._resolveWebviewUri(webview, distUri, href);
-      return `<link${preAttrs || ""}href="${resolvedHref}"${postAttrs || ""}>`;
-    });
-
-    return html;
-  }
-
-  private _isExternalResource(resourcePath: string): boolean {
-    return (
-      /^(https?:)?\/\//i.test(resourcePath) ||
-      resourcePath.startsWith("vscode-resource:") ||
-      resourcePath.startsWith("vscode-webview-resource:") ||
-      resourcePath.startsWith("data:")
-    );
-  }
-
-  private _resolveWebviewUri(
-    webview: vscode.Webview,
-    baseUri: vscode.Uri,
-    resourcePath: string
-  ): string {
-    const cleanedPath = resourcePath.trim();
-    const [pathWithoutHash, hashFragment] = cleanedPath.split("#", 2);
-    const [pathPart, queryString] = pathWithoutHash.split("?", 2);
-
-    const normalizedSegments = pathPart
-      .replace(/^\//, "")
-      .split("/")
-      .filter((segment) => segment.length > 0);
-
-    const resourceUri = vscode.Uri.joinPath(baseUri, ...normalizedSegments);
-    let webviewUri = webview.asWebviewUri(resourceUri).toString();
-
-    if (queryString) {
-      webviewUri += `?${queryString}`;
-    }
-
-    if (hashFragment) {
-      webviewUri += `#${hashFragment}`;
-    }
-
-    return webviewUri;
+    return loadWebviewHtml(this._extensionUri, this._panel.webview, "testEditor");
   }
 
   private _runTest() {
@@ -275,17 +171,6 @@ export class TestEditorPanel {
       return;
     }
     vscode.commands.executeCommand("webtestpilot.runTest", this._testItem);
-  }
-
-  // Add nonce helper
-  private _getNonce(): string {
-    const possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let text = "";
-    for (let i = 0; i < 32; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
   }
 
   public dispose() {

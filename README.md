@@ -31,5 +31,5 @@ yarn package
 
 Start the dev server
 1. In the new window: Open file extensions.ts -> Ctrl/Command + Shift + P -> Type "Start Debugging" -> Choose
-2. (Temp workaround) In the debug window, Setup the webtestpilot path at run time: Ctrl/Command + Shift + P -> Type "Enter webtestpilot workspace" -> input ....WebTestPilot/webtestpilot (fill in the whole path to folder).
+2. (Temp workaround) In the debug window, Setup the webtestpilot path at run time: Ctrl/Command + Shift + P -> Type "WebTestPilot: Set Workspace ..." -> input choose the folder WebTestPilot/.
 3. Click the extension icon and start using.
