@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TestItem, FolderItem, FixtureItem, TreeItem as WebTestPilotDataItem } from './models';
+import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
 import { FileSystemService } from './fileSystemService';
 
 export class WebTestPilotTreeItem extends vscode.TreeItem {
@@ -22,12 +22,6 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
             const actionCount = test.actions ? test.actions.length : 0;
             return `${test.name}\n${test.url || 'No URL'}\n${actionCount} action(s)`;
         }
-        if (this.item.type === 'fixture') {
-            const fixture = this.item as FixtureItem;
-            const actionCount = fixture.actions ? fixture.actions.length : 0;
-            const baseInfo = fixture.baseFixtureId ? `\nBase: ${fixture.baseFixtureId}` : '';
-            return `${fixture.name}\n${actionCount} action(s)${baseInfo}`;
-        }
         return this.item.name;
     }
 
@@ -37,21 +31,12 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
             const actionCount = test.actions ? test.actions.length : 0;
             return `${actionCount} action(s) • ${test.url || 'No URL'}`;
         }
-        if (this.item.type === 'fixture') {
-            const fixture = this.item as FixtureItem;
-            const actionCount = fixture.actions ? fixture.actions.length : 0;
-            const baseInfo = fixture.baseFixtureId ? ` • Base: ${fixture.baseFixtureId.replace(/\.json$/, '')}` : '';
-            return `${actionCount} action(s)${baseInfo}`;
-        }
         return '';
     }
 
     private getIconPath(): vscode.ThemeIcon | vscode.Uri {
         if (this.item.type === 'test') {
             return new vscode.ThemeIcon('debug-start');
-        }
-        if (this.item.type === 'fixture') {
-            return new vscode.ThemeIcon('tools');
         }
         return new vscode.ThemeIcon('folder');
     }
@@ -115,9 +100,6 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
             const rootTests = this.items.filter(item => 
                 item.type === 'test' && !item.folderId
             ) as TestItem[];
-            const fixtures = this.items.filter(item => 
-                item.type === 'fixture'
-            ) as FixtureItem[];
             
             return Promise.resolve([
                 ...rootFolders.map(folder => new WebTestPilotTreeItem(folder, vscode.TreeItemCollapsibleState.Collapsed)),
@@ -126,11 +108,6 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
                     title: 'Open Test',
                     arguments: [test]
                 })),
-                ...fixtures.map(fixture => new WebTestPilotTreeItem(fixture, vscode.TreeItemCollapsibleState.None, {
-                    command: 'webtestpilot.openFixtureEditor',
-                    title: 'Open Fixture',
-                    arguments: [fixture]
-                }))
             ]);
         }
 
@@ -173,8 +150,6 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     async deleteItem(item: WebTestPilotDataItem): Promise<void> {
         if (item.type === 'test') {
             await this.fileSystemService.deleteTest(item.id);
-        } else if (item.type === 'fixture') {
-            await this.fileSystemService.deleteFixture(item.id);
         } else {
             await this.fileSystemService.deleteFolder(item.id);
         }
@@ -189,27 +164,6 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
             console.error('TreeDataProvider.updateTest failed:', error);
             throw error;
         }
-    }
-
-    async createFixture(name: string, baseFixtureId?: string): Promise<FixtureItem> {
-        const fixtureItem = await this.fileSystemService.createFixture(name, baseFixtureId);
-        await this.loadFromFileSystem();
-        return fixtureItem;
-    }
-
-    async updateFixture(fixtureId: string, fixtureItem: FixtureItem): Promise<void> {
-        try {
-            await this.fileSystemService.updateFixture(fixtureId, fixtureItem);
-            await this.loadFromFileSystem();
-        } catch (error) {
-            console.error('TreeDataProvider.updateFixture failed:', error);
-            throw error;
-        }
-    }
-
-    async deleteFixture(fixtureId: string): Promise<void> {
-        await this.fileSystemService.deleteFixture(fixtureId);
-        await this.loadFromFileSystem();
     }
 
     getStructure(): WebTestPilotDataItem[] {

@@ -1,7 +1,148 @@
-main {
+.test-editor {
+  box-sizing: border-box;
+  padding: 24px;
+  max-width: 880px;
+  margin: 0 auto;
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  color: var(--vscode-foreground);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  position: sticky;
+  top: 0;
+  background: var(--vscode-editor-background);
+  z-index: 5;
+}
+
+.editor-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.editor-section {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.field-label {
+  font-weight: 600;
+  color: var(--vscode-foreground);
+}
+
+.text-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid var(--vscode-input-border);
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.text-input:focus {
+  outline: 1px solid var(--vscode-focusBorder, var(--vscode-input-border));
+  outline-offset: 0;
+}
+
+.actions-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.actions-section h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-card {
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  padding: 12px;
+  background: var(--vscode-editor-background);
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-row + .action-row {
+  margin-top: 6px;
+}
+
+.action-number {
+  min-width: 20px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--vscode-descriptionForeground);
+}
+
+.icon-button {
+  border: none;
+  border-radius: 4px;
+  background: var(--vscode-errorBackground);
+  color: var(--vscode-button-foreground);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  height: 100%;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.icon-button:hover {
+  background: var(--vscode-button-hoverBackground);
+}
+
+.empty-state {
+  border: 1px dashed var(--vscode-panel-border);
+  border-radius: 6px;
+  padding: 16px;
+  font-style: italic;
+  color: var(--vscode-descriptionForeground);
+}
+
+@media (max-width: 720px) {
+  .test-editor {
+    padding: 16px;
+  }
+
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
 }

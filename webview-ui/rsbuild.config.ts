@@ -1,7 +1,11 @@
 import { defineConfig } from "@rsbuild/core";
+import { pluginReact } from "@rsbuild/plugin-react";
 
 export default defineConfig({
-  plugins: [],
+  plugins: [pluginReact()],
+  // output: {
+  //   filenameHash: false,
+  // },
   html: {
     template: "./index.html",
   },

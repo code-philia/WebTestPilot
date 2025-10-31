@@ -23,14 +23,4 @@ export interface FolderItem {
     updatedAt: Date;
 }
 
-export interface FixtureItem {
-    id: string;
-    name: string;
-    type: 'fixture';
-    actions?: TestAction[];
-    baseFixtureId?: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export type TreeItem = TestItem | FolderItem | FixtureItem;
+export type TreeItem = TestItem | FolderItem;

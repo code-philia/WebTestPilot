@@ -1,264 +1,299 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as fs from 'fs/promises';
-import { TestItem } from './models';
-import { WebTestPilotTreeDataProvider } from './treeDataProvider';
+import * as vscode from "vscode";
+import * as fs from "fs";
+import { TestItem } from "./models";
+import { WebTestPilotTreeDataProvider } from "./treeDataProvider";
 
 /**
  * TestEditorPanel provides a webview interface for editing test cases
  */
 export class TestEditorPanel {
-    public static currentPanel: TestEditorPanel | undefined;
-    public static readonly viewType = 'testEditor';
+  public static currentPanel: TestEditorPanel | undefined;
+  public static readonly viewType = "testEditor";
 
-    private readonly _panel: vscode.WebviewPanel;
-    private _disposables: vscode.Disposable[] = [];
-    private _testItem: TestItem;
-    private _treeDataProvider: WebTestPilotTreeDataProvider;
+  private readonly _panel: vscode.WebviewPanel;
+  private readonly _extensionUri: vscode.Uri;
+  private _disposables: vscode.Disposable[] = [];
+  private _testItem: TestItem;
+  private _treeDataProvider: WebTestPilotTreeDataProvider;
 
-    private constructor(
-        panel: vscode.WebviewPanel,
-        testItem: TestItem,
-        treeDataProvider: WebTestPilotTreeDataProvider
-    ) {
-        this._panel = panel;
-        this._testItem = { ...testItem };
-        this._treeDataProvider = treeDataProvider;
+  private constructor(
+    panel: vscode.WebviewPanel,
+    extensionUri: vscode.Uri,
+    testItem: TestItem,
+    treeDataProvider: WebTestPilotTreeDataProvider
+  ) {
+    this._panel = panel;
+    this._extensionUri = extensionUri;
+    this._testItem = testItem;
+    this._treeDataProvider = treeDataProvider;
 
-        // Set the webview's initial html content
-        this._update();
+    // Set the webview's HTML content
+    this._panel.webview.html = this._getHtmlForWebview();
 
-        // Listen for when the panel is disposed
-        // This happens when user closes the panel or when the panel is closed programmatically
-        this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+    // Listen for panel disposal
+    this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
-        // Handle messages from the webview
-        this._panel.webview.onDidReceiveMessage(
-            message => {
-                switch (message.command) {
-                    case 'save':
-                        this._saveTest(message.data);
-                        return;
-                    case 'updateTest':
-                        this._testItem = { ...this._testItem, ...message.data };
-                        this._updatePanelTitle();
-                        return;
-                    case 'runTest':
-                        // Validate test has actions before running
-                        if (!this._testItem.actions || this._testItem.actions.length === 0) {
-                            vscode.window.showWarningMessage('Cannot run test: No actions defined. Please add test actions before running.');
-                            return;
-                        }
-                        // Execute the actual runTest command
-                        vscode.commands.executeCommand('webtestpilot.runTest', this._testItem);
-                        return;
-                    case 'close':
-                        this.dispose();
-                        return;
-                    case 'showError':
-                        vscode.window.showErrorMessage(message.text || 'An error occurred');
-                        return;
-                }
-            },
-            undefined,
-            this._disposables
-        );
-    }
-
-    private async loadTestFromFile(testId: string): Promise<TestItem> {
-        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (!workspaceRoot) {
-            throw new Error('No workspace folder found');
-        }
-        const testFilePath = path.join(workspaceRoot, '.webtestpilot', testId);
-        const content = await fs.readFile(testFilePath, 'utf-8');
-        const testData = JSON.parse(content);
-        
-        return {
-            id: testId,
-            name: testData.name || this._testItem.name,
-            type: 'test',
-            url: testData.url || '',
-            actions: testData.actions || [],
-            folderId: this._testItem.folderId,
-            createdAt: new Date(testData.createdAt || Date.now()),
-            updatedAt: new Date(testData.updatedAt || Date.now())
-        };
-    }
-
-    public static async createOrShow(
-        extensionUri: vscode.Uri,
-        testItem: TestItem,
-        treeDataProvider: WebTestPilotTreeDataProvider
-    ) {
-        const column = vscode.window.activeTextEditor
-            ? vscode.window.activeTextEditor.viewColumn
-            : undefined;
-
-        // If we already have a panel, show it.
-        if (TestEditorPanel.currentPanel) {
-            TestEditorPanel.currentPanel._panel.reveal(column);
-            TestEditorPanel.currentPanel._treeDataProvider = treeDataProvider;
-            
-            // Only load fresh data if current test is different or has no actions
-            if (TestEditorPanel.currentPanel._testItem.id !== testItem.id || 
-                !TestEditorPanel.currentPanel._testItem.actions || 
-                TestEditorPanel.currentPanel._testItem.actions.length === 0) {
-                try {
-                    const freshTestItem = await TestEditorPanel.currentPanel.loadTestFromFile(testItem.id);
-                    TestEditorPanel.currentPanel._testItem = freshTestItem;
-                } catch (error) {
-                    console.error('Failed to load fresh test data:', error);
-                    // Continue with current data if file load fails
-                }
+    // Handle messages from the webview
+    this._panel.webview.onDidReceiveMessage(
+      async (message) => {
+        switch (message.command) {
+          case "ready":
+            // Webview is ready, send initial data
+            this._sendTestData();
+            return;
+          case "save":
+            await this._saveTest(message.data);
+            return;
+          case "saveAndRun":
+            if (await this._saveTest(message.data)) {
+              this._runTest();
             }
-            
-            TestEditorPanel.currentPanel._updatePanelTitle();
-            TestEditorPanel.currentPanel._update();
+            return;
+          case "updateTest":
+            this._testItem = { ...this._testItem, ...message.data };
+            this._updatePanelTitle();
+            return;
+          case "close":
+            this.dispose();
+            return;
+          case "showError":
+            vscode.window.showErrorMessage(message.text || "An error occurred");
             return;
         }
+      },
+      undefined,
+      this._disposables
+    );
+  }
 
-        // Otherwise, create a new panel.
-        const panel = vscode.window.createWebviewPanel(
-            TestEditorPanel.viewType,
-            `Edit Test: ${testItem.name}`,
-            column || vscode.ViewColumn.One,
-            {
-                // Enable javascript in the webview
-                enableScripts: true,
-                // And restrict the webview to only loading content from our extension's directory
-                localResourceRoots: [extensionUri]
-            }
-        );
+  public static createOrShow(
+    extensionUri: vscode.Uri,
+    testItem: TestItem,
+    treeDataProvider: WebTestPilotTreeDataProvider
+  ) {
+    const column = vscode.window.activeTextEditor
+      ? vscode.window.activeTextEditor.viewColumn
+      : undefined;
 
-        const editorPanel = new TestEditorPanel(panel, testItem, treeDataProvider);
-        
-        // Load fresh data from file for new panel
-        try {
-            const freshTestItem = await editorPanel.loadTestFromFile(testItem.id);
-            editorPanel._testItem = freshTestItem;
-        } catch (error) {
-            console.error('Failed to load test data:', error);
-            // Continue with provided testItem if file load fails
-        }
-        
-        editorPanel._updatePanelTitle();
-        editorPanel._update();
-        
-        TestEditorPanel.currentPanel = editorPanel;
+    // If we already have a panel, show it and update the test
+    if (TestEditorPanel.currentPanel) {
+      TestEditorPanel.currentPanel._panel.reveal(column);
+      TestEditorPanel.currentPanel._testItem = testItem;
+      TestEditorPanel.currentPanel._treeDataProvider = treeDataProvider;
+      TestEditorPanel.currentPanel._updatePanelTitle();
+      TestEditorPanel.currentPanel._sendTestData();
+      return;
     }
 
-    private _updatePanelTitle() {
-        this._panel.title = `Edit Test: ${this._testItem.name}`;
+    // Create a new panel
+    const panel = vscode.window.createWebviewPanel(
+      TestEditorPanel.viewType,
+      `Edit Test: ${testItem.name}`,
+      column || vscode.ViewColumn.One,
+      {
+        enableScripts: true,
+        localResourceRoots: [
+          vscode.Uri.joinPath(extensionUri, "webview-ui", "dist"),
+          extensionUri,
+        ],
+        retainContextWhenHidden: true,
+      }
+    );
+
+    TestEditorPanel.currentPanel = new TestEditorPanel(
+      panel,
+      extensionUri,
+      testItem,
+      treeDataProvider
+    );
+  }
+
+  private _updatePanelTitle() {
+    this._panel.title = `Edit Test: ${this._testItem.name}`;
+  }
+
+  private _sendTestData() {
+    this._panel.webview.postMessage({
+      command: "loadTest",
+      test: {
+        id: this._testItem.id,
+        name: this._testItem.name || "",
+        url: this._testItem.url || "",
+        folderId: this._testItem.folderId,
+        actions: this._testItem.actions || [],
+      },
+    });
+  }
+
+  private async _saveTest(data: any): Promise<boolean> {
+    // Validate required fields
+    if (!data.name || data.name.trim() === "") {
+      vscode.window.showErrorMessage("Test name is required");
+      return false;
     }
 
-    private async _update() {
-        // Only load fresh data if we don't have current data or if explicitly requested
-        if (!this._testItem.actions || this._testItem.actions.length === 0) {
-            try {
-                const freshTestItem = await this.loadTestFromFile(this._testItem.id!);
-                // Only overwrite if current data is empty
-                if (!this._testItem.actions || this._testItem.actions.length === 0) {
-                    this._testItem = { ...this._testItem, ...freshTestItem };
-                }
-            } catch (error) {
-                console.error('Failed to load fresh data:', error);
-                // Continue with current data if file load fails
-            }
-        }
-        
-        this._updatePanelTitle();
-        const html = await this._getHtmlForWebview();
-        this._panel.webview.html = html;
+    // Preserve existing data and merge with new data
+    this._testItem = {
+      ...this._testItem,
+      name: data.name.trim(),
+      url: data.url ? data.url.trim() : "",
+      actions: Array.isArray(data.actions)
+        ? data.actions
+        : this._testItem.actions || [],
+      updatedAt: new Date(),
+    };
+
+    this._updatePanelTitle();
+
+    try {
+      await this._treeDataProvider.updateTest(
+        this._testItem.id,
+        this._testItem
+      );
+      vscode.window.showInformationMessage("Test saved successfully!");
+      return true;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      vscode.window.showErrorMessage(`Failed to save test: ${errorMessage}`);
+      console.error("Save error:", error);
+      return false;
+    }
+  }
+
+  private _getHtmlForWebview(): string {
+    const webview = this._panel.webview;
+    const distUri = vscode.Uri.joinPath(
+      this._extensionUri,
+      "webview-ui",
+      "dist"
+    );
+    const indexHtmlUri = vscode.Uri.joinPath(distUri, "index.html");
+
+    // Load the built index.html
+    let html = fs.readFileSync(indexHtmlUri.fsPath, "utf-8");
+
+    // Generate a nonce for CSP and script tags
+    const nonce = this._getNonce();
+
+    // Build the CSP meta tag using the webview's cspSource and the nonce
+    const cspMeta = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} https: data:; style-src ${webview.cspSource} 'unsafe-inline'; font-src ${webview.cspSource}; script-src 'nonce-${nonce}'; connect-src ${webview.cspSource} https:;">`;
+
+    // Insert the CSP meta tag before the closing head tag
+    html = html.replace("</head>", `${cspMeta}</head>`);
+
+    // Inject page identifier script with nonce
+    const pageScript = `<script nonce="${nonce}">window.__PAGE__ = 'testEditor';</script>`;
+
+    // Insert the page script before the closing body tag
+    html = html.replace("</body>", `${pageScript}</body>`);
+
+    // Add nonce attribute to all script tags so bundled scripts are allowed by the CSP
+    html = html.replace(/<script(\s)/g, `<script nonce="${nonce}"$1`);
+
+    html = this._rewriteResourceUrls(html, distUri, webview, nonce);
+    return html;
+  }
+
+  private _rewriteResourceUrls(
+    html: string,
+    distUri: vscode.Uri,
+    webview: vscode.Webview,
+    nonce: string
+  ): string {
+    const scriptPattern = /<script([^>]*)src="([^"]+)"([^>]*)><\/script>/gi;
+    html = html.replace(scriptPattern, (match, preAttrs, src, postAttrs) => {
+      if (this._isExternalResource(src)) {
+        return match;
+      }
+
+      const resolvedSrc = this._resolveWebviewUri(webview, distUri, src);
+      let rebuilt = `<script${preAttrs || ""} src="${resolvedSrc}"${
+        postAttrs || ""
+      }></script>`;
+      if (/nonce\s*=/.test(rebuilt)) {
+        rebuilt = rebuilt.replace(/nonce\s*=\s*"[^"]*"/i, `nonce="${nonce}"`);
+      } else {
+        rebuilt = rebuilt.replace("<script", `<script nonce="${nonce}"`);
+      }
+      return rebuilt;
+    });
+
+    const linkPattern = /<link([^>]*)href="([^"]+)"([^>]*)>/gi;
+    html = html.replace(linkPattern, (match, preAttrs, href, postAttrs) => {
+      if (this._isExternalResource(href)) {
+        return match;
+      }
+
+      const resolvedHref = this._resolveWebviewUri(webview, distUri, href);
+      return `<link${preAttrs || ""}href="${resolvedHref}"${postAttrs || ""}>`;
+    });
+
+    return html;
+  }
+
+  private _isExternalResource(resourcePath: string): boolean {
+    return (
+      /^(https?:)?\/\//i.test(resourcePath) ||
+      resourcePath.startsWith("vscode-resource:") ||
+      resourcePath.startsWith("vscode-webview-resource:") ||
+      resourcePath.startsWith("data:")
+    );
+  }
+
+  private _resolveWebviewUri(
+    webview: vscode.Webview,
+    baseUri: vscode.Uri,
+    resourcePath: string
+  ): string {
+    const cleanedPath = resourcePath.trim();
+    const [pathWithoutHash, hashFragment] = cleanedPath.split("#", 2);
+    const [pathPart, queryString] = pathWithoutHash.split("?", 2);
+
+    const normalizedSegments = pathPart
+      .replace(/^\//, "")
+      .split("/")
+      .filter((segment) => segment.length > 0);
+
+    const resourceUri = vscode.Uri.joinPath(baseUri, ...normalizedSegments);
+    let webviewUri = webview.asWebviewUri(resourceUri).toString();
+
+    if (queryString) {
+      webviewUri += `?${queryString}`;
     }
 
-    private async _saveTest(data: any) {
-        // Validate required fields
-        if (!data.name || data.name.trim() === '') {
-            vscode.window.showErrorMessage('Test name is required');
-            return;
-        }
-
-        // Preserve existing data and merge with new data
-        this._testItem = {
-            ...this._testItem,
-            name: data.name.trim(),
-            url: data.url ? data.url.trim() : '',
-            actions: Array.isArray(data.actions) ? data.actions : (this._testItem.actions || []),
-            updatedAt: new Date()
-        };
-        
-        this._updatePanelTitle();
-        
-        try {
-            await this._treeDataProvider.updateTest(this._testItem.id, this._testItem);
-            vscode.window.showInformationMessage('Test saved successfully!');
-        } catch (error) {
-            const errorMessage = error instanceof Error ? error.message : String(error);
-            vscode.window.showErrorMessage(`Failed to save test: ${errorMessage}`);
-            console.error('Save error:', error);
-        }
+    if (hashFragment) {
+      webviewUri += `#${hashFragment}`;
     }
 
-    private async _getHtmlForWebview(): Promise<string> {
-        const testItem = this._testItem;
-        const actions = testItem.actions || [];
-        
-        // Read HTML template from file
-        const htmlPath = path.join(__dirname, 'views', 'test-editor.html');
-        let htmlTemplate = await fs.readFile(htmlPath, 'utf-8');
-        
-        // Helper function to escape HTML attributes
-        const escapeHtml = (text: string): string => {
-            return text
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        };
+    return webviewUri;
+  }
 
-        // Replace placeholders in template
-        htmlTemplate = htmlTemplate
-            .replace(/\{\{TEST_NAME\}\}/g, escapeHtml(testItem.name))
-            .replace(/\{\{TEST_NAME_VALUE\}\}/g, escapeHtml(testItem.name))
-            .replace(/\{\{TEST_URL_VALUE\}\}/g, escapeHtml(testItem.url || ''))
-            .replace(/\{\{ACTIONS_LIST\}\}/g, actions.map((action, index) => `
-                <div class="action-item compact" data-index="${index}">
-                    <div class="action-row">
-                        <span class="action-number">${index + 1}.</span>
-                        <input type="text" class="action-text compact" placeholder="Action" value="${escapeHtml(action.action || '')}" />
-                        <button class="btn btn-danger compact" onclick="removeAction(${index})">×</button>
-                    </div>
-                    <div class="action-row">
-                        <span class="action-number">→</span>
-                        <input type="text" class="expected-result compact" placeholder="Expected result" value="${escapeHtml(action.expectedResult || '')}" />
-                    </div>
-                </div>
-            `).join(''));
-
-        // Add JSON data script with fallback
-        const jsonScript = `<script type="application/json" id="actionsJson">${JSON.stringify(actions)}</script>`;
-        htmlTemplate = htmlTemplate.replace('</body>', `${jsonScript}</body>`);
-        
-        // Also add a debug script to verify actions are loaded
-        const debugScript = `<script>console.log('Actions injected:', ${JSON.stringify(actions)});</script>`;
-        htmlTemplate = htmlTemplate.replace('</body>', `${debugScript}</body>`);
-
-        return htmlTemplate;
+  private _runTest() {
+    if (!this._testItem.actions || this._testItem.actions.length === 0) {
+      vscode.window.showWarningMessage("Cannot run test: No actions defined.");
+      return;
     }
+    vscode.commands.executeCommand("webtestpilot.runTest", this._testItem);
+  }
 
-    public dispose() {
-        TestEditorPanel.currentPanel = undefined;
-
-        // Clean up our resources
-        this._panel.dispose();
-
-        while (this._disposables.length) {
-            const x = this._disposables.pop();
-            if (x) {
-                x.dispose();
-            }
-        }
+  // Add nonce helper
+  private _getNonce(): string {
+    const possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let text = "";
+    for (let i = 0; i < 32; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
+    return text;
+  }
+
+  public dispose() {
+    TestEditorPanel.currentPanel = undefined;
+    this._panel.dispose();
+
+    while (this._disposables.length) {
+      this._disposables.pop()?.dispose();
+    }
+  }
 }

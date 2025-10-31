@@ -4,7 +4,6 @@ import * as vscode from 'vscode';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
-import { FixtureEditorPanel } from './fixtureEditorPanel';
 import { TestRunnerPanel } from './testRunnerPanel';
 import { ParallelTestRunner } from './parallelTestRunner';
 import { ImportPanel } from './importPanel';
@@ -111,17 +110,17 @@ export function activate(context: vscode.ExtensionContext) {
 			const content = await fs.readFile(testFilePath, 'utf-8');
 			const testData = JSON.parse(content);
 			
-		// Merge the file data with the tree item data
+			// Merge the file data with the tree item data
 			const fullTestItem: TestItem = {
 				...test,
 				actions: testData.actions || []
 			};
 
-			// Open the fixture editor panel with test tab
-			FixtureEditorPanel.createOrShow(
+			// Open the test editor panel
+			TestEditorPanel.createOrShow(
 				context.extensionUri,
-				treeDataProvider,
-				fullTestItem
+				fullTestItem,
+				treeDataProvider
 			);
 		} catch (error) {
 			// If file doesn't exist, create a new test with default actions
@@ -130,20 +129,12 @@ export function activate(context: vscode.ExtensionContext) {
 				actions: []
 			};
 
-			FixtureEditorPanel.createOrShow(
+			TestEditorPanel.createOrShow(
 				context.extensionUri,
-				treeDataProvider,
-				newTestItem
+				newTestItem,
+				treeDataProvider
 			);
 		}
-	});
-
-	const openFixtureEditorCommand = vscode.commands.registerCommand('webtestpilot.openFixtureEditor', async () => {
-		// Open the fixture editor panel without a specific test
-		FixtureEditorPanel.createOrShow(
-			context.extensionUri,
-			treeDataProvider
-		);
 	});
 
 	const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
@@ -274,7 +265,6 @@ export function activate(context: vscode.ExtensionContext) {
 		createFolderCommand,
 		deleteItemCommand,
 		openTestCommand,
-		openFixtureEditorCommand,
 		createTestRootCommand,
 		createFolderRootCommand,
 		runTestCommand,

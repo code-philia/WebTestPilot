@@ -26,8 +26,7 @@ uv run baml-cli generate
 Update latest build
 ```
 yarn install:all
-npm run build:webview
-yarn compile
+yarn package
 ```
 
 Start the dev server
