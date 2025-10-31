@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTestPilot Editor</title>
+</head>
+
+<body>
+    <div class="mx-auto p-5 max-w-4xl">
+        <header class="header-sticky header">
+            <h1 class="font-bold text-2xl">WebTestPilot Editor</h1>
+            <div class="flex gap-2">
+                <button onclick="saveCurrent()" class="btn btn-primary">Save</button>
+                <button onclick="runCurrent()" id="runButton" class="hidden btn btn-secondary">Run</button>
+                <button onclick="closePanel()" class="btn btn-secondary">Close</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('tests')">Test Cases</button>
+            <button class="tab" onclick="showTab('fixtures')">Fixtures</button>
+        </div>
+
+        <!-- Test Cases Tab -->
+        <div id="tests-tab" class="tab-content">
+            <div class="space-y-5">
+                <div>
+                    <label for="testName" class="form-label">Test Name:</label>
+                    <input type="text" id="testName" value="{{TEST_NAME_VALUE}}" class="form-input" />
+                </div>
+
+                <div>
+                    <label for="testUrl" class="form-label">URL:</label>
+                    <input type="url" id="testUrl" value="{{TEST_URL_VALUE}}" placeholder="https://example.com"
+                        class="form-input" />
+                </div>
+
+                <div class="mt-7.5">
+                    <div class="flex justify-between items-center mb-2.5">
+                        <h3 class="font-semibold text-lg">Actions</h3>
+                        <button onclick="addTestAction()" class="btn btn-secondary">Add Action</button>
+                    </div>
+
+                    <div id="testActionsList">
+                        {{TEST_ACTIONS_LIST}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fixtures Tab -->
+        <div id="fixtures-tab" class="hidden tab-content">
+            <div class="flex items-end gap-2.5 mb-5">
+                <div class="flex-1 mb-0">
+                    <label for="fixtureSelector" class="form-label">Select Fixture:</label>
+                    <select id="fixtureSelector" onchange="loadFixture()" class="cursor-pointer form-input">
+                        <option value="">-- Create New Fixture --</option>
+                        {{FIXTURE_OPTIONS}}
+                    </select>
+                </div>
+                <div class="flex-1 mb-0">
+                    <label for="newFixtureName" class="form-label">New Fixture Name:</label>
+                    <input type="text" id="newFixtureName" placeholder="Enter fixture name" class="form-input" />
+                </div>
+                <button onclick="createFixture()" class="btn btn-primary">Create</button>
+                <button onclick="deleteCurrentFixture()" id="deleteFixtureButton"
+                    class="hidden btn btn-danger">Delete</button>
+            </div>
+
+            <div id="fixtureEditSection" class="hidden">
+                <div class="space-y-5">
+                    <div>
+                        <label for="fixtureName" class="form-label">Fixture Name:</label>
+                        <input type="text" id="fixtureName" value="{{FIXTURE_NAME_VALUE}}" class="form-input" />
+                    </div>
+
+                    <div>
+                        <label for="baseFixtureSelector" class="form-label">Base Fixture (optional):</label>
+                        <select id="baseFixtureSelector" class="cursor-pointer form-input">
+                            <option value="">-- No Base Fixture --</option>
+                            {{BASE_FIXTURE_OPTIONS}}
+                        </select>
+                    </div>
+
+                    <div class="mt-7.5">
+                        <div class="flex justify-between items-center mb-2.5">
+                            <h3 class="font-semibold text-lg">Actions</h3>
+                            <button onclick="addFixtureAction()" class="btn btn-secondary">Add Action</button>
+                        </div>
+
+                        <div id="fixtureActionsList">
+                            {{FIXTURE_ACTIONS_LIST}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vscode = acquireVsCodeApi();
+        let testActions = [];
+        let fixtureActions = [];
+        let currentTab = 'tests';
+        let currentFixtureId = null;
+
+        // Initialize actions from JSON data when DOM is ready
+        function initializeActions() {
+            // Load test actions
+            const testActionsJsonElement = document.getElementById('testActionsJson');
+            if (testActionsJsonElement) {
+                try {
+                    testActions = JSON.parse(testActionsJsonElement.textContent || '[]');
+                } catch (e) {
+                    console.error('Failed to load test actions:', e);
+                    testActions = [];
+                }
+            }
+
+            // Load fixture actions
+            const fixtureActionsJsonElement = document.getElementById('fixtureActionsJson');
+            if (fixtureActionsJsonElement) {
+                try {
+                    fixtureActions = JSON.parse(fixtureActionsJsonElement.textContent || '[]');
+                } catch (e) {
+                    console.error('Failed to load fixture actions:', e);
+                    fixtureActions = [];
+                }
+            }
+
+            renderTestActions();
+            renderFixtureActions();
+        }
+
+        // Initialize when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeActions);
+        } else {
+            initializeActions();
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            event.target.classList.add('active');
+
+            currentTab = tabName;
+
+            // Show/hide run button based on tab
+            const runButton = document.getElementById('runButton');
+            if (tabName === 'tests') {
+                runButton.classList.remove('hidden');
+            } else {
+                runButton.classList.add('hidden');
+            }
+        }
+
+        // Test Actions Functions
+        function addTestAction() {
+            testActions.push({
+                action: '',
+                expectedResult: ''
+            });
+            renderTestActions();
+        }
+
+        function removeTestAction(index) {
+            testActions.splice(index, 1);
+            renderTestActions();
+        }
+
+        function updateTestAction(index, field, value) {
+            if (testActions[index]) {
+                testActions[index][field] = value;
+            }
+        }
+
+        function renderTestActions() {
+            const container = document.getElementById('testActionsList');
+
+            if (!testActions || testActions.length === 0) {
+                container.innerHTML = '<div class="empty-state">No actions defined. Click "Add Action" to get started.</div>';
+                return;
+            }
+
+            container.innerHTML = testActions.map((action, index) => `
+                <div class="action-item" data-index="${index}">
+                    <div class="action-row">
+                        <span class="action-number">${index + 1}.</span>
+                        <input type="text" class="action-input" placeholder="Action" 
+                               value="${escapeHtml(action.action || '')}" 
+                               onchange="updateTestAction(${index}, 'action', this.value)">
+                        <button class="btn btn-sm btn-danger" onclick="removeTestAction(${index})">×</button>
+                    </div>
+                    <div class="action-row">
+                        <span class="action-number">→</span>
+                        <input type="text" class="action-input" placeholder="Expected result" 
+                               value="${escapeHtml(action.expectedResult || '')}" 
+                               onchange="updateTestAction(${index}, 'expectedResult', this.value)">
+                        </div>
+                </div>
+            `).join('');
+        }
+
+        // Fixture Actions Functions
+        function addFixtureAction() {
+            fixtureActions.push({
+                action: '',
+                expectedResult: ''
+            });
+            renderFixtureActions();
+        }
+
+        function removeFixtureAction(index) {
+            fixtureActions.splice(index, 1);
+            renderFixtureActions();
+        }
+
+        function updateFixtureAction(index, field, value) {
+            if (fixtureActions[index]) {
+                fixtureActions[index][field] = value;
+            }
+        }
+
+        function renderFixtureActions() {
+            const container = document.getElementById('fixtureActionsList');
+
+            if (!fixtureActions || fixtureActions.length === 0) {
+                container.innerHTML = '<div class="empty-state">No actions defined. Click "Add Action" to get started.</div>';
+                return;
+            }
+
+            container.innerHTML = fixtureActions.map((action, index) => `
+                <div class="action-item" data-index="${index}">
+                    <div class="action-row">
+                        <span class="action-number">${index + 1}.</span>
+                        <input type="text" class="action-input" placeholder="Action" 
+                               value="${escapeHtml(action.action || '')}" 
+                               onchange="updateFixtureAction(${index}, 'action', this.value)">
+                        <button class="btn btn-sm btn-danger" onclick="removeFixtureAction(${index})">×</button>
+                    </div>
+                    <div class="action-row">
+                        <span class="action-number">→</span>
+                        <input type="text" class="action-input" placeholder="Expected result" 
+                               value="${escapeHtml(action.expectedResult || '')}" 
+                               onchange="updateFixtureAction(${index}, 'expectedResult', this.value)">
+                        </div>
+                </div>
+            `).join('');
+        }
+
+        // Fixture Management Functions
+        function loadFixture() {
+            const selector = document.getElementById('fixtureSelector');
+            const fixtureId = selector.value;
+
+            if (fixtureId) {
+                vscode.postMessage({
+                    command: 'loadFixture',
+                    data: fixtureId
+                });
+            } else {
+                // Hide edit section when no fixture selected
+                document.getElementById('fixtureEditSection').style.display = 'none';
+                document.getElementById('deleteFixtureButton').style.display = 'none';
+                document.getElementById('newFixtureName').value = '';
+            }
+        }
+
+        function createFixture() {
+            const name = document.getElementById('newFixtureName').value.trim();
+
+            if (!name) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Fixture name is required'
+                });
+                return;
+            }
+
+            vscode.postMessage({
+                command: 'createFixture',
+                data: {
+                    name: name
+                }
+            });
+        }
+
+        function deleteCurrentFixture() {
+            if (currentFixtureId) {
+                vscode.postMessage({
+                    command: 'deleteFixture',
+                    data: currentFixtureId
+                });
+            }
+        }
+
+        // Save Functions
+        function saveCurrent() {
+            if (currentTab === 'tests') {
+                saveTest();
+            } else {
+                saveFixture();
+            }
+        }
+
+        function saveTest() {
+            const name = document.getElementById('testName').value.trim();
+            const url = document.getElementById('testUrl').value.trim();
+
+            if (!name) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Test name is required'
+                });
+                return;
+            }
+
+            vscode.postMessage({
+                command: 'saveTest',
+                data: {
+                    name,
+                    url,
+                    actions: testActions
+                }
+            });
+        }
+
+        function saveFixture() {
+            const name = document.getElementById('fixtureName').value.trim();
+            const baseFixtureId = document.getElementById('baseFixtureSelector').value;
+
+            if (!name) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Fixture name is required'
+                });
+                return;
+            }
+
+            vscode.postMessage({
+                command: 'saveFixture',
+                data: {
+                    name,
+                    baseFixtureId: baseFixtureId || null,
+                    actions: fixtureActions
+                }
+            });
+        }
+
+        function runCurrent() {
+            if (currentTab === 'tests') {
+                runTest();
+            }
+        }
+
+        function runTest() {
+            if (!testActions || testActions.length === 0) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Cannot run test: No actions defined. Please add test actions before running.'
+                });
+                return;
+            }
+
+            const hasEmptyActions = testActions.some(action =>
+                !action.action || action.action.trim() === ''
+            );
+
+            if (hasEmptyActions) {
+                vscode.postMessage({
+                    command: 'showError',
+                    text: 'Cannot run test: Some actions are empty. Please fill in all action descriptions.'
+                });
+                return;
+            }
+
+            // First save the test, then run it
+            saveTest();
+            setTimeout(() => {
+                vscode.postMessage({
+                    command: 'runTest'
+                });
+            }, 500);
+        }
+
+        function closePanel() {
+            vscode.postMessage({
+                command: 'close'
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Auto-save on input changes
+        document.getElementById('testName').addEventListener('input', function () {
+            vscode.postMessage({
+                command: 'updateTest',
+                data: {
+                    name: this.value.trim()
+                }
+            });
+        });
+
+        document.getElementById('testUrl').addEventListener('input', function () {
+            vscode.postMessage({
+                command: 'updateTest',
+                data: {
+                    url: this.value.trim()
+                }
+            });
+        });
+
+        document.getElementById('fixtureName').addEventListener('input', function () {
+            vscode.postMessage({
+                command: 'updateFixture',
+                data: {
+                    name: this.value.trim()
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

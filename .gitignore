@@ -1,41 +1,27 @@
-.vscode
-*.DS_Store
-.aider*
-*screenshots*
-
-# Python-generated files
+# Build
 __pycache__/
 *.py[oc]
 build/
-dist/
 wheels/
 *.egg-info
+dist/
 
-# Virtual environments
+# Envs
 .venv
-
-# Environment variables
 .env
 *venv*
 
-# Ruff
+# Tools
+.vscode
+*.DS_Store
+.aider*
 .ruff_cache/
-
-experiments/**/resources/*
-experiments/**/*.network
-experiments/**/*.trace
-experiments/**/*.zip
-
-checkpoint_*
-*naviqate_output*
-
-experiments/**/*.html
-experiments/**/*.png
-archive/
-media/
-
+.mypy_cache
 */*/node_modules/*
 node_modules
 .webtestpilot
-specs/
-mcp
+
+# Devs
+archive
+media
+screenshots

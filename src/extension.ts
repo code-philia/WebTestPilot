@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
 import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './testEditorPanel';
+import { FixtureEditorPanel } from './fixtureEditorPanel';
 import { TestRunnerPanel } from './testRunnerPanel';
 import { ParallelTestRunner } from './parallelTestRunner';
 import { ImportPanel } from './importPanel';
@@ -116,11 +117,11 @@ export function activate(context: vscode.ExtensionContext) {
 				actions: testData.actions || []
 			};
 
-			// Open the test editor panel
-			TestEditorPanel.createOrShow(
+			// Open the fixture editor panel with test tab
+			FixtureEditorPanel.createOrShow(
 				context.extensionUri,
-				fullTestItem,
-				treeDataProvider
+				treeDataProvider,
+				fullTestItem
 			);
 		} catch (error) {
 			// If file doesn't exist, create a new test with default actions
@@ -129,12 +130,20 @@ export function activate(context: vscode.ExtensionContext) {
 				actions: []
 			};
 
-			TestEditorPanel.createOrShow(
+			FixtureEditorPanel.createOrShow(
 				context.extensionUri,
-				newTestItem,
-				treeDataProvider
+				treeDataProvider,
+				newTestItem
 			);
 		}
+	});
+
+	const openFixtureEditorCommand = vscode.commands.registerCommand('webtestpilot.openFixtureEditor', async () => {
+		// Open the fixture editor panel without a specific test
+		FixtureEditorPanel.createOrShow(
+			context.extensionUri,
+			treeDataProvider
+		);
 	});
 
 	const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
@@ -265,6 +274,7 @@ export function activate(context: vscode.ExtensionContext) {
 		createFolderCommand,
 		deleteItemCommand,
 		openTestCommand,
+		openFixtureEditorCommand,
 		createTestRootCommand,
 		createFolderRootCommand,
 		runTestCommand,

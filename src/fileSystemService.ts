@@ -1,14 +1,16 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
+import { TestItem, FolderItem, FixtureItem, TreeItem as WebTestPilotDataItem } from './models';
 
 export class FileSystemService {
     private webTestPilotDir: string;
+    private fixturesDir: string;
     private fileWatcher: vscode.FileSystemWatcher | undefined;
 
     constructor(private workspaceRoot: string) {
         this.webTestPilotDir = path.join(workspaceRoot, '.webtestpilot');
+        this.fixturesDir = path.join(this.webTestPilotDir, '.fixtures');
     }
 
     async initialize(): Promise<void> {
@@ -17,6 +19,12 @@ export class FileSystemService {
         } catch {
             await fs.mkdir(this.webTestPilotDir, { recursive: true });
         }
+        
+        try {
+            await fs.access(this.fixturesDir);
+        } catch {
+            await fs.mkdir(this.fixturesDir, { recursive: true });
+        }
     }
 
     async readStructure(): Promise<WebTestPilotDataItem[]> {
@@ -24,6 +32,7 @@ export class FileSystemService {
         
         try {
             await this.readDirectoryRecursive(this.webTestPilotDir, items);
+            await this.readFixtures(items);
         } catch (error) {
             console.error('Error reading .webtestpilot directory:', error);
         }
@@ -39,6 +48,11 @@ export class FileSystemService {
                 const relativeEntryPath = relativePath ? path.join(relativePath, entry.name) : entry.name;
 
                 if (entry.isDirectory()) {
+                    // Skip .fixtures directory as it's handled separately
+                    if (entry.name === '.fixtures') {
+                        continue;
+                    }
+                    
                     // Create folder item
                     const folderItem: FolderItem = {
                         id: relativeEntryPath,
@@ -186,6 +200,95 @@ export class FileSystemService {
         }
     }
 
+    private async readFixtures(items: WebTestPilotDataItem[]): Promise<void> {
+        try {
+            const fixtureFiles = await fs.readdir(this.fixturesDir);
+            
+            for (const file of fixtureFiles) {
+                if (file.endsWith('.json')) {
+                    try {
+                        const filePath = path.join(this.fixturesDir, file);
+                        const content = await fs.readFile(filePath, 'utf-8');
+                        const fixtureData = JSON.parse(content);
+                        
+                        const fixtureItem: FixtureItem = {
+                            id: file,
+                            name: this.extractFixtureName(file, fixtureData),
+                            type: 'fixture',
+                            actions: fixtureData.actions || [],
+                            baseFixtureId: fixtureData.baseFixtureId,
+                            createdAt: new Date(fixtureData.createdAt || Date.now()),
+                            updatedAt: new Date(fixtureData.updatedAt || Date.now())
+                        };
+                        items.push(fixtureItem);
+                    } catch (error) {
+                        console.error(`Error reading fixture file ${file}:`, error);
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error reading fixtures directory:', error);
+        }
+    }
+
+    private extractFixtureName(fileName: string, fixtureData: any): string {
+        const baseName = fileName.replace(/\.json$/, '');
+        return fixtureData.name || baseName;
+    }
+
+    async createFixture(name: string, baseFixtureId?: string): Promise<FixtureItem> {
+        const fixtureFileName = this.generateFixtureFileName(name);
+        
+        const fixtureItem: FixtureItem = {
+            id: fixtureFileName,
+            name,
+            type: 'fixture',
+            actions: [],
+            baseFixtureId,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        const filePath = path.join(this.fixturesDir, fixtureFileName);
+        await this.writeFixtureFile(filePath, fixtureItem);
+        return fixtureItem;
+    }
+
+    async updateFixture(fixtureId: string, fixtureItem: FixtureItem): Promise<void> {
+        const filePath = path.join(this.fixturesDir, fixtureId);
+        await this.writeFixtureFile(filePath, fixtureItem);
+    }
+
+    async deleteFixture(fixtureId: string): Promise<void> {
+        const filePath = path.join(this.fixturesDir, fixtureId);
+        await fs.unlink(filePath);
+    }
+
+    private async writeFixtureFile(filePath: string, fixtureItem: FixtureItem): Promise<void> {
+        const fixtureContent = {
+            name: fixtureItem.name,
+            actions: fixtureItem.actions || [],
+            baseFixtureId: fixtureItem.baseFixtureId,
+            createdAt: fixtureItem.createdAt.toISOString(),
+            updatedAt: fixtureItem.updatedAt.toISOString()
+        };
+
+        try {
+            const tempFilePath = filePath + '.tmp';
+            await fs.writeFile(tempFilePath, JSON.stringify(fixtureContent, null, 2), 'utf-8');
+            await fs.rename(tempFilePath, filePath);
+        } catch (error) {
+            console.error('Failed to write fixture file:', error);
+            throw error;
+        }
+    }
+
+    private generateFixtureFileName(name: string): string {
+        const sanitizedName = name.replace(/[^a-zA-Z0-9-_]/g, '_').trim();
+        const timestamp = Date.now();
+        return `${sanitizedName}_${timestamp}.json`;
+    }
+
     private generateTestFileName(name: string): string {
         // Sanitize name for filename
         const sanitizedName = name.replace(/[^a-zA-Z0-9-_]/g, '_').trim();
@@ -198,6 +301,7 @@ export class FileSystemService {
             this.fileWatcher.dispose();
         }
 
+        // Watch both the main directory and fixtures directory
         this.fileWatcher = vscode.workspace.createFileSystemWatcher(
             new vscode.RelativePattern(this.webTestPilotDir, '**/*'),
             false,

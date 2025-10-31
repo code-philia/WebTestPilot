@@ -84,7 +84,7 @@
         {
           "id": "webtestpilot.treeView",
           "name": "WebTestPilot",
-          "icon": "resources/view-icon.svg"
+          "icon": "assets/view-icon.svg"
         }
       ]
     },
@@ -93,7 +93,7 @@
         {
           "id": "webtestpilot",
           "title": "WebTestPilot",
-          "icon": "resources/activity-bar-logo.svg"
+          "icon": "assets/activity-bar-logo.svg"
         }
       ]
     },
