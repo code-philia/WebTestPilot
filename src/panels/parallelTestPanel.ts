@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { chromium, type Browser, type BrowserContext, type Page } from 'playwright-core';
-import { TestItem, FolderItem } from './models';
-import { WorkspaceRootService } from './workspaceRootService.js';
+import { TestItem, FolderItem } from '../models';
+import { WorkspaceRootService } from '../workspaceRootService.js';
 import { spawn } from 'child_process';
 
 
@@ -34,8 +34,8 @@ interface TestData {
  * ParallelTestRunner handles running multiple test cases simultaneously
  * with each test in its own browser tab and Python process
  */
-export class ParallelTestRunner {
-    public static currentPanel: ParallelTestRunner | undefined;
+export class ParallelTestPanel {
+    public static currentPanel: ParallelTestPanel | undefined;
     private readonly _panel: vscode.WebviewPanel;
     private _disposables: vscode.Disposable[] = [];
     private _folder: FolderItem;
@@ -742,8 +742,8 @@ export class ParallelTestRunner {
         }
 
         // If we already have a panel, dispose it and create a new one
-        if (ParallelTestRunner.currentPanel) {
-            ParallelTestRunner.currentPanel.dispose();
+        if (ParallelTestPanel.currentPanel) {
+            ParallelTestPanel.currentPanel.dispose();
         }
 
         // Create a new panel for parallel execution
@@ -758,11 +758,11 @@ export class ParallelTestRunner {
         );
 
         const cdpEndpoint = vscode.workspace.getConfiguration('webtestpilot').get<string>('cdpEndpoint') || 'http://localhost:9222';
-        ParallelTestRunner.currentPanel = new ParallelTestRunner(panel, folder, cdpEndpoint);
+        ParallelTestPanel.currentPanel = new ParallelTestPanel(panel, folder, cdpEndpoint);
 
         // Start tests after a short delay to allow UI to initialize
         setTimeout(() => {
-            ParallelTestRunner.currentPanel?._startParallelTests(testsInFolder, workspaceRoot);
+            ParallelTestPanel.currentPanel?._startParallelTests(testsInFolder, workspaceRoot);
         }, 2000);
     }
 
@@ -782,7 +782,7 @@ export class ParallelTestRunner {
      * Disposes the panel and cleans up resources
      */
     public dispose() {
-        ParallelTestRunner.currentPanel = undefined;
+        ParallelTestPanel.currentPanel = undefined;
 
         // Stop all tests
         this._stopAllTests();

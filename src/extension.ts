@@ -3,9 +3,9 @@
 import * as vscode from 'vscode';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
 import { TestItem, FolderItem } from './models';
-import { TestEditorPanel } from './testEditorPanel';
-import { TestRunnerPanel } from './testRunnerPanel';
-import { ParallelTestRunner } from './parallelTestRunner';
+import { TestEditorPanel } from './panels/testEditorPanel';
+import { TestRunnerPanel } from './panels/testRunnerPanel';
+import { ParallelTestPanel } from './panels/parallelTestPanel';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -222,7 +222,7 @@ export function activate(context: vscode.ExtensionContext) {
 			(global as any).webTestPilotTreeDataProvider = treeDataProvider;
 			
 			// Start parallel test runner
-			await ParallelTestRunner.createOrShow(folderItem, workspaceRoot);
+			await ParallelTestPanel.createOrShow(folderItem, workspaceRoot);
 		}
 	});
 

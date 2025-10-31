@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
-import { TestItem } from "./models";
-import { WebTestPilotTreeDataProvider } from "./treeDataProvider";
+import { TestItem } from "../models";
+import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
 
 /**
  * TestEditorPanel provides a webview interface for editing test cases
