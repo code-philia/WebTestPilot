@@ -24,9 +24,10 @@ uv run baml-cli generate
 
 ### Setup extension
 Update latest build
-```bash
+```
+yarn install:all
+npm run build:webview
 yarn compile
-yarn watch:esbuild
 ```
 
 Start the dev server

@@ -111,7 +111,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const content = await fs.readFile(testFilePath, 'utf-8');
 			const testData = JSON.parse(content);
 			
-			// Merge the file data with the tree item data
+		// Merge the file data with the tree item data
 			const fullTestItem: TestItem = {
 				...test,
 				actions: testData.actions || []
