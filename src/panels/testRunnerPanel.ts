@@ -6,6 +6,7 @@ import { chromium } from "playwright-core";
 import { TestItem } from "../models";
 import { WorkspaceRootService } from "../services/workspaceRootService.js";
 import { parseLogEvents } from "../utils/logParser";
+import assert from "assert";
 
 /**
  * TestRunnerPanel handles running tests by connecting to a remote browser via CDP
@@ -545,15 +546,16 @@ export class TestRunnerPanel {
    * Parse step updates from Python process output
    */
   private _parseStepUpdates(text: string) {
+    assert(this._progress, "Progress object should be defined");
+
     const events = parseLogEvents(text);
     for (const ev of events) {
       if (ev.type === "step") {
         const stepNumber = ev.step;
         if (ev.status === "started") {
-          const action = ev.action || "";
-          if (this._progress) {
-            this._progress.report({ message: `Step ${stepNumber}: ${action}` });
-          }
+          this._progress.report({
+            message: `Step ${stepNumber}: ${ev.action || ""}`,
+          });
         } else if (ev.status === "passed") {
           vscode.window.showInformationMessage(`Step ${stepNumber} passed`);
         } else if (ev.status === "failed") {
@@ -563,30 +565,24 @@ export class TestRunnerPanel {
         }
       } else if (ev.type === "verification") {
         const stepNumber = ev.step;
+
         if (ev.status === "verifying") {
-          const expectation = ev.expectation || "";
-          if (this._progress) {
-            this._progress.report({
-              message: `Step ${stepNumber}: Verifying - ${expectation}`,
-            });
-          }
+          this._progress.report({
+            message: `Step ${stepNumber}: Verifying - ${ev.expectation || ""}`,
+          });
         } else if (ev.status === "verifyPassed") {
-          if (this._progress) {
-            this._progress.report({
-              message: `Step ${stepNumber}: ✓ Completed`,
-            });
-          }
+          this._progress.report({
+            message: `Step ${stepNumber}: ✓ Completed`,
+          });
           vscode.window.showInformationMessage(
             `✅ Step ${stepNumber} verification passed`
           );
         } else if (ev.status === "verifyFailed") {
-          if (this._progress) {
-            this._progress.report({
-              message: `Step ${stepNumber}: ❌ Failed - ${
-                ev.error || "verification failed"
-              }`,
-            });
-          }
+          this._progress.report({
+            message: `Step ${stepNumber}: ❌ Failed - ${
+              ev.error || "verification failed"
+            }`,
+          });
           vscode.window.showErrorMessage(
             `❌ Step ${stepNumber} verification failed: ${
               ev.error || "verification failed"

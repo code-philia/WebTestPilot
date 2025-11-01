@@ -18,7 +18,6 @@ interface TestExecution {
     endTime?: number;
     currentStep: number;
     totalSteps: number;
-    stepsWithVerifications: Set<number>; // Steps that have verification checks
     verifiedSteps: Set<number>; // Steps that passed verification
     completedSteps: Set<number>; // All steps that completed (with or without verification)
     result?: {
@@ -254,7 +253,6 @@ export class ParallelTestPanel {
                 startTime: Date.now(),
                 currentStep: 0,
                 totalSteps: testData.actions ? testData.actions.length : 0,
-                stepsWithVerifications: new Set<number>(),
                 verifiedSteps: new Set<number>(),
                 completedSteps: new Set<number>()
             };
@@ -482,91 +480,49 @@ export class ParallelTestPanel {
         for (const ev of events) {
             if (ev.type === 'step') {
                 const stepNumber = ev.step;
+                const payload = {
+                    type: 'stepUpdate',
+                    testId: testId,
+                    stepNumber: stepNumber,
+                    action: ev.action,
+                    status: ev.status,
+                    message: ''
+                };
+
                 if (ev.status === 'started') {
                     execution.currentStep = stepNumber;
-
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        action: ev.action,
-                        status: 'executing',
-                        message: `Step ${stepNumber}: ${ev.action || ''}`
-                    });
+                    payload.message = `Step ${stepNumber}: ${ev.action || ''}`;
                 } else if (ev.status === 'passed') {
                     execution.completedSteps.add(stepNumber);
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        status: 'passed',
-                        message: `✅ Step ${stepNumber} passed`
-                    });
+                    payload.message = `✅ Step ${stepNumber} passed`;
                 } else if (ev.status === 'failed') {
                     execution.completedSteps.add(stepNumber);
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        status: 'failed',
-                        message: `❌ Step ${stepNumber} failed: ${ev.error || ''}`,
-                        error: ev.error
-                    });
+                    payload.message = `❌ Step ${stepNumber} failed: ${ev.error || ''}`;
                 }
+                
+                this._panel.webview.postMessage(payload);
             } else if (ev.type === 'verification') {
                 const stepNumber = ev.step;
+                const payload = {
+                    type: 'stepUpdate',
+                    testId: testId,
+                    stepNumber: stepNumber,
+                    status: ev.status,
+                    message: '',
+                    error: ''
+                };
+
                 if (ev.status === 'verifying') {
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        status: 'verifying',
-                        message: `Step ${stepNumber}: Verifying - ${ev.expectation || ''}`
-                    });
+                    payload.message = `Step ${stepNumber}: Verifying - ${ev.expectation || ''}`;
+                    this._panel.webview.postMessage(payload);
                 } else if (ev.status === 'verifyPassed') {
-                    execution.stepsWithVerifications.add(stepNumber);
+                    payload.message = `✅ Step ${stepNumber} verification passed`;
+                    this._panel.webview.postMessage(payload);
                     execution.verifiedSteps.add(stepNumber);
-
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        status: 'completed',
-                        message: `✅ Step ${stepNumber} verification passed`
-                    });
-
-                    if (execution.stepsWithVerifications.size > 0 && execution.verifiedSteps.size === execution.stepsWithVerifications.size) {
-                        this._outputChannel.appendLine(`[${testId}] ✅ All ${execution.stepsWithVerifications.size} verifications passed - marking test as PASSED`);
-
-                        this._panel.webview.postMessage({
-                            type: 'testFinished',
-                            testId: testId,
-                            result: {
-                                success: true,
-                                stepsExecuted: execution.totalSteps,
-                                errors: []
-                            },
-                            duration: Date.now() - execution.startTime
-                        });
-
-                        execution.result = {
-                            success: true,
-                            stepsExecuted: execution.totalSteps,
-                            errors: []
-                        };
-                    }
                 } else if (ev.status === 'verifyFailed') {
-                    execution.stepsWithVerifications.add(stepNumber);
-
-                    this._panel.webview.postMessage({
-                        type: 'stepUpdate',
-                        testId: testId,
-                        stepNumber: stepNumber,
-                        status: 'failed',
-                        message: `❌ Step ${stepNumber} verification failed: ${ev.error || ''}`,
-                        error: ev.error
-                    });
-
+                    payload.message = `❌ Step ${stepNumber} verification failed: ${ev.error || ''}`;
+                    payload.error = String(ev.error);
+                    this._panel.webview.postMessage(payload);
                     this._outputChannel.appendLine(`[${testId}] ❌ Test FAILED - verification failed at step ${stepNumber}: ${ev.error || ''}`);
 
                     this._panel.webview.postMessage({
