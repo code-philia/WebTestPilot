@@ -350,7 +350,7 @@ export class ParallelTestPanel {
                 }
 
                 // Parse result
-                let result = { success: false, stepsExecuted: 0, errors: [] as string[] };
+                let result = { success: true, stepsExecuted: 0, errors: [] as string[] };
                 
                 if (signal === 'SIGTERM' || signal === 'SIGKILL') {
                     this._outputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
@@ -360,6 +360,12 @@ export class ParallelTestPanel {
                         result = JSON.parse(jsonMatch[0]);
                     }
                     this._outputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
+                    this._panel.webview.postMessage({
+                        type: 'testFinished',
+                        testId: test.id,
+                        result: result,
+                        duration: execution.endTime - execution.startTime
+                    });
                 } else {
                     result.success = false;
                     
@@ -386,27 +392,7 @@ export class ParallelTestPanel {
                     execution.result = result;
                 }
 
-                // Store final logs and close individual output channel
-                const testLogs = this._testLogs.get(test.id);
-                const outputChannel = this._testOutputChannels.get(test.id);
-                if (testLogs && outputChannel) {
-                    outputChannel.appendLine('');
-                    outputChannel.appendLine('='.repeat(60));
-                    outputChannel.appendLine('FINAL TEST SUMMARY');
-                    outputChannel.appendLine('='.repeat(60));
-                    outputChannel.appendLine(`Total stdout lines: ${testLogs.stdout.length}`);
-                    outputChannel.appendLine(`Total stderr lines: ${testLogs.stderr.length}`);
-                    if (execution.result && execution.result.errors && execution.result.errors.length > 0) {
-                        outputChannel.appendLine('Errors encountered:');
-                        execution.result.errors.forEach((error, index) => {
-                            outputChannel.appendLine(`  ${index + 1}. ${error}`);
-                        });
-                    }
-                    outputChannel.appendLine('='.repeat(60));
-                }
-
                 // Only send testFinished if not already sent by verification handlers
-                // (verification handlers set execution.result)
                 if (!execution.result || execution.result !== result) {
                     // Update UI
                     this._panel.webview.postMessage({
