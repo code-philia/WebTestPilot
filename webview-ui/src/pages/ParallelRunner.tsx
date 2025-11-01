@@ -1,0 +1,326 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { useVSCode } from "../hooks/useVSCode";
+import { TestCard, TestCardData } from "../components/TestCard";
+import { TestSummary, SummaryData } from "../components/TestSummary";
+import { getCurrentTimeString, parseStepNumber } from "../utilities/formatters";
+
+export const ParallelRunner: React.FC = () => {
+  const { postMessage, onMessage } = useVSCode();
+  const [folderName, setFolderName] = useState<string>("");
+  const [connectionStatus, setConnectionStatus] = useState<string>(
+    "Connecting to browser..."
+  );
+  const [tests, setTests] = useState<Map<string, TestCardData>>(new Map());
+  const [visibleLogs, setVisibleLogs] = useState<Set<string>>(new Set());
+  const [summary, setSummary] = useState<SummaryData>({
+    total: 0,
+    running: 0,
+    passed: 0,
+    failed: 0,
+    stopped: 0,
+  });
+
+  // Notify extension that webview is ready
+  useEffect(() => {
+    postMessage("ready");
+  }, [postMessage]);
+
+  // Calculate summary whenever tests change
+  useEffect(() => {
+    const testArray = Array.from(tests.values());
+    setSummary({
+      total: testArray.length,
+      running: testArray.filter((t) => t.status === "running").length,
+      passed: testArray.filter((t) => t.status === "passed").length,
+      failed: testArray.filter((t) => t.status === "failed").length,
+      stopped: testArray.filter((t) => t.status === "stopped").length,
+    });
+  }, [tests]);
+
+  // Listen for messages from extension
+  useEffect(() => {
+    return onMessage((message: any) => {
+      if (!message || !message.type) return;
+
+      switch (message.type) {
+        case "connected":
+          setConnectionStatus("Connected to browser ✓");
+          if (message.folderName) {
+            setFolderName(message.folderName);
+          }
+          break;
+
+        case "error":
+          setConnectionStatus(`Error: ${message.message}`);
+          break;
+
+        case "testStarted":
+          handleTestStarted(message);
+          break;
+
+        case "testFinished":
+          handleTestFinished(message);
+          break;
+
+        case "screenshot":
+          handleScreenshot(message);
+          break;
+
+        case "stepUpdate":
+          handleStepUpdate(message);
+          break;
+
+        case "logMessage":
+          handleLogMessage(message);
+          break;
+
+        case "tabsCleared":
+          setTests(new Map());
+          setVisibleLogs(new Set());
+          break;
+      }
+    });
+  }, [onMessage, tests]);
+
+  const handleTestStarted = useCallback((message: any) => {
+    const testData: TestCardData = {
+      id: message.testId,
+      name: message.testName,
+      url: message.url || "",
+      status: "running",
+      tabIndex: message.tabIndex || 0,
+      currentStep: 0,
+      totalSteps: message.totalSteps || 0,
+      startTime: Date.now(),
+      targetId: message.targetId,
+      logs: [],
+      errors: [],
+    };
+
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      newMap.set(message.testId, testData);
+      return newMap;
+    });
+
+    // Show logs by default for new tests
+    setVisibleLogs((prev) => {
+      const newSet = new Set(prev);
+      newSet.add(message.testId);
+      return newSet;
+    });
+  }, []);
+
+  const handleTestFinished = useCallback((message: any) => {
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      const test = newMap.get(message.testId);
+      if (test) {
+        test.status = message.result?.success ? "passed" : "failed";
+        test.endTime = Date.now();
+        if (message.result?.errors) {
+          test.errors = message.result.errors;
+        }
+        newMap.set(message.testId, test);
+      }
+      return newMap;
+    });
+  }, []);
+
+  const handleScreenshot = useCallback((message: any) => {
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      const test = newMap.get(message.testId);
+      if (test) {
+        test.screenshot = message.data;
+        test.screenshotTimestamp = message.timestamp;
+        test.screenshotUrl = message.url;
+        newMap.set(message.testId, test);
+      }
+      return newMap;
+    });
+  }, []);
+
+  const handleStepUpdate = useCallback((message: any) => {
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      const test = newMap.get(message.testId);
+      if (test) {
+        test.currentStep = message.stepNumber;
+
+        // Add step update to logs
+        const logEntry = {
+          type:
+            message.status === "failed"
+              ? ("stderr" as const)
+              : ("stdout" as const),
+          message:
+            message.message || `Step ${message.stepNumber}: ${message.status}`,
+          time: getCurrentTimeString(),
+        };
+        test.logs = [...(test.logs || []), logEntry];
+
+        // Add errors if step failed
+        if (message.status === "failed" && message.error) {
+          test.errors = [...(test.errors || []), message.error];
+        }
+
+        newMap.set(message.testId, test);
+      }
+      return newMap;
+    });
+  }, []);
+
+  const handleLogMessage = useCallback((message: any) => {
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      const test = newMap.get(message.testId);
+      if (test) {
+        const logEntry = {
+          type: message.logType as "stdout" | "stderr",
+          message: message.message,
+          time: getCurrentTimeString(),
+        };
+        test.logs = [...(test.logs || []), logEntry];
+
+        // Update step counter based on log message
+        const stepNum = parseStepNumber(message.message);
+        if (stepNum !== null && stepNum > test.currentStep) {
+          test.currentStep = stepNum;
+        }
+
+        newMap.set(message.testId, test);
+      }
+      return newMap;
+    });
+  }, []);
+
+  const handleStopTest = useCallback(
+    (testId: string) => {
+      postMessage("stopTest", { testId });
+      setTests((prev) => {
+        const newMap = new Map(prev);
+        const test = newMap.get(testId);
+        if (test) {
+          test.status = "stopped";
+          test.endTime = Date.now();
+          newMap.set(testId, test);
+        }
+        return newMap;
+      });
+    },
+    [postMessage]
+  );
+
+  const handleViewLogs = useCallback(
+    (testId: string, testName: string) => {
+      postMessage("viewLogs", { testId, testName });
+    },
+    [postMessage]
+  );
+
+  const handleToggleLogs = useCallback((testId: string) => {
+    setVisibleLogs((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(testId)) {
+        newSet.delete(testId);
+      } else {
+        newSet.add(testId);
+      }
+      return newSet;
+    });
+  }, []);
+
+  const handleStopAllTests = useCallback(() => {
+    postMessage("stopAll");
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      newMap.forEach((test) => {
+        if (test.status === "running") {
+          test.status = "stopped";
+          test.endTime = Date.now();
+        }
+      });
+      return newMap;
+    });
+  }, [postMessage]);
+
+  const handleClearFinished = useCallback(() => {
+    setTests((prev) => {
+      const newMap = new Map(prev);
+      Array.from(newMap.entries()).forEach(([id, test]) => {
+        if (
+          test.status === "passed" ||
+          test.status === "failed" ||
+          test.status === "stopped"
+        ) {
+          newMap.delete(id);
+          setVisibleLogs((prevLogs) => {
+            const newLogs = new Set(prevLogs);
+            newLogs.delete(id);
+            return newLogs;
+          });
+        }
+      });
+      return newMap;
+    });
+  }, []);
+
+  const handleClearTabs = useCallback(() => {
+    postMessage("clearTabs");
+  }, [postMessage]);
+
+  const testArray = Array.from(tests.values());
+  const hasRunningTests = testArray.some((t) => t.status === "running");
+  const hasFinishedTests = testArray.some(
+    (t) =>
+      t.status === "passed" || t.status === "failed" || t.status === "stopped"
+  );
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <div className="header">
+        <h1>Parallel Tests: {folderName || "Loading..."}</h1>
+        <div>{connectionStatus}</div>
+      </div>
+
+      {testArray.length > 0 && <TestSummary summary={summary} />}
+
+      <div className="controls">
+        <VSCodeButton
+          appearance="secondary"
+          onClick={handleStopAllTests}
+          disabled={!hasRunningTests}
+        >
+          Stop All Tests
+        </VSCodeButton>
+        <VSCodeButton
+          appearance="secondary"
+          onClick={handleClearFinished}
+          disabled={!hasFinishedTests}
+        >
+          Clear Finished
+        </VSCodeButton>
+        <VSCodeButton appearance="secondary" onClick={handleClearTabs}>
+          Clear All Tabs
+        </VSCodeButton>
+      </div>
+
+      <div className="test-grid">
+        {testArray.map((test) => (
+          <TestCard
+            key={test.id}
+            test={test}
+            onStop={handleStopTest}
+            onViewLogs={handleViewLogs}
+            onToggleLogs={handleToggleLogs}
+            isLogsVisible={visibleLogs.has(test.id)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ParallelRunner;

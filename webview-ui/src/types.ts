@@ -49,4 +49,9 @@ export type WebviewMessage =
   | { command: 'saveAndRun'; data: SavePayload }
   | { command: 'updateTest'; data: Partial<TestEditorData> }
   | { command: 'close' }
-  | { command: 'showError'; text: string };
+  | { command: 'showError'; text: string }
+  | { command: 'ready' }
+  | { command: 'stopTest'; testId: string }
+  | { command: 'stopAll' }
+  | { command: 'viewLogs'; testId: string; testName: string }
+  | { command: 'clearTabs' };

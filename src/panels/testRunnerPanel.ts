@@ -361,7 +361,7 @@ export class TestRunnerPanel {
               {
                 env: {
                   ...process.env,
-                  BAML_LOG: "warn",
+                  BAML_LOG: "info",
                 },
               }
             );

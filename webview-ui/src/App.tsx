@@ -2,6 +2,7 @@ import React from "react";
 import { TestEditor } from "./pages/TestEditor";
 import "./App.css";
 import SingleRunner from "./pages/SingleRunner";
+import ParallelRunner from "./pages/ParallelRunner";
 
 // Global window interface for page routing
 declare global {
@@ -22,10 +23,11 @@ const App: React.FC = () => {
       return <TestEditor />;
     case "singleRunner":
       return <SingleRunner />;
+    case "parallelRunner":
+      return <ParallelRunner />;
 
     // Future pages will be added here:
     // case 'import': return <Import />;
-    // case 'parallelRunner': return <ParallelRunner />;
 
     default:
       return (

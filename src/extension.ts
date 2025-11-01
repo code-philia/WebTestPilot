@@ -220,8 +220,9 @@ export function activate(context: vscode.ExtensionContext) {
 		);
 
 		if (result === 'Run Parallel') {
-			// Store tree data provider globally for parallel runner access
+			// Store tree data provider and extensionUri globally for parallel runner access
 			(global as any).webTestPilotTreeDataProvider = treeDataProvider;
+			(global as any).extensionUri = context.extensionUri;
 			
 			// Start parallel test runner
 			await ParallelTestPanel.createOrShow(folderItem, workspaceRoot);

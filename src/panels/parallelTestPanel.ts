@@ -1,10 +1,11 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as fs from 'fs/promises';
-import { chromium, type Browser, type BrowserContext, type Page } from 'playwright-core';
-import { TestItem, FolderItem } from '../models';
-import { WorkspaceRootService } from '../workspaceRootService.js';
 import { spawn } from 'child_process';
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import { Browser, BrowserContext, chromium, Page } from 'playwright-core';
+import * as vscode from 'vscode';
+import { FolderItem, TestItem } from '../models';
+import { loadWebviewHtml } from '../utils/webviewLoader';
+import { WorkspaceRootService } from '../workspaceRootService';
 
 
 
@@ -50,16 +51,15 @@ export class ParallelTestPanel {
     private constructor(
         panel: vscode.WebviewPanel,
         folder: FolderItem,
-        cdpEndpoint: string
+        cdpEndpoint: string,
+        extensionUri: vscode.Uri
     ) {
         this._panel = panel;
         this._folder = folder;
         this._outputChannel = vscode.window.createOutputChannel('WebTestPilot Parallel Runner');
 
-        // Set the webview's initial html content
-        this._getHtmlForWebview().then(html => {
-            this._panel.webview.html = html;
-        });
+        // Set the webview's initial html content using React UI
+        this._panel.webview.html = this._getHtmlForWebview(extensionUri);
 
         // Connect to browser and setup parallel execution
         this._connectToBrowser(cdpEndpoint);
@@ -70,7 +70,7 @@ export class ParallelTestPanel {
         // Handle messages from the webview
         this._panel.webview.onDidReceiveMessage(
             message => {
-                switch (message.type) {
+                switch (message.command) {
                     case 'ready':
                         console.log('Parallel runner webview ready');
                         return;
@@ -83,11 +83,8 @@ export class ParallelTestPanel {
                     case 'viewLogs':
                         this._showTestLogs(message.testId, message.testName);
                         return;
-                    case 'confirmClearTabs':
-                        this._confirmClearAllTabs();
-                        return;
                     case 'clearTabs':
-                        this._clearAllTabs();
+                        this._confirmClearAllTabs();
                         return;
                 }
             },
@@ -280,7 +277,7 @@ export class ParallelTestPanel {
             ], {
                 env: {
                     ...process.env,
-                    BAML_LOG: 'warn'
+                    BAML_LOG: 'info'
                 }
             });
 
@@ -700,7 +697,7 @@ export class ParallelTestPanel {
         this._outputChannel.appendLine('Clearing all browser tabs...');
         
         if (this._context) {
-            this._context.pages().forEach(async (page) => {
+            this._context.pages().forEach(async (page: Page) => {
                 if (!page.isClosed()) {
                     await page.close();
                 }
@@ -746,6 +743,20 @@ export class ParallelTestPanel {
             ParallelTestPanel.currentPanel.dispose();
         }
 
+        // Get extension URI from the first workspace folder
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
+        }
+
+        // Get the extension context to access extensionUri
+        const extensionUri = (global as any).extensionUri as vscode.Uri;
+        if (!extensionUri) {
+            vscode.window.showErrorMessage('Extension URI not available');
+            return;
+        }
+
         // Create a new panel for parallel execution
         const panel = vscode.window.createWebviewPanel(
             'parallelTestRunner',
@@ -753,12 +764,16 @@ export class ParallelTestPanel {
             vscode.ViewColumn.One,
             {
                 enableScripts: true,
-                retainContextWhenHidden: true
+                retainContextWhenHidden: true,
+                localResourceRoots: [
+                    vscode.Uri.joinPath(extensionUri, 'webview-ui', 'dist'),
+                    extensionUri,
+                ],
             }
         );
 
         const cdpEndpoint = vscode.workspace.getConfiguration('webtestpilot').get<string>('cdpEndpoint') || 'http://localhost:9222';
-        ParallelTestPanel.currentPanel = new ParallelTestPanel(panel, folder, cdpEndpoint);
+        ParallelTestPanel.currentPanel = new ParallelTestPanel(panel, folder, cdpEndpoint, extensionUri);
 
         // Start tests after a short delay to allow UI to initialize
         setTimeout(() => {
@@ -767,15 +782,10 @@ export class ParallelTestPanel {
     }
 
     /**
-     * Gets the HTML content for the webview
+     * Gets the HTML content for the webview using React UI
      */
-    private async _getHtmlForWebview(): Promise<string> {
-        const fs = require('fs').promises;
-        const htmlPath = require('path').join(__dirname, 'views', 'parallel-test-runner.html');
-
-        let htmlContent = await fs.readFile(htmlPath, 'utf-8');
-        htmlContent = htmlContent.replace(/\{\{FOLDER_NAME\}\}/g, this._folder.name);
-        return htmlContent;
+    private _getHtmlForWebview(extensionUri: vscode.Uri): string {
+        return loadWebviewHtml(extensionUri, this._panel.webview, 'parallelRunner');
     }
 
     /**
