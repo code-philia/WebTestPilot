@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useLingui } from "@lingui/react/macro";
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import React, { useEffect, useState } from "react";
 import { formatDuration, formatTimestamp } from "../utilities/formatters";
 
 export interface TestCardData {
@@ -39,6 +40,7 @@ export const TestCard: React.FC<TestCardProps> = ({
   onToggleLogs,
   isLogsVisible,
 }) => {
+  const { t } = useLingui();
   const [duration, setDuration] = useState(0);
 
   // Update duration timer
@@ -78,17 +80,24 @@ export const TestCard: React.FC<TestCardProps> = ({
       </div>
 
       {test.targetId && (
-        <div className="tab-info">Browser Tab: {test.targetId.slice(0, 8)}</div>
+        <div className="tab-info">
+          {t`Browser Tab:`} {test.targetId.slice(0, 8)}
+        </div>
       )}
 
       {test.url && <div className="url-info">{test.url}</div>}
 
       <div className="test-info">
         <span>
-          Steps: {test.currentStep}/{test.totalSteps}
+          {t`Steps:`} {test.currentStep}/{test.totalSteps}
         </span>
-        <span>Duration: {formatDuration(duration)}</span>
-        <span>Tab #{test.tabIndex}</span>
+        <span>
+          {t`Duration:`} {formatDuration(duration)}
+        </span>
+        <span>
+          {t`Tab #`}
+          {test.tabIndex}
+        </span>
       </div>
 
       {test.screenshot && (
@@ -109,20 +118,20 @@ export const TestCard: React.FC<TestCardProps> = ({
       <div className="test-actions">
         {test.status === "running" && (
           <VSCodeButton appearance="secondary" onClick={() => onStop(test.id)}>
-            Stop
+            {t`Stop`}
           </VSCodeButton>
         )}
         <VSCodeButton
           appearance="secondary"
           onClick={() => onToggleLogs(test.id)}
         >
-          {isLogsVisible ? "Hide" : "Show"} Logs
+          {isLogsVisible ? t`Hide` : t`Show`} {t`Logs`}
         </VSCodeButton>
         <VSCodeButton
           appearance="secondary"
           onClick={() => onViewLogs(test.id, test.name)}
         >
-          View Full Logs
+          {t`View Full Logs`}
         </VSCodeButton>
       </div>
 

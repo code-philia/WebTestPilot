@@ -8,6 +8,7 @@ import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
 import { useVSCode } from "../hooks/useVSCode";
 import { ActionList } from "../components/ActionList";
 import type { TestAction, TestEditorData, SavePayload } from "../types";
+import { useLingui } from "@lingui/react/macro";
 
 const DEFAULT_DATA: TestEditorData = {
   id: undefined,
@@ -29,6 +30,7 @@ function sanitizePayload(data: TestEditorData): SavePayload {
 }
 
 export const TestEditor: React.FC = () => {
+  const { t } = useLingui();
   const { postMessage, onMessage, getState, setState } = useVSCode();
   const [testData, setTestData] = useState<TestEditorData>(
     () => getState() || DEFAULT_DATA
@@ -66,8 +68,8 @@ export const TestEditor: React.FC = () => {
   // Update document title
   useEffect(() => {
     document.title = testData.name
-      ? `Edit Test: ${testData.name}`
-      : "Edit Test";
+      ? t`Edit Test: ${testData.name}`
+      : t`Edit Test`;
   }, [testData.name]);
 
   // Event handlers
@@ -132,7 +134,7 @@ export const TestEditor: React.FC = () => {
     const payload = sanitizePayload(testData);
 
     if (!payload.name) {
-      postMessage("showError", { text: "Test name is required" });
+      postMessage("showError", { text: t`Test name is required` });
       return;
     }
 
@@ -145,7 +147,7 @@ export const TestEditor: React.FC = () => {
 
     if (payload.actions.length === 0) {
       postMessage("showError", {
-        text: "Cannot run test: No actions defined. Please add test actions before running.",
+        text: t`Cannot run test: No actions defined. Please add test actions before running.`,
       });
       return;
     }
@@ -156,7 +158,7 @@ export const TestEditor: React.FC = () => {
 
     if (hasEmptyActions) {
       postMessage("showError", {
-        text: "Cannot run test: Some actions are empty. Please fill in all action descriptions.",
+        text: t`Cannot run test: Some actions are empty. Please fill in all action descriptions.`,
       });
       return;
     }
@@ -169,44 +171,44 @@ export const TestEditor: React.FC = () => {
     <main className="test-editor">
       <header className="editor-header">
         <div className="editor-title">
-          {testData.name ? `Edit Test: ${testData.name}` : "Edit Test"}
+          {testData.name ? t`Edit Test: ${testData.name}` : t`Edit Test`}
         </div>
         <div className="header-actions">
           <VSCodeButton appearance="primary" onClick={handleSave}>
-            Save Test
+            {t`Save Test`}
           </VSCodeButton>
           <VSCodeButton appearance="secondary" onClick={handleRunTest}>
-            Run Test
+            {t`Run Test`}
           </VSCodeButton>
           <VSCodeButton appearance="secondary" onClick={handleClose}>
-            Close
+            {t`Close`}
           </VSCodeButton>
         </div>
       </header>
 
       <section className="editor-section">
         <label className="field-label" htmlFor="test-name">
-          Test Name
+          {t`Test Name`}
         </label>
         <input
           id="test-name"
           className="text-input"
           value={testData.name}
           onChange={handleNameChange}
-          placeholder="My Test"
+          placeholder={t`My Test`}
         />
       </section>
 
       <section className="editor-section">
         <label className="field-label" htmlFor="test-url">
-          URL
+          {t`URL`}
         </label>
         <input
           id="test-url"
           className="text-input"
           value={testData.url}
           onChange={handleUrlChange}
-          placeholder="https://example.com"
+          placeholder={t`https://example.com`}
         />
       </section>
 

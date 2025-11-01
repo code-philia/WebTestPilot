@@ -1,6 +1,7 @@
 import React, { type ChangeEvent } from "react";
 import type { TestAction } from "../types";
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { useLingui } from "@lingui/react/macro";
 
 interface ActionListProps {
   actions: TestAction[];
@@ -19,16 +20,18 @@ export const ActionList: React.FC<ActionListProps> = ({
   onRemoveAction,
   onAddAction,
 }) => {
+  const { t } = useLingui();
+
   return (
     <section className="editor-section actions-section">
       <div className="section-header">
-        <h3>Actions</h3>
-        <VSCodeButton onClick={onAddAction}>Add Action</VSCodeButton>
+        <h3>{t`Actions`}</h3>
+        <VSCodeButton onClick={onAddAction}>{t`Add Action`}</VSCodeButton>
       </div>
 
       {actions.length === 0 ? (
         <div className="empty-state">
-          No actions defined. Click "Add Action" to get started.
+          {t`No actions defined. Click "Add Action" to get started.`}
         </div>
       ) : (
         <div className="actions-list">
@@ -42,7 +45,7 @@ export const ActionList: React.FC<ActionListProps> = ({
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     onActionChange(index, "action", e.target.value)
                   }
-                  placeholder="Action"
+                  placeholder={t`Action`}
                 />
                 <button
                   className="icon-button"
@@ -60,7 +63,7 @@ export const ActionList: React.FC<ActionListProps> = ({
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     onActionChange(index, "expectedResult", e.target.value)
                   }
-                  placeholder="Expected result"
+                  placeholder={t`Expected result`}
                 />
               </div>
             </div>

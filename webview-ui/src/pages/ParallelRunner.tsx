@@ -4,12 +4,14 @@ import { useVSCode } from "../hooks/useVSCode";
 import { TestCard, TestCardData } from "../components/TestCard";
 import { TestSummary, SummaryData } from "../components/TestSummary";
 import { getCurrentTimeString, parseStepNumber } from "../utilities/formatters";
+import { useLingui } from "@lingui/react/macro";
 
 export const ParallelRunner: React.FC = () => {
+  const { t } = useLingui();
   const { postMessage, onMessage } = useVSCode();
   const [folderName, setFolderName] = useState<string>("");
   const [connectionStatus, setConnectionStatus] = useState<string>(
-    "Connecting to browser..."
+    t`Connecting to browser...`
   );
   const [tests, setTests] = useState<Map<string, TestCardData>>(new Map());
   const [visibleLogs, setVisibleLogs] = useState<Set<string>>(new Set());
@@ -45,7 +47,7 @@ export const ParallelRunner: React.FC = () => {
 
       switch (message.type) {
         case "connected":
-          setConnectionStatus("Connected to browser ✓");
+          setConnectionStatus(t`Connected to browser ✓`);
           if (message.folderName) {
             setFolderName(message.folderName);
           }
@@ -281,7 +283,9 @@ export const ParallelRunner: React.FC = () => {
   return (
     <div style={{ padding: "20px" }}>
       <div className="header">
-        <h1>Parallel Tests: {folderName || "Loading..."}</h1>
+        <h1>
+          {t`Parallel Tests:`} {folderName || t`Loading...`}
+        </h1>
         <div>{connectionStatus}</div>
       </div>
 
@@ -293,17 +297,17 @@ export const ParallelRunner: React.FC = () => {
           onClick={handleStopAllTests}
           disabled={!hasRunningTests}
         >
-          Stop All Tests
+          {t`Stop All Tests`}
         </VSCodeButton>
         <VSCodeButton
           appearance="secondary"
           onClick={handleClearFinished}
           disabled={!hasFinishedTests}
         >
-          Clear Finished
+          {t`Clear Finished`}
         </VSCodeButton>
         <VSCodeButton appearance="secondary" onClick={handleClearTabs}>
-          Clear All Tabs
+          {t`Clear All Tabs`}
         </VSCodeButton>
       </div>
 

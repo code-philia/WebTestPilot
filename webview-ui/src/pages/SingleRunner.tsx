@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useVSCode } from "../hooks/useVSCode";
 import "../App.css";
+import { useLingui } from "@lingui/react/macro";
 
 export const SingleRunner: React.FC = () => {
+  const { t } = useLingui();
   const { postMessage, onMessage } = useVSCode();
-  const [status, setStatus] = useState<string>("Connecting to browser...");
+  const [status, setStatus] = useState<string>(t`Connecting to browser...`);
   const [url, setUrl] = useState<string>("-");
   const [footerText, setFooterText] = useState<string>(
-    "Waiting for connection..."
+    t`Waiting for connection...`
   );
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,10 +29,10 @@ export const SingleRunner: React.FC = () => {
       const type = message?.type || message?.command;
       switch (type) {
         case "connected":
-          setStatus("🟢 Connected");
+          setStatus(t`🟢 Connected`);
           setLoading(false);
           setUrl(message.url || "about:blank");
-          setFooterText("Streaming live from remote browser");
+          setFooterText(t`Streaming live from remote browser`);
           break;
         case "screenshot":
           if (message.data) {
@@ -62,22 +64,22 @@ export const SingleRunner: React.FC = () => {
         case "testStarted":
           setShowStop(true);
           setStopDisabled(false);
-          setFooterText("Test running... Click Stop to cancel");
+          setFooterText(t`Test running... Click Stop to cancel`);
           break;
         case "testFinished":
           setShowStop(false);
           setStopDisabled(false);
-          setFooterText("Test finished");
+          setFooterText(t`Test finished`);
           break;
         case "testStopped":
           setShowStop(false);
           setStopDisabled(false);
-          setFooterText("Test stopped by user");
+          setFooterText(t`Test stopped by user`);
           break;
         case "error":
           setLoading(false);
-          setFooterText("Connection failed");
-          setStatus("🔴 Disconnected");
+          setFooterText(t`Connection failed`);
+          setStatus(t`🔴 Disconnected`);
           // optionally display message
           break;
         default:
@@ -98,7 +100,9 @@ export const SingleRunner: React.FC = () => {
     <div className="live-browser-root">
       <div className="header">
         <div>
-          <div className="title">🔴 Live</div>
+          <div className="title">
+            {t`🔴 Live`}
+          </div>
           <div className="status">{status}</div>
         </div>
         <div className="controls">
@@ -108,7 +112,7 @@ export const SingleRunner: React.FC = () => {
               onClick={handleStop}
               disabled={stopDisabled}
             >
-              ⏹️ {stopDisabled ? "Stopping..." : "Stop Test"}
+              ⏹️ {stopDisabled ? t`Stopping...` : t`Stop Test`}
             </button>
           )}
           <div className="url-bar">{url}</div>
@@ -117,13 +121,15 @@ export const SingleRunner: React.FC = () => {
 
       <div className="content">
         {loading && (
-          <div className="loading">Connecting to remote browser...</div>
+          <div className="loading">
+            {t`Connecting to remote browser...`}
+          </div>
         )}
         {screenshot && (
           <img
             id="screenshot"
             src={screenshot}
-            alt="Live screenshot"
+            alt={t`Live screenshot`}
             style={{
               maxWidth: "100%",
               maxHeight: "100%",

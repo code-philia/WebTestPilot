@@ -26,7 +26,7 @@ template_string PostconditionIntro() #"
     # Reminder
     - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
     - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
-    - Assertions should have insightful messages with it, i.e. "Message shown is not ...", ... be specific.
+    - Assertions should have insightful, helpful messages with it, i.e. "Message shown is not ...", ... be specific.
 "#
 
 template_string PostconditionExample() #"

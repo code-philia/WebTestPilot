@@ -1,0 +1,231 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-11-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/pages/SingleRunner.tsx:82
+msgid "🔴 Disconnected"
+msgstr "🔴 已断开连接"
+
+#: src/pages/SingleRunner.tsx:104
+msgid "🔴 Live"
+msgstr "🔴 直播"
+
+#: src/pages/SingleRunner.tsx:32
+msgid "🟢 Connected"
+msgstr "🟢 已连接"
+
+#: src/components/ActionList.tsx:48
+msgid "Action"
+msgstr "操作"
+
+#: src/components/ActionList.tsx:28
+msgid "Actions"
+msgstr "操作"
+
+#: src/components/ActionList.tsx:29
+msgid "Add Action"
+msgstr "添加操作"
+
+#: src/components/TestCard.tsx:84
+msgid "Browser Tab:"
+msgstr "浏览器标签页："
+
+#: src/pages/TestEditor.tsx:150
+msgid "Cannot run test: No actions defined. Please add test actions before running."
+msgstr "无法运行测试：未定义任何操作。请先添加测试操作。"
+
+#: src/pages/TestEditor.tsx:161
+msgid "Cannot run test: Some actions are empty. Please fill in all action descriptions."
+msgstr "无法运行测试：存在空的操作。请填写所有操作描述。"
+
+#: src/pages/ParallelRunner.tsx:310
+msgid "Clear All Tabs"
+msgstr "清除所有标签页"
+
+#: src/pages/ParallelRunner.tsx:307
+msgid "Clear Finished"
+msgstr "清除已完成"
+
+#: src/pages/TestEditor.tsx:184
+msgid "Close"
+msgstr "关闭"
+
+#: src/pages/ParallelRunner.tsx:50
+msgid "Connected to browser ✓"
+msgstr "已连接到浏览器 ✓"
+
+#: src/pages/ParallelRunner.tsx:14
+#: src/pages/SingleRunner.tsx:9
+msgid "Connecting to browser..."
+msgstr "正在连接到浏览器…"
+
+#: src/pages/SingleRunner.tsx:125
+msgid "Connecting to remote browser..."
+msgstr "正在连接到远程浏览器…"
+
+#: src/pages/SingleRunner.tsx:81
+msgid "Connection failed"
+msgstr "连接失败"
+
+#: src/components/TestCard.tsx:95
+msgid "Duration:"
+msgstr "持续时间："
+
+#: src/pages/TestEditor.tsx:72
+#: src/pages/TestEditor.tsx:174
+msgid "Edit Test"
+msgstr "编辑测试"
+
+#. placeholder {0}: testData.name
+#: src/pages/TestEditor.tsx:71
+#: src/pages/TestEditor.tsx:174
+msgid "Edit Test: {0}"
+msgstr "编辑测试：{0}"
+
+#: src/components/ActionList.tsx:66
+msgid "Expected result"
+msgstr "预期结果"
+
+#: src/components/TestSummary.tsx:34
+msgid "Failed"
+msgstr "失败"
+
+#: src/components/TestCard.tsx:128
+msgid "Hide"
+msgstr "隐藏"
+
+#: src/pages/TestEditor.tsx:211
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: src/pages/SingleRunner.tsx:132
+msgid "Live screenshot"
+msgstr "实时截图"
+
+#: src/App.tsx:37
+#: src/pages/ParallelRunner.tsx:287
+msgid "Loading..."
+msgstr "加载中..."
+
+#: src/components/TestCard.tsx:128
+msgid "Logs"
+msgstr "日志"
+
+#: src/pages/TestEditor.tsx:198
+msgid "My Test"
+msgstr "我的测试"
+
+#: src/components/ActionList.tsx:34
+msgid "No actions defined. Click \"Add Action\" to get started."
+msgstr "未定义任何操作。点击“添加操作”开始。"
+
+#: src/App.tsx:61
+msgid "Page \"{page}\" not found"
+msgstr "页面“{page}”未找到"
+
+#: src/pages/ParallelRunner.tsx:287
+msgid "Parallel Tests:"
+msgstr "并行测试："
+
+#: src/components/TestSummary.tsx:30
+msgid "Passed"
+msgstr "通过"
+
+#: src/pages/TestEditor.tsx:181
+msgid "Run Test"
+msgstr "运行测试"
+
+#: src/components/TestSummary.tsx:26
+msgid "Running"
+msgstr "运行中"
+
+#: src/pages/TestEditor.tsx:178
+msgid "Save Test"
+msgstr "保存测试"
+
+#: src/components/TestCard.tsx:128
+msgid "Show"
+msgstr "显示"
+
+#: src/components/TestCard.tsx:92
+msgid "Steps:"
+msgstr "步骤："
+
+#: src/components/TestCard.tsx:121
+msgid "Stop"
+msgstr "停止"
+
+#: src/pages/ParallelRunner.tsx:300
+msgid "Stop All Tests"
+msgstr "停止所有测试"
+
+#: src/pages/SingleRunner.tsx:115
+msgid "Stop Test"
+msgstr "停止测试"
+
+#: src/components/TestSummary.tsx:38
+msgid "Stopped"
+msgstr "已停止"
+
+#: src/pages/SingleRunner.tsx:115
+msgid "Stopping..."
+msgstr "正在停止…"
+
+#: src/pages/SingleRunner.tsx:35
+msgid "Streaming live from remote browser"
+msgstr "正在从远程浏览器进行实时流"
+
+#: src/components/TestCard.tsx:98
+msgid "Tab #"
+msgstr "标签页 #"
+
+#: src/pages/SingleRunner.tsx:72
+msgid "Test finished"
+msgstr "测试完成"
+
+#: src/pages/TestEditor.tsx:191
+msgid "Test Name"
+msgstr "测试名称"
+
+#: src/pages/TestEditor.tsx:137
+msgid "Test name is required"
+msgstr "测试名称为必填项"
+
+#: src/pages/SingleRunner.tsx:67
+msgid "Test running... Click Stop to cancel"
+msgstr "测试正在运行… 点击停止以取消"
+
+#: src/pages/SingleRunner.tsx:77
+msgid "Test stopped by user"
+msgstr "测试被用户停止"
+
+#: src/components/TestSummary.tsx:22
+msgid "Total Tests"
+msgstr "测试总数"
+
+#: src/App.tsx:60
+msgid "Unknown Page"
+msgstr "未知页面"
+
+#: src/pages/TestEditor.tsx:204
+msgid "URL"
+msgstr "URL"
+
+#: src/components/TestCard.tsx:134
+msgid "View Full Logs"
+msgstr "查看完整日志"
+
+#: src/pages/SingleRunner.tsx:12
+msgid "Waiting for connection..."
+msgstr "等待连接…"
