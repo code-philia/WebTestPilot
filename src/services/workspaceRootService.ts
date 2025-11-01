@@ -26,6 +26,6 @@ export class WorkspaceRootService {
     public static async setWorkspaceRoot(rootPath: string): Promise<void> {
         const config = vscode.workspace.getConfiguration('webtestpilot');
         await config.update('workspaceRoot', rootPath, vscode.ConfigurationTarget.Global);
-        vscode.window.showInformationMessage(`WebTestPilot workspace root set to: ${rootPath}`);
+        vscode.window.showInformationMessage(`Workspace root: ${rootPath}`);
     }
 }

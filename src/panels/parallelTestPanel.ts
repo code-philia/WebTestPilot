@@ -6,8 +6,7 @@ import * as vscode from 'vscode';
 import { FolderItem, TestItem } from '../models';
 import { loadWebviewHtml } from '../utils/webviewLoader';
 import { WorkspaceRootService } from '../services/workspaceRootService';
-
-
+import { parseLogEvents } from '../utils/logParser';
 
 interface TestExecution {
     testItem: TestItem;
@@ -130,7 +129,7 @@ export class ParallelTestPanel {
             // Wait for context to be fully initialized
             await new Promise(resolve => setTimeout(resolve, 500));
 
-            vscode.window.showInformationMessage(`✅ Connected! Ready for parallel test execution`);
+            vscode.window.showInformationMessage(`Connected! Ready for parallel test execution`);
 
             // Send initial connection status
             this._panel.webview.postMessage({
@@ -200,6 +199,7 @@ export class ParallelTestPanel {
         
         this._outputChannel.appendLine('\nAll test processes started sequentially');
     }
+
 
     /**
      * Starts a single test execution
@@ -374,6 +374,13 @@ export class ParallelTestPanel {
                         result.errors = [stderrData || `Process exited with code ${code}`];
                         this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with code ${code}`);
                     }
+
+                    this._panel.webview.postMessage({
+                        type: 'testFinished',
+                        testId: test.id,
+                        result: result,
+                        duration: execution.endTime - execution.startTime
+                    });
                 }
 
                 // Only update result if not already set by verification handlers
@@ -423,9 +430,6 @@ export class ParallelTestPanel {
                 };
 
                 this._outputChannel.appendLine(`[${test.name}] ❌ Process error: ${error.message}`);
-                
-                // Keep the page open for inspection - no automatic closing
-                
                 this._panel.webview.postMessage({
                     type: 'testFinished',
                     testId: test.id,
@@ -474,158 +478,125 @@ export class ParallelTestPanel {
             return;
         }
 
-        // Parse step execution: "STEP_N: action description"
-        const stepMatch = text.match(/STEP_(\d+):\s*(.+)/);
-        if (stepMatch) {
-            const stepNumber = parseInt(stepMatch[1]);
-            const action = stepMatch[2].trim();
-            execution.currentStep = stepNumber;
-            
-            // Send step update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                action: action,
-                status: 'executing',
-                message: `Step ${stepNumber}: ${action}`
-            });
-        }
-        
-        // Parse step passed: "STEP_N_PASSED"
-        const stepPassedMatch = text.match(/STEP_(\d+)_PASSED/);
-        if (stepPassedMatch) {
-            const stepNumber = parseInt(stepPassedMatch[1]);
-            
-            // Track completed step (regardless of verification)
-            execution.completedSteps.add(stepNumber);
-            
-            // Send step passed update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                status: 'passed',
-                message: `✅ Step ${stepNumber} passed`
-            });
-        }
-        
-        // Parse step failed: "STEP_N_FAILED: error message"
-        const stepFailedMatch = text.match(/STEP_(\d+)_FAILED:\s*(.+)/);
-        if (stepFailedMatch) {
-            const stepNumber = parseInt(stepFailedMatch[1]);
-            const error = stepFailedMatch[2].trim();
-            
-            // Send step failed update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                status: 'failed',
-                message: `❌ Step ${stepNumber} failed: ${error}`,
-                error: error
-            });
-        }
-        
-        // Parse step verification: "VERIFYING_STEP_N: expectation description"
-        const verifyMatch = text.match(/VERIFYING_STEP_(\d+):\s*(.+)/);
-        if (verifyMatch) {
-            const stepNumber = parseInt(verifyMatch[1]);
-            const expectation = verifyMatch[2].trim();
-            
-            // Send verification update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                status: 'verifying',
-                message: `Step ${stepNumber}: Verifying - ${expectation}`
-            });
-        }
-        
-        // Parse verification passed: "VERIFYING_STEP_N_PASSED"
-        const verifyPassedMatch = text.match(/VERIFYING_STEP_(\d+)_PASSED/);
-        if (verifyPassedMatch) {
-            const stepNumber = parseInt(verifyPassedMatch[1]);
-            
-            // Mark that this step has verification
-            execution.stepsWithVerifications.add(stepNumber);
-            
-            // Track verified steps
-            execution.verifiedSteps.add(stepNumber);
-            
-            // Send verification passed update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                status: 'completed',
-                message: `✅ Step ${stepNumber} verification passed`
-            });
-            
-            // Check if all steps with verifications have been verified (meaning all verifications passed)
-            if (execution.stepsWithVerifications.size > 0 && 
-                execution.verifiedSteps.size === execution.stepsWithVerifications.size) {
-                this._outputChannel.appendLine(`[${testId}] ✅ All ${execution.stepsWithVerifications.size} verifications passed - marking test as PASSED`);
-                
-                // Mark test as passed in UI immediately
-                this._panel.webview.postMessage({
-                    type: 'testFinished',
-                    testId: testId,
-                    result: {
-                        success: true,
-                        stepsExecuted: execution.totalSteps,
-                        errors: []
-                    },
-                    duration: Date.now() - execution.startTime
-                });
-                
-                execution.result = {
-                    success: true,
-                    stepsExecuted: execution.totalSteps,
-                    errors: []
-                };
+        const events = parseLogEvents(text);
+        for (const ev of events) {
+            if (ev.type === 'step') {
+                const stepNumber = ev.step;
+                if (ev.status === 'started') {
+                    execution.currentStep = stepNumber;
+
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        action: ev.action,
+                        status: 'executing',
+                        message: `Step ${stepNumber}: ${ev.action || ''}`
+                    });
+                } else if (ev.status === 'passed') {
+                    execution.completedSteps.add(stepNumber);
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        status: 'passed',
+                        message: `✅ Step ${stepNumber} passed`
+                    });
+                } else if (ev.status === 'failed') {
+                    execution.completedSteps.add(stepNumber);
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        status: 'failed',
+                        message: `❌ Step ${stepNumber} failed: ${ev.error || ''}`,
+                        error: ev.error
+                    });
+                }
+            } else if (ev.type === 'verification') {
+                const stepNumber = ev.step;
+                if (ev.status === 'verifying') {
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        status: 'verifying',
+                        message: `Step ${stepNumber}: Verifying - ${ev.expectation || ''}`
+                    });
+                } else if (ev.status === 'verifyPassed') {
+                    execution.stepsWithVerifications.add(stepNumber);
+                    execution.verifiedSteps.add(stepNumber);
+
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        status: 'completed',
+                        message: `✅ Step ${stepNumber} verification passed`
+                    });
+
+                    if (execution.stepsWithVerifications.size > 0 && execution.verifiedSteps.size === execution.stepsWithVerifications.size) {
+                        this._outputChannel.appendLine(`[${testId}] ✅ All ${execution.stepsWithVerifications.size} verifications passed - marking test as PASSED`);
+
+                        this._panel.webview.postMessage({
+                            type: 'testFinished',
+                            testId: testId,
+                            result: {
+                                success: true,
+                                stepsExecuted: execution.totalSteps,
+                                errors: []
+                            },
+                            duration: Date.now() - execution.startTime
+                        });
+
+                        execution.result = {
+                            success: true,
+                            stepsExecuted: execution.totalSteps,
+                            errors: []
+                        };
+                    }
+                } else if (ev.status === 'verifyFailed') {
+                    execution.stepsWithVerifications.add(stepNumber);
+
+                    this._panel.webview.postMessage({
+                        type: 'stepUpdate',
+                        testId: testId,
+                        stepNumber: stepNumber,
+                        status: 'failed',
+                        message: `❌ Step ${stepNumber} verification failed: ${ev.error || ''}`,
+                        error: ev.error
+                    });
+
+                    this._outputChannel.appendLine(`[${testId}] ❌ Test FAILED - verification failed at step ${stepNumber}: ${ev.error || ''}`);
+
+                    this._panel.webview.postMessage({
+                        type: 'testFinished',
+                        testId: testId,
+                        result: {
+                            success: false,
+                            stepsExecuted: stepNumber,
+                            errors: [ev.error || 'Verification failed']
+                        },
+                        duration: Date.now() - execution.startTime
+                    });
+
+                    execution.result = {
+                        success: false,
+                        stepsExecuted: stepNumber,
+                        errors: [ev.error || 'Verification failed']
+                    };
+                }
+            } else if (ev.type === 'bug') {
+                const tlogs = this._testLogs.get(testId);
+                if (tlogs) {
+                    tlogs.stderr.push(`Bug reported: ${ev.message}`);
+                }
+                const out = this._testOutputChannels.get(testId);
+                if (out) {
+                    out.appendLine(`Bug reported: ${ev.message}`);
+                }
+                this._outputChannel.appendLine(`[${testId}] Bug reported: ${ev.message}`);
             }
-        }
-        
-        // Parse verification failed: "VERIFYING_STEP_N_FAILED: error message"
-        const verifyFailedMatch = text.match(/VERIFYING_STEP_(\d+)_FAILED:\s*(.+)/);
-        if (verifyFailedMatch) {
-            const stepNumber = parseInt(verifyFailedMatch[1]);
-            const error = verifyFailedMatch[2].trim();
-            
-            // Mark that this step has verification
-            execution.stepsWithVerifications.add(stepNumber);
-            
-            // Send verification failed update to UI
-            this._panel.webview.postMessage({
-                type: 'stepUpdate',
-                testId: testId,
-                stepNumber: stepNumber,
-                status: 'failed',
-                message: `❌ Step ${stepNumber} verification failed: ${error}`,
-                error: error
-            });
-            
-            // Mark test as failed immediately in UI
-            this._outputChannel.appendLine(`[${testId}] ❌ Test FAILED - verification failed at step ${stepNumber}: ${error}`);
-            
-            this._panel.webview.postMessage({
-                type: 'testFinished',
-                testId: testId,
-                result: {
-                    success: false,
-                    stepsExecuted: stepNumber,
-                    errors: [error]
-                },
-                duration: Date.now() - execution.startTime
-            });
-            
-            execution.result = {
-                success: false,
-                stepsExecuted: stepNumber,
-                errors: [error]
-            };
         }
     }
 

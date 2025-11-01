@@ -5,6 +5,7 @@ import { loadWebviewHtml } from "../utils/webviewLoader";
 import { chromium } from "playwright-core";
 import { TestItem } from "../models";
 import { WorkspaceRootService } from "../services/workspaceRootService.js";
+import { parseLogEvents } from "../utils/logParser";
 
 /**
  * TestRunnerPanel handles running tests by connecting to a remote browser via CDP
@@ -21,7 +22,12 @@ export class TestRunnerPanel {
   private _screenshotInterval: NodeJS.Timeout | undefined;
   private _pythonProcess: any = undefined;
   private _isTestRunning: boolean = false;
-  private _progress: any = undefined;
+  private _progress:
+    | vscode.Progress<{
+        message?: string;
+        increment?: number;
+      }>
+    | undefined = undefined;
 
   private constructor(
     panel: vscode.WebviewPanel,
@@ -83,7 +89,7 @@ export class TestRunnerPanel {
       this._page = pages.length > 0 ? pages[0] : await context.newPage();
 
       vscode.window.showInformationMessage(
-        `✅ Connected to browser! Streaming live view...`
+        `Connected to browser! Streaming live view...`
       );
 
       // Send initial info
@@ -539,84 +545,57 @@ export class TestRunnerPanel {
    * Parse step updates from Python process output
    */
   private _parseStepUpdates(text: string) {
-    // Parse step execution: "STEP_N: action description"
-    const stepMatch = text.match(/STEP_(\d+):\s*(.+)/);
-    if (stepMatch) {
-      const stepNumber = parseInt(stepMatch[1]);
-      const action = stepMatch[2].trim();
-
-      // Update progress message
-      if (this._progress) {
-        this._progress.report({
-          message: `Step ${stepNumber}: ${action}`,
-        });
+    const events = parseLogEvents(text);
+    for (const ev of events) {
+      if (ev.type === "step") {
+        const stepNumber = ev.step;
+        if (ev.status === "started") {
+          const action = ev.action || "";
+          if (this._progress) {
+            this._progress.report({ message: `Step ${stepNumber}: ${action}` });
+          }
+        } else if (ev.status === "passed") {
+          vscode.window.showInformationMessage(`Step ${stepNumber} passed`);
+        } else if (ev.status === "failed") {
+          vscode.window.showErrorMessage(
+            `❌ Step ${stepNumber} failed: ${ev.error || "error"}`
+          );
+        }
+      } else if (ev.type === "verification") {
+        const stepNumber = ev.step;
+        if (ev.status === "verifying") {
+          const expectation = ev.expectation || "";
+          if (this._progress) {
+            this._progress.report({
+              message: `Step ${stepNumber}: Verifying - ${expectation}`,
+            });
+          }
+        } else if (ev.status === "verifyPassed") {
+          if (this._progress) {
+            this._progress.report({
+              message: `Step ${stepNumber}: ✓ Completed`,
+            });
+          }
+          vscode.window.showInformationMessage(
+            `✅ Step ${stepNumber} verification passed`
+          );
+        } else if (ev.status === "verifyFailed") {
+          if (this._progress) {
+            this._progress.report({
+              message: `Step ${stepNumber}: ❌ Failed - ${
+                ev.error || "verification failed"
+              }`,
+            });
+          }
+          vscode.window.showErrorMessage(
+            `❌ Step ${stepNumber} verification failed: ${
+              ev.error || "verification failed"
+            }`
+          );
+        }
+      } else if (ev.type === "bug") {
+        vscode.window.showErrorMessage(`Bug reported: ${ev.message}`);
       }
-    }
-
-    // Parse step passed: "STEP_N_PASSED"
-    const stepPassedMatch = text.match(/STEP_(\d+)_PASSED/);
-    if (stepPassedMatch) {
-      const stepNumber = parseInt(stepPassedMatch[1]);
-
-      vscode.window.showInformationMessage(`✅ Step ${stepNumber} passed`);
-    }
-
-    // Parse step failed: "STEP_N_FAILED: error message"
-    const stepFailedMatch = text.match(/STEP_(\d+)_FAILED:\s*(.+)/);
-    if (stepFailedMatch) {
-      const stepNumber = parseInt(stepFailedMatch[1]);
-      const error = stepFailedMatch[2].trim();
-
-      vscode.window.showErrorMessage(`❌ Step ${stepNumber} failed: ${error}`);
-    }
-
-    // Parse step verification: "VERIFYING_STEP_N: expectation description"
-    const verifyMatch = text.match(/VERIFYING_STEP_(\d+):\s*(.+)/);
-    if (verifyMatch) {
-      const stepNumber = parseInt(verifyMatch[1]);
-      const expectation = verifyMatch[2].trim();
-
-      // Update progress message
-      if (this._progress) {
-        this._progress.report({
-          message: `Step ${stepNumber}: Verifying - ${expectation}`,
-        });
-      }
-    }
-
-    // Parse verification passed: "VERIFYING_STEP_N_PASSED"
-    const verifyPassedMatch = text.match(/VERIFYING_STEP_(\d+)_PASSED/);
-    if (verifyPassedMatch) {
-      const stepNumber = parseInt(verifyPassedMatch[1]);
-
-      // Update progress message
-      if (this._progress) {
-        this._progress.report({
-          message: `Step ${stepNumber}: ✓ Completed`,
-        });
-      }
-
-      vscode.window.showInformationMessage(
-        `✅ Step ${stepNumber} verification passed`
-      );
-    }
-
-    // Parse verification failed: "VERIFYING_STEP_N_FAILED: error message"
-    const verifyFailedMatch = text.match(/VERIFYING_STEP_(\d+)_FAILED:\s*(.+)/);
-    if (verifyFailedMatch) {
-      const stepNumber = parseInt(verifyFailedMatch[1]);
-      const error = verifyFailedMatch[2].trim();
-
-      // Update progress message
-      if (this._progress) {
-        this._progress.report({
-          message: `Step ${stepNumber}: ❌ Failed - ${error}`,
-        });
-      }
-
-      vscode.window.showErrorMessage(
-        `❌ Step ${stepNumber} verification failed: ${error}`
-      );
     }
   }
 
