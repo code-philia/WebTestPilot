@@ -5,7 +5,7 @@ import { Browser, BrowserContext, chromium, Page } from 'playwright-core';
 import * as vscode from 'vscode';
 import { FolderItem, TestItem } from '../models';
 import { loadWebviewHtml } from '../utils/webviewLoader';
-import { WorkspaceRootService } from '../workspaceRootService';
+import { WorkspaceRootService } from '../services/workspaceRootService';
 
 
 
@@ -18,6 +18,10 @@ interface TestExecution {
     startTime: number;
     endTime?: number;
     currentStep: number;
+    totalSteps: number;
+    stepsWithVerifications: Set<number>; // Steps that have verification checks
+    verifiedSteps: Set<number>; // Steps that passed verification
+    completedSteps: Set<number>; // All steps that completed (with or without verification)
     result?: {
         success: boolean;
         stepsExecuted: number;
@@ -248,7 +252,11 @@ export class ParallelTestPanel {
                 pythonProcess: null,
                 isRunning: true,
                 startTime: Date.now(),
-                currentStep: 0
+                currentStep: 0,
+                totalSteps: testData.actions ? testData.actions.length : 0,
+                stepsWithVerifications: new Set<number>(),
+                verifiedSteps: new Set<number>(),
+                completedSteps: new Set<number>()
             };
             this._executions.set(test.id, execution);
 
@@ -368,7 +376,10 @@ export class ParallelTestPanel {
                     }
                 }
 
-                execution.result = result;
+                // Only update result if not already set by verification handlers
+                if (!execution.result) {
+                    execution.result = result;
+                }
 
                 // Store final logs and close individual output channel
                 const testLogs = this._testLogs.get(test.id);
@@ -389,13 +400,17 @@ export class ParallelTestPanel {
                     outputChannel.appendLine('='.repeat(60));
                 }
 
-                // Update UI
-                this._panel.webview.postMessage({
-                    type: 'testFinished',
-                    testId: test.id,
-                    result: result,
-                    duration: execution.endTime - execution.startTime
-                });
+                // Only send testFinished if not already sent by verification handlers
+                // (verification handlers set execution.result)
+                if (!execution.result || execution.result !== result) {
+                    // Update UI
+                    this._panel.webview.postMessage({
+                        type: 'testFinished',
+                        testId: test.id,
+                        result: execution.result || result,
+                        duration: execution.endTime - execution.startTime
+                    });
+                }
             });
 
             pythonProcess.on('error', (error: Error) => {
@@ -482,6 +497,9 @@ export class ParallelTestPanel {
         if (stepPassedMatch) {
             const stepNumber = parseInt(stepPassedMatch[1]);
             
+            // Track completed step (regardless of verification)
+            execution.completedSteps.add(stepNumber);
+            
             // Send step passed update to UI
             this._panel.webview.postMessage({
                 type: 'stepUpdate',
@@ -530,6 +548,12 @@ export class ParallelTestPanel {
         if (verifyPassedMatch) {
             const stepNumber = parseInt(verifyPassedMatch[1]);
             
+            // Mark that this step has verification
+            execution.stepsWithVerifications.add(stepNumber);
+            
+            // Track verified steps
+            execution.verifiedSteps.add(stepNumber);
+            
             // Send verification passed update to UI
             this._panel.webview.postMessage({
                 type: 'stepUpdate',
@@ -538,6 +562,30 @@ export class ParallelTestPanel {
                 status: 'completed',
                 message: `✅ Step ${stepNumber} verification passed`
             });
+            
+            // Check if all steps with verifications have been verified (meaning all verifications passed)
+            if (execution.stepsWithVerifications.size > 0 && 
+                execution.verifiedSteps.size === execution.stepsWithVerifications.size) {
+                this._outputChannel.appendLine(`[${testId}] ✅ All ${execution.stepsWithVerifications.size} verifications passed - marking test as PASSED`);
+                
+                // Mark test as passed in UI immediately
+                this._panel.webview.postMessage({
+                    type: 'testFinished',
+                    testId: testId,
+                    result: {
+                        success: true,
+                        stepsExecuted: execution.totalSteps,
+                        errors: []
+                    },
+                    duration: Date.now() - execution.startTime
+                });
+                
+                execution.result = {
+                    success: true,
+                    stepsExecuted: execution.totalSteps,
+                    errors: []
+                };
+            }
         }
         
         // Parse verification failed: "VERIFYING_STEP_N_FAILED: error message"
@@ -545,6 +593,9 @@ export class ParallelTestPanel {
         if (verifyFailedMatch) {
             const stepNumber = parseInt(verifyFailedMatch[1]);
             const error = verifyFailedMatch[2].trim();
+            
+            // Mark that this step has verification
+            execution.stepsWithVerifications.add(stepNumber);
             
             // Send verification failed update to UI
             this._panel.webview.postMessage({
@@ -555,6 +606,26 @@ export class ParallelTestPanel {
                 message: `❌ Step ${stepNumber} verification failed: ${error}`,
                 error: error
             });
+            
+            // Mark test as failed immediately in UI
+            this._outputChannel.appendLine(`[${testId}] ❌ Test FAILED - verification failed at step ${stepNumber}: ${error}`);
+            
+            this._panel.webview.postMessage({
+                type: 'testFinished',
+                testId: testId,
+                result: {
+                    success: false,
+                    stepsExecuted: stepNumber,
+                    errors: [error]
+                },
+                duration: Date.now() - execution.startTime
+            });
+            
+            execution.result = {
+                success: false,
+                stepsExecuted: stepNumber,
+                errors: [error]
+            };
         }
     }
 

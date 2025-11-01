@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
-import { FileSystemService } from './fileSystemService';
+import { FileSystemService } from './services/fileSystemService';
 
 export class WebTestPilotTreeItem extends vscode.TreeItem {
     constructor(

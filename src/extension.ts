@@ -8,7 +8,7 @@ import { TestItem, FolderItem } from './models';
 import { TestEditorPanel } from './panels/testEditorPanel';
 import { TestRunnerPanel } from './panels/testRunnerPanel';
 import { ParallelTestPanel } from './panels/parallelTestPanel';
-import { WorkspaceRootService } from './workspaceRootService';
+import { WorkspaceRootService } from './services/workspaceRootService';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed

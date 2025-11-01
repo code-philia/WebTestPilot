@@ -4,7 +4,7 @@ import * as fs from "fs/promises";
 import { loadWebviewHtml } from "../utils/webviewLoader";
 import { chromium } from "playwright-core";
 import { TestItem } from "../models";
-import { WorkspaceRootService } from "../workspaceRootService.js";
+import { WorkspaceRootService } from "../services/workspaceRootService.js";
 
 /**
  * TestRunnerPanel handles running tests by connecting to a remote browser via CDP

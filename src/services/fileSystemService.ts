@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
+import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from '../models';
 
 export class FileSystemService {
     private webTestPilotDir: string;
