@@ -14,7 +14,7 @@ An AI-powered VS Code extension for automated web testing and test case generati
 
 - [Google Chrome](https://www.google.com/chrome/) installed locally
 - Node.js >= 22.12.0
-- Python 3.12 (for runtime)
+- Python 3.12
 
 ## Installation
 
@@ -25,13 +25,6 @@ source browser.sh
 ```
 
 ### 2. Setup WebTestPilot Runtime
-
-#### Environment Variables (if using OpenAI)
-
-```bash
-cp .env.example .env
-# Add your OPENAI_API_KEY
-```
 
 #### Python Environment
 
