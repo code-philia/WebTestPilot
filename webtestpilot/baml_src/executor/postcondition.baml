@@ -26,7 +26,7 @@ template_string PostconditionIntro() #"
     # Reminder
     - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
     - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
-    - Assertions should have meaning messages with it.
+    - Assertions should have insightful messages with it, i.e. "Message shown is not ...", ... be specific.
 "#
 
 template_string PostconditionExample() #"
@@ -64,7 +64,8 @@ template_string PostconditionExample() #"
         prior = session.history[0].extract("get cart summary", schema=Cart).items
 
         # Assert cart contains prior items plus the added product
-        assert set(p.title for p in current) == set(p.title for p in prior + [added])
+        assert set(p.title for p in current) == set(p.title for p in prior + [added]) , "Cart items do not match expected items after addition."
+        # ... Additional assertions can be added as needed
     ```
 "#
 
