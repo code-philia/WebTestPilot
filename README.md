@@ -33,7 +33,6 @@ cd webtestpilot
 uv sync
 source ./.venv/bin/activate
 python3 -V
-uv run baml-cli generate
 ```
 
 ### 3. Setup Extension
