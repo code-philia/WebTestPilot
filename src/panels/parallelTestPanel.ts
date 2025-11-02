@@ -239,7 +239,6 @@ export class ParallelTestPanel {
             this._testLogs.set(test.id, { stdout: [], stderr: [] });
             const testOutputChannel = vscode.window.createOutputChannel(`Test: ${test.name}`);
             this._testOutputChannels.set(test.id, testOutputChannel);
-            testOutputChannel.show(false);
 
             // Create execution record
             const execution: TestExecution = {
@@ -354,12 +353,9 @@ export class ParallelTestPanel {
                     testOutputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
                     result.status = 'stopped';
                     payload.result = result;
+
                     this._panel.webview.postMessage(payload);
                 } else if (code === 0) {
-                    const jsonMatch = stdoutData.match(/\{[\s\S]*\}/);
-                    if (jsonMatch) {
-                        result = JSON.parse(jsonMatch[0]);
-                    }
                     testOutputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
                     console.log(`[${test.name}] ✅ Test completed successfully`);
 

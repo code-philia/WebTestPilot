@@ -99,6 +99,7 @@ client<llm> LocalModel {
 
 client<llm> UIVenus {
   provider "openai-generic"
+  retry_policy Exponential
   options {
     base_url "https://24x723l6jtk1.share.zrok.io/v1"
     // base_url "https://7b45fdfd7206.ngrok-free.app/v1"
