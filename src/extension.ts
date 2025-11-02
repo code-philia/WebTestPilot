@@ -14,263 +14,263 @@ import { WorkspaceRootService } from './services/workspaceRootService';
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "webtestpilot" is now active!');
+    // Use the console to output diagnostic information (console.log) and errors (console.error)
+    // This line of code will only be executed once when your extension is activated
+    console.log('Congratulations, your extension "webtestpilot" is now active!');
 
-	// Create tree data provider
-	const treeDataProvider = new WebTestPilotTreeDataProvider(context);
+    // Create tree data provider
+    const treeDataProvider = new WebTestPilotTreeDataProvider(context);
 	
-	// Register tree view
-	const treeView = vscode.window.createTreeView('webtestpilot.treeView', {
-		treeDataProvider,
-		showCollapseAll: true
-	});
+    // Register tree view
+    const treeView = vscode.window.createTreeView('webtestpilot.treeView', {
+        treeDataProvider,
+        showCollapseAll: true
+    });
 
-	// Register commands
-	const createTestCommand = vscode.commands.registerCommand('webtestpilot.createTest', async () => {
-		// Get the currently selected tree item
-		const selectedItem = treeView.selection[0];
-		const folderItem = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+    // Register commands
+    const createTestCommand = vscode.commands.registerCommand('webtestpilot.createTest', async () => {
+        // Get the currently selected tree item
+        const selectedItem = treeView.selection[0];
+        const folderItem = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
 		
-		const name = await vscode.window.showInputBox({
-			prompt: folderItem ? `Enter test name for "${folderItem.name}"` : 'Enter test name',
-			placeHolder: 'My Test',
-			validateInput: (value) => {
-				if (!value || value.trim().length === 0) {
-					return 'Test name is required';
-				}
-				return null;
-			}
-		});
+        const name = await vscode.window.showInputBox({
+            prompt: folderItem ? `Enter test name for "${folderItem.name}"` : 'Enter test name',
+            placeHolder: 'My Test',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Test name is required';
+                }
+                return null;
+            }
+        });
 
-		if (name) {
-			const folderId = folderItem?.id;
+        if (name) {
+            const folderId = folderItem?.id;
 
-			await treeDataProvider.createTest(name.trim(), folderId);
-			const location = folderItem ? `in "${folderItem.name}"` : 'at root';
-			vscode.window.showInformationMessage(`Test "${name}" created ${location}!`);
-		}
-	});
+            await treeDataProvider.createTest(name.trim(), folderId);
+            const location = folderItem ? `in "${folderItem.name}"` : 'at root';
+            vscode.window.showInformationMessage(`Test "${name}" created ${location}!`);
+        }
+    });
 
-	const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async () => {
-		// Get the currently selected tree item
-		const selectedItem = treeView.selection[0];
-		const parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+    const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async () => {
+        // Get the currently selected tree item
+        const selectedItem = treeView.selection[0];
+        const parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
 		
-		const name = await vscode.window.showInputBox({
-			prompt: parentFolder ? `Enter subfolder name for "${parentFolder.name}"` : 'Enter folder name',
-			placeHolder: 'My Folder',
-			validateInput: (value) => {
-				if (!value || value.trim().length === 0) {
-					return 'Folder name is required';
-				}
-				// Validate folder name doesn't contain invalid characters
-				if (/[<>:"/\\|?*]/.test(value)) {
-					return 'Folder name contains invalid characters';
-				}
-				return null;
-			}
-		});
+        const name = await vscode.window.showInputBox({
+            prompt: parentFolder ? `Enter subfolder name for "${parentFolder.name}"` : 'Enter folder name',
+            placeHolder: 'My Folder',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Folder name is required';
+                }
+                // Validate folder name doesn't contain invalid characters
+                if (/[<>:"/\\|?*]/.test(value)) {
+                    return 'Folder name contains invalid characters';
+                }
+                return null;
+            }
+        });
 
-		if (name) {
-			const parentId = parentFolder?.id;
+        if (name) {
+            const parentId = parentFolder?.id;
 
-			await treeDataProvider.createFolder(name.trim(), parentId);
-			const location = parentFolder ? `in "${parentFolder.name}"` : 'at root';
-			vscode.window.showInformationMessage(`Folder "${name}" created ${location}!`);
-		}
-	});
+            await treeDataProvider.createFolder(name.trim(), parentId);
+            const location = parentFolder ? `in "${parentFolder.name}"` : 'at root';
+            vscode.window.showInformationMessage(`Folder "${name}" created ${location}!`);
+        }
+    });
 
-	const deleteItemCommand = vscode.commands.registerCommand('webtestpilot.deleteItem', async (treeItem: WebTestPilotTreeItem) => {
-		const itemType = treeItem.item.type === 'test' ? 'test' : 'folder';
-		const result = await vscode.window.showWarningMessage(
-			`Are you sure you want to delete this ${itemType}?`,
-			{ modal: true },
-			'Delete',
-			'Cancel'
-		);
+    const deleteItemCommand = vscode.commands.registerCommand('webtestpilot.deleteItem', async (treeItem: WebTestPilotTreeItem) => {
+        const itemType = treeItem.item.type === 'test' ? 'test' : 'folder';
+        const result = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete this ${itemType}?`,
+            { modal: true },
+            'Delete',
+            'Cancel'
+        );
 
-		if (result === 'Delete') {
-			treeDataProvider.deleteItem(treeItem.item);
-			vscode.window.showInformationMessage(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} deleted successfully!`);
-		}
-	});
+        if (result === 'Delete') {
+            treeDataProvider.deleteItem(treeItem.item);
+            vscode.window.showInformationMessage(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} deleted successfully!`);
+        }
+    });
 
-	const openTestCommand = vscode.commands.registerCommand('webtestpilot.openTest', async (test: TestItem) => {
-		// Load the actual test data from file to get the complete test with actions
-		const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-		if (!workspaceRoot) {
-			vscode.window.showErrorMessage('No workspace folder found');
-			return;
-		}
+    const openTestCommand = vscode.commands.registerCommand('webtestpilot.openTest', async (test: TestItem) => {
+        // Load the actual test data from file to get the complete test with actions
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
+        }
 
-		const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
+        const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
 
-		try {
-			const content = await fs.readFile(testFilePath, 'utf-8');
-			const testData = JSON.parse(content);
+        try {
+            const content = await fs.readFile(testFilePath, 'utf-8');
+            const testData = JSON.parse(content);
 			
-			// Merge the file data with the tree item data
-			const fullTestItem: TestItem = {
-				...test,
-				actions: testData.actions || []
-			};
+            // Merge the file data with the tree item data
+            const fullTestItem: TestItem = {
+                ...test,
+                actions: testData.actions || []
+            };
 
-			// Open the test editor panel
-			TestEditorPanel.createOrShow(
-				context.extensionUri,
-				fullTestItem,
-				treeDataProvider
-			);
-		} catch (error) {
-			// If file doesn't exist, create a new test with default actions
-			const newTestItem: TestItem = {
-				...test,
-				actions: []
-			};
+            // Open the test editor panel
+            TestEditorPanel.createOrShow(
+                context.extensionUri,
+                fullTestItem,
+                treeDataProvider
+            );
+        } catch (error) {
+            // If file doesn't exist, create a new test with default actions
+            const newTestItem: TestItem = {
+                ...test,
+                actions: []
+            };
 
-			TestEditorPanel.createOrShow(
-				context.extensionUri,
-				newTestItem,
-				treeDataProvider
-			);
-		}
-	});
+            TestEditorPanel.createOrShow(
+                context.extensionUri,
+                newTestItem,
+                treeDataProvider
+            );
+        }
+    });
 
-	const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
-		vscode.commands.executeCommand('webtestpilot.createTest');
-	});
+    const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createTest');
+    });
 
-	const createFolderRootCommand = vscode.commands.registerCommand('webtestpilot.createFolderRoot', () => {
-		vscode.commands.executeCommand('webtestpilot.createFolder');
-	});
+    const createFolderRootCommand = vscode.commands.registerCommand('webtestpilot.createFolderRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createFolder');
+    });
 
-	const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (treeItemOrTest: any) => {
-		console.log('runTestCommand called with:', treeItemOrTest);
+    const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (treeItemOrTest: any) => {
+        console.log('runTestCommand called with:', treeItemOrTest);
 		
-		// Extract TestItem from WebTestPilotTreeItem if needed
-		let test: TestItem;
-		if (treeItemOrTest && treeItemOrTest.item && treeItemOrTest.item.type === 'test') {
-			// This is a WebTestPilotTreeItem
-			test = treeItemOrTest.item as TestItem;
-		} else if (treeItemOrTest && treeItemOrTest.type === 'test') {
-			// This is already a TestItem
-			test = treeItemOrTest as TestItem;
-		} else {
-			vscode.window.showErrorMessage('Invalid test item');
-			return;
-		}
+        // Extract TestItem from WebTestPilotTreeItem if needed
+        let test: TestItem;
+        if (treeItemOrTest && treeItemOrTest.item && treeItemOrTest.item.type === 'test') {
+            // This is a WebTestPilotTreeItem
+            test = treeItemOrTest.item as TestItem;
+        } else if (treeItemOrTest && treeItemOrTest.type === 'test') {
+            // This is already a TestItem
+            test = treeItemOrTest as TestItem;
+        } else {
+            vscode.window.showErrorMessage('Invalid test item');
+            return;
+        }
 		
-		// Validate test item
-		if (!test || !test.id) {
-			vscode.window.showErrorMessage('Invalid test item');
-			return;
-		}
+        // Validate test item
+        if (!test || !test.id) {
+            vscode.window.showErrorMessage('Invalid test item');
+            return;
+        }
 		
-		// Get workspace root
-		const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-		if (!workspaceRoot) {
-			vscode.window.showErrorMessage('No workspace folder found');
-			return;
-		}
+        // Get workspace root
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
+        }
 
-		// Use TestRunnerPanel to run the test
-		await TestRunnerPanel.createOrShow(test, workspaceRoot, context.extensionUri);
-	});
+        // Use TestRunnerPanel to run the test
+        await TestRunnerPanel.createOrShow(test, workspaceRoot, context.extensionUri);
+    });
 
-	const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {
-		vscode.commands.executeCommand('webtestpilot.createTest', folderItem);
-	});
+    const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {
+        vscode.commands.executeCommand('webtestpilot.createTest', folderItem);
+    });
 
-	const addFolderCommand = vscode.commands.registerCommand('webtestpilot.addFolder', async (parentFolder: FolderItem) => {
-		vscode.commands.executeCommand('webtestpilot.createFolder', parentFolder);
-	});
+    const addFolderCommand = vscode.commands.registerCommand('webtestpilot.addFolder', async (parentFolder: FolderItem) => {
+        vscode.commands.executeCommand('webtestpilot.createFolder', parentFolder);
+    });
 
-	const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (treeItem: any) => {
-		// Extract folder item from tree item (similar to createTest command)
-		const folderItem = treeItem?.item?.type === 'folder' ? treeItem.item as FolderItem : undefined;
+    const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (treeItem: any) => {
+        // Extract folder item from tree item (similar to createTest command)
+        const folderItem = treeItem?.item?.type === 'folder' ? treeItem.item as FolderItem : undefined;
 		
-		if (!folderItem) {
-			vscode.window.showErrorMessage('Invalid folder selection');
-			return;
-		}
+        if (!folderItem) {
+            vscode.window.showErrorMessage('Invalid folder selection');
+            return;
+        }
 
-		// Get workspace root
-		const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-		if (!workspaceRoot) {
-			vscode.window.showErrorMessage('No workspace folder found');
-			return;
-		}
+        // Get workspace root
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
+        }
 
-		// Get all tests in this folder (including subfolders)
-		const testsInFolder = treeDataProvider.getChildrenTests(folderItem.id);
+        // Get all tests in this folder (including subfolders)
+        const testsInFolder = treeDataProvider.getChildrenTests(folderItem.id);
 		
-		if (testsInFolder.length === 0) {
-			vscode.window.showInformationMessage(`No test cases found in folder "${folderItem.name}"`);
-			return;
-		}
+        if (testsInFolder.length === 0) {
+            vscode.window.showInformationMessage(`No test cases found in folder "${folderItem.name}"`);
+            return;
+        }
 
-		// Show confirmation dialog
-		const result = await vscode.window.showInformationMessage(
-			`Run ${testsInFolder.length} test case(s) in folder "${folderItem.name}" in parallel?`,
-			{ modal: true },
-			'Run Parallel',
-			'Cancel'
-		);
+        // Show confirmation dialog
+        const result = await vscode.window.showInformationMessage(
+            `Run ${testsInFolder.length} test case(s) in folder "${folderItem.name}" in parallel?`,
+            { modal: true },
+            'Run Parallel',
+            'Cancel'
+        );
 
-		if (result === 'Run Parallel') {
-			// Store tree data provider and extensionUri globally for parallel runner access
-			(global as any).webTestPilotTreeDataProvider = treeDataProvider;
-			(global as any).extensionUri = context.extensionUri;
+        if (result === 'Run Parallel') {
+            // Store tree data provider and extensionUri globally for parallel runner access
+            (global as any).webTestPilotTreeDataProvider = treeDataProvider;
+            (global as any).extensionUri = context.extensionUri;
 			
-			// Start parallel test runner
-			await ParallelTestPanel.createOrShow(folderItem, workspaceRoot);
-		}
-	});
+            // Start parallel test runner
+            await ParallelTestPanel.createOrShow(folderItem, workspaceRoot);
+        }
+    });
 
-	const setWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.setWorkspaceRoot', async () => {
-		const options: vscode.OpenDialogOptions = {
-			canSelectMany: false,
-			canSelectFolders: true,
-			openLabel: 'Select WebTestPilot Workspace Root'
-		};
+    const setWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.setWorkspaceRoot', async () => {
+        const options: vscode.OpenDialogOptions = {
+            canSelectMany: false,
+            canSelectFolders: true,
+            openLabel: 'Select WebTestPilot Workspace Root'
+        };
 
-		const folderUri = await vscode.window.showOpenDialog(options);
-		if (folderUri && folderUri[0]) {
-			await WorkspaceRootService.setWorkspaceRoot(folderUri[0].fsPath);
-		}
-	});
+        const folderUri = await vscode.window.showOpenDialog(options);
+        if (folderUri && folderUri[0]) {
+            await WorkspaceRootService.setWorkspaceRoot(folderUri[0].fsPath);
+        }
+    });
 
-	const showWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.showWorkspaceRoot', async () => {
-		const root = WorkspaceRootService.getWorkspaceRoot();
-		if (root) {
-			vscode.window.showInformationMessage(`${root}`);
-		} else {
-			vscode.window.showWarningMessage('No WebTestPilot workspace root configured');
-		}
-	});
+    const showWorkspaceRootCommand = vscode.commands.registerCommand('webtestpilot.showWorkspaceRoot', async () => {
+        const root = WorkspaceRootService.getWorkspaceRoot();
+        if (root) {
+            vscode.window.showInformationMessage(`${root}`);
+        } else {
+            vscode.window.showWarningMessage('No WebTestPilot workspace root configured');
+        }
+    });
 
-	// Add all disposables to context
-	context.subscriptions.push(
-		treeView,
-		createTestCommand,
-		createFolderCommand,
-		deleteItemCommand,
-		openTestCommand,
-		createTestRootCommand,
-		createFolderRootCommand,
-		runTestCommand,
-		addTestCaseCommand,
-		addFolderCommand,
-		runFolderCommand,
-		setWorkspaceRootCommand,
-		showWorkspaceRootCommand,
-		treeDataProvider // Dispose the tree provider to clean up file watchers
-	);
+    // Add all disposables to context
+    context.subscriptions.push(
+        treeView,
+        createTestCommand,
+        createFolderCommand,
+        deleteItemCommand,
+        openTestCommand,
+        createTestRootCommand,
+        createFolderRootCommand,
+        runTestCommand,
+        addTestCaseCommand,
+        addFolderCommand,
+        runFolderCommand,
+        setWorkspaceRootCommand,
+        showWorkspaceRootCommand,
+        treeDataProvider // Dispose the tree provider to clean up file watchers
+    );
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {
-	// Cleanup will be handled by disposables
+    // Cleanup will be handled by disposables
 }

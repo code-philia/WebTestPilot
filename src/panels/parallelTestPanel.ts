@@ -73,21 +73,21 @@ export class ParallelTestPanel {
         this._panel.webview.onDidReceiveMessage(
             message => {
                 switch (message.command) {
-                    case 'ready':
-                        console.log('Parallel runner webview ready');
-                        return;
-                    case 'stopTest':
-                        this._stopTest(message.testId);
-                        return;
-                    case 'stopAll':
-                        this._stopAllTests();
-                        return;
-                    case 'viewLogs':
-                        this._showTestLogs(message.testId, message.testName);
-                        return;
-                    case 'clearTabs':
-                        this._confirmClearAllTabs();
-                        return;
+                case 'ready':
+                    console.log('Parallel runner webview ready');
+                    return;
+                case 'stopTest':
+                    this._stopTest(message.testId);
+                    return;
+                case 'stopAll':
+                    this._stopAllTests();
+                    return;
+                case 'viewLogs':
+                    this._showTestLogs(message.testId, message.testName);
+                    return;
+                case 'clearTabs':
+                    this._confirmClearAllTabs();
+                    return;
                 }
             },
             undefined,
@@ -348,7 +348,7 @@ export class ParallelTestPanel {
                     testId: test.id,
                     result: result,
                     duration: execution.endTime - execution.startTime
-                }
+                };
                 
                 if (signal === 'SIGTERM' || signal === 'SIGKILL') {
                     testOutputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
