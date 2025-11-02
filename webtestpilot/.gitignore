@@ -16,4 +16,4 @@ wheels/
 .ruff_cache/
 
 # BAML-generated files
-baml_client
+# baml_client
