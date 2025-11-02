@@ -111,11 +111,11 @@ client<llm> UIVenus {
 }
 
 retry_policy Exponential {
-  max_retries 3
+  max_retries 5
   strategy {
     type exponential_backoff
     delay_ms 300
     multiplier 1.5
-    max_delay_ms 10000
+    max_delay_ms 50000
   }
 }
