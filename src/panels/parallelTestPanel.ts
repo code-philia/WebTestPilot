@@ -128,8 +128,6 @@ export class ParallelTestPanel {
             // Wait for context to be fully initialized
             await new Promise(resolve => setTimeout(resolve, 500));
 
-            vscode.window.showInformationMessage(`Connected! Ready for parallel test execution`);
-
             // Send initial connection status
             this._panel.webview.postMessage({
                 type: 'connected',
@@ -241,7 +239,7 @@ export class ParallelTestPanel {
             this._testLogs.set(test.id, { stdout: [], stderr: [] });
             const testOutputChannel = vscode.window.createOutputChannel(`Test: ${test.name}`);
             this._testOutputChannels.set(test.id, testOutputChannel);
-            testOutputChannel.show(true);
+            testOutputChannel.show(false);
 
             // Create execution record
             const execution: TestExecution = {
@@ -340,65 +338,49 @@ export class ParallelTestPanel {
                 if (interval) {
                     clearInterval(interval);
                     this._screenshotIntervals.delete(test.id);
-                    this._outputChannel.appendLine(`[${test.name}] Screenshot streaming stopped`);
-                    
-                    // Notify UI that streaming has stopped
-                    this._panel.webview.postMessage({
-                        type: 'streamingStopped',
-                        testId: test.id
-                    });
+                    testOutputChannel.appendLine(`[${test.name}] Screenshot streaming stopped`);
                 }
 
                 // Parse result
-                let result = { success: true, stepsExecuted: 0, errors: [] as string[] };
+                let result = { status: 'passed', errors: [] as string[] };
+                const payload = {
+                    type: 'testFinished',
+                    testId: test.id,
+                    result: result,
+                    duration: execution.endTime - execution.startTime
+                }
                 
                 if (signal === 'SIGTERM' || signal === 'SIGKILL') {
-                    this._outputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
+                    testOutputChannel.appendLine(`[${test.name}] ⚠️  Test stopped by user`);
+                    result.status = 'stopped';
+                    payload.result = result;
+                    this._panel.webview.postMessage(payload);
                 } else if (code === 0) {
                     const jsonMatch = stdoutData.match(/\{[\s\S]*\}/);
                     if (jsonMatch) {
                         result = JSON.parse(jsonMatch[0]);
                     }
-                    this._outputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
-                    this._panel.webview.postMessage({
-                        type: 'testFinished',
-                        testId: test.id,
-                        result: result,
-                        duration: execution.endTime - execution.startTime
-                    });
+                    testOutputChannel.appendLine(`[${test.name}] ✅ Test completed successfully`);
+                    console.log(`[${test.name}] ✅ Test completed successfully`);
+
+                    this._panel.webview.postMessage(payload);
                 } else {
-                    result.success = false;
+                    result.status = 'failed';
                     
                     // Extract BugReport messages from stdout
                     const bugMessages = this._parseBugReports(stdoutData);
                     if (bugMessages.length > 0) {
                         result.errors = bugMessages;
-                        this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with BugReport: ${bugMessages.join('; ')}`);
+                        testOutputChannel.appendLine(`[${test.name}] ❌ Test failed with BugReport: ${bugMessages.join('; ')}`);
                     } else {
                         result.errors = [stderrData || `Process exited with code ${code}`];
-                        this._outputChannel.appendLine(`[${test.name}] ❌ Test failed with code ${code}`);
+                        testOutputChannel.appendLine(`[${test.name}] ❌ Test failed with code ${code}`);
                     }
 
                     this._panel.webview.postMessage({
                         type: 'testFinished',
                         testId: test.id,
                         result: result,
-                        duration: execution.endTime - execution.startTime
-                    });
-                }
-
-                // Only update result if not already set by verification handlers
-                if (!execution.result) {
-                    execution.result = result;
-                }
-
-                // Only send testFinished if not already sent by verification handlers
-                if (!execution.result || execution.result !== result) {
-                    // Update UI
-                    this._panel.webview.postMessage({
-                        type: 'testFinished',
-                        testId: test.id,
-                        result: execution.result || result,
                         duration: execution.endTime - execution.startTime
                     });
                 }
@@ -413,7 +395,7 @@ export class ParallelTestPanel {
                     errors: [error.message]
                 };
 
-                this._outputChannel.appendLine(`[${test.name}] ❌ Process error: ${error.message}`);
+                testOutputChannel.appendLine(`[${test.name}] ❌ Process error: ${error.message}`);
                 this._panel.webview.postMessage({
                     type: 'testFinished',
                     testId: test.id,
@@ -563,7 +545,7 @@ export class ParallelTestPanel {
                     type: 'png',
                     fullPage: false,
                     scale: 'device',
-                    timeout: 10000
+                    timeout: 20000
                 });
                 const base64 = imgBuffer.toString('base64');
                 
@@ -584,6 +566,7 @@ export class ParallelTestPanel {
                 if (interval) {
                     clearInterval(interval);
                     this._screenshotIntervals.delete(testId);
+                    console.log(`[${testId}] Screenshot streaming stopped due to error`);
                     this._outputChannel.appendLine(`[${testId}] Screenshot streaming stopped due to error`);
                 }
             }
@@ -618,20 +601,14 @@ export class ParallelTestPanel {
     private _stopTest(testId: string) {
         const execution = this._executions.get(testId);
         if (execution && execution.isRunning && execution.pythonProcess) {
-            this._outputChannel.appendLine(`[${execution.testItem.name}] Stopping test...`);
+            this._testOutputChannels.get(testId)?.appendLine(`[${execution.testItem.name}] Stopping test...`);
             
             // Stop screenshot streaming for this test
             const interval = this._screenshotIntervals.get(testId);
             if (interval) {
                 clearInterval(interval);
                 this._screenshotIntervals.delete(testId);
-                this._outputChannel.appendLine(`[${execution.testItem.name}] Screenshot streaming stopped`);
-                
-                // Notify UI that streaming has stopped
-                this._panel.webview.postMessage({
-                    type: 'streamingStopped',
-                    testId: testId
-                });
+                this._testOutputChannels.get(testId)?.appendLine(`[${execution.testItem.name}] Screenshot streaming stopped`);
             }
             
             execution.pythonProcess.kill('SIGTERM');

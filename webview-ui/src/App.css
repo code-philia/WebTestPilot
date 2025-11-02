@@ -157,6 +157,16 @@
   border-radius: 8px;
 }
 
+/* Constrain the overall parallel runner area so the page doesn't grow indefinitely
+   when many test cards or screenshots are added. Allows internal scrolling instead. */
+.parallel-runner-root {
+  padding: 20px;
+  box-sizing: border-box;
+  /* Leave room for VSCode UI chrome; adjust if your header size differs */
+  height: calc(100vh - 48px);
+  overflow: auto;
+}
+
 .header h1 {
   margin: 0 0 10px 0;
   color: var(--vscode-foreground);
@@ -184,6 +194,7 @@
   padding: 15px;
   background-color: var(--vscode-editor-background);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 48vw;
 }
 
 .test-header {
@@ -240,7 +251,10 @@
 
 .test-screenshot {
   width: 100%;
-  height: 200px;
+  max-width: 100%;
+  display: block; /* prevent inline img whitespace and layout shifts */
+  height: 200px; /* fixed visual height */
+  max-height: 200px; /* guard against oversized intrinsic images */
   background-color: var(--vscode-editor-background);
   border: 1px solid var(--vscode-panel-border);
   border-radius: 4px;

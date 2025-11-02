@@ -161,7 +161,6 @@ def run_test_from_file(
                 logger.info(f"Starting test execution with {len(test_steps)} steps")
                 WebTestPilot.run(session, test_steps, assertion=enable_assertions)
                 result["steps_executed"] = len(test_steps)
-                logger.info("Test execution completed successfully")
             except BugReport as report:
                 result["success"] = False
                 result["errors"].append(str(report))
@@ -244,6 +243,7 @@ def main():
         print(f"{'=' * 60}\n")
 
     # Exit with appropriate code
+    logger.debug(f"Exiting with code: {0 if result['success'] else 1}")
     sys.exit(0 if result["success"] else 1)
 
 

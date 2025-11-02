@@ -14,7 +14,6 @@ export const ParallelRunner: React.FC = () => {
     t`Connecting to browser...`
   );
   const [tests, setTests] = useState<Map<string, TestCardData>>(new Map());
-  const [visibleLogs, setVisibleLogs] = useState<Set<string>>(new Set());
   const [summary, setSummary] = useState<SummaryData>({
     total: 0,
     running: 0,
@@ -79,7 +78,6 @@ export const ParallelRunner: React.FC = () => {
 
         case "tabsCleared":
           setTests(new Map());
-          setVisibleLogs(new Set());
           break;
       }
     });
@@ -105,21 +103,15 @@ export const ParallelRunner: React.FC = () => {
       newMap.set(message.testId, testData);
       return newMap;
     });
-
-    // Show logs by default for new tests
-    setVisibleLogs((prev) => {
-      const newSet = new Set(prev);
-      newSet.add(message.testId);
-      return newSet;
-    });
   }, []);
 
   const handleTestFinished = useCallback((message: any) => {
     setTests((prev) => {
       const newMap = new Map(prev);
       const test = newMap.get(message.testId);
+
       if (test) {
-        test.status = message.result?.success ? "passed" : "failed";
+        test.status = message.result?.status;
         test.endTime = Date.now();
         if (message.result?.errors) {
           test.errors = message.result.errors;
@@ -222,18 +214,6 @@ export const ParallelRunner: React.FC = () => {
     [postMessage]
   );
 
-  const handleToggleLogs = useCallback((testId: string) => {
-    setVisibleLogs((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(testId)) {
-        newSet.delete(testId);
-      } else {
-        newSet.add(testId);
-      }
-      return newSet;
-    });
-  }, []);
-
   const handleStopAllTests = useCallback(() => {
     postMessage("stopAll");
     setTests((prev) => {
@@ -248,27 +228,6 @@ export const ParallelRunner: React.FC = () => {
     });
   }, [postMessage]);
 
-  const handleClearFinished = useCallback(() => {
-    setTests((prev) => {
-      const newMap = new Map(prev);
-      Array.from(newMap.entries()).forEach(([id, test]) => {
-        if (
-          test.status === "passed" ||
-          test.status === "failed" ||
-          test.status === "stopped"
-        ) {
-          newMap.delete(id);
-          setVisibleLogs((prevLogs) => {
-            const newLogs = new Set(prevLogs);
-            newLogs.delete(id);
-            return newLogs;
-          });
-        }
-      });
-      return newMap;
-    });
-  }, []);
-
   const handleClearTabs = useCallback(() => {
     postMessage("clearTabs");
   }, [postMessage]);
@@ -281,7 +240,7 @@ export const ParallelRunner: React.FC = () => {
   );
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="parallel-runner-root">
       <div className="header">
         <h1>
           {t`Parallel Tests:`} {folderName || t`Loading...`}
@@ -299,13 +258,6 @@ export const ParallelRunner: React.FC = () => {
         >
           {t`Stop All Tests`}
         </VSCodeButton>
-        <VSCodeButton
-          appearance="secondary"
-          onClick={handleClearFinished}
-          disabled={!hasFinishedTests}
-        >
-          {t`Clear Finished`}
-        </VSCodeButton>
         <VSCodeButton appearance="secondary" onClick={handleClearTabs}>
           {t`Clear All Tabs`}
         </VSCodeButton>
@@ -318,8 +270,6 @@ export const ParallelRunner: React.FC = () => {
             test={test}
             onStop={handleStopTest}
             onViewLogs={handleViewLogs}
-            onToggleLogs={handleToggleLogs}
-            isLogsVisible={visibleLogs.has(test.id)}
           />
         ))}
       </div>

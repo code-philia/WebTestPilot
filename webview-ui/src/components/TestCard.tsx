@@ -29,16 +29,12 @@ interface TestCardProps {
   test: TestCardData;
   onStop: (testId: string) => void;
   onViewLogs: (testId: string, testName: string) => void;
-  onToggleLogs: (testId: string) => void;
-  isLogsVisible: boolean;
 }
 
 export const TestCard: React.FC<TestCardProps> = ({
   test,
   onStop,
   onViewLogs,
-  onToggleLogs,
-  isLogsVisible,
 }) => {
   const { t } = useLingui();
   const [duration, setDuration] = useState(0);
@@ -123,12 +119,6 @@ export const TestCard: React.FC<TestCardProps> = ({
         )}
         <VSCodeButton
           appearance="secondary"
-          onClick={() => onToggleLogs(test.id)}
-        >
-          {isLogsVisible ? t`Hide` : t`Show`} {t`Logs`}
-        </VSCodeButton>
-        <VSCodeButton
-          appearance="secondary"
           onClick={() => onViewLogs(test.id, test.name)}
         >
           {t`View Full Logs`}
@@ -143,7 +133,7 @@ export const TestCard: React.FC<TestCardProps> = ({
         </div>
       )}
 
-      {isLogsVisible && test.logs && test.logs.length > 0 && (
+      {test.logs && test.logs.length > 0 && (
         <div className="log-container">
           {test.logs.map((log, idx) => (
             <div
