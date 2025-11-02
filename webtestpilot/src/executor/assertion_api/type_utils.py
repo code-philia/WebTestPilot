@@ -75,10 +75,19 @@ def convert_extracted_data(
         if schema is list:
             return list(output) if output else []
     elif is_basemodel_type(schema):
-        extracted_data = output.model_dump().get("schema", {})
-        logger.debug(
-            f"Checking type of extracted data {type(extracted_data)} {extracted_data} {schema=}"
-        )
-        return schema.model_validate(extracted_data)
+        # NOTE: Sometimes model does not annotate as list[Type], but just Type
+        # And it returns a list at the end :).
+        if isinstance(output, list):
+            res = []
+            for item in output:
+                extracted_data = item.model_dump().get("schema", {})
+                res.append(schema.model_validate(extracted_data))
+            return res
+        else:
+            extracted_data = output.model_dump().get("schema", {})
+            logger.debug(
+                f"Checking type of extracted data {type(extracted_data)} {extracted_data} {schema=}"
+            )
+            return schema.model_validate(extracted_data)
 
     return output
