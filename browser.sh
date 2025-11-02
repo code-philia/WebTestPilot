@@ -30,8 +30,8 @@ echo "Starting headless Chrome with profile $PROFILE_DIR..."
     --no-default-browser-check \
     --disable-extensions \
     --window-size=${WINDOW_SIZE} \
-    --headless=new \
     > /tmp/chrome.log 2>&1 &
+    # --headless=new \
 
 CHROME_PID=$!
 echo "Chrome PID: $CHROME_PID"
