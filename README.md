@@ -51,3 +51,4 @@ yarn package
 2. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) and type "Debug: Start Debugging", then select it.
 3. (Temporary workaround) In the debug window, press `Ctrl+Shift+P` and type "WebTestPilot: Set Workspace...", then select the WebTestPilot folder.
 4. Click the WebTestPilot extension icon in the sidebar to start using it.
+5. Put the given test cases into .webtestpilot folder of the opened folder in the Extension Development Host window.
