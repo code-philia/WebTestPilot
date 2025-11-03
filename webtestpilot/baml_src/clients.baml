@@ -102,7 +102,7 @@ client<llm> UIVenus {
   provider "openai-generic"
   retry_policy Exponential
   options {
-    base_url "https://jksyombtgtk5.share.zrok.io/v1"
+    base_url "https://uivenus.06946099.xyz/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
   }
