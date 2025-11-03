@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-CLI interface for WebTestPilot - called from VS Code extension
-Accepts test data via JSON and runs the automation agent
-"""
-
 import argparse
 import json
 import logging

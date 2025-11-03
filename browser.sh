@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PORT=9222
-WINDOW_SIZE="1280,720"
+WINDOW_SIZE="1920,1080"
 PROFILE_DIR="/tmp/chrome-profile"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -15,13 +15,12 @@ fi
 PROFILE_DIR=$(mktemp -d /tmp/chrome-profile-XXXX)
 
 # Kill any existing Chrome instance using that port
-pkill -f chrome
+sudo pkill -f chrome
 
 # Make sure profile dir exists
 mkdir -p "$PROFILE_DIR"
-
-# Start Chrome
-echo "Starting headless Chrome with profile $PROFILE_DIR..."
+# Start Chrome in fullscreen
+echo "Starting Chrome in full screen with profile $PROFILE_DIR..."
 "$CHROME_CMD" \
     --remote-debugging-port=${PORT} \
     --remote-debugging-address=0.0.0.0 \

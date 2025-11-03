@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
 import { loadWebviewHtml } from "../utils/webviewLoader";
-import { chromium } from "playwright-core";
+import { chromium, Page } from "playwright-core";
 import { TestItem } from "../models";
 import { WorkspaceRootService } from "../services/workspaceRootService.js";
 import { parseLogEvents } from "../utils/logParser";
@@ -19,7 +19,7 @@ export class TestRunnerPanel {
     private _disposables: vscode.Disposable[] = [];
     private _testItem: TestItem;
     private _browser: any;
-    private _page: any;
+    private _page: Page | undefined;
     private _screenshotInterval: NodeJS.Timeout | undefined;
     private _pythonProcess: any = undefined;
     private _isTestRunning: boolean = false;
@@ -89,6 +89,8 @@ export class TestRunnerPanel {
             const pages = context.pages();
             this._page = pages.length > 0 ? pages[0] : await context.newPage();
 
+            assert(this._page, "Failed to get or create a page in the browser");
+
             vscode.window.showInformationMessage(
                 `Connected to browser! Streaming live view...`
             );
@@ -110,6 +112,8 @@ export class TestRunnerPanel {
 
             // Listen to page navigation
             this._page.on("framenavigated", (frame: any) => {
+                assert(this._page, "Page should be defined");
+
                 if (frame === this._page.mainFrame()) {
                     this._panel.webview.postMessage({
                         type: "navigation",
@@ -176,9 +180,9 @@ export class TestRunnerPanel {
 
             try {
                 const imgBuffer = await this._page.screenshot({
-                    type: "png", // Changed from jpeg to png for higher quality
-                    fullPage: false,
-                    scale: "device", // Use device pixel ratio for crisp images
+                    type: "png",
+                    fullPage: true,
+                    scale: "device",
                 });
                 const base64 = imgBuffer.toString("base64");
 
