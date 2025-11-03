@@ -2,12 +2,15 @@ import base64
 import logging
 
 from baml_py import Image
+from baml_py.baml_py import BamlImagePy
 from executor.assertion_api.session import Session
 
 from config import Config
 from baml_client.sync_client import b
 from baml_client.types import Feedback
 from executor.assertion_api import execute_assertion
+from io import BytesIO
+from PIL import Image as PilImage
 
 
 logger = logging.getLogger(__name__)
@@ -26,8 +29,8 @@ def verify_precondition(
     logger.info(f"Condition: {condition}")
     client_registry = config.assertion_generation
     collector = session.collector
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot = Image.from_base64("image/png", screenshot_b64)
     history = session.get_history()
 
     response = b.GeneratePrecondition(
@@ -56,8 +59,13 @@ def execute_action(session: Session, action: str, config: Config) -> None:
     client_registry = config.action_proposer
     client_name = config.action_proposer_name
     collector = session.collector
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    # get the dimension of the image from the base64 string
+    # image_bytes = base64.b64decode(screenshot_b64)
+    # img = PilImage.open(BytesIO(image_bytes))
+    # width, height = img.size
+    # logger.debug(f"Image size: {width}x{height}")
+    screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
 
     code = b.ProposeActions(
         screenshot,
@@ -93,11 +101,11 @@ def verify_postcondition(
     client_registry = config.assertion_generation
     collector = session.collector
     max_tries = config.max_tries
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
     history = session.get_history()
 
-    feedback = []
+    feedback: list[Feedback] = []
     message = "Post-condition verification failed after all retries"
     
     for _ in range(1, max_tries + 1):
