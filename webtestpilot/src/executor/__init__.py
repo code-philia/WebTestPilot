@@ -50,7 +50,7 @@ def verify_precondition(
         raise BugReport(message)
 
 
-def execute_action(session: Session, action: str, config: Config) -> None:
+def execute_action(session: Session, action: str, config: Config) -> BamlImagePy:
     # Increment step counter and output step info for VSCode parsing
     session.step_counter += 1
     logger.info(f"Action: {action}")
@@ -85,15 +85,18 @@ def execute_action(session: Session, action: str, config: Config) -> None:
             import executor.automators.custom as automator
             automator.execute(code, session.page, session)
 
-        session.capture_state(prev_action=action)
+        screenshot_after_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+        screenshot_after: BamlImagePy = Image.from_base64("image/png", screenshot_after_b64)
         logger.info(f"STEP_{session.step_counter}_PASSED")
+        session.capture_state(prev_action=action)
+        return screenshot_after
     except Exception as e:
         logger.info(f"STEP_{session.step_counter}_FAILED: {str(e)}")
         raise
 
 
 def verify_postcondition(
-    session: Session, action: str, expectation: str, config: Config
+    session: Session, action: str, expectation: str, config: Config, screenshot_after: BamlImagePy
 ) -> None:
     logger.info(f"Expectation: {expectation}")
     # Output step verification info for VSCode parsing
@@ -101,8 +104,8 @@ def verify_postcondition(
     client_registry = config.assertion_generation
     collector = session.collector
     max_tries = config.max_tries
-    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
+    # screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    # screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
     history = session.get_history()
 
     feedback: list[Feedback] = []
@@ -110,7 +113,7 @@ def verify_postcondition(
     
     for _ in range(1, max_tries + 1):
         response = b.GeneratePostcondition(
-            screenshot,
+            screenshot_after,
             history,
             action,
             expectation,
