@@ -28,6 +28,7 @@ template_string PostconditionIntro() #"
     - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
     - Assertions should have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
     - Generally, avoid writing hardcoded values as the UI have changes between the time of generation and execution.
+    - Make sure code is executable and does not have type error.
 "#
 
 template_string PostconditionExample() #"

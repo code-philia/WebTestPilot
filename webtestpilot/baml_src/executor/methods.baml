@@ -6,7 +6,7 @@ type Primitives = string | int | float | bool
 type ExtractedData = Output | Primitives | Output[] | Primitives[]
 
 
-function ExtractFromState(screenshot: image, instruction: string) -> ExtractedData {
+function ExtractFromState(screenshot: image, instruction: string) -> Output {
     client "Base"
     prompt #"
         {{_.role("user")}}
@@ -20,7 +20,7 @@ function ExtractFromState(screenshot: image, instruction: string) -> ExtractedDa
     "#
 }
 
-function ExtractFromElement(screenshot: image, html: string, instruction: string) -> ExtractedData {
+function ExtractFromElement(screenshot: image, html: string, instruction: string) -> Output {
     client "Base"
     prompt #"
         {{_.role("user")}}

@@ -91,9 +91,7 @@ client<llm> LocalModel {
   provider "openai-generic"
   retry_policy Exponential
   options {
-    // base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
-    base_url "https://dgh8bwp6wn5g.share.zrok.io/v1"
-    // base_url "https://jksyombtgtk5.share.zrok.io"
+    base_url "https://llms.06946099.xyz/v1"
     model "Qwen/Qwen3-VL-30B-A3B-Thinking"
   }
 }

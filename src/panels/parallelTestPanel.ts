@@ -124,7 +124,8 @@ export class ParallelTestPanel {
             // Create a single context for all tests
             const contexts = this._browser.contexts();
             this._context = contexts.length > 0 ? contexts[0] : await this._browser.newContext({
-                viewport: { width: 1920, height: 1080 }
+                viewport: { width: 1920, height: 1080 },
+                deviceScaleFactor: 1
             });
             
             // Wait for context to be fully initialized

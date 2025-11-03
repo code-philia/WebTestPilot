@@ -108,7 +108,16 @@ def run_test_from_file(
             browser = p.chromium.connect_over_cdp(cdp_endpoint)
 
             # Get or create context
-            context = browser.contexts[0] if browser.contexts else browser.new_context()
+            context = (
+                browser.contexts[0]
+                if browser.contexts
+                else browser.new_context(
+                    viewport={
+                        "width": VIEWPORT_WIDTH,
+                        "height": VIEWPORT_HEIGHT,
+                    }
+                )
+            )
 
             # Get the correct page based on tab_index
             page: Page | None = None
