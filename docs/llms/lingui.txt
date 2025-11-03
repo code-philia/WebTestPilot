@@ -1,0 +1,58 @@
+# Lingui
+
+
+## installation
+
+- [Installation and Setup](/installation.md): Learn how to install Lingui in your project
+
+## tutorials
+
+- [JavaScript Apps Internationalization](/tutorials/javascript.md): Learn how to use Lingui's internationalization features in your vanilla JavaScript application
+- [React Apps Internationalization](/tutorials/react.md): Learn how to add internationalization to a React application using Lingui
+- [React Native Apps Internationalization](/tutorials/react-native.md): Learn how to add internationalization to a React Native application using Lingui
+- [Lingui with React Server Components](/tutorials/react-rsc.md): Learn how to setup and use Lingui with RSC & Next.js
+
+## guides
+
+- [Custom Extractor](/guides/custom-extractor.md): Learn how to write a custom message extractor for your project
+- [Custom Formatter](/guides/custom-formatter.md): Learn how to write a custom localization message formatter for your project
+- [Dynamic Loading of Message Catalogs](/guides/dynamic-loading-catalogs.md): Learn how to set up dynamic loading of message catalogs in Lingui to reduce bundle size and improve performance
+- [Explicit vs Generated IDs](/guides/explicit-vs-generated-ids.md): Learn about the differences between explicit and generated IDs and how to choose the right approach for your project
+- [Lazy Translations](/guides/lazy-translations.md): Lazy translations allow you to defer translation of a message until it is actually displayed
+- [Message Extraction](/guides/message-extraction.md): Learn about message extraction in i18n and how to use Lingui to extract messages from your application
+- [ICU MessageFormat](/guides/message-format.md): ICU MessageFormat is a flexible and powerful syntax designed to express the grammatical nuances of different languages. Its flexibility ensures that your application can handle grammatical variations, making it essential for effective internationalization.
+- [Monorepo](/guides/monorepo.md): If you're using lingui within a monorepo you need:
+- [Keeping Your Bundle Small: How Lingui Optimizes for Performance](/guides/optimizing-bundle-size.md): When you're building a modern app with internationalization (i18n), it's easy to end up with a bloated bundle. The more languages and messages you have, the more it can grow — fast.
+- [Pluralization](/guides/plurals.md): Learn about pluralization and how to use it in your application with Lingui
+- [Pseudolocalization](/guides/pseudolocalization.md): Learn how to use pseudolocalization to test the internationalization aspects of your application with Lingui
+- [Testing](/guides/testing.md): In a React application, components that use Trans or useLingui need access to the context provided by I18nProvider. How you wrap your component with the I18nProvider depends on the testing library you're using.
+
+## ref
+
+- [Catalog Formats](/ref/catalog-formats.md): Learn about the different catalog formats supported by Lingui
+- [Lingui CLI](/ref/cli.md): Learn how to set up and use Lingui CLI to extract, merge and compile message catalogs
+- [Configuration](/ref/conf.md): Learn how to configure Lingui for your project
+- [Core API Reference](/ref/core.md): The package provides the main i18n object, which manages message catalogs, active locale, and message translation and formatting
+- [ESLint Plugin](/ref/eslint-plugin.md): Lingui ESLint Plugin helps you find and prevent common i18n mistakes in your code
+- [Vue.js Extractor](/ref/extractor-vue.md): The @lingui/extractor-vue package provides a custom extractor that handles Vue.js files.
+- [Webpack Loader](/ref/loader.md): The @lingui/loader is a Webpack loader for Lingui message catalogs. It offers an alternative to the lingui compile and compiles catalogs on the fly.
+- [Locale Detection](/ref/locale-detector.md): Detect the user's locale with the `@lingui/detect-locale` package
+- [Macros](/ref/macro.md): Transform JavaScript objects and JSX elements into ICU MessageFormat messages
+- [Metro Transformer](/ref/metro-transformer.md): Use Lingui with React Native and compile your message catalogs on the fly
+- [React API Reference](/ref/react.md): Reference for the Lingui React API and components
+- [SWC Plugin](/ref/swc-plugin.md): Use Lingui Macros in your SWC project
+- [Vite Plugin](/ref/vite-plugin.md): Use Lingui with Vite and compile your message catalogs on the fly
+
+## examples
+
+- [Examples](/examples.md): Examples of using Lingui for internationalization (i18n) in various frameworks and libraries
+
+## introduction
+
+- [Introduction](/introduction.md): Lingui is a universal, clean and readable, lightweight and powerful internationalization framework for global projects
+
+## tools
+
+- [Crowdin](/tools/crowdin.md): Crowdin is a localization management platform that helps translate your LinguiJS-based product. Automate localization, release several multilingual versions of your app simultaneously, and provide an enhanced experience for your global customers.
+- [Sync & Collaboration Tools](/tools/introduction.md): While Lingui provides a powerful API for managing your translations, it doesn't provide an integrated solution for managing synchronization and collaboration with your translators.
+- [Translation.io](/tools/translation-io.md): Translation.io is a professional synchronization and collaboration platform that will assist your team in the translation of your Lingui application.
