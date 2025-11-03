@@ -15,6 +15,7 @@
   "dependencies": {
     "@lingui/react": "^5.5.2",
     "@vscode/webview-ui-toolkit": "^1.2.2",
+    "preact": "^10.27.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -23,6 +24,7 @@
     "@lingui/macro": "^5.5.2",
     "@lingui/swc-plugin": "^5.6.1",
     "@rsbuild/core": "1.4.8",
+    "@rsbuild/plugin-preact": "^1.6.0",
     "@rsbuild/plugin-react": "^1.4.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

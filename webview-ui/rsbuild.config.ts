@@ -1,8 +1,8 @@
 import { defineConfig } from "@rsbuild/core";
-import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginPreact } from "@rsbuild/plugin-preact";
 
 export default defineConfig({
-  plugins: [pluginReact()],
+  plugins: [pluginPreact()],
   html: {
     template: "./index.html",
   },
@@ -17,11 +17,6 @@ export default defineConfig({
   },
   security: {
     nonce: "webtestpilot",
-  },
-  performance: {
-    preload: {
-      type: "async-chunks",
-    },
   },
   tools: {
     swc: {

@@ -623,6 +623,16 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
+"@prefresh/core@^1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-1.5.8.tgz#97b743030dc66425f73796b2801521a9fcb7ab64"
+  integrity sha512-T7HMpakS1iPVCFZvfDLMGyrWAcO3toUN9/RkJUqqoRr/vNhQrZgHjidfhq3awDzAQtw1emDWH8dsOeu0DWqtgA==
+
+"@prefresh/utils@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-1.2.1.tgz#c1cb3c3114839d07271a36b386bf03cf354d31d7"
+  integrity sha512-vq/sIuN5nYfYzvyayXI4C2QkprfNaHUQ9ZX+3xLD8nL3rWyzpxOm1+K7RtMbhd+66QcaISViK7amjnheQ/4WZw==
+
 "@rollup/pluginutils@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz#e6c6c3aba0744edce3fb2074922d3776c0af2a6d"
@@ -641,6 +651,16 @@
     "@swc/helpers" "^0.5.17"
     core-js "~3.44.0"
     jiti "^2.4.2"
+
+"@rsbuild/plugin-preact@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@rsbuild/plugin-preact/-/plugin-preact-1.6.0.tgz#17d2475ee19c4247e85eba8971d22a42810c9f37"
+  integrity sha512-/IzJevWRls9ywyHCKeEevgndzgzWW6YOG5+wOHogF5kTYqbaTXTZj0akgTmQqyi1/+wJ+WJoC8tYv4jNAZwdrQ==
+  dependencies:
+    "@prefresh/core" "^1.5.8"
+    "@prefresh/utils" "^1.2.1"
+    "@rspack/plugin-preact-refresh" "^1.1.4"
+    "@swc/plugin-prefresh" "^10.0.0"
 
 "@rsbuild/plugin-react@^1.4.1":
   version "1.4.1"
@@ -732,6 +752,11 @@
   resolved "https://registry.yarnpkg.com/@rspack/lite-tapable/-/lite-tapable-1.0.1.tgz#d4540a5d28bd6177164bc0ba0bee4bdec0458591"
   integrity sha512-VynGOEsVw2s8TAlLf/uESfrgfrq2+rcXB1muPJYBWbsm1Oa6r5qVQhjA5ggM6z/coYPrsVMgovl3Ff7Q7OCp1w==
 
+"@rspack/plugin-preact-refresh@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@rspack/plugin-preact-refresh/-/plugin-preact-refresh-1.1.4.tgz#42931caa2da7e5cc1ad0796d81d8b93fc79412e7"
+  integrity sha512-M197BNmvxD7h0hwccmAyc3H6QCeOFPLUExoC9jgEpZI4+dLnbrJyGEEuGss2svUIT6T5d92S71K0o8xSyjuFPQ==
+
 "@rspack/plugin-react-refresh@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@rspack/plugin-react-refresh/-/plugin-react-refresh-1.5.2.tgz#fc5ce67b19fc86027f12651be09c4a90bb5f8baa"
@@ -745,12 +770,24 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
+"@swc/counter@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@swc/counter/-/counter-0.1.3.tgz#cc7463bd02949611c6329596fccd2b0ec782b0e9"
+  integrity sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==
+
 "@swc/helpers@^0.5.17":
   version "0.5.17"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.17.tgz#5a7be95ac0f0bf186e7e6e890e7a6f6cda6ce971"
   integrity sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A==
   dependencies:
     tslib "^2.8.0"
+
+"@swc/plugin-prefresh@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@swc/plugin-prefresh/-/plugin-prefresh-10.0.0.tgz#7d198505a946b4873ccd9cc4b6f0968bb40916f0"
+  integrity sha512-KP8XT2FILHd74lNwJY4CGnda7DBd8TY+EN8qPd1tTjvcUc1CCm1qWtqvC06yQM3G24I0VTDZq3iEcrxHNpQSiw==
+  dependencies:
+    "@swc/counter" "^0.1.3"
 
 "@tybys/wasm-util@^0.10.0":
   version "0.10.1"
@@ -1523,6 +1560,11 @@ pofile@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/pofile/-/pofile-1.1.4.tgz#eab7e29f5017589b2a61b2259dff608c0cad76a2"
   integrity sha512-r6Q21sKsY1AjTVVjOuU02VYKVNQGJNQHjTIvs4dEbeuuYfxgYk/DGD2mqqq4RDaVkwdSq0VEtmQUOPe/wH8X3g==
+
+preact@^10.27.2:
+  version "10.27.2"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.27.2.tgz#19b9009c1be801a76a0aaf0fe5ba665985a09312"
+  integrity sha512-5SYSgFKSyhCbk6SrXyMpqjb5+MQBgfvEKE/OC+PujcY34sOpqtr+0AZQtPYx5IA6VxynQ7rUPCtKzyovpj9Bpg==
 
 pretty-format@^29.7.0:
   version "29.7.0"
