@@ -119,7 +119,7 @@ export class TestEditorPanel {
                 id: this._testItem.id,
                 name: this._testItem.name || "",
                 url: this._testItem.url || "",
-                folderId: this._testItem.folderId,
+                folderId: this._testItem.parentId,
                 actions: this._testItem.actions || [],
             },
         });

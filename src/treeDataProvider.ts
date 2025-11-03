@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem } from './models';
+import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, MenuItem, POSSIBLE_MENUS, POSSIBLE_MENU_IDS } from './models';
 import { FileSystemService } from './services/fileSystemService';
 
 export class WebTestPilotTreeItem extends vscode.TreeItem {
@@ -17,28 +17,45 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
     }
 
     private getTooltip(): string {
-        if (this.item.type === 'test') {
+        switch(this.item.type) {
+        case 'menu' :
+        case 'folder' :
+            return  `${this.item.name}`;
+        case 'test':
             const test = this.item as TestItem;
             const actionCount = test.actions ? test.actions.length : 0;
             return `${test.name}\n${test.url || 'No URL'}\n${actionCount} action(s)`;
+        default:
+            return this.item.name;
         }
-        return this.item.name;
     }
 
     private getDescription(): string {
-        if (this.item.type === 'test') {
+        switch (this.item.type) {
+        case 'menu':
+        case 'folder':
+            return '';
+        case 'test':
             const test = this.item as TestItem;
             const actionCount = test.actions ? test.actions.length : 0;
             return `${actionCount} action(s) • ${test.url || 'No URL'}`;
+        default:
+            return '';
         }
-        return '';
     }
 
     private getIconPath(): vscode.ThemeIcon | vscode.Uri {
-        if (this.item.type === 'test') {
-            return new vscode.ThemeIcon('debug-start');
+        switch (this.item.type) {
+        case 'folder':
+            return new vscode.ThemeIcon('folder');
+        case 'test':
+            return new vscode.ThemeIcon('beaker');
+        case 'menu':
+            const menuItem = this.item as MenuItem;
+            return new vscode.ThemeIcon(menuItem.icon);
+        default:
+            return new vscode.ThemeIcon('file');
         }
-        return new vscode.ThemeIcon('folder');
     }
 }
 
@@ -48,14 +65,16 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
 
     private items: WebTestPilotDataItem[] = [];
     private fileSystemService: FileSystemService;
+    private loadType: POSSIBLE_MENUS;
 
-    constructor(private context: vscode.ExtensionContext) {
+    constructor(private context: vscode.ExtensionContext, loadType: POSSIBLE_MENUS) {
+        this.loadType = loadType;
         const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!workspaceRoot) {
             throw new Error('No workspace folder found');
         }
-        
-        this.fileSystemService = new FileSystemService(workspaceRoot);
+
+        this.fileSystemService = new FileSystemService(workspaceRoot, this.loadType);
         this.initialize();
     }
 
@@ -92,33 +111,39 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     getChildren(element?: WebTestPilotTreeItem): Thenable<WebTestPilotTreeItem[]> {
+        // Root level - show 3 items; test cases, fixtures, environments
+        console.log(this.items);
         if (!element) {
-            // Root level - show folders, root-level tests, and fixtures
             const rootFolders = this.items.filter(item => 
-                item.type === 'folder' && !item.parentId
+                POSSIBLE_MENU_IDS.includes(item.parentId!) && item.type === 'folder'
             ) as FolderItem[];
-            const rootTests = this.items.filter(item => 
-                item.type === 'test' && !item.folderId
+            const rootItems = this.items.filter(item =>
+                POSSIBLE_MENU_IDS.includes(item.parentId!) && item.type === this.loadType
             ) as TestItem[];
-            
+
             return Promise.resolve([
-                ...rootFolders.map(folder => new WebTestPilotTreeItem(folder, vscode.TreeItemCollapsibleState.Collapsed)),
-                ...rootTests.map(test => new WebTestPilotTreeItem(test, vscode.TreeItemCollapsibleState.None, {
-                    command: 'webtestpilot.openTest',
-                    title: 'Open Test',
-                    arguments: [test]
-                })),
+                ...rootFolders.map(
+                    folder => new WebTestPilotTreeItem(folder, vscode.TreeItemCollapsibleState.Collapsed)
+                ),
+                ...rootItems.map(
+                    test => new WebTestPilotTreeItem(test, vscode.TreeItemCollapsibleState.None, {
+                        command: 'webtestpilot.openTest',
+                        title: 'Open Test',
+                        arguments: [test]
+                    })
+                )
             ]);
         }
-
-        if (element.item.type === 'folder') {
-            const folder = element.item as FolderItem;
+        
+        if (!element || element.item.type === 'folder' || element.item.type === 'menu') {
+            const parent = element.item as FolderItem | MenuItem;
             const childFolders = this.items.filter(item => 
-                item.type === 'folder' && item.parentId === folder.id
+                item.type === 'folder' && item.parentId === parent.id
             ) as FolderItem[];
             const childTests = this.items.filter(item => 
-                item.type === 'test' && item.folderId === folder.id
+                item.type === this.loadType && item.parentId === parent.id
             ) as TestItem[];
+            console.log(parent.id, childFolders, childTests);
             
             return Promise.resolve([
                 ...childFolders.map(childFolder => new WebTestPilotTreeItem(childFolder, vscode.TreeItemCollapsibleState.Collapsed)),
@@ -170,22 +195,15 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
         return this.items;
     }
 
-    getChildrenTests(folderId?: string): TestItem[] {
-        if (!folderId) {
-            // Root level tests
-            return this.items.filter(item => 
-                item.type === 'test' && !item.folderId
-            ) as TestItem[];
-        }
-
+    getChildrenTests(parentId: string): TestItem[] {
         // Tests in specific folder
         const directTests = this.items.filter(item => 
-            item.type === 'test' && item.folderId === folderId
+            item.type === 'test' && item.parentId === parentId
         ) as TestItem[];
 
         // Get tests from subfolders recursively
         const subfolders = this.items.filter(item => 
-            item.type === 'folder' && item.parentId === folderId
+            item.type === 'folder' && item.parentId === parentId
         ) as FolderItem[];
 
         const subfolderTests: TestItem[] = [];

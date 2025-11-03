@@ -8,6 +8,7 @@ export interface TestCardData {
   name: string;
   url: string;
   status: "pending" | "running" | "passed" | "failed" | "stopped";
+  currentAction: string;
   tabIndex: number;
   currentStep: number;
   totalSteps: number;
@@ -72,6 +73,7 @@ export const TestCard: React.FC<TestCardProps> = ({
         <div className="test-name" title={test.name}>
           {test.name}
         </div>
+        <div className={`test-status ${getStatusClass()}`}>{test.currentAction}</div>
         <div className={`test-status ${getStatusClass()}`}>{test.status}</div>
       </div>
 

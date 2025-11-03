@@ -112,8 +112,18 @@
       "webtestpilot": [
         {
           "id": "webtestpilot.treeView",
-          "name": "WebTestPilot",
-          "icon": "assets/view-icon.svg"
+          "name": "Tests",
+          "icon": "beaker"
+        },
+        {
+          "id": "webtestpilot.treeFixtureView",
+          "name": "Fixtures",
+          "icon": "file-code"
+        },
+        {
+          "id": "webtestpilot.treeEnvironmentView",
+          "name": "Environments",
+          "icon": "server"
         }
       ]
     },

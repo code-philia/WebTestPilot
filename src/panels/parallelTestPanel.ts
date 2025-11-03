@@ -7,6 +7,7 @@ import { FolderItem, TestItem } from '../models';
 import { loadWebviewHtml } from '../utils/webviewLoader';
 import { WorkspaceRootService } from '../services/workspaceRootService';
 import { parseLogEvents } from '../utils/logParser';
+import { WebTestPilotTreeDataProvider } from '../treeDataProvider';
 
 interface TestExecution {
     testItem: TestItem;
@@ -685,7 +686,7 @@ export class ParallelTestPanel {
      */
     public static async createOrShow(folder: FolderItem, workspaceRoot: string) {
         // Get all tests in folder
-        const treeDataProvider = (global as any).webTestPilotTreeDataProvider;
+        const treeDataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
         if (!treeDataProvider) {
             vscode.window.showErrorMessage('Tree data provider not available');
             return;

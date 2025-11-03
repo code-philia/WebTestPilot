@@ -91,6 +91,7 @@ export const ParallelRunner: React.FC = () => {
       status: "running",
       tabIndex: message.tabIndex || 0,
       currentStep: 0,
+      currentAction: "",
       totalSteps: message.totalSteps || 0,
       startTime: Date.now(),
       targetId: message.targetId,
@@ -140,20 +141,26 @@ export const ParallelRunner: React.FC = () => {
     setTests((prev) => {
       const newMap = new Map(prev);
       const test = newMap.get(message.testId);
+      console.log(test);
       if (test) {
         test.currentStep = message.stepNumber;
+        test.currentAction = `${message.status} step ${message.stepNumber}`;
 
         // Add step update to logs
-        const logEntry = {
-          type:
-            message.status === "failed"
-              ? ("stderr" as const)
-              : ("stdout" as const),
-          message:
-            message.message || `Step ${message.stepNumber}: ${message.status}`,
-          time: getCurrentTimeString(),
-        };
-        test.logs = [...(test.logs || []), logEntry];
+        console.log("Adding step log:", message, test.currentAction);
+        test.logs = [
+          ...(test.logs || []),
+          {
+            type:
+              message.status === "failed"
+                ? ("stderr" as const)
+                : ("stdout" as const),
+            message:
+              message.message ||
+              `Step ${message.stepNumber}: ${message.status}`,
+            time: getCurrentTimeString(),
+          },
+        ];
 
         // Add errors if step failed
         if (message.status === "failed" && message.error) {

@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
-import { TestItem, FolderItem } from './models';
+import { TestItem, FolderItem, ENV_MENU_ID, FIXTURE_MENU_ID, TEST_MENU_ID } from './models';
 import { TestEditorPanel } from './panels/testEditorPanel';
 import { TestRunnerPanel } from './panels/testRunnerPanel';
 import { ParallelTestPanel } from './panels/parallelTestPanel';
@@ -19,18 +19,28 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations, your extension "webtestpilot" is now active!');
 
     // Create tree data provider
-    const treeDataProvider = new WebTestPilotTreeDataProvider(context);
-	
+    const treeTestDataProvider = new WebTestPilotTreeDataProvider(context, TEST_MENU_ID);
+    const treeFixtureDataProvider = new WebTestPilotTreeDataProvider(context, FIXTURE_MENU_ID);
+    const treeEnvironmentDataProvider = new WebTestPilotTreeDataProvider(context, ENV_MENU_ID);
+
     // Register tree view
-    const treeView = vscode.window.createTreeView('webtestpilot.treeView', {
-        treeDataProvider,
+    const treeTestView = vscode.window.createTreeView('webtestpilot.treeView', {
+        treeDataProvider: treeTestDataProvider,
+        showCollapseAll: true
+    });
+    const treeFixtureView = vscode.window.createTreeView('webtestpilot.treeFixtureView', {
+        treeDataProvider: treeFixtureDataProvider,
+        showCollapseAll: true
+    });
+    const treeEnvironmentView = vscode.window.createTreeView('webtestpilot.treeEnvironmentView', {
+        treeDataProvider: treeEnvironmentDataProvider,
         showCollapseAll: true
     });
 
     // Register commands
     const createTestCommand = vscode.commands.registerCommand('webtestpilot.createTest', async () => {
         // Get the currently selected tree item
-        const selectedItem = treeView.selection[0];
+        const selectedItem = treeTestView.selection[0];
         const folderItem = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
 		
         const name = await vscode.window.showInputBox({
@@ -47,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
         if (name) {
             const folderId = folderItem?.id;
 
-            await treeDataProvider.createTest(name.trim(), folderId);
+            await treeTestDataProvider.createTest(name.trim(), folderId);
             const location = folderItem ? `in "${folderItem.name}"` : 'at root';
             vscode.window.showInformationMessage(`Test "${name}" created ${location}!`);
         }
@@ -55,7 +65,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async () => {
         // Get the currently selected tree item
-        const selectedItem = treeView.selection[0];
+        const selectedItem = treeTestView.selection[0];
         const parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
 		
         const name = await vscode.window.showInputBox({
@@ -76,7 +86,7 @@ export function activate(context: vscode.ExtensionContext) {
         if (name) {
             const parentId = parentFolder?.id;
 
-            await treeDataProvider.createFolder(name.trim(), parentId);
+            await treeTestDataProvider.createFolder(name.trim(), parentId);
             const location = parentFolder ? `in "${parentFolder.name}"` : 'at root';
             vscode.window.showInformationMessage(`Folder "${name}" created ${location}!`);
         }
@@ -92,7 +102,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
 
         if (result === 'Delete') {
-            treeDataProvider.deleteItem(treeItem.item);
+            treeTestDataProvider.deleteItem(treeItem.item);
             vscode.window.showInformationMessage(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} deleted successfully!`);
         }
     });
@@ -121,7 +131,7 @@ export function activate(context: vscode.ExtensionContext) {
             TestEditorPanel.createOrShow(
                 context.extensionUri,
                 fullTestItem,
-                treeDataProvider
+                treeTestDataProvider
             );
         } catch (error) {
             // If file doesn't exist, create a new test with default actions
@@ -133,7 +143,7 @@ export function activate(context: vscode.ExtensionContext) {
             TestEditorPanel.createOrShow(
                 context.extensionUri,
                 newTestItem,
-                treeDataProvider
+                treeTestDataProvider
             );
         }
     });
@@ -204,7 +214,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         // Get all tests in this folder (including subfolders)
-        const testsInFolder = treeDataProvider.getChildrenTests(folderItem.id);
+        const testsInFolder = treeTestDataProvider.getChildrenTests(folderItem.id);
 		
         if (testsInFolder.length === 0) {
             vscode.window.showInformationMessage(`No test cases found in folder "${folderItem.name}"`);
@@ -221,7 +231,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (result === 'Run Parallel') {
             // Store tree data provider and extensionUri globally for parallel runner access
-            (global as any).webTestPilotTreeDataProvider = treeDataProvider;
+            (global as any).webTestPilotTreeDataProvider = treeTestDataProvider;
             (global as any).extensionUri = context.extensionUri;
 			
             // Start parallel test runner
@@ -253,7 +263,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Add all disposables to context
     context.subscriptions.push(
-        treeView,
+        treeTestView,
         createTestCommand,
         createFolderCommand,
         deleteItemCommand,
@@ -266,7 +276,7 @@ export function activate(context: vscode.ExtensionContext) {
         runFolderCommand,
         setWorkspaceRootCommand,
         showWorkspaceRootCommand,
-        treeDataProvider // Dispose the tree provider to clean up file watchers
+        treeTestDataProvider // Dispose the tree provider to clean up file watchers
     );
 }
 
