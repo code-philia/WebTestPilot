@@ -7,6 +7,7 @@ import { TestItem } from "../models";
 import { WorkspaceRootService } from "../services/workspaceRootService.js";
 import { parseLogEvents } from "../utils/logParser";
 import assert from "assert";
+import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
 
 /**
  * TestRunnerPanel handles running tests by connecting to a remote browser via CDP
@@ -212,24 +213,15 @@ export class TestRunnerPanel {
         workspaceRoot: string,
         extension_uri: vscode.Uri
     ) {
-    // Load test data from file
-        const testFilePath = path.join(workspaceRoot, ".webtestpilot", testItem.id);
-
         try {
-            const content = await fs.readFile(testFilePath, "utf-8");
-            const testData = JSON.parse(content);
-
-            // Get the URL from the test data
-            const url = testData.url || testItem.url;
-
-            // Get CDP endpoint from configuration or use default
+            const url = testItem.url;
             const cdpEndpoint =
         vscode.workspace
             .getConfiguration("webtestpilot")
             .get<string>("cdpEndpoint") || "http://localhost:9222";
 
             // Validate test has actions
-            if (!testData.actions || testData.actions.length === 0) {
+            if (!testItem.actions || testItem.actions.length === 0) {
                 vscode.window.showWarningMessage(
                     `Test "${testItem.name}" has no actions defined. Please add test actions before running.`
                 );
@@ -242,16 +234,6 @@ export class TestRunnerPanel {
             );
             outputChannel.clear();
             outputChannel.show(true);
-
-            outputChannel.appendLine("=".repeat(60));
-            outputChannel.appendLine(`Running Test: ${testItem.name}`);
-            outputChannel.appendLine("=".repeat(60));
-            outputChannel.appendLine(`Test File: ${testFilePath}`);
-            outputChannel.appendLine(`URL: ${url || "Not specified"}`);
-            outputChannel.appendLine(`CDP Endpoint: ${cdpEndpoint}`);
-            outputChannel.appendLine(`Actions: ${testData.actions.length}`);
-            outputChannel.appendLine("=".repeat(60));
-            outputChannel.appendLine("");
 
             // If we already have a panel, dispose it and create a new one
             if (TestRunnerPanel.currentPanel) {
@@ -358,26 +340,28 @@ export class TestRunnerPanel {
                     // Execute Python CLI
                     try {
                         const { spawn } = require("child_process");
-                        const fixtureFilePath = testData.fixtureId
-                            ? path.join(
-                                workspaceRoot,
-                                ".webtestpilot",
-                                ".fixture",
-                                testData.fixtureId
-                            )
-                            : undefined;
+                        const args = [
+                            testItem.fullPath,
+                            "--config",
+                            configPath,
+                            "--cdp-endpoint",
+                            cdpEndpoint,
+                            "--json-output",
+                        ];
+                        
+                        const dataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
+                        if (testItem.fixtureId) {
+                            const fixture = dataProvider?.getFixtureWithId(testItem.fixtureId);
+                            args.push("--fixture-file-path", fixture!.fullPath);
+                        }
+                        // TODO: Implement for environment global param.
+                        // const environment = dataProvider?.getEnvironmentWithId(testItem);
+
                         const pythonProcess = spawn(
                             pythonPath,
                             [
                                 cliScriptPath,
-                                testFilePath,
-                                "--fixture-file-path",
-                                fixtureFilePath,
-                                "--config",
-                                configPath,
-                                "--cdp-endpoint",
-                                cdpEndpoint,
-                                "--json-output",
+                                ...args,
                             ],
                             {
                                 env: {
@@ -537,7 +521,7 @@ export class TestRunnerPanel {
                 testName: testItem.name,
                 url: url,
                 cdpEndpoint: cdpEndpoint,
-                actionsCount: testData.actions?.length || 0,
+                actionsCount: testItem.actions?.length || 0,
             });
         } catch (error) {
             console.error("Error running test:", error);

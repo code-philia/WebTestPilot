@@ -97,21 +97,6 @@ export class ParallelTestPanel {
     }
 
     /**
-     * Load and parse a JSON test file
-     */
-    private async _loadAndParseTestFile(testId: string, workspaceRoot: string): Promise<TestData> {
-        const testFilePath = path.join(workspaceRoot, '.webtestpilot', testId);
-        const content = await fs.readFile(testFilePath, 'utf-8');
-        const testData = JSON.parse(content);
-        
-        if (!testData.actions || testData.actions.length === 0) {
-            throw new Error('No actions defined in test');
-        }
-        
-        return testData;
-    }
-
-    /**
      * Connects to the remote browser via CDP and creates context for parallel execution
      */
     private async _connectToBrowser(cdpEndpoint: string) {
@@ -167,6 +152,7 @@ export class ParallelTestPanel {
         console.log('Parallel runner using workspace root:', workspaceRoot);
         
         // Get configuration
+        // TODO: Hardcoded paths.
         const cdpEndpoint = vscode.workspace.getConfiguration('webtestpilot').get<string>('cdpEndpoint') || 'http://localhost:9222';
         const pythonPath = path.join(workspaceRoot, 'webtestpilot', '.venv', 'bin', 'python');
         const cliScriptPath = path.join(workspaceRoot, 'webtestpilot', 'src', 'cli.py');
@@ -195,7 +181,7 @@ export class ParallelTestPanel {
             }
             
             this._outputChannel.appendLine(`Starting test ${index + 1}/${tests.length}: ${test.name}`);
-            await this._startSingleTest(test, WorkspaceRootService.getOpenedFolderWorkspaceRoot(), pythonPath, cliScriptPath, configPath, cdpEndpoint);
+            await this._startSingleTest(test, pythonPath, cliScriptPath, configPath, cdpEndpoint);
         }
         
         this._outputChannel.appendLine('\nAll test processes started sequentially');
@@ -207,7 +193,6 @@ export class ParallelTestPanel {
      */
     private async _startSingleTest(
         test: TestItem,
-        workspaceRoot: string,
         pythonPath: string,
         cliScriptPath: string,
         configPath: string,
@@ -220,15 +205,6 @@ export class ParallelTestPanel {
             }
             if (!this._context) {
                 throw new Error('Browser context not initialized');
-            }
-
-            let testData: TestData;
-            const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
-            try {
-                testData = await this._loadAndParseTestFile(test.id, workspaceRoot);
-            } catch (error) {
-                this._outputChannel.appendLine(`⚠️  Skipping "${test.name}" - ${error instanceof Error ? error.message : String(error)}`);
-                return;
             }
 
             // Create a new page for this test
@@ -253,7 +229,7 @@ export class ParallelTestPanel {
                 isRunning: true,
                 startTime: Date.now(),
                 currentStep: 0,
-                totalSteps: testData.actions ? testData.actions.length : 0,
+                totalSteps: test.actions ? test.actions.length : 0,
                 verifiedSteps: new Set<number>(),
                 completedSteps: new Set<number>()
             };
@@ -268,19 +244,32 @@ export class ParallelTestPanel {
                 type: 'testStarted',
                 testId: test.id,
                 testName: test.name,
-                url: testData.url,
+                url: test.url,
                 tabIndex: TARGET_ID,
-                totalSteps: testData.actions ? testData.actions.length : 0
+                totalSteps: test.actions ? test.actions.length : 0
             });
 
-            // Start Python process
-            const pythonProcess = spawn(pythonPath, [
-                cliScriptPath,
-                testFilePath,
+            const args = [
+                test.fullPath,
                 '--config', configPath,
                 '--cdp-endpoint', cdpEndpoint,
                 '--target-id', TARGET_ID,
                 '--json-output'
+            ];
+            
+            const dataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
+            if (test.fixtureId) {
+                const fixture = dataProvider?.getFixtureWithId(test.fixtureId);
+                args.push("--fixture-file-path", fixture!.fullPath);
+            }
+            // TODO: Implement for environment global param.
+            // const environment = dataProvider?.getEnvironmentWithId(testItem);
+
+            // Start Python process
+            const pythonProcess = spawn(pythonPath, [
+                cliScriptPath,
+                test.fullPath,
+                ...args
             ], {
                 env: {
                     ...process.env,

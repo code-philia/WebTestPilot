@@ -184,18 +184,17 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
         return Promise.resolve([]);
     }
 
-    async createFolder(name: string, parentId?: string): Promise<FolderItem> {
-        const parentPath = parentId;
-        const folderItem = await this.fileSystemService.createFolder(name, parentPath);
+    async createFolder(name: string, parentPath?: string, type?: POSSIBLE_MENUS): Promise<FolderItem> {
+        const folderItem = await this.fileSystemService.createFolder(name, parentPath, type);
         await this.loadFromFileSystem();
         return folderItem;
     }
 
     async deleteItem(item: WebTestPilotDataItem): Promise<void> {
-        if (item.type === 'test' || item.type === 'fixture' || item.type === 'environment') {
-            await this.fileSystemService.deleteTest(item.id);
+        if (item.type !== 'folder') {
+            await this.fileSystemService.deleteItem(item.fullPath);
         } else {
-            await this.fileSystemService.deleteFolder(item.id);
+            await this.fileSystemService.deleteFolder(item.fullPath);
         }
         await this.loadFromFileSystem();
     }
@@ -218,13 +217,8 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     async updateFixture(fixturePath: string, fixtureItem: FixtureItem): Promise<void> {
-        try {
-            await this.fileSystemService.updateFixture(fixturePath, fixtureItem);
-            await this.loadFromFileSystem();
-        } catch (error) {
-            console.error('TreeDataProvider.updateFixture failed:', error);
-            throw error;
-        }
+        await this.fileSystemService.updateFixture(fixturePath, fixtureItem);
+        await this.loadFromFileSystem();
     }
 
     async createFixture(name: string, folderId?: string): Promise<FixtureItem> {
@@ -242,13 +236,20 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     async updateEnvironment(environmentPath: string, environmentItem: EnvironmentItem): Promise<void> {
-        try {
-            await this.fileSystemService.updateEnvironment(environmentPath, environmentItem);
-            await this.loadFromFileSystem();
-        } catch (error) {
-            console.error('TreeDataProvider.updateEnvironment failed:', error);
-            throw error;
-        }
+        await this.fileSystemService.updateEnvironment(environmentPath, environmentItem);
+        await this.loadFromFileSystem();
+    }
+
+    // TODO: This shouuld be moved elsewhere? repos style
+    getFixtureWithId(id: string): FixtureItem | undefined {
+        const fixture = this.items.find(item => item.type === 'fixture' && item.id === id) as FixtureItem | undefined;
+        return fixture;
+    }
+    
+    // TODO: This shouuld be moved elsewhere? repos style
+    getEnvironmentWithId(id: string): EnvironmentItem | undefined {
+        const environment = this.items.find(item => item.type === 'environment' && item.id === id) as EnvironmentItem | undefined;
+        return environment;
     }
 
     getStructure(): WebTestPilotDataItem[] {

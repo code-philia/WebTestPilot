@@ -140,7 +140,7 @@ export class FixtureEditorPanel {
 
         try {
             await this._treeDataProvider.updateFixture(
-                this._fixtureItem.id,
+                this._fixtureItem.fullPath,
                 this._fixtureItem
             );
             vscode.window.showInformationMessage("Fixture saved successfully!");

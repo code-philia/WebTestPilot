@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, MenuItem, EnvironmentItem, FixtureItem, FIXTURE_MENU_ID, ENV_MENU_ID, TEST_MENU_ID, POSSIBLE_MENUS } from '../models';
+import { generateId } from '../utils/common';
 
 
 export class FileSystemService {
@@ -69,13 +70,15 @@ export class FileSystemService {
                 const entryFullPath = path.join(currentPath, entry.name);
 
                 if (entry.isDirectory()) {
+                    // Dynamic ids for folder always.
                     const folderItem: FolderItem = {
                         id: entryFullPath,
                         name: entry.name,
                         type: 'folder',
                         parentId: rootPath === currentPath ? loadType : currentPath,
                         createdAt: new Date(),
-                        updatedAt: new Date()
+                        updatedAt: new Date(),
+                        fullPath: entryFullPath
                     };
                     items.push(folderItem);
                     await this.loadDataRecursive(rootPath, items, entryFullPath, loadType);
@@ -84,11 +87,12 @@ export class FileSystemService {
                         const content = await fs.readFile(entryFullPath, 'utf-8');
                         const data = JSON.parse(content);
                         let item: Partial<WebTestPilotDataItem> = {
-                            id: entryFullPath,
+                            id: data.id ? data.id : generateId(loadType),
                             name: this.extractTestName(entry.name, data),
                             parentId: rootPath === currentPath ? loadType : currentPath,
                             createdAt: new Date(data.createdAt || Date.now()),
-                            updatedAt: new Date(data.updatedAt || Date.now())
+                            updatedAt: new Date(data.updatedAt || Date.now()),
+                            fullPath: entryFullPath
                         };
                         switch (loadType) {
                         case TEST_MENU_ID:
@@ -116,6 +120,17 @@ export class FileSystemService {
                             break;
                         }
                         items.push(item as WebTestPilotDataItem);
+
+                        // Write this file so that the id persists if it's not in the first place.
+                        if (!data.id) {
+                            if (loadType === FIXTURE_MENU_ID) {
+                                await this.writeFixtureFile(entryFullPath, item as FixtureItem);
+                            } else if (loadType === ENV_MENU_ID) {
+                                await this.writeEnvironmentFile(entryFullPath, item as EnvironmentItem);
+                            } else if (loadType === TEST_MENU_ID) {
+                                await this.writeTestFile(entryFullPath, item as TestItem);
+                            }
+                        }
                     } catch (error) {
                         console.error(`Error reading test file ${entryFullPath}:`, error);
                     }
@@ -136,56 +151,52 @@ export class FileSystemService {
 
     async createTest(name: string, folderPath?: string): Promise<TestItem> {
         const testFileName = this.generateTestFileName(name);
-        const testId = folderPath 
+        const testFullPath = folderPath 
             ? path.join(folderPath, testFileName)
-            : testFileName;
+            : path.join(this.testsDir, testFileName);
 
         const testItem: TestItem = {
-            id: testId,
+            id: generateId('test'),
             name,
             type: 'test',
             url: 'http://localhost:8080/',
             actions: [],
             parentId: folderPath ? folderPath : undefined,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            fullPath: testFullPath
         };
 
-        const filePath = path.join(this.testsDir, testId);
-        await this.writeTestFile(filePath, testItem);
+        await this.writeTestFile(testFullPath, testItem);
         return testItem;
     }
 
-    async createFolder(name: string, parentPath?: string): Promise<FolderItem> {
-        // Sanitize folder name
+    async createFolder(name: string, parentPath?: string, type?: POSSIBLE_MENUS): Promise<FolderItem> {
         const sanitizedName = name.replace(/[<>:"/\\|?*]/g, '_').trim();
-        
-        const folderId = parentPath 
+        const fullPath = parentPath 
             ? path.join(parentPath, sanitizedName)
-            : sanitizedName;
+            : path.join(this.webTestPilotDir, `.${type}`, sanitizedName);
 
         const folderItem: FolderItem = {
-            id: folderId,
+            id: fullPath,
             name: sanitizedName,
             type: 'folder',
             parentId: parentPath ? parentPath : undefined,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            fullPath: fullPath,
         };
 
-        const folderPath = path.join(this.webTestPilotDir, folderId);
-        await fs.mkdir(folderPath, { recursive: true });
+        await fs.mkdir(fullPath, { recursive: true });
         return folderItem;
     }
 
-    async deleteTest(testPath: string): Promise<void> {
-        const filePath = path.join(this.testsDir, testPath);
-        await fs.unlink(filePath);
+    async deleteItem(path: string): Promise<void> {
+        await fs.unlink(path);
     }
 
     async deleteFolder(folderPath: string): Promise<void> {
-        const fullPath = path.join(this.webTestPilotDir, folderPath);
-        await fs.rm(fullPath, { recursive: true, force: true });
+        await fs.rm(folderPath, { recursive: true, force: true });
     }
 
     async updateTest(testPath: string, testItem: TestItem): Promise<void> {
@@ -198,27 +209,28 @@ export class FileSystemService {
 
     async createFixture(name: string, folderPath?: string): Promise<FixtureItem> {
         const fixtureFileName = this.generateTestFileName(name);
-        const fixtureId = folderPath 
+        const fixtureFullPath = folderPath 
             ? path.join(folderPath, fixtureFileName)
-            : fixtureFileName;
+            : path.join(this.fixturesDir, fixtureFileName);
 
         const fixtureItem: FixtureItem = {
-            id: fixtureId,
+            id: generateId('fixture'),
             name,
             type: 'fixture',
             actions: [],
             parentId: folderPath ? folderPath : undefined,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            fullPath: fixtureFullPath
         };
 
-        const filePath = path.join(this.fixturesDir, fixtureId);
-        await this.writeFixtureFile(filePath, fixtureItem);
+        await this.writeFixtureFile(fixtureFullPath, fixtureItem);
         return fixtureItem;
     }
 
     private async writeTestFile(filePath: string, testItem: TestItem): Promise<void> {
         const testContent = {
+            id: testItem.id,
             name: testItem.name,
             url: testItem.url,
             fixtureId: testItem.fixtureId,
@@ -240,6 +252,7 @@ export class FileSystemService {
 
     private async writeFixtureFile(filePath: string, fixtureItem: FixtureItem): Promise<void> {
         const fixtureContent = {
+            id: fixtureItem.id,
             name: fixtureItem.name,
             actions: fixtureItem.actions || [],
             createdAt: fixtureItem.createdAt.toISOString(),
@@ -259,22 +272,22 @@ export class FileSystemService {
 
     async createEnvironment(name: string, folderPath?: string): Promise<EnvironmentItem> {
         const environmentFileName = this.generateTestFileName(name);
-        const environmentId = folderPath 
+        const environmentFullPath = folderPath 
             ? path.join(folderPath, environmentFileName)
-            : environmentFileName;
+            : path.join(this.envDir, environmentFileName);
 
         const environmentItem: EnvironmentItem = {
-            id: environmentId,
+            id: generateId('environment'),
             name,
             type: 'environment',
             environmentVariables: {},
             parentId: folderPath ? folderPath : undefined,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            fullPath: environmentFullPath
         };
 
-        const filePath = path.join(this.envDir, environmentId);
-        await this.writeEnvironmentFile(filePath, environmentItem);
+        await this.writeEnvironmentFile(environmentFullPath, environmentItem);
         return environmentItem;
     }
 
@@ -284,6 +297,7 @@ export class FileSystemService {
 
     private async writeEnvironmentFile(filePath: string, environmentItem: EnvironmentItem): Promise<void> {
         const environmentContent = {
+            id: environmentItem.id,
             name: environmentItem.name,
             environmentVariables: environmentItem.environmentVariables || {},
             createdAt: environmentItem.createdAt.toISOString(),

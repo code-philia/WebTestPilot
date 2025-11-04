@@ -164,7 +164,7 @@ export class TestEditorPanel {
 
         try {
             await this._treeDataProvider.updateTest(
-                this._testItem.id,
+                this._testItem.fullPath,
                 this._testItem
             );
             vscode.window.showInformationMessage("Test saved successfully!");

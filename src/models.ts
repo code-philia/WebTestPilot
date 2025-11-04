@@ -16,6 +16,7 @@ interface SidebarItemBase {
     parentId: string | undefined;
     createdAt: Date;
     updatedAt: Date;
+    fullPath: string;
 }
 
 export interface MenuItem extends SidebarItemBase {

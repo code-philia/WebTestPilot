@@ -65,10 +65,12 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async () => {
+    const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async (parentFolder?: FolderItem) => {
         // Get the currently selected tree item
-        const selectedItem = treeTestView.selection[0];
-        const parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+        if (!parentFolder) {
+            const selectedItem = treeTestView.selection[0];
+            parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+        }
 		
         const name = await vscode.window.showInputBox({
             prompt: parentFolder ? `Enter subfolder name for "${parentFolder.name}"` : 'Enter folder name',
@@ -86,16 +88,16 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         if (name) {
-            const parentId = parentFolder?.id;
+            const parentPath = parentFolder?.fullPath;
 
-            await treeTestDataProvider.createFolder(name.trim(), parentId);
+            await treeTestDataProvider.createFolder(name.trim(), parentPath, 'test');
             const location = parentFolder ? `in "${parentFolder.name}"` : 'at root';
             vscode.window.showInformationMessage(`Folder "${name}" created ${location}!`);
         }
     });
 
     const deleteItemCommand = vscode.commands.registerCommand('webtestpilot.deleteItem', async (treeItem: WebTestPilotTreeItem) => {
-        const itemType = treeItem.item.type === 'test' ? 'test' : treeItem.item.type === 'fixture' ? 'fixture' : 'folder';
+        const itemType = treeItem.item.type;
         const result = await vscode.window.showWarningMessage(
             `Are you sure you want to delete this ${itemType}?`,
             { modal: true },
@@ -158,16 +160,11 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         if (name) {
-            const folderId = folderItem?.id;
-
-            await treeFixtureDataProvider.createFixture(name.trim(), folderId);
+            const folderPath = folderItem?.fullPath;
+            await treeFixtureDataProvider.createFixture(name.trim(), folderPath);
             const location = folderItem ? `in "${folderItem.name}"` : 'at root';
             vscode.window.showInformationMessage(`Fixture "${name}" created ${location}!`);
         }
-    });
-
-    const createFixtureRootCommand = vscode.commands.registerCommand('webtestpilot.createFixtureRoot', () => {
-        vscode.commands.executeCommand('webtestpilot.createFixture');
     });
 
     const createEnvironmentCommand = vscode.commands.registerCommand('webtestpilot.createEnvironment', async () => {
@@ -187,8 +184,8 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         if (name) {
-            const folderId = folderItem?.id;
-            await treeEnvironmentDataProvider.createEnvironment(name.trim(), folderId);
+            const folderPath = folderItem?.fullPath;
+            await treeEnvironmentDataProvider.createEnvironment(name.trim(), folderPath);
             const location = folderItem ? `in "${folderItem.name}"` : 'at root';
             vscode.window.showInformationMessage(`Environment "${name}" created ${location}!`);
         }
@@ -213,27 +210,8 @@ export function activate(context: vscode.ExtensionContext) {
         );
     });
 
-    const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (treeItemOrTest: any) => {
-        console.log('runTestCommand called with:', treeItemOrTest);
-		
-        // Extract TestItem from WebTestPilotTreeItem if needed
-        let test: TestItem;
-        if (treeItemOrTest && treeItemOrTest.item && treeItemOrTest.item.type === 'test') {
-            // This is a WebTestPilotTreeItem
-            test = treeItemOrTest.item as TestItem;
-        } else if (treeItemOrTest && treeItemOrTest.type === 'test') {
-            // This is already a TestItem
-            test = treeItemOrTest as TestItem;
-        } else {
-            vscode.window.showErrorMessage('Invalid test item');
-            return;
-        }
-		
-        // Validate test item
-        if (!test || !test.id) {
-            vscode.window.showErrorMessage('Invalid test item');
-            return;
-        }
+    const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (testItem: TestItem) => {
+        console.log('runTestCommand called with:', testItem);
 		
         // Get workspace root
         const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -243,7 +221,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         // Use TestRunnerPanel to run the test
-        await TestRunnerPanel.createOrShow(test, workspaceRoot, context.extensionUri);
+        await TestRunnerPanel.createOrShow(testItem, workspaceRoot, context.extensionUri);
     });
 
     const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
@@ -341,7 +319,6 @@ export function activate(context: vscode.ExtensionContext) {
         openEnvironmentCommand,
         createTestRootCommand,
         createFolderRootCommand,
-        createFixtureRootCommand,
         createEnvironmentRootCommand,
         runTestCommand,
         addTestCaseCommand,
@@ -349,7 +326,7 @@ export function activate(context: vscode.ExtensionContext) {
         runFolderCommand,
         setWorkspaceRootCommand,
         showWorkspaceRootCommand,
-        treeTestDataProvider, // Dispose the tree provider to clean up file watchers
+        treeTestDataProvider,
         treeFixtureDataProvider,
         treeEnvironmentDataProvider
     );

@@ -138,7 +138,7 @@ export class EnvironmentEditorPanel {
 
         try {
             await this._treeDataProvider.updateEnvironment(
-                this._environmentItem.id,
+                this._environmentItem.fullPath,
                 this._environmentItem
             );
             vscode.window.showInformationMessage("Environment saved successfully!");
