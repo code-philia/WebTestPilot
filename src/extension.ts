@@ -11,6 +11,7 @@ import { EnvironmentEditorPanel } from './panels/environmentEditorPanel';
 import { TestRunnerPanel } from './panels/testRunnerPanel';
 import { ParallelTestPanel } from './panels/parallelTestPanel';
 import { WorkspaceRootService } from './services/workspaceRootService';
+import { EnvironmentService } from './services/environmentService';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -20,12 +21,15 @@ export function activate(context: vscode.ExtensionContext) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "webtestpilot" is now active!');
 
-    // Create tree data provider
+    // Create centralized environment service
+    const environmentService = new EnvironmentService(context);
+
+    // Create tree data providers
     const treeTestDataProvider = new WebTestPilotTreeDataProvider(context, TEST_MENU_ID);
     const treeFixtureDataProvider = new WebTestPilotTreeDataProvider(context, FIXTURE_MENU_ID);
-    const treeEnvironmentDataProvider = new WebTestPilotTreeDataProvider(context, ENV_MENU_ID);
+    const treeEnvironmentDataProvider = new WebTestPilotTreeDataProvider(context, ENV_MENU_ID, environmentService);
 
-    // Register tree view
+    // Register tree views
     const treeTestView = vscode.window.createTreeView('webtestpilot.treeView', {
         treeDataProvider: treeTestDataProvider,
         showCollapseAll: true
@@ -36,8 +40,29 @@ export function activate(context: vscode.ExtensionContext) {
     });
     const treeEnvironmentView = vscode.window.createTreeView('webtestpilot.treeEnvironmentView', {
         treeDataProvider: treeEnvironmentDataProvider,
-        showCollapseAll: true
+        showCollapseAll: true,
+        manageCheckboxStateManually: true
     });
+
+    // Handle checkbox changes with clean logic
+    treeEnvironmentView.onDidChangeCheckboxState(async (ev) => {
+        for (const [item, newState] of ev.items) {
+            const isChecked = newState === vscode.TreeItemCheckboxState.Checked;
+            
+            if (isChecked) {
+                // Select this environment (service handles state + notification)
+                await environmentService.setSelectedEnvironment(item.item as EnvironmentItem);
+                vscode.window.showInformationMessage(`Selected environment: ${item.item.name}`);
+            } else {
+                // Only clear if this was the selected one
+                if (environmentService.isSelected(item.item.id)) {
+                    await environmentService.setSelectedEnvironment(undefined);
+                    vscode.window.showInformationMessage(`Cleared selected environment`);
+                }
+            }
+        }
+    });
+
 
     // Register commands
     const createTestCommand = vscode.commands.registerCommand('webtestpilot.createTest', async () => {
@@ -309,6 +334,7 @@ export function activate(context: vscode.ExtensionContext) {
         treeTestView,
         treeFixtureView,
         treeEnvironmentView,
+        environmentService,
         createTestCommand,
         createFolderCommand,
         createFixtureCommand,

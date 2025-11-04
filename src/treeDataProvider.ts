@@ -1,14 +1,23 @@
 import * as vscode from 'vscode';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, MenuItem, FixtureItem, EnvironmentItem, POSSIBLE_MENUS, POSSIBLE_MENU_IDS } from './models';
+import { TreeItem as WebTestPilotDataItem, TestItem, FolderItem, MenuItem, FixtureItem, EnvironmentItem, POSSIBLE_MENU_IDS, POSSIBLE_MENUS, TEST_MENU_ID, FIXTURE_MENU_ID, ENV_MENU_ID } from './models';
 import { FileSystemService } from './services/fileSystemService';
+import { EnvironmentService } from './services/environmentService';
 
 export class WebTestPilotTreeItem extends vscode.TreeItem {
     constructor(
         public readonly item: WebTestPilotDataItem,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
-        public readonly command?: vscode.Command
+        public readonly command?: vscode.Command,
+        public readonly checked?: boolean
     ) {
         super(item.name, collapsibleState);
+
+        if (item.type === 'environment') {
+            this.checkboxState = {
+                state: this.checked ? vscode.TreeItemCheckboxState.Checked : vscode.TreeItemCheckboxState.Unchecked,
+                tooltip: this.checked ? 'Environment selected' : 'Environment not selected'
+            };
+        }
         
         this.tooltip = this.getTooltip();
         this.description = this.getDescription();
@@ -84,9 +93,23 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     private items: WebTestPilotDataItem[] = [];
     private fileSystemService: FileSystemService;
     private loadType: POSSIBLE_MENUS;
+    private environmentService?: EnvironmentService;
 
-    constructor(private context: vscode.ExtensionContext, loadType: POSSIBLE_MENUS) {
+    constructor(
+        private context: vscode.ExtensionContext, 
+        loadType: POSSIBLE_MENUS,
+        environmentService?: EnvironmentService
+    ) {
         this.loadType = loadType;
+        this.environmentService = environmentService;
+        
+        // Listen to environment changes if this is the environment tree
+        if (environmentService && loadType === ENV_MENU_ID) {
+            environmentService.onDidChangeEnvironment(() => {
+                this._onDidChangeTreeData.fire();
+            });
+        }
+        
         const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!workspaceRoot) {
             throw new Error('No workspace folder found');
@@ -128,6 +151,26 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
         return element;
     }
 
+    private createTreeItem(item: WebTestPilotDataItem): WebTestPilotTreeItem {
+        const commandMap = {
+            'test': 'webtestpilot.openTest',
+            'fixture': 'webtestpilot.openFixture',
+            'environment': 'webtestpilot.openEnvironment'
+        };
+        
+        const command = commandMap[this.loadType] ? {
+            command: commandMap[this.loadType],
+            title: `Open ${this.loadType}`,
+            arguments: [item]
+        } : undefined;
+        
+        const checked = this.loadType === 'environment' && this.environmentService
+            ? this.environmentService.isSelected(item.id)
+            : undefined;
+        
+        return new WebTestPilotTreeItem(item, vscode.TreeItemCollapsibleState.None, command, checked);
+    }
+
     getChildren(element?: WebTestPilotTreeItem): Thenable<WebTestPilotTreeItem[]> {
         // Root level - show 3 items; test cases, fixtures, environments
         console.log(this.items);
@@ -143,16 +186,7 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
                 ...rootFolders.map(
                     folder => new WebTestPilotTreeItem(folder, vscode.TreeItemCollapsibleState.Collapsed)
                 ),
-                ...rootItems.map(item => {
-                    const command = this.loadType === 'test' ? 'webtestpilot.openTest' : 
-                        this.loadType === 'fixture' ? 'webtestpilot.openFixture' :
-                            this.loadType === 'environment' ? 'webtestpilot.openEnvironment' : undefined;
-                    return new WebTestPilotTreeItem(item, vscode.TreeItemCollapsibleState.None, command ? {
-                        command,
-                        title: `Open ${this.loadType}`,
-                        arguments: [item]
-                    } : undefined);
-                })
+                ...rootItems.map(item => this.createTreeItem(item))
             ]);
         }
         
@@ -164,20 +198,10 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
             const childItems = this.items.filter(item => 
                 item.type === this.loadType && item.parentId === parent.id
             );
-            console.log(parent.id, childFolders, childItems);
             
             return Promise.resolve([
                 ...childFolders.map(childFolder => new WebTestPilotTreeItem(childFolder, vscode.TreeItemCollapsibleState.Collapsed)),
-                ...childItems.map(item => {
-                    const command = this.loadType === 'test' ? 'webtestpilot.openTest' : 
-                        this.loadType === 'fixture' ? 'webtestpilot.openFixture' :
-                            this.loadType === 'environment' ? 'webtestpilot.openEnvironment' : undefined;
-                    return new WebTestPilotTreeItem(item, vscode.TreeItemCollapsibleState.None, command ? {
-                        command,
-                        title: `Open ${this.loadType}`,
-                        arguments: [item]
-                    } : undefined);
-                })
+                ...childItems.map(item => this.createTreeItem(item))
             ]);
         }
 
