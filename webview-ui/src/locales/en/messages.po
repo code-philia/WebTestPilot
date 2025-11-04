@@ -37,7 +37,7 @@ msgstr "Actions"
 msgid "Add Action"
 msgstr "Add Action"
 
-#: src/pages/EnvironmentEditor.tsx:187
+#: src/pages/EnvironmentEditor.tsx:207
 msgid "Add Variable"
 msgstr "Add Variable"
 
@@ -61,7 +61,7 @@ msgstr "Clear All Tabs"
 #~ msgid "Clear Finished"
 #~ msgstr "Clear Finished"
 
-#: src/pages/EnvironmentEditor.tsx:158
+#: src/pages/EnvironmentEditor.tsx:178
 #: src/pages/FixtureEditor.tsx:143
 #: src/pages/TestEditor.tsx:204
 msgid "Close"
@@ -89,13 +89,13 @@ msgid "Duration:"
 msgstr "Duration:"
 
 #: src/pages/EnvironmentEditor.tsx:68
-#: src/pages/EnvironmentEditor.tsx:151
+#: src/pages/EnvironmentEditor.tsx:171
 msgid "Edit Environment"
 msgstr "Edit Environment"
 
 #. placeholder {0}: environmentData.name
 #: src/pages/EnvironmentEditor.tsx:67
-#: src/pages/EnvironmentEditor.tsx:150
+#: src/pages/EnvironmentEditor.tsx:170
 msgid "Edit Environment: {0}"
 msgstr "Edit Environment: {0}"
 
@@ -121,15 +121,15 @@ msgstr "Edit Test"
 msgid "Edit Test: {0}"
 msgstr "Edit Test: {0}"
 
-#: src/pages/EnvironmentEditor.tsx:165
+#: src/pages/EnvironmentEditor.tsx:185
 msgid "Environment Name"
 msgstr "Environment Name"
 
-#: src/pages/EnvironmentEditor.tsx:136
+#: src/pages/EnvironmentEditor.tsx:156
 msgid "Environment name is required"
 msgstr "Environment name is required"
 
-#: src/pages/EnvironmentEditor.tsx:185
+#: src/pages/EnvironmentEditor.tsx:205
 msgid "Environment Variables"
 msgstr "Environment Variables"
 
@@ -177,7 +177,7 @@ msgstr "Loading..."
 #~ msgid "Logs"
 #~ msgstr "Logs"
 
-#: src/pages/EnvironmentEditor.tsx:172
+#: src/pages/EnvironmentEditor.tsx:192
 msgid "My Environment"
 msgstr "My Environment"
 
@@ -201,7 +201,7 @@ msgstr "No actions defined. Click \"Add Action\" to get started."
 msgid "No Fixture"
 msgstr "No Fixture"
 
-#: src/pages/EnvironmentEditor.tsx:203
+#: src/pages/EnvironmentEditor.tsx:223
 msgid "No variables defined. Click \"Add Variable\" to create one."
 msgstr "No variables defined. Click \"Add Variable\" to create one."
 
@@ -217,7 +217,7 @@ msgstr "Parallel Tests:"
 msgid "Passed"
 msgstr "Passed"
 
-#: src/pages/EnvironmentEditor.tsx:235
+#: src/pages/EnvironmentEditor.tsx:258
 msgid "Remove variable"
 msgstr "Remove variable"
 
@@ -229,7 +229,7 @@ msgstr "Run Test"
 msgid "Running"
 msgstr "Running"
 
-#: src/pages/EnvironmentEditor.tsx:155
+#: src/pages/EnvironmentEditor.tsx:175
 msgid "Save Environment"
 msgstr "Save Environment"
 
@@ -309,19 +309,19 @@ msgstr "Total Tests"
 msgid "URL"
 msgstr "URL"
 
-#: src/pages/EnvironmentEditor.tsx:228
+#: src/pages/EnvironmentEditor.tsx:251
 msgid "value"
 msgstr "value"
 
-#: src/pages/EnvironmentEditor.tsx:195
+#: src/pages/EnvironmentEditor.tsx:215
 msgid "Value"
 msgstr "Value"
 
-#: src/pages/EnvironmentEditor.tsx:194
+#: src/pages/EnvironmentEditor.tsx:214
 msgid "Variable"
 msgstr "Variable"
 
-#: src/pages/EnvironmentEditor.tsx:217
+#: src/pages/EnvironmentEditor.tsx:240
 msgid "VARIABLE_NAME"
 msgstr "VARIABLE_NAME"
 

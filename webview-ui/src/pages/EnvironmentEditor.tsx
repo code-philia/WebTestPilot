@@ -79,13 +79,20 @@ export const EnvironmentEditor: React.FC = () => {
   );
 
   const handleAddVariable = useCallback(() => {
-    setEnvironmentData((prev) => ({
-      ...prev,
-      environmentVariables: {
-        ...prev.environmentVariables,
-        "": "", // Add empty key-value pair
-      },
-    }));
+    setEnvironmentData((prev) => {
+      // Generate a unique temporary key
+      let tempKey = `NEW_VAR_${Date.now()}`;
+      while (tempKey in prev.environmentVariables) {
+        tempKey = `NEW_VAR_${Date.now()}_${Math.random()}`;
+      }
+      return {
+        ...prev,
+        environmentVariables: {
+          ...prev.environmentVariables,
+          [tempKey]: "",
+        },
+      };
+    });
   }, []);
 
   const handleRemoveVariable = useCallback((key: string) => {
@@ -102,10 +109,23 @@ export const EnvironmentEditor: React.FC = () => {
   const handleVariableKeyChange = useCallback(
     (oldKey: string, newKey: string) => {
       setEnvironmentData((prev) => {
-        const newVars = { ...prev.environmentVariables };
-        const value = newVars[oldKey];
-        delete newVars[oldKey];
-        newVars[newKey] = value;
+        // If the key hasn't actually changed, don't update
+        if (oldKey === newKey) {
+          return prev;
+        }
+        
+        const newVars: Record<string, string> = {};
+        const value = prev.environmentVariables[oldKey];
+        
+        // Rebuild the object maintaining order
+        for (const [k, v] of Object.entries(prev.environmentVariables)) {
+          if (k === oldKey) {
+            newVars[newKey] = value;
+          } else {
+            newVars[k] = v;
+          }
+        }
+        
         return {
           ...prev,
           environmentVariables: newVars,
@@ -204,41 +224,45 @@ export const EnvironmentEditor: React.FC = () => {
                 </td>
               </tr>
             ) : (
-              variables.map(([key, value], index) => (
-                <tr key={`${key}-${index}`}>
-                  <td>
-                    <input
-                      type="text"
-                      className="text-input"
-                      value={key}
-                      onChange={(e) =>
-                        handleVariableKeyChange(key, e.target.value)
-                      }
-                      placeholder={t`VARIABLE_NAME`}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="text-input"
-                      value={value}
-                      onChange={(e) =>
-                        handleVariableValueChange(key, e.target.value)
-                      }
-                      placeholder={t`value`}
-                    />
-                  </td>
-                  <td>
-                    <VSCodeButton
-                      appearance="icon"
-                      onClick={() => handleRemoveVariable(key)}
-                      aria-label={t`Remove variable`}
-                    >
-                      <span className="codicon codicon-trash"></span>
-                    </VSCodeButton>
-                  </td>
-                </tr>
-              ))
+              variables.map(([key, value], index) => {
+                // Use index as the stable key for React, and track the actual variable key separately
+                const stableKey = `var-${index}`;
+                return (
+                  <tr key={stableKey}>
+                    <td>
+                      <input
+                        type="text"
+                        className="text-input"
+                        value={key}
+                        onChange={(e) =>
+                          handleVariableKeyChange(key, e.target.value)
+                        }
+                        placeholder={t`VARIABLE_NAME`}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        className="text-input"
+                        value={value}
+                        onChange={(e) =>
+                          handleVariableValueChange(key, e.target.value)
+                        }
+                        placeholder={t`value`}
+                      />
+                    </td>
+                    <td>
+                      <VSCodeButton
+                        appearance="icon"
+                        onClick={() => handleRemoveVariable(key)}
+                        aria-label={t`Remove variable`}
+                      >
+                        <span className="codicon codicon-trash"></span>
+                      </VSCodeButton>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>

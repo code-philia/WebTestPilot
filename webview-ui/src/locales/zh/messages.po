@@ -37,7 +37,7 @@ msgstr "操作"
 msgid "Add Action"
 msgstr "添加操作"
 
-#: src/pages/EnvironmentEditor.tsx:187
+#: src/pages/EnvironmentEditor.tsx:207
 msgid "Add Variable"
 msgstr "添加变量"
 
@@ -61,7 +61,7 @@ msgstr "清除所有标签页"
 #~ msgid "Clear Finished"
 #~ msgstr "清除已完成"
 
-#: src/pages/EnvironmentEditor.tsx:158
+#: src/pages/EnvironmentEditor.tsx:178
 #: src/pages/FixtureEditor.tsx:143
 #: src/pages/TestEditor.tsx:204
 msgid "Close"
@@ -89,13 +89,13 @@ msgid "Duration:"
 msgstr "持续时间："
 
 #: src/pages/EnvironmentEditor.tsx:68
-#: src/pages/EnvironmentEditor.tsx:151
+#: src/pages/EnvironmentEditor.tsx:171
 msgid "Edit Environment"
 msgstr "编辑环境"
 
 #. placeholder {0}: environmentData.name
 #: src/pages/EnvironmentEditor.tsx:67
-#: src/pages/EnvironmentEditor.tsx:150
+#: src/pages/EnvironmentEditor.tsx:170
 msgid "Edit Environment: {0}"
 msgstr "编辑环境：{0}"
 
@@ -121,15 +121,15 @@ msgstr "编辑测试"
 msgid "Edit Test: {0}"
 msgstr "编辑测试：{0}"
 
-#: src/pages/EnvironmentEditor.tsx:165
+#: src/pages/EnvironmentEditor.tsx:185
 msgid "Environment Name"
 msgstr "环境名称"
 
-#: src/pages/EnvironmentEditor.tsx:136
+#: src/pages/EnvironmentEditor.tsx:156
 msgid "Environment name is required"
 msgstr "环境名称为必填项"
 
-#: src/pages/EnvironmentEditor.tsx:185
+#: src/pages/EnvironmentEditor.tsx:205
 msgid "Environment Variables"
 msgstr "环境变量"
 
@@ -177,7 +177,7 @@ msgstr "加载中..."
 #~ msgid "Logs"
 #~ msgstr "日志"
 
-#: src/pages/EnvironmentEditor.tsx:172
+#: src/pages/EnvironmentEditor.tsx:192
 msgid "My Environment"
 msgstr "我的环境"
 
@@ -201,9 +201,9 @@ msgstr "未定义任何操作。点击“添加操作”开始。"
 msgid "No Fixture"
 msgstr "无夹具"
 
-#: src/pages/EnvironmentEditor.tsx:203
+#: src/pages/EnvironmentEditor.tsx:223
 msgid "No variables defined. Click \"Add Variable\" to create one."
-msgstr "未定义任何变量。点击"添加变量"创建一个。"
+msgstr "未定义任何变量。点击\"添加变量\"创建一个。"
 
 #: src/App.tsx:61
 #~ msgid "Page \"{page}\" not found"
@@ -217,7 +217,7 @@ msgstr "并行测试："
 msgid "Passed"
 msgstr "通过"
 
-#: src/pages/EnvironmentEditor.tsx:235
+#: src/pages/EnvironmentEditor.tsx:258
 msgid "Remove variable"
 msgstr "移除变量"
 
@@ -229,7 +229,7 @@ msgstr "运行测试"
 msgid "Running"
 msgstr "运行中"
 
-#: src/pages/EnvironmentEditor.tsx:155
+#: src/pages/EnvironmentEditor.tsx:175
 msgid "Save Environment"
 msgstr "保存环境"
 
@@ -309,19 +309,19 @@ msgstr "测试总数"
 msgid "URL"
 msgstr "URL"
 
-#: src/pages/EnvironmentEditor.tsx:228
+#: src/pages/EnvironmentEditor.tsx:251
 msgid "value"
 msgstr "值"
 
-#: src/pages/EnvironmentEditor.tsx:195
+#: src/pages/EnvironmentEditor.tsx:215
 msgid "Value"
 msgstr "值"
 
-#: src/pages/EnvironmentEditor.tsx:194
+#: src/pages/EnvironmentEditor.tsx:214
 msgid "Variable"
 msgstr "变量"
 
-#: src/pages/EnvironmentEditor.tsx:217
+#: src/pages/EnvironmentEditor.tsx:240
 msgid "VARIABLE_NAME"
 msgstr "变量名称"
 
