@@ -64,6 +64,16 @@
         "icon": "$(add)"
       },
       {
+        "command": "webtestpilot.createTestRoot",
+        "title": "New Test",
+        "icon": "$(add)"
+      },
+      {
+        "command": "webtestpilot.createFolderRoot",
+        "title": "New Folder",
+        "icon": "$(new-folder)"
+      },
+      {
         "command": "webtestpilot.addFolder",
         "title": "Add Folder",
         "icon": "$(new-folder)"
@@ -88,24 +98,12 @@
         "icon": "$(play)"
       },
       {
-        "command": "webtestpilot.createTestRoot",
-        "title": "New Test"
-      },
-      {
-        "command": "webtestpilot.createFolderRoot",
-        "title": "New Folder"
-      },
-      {
         "command": "webtestpilot.setWorkspaceRoot",
         "title": "WebTestPilot: Set Workspace Root"
       },
       {
         "command": "webtestpilot.showWorkspaceRoot",
         "title": "WebTestPilot: Show Workspace Root"
-      },
-      {
-        "command": "webtestpilot.openFixtureEditor",
-        "title": "Open Fixture Editor"
       }
     ],
     "views": {
@@ -139,51 +137,66 @@
     "menus": {
       "view/title": [
         {
+          "command": "webtestpilot.createFolderRoot",
+          "when": "view == webtestpilot.treeView",
+          "group": "navigation"
+        },
+        {
           "command": "webtestpilot.createTestRoot",
           "when": "view == webtestpilot.treeView",
           "group": "navigation"
         },
         {
+          "command": "webtestpilot.createTestRoot",
+          "when": "view == webtestpilot.treeFixtureView",
+          "group": "navigation"
+        },
+        {
           "command": "webtestpilot.createFolderRoot",
-          "when": "view == webtestpilot.treeView",
+          "when": "view == webtestpilot.treeFixtureView",
+          "group": "navigation"
+        },
+        {
+          "command": "webtestpilot.createTestRoot",
+          "when": "view == webtestpilot.treeEnvironmentView",
+          "group": "navigation"
+        },
+        {
+          "command": "webtestpilot.createFolderRoot",
+          "when": "view == webtestpilot.treeEnvironmentView",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
           "command": "webtestpilot.addTestCase",
-          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "when": "(view == webtestpilot.treeView) && viewItem == folder",
           "group": "inline@1"
         },
         {
           "command": "webtestpilot.addFolder",
-          "when": "view == webtestpilot.treeView && viewItem == folder",
+          "when": "(view == webtestpilot.treeView) && viewItem == folder",
           "group": "inline@2"
         },
         {
           "command": "webtestpilot.runFolder",
-          "when": "view == webtestpilot.treeView && viewItem == folder",
-          "group": "inline@3"
-        },
-        {
-          "command": "webtestpilot.createTest",
-          "when": "view == webtestpilot.treeView && viewItem == folder",
-          "group": "1_folderActions"
-        },
-        {
-          "command": "webtestpilot.createFolder",
-          "when": "view == webtestpilot.treeView && viewItem == folder",
-          "group": "1_folderActions"
+          "when": "(view == webtestpilot.treeView) && viewItem == folder",
+          "group": "inline@4"
         },
         {
           "command": "webtestpilot.runTest",
-          "when": "view == webtestpilot.treeView && viewItem == test",
+          "when": "(view == webtestpilot.treeView) && viewItem == test",
+          "group": "inline@2"
+        },
+        {
+          "command": "webtestpilot.deleteItem",
+          "when": "view == webtestpilot.treeView || view == webtestpilot.treeFixtureView || view == webtestpilot.treeEnvironmentView",
           "group": "inline@1"
         },
         {
           "command": "webtestpilot.deleteItem",
           "when": "view == webtestpilot.treeView",
-          "group": "2_modification"
+          "group": "inline@3"
         }
       ]
     },
@@ -191,6 +204,14 @@
       {
         "view": "webtestpilot.treeView",
         "contents": "No WebTestPilot items found. [Create a test](command:webtestpilot.createTestRoot) or [create a folder](command:webtestpilot.createFolderRoot) to get started."
+      },
+      {
+        "view": "webtestpilot.treeFixtureView",
+        "contents": "No fixtures found."
+      },
+      {
+        "view": "webtestpilot.treeEnvironmentView",
+        "contents": "No environments items found."
       }
     ],
     "configuration": {

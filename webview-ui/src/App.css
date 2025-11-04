@@ -103,9 +103,7 @@
 
 /* Read-only/fixtures styling for the actions section */
 .actions-section.readonly {
-  border: 1px dashed var(--vscode-panel-border);
   border-radius: 8px;
-  padding: 10px;
   background: transparent;
   opacity: 0.95;
 }
