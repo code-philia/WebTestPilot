@@ -141,14 +141,6 @@ export function activate(context: vscode.ExtensionContext) {
         );
     });
 
-    const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
-        vscode.commands.executeCommand('webtestpilot.createTest');
-    });
-
-    const createFolderRootCommand = vscode.commands.registerCommand('webtestpilot.createFolderRoot', () => {
-        vscode.commands.executeCommand('webtestpilot.createFolder');
-    });
-
     const createFixtureCommand = vscode.commands.registerCommand('webtestpilot.createFixture', async () => {
         // Get the currently selected tree item
         const selectedItem = treeFixtureView.selection[0];
@@ -252,6 +244,14 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Use TestRunnerPanel to run the test
         await TestRunnerPanel.createOrShow(test, workspaceRoot, context.extensionUri);
+    });
+
+    const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createTest');
+    });
+
+    const createFolderRootCommand = vscode.commands.registerCommand('webtestpilot.createFolderRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createFolder');
     });
 
     const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {

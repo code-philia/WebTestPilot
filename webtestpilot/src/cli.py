@@ -2,7 +2,7 @@ import argparse
 import json
 import logging
 import sys
-from typing import Any
+from typing import Any, Optional
 
 from baml_client.types import Step
 from config import Config
@@ -36,7 +36,36 @@ def parse_test_action_to_step(action: dict[str, Any]) -> Step:
     )
 
 
-def load_and_parse_test_file(test_file_path: str) -> tuple[dict[str, Any], list[Step]]:
+def inject_environment_values(
+    environment_data: dict[str, str], test_steps: list[Step]
+) -> list[Step]:
+    """i.e. ${{username}} -> actual value from environment file"""
+    injected_steps = []
+    for step in test_steps:
+        injected_action = step.action
+        injected_expectation = step.expectation
+
+        for var_name, var_value in environment_data.items():
+            placeholder = f"${{{var_name}}}"
+            injected_action = injected_action.replace(placeholder, var_value)
+            injected_expectation = injected_expectation.replace(placeholder, var_value)
+
+        injected_steps.append(
+            Step(
+                condition=step.condition,
+                action=injected_action,
+                expectation=injected_expectation,
+            )
+        )
+
+    return injected_steps
+
+
+def load_and_parse_test_file(
+    test_file_path: str,
+    fixture_file_path: str | None,
+    environment_file_path: str | None,
+) -> tuple[dict[str, Any], list[Step]]:
     """
     Load and parse a JSON test file
 
@@ -51,46 +80,59 @@ def load_and_parse_test_file(test_file_path: str) -> tuple[dict[str, Any], list[
         json.JSONDecodeError: If test file contains invalid JSON
         ValueError: If no actions are defined in the test file
     """
+    # Order: Load test -> Fixtures -> Parse Test + Fixture -> Merge -> Inject Environment values
     with open(test_file_path, "r") as f:
         test_data = json.load(f)
 
-    logger.info(f"Loaded test: {test_data.get('name', 'Unnamed Test')}")
-    logger.info(f"Test URL: {test_data.get('url', 'No URL specified')}")
+    logger.debug(f"Loaded test: {test_data.get('name', 'Unnamed Test')}")
+    logger.debug(f"Test URL: {test_data.get('url', 'No URL specified')}")
 
-    # Convert test actions to Steps
+    # Fixtures will be pre-pended to test steps.
+    fixture_actions = []
+    if fixture_file_path:
+        logger.debug(f"Using fixture file: {fixture_file_path}")
+        with open(fixture_file_path, "r") as fixture_file:
+            fixture_data: dict = json.load(fixture_file)
+            fixture_actions = fixture_data.get("actions", [])
+
     actions = test_data.get("actions", [])
     if not actions:
         raise ValueError("No actions defined in test")
 
+    fixture_steps = [parse_test_action_to_step(action) for action in fixture_actions]
     test_steps = [parse_test_action_to_step(action) for action in actions]
-    logger.info(f"Converted {len(test_steps)} actions to test steps")
 
-    return test_data, test_steps
+    logger.debug(f"Converted {len(test_steps)} actions to test steps")
+    merged_steps = fixture_steps + test_steps
+    logger.debug(f"Total steps after merging fixture: {len(merged_steps)}")
+
+    # Inject last to ensure all placeholders are replaced.
+    if environment_file_path:
+        logger.debug(f"Using environment file: {environment_file_path}")
+        with open(environment_file_path, "r") as env_file:
+            environment_data = json.load(env_file)
+            test_steps = inject_environment_values(
+                environment_data=environment_data,
+                test_steps=test_steps,
+            )
+
+    return test_data, merged_steps
 
 
 def run_test_from_file(
     test_file_path: str,
     config_path: str,
     cdp_endpoint: str,
-    target_id: str | None = None,
-    enable_assertions: bool = True,
+    target_id: Optional[str],
+    fixture_file_path: Optional[str],
+    environment_file_path: Optional[str],
+    enable_assertions: bool,
 ) -> dict[str, Any]:
-    """
-    Run a test from a JSON file
-
-    Args:
-        test_file_path: Path to the test JSON file
-        config_path: Path to the config.yaml file
-        cdp_endpoint: CDP endpoint URL (e.g., http://localhost:9222)
-        enable_assertions: Whether to verify expectations/postconditions
-        output_trace: Path to save the Playwright trace file
-
-    Returns:
-        Dict with test results including success status and any errors
-    """
     try:
         # Load and parse test data
-        test_data, test_steps = load_and_parse_test_file(test_file_path)
+        test_data, test_steps = load_and_parse_test_file(
+            test_file_path, fixture_file_path, environment_file_path
+        )
         config = Config.load(config_path)
 
         result: dict = {
@@ -218,6 +260,20 @@ def main():
         help="Output results as JSON instead of human-readable format",
     )
 
+    parser.add_argument(
+        "--fixture-file-path",
+        type=Optional[str],
+        default=None,
+        help="Path to fixture file",
+    )
+
+    parser.add_argument(
+        "--environment-file-path",
+        type=Optional[str],
+        default=None,
+        help="Path to environment file",
+    )
+
     args = parser.parse_args()
 
     # Run the test
@@ -226,6 +282,8 @@ def main():
         config_path=args.config,
         cdp_endpoint=args.cdp_endpoint,
         target_id=getattr(args, "target_id", None),
+        fixture_file_path=args.fixture_file_path,
+        environment_file_path=args.environment_file_path,
         enable_assertions=not args.no_assertions,
     )
 
