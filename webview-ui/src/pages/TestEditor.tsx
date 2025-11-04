@@ -43,6 +43,7 @@ export const TestEditor: React.FC = () => {
     () => getState() || DEFAULT_DATA
   );
   const [fixtures, setFixtures] = useState<FixtureEditorData[]>([]);
+  const [chosenFixtureId, setChosenFixtureId] = useState<string>("");
   const [chosenFixtureData, setChosenFixtureData] =
     useState<FixtureEditorData | null>(null);
 
@@ -67,11 +68,13 @@ export const TestEditor: React.FC = () => {
         };
         setTestData(test);
         setState(test);
+        setFixtures(message.fixtures);
 
-        // Set fixtures if provided
-        if (message.fixtures) {
-          setFixtures(message.fixtures);
-        }
+        setChosenFixtureId(test.fixtureId || "");
+        const chosenFixture = message.fixtures.find(
+          (fixture: FixtureEditorData) => fixture.id === test.fixtureId
+        );
+        setChosenFixtureData(chosenFixture || null);
       }
     });
   }, [onMessage, setState]);
@@ -109,11 +112,16 @@ export const TestEditor: React.FC = () => {
 
   const handleFixtureChange = useCallback(
     (event: any) => {
-      const selectedFixtureId = event.target.value || undefined;
+      const selectedFixtureId = event.target.value;
+      setChosenFixtureId(selectedFixtureId);
       const chosenFixture = fixtures.find(
         (fixture) => fixture.id === selectedFixtureId
       );
       setChosenFixtureData(chosenFixture || null);
+      setTestData((prev) => ({
+        ...prev,
+        fixtureId: selectedFixtureId,
+      }));
 
       postMessage("updateTest", { data: { fixtureId: selectedFixtureId } });
     },
@@ -185,7 +193,12 @@ export const TestEditor: React.FC = () => {
     postMessage("saveAndRun", { data: payload });
   }, [testData, postMessage]);
 
-  console.log("Rendering TestEditor with data:", testData, "and fixtures:", fixtures);
+  console.log(
+    "Rendering TestEditor with data:",
+    testData,
+    "and fixtures:",
+    fixtures
+  );
 
   return (
     <main className="test-editor">
@@ -238,10 +251,10 @@ export const TestEditor: React.FC = () => {
         </label>
         <VSCodeDropdown
           id="test-fixture"
-          value={testData.fixtureId || ""}
+          value={chosenFixtureId}
           onChange={handleFixtureChange}
         >
-          <option value="">{t`No Fixture`}</option>
+          <option key="" value="">{t`No Fixture`}</option>
           {fixtures.map((fixture) => (
             <option key={fixture.id} value={fixture.id}>
               {fixture.name}

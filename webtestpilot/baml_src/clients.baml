@@ -92,7 +92,7 @@ client<llm> NgrokLocalModel {
   provider "openai-generic"
   retry_policy Exponential
   options {
-    base_url "viperish-fawn-superhumanly.ngrok-free.dev"
+    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
     model "Qwen/Qwen3-VL-30B-A3B-Thinking"
   }
 }
@@ -114,6 +114,9 @@ client<llm> ZrokUIVenus {
     base_url "https://uivenus.06946099.xyz/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
+    header {
+      "secret" "sjtu-course-cs3604-2025"
+    }
   }
 }
 

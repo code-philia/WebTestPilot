@@ -49,6 +49,16 @@
   "contributes": {
     "commands": [
       {
+        "command": "webtestpilot.createFixture",
+        "title": "New Fixture",
+        "icon": "$(add)"
+      },
+      {
+        "command": "webtestpilot.createEnvironment",
+        "title": "New Environment",
+        "icon": "$(add)"
+      },
+      {
         "command": "webtestpilot.createTest",
         "title": "New Test",
         "icon": "$(debug-start)"
@@ -147,22 +157,12 @@
           "group": "navigation"
         },
         {
-          "command": "webtestpilot.createTestRoot",
+          "command": "webtestpilot.createFixture",
           "when": "view == webtestpilot.treeFixtureView",
           "group": "navigation"
         },
         {
-          "command": "webtestpilot.createFolderRoot",
-          "when": "view == webtestpilot.treeFixtureView",
-          "group": "navigation"
-        },
-        {
-          "command": "webtestpilot.createTestRoot",
-          "when": "view == webtestpilot.treeEnvironmentView",
-          "group": "navigation"
-        },
-        {
-          "command": "webtestpilot.createFolderRoot",
+          "command": "webtestpilot.createEnvironment",
           "when": "view == webtestpilot.treeEnvironmentView",
           "group": "navigation"
         }
@@ -179,6 +179,11 @@
           "group": "inline@2"
         },
         {
+          "command": "webtestpilot.deleteItem",
+          "when": "view == webtestpilot.treeView",
+          "group": "inline@3"
+        },
+        {
           "command": "webtestpilot.runFolder",
           "when": "(view == webtestpilot.treeView) && viewItem == folder",
           "group": "inline@4"
@@ -190,13 +195,8 @@
         },
         {
           "command": "webtestpilot.deleteItem",
-          "when": "view == webtestpilot.treeView || view == webtestpilot.treeFixtureView || view == webtestpilot.treeEnvironmentView",
+          "when": "view == webtestpilot.treeFixtureView || view == webtestpilot.treeEnvironmentView",
           "group": "inline@1"
-        },
-        {
-          "command": "webtestpilot.deleteItem",
-          "when": "view == webtestpilot.treeView",
-          "group": "inline@3"
         }
       ]
     },
