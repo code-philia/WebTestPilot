@@ -70,14 +70,6 @@ client<llm> Qwen3b {
   }
 }
 
-client<llm> Qwen3VL2b {
-  provider "openai-generic"
-  options {
-    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
-    model "Qwen/Qwen3-VL-2B-Instruct"
-  }
-}
-
 client<llm> OpenRouter {
   provider "openai-generic"
   options {
@@ -87,7 +79,7 @@ client<llm> OpenRouter {
   }
 }
 
-client<llm> LocalModel {
+client<llm> ZrokLocalModel {
   provider "openai-generic"
   retry_policy Exponential
   options {
@@ -96,13 +88,52 @@ client<llm> LocalModel {
   }
 }
 
-client<llm> UIVenus {
+client<llm> NgrokLocalModel {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "viperish-fawn-superhumanly.ngrok-free.dev"
+    model "Qwen/Qwen3-VL-30B-A3B-Thinking"
+  }
+}
+
+client<llm> FallbackLocalModel {
+  provider fallback
+  options {
+    strategy [
+      ZrokLocalModel
+      NgrokLocalModel
+    ]
+  }
+}
+
+client<llm> ZrokUIVenus {
   provider "openai-generic"
   retry_policy Exponential
   options {
     base_url "https://uivenus.06946099.xyz/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
+  }
+}
+
+client<llm> NgrokUIVenus {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://8dcd0b9d943d.ngrok-free.app/v1"
+    api_key "token-abc123"
+    model "inclusionAI/UI-Venus-Ground-7B"
+  }
+}
+
+client<llm> FallbackUIVenus {
+  provider fallback
+  options {
+    strategy [
+      ZrokUIVenus
+      NgrokUIVenus
+    ]
   }
 }
 
