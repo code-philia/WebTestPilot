@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
 import { TestEditor } from "./pages/TestEditor";
+import { FixtureEditor } from "./pages/FixtureEditor";
+import { EnvironmentEditor } from "./pages/EnvironmentEditor";
 import "./App.css";
 import SingleRunner from "./pages/SingleRunner";
 import ParallelRunner from "./pages/ParallelRunner";
@@ -43,6 +45,12 @@ const App: React.FC = () => {
   switch (page) {
     case "testEditor":
       content = <TestEditor />;
+      break;
+    case "fixtureEditor":
+      content = <FixtureEditor />;
+      break;
+    case "environmentEditor":
+      content = <EnvironmentEditor />;
       break;
     case "singleRunner":
       content = <SingleRunner />;

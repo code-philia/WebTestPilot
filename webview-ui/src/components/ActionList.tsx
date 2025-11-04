@@ -5,33 +5,41 @@ import { useLingui } from "@lingui/react/macro";
 
 interface ActionListProps {
   actions: TestAction[];
-  onActionChange: (
+  onActionChange?: (
     index: number,
     field: keyof TestAction,
     value: string
   ) => void;
-  onRemoveAction: (index: number) => void;
-  onAddAction: () => void;
+  onRemoveAction?: (index: number) => void;
+  onAddAction?: () => void;
+  readonly?: boolean;
 }
 
 export const ActionList: React.FC<ActionListProps> = ({
   actions,
-  onActionChange,
-  onRemoveAction,
-  onAddAction,
+  onActionChange = () => {},
+  onRemoveAction = () => {},
+  onAddAction = () => {},
+  readonly = false,
 }) => {
   const { t } = useLingui();
 
   return (
-    <section className="editor-section actions-section">
+    <section
+      className={`editor-section actions-section ${readonly ? "readonly" : ""}`}
+    >
       <div className="section-header">
-        <h3>{t`Actions`}</h3>
-        <VSCodeButton onClick={onAddAction}>{t`Add Action`}</VSCodeButton>
+        <h3>{readonly ? t`From fixture` : t`Actions`}</h3>
+        {!readonly && (
+          <VSCodeButton onClick={onAddAction}>{t`Add Action`}</VSCodeButton>
+        )}
       </div>
 
       {actions.length === 0 ? (
         <div className="empty-state">
-          {t`No actions defined. Click "Add Action" to get started.`}
+          {readonly
+            ? t`No actions defined in fixtures.`
+            : t`No actions defined. Click "Add Action" to get started.`}
         </div>
       ) : (
         <div className="actions-list">
@@ -42,28 +50,44 @@ export const ActionList: React.FC<ActionListProps> = ({
                 <input
                   className="text-input"
                   value={action.action}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    onActionChange(index, "action", e.target.value)
+                  onChange={
+                    readonly
+                      ? undefined
+                      : (e: ChangeEvent<HTMLInputElement>) =>
+                          onActionChange(index, "action", e.target.value)
                   }
                   placeholder={t`Action`}
+                  readOnly={readonly}
+                  aria-readonly={readonly}
                 />
-                <button
-                  className="icon-button"
-                  onClick={() => onRemoveAction(index)}
-                  aria-label={`Remove action ${index + 1}`}
-                >
-                  ×
-                </button>
+                {!readonly && (
+                  <button
+                    className="icon-button"
+                    onClick={() => onRemoveAction(index)}
+                    aria-label={`Remove action ${index + 1}`}
+                  >
+                    ×
+                  </button>
+                )}
               </div>
               <div className="action-row">
                 <span className="action-number">→</span>
                 <input
                   className="text-input"
                   value={action.expectedResult}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    onActionChange(index, "expectedResult", e.target.value)
+                  onChange={
+                    readonly
+                      ? undefined
+                      : (e: ChangeEvent<HTMLInputElement>) =>
+                          onActionChange(
+                            index,
+                            "expectedResult",
+                            e.target.value
+                          )
                   }
                   placeholder={t`Expected result`}
+                  readOnly={readonly}
+                  aria-readonly={readonly}
                 />
               </div>
             </div>

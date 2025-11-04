@@ -63,7 +63,6 @@ export class FileSystemService {
     }
 
     private async loadDataRecursive(rootPath: string, items: WebTestPilotDataItem[], currentPath: string = '', loadType: POSSIBLE_MENUS): Promise<void> {
-        console.log('FileSystemService Loading data from:', rootPath, 'Current path:', currentPath, 'Load type:', loadType);
         try {
             const entries = await fs.readdir(currentPath, { withFileTypes: true });
             for (const entry of entries) {
@@ -79,7 +78,6 @@ export class FileSystemService {
                         updatedAt: new Date()
                     };
                     items.push(folderItem);
-                    console.log("FileSystemService loading folder:", entryFullPath);
                     await this.loadDataRecursive(rootPath, items, entryFullPath, loadType);
                 } else if (entry.isFile() && entry.name.endsWith('.json')) {
                     try {
@@ -92,13 +90,13 @@ export class FileSystemService {
                             createdAt: new Date(data.createdAt || Date.now()),
                             updatedAt: new Date(data.updatedAt || Date.now())
                         };
-                        console.log('FileSystemService loading file:', loadType, entryFullPath);
                         switch (loadType) {
                         case TEST_MENU_ID:
                             item = {
                                 ...item,
                                 type: 'test',
                                 url: data.url || '',
+                                fixtureId: data.fixtureId,
                                 actions: data.actions || [],
                             } as TestItem;
                             break;
@@ -153,7 +151,7 @@ export class FileSystemService {
             updatedAt: new Date()
         };
 
-        const filePath = path.join(this.webTestPilotDir, testId);
+        const filePath = path.join(this.testsDir, testId);
         await this.writeTestFile(filePath, testItem);
         return testItem;
     }
@@ -181,7 +179,7 @@ export class FileSystemService {
     }
 
     async deleteTest(testPath: string): Promise<void> {
-        const filePath = path.join(this.webTestPilotDir, testPath);
+        const filePath = path.join(this.testsDir, testPath);
         await fs.unlink(filePath);
     }
 
@@ -191,34 +189,39 @@ export class FileSystemService {
     }
 
     async updateTest(testPath: string, testItem: TestItem): Promise<void> {
-        try {
-            const filePath = path.join(this.webTestPilotDir, testPath);
-            
-            // Ensure the directory exists
-            const dir = path.dirname(filePath);
-            await fs.mkdir(dir, { recursive: true });
-            
-            await this.writeTestFile(filePath, testItem);
-        } catch (error) {
-            console.error('FileSystemService.updateTest failed:', error);
-            
-            // Provide more specific error messages
-            if (error instanceof Error && 'code' in error) {
-                const errorCode = (error as any).code;
-                if (errorCode === 'EACCES') {
-                    throw new Error(`Permission denied: Cannot write to file. Please check file permissions for: ${this.webTestPilotDir}`);
-                } else if (errorCode === 'ENOENT') {
-                    throw new Error(`Directory not found: ${this.webTestPilotDir}. Please ensure the workspace directory exists.`);
-                }
-            }
-            throw error;
-        }
+        await this.writeTestFile(testPath, testItem);
+    }
+
+    async updateFixture(fixturePath: string, fixtureItem: FixtureItem): Promise<void> {
+        await this.writeFixtureFile(fixturePath, fixtureItem);
+    }
+
+    async createFixture(name: string, folderPath?: string): Promise<FixtureItem> {
+        const fixtureFileName = this.generateTestFileName(name);
+        const fixtureId = folderPath 
+            ? path.join(folderPath, fixtureFileName)
+            : fixtureFileName;
+
+        const fixtureItem: FixtureItem = {
+            id: fixtureId,
+            name,
+            type: 'fixture',
+            actions: [],
+            parentId: folderPath ? folderPath : undefined,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        const filePath = path.join(this.fixturesDir, fixtureId);
+        await this.writeFixtureFile(filePath, fixtureItem);
+        return fixtureItem;
     }
 
     private async writeTestFile(filePath: string, testItem: TestItem): Promise<void> {
         const testContent = {
             name: testItem.name,
             url: testItem.url,
+            fixtureId: testItem.fixtureId,
             actions: testItem.actions || [],
             createdAt: testItem.createdAt.toISOString(),
             updatedAt: testItem.updatedAt.toISOString()
@@ -231,6 +234,69 @@ export class FileSystemService {
             await fs.rename(tempFilePath, filePath);
         } catch (error) {
             console.error('Failed to write test file:', error);
+            throw error;
+        }
+    }
+
+    private async writeFixtureFile(filePath: string, fixtureItem: FixtureItem): Promise<void> {
+        const fixtureContent = {
+            name: fixtureItem.name,
+            actions: fixtureItem.actions || [],
+            createdAt: fixtureItem.createdAt.toISOString(),
+            updatedAt: fixtureItem.updatedAt.toISOString()
+        };
+
+        try {
+            // Write to a temporary file first, then rename to avoid corruption
+            const tempFilePath = filePath + '.tmp';
+            await fs.writeFile(tempFilePath, JSON.stringify(fixtureContent, null, 2), 'utf-8');
+            await fs.rename(tempFilePath, filePath);
+        } catch (error) {
+            console.error('Failed to write fixture file:', error);
+            throw error;
+        }
+    }
+
+    async createEnvironment(name: string, folderPath?: string): Promise<EnvironmentItem> {
+        const environmentFileName = this.generateTestFileName(name);
+        const environmentId = folderPath 
+            ? path.join(folderPath, environmentFileName)
+            : environmentFileName;
+
+        const environmentItem: EnvironmentItem = {
+            id: environmentId,
+            name,
+            type: 'environment',
+            environmentVariables: {},
+            parentId: folderPath ? folderPath : undefined,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        const filePath = path.join(this.envDir, environmentId);
+        await this.writeEnvironmentFile(filePath, environmentItem);
+        return environmentItem;
+    }
+
+    async updateEnvironment(environmentPath: string, environmentItem: EnvironmentItem): Promise<void> {
+        await this.writeEnvironmentFile(environmentPath, environmentItem);
+    }
+
+    private async writeEnvironmentFile(filePath: string, environmentItem: EnvironmentItem): Promise<void> {
+        const environmentContent = {
+            name: environmentItem.name,
+            environmentVariables: environmentItem.environmentVariables || {},
+            createdAt: environmentItem.createdAt.toISOString(),
+            updatedAt: environmentItem.updatedAt.toISOString()
+        };
+
+        try {
+            // Write to a temporary file first, then rename to avoid corruption
+            const tempFilePath = filePath + '.tmp';
+            await fs.writeFile(tempFilePath, JSON.stringify(environmentContent, null, 2), 'utf-8');
+            await fs.rename(tempFilePath, filePath);
+        } catch (error) {
+            console.error('Failed to write environment file:', error);
             throw error;
         }
     }

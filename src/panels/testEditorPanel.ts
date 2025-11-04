@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { TestItem } from "../models";
+import { TestItem, FixtureItem } from "../models";
 import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
 import { loadWebviewHtml } from "../utils/webviewLoader";
 
@@ -15,17 +15,20 @@ export class TestEditorPanel {
     private _disposables: vscode.Disposable[] = [];
     private _testItem: TestItem;
     private _treeDataProvider: WebTestPilotTreeDataProvider;
+    private _fixtureTreeDataProvider: WebTestPilotTreeDataProvider;
 
     private constructor(
         panel: vscode.WebviewPanel,
         extensionUri: vscode.Uri,
         testItem: TestItem,
-        treeDataProvider: WebTestPilotTreeDataProvider
+        treeDataProvider: WebTestPilotTreeDataProvider,
+        fixtureTreeDataProvider: WebTestPilotTreeDataProvider
     ) {
         this._panel = panel;
         this._extensionUri = extensionUri;
         this._testItem = testItem;
         this._treeDataProvider = treeDataProvider;
+        this._fixtureTreeDataProvider = fixtureTreeDataProvider;
 
         // Set the webview's HTML content
         this._panel.webview.html = this._getHtmlForWebview();
@@ -69,7 +72,8 @@ export class TestEditorPanel {
     public static createOrShow(
         extensionUri: vscode.Uri,
         testItem: TestItem,
-        treeDataProvider: WebTestPilotTreeDataProvider
+        treeDataProvider: WebTestPilotTreeDataProvider,
+        fixtureTreeDataProvider: WebTestPilotTreeDataProvider
     ) {
         const column = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
@@ -80,6 +84,7 @@ export class TestEditorPanel {
             TestEditorPanel.currentPanel._panel.reveal(column);
             TestEditorPanel.currentPanel._testItem = testItem;
             TestEditorPanel.currentPanel._treeDataProvider = treeDataProvider;
+            TestEditorPanel.currentPanel._fixtureTreeDataProvider = fixtureTreeDataProvider;
             TestEditorPanel.currentPanel._updatePanelTitle();
             TestEditorPanel.currentPanel._sendTestData();
             return;
@@ -104,7 +109,8 @@ export class TestEditorPanel {
             panel,
             extensionUri,
             testItem,
-            treeDataProvider
+            treeDataProvider,
+            fixtureTreeDataProvider
         );
     }
 
@@ -113,6 +119,9 @@ export class TestEditorPanel {
     }
 
     private _sendTestData() {
+        // Get all fixtures for dropdown
+        const fixtures = this._fixtureTreeDataProvider.getStructure().filter(item => item.type === 'fixture') as FixtureItem[];
+        
         this._panel.webview.postMessage({
             command: "loadTest",
             test: {
@@ -120,8 +129,15 @@ export class TestEditorPanel {
                 name: this._testItem.name || "",
                 url: this._testItem.url || "",
                 folderId: this._testItem.parentId,
+                fixtureId: this._testItem.fixtureId,
                 actions: this._testItem.actions || [],
             },
+            fixtures: fixtures.map(fixture => ({
+                id: fixture.id,
+                name: fixture.name,
+                parentId: fixture.parentId,
+                actions: fixture.actions || []
+            })),
         });
     }
 
@@ -137,6 +153,7 @@ export class TestEditorPanel {
             ...this._testItem,
             name: data.name.trim(),
             url: data.url ? data.url.trim() : "",
+            fixtureId: data.fixtureId,
             actions: Array.isArray(data.actions)
                 ? data.actions
                 : this._testItem.actions || [],

@@ -39,6 +39,13 @@ For more details, refer to [original uv document](https://docs.astral.sh/uv/gett
 
 ### Setup Extension
 ```bash
+# Node 22
+nvm install lts/jod
+nvm use lts/jod
+
+# If don't have yarn
+npm install --global yarn
+
 # MacOS / Linux / WSL
 source setup.sh
 

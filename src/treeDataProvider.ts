@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, MenuItem, POSSIBLE_MENUS, POSSIBLE_MENU_IDS } from './models';
+import { TestItem, FolderItem, TreeItem as WebTestPilotDataItem, MenuItem, FixtureItem, EnvironmentItem, POSSIBLE_MENUS, POSSIBLE_MENU_IDS } from './models';
 import { FileSystemService } from './services/fileSystemService';
 
 export class WebTestPilotTreeItem extends vscode.TreeItem {
@@ -25,8 +25,14 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
             const test = this.item as TestItem;
             const actionCount = test.actions ? test.actions.length : 0;
             return `${test.name}\n${test.url || 'No URL'}\n${actionCount} action(s)`;
-        default:
-            return this.item.name;
+        case 'fixture':
+            const fixture = this.item as FixtureItem;
+            const fixtureActionCount = fixture.actions ? fixture.actions.length : 0;
+            return `${fixture.name}\n${fixtureActionCount} action(s)`;
+        case 'environment':
+            const environment = this.item as EnvironmentItem;
+            const varCount = Object.keys(environment.environmentVariables || {}).length;
+            return `${environment.name}\n${varCount} variable(s)`;
         }
     }
 
@@ -39,6 +45,14 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
             const test = this.item as TestItem;
             const actionCount = test.actions ? test.actions.length : 0;
             return `${actionCount} action(s) • ${test.url || 'No URL'}`;
+        case 'fixture':
+            const fixture = this.item as FixtureItem;
+            const fixtureActionCount = fixture.actions ? fixture.actions.length : 0;
+            return `${fixtureActionCount} action(s)`;
+        case 'environment':
+            const environment = this.item as EnvironmentItem;
+            const varCount = Object.keys(environment.environmentVariables || {}).length;
+            return `${varCount} variable(s)`;
         default:
             return '';
         }
@@ -50,6 +64,10 @@ export class WebTestPilotTreeItem extends vscode.TreeItem {
             return new vscode.ThemeIcon('folder');
         case 'test':
             return new vscode.ThemeIcon('beaker');
+        case 'fixture':
+            return new vscode.ThemeIcon('tools');
+        case 'environment':
+            return new vscode.ThemeIcon('settings-gear');
         case 'menu':
             const menuItem = this.item as MenuItem;
             return new vscode.ThemeIcon(menuItem.icon);
@@ -119,19 +137,22 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
             ) as FolderItem[];
             const rootItems = this.items.filter(item =>
                 POSSIBLE_MENU_IDS.includes(item.parentId!) && item.type === this.loadType
-            ) as TestItem[];
+            );
 
             return Promise.resolve([
                 ...rootFolders.map(
                     folder => new WebTestPilotTreeItem(folder, vscode.TreeItemCollapsibleState.Collapsed)
                 ),
-                ...rootItems.map(
-                    test => new WebTestPilotTreeItem(test, vscode.TreeItemCollapsibleState.None, {
-                        command: 'webtestpilot.openTest',
-                        title: 'Open Test',
-                        arguments: [test]
-                    })
-                )
+                ...rootItems.map(item => {
+                    const command = this.loadType === 'test' ? 'webtestpilot.openTest' : 
+                        this.loadType === 'fixture' ? 'webtestpilot.openFixture' :
+                            this.loadType === 'environment' ? 'webtestpilot.openEnvironment' : undefined;
+                    return new WebTestPilotTreeItem(item, vscode.TreeItemCollapsibleState.None, command ? {
+                        command,
+                        title: `Open ${this.loadType}`,
+                        arguments: [item]
+                    } : undefined);
+                })
             ]);
         }
         
@@ -140,29 +161,27 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
             const childFolders = this.items.filter(item => 
                 item.type === 'folder' && item.parentId === parent.id
             ) as FolderItem[];
-            const childTests = this.items.filter(item => 
+            const childItems = this.items.filter(item => 
                 item.type === this.loadType && item.parentId === parent.id
-            ) as TestItem[];
-            console.log(parent.id, childFolders, childTests);
+            );
+            console.log(parent.id, childFolders, childItems);
             
             return Promise.resolve([
                 ...childFolders.map(childFolder => new WebTestPilotTreeItem(childFolder, vscode.TreeItemCollapsibleState.Collapsed)),
-                ...childTests.map(test => new WebTestPilotTreeItem(test, vscode.TreeItemCollapsibleState.None, {
-                    command: 'webtestpilot.openTest',
-                    title: 'Open Test',
-                    arguments: [test]
-                }))
+                ...childItems.map(item => {
+                    const command = this.loadType === 'test' ? 'webtestpilot.openTest' : 
+                        this.loadType === 'fixture' ? 'webtestpilot.openFixture' :
+                            this.loadType === 'environment' ? 'webtestpilot.openEnvironment' : undefined;
+                    return new WebTestPilotTreeItem(item, vscode.TreeItemCollapsibleState.None, command ? {
+                        command,
+                        title: `Open ${this.loadType}`,
+                        arguments: [item]
+                    } : undefined);
+                })
             ]);
         }
 
         return Promise.resolve([]);
-    }
-
-    async createTest(name: string, folderId?: string): Promise<TestItem> {
-        const folderPath = folderId;
-        const testItem = await this.fileSystemService.createTest(name, folderPath);
-        await this.loadFromFileSystem();
-        return testItem;
     }
 
     async createFolder(name: string, parentId?: string): Promise<FolderItem> {
@@ -173,12 +192,19 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
     }
 
     async deleteItem(item: WebTestPilotDataItem): Promise<void> {
-        if (item.type === 'test') {
+        if (item.type === 'test' || item.type === 'fixture' || item.type === 'environment') {
             await this.fileSystemService.deleteTest(item.id);
         } else {
             await this.fileSystemService.deleteFolder(item.id);
         }
         await this.loadFromFileSystem();
+    }
+
+    async createTest(name: string, folderId?: string): Promise<TestItem> {
+        const folderPath = folderId;
+        const testItem = await this.fileSystemService.createTest(name, folderPath);
+        await this.loadFromFileSystem();
+        return testItem;
     }
 
     async updateTest(testPath: string, testItem: TestItem): Promise<void> {
@@ -191,18 +217,52 @@ export class WebTestPilotTreeDataProvider implements vscode.TreeDataProvider<Web
         }
     }
 
+    async updateFixture(fixturePath: string, fixtureItem: FixtureItem): Promise<void> {
+        try {
+            await this.fileSystemService.updateFixture(fixturePath, fixtureItem);
+            await this.loadFromFileSystem();
+        } catch (error) {
+            console.error('TreeDataProvider.updateFixture failed:', error);
+            throw error;
+        }
+    }
+
+    async createFixture(name: string, folderId?: string): Promise<FixtureItem> {
+        const folderPath = folderId;
+        const fixtureItem = await this.fileSystemService.createFixture(name, folderPath);
+        await this.loadFromFileSystem();
+        return fixtureItem;
+    }
+
+    async createEnvironment(name: string, folderId?: string): Promise<EnvironmentItem> {
+        const folderPath = folderId;
+        const environmentItem = await this.fileSystemService.createEnvironment(name, folderPath);
+        await this.loadFromFileSystem();
+        return environmentItem;
+    }
+
+    async updateEnvironment(environmentPath: string, environmentItem: EnvironmentItem): Promise<void> {
+        try {
+            await this.fileSystemService.updateEnvironment(environmentPath, environmentItem);
+            await this.loadFromFileSystem();
+        } catch (error) {
+            console.error('TreeDataProvider.updateEnvironment failed:', error);
+            throw error;
+        }
+    }
+
     getStructure(): WebTestPilotDataItem[] {
         return this.items;
     }
 
     getChildrenTests(parentId: string): TestItem[] {
         // Tests in specific folder
-        const directTests = this.items.filter(item => 
+        const directTests = this.items.filter(item =>
             item.type === 'test' && item.parentId === parentId
         ) as TestItem[];
 
         // Get tests from subfolders recursively
-        const subfolders = this.items.filter(item => 
+        const subfolders = this.items.filter(item =>
             item.type === 'folder' && item.parentId === parentId
         ) as FolderItem[];
 

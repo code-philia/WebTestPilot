@@ -4,10 +4,15 @@ import React, {
   useState,
   type ChangeEvent,
 } from "react";
-import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { VSCodeButton, VSCodeDropdown } from "@vscode/webview-ui-toolkit/react";
 import { useVSCode } from "../hooks/useVSCode";
 import { ActionList } from "../components/ActionList";
-import type { TestAction, TestEditorData, SavePayload } from "../types";
+import type {
+  TestAction,
+  TestEditorData,
+  SavePayload,
+  FixtureEditorData,
+} from "../types";
 import { useLingui } from "@lingui/react/macro";
 
 const DEFAULT_DATA: TestEditorData = {
@@ -15,6 +20,7 @@ const DEFAULT_DATA: TestEditorData = {
   folderId: undefined,
   name: "",
   url: "",
+  fixtureId: undefined,
   actions: [],
 };
 
@@ -22,6 +28,7 @@ function sanitizePayload(data: TestEditorData): SavePayload {
   return {
     name: data.name.trim(),
     url: data.url.trim(),
+    fixtureId: data.fixtureId,
     actions: data.actions.map((action) => ({
       action: action.action.trim(),
       expectedResult: action.expectedResult.trim(),
@@ -35,6 +42,9 @@ export const TestEditor: React.FC = () => {
   const [testData, setTestData] = useState<TestEditorData>(
     () => getState() || DEFAULT_DATA
   );
+  const [fixtures, setFixtures] = useState<FixtureEditorData[]>([]);
+  const [chosenFixtureData, setChosenFixtureData] =
+    useState<FixtureEditorData | null>(null);
 
   // Request initial data when component mounts
   useEffect(() => {
@@ -52,10 +62,16 @@ export const TestEditor: React.FC = () => {
           folderId: message.test.folderId,
           name: message.test.name || "",
           url: message.test.url || "",
+          fixtureId: message.test.fixtureId,
           actions: message.test.actions || [],
         };
         setTestData(test);
         setState(test);
+
+        // Set fixtures if provided
+        if (message.fixtures) {
+          setFixtures(message.fixtures);
+        }
       }
     });
   }, [onMessage, setState]);
@@ -91,6 +107,19 @@ export const TestEditor: React.FC = () => {
     [postMessage]
   );
 
+  const handleFixtureChange = useCallback(
+    (event: any) => {
+      const selectedFixtureId = event.target.value || undefined;
+      const chosenFixture = fixtures.find(
+        (fixture) => fixture.id === selectedFixtureId
+      );
+      setChosenFixtureData(chosenFixture || null);
+
+      postMessage("updateTest", { data: { fixtureId: selectedFixtureId } });
+    },
+    [postMessage, fixtures]
+  );
+
   const handleAddAction = useCallback(() => {
     setTestData((prev) => ({
       ...prev,
@@ -121,15 +150,6 @@ export const TestEditor: React.FC = () => {
     postMessage("close");
   }, [postMessage]);
 
-  const persistSanitizedState = useCallback((payload: SavePayload) => {
-    setTestData((prev) => ({
-      ...prev,
-      name: payload.name,
-      url: payload.url,
-      actions: payload.actions,
-    }));
-  }, []);
-
   const handleSave = useCallback(() => {
     const payload = sanitizePayload(testData);
 
@@ -138,9 +158,8 @@ export const TestEditor: React.FC = () => {
       return;
     }
 
-    persistSanitizedState(payload);
     postMessage("save", { data: payload });
-  }, [persistSanitizedState, testData, postMessage]);
+  }, [testData, postMessage]);
 
   const handleRunTest = useCallback(() => {
     const payload = sanitizePayload(testData);
@@ -163,9 +182,10 @@ export const TestEditor: React.FC = () => {
       return;
     }
 
-    persistSanitizedState(payload);
     postMessage("saveAndRun", { data: payload });
-  }, [persistSanitizedState, testData, postMessage]);
+  }, [testData, postMessage]);
+
+  console.log("Rendering TestEditor with data:", testData, "and fixtures:", fixtures);
 
   return (
     <main className="test-editor">
@@ -212,11 +232,36 @@ export const TestEditor: React.FC = () => {
         />
       </section>
 
+      <section className="editor-section">
+        <label className="field-label" htmlFor="test-fixture">
+          {t`Fixture`}
+        </label>
+        <VSCodeDropdown
+          id="test-fixture"
+          value={testData.fixtureId || ""}
+          onChange={handleFixtureChange}
+        >
+          <option value="">{t`No Fixture`}</option>
+          {fixtures.map((fixture) => (
+            <option key={fixture.id} value={fixture.id}>
+              {fixture.name}
+            </option>
+          ))}
+        </VSCodeDropdown>
+      </section>
+
+      {chosenFixtureData && (
+        <ActionList
+          actions={chosenFixtureData.actions}
+          readonly={!!chosenFixtureData}
+        />
+      )}
       <ActionList
         actions={testData.actions}
         onActionChange={handleActionChange}
         onRemoveAction={handleRemoveAction}
         onAddAction={handleAddAction}
+        readonly={false}
       />
     </main>
   );

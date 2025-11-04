@@ -355,14 +355,24 @@ export class TestRunnerPanel {
                     outputChannel.appendLine("Executing Python agent...");
                     outputChannel.appendLine("");
 
+                    // Execute Python CLI
                     try {
-                        // Execute Python CLI
                         const { spawn } = require("child_process");
+                        const fixtureFilePath = testData.fixtureId
+                            ? path.join(
+                                workspaceRoot,
+                                ".webtestpilot",
+                                ".fixture",
+                                testData.fixtureId
+                            )
+                            : undefined;
                         const pythonProcess = spawn(
                             pythonPath,
                             [
                                 cliScriptPath,
                                 testFilePath,
+                                "--fixture-file-path",
+                                fixtureFilePath,
                                 "--config",
                                 configPath,
                                 "--cdp-endpoint",

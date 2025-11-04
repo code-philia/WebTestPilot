@@ -26,6 +26,7 @@ export interface MenuItem extends SidebarItemBase {
 export interface TestItem extends SidebarItemBase {
     type: 'test';
     url?: string;
+    fixtureId?: string;
     actions?: TestAction[];
 }
 

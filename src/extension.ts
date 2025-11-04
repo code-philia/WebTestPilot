@@ -4,8 +4,10 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import { WebTestPilotTreeDataProvider, WebTestPilotTreeItem } from './treeDataProvider';
-import { TestItem, FolderItem, ENV_MENU_ID, FIXTURE_MENU_ID, TEST_MENU_ID } from './models';
+import { TestItem, FixtureItem, EnvironmentItem, FolderItem, ENV_MENU_ID, FIXTURE_MENU_ID, TEST_MENU_ID } from './models';
 import { TestEditorPanel } from './panels/testEditorPanel';
+import { FixtureEditorPanel } from './panels/fixtureEditorPanel';
+import { EnvironmentEditorPanel } from './panels/environmentEditorPanel';
 import { TestRunnerPanel } from './panels/testRunnerPanel';
 import { ParallelTestPanel } from './panels/parallelTestPanel';
 import { WorkspaceRootService } from './services/workspaceRootService';
@@ -93,7 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const deleteItemCommand = vscode.commands.registerCommand('webtestpilot.deleteItem', async (treeItem: WebTestPilotTreeItem) => {
-        const itemType = treeItem.item.type === 'test' ? 'test' : 'folder';
+        const itemType = treeItem.item.type === 'test' ? 'test' : treeItem.item.type === 'fixture' ? 'fixture' : 'folder';
         const result = await vscode.window.showWarningMessage(
             `Are you sure you want to delete this ${itemType}?`,
             { modal: true },
@@ -115,37 +117,28 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const testFilePath = path.join(workspaceRoot, '.webtestpilot', test.id);
+        TestEditorPanel.createOrShow(
+            context.extensionUri,
+            test,
+            treeTestDataProvider,
+            treeFixtureDataProvider
+        );
+    });
 
-        try {
-            const content = await fs.readFile(testFilePath, 'utf-8');
-            const testData = JSON.parse(content);
-			
-            // Merge the file data with the tree item data
-            const fullTestItem: TestItem = {
-                ...test,
-                actions: testData.actions || []
-            };
-
-            // Open the test editor panel
-            TestEditorPanel.createOrShow(
-                context.extensionUri,
-                fullTestItem,
-                treeTestDataProvider
-            );
-        } catch (error) {
-            // If file doesn't exist, create a new test with default actions
-            const newTestItem: TestItem = {
-                ...test,
-                actions: []
-            };
-
-            TestEditorPanel.createOrShow(
-                context.extensionUri,
-                newTestItem,
-                treeTestDataProvider
-            );
+    const openFixtureCommand = vscode.commands.registerCommand('webtestpilot.openFixture', async (fixture: FixtureItem) => {
+        // Load the actual fixture data from file to get the complete fixture with actions
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
         }
+
+        // Open the fixture editor panel
+        FixtureEditorPanel.createOrShow(
+            context.extensionUri,
+            fixture,
+            treeFixtureDataProvider
+        );
     });
 
     const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
@@ -154,6 +147,78 @@ export function activate(context: vscode.ExtensionContext) {
 
     const createFolderRootCommand = vscode.commands.registerCommand('webtestpilot.createFolderRoot', () => {
         vscode.commands.executeCommand('webtestpilot.createFolder');
+    });
+
+    const createFixtureCommand = vscode.commands.registerCommand('webtestpilot.createFixture', async () => {
+        // Get the currently selected tree item
+        const selectedItem = treeFixtureView.selection[0];
+        const folderItem = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+		
+        const name = await vscode.window.showInputBox({
+            prompt: folderItem ? `Enter fixture name for "${folderItem.name}"` : 'Enter fixture name',
+            placeHolder: 'My Fixture',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Fixture name is required';
+                }
+                return null;
+            }
+        });
+
+        if (name) {
+            const folderId = folderItem?.id;
+
+            await treeFixtureDataProvider.createFixture(name.trim(), folderId);
+            const location = folderItem ? `in "${folderItem.name}"` : 'at root';
+            vscode.window.showInformationMessage(`Fixture "${name}" created ${location}!`);
+        }
+    });
+
+    const createFixtureRootCommand = vscode.commands.registerCommand('webtestpilot.createFixtureRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createFixture');
+    });
+
+    const createEnvironmentCommand = vscode.commands.registerCommand('webtestpilot.createEnvironment', async () => {
+        // Get the currently selected tree item
+        const selectedItem = treeEnvironmentView.selection[0];
+        const folderItem = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
+		
+        const name = await vscode.window.showInputBox({
+            prompt: folderItem ? `Enter environment name for "${folderItem.name}"` : 'Enter environment name',
+            placeHolder: 'My Environment',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Environment name cannot be empty';
+                }
+                return null;
+            }
+        });
+
+        if (name) {
+            const folderId = folderItem?.id;
+            await treeEnvironmentDataProvider.createEnvironment(name.trim(), folderId);
+            const location = folderItem ? `in "${folderItem.name}"` : 'at root';
+            vscode.window.showInformationMessage(`Environment "${name}" created ${location}!`);
+        }
+    });
+
+    const createEnvironmentRootCommand = vscode.commands.registerCommand('webtestpilot.createEnvironmentRoot', () => {
+        vscode.commands.executeCommand('webtestpilot.createEnvironment');
+    });
+
+    const openEnvironmentCommand = vscode.commands.registerCommand('webtestpilot.openEnvironment', async (environment: EnvironmentItem) => {
+        // Load the actual environment data from file to get the complete environment
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder found');
+            return;
+        }
+
+        EnvironmentEditorPanel.createOrShow(
+            context.extensionUri,
+            environment,
+            treeEnvironmentDataProvider
+        );
     });
 
     const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (treeItemOrTest: any) => {
@@ -264,19 +329,29 @@ export function activate(context: vscode.ExtensionContext) {
     // Add all disposables to context
     context.subscriptions.push(
         treeTestView,
+        treeFixtureView,
+        treeEnvironmentView,
         createTestCommand,
         createFolderCommand,
+        createFixtureCommand,
+        createEnvironmentCommand,
         deleteItemCommand,
         openTestCommand,
+        openFixtureCommand,
+        openEnvironmentCommand,
         createTestRootCommand,
         createFolderRootCommand,
+        createFixtureRootCommand,
+        createEnvironmentRootCommand,
         runTestCommand,
         addTestCaseCommand,
         addFolderCommand,
         runFolderCommand,
         setWorkspaceRootCommand,
         showWorkspaceRootCommand,
-        treeTestDataProvider // Dispose the tree provider to clean up file watchers
+        treeTestDataProvider, // Dispose the tree provider to clean up file watchers
+        treeFixtureDataProvider,
+        treeEnvironmentDataProvider
     );
 }
 
