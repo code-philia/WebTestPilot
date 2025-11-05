@@ -1,13 +1,15 @@
-import * as vscode from "vscode";
-import * as path from "path";
-import * as fs from "fs/promises";
-import { loadWebviewHtml } from "../utils/webviewLoader";
-import { chromium, Page } from "playwright-core";
-import { TestItem } from "../models";
-import { WorkspaceRootService } from "../services/workspaceRootService.js";
-import { parseLogEvents } from "../utils/logParser";
 import assert from "assert";
+import { spawn } from "child_process";
+import * as fs from "fs/promises";
+import * as path from "path";
+import { chromium, Page } from "playwright-core";
+import * as vscode from "vscode";
+import { TestItem } from "../models";
+import { EnvironmentService } from "../services/environmentService";
+import { WorkspaceRootService } from "../services/workspaceRootService.js";
 import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
+import { parseLogEvents } from "../utils/logParser";
+import { loadWebviewHtml } from "../utils/webviewLoader";
 
 /**
  * TestRunnerPanel handles running tests by connecting to a remote browser via CDP
@@ -210,7 +212,6 @@ export class TestRunnerPanel {
    */
     public static async createOrShow(
         testItem: TestItem,
-        workspaceRoot: string,
         extension_uri: vscode.Uri
     ) {
         try {
@@ -221,6 +222,7 @@ export class TestRunnerPanel {
             .get<string>("cdpEndpoint") || "http://localhost:9222";
 
             // Validate test has actions
+            console.log(testItem);
             if (!testItem.actions || testItem.actions.length === 0) {
                 vscode.window.showWarningMessage(
                     `Test "${testItem.name}" has no actions defined. Please add test actions before running.`
@@ -279,7 +281,7 @@ export class TestRunnerPanel {
                     progress.report({ message: "Starting Python agent..." });
 
                     // Run the Python CLI to execute the test
-                    workspaceRoot = WorkspaceRootService.getWorkspaceRoot();
+                    const workspaceRoot = WorkspaceRootService.getWorkspaceRoot();
                     console.log("Using workspace root:", workspaceRoot);
                     const pythonPath = path.join(
                         workspaceRoot,
@@ -339,7 +341,6 @@ export class TestRunnerPanel {
 
                     // Execute Python CLI
                     try {
-                        const { spawn } = require("child_process");
                         const args = [
                             testItem.fullPath,
                             "--config",
@@ -349,13 +350,17 @@ export class TestRunnerPanel {
                             "--json-output",
                         ];
                         
-                        const dataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
+                        const fixtureDataProvider = (global as any).webTestPilotFixtureTreeDataProvider as WebTestPilotTreeDataProvider;
                         if (testItem.fixtureId) {
-                            const fixture = dataProvider?.getFixtureWithId(testItem.fixtureId);
+                            const fixture = fixtureDataProvider?.getFixtureWithId(testItem.fixtureId);
                             args.push("--fixture-file-path", fixture!.fullPath);
                         }
-                        // TODO: Implement for environment global param.
-                        // const environment = dataProvider?.getEnvironmentWithId(testItem);
+                    
+                        const environmentService = (global as any).environmentService as EnvironmentService;
+                        const selectedEnv = environmentService.getSelectedEnvironment();
+                        if (selectedEnv) {
+                            args.push("--environment-file-path", selectedEnv.fullPath);
+                        }
 
                         const pythonProcess = spawn(
                             pythonPath,

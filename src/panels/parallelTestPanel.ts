@@ -8,6 +8,7 @@ import { loadWebviewHtml } from '../utils/webviewLoader';
 import { WorkspaceRootService } from '../services/workspaceRootService';
 import { parseLogEvents } from '../utils/logParser';
 import { WebTestPilotTreeDataProvider } from '../treeDataProvider';
+import { EnvironmentService } from '../services/environmentService';
 
 interface TestExecution {
     testItem: TestItem;
@@ -55,7 +56,7 @@ export class ParallelTestPanel {
         panel: vscode.WebviewPanel,
         folder: FolderItem,
         cdpEndpoint: string,
-        extensionUri: vscode.Uri
+        extensionUri: vscode.Uri,
     ) {
         this._panel = panel;
         this._folder = folder;
@@ -138,7 +139,7 @@ export class ParallelTestPanel {
     /**
      * Starts execution of all tests in the folder
      */
-    private async _startParallelTests(tests: TestItem[], workspaceRoot: string) {
+    private async _startParallelTests(tests: TestItem[]) {
         this._outputChannel.clear();
         this._outputChannel.show(true);
         
@@ -147,8 +148,7 @@ export class ParallelTestPanel {
         this._outputChannel.appendLine(`Tests to run: ${tests.length}`);
         this._outputChannel.appendLine('='.repeat(60));
 
-        // Get workspace root using same method as single test runner
-        workspaceRoot = WorkspaceRootService.getWorkspaceRoot();
+        const workspaceRoot = WorkspaceRootService.getWorkspaceRoot();
         console.log('Parallel runner using workspace root:', workspaceRoot);
         
         // Get configuration
@@ -257,13 +257,17 @@ export class ParallelTestPanel {
                 '--json-output'
             ];
             
-            const dataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
+            const fixtureDataProvider = (global as any).webTestPilotFixtureTreeDataProvider as WebTestPilotTreeDataProvider;
             if (test.fixtureId) {
-                const fixture = dataProvider?.getFixtureWithId(test.fixtureId);
+                const fixture = fixtureDataProvider?.getFixtureWithId(test.fixtureId);
                 args.push("--fixture-file-path", fixture!.fullPath);
             }
-            // TODO: Implement for environment global param.
-            // const environment = dataProvider?.getEnvironmentWithId(testItem);
+        
+            const environmentService = (global as any).environmentService as EnvironmentService;
+            const selectedEnv = environmentService.getSelectedEnvironment();
+            if (selectedEnv) {
+                args.push("--environment-file-path", selectedEnv.fullPath);
+            }
 
             // Start Python process
             const pythonProcess = spawn(pythonPath, [
@@ -673,7 +677,7 @@ export class ParallelTestPanel {
     /**
      * Opens parallel test runner for a folder
      */
-    public static async createOrShow(folder: FolderItem, workspaceRoot: string) {
+    public static async createOrShow(folder: FolderItem) {
         // Get all tests in folder
         const treeDataProvider = (global as any).webTestPilotTreeDataProvider as WebTestPilotTreeDataProvider;
         if (!treeDataProvider) {
@@ -727,7 +731,7 @@ export class ParallelTestPanel {
 
         // Start tests after a short delay to allow UI to initialize
         setTimeout(() => {
-            ParallelTestPanel.currentPanel?._startParallelTests(testsInFolder, workspaceRoot);
+            ParallelTestPanel.currentPanel?._startParallelTests(testsInFolder);
         }, 2000);
     }
 

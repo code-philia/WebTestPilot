@@ -30,8 +30,8 @@ echo "Starting Chrome in full screen with profile $PROFILE_DIR..."
     --disable-extensions \
     --force-device-scale-factor=1 \
     --window-size=${WINDOW_SIZE} \
+    --headless=new \
     > /tmp/chrome.log 2>&1 &
-    # --headless=new \
 
 CHROME_PID=$!
 echo "Chrome PID: $CHROME_PID"

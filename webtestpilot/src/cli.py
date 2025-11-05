@@ -110,10 +110,10 @@ def load_and_parse_test_file(
     if environment_file_path:
         logger.debug(f"Using environment file: {environment_file_path}")
         with open(environment_file_path, "r") as env_file:
-            environment_data = json.load(env_file)
-            test_steps = inject_environment_values(
-                environment_data=environment_data,
-                test_steps=test_steps,
+            environment_data: dict = json.load(env_file)
+            merged_steps = inject_environment_values(
+                environment_data=environment_data.get("environmentVariables", {}),
+                test_steps=merged_steps,
             )
 
     return test_data, merged_steps
@@ -262,15 +262,15 @@ def main():
 
     parser.add_argument(
         "--fixture-file-path",
-        type=Optional[str],
-        default=None,
+        type=str,
+        default='',
         help="Path to fixture file",
     )
 
     parser.add_argument(
         "--environment-file-path",
-        type=Optional[str],
-        default=None,
+        type=str,
+        default='',
         help="Path to environment file",
     )
 

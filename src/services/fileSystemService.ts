@@ -16,9 +16,9 @@ export class FileSystemService {
     constructor(private workspaceRoot: string, loadType: POSSIBLE_MENUS) {
         this.loadType = loadType;
         this.webTestPilotDir = path.join(workspaceRoot, '.webtestpilot');
-        this.testsDir = path.join(this.webTestPilotDir, '.tests');
-        this.fixturesDir = path.join(this.webTestPilotDir, '.fixtures');
-        this.envDir = path.join(this.webTestPilotDir, '.environments');
+        this.testsDir = path.join(this.webTestPilotDir, '.test');
+        this.fixturesDir = path.join(this.webTestPilotDir, '.fixture');
+        this.envDir = path.join(this.webTestPilotDir, '.environment');
     }
 
     async initialize(): Promise<void> {

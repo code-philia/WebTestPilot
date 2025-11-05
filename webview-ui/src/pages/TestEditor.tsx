@@ -193,13 +193,6 @@ export const TestEditor: React.FC = () => {
     postMessage("saveAndRun", { data: payload });
   }, [testData, postMessage]);
 
-  console.log(
-    "Rendering TestEditor with data:",
-    testData,
-    "and fixtures:",
-    fixtures
-  );
-
   return (
     <main className="test-editor">
       <header className="editor-header">

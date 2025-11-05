@@ -44,6 +44,13 @@ export function activate(context: vscode.ExtensionContext) {
         manageCheckboxStateManually: true
     });
 
+    // Store tree data provider and extensionUri globally for parallel runner access
+    (global as any).webTestPilotTreeDataProvider = treeTestDataProvider;
+    (global as any).webTestPilotFixtureTreeDataProvider = treeFixtureDataProvider;
+    (global as any).webTestPilotEnvironmentTreeDataProvider = treeEnvironmentDataProvider;
+    (global as any).extensionUri = context.extensionUri;
+    (global as any).environmentService = environmentService;
+
     // Handle checkbox changes with clean logic
     treeEnvironmentView.onDidChangeCheckboxState(async (ev) => {
         for (const [item, newState] of ev.items) {
@@ -91,12 +98,6 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const createFolderCommand = vscode.commands.registerCommand('webtestpilot.createFolder', async (parentFolder?: FolderItem) => {
-        // Get the currently selected tree item
-        if (!parentFolder) {
-            const selectedItem = treeTestView.selection[0];
-            parentFolder = selectedItem?.item.type === 'folder' ? selectedItem.item as FolderItem : undefined;
-        }
-		
         const name = await vscode.window.showInputBox({
             prompt: parentFolder ? `Enter subfolder name for "${parentFolder.name}"` : 'Enter folder name',
             placeHolder: 'My Folder',
@@ -137,13 +138,6 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const openTestCommand = vscode.commands.registerCommand('webtestpilot.openTest', async (test: TestItem) => {
-        // Load the actual test data from file to get the complete test with actions
-        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (!workspaceRoot) {
-            vscode.window.showErrorMessage('No workspace folder found');
-            return;
-        }
-
         TestEditorPanel.createOrShow(
             context.extensionUri,
             test,
@@ -153,14 +147,6 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const openFixtureCommand = vscode.commands.registerCommand('webtestpilot.openFixture', async (fixture: FixtureItem) => {
-        // Load the actual fixture data from file to get the complete fixture with actions
-        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (!workspaceRoot) {
-            vscode.window.showErrorMessage('No workspace folder found');
-            return;
-        }
-
-        // Open the fixture editor panel
         FixtureEditorPanel.createOrShow(
             context.extensionUri,
             fixture,
@@ -235,18 +221,9 @@ export function activate(context: vscode.ExtensionContext) {
         );
     });
 
-    const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (testItem: TestItem) => {
+    const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (testItem: WebTestPilotTreeItem) => {
         console.log('runTestCommand called with:', testItem);
-		
-        // Get workspace root
-        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (!workspaceRoot) {
-            vscode.window.showErrorMessage('No workspace folder found');
-            return;
-        }
-
-        // Use TestRunnerPanel to run the test
-        await TestRunnerPanel.createOrShow(testItem, workspaceRoot, context.extensionUri);
+        await TestRunnerPanel.createOrShow(testItem.item as TestItem, context.extensionUri);
     });
 
     const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {
@@ -257,27 +234,19 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.executeCommand('webtestpilot.createFolder');
     });
 
-    const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (folderItem: FolderItem) => {
-        vscode.commands.executeCommand('webtestpilot.createTest', folderItem);
+    const addTestCaseCommand = vscode.commands.registerCommand('webtestpilot.addTestCase', async (treeItem: WebTestPilotTreeItem) => {
+        vscode.commands.executeCommand('webtestpilot.createTest', treeItem.item);
     });
 
-    const addFolderCommand = vscode.commands.registerCommand('webtestpilot.addFolder', async (parentFolder: FolderItem) => {
-        vscode.commands.executeCommand('webtestpilot.createFolder', parentFolder);
+    const addFolderCommand = vscode.commands.registerCommand('webtestpilot.addFolder', async (treeItem: WebTestPilotTreeItem) => {
+        vscode.commands.executeCommand('webtestpilot.createFolder', treeItem.item);
     });
 
-    const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (treeItem: any) => {
-        // Extract folder item from tree item (similar to createTest command)
-        const folderItem = treeItem?.item?.type === 'folder' ? treeItem.item as FolderItem : undefined;
+    const runFolderCommand = vscode.commands.registerCommand('webtestpilot.runFolder', async (treeItem: WebTestPilotTreeItem) => {
+        const folderItem = treeItem.item.type === 'folder' ? treeItem.item as FolderItem : undefined;
 		
         if (!folderItem) {
             vscode.window.showErrorMessage('Invalid folder selection');
-            return;
-        }
-
-        // Get workspace root
-        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (!workspaceRoot) {
-            vscode.window.showErrorMessage('No workspace folder found');
             return;
         }
 
@@ -298,12 +267,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
 
         if (result === 'Run Parallel') {
-            // Store tree data provider and extensionUri globally for parallel runner access
-            (global as any).webTestPilotTreeDataProvider = treeTestDataProvider;
-            (global as any).extensionUri = context.extensionUri;
-			
-            // Start parallel test runner
-            await ParallelTestPanel.createOrShow(folderItem, workspaceRoot);
+            await ParallelTestPanel.createOrShow(folderItem);
         }
     });
 
