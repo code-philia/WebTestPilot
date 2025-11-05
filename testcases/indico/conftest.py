@@ -1,14 +1,17 @@
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import randint
 
 import pytest
+from playwright.async_api import Page as AsyncPage
 from playwright.sync_api import Page
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from tracing_api import create_traced_page, traced_expect as expect
+from tracing_api import TracedPage, create_traced_page
+from tracing_api import traced_expect as expect
+
+from .utilities import create_conference, create_lecture, create_meeting
 
 pytest_plugins = ["pytest_xpath_plugin"]
 
@@ -19,112 +22,47 @@ PASSWORD = "webtestpilot"
 
 @dataclass
 class IndicoTestData:
-    def __post_init__(self):
-        self._unique_id = str(randint(100000, 999999))
+    # Lecture properties
+    lecture_name: str = "Lecture"
 
-    @property
-    def lecture_name(self) -> str:
-        return f"Lecture{self._unique_id}"
+    # Venue properties
+    venue_name: str = "Venue"
+    room_name: str = "Room"
 
-    @property
-    def venue_name(self) -> str:
-        return f"Venue{self._unique_id}"
+    # Meeting properties
+    meeting_name: str = "Meeting"
+    meeting_minute_name: str = "Meeting Minute"
+    meeting_contribution_name: str = "Meeting Contribution"
+    meeting_contribution_description: str = "Description"
+    break_name: str = "Break"
+    break_description: str = "Description"
 
-    @property
-    def room_name(self) -> str:
-        return f"Room{self._unique_id}"
+    # Date/time properties
+    end_date: str = "10/10/2040"
+    end_time: str = "12"
 
-    @property
-    def meeting_name(self) -> str:
-        return f"Meeting{self._unique_id}"
+    # Conference properties
+    conference_name: str = "Conference"
+    conference_track_name: str = "Track"
+    conference_track_group_name: str = "Track group"
+    conference_track_code: str = "T"
+    conference_track_description: str = "Papers about"
+    conference_track_group_description: str = "Many papers about"
 
-    @property
-    def meeting_minute_name(self) -> str:
-        return f"Meeting Minute{self._unique_id}"
+    # Notification properties
+    email_notification_title: str = "Email"
+    email_notification_rule_set: str = "Notification rule"
 
-    @property
-    def meeting_contribution_name(self) -> str:
-        return f"Meeting Contribution{self._unique_id}"
+    # Session properties
+    session_type: str = "Session type"
+    session_title: str = "Session title"
+    session_title_updated: str = "Session title updated"
+    session_description: str = "Session description"
+    session_contribution_name: str = "Session Contribution"
+    session_contribution_description: str = "Description"
 
-    @property
-    def meeting_contribution_description(self) -> str:
-        return f"Description{self._unique_id}"
-
-    @property
-    def break_name(self) -> str:
-        return f"Break{self._unique_id}"
-
-    @property
-    def break_description(self) -> str:
-        return f"Description{self._unique_id}"
-
-    @property
-    def end_date(self) -> str:
-        return "10/10/2040"
-
-    @property
-    def end_time(self) -> str:
-        return "12"
-
-    @property
-    def conference_name(self) -> str:
-        return f"Conference{self._unique_id}"
-
-    @property
-    def conference_track_name(self) -> str:
-        return f"Track{self._unique_id}"
-
-    @property
-    def conference_track_group_name(self) -> str:
-        return f"Track group{self._unique_id}"
-
-    @property
-    def conference_track_code(self) -> str:
-        return f"T{self._unique_id}"
-
-    @property
-    def conference_track_description(self) -> str:
-        return f"Papers about{self._unique_id}"
-
-    @property
-    def conference_track_group_description(self) -> str:
-        return f"Many papers about{self._unique_id}"
-
-    @property
-    def email_notification_title(self) -> str:
-        return f"Email{self._unique_id}"
-
-    @property
-    def email_notification_rule_set(self) -> str:
-        return f"Notification rule{self._unique_id}"
-
-    @property
-    def session_type(self) -> str:
-        return f"Session type{self._unique_id}"
-
-    @property
-    def session_title(self) -> str:
-        return f"Session title{self._unique_id}"
-
-    @property
-    def session_title_updated(self) -> str:
-        return f"Session title updated{self._unique_id}"
-
-    @property
-    def session_description(self) -> str:
-        return f"Session description{self._unique_id}"
-
-    @property
-    def session_contribution_name(self) -> str:
-        return f"Session Contribution{self._unique_id}"
-
-    @property
-    def session_contribution_description(self) -> str:
-        return f"Description{self._unique_id}"
-
-    @property
-    def registration_form_name(self) -> str:
-        return "Registration Form"
+    # Registration properties
+    registration_form_name: str = "Registration Form"
 
 
 @pytest.fixture
@@ -133,13 +71,8 @@ def test_data() -> IndicoTestData:
     return IndicoTestData()
 
 
-def go_to_indico(page: Page) -> Page:
+def login_to_indico(page: TracedPage | Page) -> TracedPage | Page:
     page.goto(INDICO_HOST)
-    return page
-
-
-def login_to_indico(page: Page) -> Page:
-    page = go_to_indico(page)
     page.get_by_role("link", name=" Login").click()
     page.get_by_role("textbox", name="Username or email").fill(USER)
     page.get_by_role("textbox", name="Password").click()
@@ -148,124 +81,33 @@ def login_to_indico(page: Page) -> Page:
     return page
 
 
+async def login_to_indico_async(page: AsyncPage) -> AsyncPage:
+    await page.goto(INDICO_HOST)
+    await page.get_by_role("link", name=" Login").click()
+    await page.get_by_role("textbox", name="Username or email").fill(USER)
+    await page.get_by_role("textbox", name="Password").click()
+    await page.get_by_role("textbox", name="Password").fill(PASSWORD)
+    await page.get_by_role("button", name="Login with Indico").click()
+    return page
+
+
 @pytest.fixture
-def logged_in_page(page: Page) -> Page:
+def logged_in_page(page: Page) -> TracedPage:
     traced_page = create_traced_page(page)
-    traced_page = login_to_indico(traced_page)
+    login_to_indico(traced_page)
     expect(traced_page.locator("#global-menu")).to_contain_text("My profile")
     return traced_page
 
 
 @pytest.fixture
-def created_lecture_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_lecture(logged_in_page, test_data)
+def seed(logged_in_page: Page):
+    create_lecture(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(INDICO_HOST)
 
+    create_meeting(logged_in_page)
+    logged_in_page.wait_for_timeout(1000)
+    logged_in_page.goto(INDICO_HOST)
 
-def create_lecture(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    logged_in_page.get_by_role("link", name="Create event ").click()
-    logged_in_page.get_by_role("link", name="Lecture").first.click()
-
-    # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.lecture_name
-    )
-
-    # Venue and Room
-    logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
-    logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
-
-    # Event protection mode
-    logged_in_page.locator("#event-creation-protection_mode").get_by_text(
-        "Public"
-    ).click()
-
-    logged_in_page.get_by_role("button", name="Create event", exact=True).click()
-    return logged_in_page
-
-
-@pytest.fixture
-def created_meeting_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_meeting(logged_in_page, test_data)
-
-
-def create_meeting(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    logged_in_page.get_by_role("link", name="Create event ").click()
-    logged_in_page.get_by_role("link", name="Meeting").first.click()
-
-    # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.meeting_name
-    )
-
-    # End date
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="DD/MM/YYYY"
-    ).click()
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="DD/MM/YYYY"
-    ).fill(test_data.end_date)
-
-    # End time
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="--:--"
-    ).click()
-    logged_in_page.get_by_role("button", name=test_data.end_time).first.click()
-
-    # Venue and Room
-    logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
-    logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
-
-    # Event protection mode
-    logged_in_page.locator("#event-creation-protection_mode").get_by_text(
-        "Public"
-    ).click()
-
-    logged_in_page.get_by_role("button", name="Create event", exact=True).click()
-    return logged_in_page
-
-
-@pytest.fixture
-def created_conference_page(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    return create_conference(logged_in_page, test_data)
-
-
-def create_conference(logged_in_page: Page, test_data: IndicoTestData) -> Page:
-    logged_in_page.get_by_role("link", name="Create event ").click()
-    logged_in_page.get_by_role("link", name="Conference").first.click()
-
-    # Name
-    logged_in_page.get_by_role("textbox", name="Event title").fill(
-        test_data.conference_name
-    )
-
-    # End date
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="DD/MM/YYYY"
-    ).click()
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="DD/MM/YYYY"
-    ).fill(test_data.end_date)
-
-    # End time
-    logged_in_page.locator("#event-creation-end_dt").get_by_role(
-        "textbox", name="--:--"
-    ).click()
-    logged_in_page.get_by_role("button", name=test_data.end_time).first.click()
-
-    # Venue and Room
-    logged_in_page.get_by_role("textbox", name="Venue").click()
-    logged_in_page.get_by_role("textbox", name="Venue").fill(test_data.venue_name)
-    logged_in_page.get_by_role("textbox", name="Room").click()
-    logged_in_page.get_by_role("textbox", name="Room").fill(test_data.room_name)
-
-    # Event protection mode
-    logged_in_page.locator("#event-creation-protection_mode").get_by_text(
-        "Public"
-    ).click()
-
-    logged_in_page.get_by_role("button", name="Create event", exact=True).click()
+    create_conference(logged_in_page)
     return logged_in_page

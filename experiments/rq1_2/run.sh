@@ -44,13 +44,12 @@ fi
 # ---------------------------
 # Absolute paths relative to script
 # ---------------------------
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-BASELINE_DIR="$SCRIPT_DIR/../../baselines"
-VENV_DIR="$BASELINE_DIR/$BASELINE/.venv"
+BASELINE_DIR="./$SCRIPT_DIR/baselines"
+VENV_DIR="$BASELINE_DIR/.venv-$BASELINE"
 
-EXPERIMENTS_DIR="$SCRIPT_DIR"
-RESULTS_DIR="$EXPERIMENTS_DIR/results/$BASELINE"
-TEST_DIR="$EXPERIMENTS_DIR/input/$APP"
+EXPERIMENTS_DIR="./$SCRIPT_DIR/experiments/"
+RESULTS_DIR="$EXPERIMENTS_DIR/rq1_2/results/$BASELINE"
+TEST_DIR="$EXPERIMENTS_DIR/rq1_2/input/$APP"
 
 # ---------------------------
 # Run evaluation
@@ -69,11 +68,13 @@ source "$VENV_DIR/bin/activate"
 # Run the evaluation script
 if [[ -n "$RERUN" ]]; then
     python "$BASELINE_DIR/evaluate.py" "$BASELINE" "$APP" \
+        --headless \
         --output-dir "$RESULTS_DIR" \
         --test-dir "$TEST_DIR" \
         --rerun "$RERUN"
 else
     python "$BASELINE_DIR/evaluate.py" "$BASELINE" "$APP" \
+        --headless \
         --output-dir "$RESULTS_DIR" \
         --test-dir "$TEST_DIR"
 fi

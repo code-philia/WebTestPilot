@@ -1,0 +1,2671 @@
+[
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3326",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "22.02.3",
+    "commit_id": "d2b49084b082f0aa28ca6969884b88acb2c63b96",
+    "annotated_at": "2025-10-13T11:21:54.832Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3008",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "21.10.1",
+    "commit_id": "538b5ef4eb7d315a61c21adcb7283a8a164e2a64",
+    "annotated_at": "2025-10-14T02:06:49.718Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3200",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "21.12.2",
+    "commit_id": "049d6ba5b2e16041664de644980e34cdeed3738c",
+    "annotated_at": "2025-10-14T02:13:23.239Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3142",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "21.12.1",
+    "commit_id": "941217d9fb223e9c5d22d57b2214d48982594823",
+    "annotated_at": "2025-10-14T02:16:16.519Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/739",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.18",
+    "commit_id": "8b27ce32962fc70a2b46e8424c88595a9c5f1bae",
+    "annotated_at": "2025-10-14T02:46:51.167Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4228",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "23.05",
+    "commit_id": "2523cee0e2b7a1eb31feec65b6448ccaa45d27f4",
+    "annotated_at": "2025-10-14T02:51:07.601Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2815",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "21.05.2",
+    "commit_id": "0269f5122e114203586d6fbb1e795e2421fb679b",
+    "annotated_at": "2025-10-14T02:52:13.834Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/553",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.18.3",
+    "commit_id": "79c3a07e9a79c0cdac95e86b1b9ffa8797b38788",
+    "annotated_at": "2025-10-14T02:58:56.521Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/152",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.11.0",
+    "commit_id": "b157a9927ac4a56024bed38c62bc861af4fe9eac",
+    "annotated_at": "2025-10-14T03:01:10.420Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1978",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.28.3",
+    "commit_id": "02f7ffe53ceca1f83676473cf741b47401814b34",
+    "annotated_at": "2025-10-14T03:03:17.536Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/460",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.17.1",
+    "commit_id": "70ee28ee132ffddc88ca07707c91fef5e99eca47",
+    "annotated_at": "2025-10-14T03:15:14.362Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4808",
+    "annotations": [
+      "group1"
+    ],
+    "version": "23.12",
+    "commit_id": "c66b8ad842a14e83e8a5ecb44710ca94ac1430e8",
+    "annotated_at": "2025-10-14T03:16:33.512Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3292",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "22.02",
+    "commit_id": "0de4d6d22342fa5a84393e5e18ff59fe42cbb876",
+    "annotated_at": "2025-10-14T03:19:29.423Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4843",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "23.12.3",
+    "commit_id": "c290d01adbbdeeb68c4b0d791fe919a02432d457",
+    "annotated_at": "2025-10-14T03:27:57.701Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4996",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "24.05",
+    "commit_id": "72c5141decb1d83910a81fd0c4bf77f4a463ce5c",
+    "annotated_at": "2025-10-14T03:29:50.216Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5146",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "24.05.3",
+    "commit_id": "4630f0728225dbbfca285bd88345a678cf8d02d1",
+    "annotated_at": "2025-10-14T03:32:45.871Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4394",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.06.2",
+    "commit_id": "588ed785d26ce66af0ba709e71a5c1323519c29e",
+    "annotated_at": "2025-10-14T03:33:39.287Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5037",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "24.02.3",
+    "commit_id": "bddc6ae66bb8094c2c16df64d55663901d5eebd6",
+    "annotated_at": "2025-10-14T03:35:15.966Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1181",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.24.3",
+    "commit_id": "101a7b40b922e7045154e428a5daea5bf25080e2",
+    "annotated_at": "2025-10-14T03:40:28.566Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1427",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.26.0",
+    "commit_id": "4329fee2c97d19a359a7a6ab88cc8406f1b81d5b",
+    "annotated_at": "2025-10-14T03:41:08.836Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/424",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "0.17.0",
+    "commit_id": "e7f8188ee539f76adcd511733a7b749801d676b2",
+    "annotated_at": "2025-10-14T03:43:15.798Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/87",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "0.8.2",
+    "commit_id": "8b109bac1337a0ce2481275d157db113845c0404",
+    "annotated_at": "2025-10-14T03:44:50.434Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1284",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.25.1",
+    "commit_id": "b273b9d6d04e3c0de999cda0ce52560137dc47f1",
+    "annotated_at": "2025-10-14T03:47:28.496Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4429",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.06.2",
+    "commit_id": "cbcec189fdaa70d16036ab97c79c5dd89511b292",
+    "annotated_at": "2025-10-14T03:50:01.094Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1556",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "0.26.4",
+    "commit_id": "0b1ece664db7bb514e1a9e556964689bbbac2f49",
+    "annotated_at": "2025-10-14T03:50:47.063Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5078",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "24.05.2",
+    "commit_id": "adb7bf7016502ebdc8aafdbca422731dac0abbfc",
+    "annotated_at": "2025-10-14T03:51:37.330Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4836",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.12",
+    "commit_id": "77f125208ed281912bb6ae9d57abe7b4b26df4c6",
+    "annotated_at": "2025-10-14T03:52:21.402Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/697",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "0.19",
+    "commit_id": "7c44f5462cb78ce55960cfee49dcf2213bbeeb7b",
+    "annotated_at": "2025-10-14T03:54:18.279Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5555",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "25.02",
+    "commit_id": "802f69cf35abba8ff75b0ef7bbed09bbcda62816",
+    "annotated_at": "2025-10-14T03:56:07.728Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1454",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "0.26.0",
+    "commit_id": "78f5f44460cb468133becc05169afdc1bf6b32ac",
+    "annotated_at": "2025-10-16T14:33:28.225Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1541",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "0.27.5",
+    "commit_id": "e06f9f7fe3af9a0218b6530c4ebe3fef1c7925f6",
+    "annotated_at": "2025-10-16T14:36:17.770Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1214",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "0.25.0",
+    "commit_id": "36424a24b527dce226618843251971d9963aa11d",
+    "annotated_at": "2025-10-16T14:38:34.146Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/284",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "0.13.1",
+    "commit_id": "80f844139c0fe8a9ec00c44ea90a95830c2eb27b",
+    "annotated_at": "2025-10-16T14:39:23.539Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1502",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "0.26.4",
+    "commit_id": "a82d9fdba5175054a9f1707e41d0fd6577447b00",
+    "annotated_at": "2025-10-16T14:40:30.995Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3248",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "21.12.4",
+    "commit_id": "43f32f6d5a8fb5e008005b3df99e4076e0dd73eb",
+    "annotated_at": "2025-10-16T14:42:09.435Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3637",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "22.07.2",
+    "commit_id": "764489e30bea99830f04bcee1bd479c6e62d3d7a",
+    "annotated_at": "2025-10-16T14:43:34.432Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4824",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.12.3",
+    "commit_id": "bbb41e8b5cc5c6e33cb27ef1b69092cf7a0f70ba",
+    "annotated_at": "2025-10-16T14:45:03.118Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2783",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "21.05",
+    "commit_id": "ef1bde8bb1c042ea124bcfb83862ba1bd61764c2",
+    "annotated_at": "2025-10-16T14:46:21.131Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3976",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "22.11.1",
+    "commit_id": "6070d804f8ac331c66dd689d8f55ba8a08fb8cf9",
+    "annotated_at": "2025-10-16T14:47:21.871Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1472",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.26",
+    "commit_id": "b792108bc18d4fcb7c6026ecad23e430e067ba43",
+    "annotated_at": "2025-10-16T14:48:58.153Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3753",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "22.09.1",
+    "commit_id": "af434d021663dc18df90c2ee0639dc9b027842c4",
+    "annotated_at": "2025-10-16T14:49:58.649Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4630",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.10",
+    "commit_id": "02d140120ac6c00987ec536ad9adb4250aeeb3d8",
+    "annotated_at": "2025-10-17T01:32:23.424Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/442",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "0.17.1",
+    "commit_id": "b12e2ceada9b1b8a382b76c896fc392adcdf5b84",
+    "annotated_at": "2025-10-17T01:56:04.461Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5642",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "25.05",
+    "commit_id": "0208f066c5fdac676cfd7dc7fd9476db68e55609",
+    "annotated_at": "2025-10-17T02:14:55.990Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2728",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "21.04.3",
+    "commit_id": "a3d36237e22338282053e3c9350eb1d1a72028c5",
+    "annotated_at": "2025-10-17T02:15:48.037Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3220",
+    "annotations": [
+      "group6"
+    ],
+    "version": "21.12.3",
+    "commit_id": "17215431caec61334cd653e030ba3b42c7ef2ca1",
+    "annotated_at": "2025-10-17T02:17:51.581Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/748",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "0.20.0",
+    "commit_id": "df1a3a0715fb724d32cc51c3008545424c38379e",
+    "annotated_at": "2025-10-17T02:19:39.802Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3523",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "22.06",
+    "commit_id": "0801955a26393cbf286596826b9cccde83dc7850",
+    "annotated_at": "2025-10-17T02:20:56.697Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5018",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "24.05",
+    "commit_id": "fc236f930b6836f49db1a584585581e70288af0a",
+    "annotated_at": "2025-10-17T02:23:08.749Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/999",
+    "annotations": [
+      "confirmed_bug",
+      "group7"
+    ],
+    "version": "0.23.2",
+    "commit_id": "9dc26a8c5271ec125c0aed5def79214bbb1df3d1",
+    "annotated_at": "2025-10-17T02:25:39.452Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2863",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "21.05.3",
+    "commit_id": "7a8954ee6501853857a55df9a73c0509a55599c9",
+    "annotated_at": "2025-10-17T02:34:32.902Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/489",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "0.17.4",
+    "commit_id": "212f924ffabcad97d1013a0f4697bf0a03a5ddda",
+    "annotated_at": "2025-10-17T02:36:10.155Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/669",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.19.0",
+    "commit_id": "2d43ab8a1b446a21bc4dc55d67e7cd5e8482f93d",
+    "annotated_at": "2025-10-17T02:37:35.762Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2837",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "21.05.1",
+    "commit_id": "4fd5dbcfdd0778afd9423d25042e3f531a5b2c6d",
+    "annotated_at": "2025-10-17T02:39:43.865Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4878",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "24.02",
+    "commit_id": "5a5f0b8de95b95827d7ee83c3057429e4afa7836",
+    "annotated_at": "2025-10-17T02:41:28.093Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/108",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "0.9.3",
+    "commit_id": "ab468bac3ceaf0819f9ad1331d9418897db380e9",
+    "annotated_at": "2025-10-17T02:46:59.220Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/2442",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.31.0",
+    "commit_id": "7791599fb59eddcde86aebcb78700c41442660af",
+    "annotated_at": "2025-10-17T02:48:33.684Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4975",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "24.02.3",
+    "commit_id": "493d8027cd99656cdbeb92c01da99b5baa485a09",
+    "annotated_at": "2025-10-17T02:53:02.111Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4814",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "23.12.2",
+    "commit_id": "24e6dc4b37f857ffe6f8eab85ca177ed290bb38a",
+    "annotated_at": "2025-10-17T02:54:24.691Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4778",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "23.12",
+    "commit_id": "69c8ff5c2d491d8674e2671a912a025cf16f86d3",
+    "annotated_at": "2025-10-17T02:56:51.832Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4782",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "23.12.1",
+    "commit_id": "788327fffb044a03ccc490be0bcddd48e3551b01",
+    "annotated_at": "2025-10-17T02:59:34.759Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3507",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "22.0.4.2",
+    "commit_id": "9dd69b04b8bcb32abe9db60627a52690629bcb52",
+    "annotated_at": "2025-10-17T03:00:19.851Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1693",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "0.27.4",
+    "commit_id": "b93f8a4d4680cfe34e3b64db95f0f9683152c22a",
+    "annotated_at": "2025-10-17T03:01:47.481Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/5396",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "24.12.1",
+    "commit_id": "5c78f8352e82231aaef70e2b3be47360d840ca47",
+    "annotated_at": "2025-10-17T03:03:05.096Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1211",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.25.0",
+    "commit_id": "a70ee9664a7891923910e0c2175ee5027d3c92b8",
+    "annotated_at": "2025-10-17T03:04:21.825Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4349",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.05.2",
+    "commit_id": "eb2c5d00cb8a3720f76f22730b3eb9c13989900f",
+    "annotated_at": "2025-10-17T03:05:24.536Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3342",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "22.02.3",
+    "commit_id": "d23b24b8db2e4268dd5e32b9cfda1dd6a5a3caf3",
+    "annotated_at": "2025-10-17T03:06:39.536Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4600",
+    "annotations": [
+      "confirmed_bug",
+      "group8"
+    ],
+    "version": "23.08.3",
+    "commit_id": "7c4dc981cd049196971a663521da73aea2990490",
+    "annotated_at": "2025-10-17T03:08:34.349Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4637",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "23.06.02",
+    "commit_id": "38ac3c959bf1282cc46ff4ae7da7f24ad4ea8140",
+    "annotated_at": "2025-10-17T03:09:44.378Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/111",
+    "annotations": [
+      "confirmed_bug",
+      "group7"
+    ],
+    "version": "0.9.3",
+    "commit_id": "49621e7b1575eba9796d7a73392724ed679d0702",
+    "annotated_at": "2025-10-17T03:10:32.937Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4809",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "23.12",
+    "commit_id": "999d41a7f5455f4c7f9f175b5718d82ee529df2b",
+    "annotated_at": "2025-10-17T03:12:11.905Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/816",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "0.21.0",
+    "commit_id": "13c0386e84ac1e26cf0db44024a3c0e8de40b5e0",
+    "annotated_at": "2025-10-17T03:14:40.794Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/3054",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "21.10.3",
+    "commit_id": "8e71cd9bacfc12c50d1f9ed9ca379b85beece940",
+    "annotated_at": "2025-10-17T03:15:57.598Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1839",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.29.3",
+    "commit_id": "6e4132121c0f472f2314d0186a6fdaf75b3b0c8d",
+    "annotated_at": "2025-10-17T03:16:51.957Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/164",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.11.0",
+    "commit_id": "07c7d5af176a2071b2151737567283eb22c485ef",
+    "annotated_at": "2025-10-17T03:19:00.958Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4841",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "23.12.3",
+    "commit_id": "12daa1c2b982522d31bcc422477708a39aea9c92",
+    "annotated_at": "2025-10-17T03:19:51.099Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4241",
+    "annotations": [
+      "group5"
+    ],
+    "version": "23.05",
+    "commit_id": "6a7bc68b61d198a5d9f33690327f3d96cea3bc91",
+    "annotated_at": "2025-10-17T03:21:17.992Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/4204",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "23.02.3",
+    "commit_id": "a9d952560d393465a9b83835332ec58d465007c3",
+    "annotated_at": "2025-10-17T03:22:30.342Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/BookStackApp/BookStack/issues/1654",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "0.27.4",
+    "commit_id": "d6456e961afde217e045140fdf8cf88921897536",
+    "annotated_at": "2025-10-17T03:23:25.485Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3980",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "2.1.11",
+    "commit_id": "541a72ee904fef43c773883e9ced2008d9b1205d",
+    "annotated_at": "2025-10-17T03:29:12.155Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6303",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "3.2.9",
+    "commit_id": "6304bdda404e7219937ac3f1f4d2cfaa5dfd4a34",
+    "annotated_at": "2025-10-17T03:30:52.461Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1891",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "1.9.3",
+    "commit_id": "5347b523530102a1edf29968bd53ac46f729ff79",
+    "annotated_at": "2025-10-17T03:37:29.256Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1786",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "2.0rc2",
+    "commit_id": "37f0238d4f5496d6fed8502fae49a395c949e289",
+    "annotated_at": "2025-10-17T03:42:26.492Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1750",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "1.9.0",
+    "commit_id": "1767d668604a0debc306a9df0fcb7cc3432266f1",
+    "annotated_at": "2025-10-17T03:43:17.790Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3265",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "681767f99ee52b8f7ae24c4233f97873e00597ce",
+    "annotated_at": "2025-10-19T15:45:12.403Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/5908",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-19T15:46:38.261Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/2070",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "2.0rc2",
+    "commit_id": "8c7231ab1af279333004acf9c0da24abfd87c0ce",
+    "annotated_at": "2025-10-19T15:48:26.642Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/2620",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "8eb66af66f0f9afa6964d9e79266fda0330a9bea",
+    "annotated_at": "2025-10-19T15:49:06.942Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "0.97b2",
+    "commit_id": "b246bca30697220d0febfad7a497b4177d24292c",
+    "annotated_at": "2025-10-19T15:50:36.682Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6717",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "27c393b15509ada955c7743693d328107f77428d",
+    "annotated_at": "2025-10-19T15:51:19.041Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3104",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "2c1e62e6ee94653bf13eb23ced42743302318801",
+    "annotated_at": "2025-10-19T15:52:13.192Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1722",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "1.9.2",
+    "commit_id": "560c8539e64473c102194f08b00a456f61d0f56f",
+    "annotated_at": "2025-10-19T15:54:16.863Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1995",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "1.9.3",
+    "commit_id": "8e2197a520757e5fd4ad81f4ef78e67ed0bbd5f7",
+    "annotated_at": "2025-10-19T15:55:19.922Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/2443",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "1.9.3",
+    "commit_id": "5003da8d751e9f619acdede93bc712e77cd46ce7",
+    "annotated_at": "2025-10-19T15:56:16.111Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/56",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "68f8135534ac5555c163b9d2507bb7362eefde71",
+    "annotated_at": "2025-10-19T15:57:03.728Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/2618",
+    "annotations": [
+      "group4",
+      "confirmed_bug"
+    ],
+    "version": "1.9.9",
+    "commit_id": "6fd9d77765a77bf4c4b18c7a05a5c0fa661b7ae7",
+    "annotated_at": "2025-10-19T15:57:43.130Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3682",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "2.1.4",
+    "commit_id": "b27382f24109006c8aa77ea38a3c1e00da87d678",
+    "annotated_at": "2025-10-19T16:00:41.129Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/2487",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "2.0rc2",
+    "commit_id": "f03bca9d53d32925df2e50fe3527ae3df3b0bbde",
+    "annotated_at": "2025-10-19T16:02:22.765Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3872",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "2.1.11",
+    "commit_id": "79dca815cbe1429f86e520e6badd16b17074f773",
+    "annotated_at": "2025-10-19T16:04:09.946Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/4546",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-19T16:04:32.617Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3132",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-19T16:05:07.121Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/4017",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "2.1.11",
+    "commit_id": "a107409c573437d8ed88c2dce59d376737a51eab",
+    "annotated_at": "2025-10-19T16:07:00.268Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/3511",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "2.1.3",
+    "commit_id": "af0e366c83bc5e2f7fa217a84156b03618a8a2e0",
+    "annotated_at": "2025-10-19T16:07:44.037Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6638",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "3.3.3",
+    "commit_id": "d15f3aa5d6557074528ba50aa81d84b21cf8adef",
+    "annotated_at": "2025-10-19T16:10:24.821Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/5614",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "3.1.1",
+    "commit_id": "60f77e9aee5c047b0cd096d2949b1ae477d2d09e",
+    "annotated_at": "2025-10-19T16:19:33.293Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6059",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-19T16:19:59.001Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/1577",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "1.2.2",
+    "commit_id": "5e1e72cfc4aeb51d3413cda11d3873088228052e",
+    "annotated_at": "2025-10-19T16:22:15.202Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/indico/indico/issues/6830",
+    "annotations": [
+      "group9",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/indico/indico/pull/6839",
+    "annotated_at": "2025-10-19T16:24:51.543Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/3196",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-19T16:27:32.473Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1238",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "2.9.5",
+    "commit_id": "2e6888a474f44594cc67e343a83d473b50ec033d",
+    "annotated_at": "2025-10-19T16:31:30.016Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1630",
+    "annotations": [
+      "group10",
+      "confirmed_bug"
+    ],
+    "version": "4.4.3",
+    "commit_id": "2379005943c8d28b75e29dd221925c9a1f440974",
+    "annotated_at": "2025-10-19T16:33:09.376Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/460",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "3.1.3",
+    "commit_id": "3061209ea7274c49b7dc04df5ee75e32598a2204",
+    "annotated_at": "2025-10-19T16:40:00.076Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1848",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "4.1.5",
+    "commit_id": "205094cd4c6533250d63d6cc31153eba4100eabb",
+    "annotated_at": "2025-10-19T16:41:02.453Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1480",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "3.3.1",
+    "commit_id": "2c8741bf96dee5bea9dd170f9b4ae6076e764cb4",
+    "annotated_at": "2025-10-19T16:43:15.698Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/2105",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "4.4.3",
+    "commit_id": "b11e0c0176fcdb93a558cf0a17aad2d340658042",
+    "annotated_at": "2025-10-19T16:44:40.984Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1827",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "4.1.5",
+    "commit_id": "39c94fb522f46f2009e140aa0885f11fb3436ae3",
+    "annotated_at": "2025-10-19T16:45:48.406Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/112",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "5.10.46",
+    "commit_id": "89c26737a07e00ae3dbce298279816c91d0869a7",
+    "annotated_at": "2025-10-19T16:46:58.197Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/4259",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "5.8.55",
+    "commit_id": "2d2bfe9d493db600128874ad2eff8fb93eb40308",
+    "annotated_at": "2025-10-19T16:47:57.021Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1599",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "3.5.1",
+    "commit_id": "a25258a7a2c517a83192826e6132b2228071c5e",
+    "annotated_at": "2025-10-19T16:49:34.810Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1499",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "3.3.3",
+    "commit_id": "20accda2f0c958763ed1faeb35d04d920c4a93a0",
+    "annotated_at": "2025-10-19T16:50:14.652Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1761",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "4.0.1",
+    "commit_id": "dd4a2d0e3d26cfbd6799e220ef4540f5d8765959",
+    "annotated_at": "2025-10-19T16:54:13.993Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/invoiceninja/invoiceninja/issues/1565",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "3.4.2",
+    "commit_id": "a596561f5f1b5809cc7d3711fdc79808bad81ccc",
+    "annotated_at": "2025-10-19T16:54:48.502Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38622",
+    "annotations": [
+      "confirmed_bug",
+      "group12"
+    ],
+    "version": "8.1.7",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38622",
+    "annotated_at": "2025-10-20T03:26:32.310Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32116",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "8.1.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/32116",
+    "annotated_at": "2025-10-20T03:31:54.631Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38572",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "8.2.3",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38572",
+    "annotated_at": "2025-10-20T03:32:50.909Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35495",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "8.1.3",
+    "commit_id": "879892d7adc2978b4a6227c8f9b0947ddaee40fe",
+    "annotated_at": "2025-10-20T03:34:17.127Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29294",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "1.7.7.0",
+    "commit_id": "8a2f2b79d7a1ba3af3cc3f2fd44d4f9b95685c26",
+    "annotated_at": "2025-10-20T03:35:56.163Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36730",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "9.0.0-beta.1",
+    "commit_id": "f4548a6f8160ba3ccffd6b0f35ed4597df618df4",
+    "annotated_at": "2025-10-20T03:38:05.075Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30737",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "8.1.0-beta.1",
+    "commit_id": "6ed9facf45d1734c9e26d880760df044fb16e008",
+    "annotated_at": "2025-10-20T03:41:05.436Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29943",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "d2cfcb778dccfc98d301e6f4dcfcd988f1949555",
+    "annotated_at": "2025-10-20T03:43:36.186Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30174",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T03:44:12.551Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29587",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "1.7.8.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29587",
+    "annotated_at": "2025-10-20T03:45:28.602Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27738",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.3",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/27738",
+    "annotated_at": "2025-10-20T03:47:07.537Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39010",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "8.1.5",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/39010",
+    "annotated_at": "2025-10-20T03:48:47.866Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29040",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "8.0.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29584",
+    "annotated_at": "2025-10-20T03:50:08.299Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32218",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "8.1.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/35775",
+    "annotated_at": "2025-10-20T03:51:20.752Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36746",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/36746",
+    "annotated_at": "2025-10-20T03:52:20.792Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39209",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T03:55:56.963Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30634",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T03:56:42.831Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39028",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T03:56:55.952Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29615",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T03:57:21.932Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37191",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "8.1.7",
+    "commit_id": "912f71675ecfec1d0759e34f8a780a9b95412cd6",
+    "annotated_at": "2025-10-20T03:58:34.752Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27748",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.3",
+    "commit_id": "9bc8cd167dd24b65610971ea0efa3e9406bea485",
+    "annotated_at": "2025-10-20T04:00:55.812Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27560",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "174ea11b2e80f9f412e980734830e1cf26b4e1b3",
+    "annotated_at": "2025-10-20T04:01:42.900Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27669",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "ba2db5859b12264e9553480716317195a45a6bde",
+    "annotated_at": "2025-10-20T04:03:28.301Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29859",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29859",
+    "annotated_at": "2025-10-20T04:04:12.918Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31467",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "8.1.0",
+    "commit_id": "0b61101be2bce477d03755e6d8358c4e0684743c",
+    "annotated_at": "2025-10-20T04:06:00.970Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32664",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "9.0.0",
+    "commit_id": "570ae9647715fd9f5f3a297149b19a0caf11df44",
+    "annotated_at": "2025-10-20T04:07:11.610Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32506",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "979ca7645d060f1f449b8e6c84a3711cc81a1838",
+    "annotated_at": "2025-10-20T04:08:43.861Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38152",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "9.0.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38152",
+    "annotated_at": "2025-10-20T04:09:45.267Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31279",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/31279",
+    "annotated_at": "2025-10-20T04:11:04.887Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32403",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "6991d5be1dc82620f32242fc95919a59c14d1d94",
+    "annotated_at": "2025-10-20T04:12:07.591Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32465",
+    "annotations": [
+      "confirmed_bug",
+      "group10"
+    ],
+    "version": "8.0.0",
+    "commit_id": "a58408f6b6610b27b47093b1628e26d7f454280d",
+    "annotated_at": "2025-10-20T04:13:00.528Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31455",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.8",
+    "commit_id": "6eaae87616fff41004d298c29c326474d1fa3e68",
+    "annotated_at": "2025-10-20T04:13:52.428Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37955",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "8.1.5",
+    "commit_id": "97778741941b44e6d7d0e4ae88a58f8345080887",
+    "annotated_at": "2025-10-20T04:14:38.986Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35322",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "1.7.7",
+    "commit_id": "751dd8b6324ba8ba1a082fa0742bf8045cba9da5",
+    "annotated_at": "2025-10-20T04:16:33.672Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28836",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "1.7.8.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29114",
+    "annotated_at": "2025-10-20T04:17:23.321Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28270",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:18:39.455Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29740",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "1.7.6.5",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29740",
+    "annotated_at": "2025-10-20T04:19:40.776Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29554",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.6",
+    "commit_id": "7e0c1b94ce5e465753d009ed4d1608baa024b63c",
+    "annotated_at": "2025-10-20T04:20:43.418Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29515",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29515",
+    "annotated_at": "2025-10-20T04:21:39.957Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31411",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "8.1.0",
+    "commit_id": "d7192bbc824706f30b1e561ac85e84ca46f97659",
+    "annotated_at": "2025-10-20T04:22:32.691Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29829",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:24:31.062Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28904",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "1.7.8.3",
+    "commit_id": "a1850487017ffa96f3801f3b3e590a25fd58c8fa",
+    "annotated_at": "2025-10-20T04:25:40.592Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/33387",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "1.7.6.5",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/33387",
+    "annotated_at": "2025-10-20T04:26:46.980Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30916",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "8.0.0",
+    "commit_id": "7f108b3befd7096ce647c5726ba520215d50a96b",
+    "annotated_at": "2025-10-20T04:27:56.373Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32359",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:29:16.846Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29861",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "d937b7f506f364356f8f186c2791a1da5493b447",
+    "annotated_at": "2025-10-20T04:30:09.771Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28716",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:31:41.479Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27620",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:31:55.528Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36472",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:32:14.457Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29096",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:32:25.971Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39335",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T04:32:54.711Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37882",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:28:10.221Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36987",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:29:03.485Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29585",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:29:17.751Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27947",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:31:33.888Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34689",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:31:54.572Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35812",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "8.1.5",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/35812",
+    "annotated_at": "2025-10-20T05:32:53.159Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/33567",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "8.1.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/33567",
+    "annotated_at": "2025-10-20T05:33:51.214Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35591",
+    "annotations": [
+      "group3",
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:37:24.236Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35102",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/36521",
+    "annotated_at": "2025-10-20T05:38:32.464Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34314",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "8.1.2",
+    "commit_id": "d55c15575d8934e3c11613974770428fa9ae5ea2",
+    "annotated_at": "2025-10-20T05:40:15.076Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39446",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "3c2c13a3021120464755a02d2dbdef8ca64b30ea",
+    "annotated_at": "2025-10-20T05:51:28.808Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34694",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.10",
+    "commit_id": "7ef4e1896866065497ea03b4456b58b2b2564d99",
+    "annotated_at": "2025-10-20T05:55:03.348Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38122",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T05:56:18.054Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28281",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "",
+    "commit_id": "d7b318fde3e7c5fd0b4f6ea6c91e095113cdca31",
+    "annotated_at": "2025-10-20T05:57:26.174Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32596",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "8.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/32596",
+    "annotated_at": "2025-10-20T06:00:48.980Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31296",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/31296",
+    "annotated_at": "2025-10-20T06:02:32.955Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30831",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "946161882362162de06703856bc7c6516b5f6e39",
+    "annotated_at": "2025-10-20T06:04:10.028Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27891",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:05:06.170Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29324",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "8d800e9d5bc8883dbd849d70786cec66b3f7676d",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:06:38.065Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29372",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "1.7.8.7",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29372",
+    "annotated_at": "2025-10-20T06:07:32.495Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36471",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "4965d7ac4ae6b100c21411b2b29f8485d51c2b51",
+    "annotated_at": "2025-10-20T06:09:33.412Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36802",
+    "annotations": [
+      "confirmed_bug",
+      "group10"
+    ],
+    "version": "8.1.7",
+    "commit_id": "857dee1c9a4a707626e2def8a625c6607657783c",
+    "annotated_at": "2025-10-20T06:12:15.985Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34352",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/34352",
+    "annotated_at": "2025-10-20T06:12:58.661Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29646",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29646",
+    "annotated_at": "2025-10-20T06:15:40.467Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35910",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "8.1.3",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:29:58.126Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39271",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "9.0.0",
+    "commit_id": "b4d2a9553a255614681b79d4c1a57a1397c493b6",
+    "annotated_at": "2025-10-20T06:32:22.163Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29060",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "8.0.0",
+    "commit_id": "0cef71a8e1ad7c7a3ba48d3c727ce278b068fbcc",
+    "annotated_at": "2025-10-20T06:33:22.462Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32690",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/32715",
+    "annotated_at": "2025-10-20T06:34:28.155Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28070",
+    "annotations": [
+      "group2",
+      "confirmed_bug"
+    ],
+    "version": "1.7.7.8",
+    "commit_id": "e3bbb59c7f63c3c5aeff58854bd35cd9154960fd",
+    "annotated_at": "2025-10-20T06:35:46.189Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29722",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "1.7.7",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29722",
+    "annotated_at": "2025-10-20T06:37:35.560Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27843",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "1.7.8.4",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/27843",
+    "annotated_at": "2025-10-20T06:38:34.489Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35021",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "8.1.1",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/34152",
+    "annotated_at": "2025-10-20T06:42:14.617Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36097",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "334c489c9f25eabfce0c5cab888e1807cecf3f41",
+    "annotated_at": "2025-10-20T06:42:50.475Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27879",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:44:07.199Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34162",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:44:40.457Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39407",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "647a30bb8761b7a3499ce93107a646b0b711f108",
+    "annotated_at": "2025-10-20T06:45:53.896Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29196",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "8.0.0",
+    "commit_id": "b7ab161c197ebc55db2c7addb42b8e8064096edc",
+    "annotated_at": "2025-10-20T06:46:54.876Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37565",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/37565",
+    "annotated_at": "2025-10-20T06:50:57.316Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39245",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "3f1a15ba55b31e21d1810d0488b0e2ee2e58ccb9",
+    "annotated_at": "2025-10-20T06:53:03.281Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29481",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "5f7f137068fae96f2712e38450f688fa6aae8ce9",
+    "annotated_at": "2025-10-20T06:54:14.950Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36607",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "8.1.4",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/36607",
+    "annotated_at": "2025-10-20T06:55:37.224Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34152",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T06:56:02.127Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29306",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "8.0.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29306",
+    "annotated_at": "2025-10-20T07:04:48.448Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39007",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "9.0.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/39007",
+    "annotated_at": "2025-10-20T07:06:21.352Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37590",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/37590",
+    "annotated_at": "2025-10-20T07:07:35.879Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27841",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "bbc418649cb411bb88a07431178126a12fc7cde2",
+    "annotated_at": "2025-10-20T07:08:51.994Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34891",
+    "annotations": [
+      "group4",
+      "group10",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/34891",
+    "annotated_at": "2025-10-20T07:09:44.759Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30178",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "a5c89391d188599f02961159862d29dfff8152a3",
+    "annotated_at": "2025-10-20T07:41:57.338Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38460",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:42:29.108Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31099",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:47:49.972Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36124",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:48:12.352Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29711",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:48:32.947Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38203",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "9.0.0",
+    "commit_id": "02f14167155ced07f7534d5c432282eef89974f1",
+    "annotated_at": "2025-10-20T07:49:32.430Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37652",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "8.2",
+    "commit_id": "45615549ac3ad86e8a3272101f30d6b4d4821658",
+    "annotated_at": "2025-10-20T07:50:31.237Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/34700",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:50:45.610Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28286",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "1.7.8.5",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/28301",
+    "annotated_at": "2025-10-20T07:52:32.639Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29025",
+    "annotations": [
+      "confirmed_bug",
+      "group10"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29025",
+    "annotated_at": "2025-10-20T07:53:20.226Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38141",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "9.0.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38141",
+    "annotated_at": "2025-10-20T07:58:31.621Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37102",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T07:58:49.701Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38448",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "1.7.8",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38481",
+    "annotated_at": "2025-10-20T08:00:18.108Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27459",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "1.7.8.0",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/27459",
+    "annotated_at": "2025-10-20T08:00:54.426Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35975",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:01:47.938Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37268",
+    "annotations": [
+      "group5",
+      "confirmed_bug"
+    ],
+    "version": "8.1.7",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/37268",
+    "annotated_at": "2025-10-20T08:02:42.815Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38457",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:02:53.444Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31115",
+    "annotations": [
+      "confirmed_bug",
+      "group10"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/commit/1629ec5d08343e969402bc649eb0734ab4dea526",
+    "annotated_at": "2025-10-20T08:03:59.070Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30465",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/30465",
+    "annotated_at": "2025-10-20T08:07:20.726Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/35863",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/35863",
+    "annotated_at": "2025-10-20T08:08:00.079Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29390",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:09:03.300Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38926",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/38926",
+    "annotated_at": "2025-10-20T08:09:33.945Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36028",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/36028",
+    "annotated_at": "2025-10-20T08:10:13.930Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29540",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:10:52.670Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29024",
+    "annotations": [
+      "group1",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/29024",
+    "annotated_at": "2025-10-20T08:12:14.211Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/39375",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/39375",
+    "annotated_at": "2025-10-20T08:12:39.810Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32290",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/32290",
+    "annotated_at": "2025-10-20T08:13:12.523Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31695",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:15:00.344Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/33289",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:15:13.237Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30473",
+    "annotations": [
+      "group11",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:16:07.397Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36032",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:16:41.713Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31603",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:17:01.958Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29281",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:18:38.557Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27502",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:18:48.789Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/28403",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:19:13.532Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32242",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:20:16.541Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/38982",
+    "annotations": [
+      "group3",
+      "confirmed_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:21:59.347Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32656",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:22:29.686Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36005",
+    "annotations": [
+      "confirmed_bug",
+      "group6"
+    ],
+    "version": "",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/36027",
+    "annotated_at": "2025-10-20T08:25:23.294Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31287",
+    "annotations": [
+      "group6",
+      "confirmed_bug"
+    ],
+    "version": "8.0.1",
+    "commit_id": "https://github.com/PrestaShop/PrestaShop/pull/33151",
+    "annotated_at": "2025-10-20T08:27:01.338Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27762",
+    "annotations": [
+      "confirmed_bug",
+      "group11"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:41:39.963Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/29629",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:41:56.309Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/27604",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:42:19.846Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/36342",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:42:30.129Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31812",
+    "annotations": [
+      "confirmed_bug",
+      "group4"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:44:08.704Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/37888",
+    "annotations": [
+      "confirmed_bug",
+      "group5"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:44:56.550Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/31759",
+    "annotations": [
+      "not_bug"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:45:09.666Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/33207",
+    "annotations": [
+      "confirmed_bug",
+      "group1"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:45:22.852Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/30352",
+    "annotations": [
+      "confirmed_bug",
+      "group3"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:46:10.690Z"
+  },
+  {
+    "issue_id": "https://api.github.com/repos/PrestaShop/PrestaShop/issues/32215",
+    "annotations": [
+      "confirmed_bug",
+      "group2"
+    ],
+    "version": "",
+    "commit_id": "",
+    "annotated_at": "2025-10-20T08:46:20.615Z"
+  }
+]

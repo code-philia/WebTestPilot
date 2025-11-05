@@ -110,7 +110,7 @@ class LavagueTestRunner(BaseTestRunner):
         except Exception:
             return code
 
-    def run_test_case(self, test_case: TestCase) -> TestResult:
+    async def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using LaVague agent."""
         actions = test_case.actions
         test_name = test_case.name
@@ -156,7 +156,10 @@ class LavagueTestRunner(BaseTestRunner):
 
                 # 4 steps as it requires at least 2 steps to finish + to handle commands with multiple actions.
                 agent = WebAgent(
-                    world_model, action_engine, n_steps=4, token_counter=token_counter
+                    world_model,
+                    action_engine,
+                    n_steps=4,
+                    token_counter=token_counter,
                 )
 
                 start_time = time.perf_counter()

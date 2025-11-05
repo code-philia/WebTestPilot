@@ -6,7 +6,7 @@ from typing import Optional
 
 from tqdm import tqdm
 from const import ApplicationEnum, MethodEnum, ModelEnum, TestCase
-from playwright.sync_api import Playwright, Page, sync_playwright
+from playwright.sync_api import Page, sync_playwright
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options
@@ -19,7 +19,6 @@ if str(PROJECT_DIR) not in sys.path:
     sys.path.append(str(PROJECT_DIR))
 
 import baselines.naviqate.method.utils.logger as logging
-import baselines.naviqate.method.utils.utils as utils
 from baselines.naviqate.method.crawler.crawler import WebCrawler
 from baselines.base_runner import BaseTestRunner, TestResult
 from baselines.utils import setup_page_state
@@ -89,14 +88,15 @@ class NaviqateTestRunner(BaseTestRunner):
             if self.browser.contexts
             else self.browser.new_context()
         )
-        page = self.context.new_page()
+        # page = self.context.new_page()
+        page = self.context.pages[0]
 
         # Set up the page state based on the setup function
         self.logger.info("Setting up page state")
         page = setup_page_state(page, setup_function, application=self.application)
         return page
 
-    def run_test_case(self, test_case: TestCase) -> TestResult:
+    async def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case using Naviqate crawler."""
         actions = test_case.actions
         test_name = test_case.name

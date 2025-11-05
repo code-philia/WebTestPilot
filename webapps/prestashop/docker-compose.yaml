@@ -30,7 +30,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db:/var/lib/mysql
-
 volumes:
   db:
     driver: local

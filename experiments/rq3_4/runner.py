@@ -14,14 +14,14 @@ WEBTESTPILOT_DIR = PROJECT_DIR / "webtestpilot" / "src"
 if str(WEBTESTPILOT_DIR) not in sys.path:
     sys.path.append(str(WEBTESTPILOT_DIR))
 
-from tqdm import tqdm
-from ruamel.yaml import YAML
-from ruamel.yaml.parser import ParserError
-from baselines.const import TestCase, ApplicationEnum, MethodEnum
-from baselines.base_runner import TestResult, BaseTestRunner
+from baselines.base_runner import BaseTestRunner, TestResult
+from baselines.const import ApplicationEnum, MethodEnum, TestCase
 
 # Reuse the same imports the baseline runner uses
-from main import Config, Session, WebTestPilot, Step
+from main import Config, Session, Step, WebTestPilot
+from ruamel.yaml import YAML
+from ruamel.yaml.parser import ParserError
+from tqdm import tqdm
 
 
 class WebTestPilotTestRunner(BaseTestRunner):
@@ -46,7 +46,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
         self.headless = headless
         self.config = config
 
-    def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
+    def _load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
         test_cases: list[TestCase] = []
 
@@ -87,7 +87,7 @@ class WebTestPilotTestRunner(BaseTestRunner):
 
         return test_cases
     
-    def run_test_case(self, test_case: TestCase, is_buggy: bool) -> TestResult:
+    async def run_test_case(self, test_case: TestCase, is_buggy: bool) -> TestResult:
         """Run a single test case using WebTestPilot agent."""
         actions = test_case.actions
         test_name = test_case.name

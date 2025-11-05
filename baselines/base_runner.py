@@ -1,19 +1,18 @@
-import sys
 import json
 import os
 import re
 import subprocess
-import time
+import sys
 import traceback
-import urllib.request
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Callable
-from tqdm import tqdm
+from typing import Optional
+
 from playwright.sync_api import Page, sync_playwright
 from playwright.sync_api._generated import Browser, BrowserContext, Playwright
+from tqdm import tqdm
 
 from baselines.pinata.src.VTAAS.schemas.verdict import AssertorResult
 
@@ -246,7 +245,7 @@ class BaseTestRunner(ABC):
             return int(match.group(1))
         return None
 
-    def load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
+    def _load_test_cases(self, filter_pattern: Optional[str] = None) -> list[TestCase]:
         """Load test cases from test case directory."""
         test_cases: list[TestCase] = []
 
@@ -306,7 +305,7 @@ class BaseTestRunner(ABC):
         return page
 
     @abstractmethod
-    def run_test_case(self, test_case: TestCase) -> TestResult:
+    async def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case.
 
         Args:
@@ -317,7 +316,7 @@ class BaseTestRunner(ABC):
         """
         pass
 
-    def run_single_test(
+    async def run_single_test(
         self,
         test_case: TestCase,
         pbar: tqdm,
@@ -347,7 +346,7 @@ class BaseTestRunner(ABC):
         # Restart application with or without bug
         self.restart_application(self.application, patch_file)
         try:
-            result = self.run_test_case(test_case)
+            result = await self.run_test_case(test_case)
 
             if is_buggy:
                 result.test_name = display_name
@@ -399,84 +398,31 @@ class BaseTestRunner(ABC):
                 return {}
         return {}
 
-    def wait_for_application(self, application: ApplicationEnum, max_wait: int = 240):
-        """Wait for application to be accessible via HTTP."""
-
-        READY_CHECKS: dict[str, Callable[[str], bool]] = {
-            "indico": lambda text: "All events" in text,
-            "invoiceninja": lambda text: "Invoice Ninja" in text,
-            "prestashop": lambda text: "Ecommerce software by PrestaShop" in text,
-            "bookstack": lambda text: "BookStack" in text,  # adjust as needed
-        }
-
-        url = self.APPLICATION_URLS.get(application)
-        assert url, f"URL for {application} not found"
-
-        print(f"Waiting for {application} to be ready at {url}...")
-        start_time = time.time()
-        check_func: Callable[[str], bool] = READY_CHECKS.get(
-            application, lambda _: True
-        )
-
-        while time.time() - start_time < max_wait:
-            try:
-                response = urllib.request.urlopen(url, timeout=5)
-                text = response.read().decode("utf-8", errors="ignore")
-
-                if check_func(text):
-                    print(f"✓ {application} is ready")
-                    return
-            except Exception as e:
-                print(f"{application} is giving error: {e}")
-
-            time.sleep(15)
-
-        print(f"Warning: {application} may not be fully ready after {max_wait}s")
-
     def restart_application(
         self, application: ApplicationEnum, patch_file: Optional[str] = None
     ):
         """Restart the specified application with optional bug injection."""
         WEBAPPS_DIR = Path(__file__).parent.parent / "webapps"
 
-        # Stop the application
-        subprocess.run(
-            ["bash", str(WEBAPPS_DIR / "stop_app.sh"), application],
-            text=True,
-        )
-
-        # Start with optional bug injection
+        # Example: bash webapps/start_app.sh invoiceninja credit-mark-1.patch
         cmd = ["bash", str(WEBAPPS_DIR / "start_app.sh"), application]
         if patch_file:
             cmd.append(patch_file)
 
         _ = subprocess.run(cmd, text=True, check=True)
 
-        # Wait for application to be accessible
-        self.wait_for_application(application)
-
-    def run_all_test_cases(
+    async def run_all_test_cases(
         self, filter_pattern: Optional[str] = None
     ) -> TestResultDataset:
         """Run all test cases and return results."""
-        test_cases = self.load_test_cases(filter_pattern)
         results = TestResultDataset()
+        checkpoint_file = self._get_checkpoint_folder()
+        test_cases = self._load_test_cases(filter_pattern)
+        disable_buggy_tests = self.method in [MethodEnum.naviqate, MethodEnum.lavague]
 
         if not test_cases:
             print(f"No test cases found in {self.test_case_path}")
             return results
-
-        # Create checkpoint folder with timestamp
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.checkpoint_folder = (
-            self.test_output_path.parent / f"checkpoint_{timestamp}"
-        )
-        self.checkpoint_folder.mkdir(parents=True, exist_ok=True)
-
-        checkpoint_file = self.checkpoint_folder / f"{self.test_output_path.name}"
-        print(f"Checkpoint folder: {self.checkpoint_folder}")
-
-        disable_buggy_tests = self.method in [MethodEnum.naviqate, MethodEnum.lavague]
 
         # Calculate total runs
         if disable_buggy_tests:
@@ -503,7 +449,7 @@ class BaseTestRunner(ABC):
             for test_case in test_cases:
                 # Run buggy test if mapping exists and method supports it
                 if test_case.name in self.bug_mapping and not disable_buggy_tests:
-                    result = self.run_single_test(
+                    result = await self.run_single_test(
                         test_case,
                         pbar,
                         is_buggy=True,
@@ -516,7 +462,7 @@ class BaseTestRunner(ABC):
                     results.save_results(str(checkpoint_file))
 
                 # Run normal test
-                result = self.run_single_test(test_case, pbar)
+                result = await self.run_single_test(test_case, pbar)
                 results.results.append(result)
                 pbar.update(1)
 
@@ -534,6 +480,17 @@ class BaseTestRunner(ABC):
         results.print_summary()
 
         return results
+
+    def _get_checkpoint_folder(self):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.checkpoint_folder = (
+            self.test_output_path.parent / f"checkpoint_{timestamp}"
+        )
+        self.checkpoint_folder.mkdir(parents=True, exist_ok=True)
+
+        checkpoint_file = self.checkpoint_folder / f"{self.test_output_path.name}"
+        print(f"Checkpoint folder: {self.checkpoint_folder}")
+        return checkpoint_file
 
     def __del__(self):
         self.clean_up_playwright()

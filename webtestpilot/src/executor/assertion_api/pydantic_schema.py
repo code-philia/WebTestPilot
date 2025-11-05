@@ -1,15 +1,19 @@
+import logging
 import warnings
-from typing import Any, Type, TypeVar, Union, get_args, get_origin, Literal
-from types import UnionType
 from enum import Enum
+from types import UnionType
+from typing import Any, Literal, Type, TypeVar, Union, get_args, get_origin
 
+from baml_client.type_builder import TypeBuilder
 from pydantic import BaseModel
 from pydantic_core import PydanticUndefined
 
-from baml_client.type_builder import TypeBuilder
+from executor.assertion_api.type_utils import (
+    is_basemodel_type,
+)
 
 T = TypeVar("T")
-
+logger = logging.getLogger(__name__)
 
 class PydanticTypeBuilder:
     def __init__(self, tb: TypeBuilder) -> None:
@@ -28,12 +32,13 @@ class PydanticTypeBuilder:
             )
             return self.tb.string()
 
+        logger.debug(f"Processing field '{field_path}' of type {python_type}")
         origin = get_origin(python_type)
         if origin is None:
             if python_type is type(None):
                 return self.tb.null()
             if issubclass(python_type, BaseModel):
-                return self.parse_model(python_type)
+                return self._parse_model(python_type)
             elif issubclass(python_type, Enum):
                 enum_name = python_type.__name__
                 new_enum = self.tb.add_enum(enum_name)
@@ -132,7 +137,7 @@ class PydanticTypeBuilder:
         )
         return self.tb.string()
 
-    def parse_model(self, model_class: Type[BaseModel]):
+    def _parse_model(self, model_class: Type[BaseModel]):
         model_name = model_class.__name__
 
         if model_name in self._processed_models.keys():
@@ -161,6 +166,11 @@ class PydanticTypeBuilder:
         return new_cls.type()
 
 
-def build_from_pydantic(models: list[Type[BaseModel]], tb: TypeBuilder):
+def build_from_pydantic(schema: Union[Type[BaseModel], Type], tb: TypeBuilder):
     builder = PydanticTypeBuilder(tb)
-    return [builder.parse_model(model) for model in models]
+    logger.debug(f"Building BAML schema from Pydantic schema: {schema}")
+
+    if is_basemodel_type(schema):
+        return builder._parse_model(schema)
+    else:
+        return builder._get_field_type(schema, "<root>")

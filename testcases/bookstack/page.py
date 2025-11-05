@@ -1,100 +1,89 @@
 from bookstack.conftest import BookStackTestData, create_page
+from bookstack.utilities import (
+    navigate_to_book,
+    navigate_to_page,
+)
 from playwright.sync_api import Page
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
 
-def test_create_page(created_book_page: Page, test_data: BookStackTestData) -> None:
-    insert_start_event_to_page(created_book_page)
+def test_create_page(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
+
+    navigate_to_book(logged_in_page, test_data.book_name)
 
     created_page_page = create_page(
-        created_book_page, test_data.page_name, test_data.page_description
+        logged_in_page, test_data.page_name, test_data.page_description
     )
-
-    # Check content
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
-    expect(created_page_page.get_by_role("main")).to_contain_text(
-        test_data.page_description
-    )
-
-    # Navigate back to book page and check
-    created_page_page.get_by_label("Breadcrumb").get_by_role(
-        "link", name=test_data.book_name
-    ).click()
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
-
-
-def test_read_page(created_page_page: Page, test_data: BookStackTestData) -> None:
-    insert_start_event_to_page(created_page_page)
-
-    # Navigate back to the book, check the page
-    created_page_page.get_by_label("Breadcrumb").get_by_role(
-        "link", name=test_data.book_name
-    ).click()
-
-    # Click the page link and check content
-    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
-    created_page_page.get_by_role("link", name=test_data.page_name).first.click()
 
     expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
     expect(created_page_page.get_by_role("main")).to_contain_text(
         test_data.page_description
     )
 
+    created_page_page.get_by_label("Breadcrumb").get_by_role(
+        "link", name=test_data.book_name, exact=True
+    ).click()
+    expect(created_page_page.get_by_role("main")).to_contain_text(test_data.page_name)
 
-def test_update_page(created_page_page: Page, test_data: BookStackTestData) -> None:
-    insert_start_event_to_page(created_page_page)
 
-    created_page_page.get_by_role("link", name="Edit").click()
+def test_read_page(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
+    navigate_to_page(logged_in_page, test_data.book_name, test_data.page_name)
 
-    # Title
-    created_page_page.get_by_role("textbox", name="Page Title").click()
-    created_page_page.get_by_role("textbox", name="Page Title").press("ControlOrMeta+a")
-    created_page_page.get_by_role("textbox", name="Page Title").fill(
+    expect(logged_in_page.get_by_role("main")).to_contain_text(test_data.page_name)
+    expect(logged_in_page.get_by_role("main")).to_contain_text(
+        test_data.page_description
+    )
+
+
+def test_update_page(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
+    navigate_to_page(logged_in_page, test_data.book_name, test_data.page_name)
+
+    logged_in_page.get_by_role("link", name="Edit").click()
+
+    logged_in_page.get_by_role("textbox", name="Page Title").click()
+    logged_in_page.get_by_role("textbox", name="Page Title").press("ControlOrMeta+a")
+    logged_in_page.get_by_role("textbox", name="Page Title").fill(
         test_data.page_name_updated
     )
 
-    # Content
-    created_page_page.locator(
-        'iframe[title="Rich Text Area"]'
-    ).content_frame.get_by_text(test_data.page_description).click()
-    created_page_page.locator(
-        'iframe[title="Rich Text Area"]'
-    ).content_frame.get_by_label("Rich Text Area. Press ALT-0").press("ControlOrMeta+a")
-    created_page_page.locator(
-        'iframe[title="Rich Text Area"]'
-    ).content_frame.get_by_label("Rich Text Area. Press ALT-0").fill(
-        test_data.page_description_updated
-    )
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_text(
+        test_data.page_description
+    ).click()
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).press("ControlOrMeta+a")
+    logged_in_page.locator('iframe[title="Rich Text Area"]').content_frame.get_by_label(
+        "Rich Text Area. Press ALT-0"
+    ).fill(test_data.page_description_updated)
 
-    created_page_page.get_by_role("button", name="Save Page").click()
+    logged_in_page.get_by_role("button", name="Save Page").click()
 
-    # Check content of the book page
     expect(
-        created_page_page.get_by_role("alert").filter(
-            has_text="Page successfully updated"
-        )
+        logged_in_page.get_by_role("alert").filter(has_text="Page successfully updated")
     ).to_be_visible(timeout=1000)
-    expect(created_page_page.get_by_role("main")).to_contain_text(
+    expect(logged_in_page.get_by_role("main")).to_contain_text(
         test_data.page_name_updated
     )
-    expect(created_page_page.get_by_role("main")).to_contain_text(
+    expect(logged_in_page.get_by_role("main")).to_contain_text(
         test_data.page_description_updated
     )
 
-    expect(created_page_page.get_by_role("list")).to_contain_text(
+    expect(logged_in_page.get_by_role("list")).to_contain_text(
         test_data.page_name_updated
     )
 
 
-def test_delete_page(created_page_page: Page) -> None:
-    insert_start_event_to_page(created_page_page)
+def test_delete_page(logged_in_page: Page, test_data: BookStackTestData) -> None:
+    insert_start_event_to_page(logged_in_page)
+    navigate_to_page(logged_in_page, test_data.book_name, test_data.page_name)
 
-    created_page_page.get_by_role("link", name="Delete").click()
-    created_page_page.get_by_role("button", name="Confirm").click()
+    logged_in_page.get_by_role("link", name="Delete").click()
+    logged_in_page.get_by_role("button", name="Confirm").click()
 
     expect(
-        created_page_page.get_by_role("alert").filter(
-            has_text="Page successfully deleted"
-        )
+        logged_in_page.get_by_role("alert").filter(has_text="Page successfully deleted")
     ).to_be_visible()

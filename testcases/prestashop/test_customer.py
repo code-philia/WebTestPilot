@@ -3,6 +3,8 @@ from prestashop.conftest import PrestaShopTestData, create_customer
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import go_to_customer_page
+
 # 2 test cases
 
 
@@ -10,15 +12,14 @@ def test_create_customer(logged_in_page: Page, test_data: PrestaShopTestData) ->
     page = logged_in_page
     insert_start_event_to_page(page)
 
-    page = create_customer(page, test_data)
+    page = create_customer(page, email="test_new@test.com")
     expect(page.get_by_text("Successful creation")).to_be_visible()
 
 
-def test_delete_customer(
-    created_customer_page: Page, test_data: PrestaShopTestData
-) -> None:
-    page = created_customer_page
+def test_delete_customer(logged_in_page: Page, test_data: PrestaShopTestData) -> None:
+    page = logged_in_page
     insert_start_event_to_page(page)
+    go_to_customer_page(page)
 
     row = page.get_by_role("row").filter(has_text=test_data.customer_email)
     page.wait_for_timeout(1000)

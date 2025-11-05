@@ -31,5 +31,11 @@ checkpoint_*
 
 experiments/**/*.html
 experiments/**/*.png
-
 archive/
+media/
+
+*/*/node_modules/*
+.webtestpilot
+specs/
+*baml_client
+node_modules/

@@ -22,6 +22,9 @@ template_string PreconditionIntro() #"
         def precondition(session: Session):
             ...
         ```
+
+    # Reminder
+    - `schema` must be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
 "#
 
 template_string PreconditionExample() #"
@@ -59,13 +62,12 @@ template_string PreconditionExample() #"
 function GeneratePrecondition(screenshot: image, history: History[], action: string, verify: string, feedback: Feedback[]) -> string {
     client "Base"
     prompt #"
-        {{_.role("user")}}
+        {{_.role("system")}}
         {{ PreconditionIntro() }}
-
         {{ Specification() }}
-
         {{ PreconditionExample() }}
         
+        {{_.role("user")}}
         {{ screenshot }}
 
         {{ FormatHistory(history) }}

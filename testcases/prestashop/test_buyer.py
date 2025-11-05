@@ -5,6 +5,8 @@ from prestashop.conftest import PrestaShopTestData
 from tracing_api import insert_start_event_to_page
 from tracing_api import traced_expect as expect
 
+from .utilities import add_product_to_wishlist
+
 # 7 testcases
 
 
@@ -78,10 +80,11 @@ def test_add_and_remove_product(
 
 
 def test_dislike_product(
-    created_wishlist_item_page: Page, test_data: PrestaShopTestData
+    logged_in_buyer_page: Page, test_data: PrestaShopTestData
 ) -> None:
-    page = created_wishlist_item_page
+    page = logged_in_buyer_page
     insert_start_event_to_page(page)
+    add_product_to_wishlist(page)
 
     # Product is already in wishlist, search for it and remove it
     page.get_by_role("textbox", name="Search").fill(test_data.buyer_product_name)

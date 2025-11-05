@@ -23,7 +23,7 @@ class Config:
     page_reidentification: ClientRegistry
 
     infer_missing_steps: bool
-    max_retries: int
+    max_tries: int
 
     @staticmethod
     def load(path: Path | str) -> "Config":
@@ -57,12 +57,9 @@ class Config:
         page_reidentification = ClientRegistry()
         page_reidentification.set_primary(executor_clients["page_reidentification"])
 
-        max_retries = yaml_data["executor"]["max_retries"]
+        max_tries = yaml_data["executor"]["max_tries"]
 
-        # Apply logging config if present
-        logging_cfg = yaml_data.get("logging")
-        if logging_cfg:
-            logging.config.dictConfig(logging_cfg)
+        logging.config.dictConfig(yaml_data.get("logging", {}))
 
         return Config(
             parser=parser,
@@ -73,5 +70,5 @@ class Config:
             ui_locator=ui_locator,
             page_reidentification=page_reidentification,
             infer_missing_steps=infer_missing_steps,
-            max_retries=max_retries,
+            max_tries=max_tries,
         )
