@@ -14,7 +14,7 @@ client<llm> GPT {
   provider openai
   retry_policy Exponential
   options {
-    model "gpt-4.1"
+    model "gpt-4.1-mini"
     api_key env.OPENAI_API_KEY
     temperature 0.0
   }
@@ -70,21 +70,82 @@ client<llm> Qwen3b {
   }
 }
 
-client<llm> UGround {
+client<llm> OpenRouter {
   provider "openai-generic"
   options {
-    base_url "http://echo-dongjs.ddns.comp.nus.edu.sg:8000/v1"
+    base_url "https://openrouter.ai/api/v1"
+    model "qwen/qwen2.5-vl-32b-instruct:free"
+    api_key env.OPENROUTER_API_KEY
+  }
+}
+
+client<llm> ZrokLocalModel {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://llms.zrok.06946099.xyz/v1"
+    model "Qwen/Qwen3-VL-30B-A3B-Thinking"
+  }
+}
+
+client<llm> NgrokLocalModel {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
+    model "Qwen/Qwen3-VL-30B-A3B-Thinking"
+  }
+}
+
+client<llm> FallbackLocalModel {
+  provider fallback
+  options {
+    strategy [
+      ZrokLocalModel
+      NgrokLocalModel
+    ]
+  }
+}
+
+client<llm> ZrokUIVenus {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://uivenus.zrok.06946099.xyz/v1"
     api_key "token-abc123"
-    model "osunlp/UGround-V1-7B"
+    model "inclusionAI/UI-Venus-Ground-7B"
+    header {
+      "secret" "sjtu-course-cs3604-2025"
+    }
+  }
+}
+
+client<llm> NgrokUIVenus {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://8dcd0b9d943d.ngrok-free.app/v1"
+    api_key "token-abc123"
+    model "inclusionAI/UI-Venus-Ground-7B"
+  }
+}
+
+client<llm> FallbackUIVenus {
+  provider fallback
+  options {
+    strategy [
+      ZrokUIVenus
+      NgrokUIVenus
+    ]
   }
 }
 
 retry_policy Exponential {
-  max_retries 3
+  max_retries 5
   strategy {
     type exponential_backoff
     delay_ms 300
     multiplier 1.5
-    max_delay_ms 10000
+    max_delay_ms 50000
   }
 }

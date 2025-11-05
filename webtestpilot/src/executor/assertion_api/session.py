@@ -38,6 +38,7 @@ class Session:
         self.collector = Collector()
         self.state_factory = StateFactory(self)
         self.element_factory = ElementFactory(self)
+        self.step_counter = 0  # Track current step number for VSCode UI
 
         self._history: list[State] = []
         self.capture_state(prev_action=None)
@@ -99,7 +100,7 @@ class Session:
                         parent.children.append(el)
                 else:
                     root = el
-            return elements, root
+            return elements, root  # type: ignore  # type: ignore
 
         elements_data = self.page.evaluate("""
             (() => {

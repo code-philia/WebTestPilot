@@ -2,12 +2,15 @@ import base64
 import logging
 
 from baml_py import Image
+from baml_py.baml_py import BamlImagePy
 from executor.assertion_api.session import Session
 
 from config import Config
 from baml_client.sync_client import b
 from baml_client.types import Feedback
 from executor.assertion_api import execute_assertion
+from io import BytesIO
+from PIL import Image as PilImage
 
 
 logger = logging.getLogger(__name__)
@@ -26,8 +29,8 @@ def verify_precondition(
     logger.info(f"Condition: {condition}")
     client_registry = config.assertion_generation
     collector = session.collector
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot = Image.from_base64("image/png", screenshot_b64)
     history = session.get_history()
 
     response = b.GeneratePrecondition(
@@ -47,47 +50,63 @@ def verify_precondition(
         raise BugReport(message)
 
 
-def execute_action(session: Session, action: str, config: Config) -> None:
+def execute_action(session: Session, action: str, config: Config) -> BamlImagePy:
+    # Increment step counter and output step info for VSCode parsing
+    session.step_counter += 1
     logger.info(f"Action: {action}")
+    # Also output in a format that's easy for VSCode to parse
+    logger.info(f"STEP_{session.step_counter}: {action}")
     client_registry = config.action_proposer
     client_name = config.action_proposer_name
     collector = session.collector
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+    screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
 
     code = b.ProposeActions(
         screenshot,
         action,
         baml_options={"client_registry": client_registry, "collector": collector},
     )
+    logger.info(f"Proposed code:\n{code}")
 
-    if client_name == "UITARS":
-        import executor.automators.uitars as automator
-    elif client_name == "InternVL3":
-        import executor.automators.pyautogui as automator
-    else:
-        import executor.automators.custom as automator
+    try:
+        if client_name == "UITARS":
+            import executor.automators.uitars as automator
+        elif client_name == "InternVL3":
+            import executor.automators.pyautogui as automator
+        else:
+            import executor.automators.custom as automator
 
-    trace = automator.execute(code, session.page, session)
-    session.trace.extend(trace)
-    session.capture_state(prev_action=action)
+        trace = automator.execute(code, session.page, session)
+        session.trace.extend(trace)
+
+        screenshot_after_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
+        screenshot_after: BamlImagePy = Image.from_base64("image/png", screenshot_after_b64)
+        logger.info(f"STEP_{session.step_counter}_PASSED")
+        session.capture_state(prev_action=action)
+        return screenshot_after
+    except Exception as e:
+        logger.info(f"STEP_{session.step_counter}_FAILED: {str(e)}")
+        raise
 
 
 def verify_postcondition(
-    session: Session, action: str, expectation: str, config: Config
+    session: Session, action: str, expectation: str, config: Config, screenshot_after: BamlImagePy
 ) -> None:
     logger.info(f"Expectation: {expectation}")
+    # Output step verification info for VSCode parsing
+    logger.info(f"VERIFYING_STEP_{session.step_counter}: {expectation}")
     client_registry = config.assertion_generation
     collector = session.collector
-    max_retries = config.max_retries
-    screenshot = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
-    screenshot = Image.from_base64("image/png", screenshot)
+    max_tries = config.max_tries
     history = session.get_history()
 
-    feedback = []
-    for _ in range(0, max_retries + 1):
+    feedback: list[Feedback] = []
+    message = "Post-condition verification failed after all retries"
+    
+    for _ in range(1, max_tries + 1):
         response = b.GeneratePostcondition(
-            screenshot,
+            screenshot_after,
             history,
             action,
             expectation,
@@ -95,13 +114,16 @@ def verify_postcondition(
             baml_options={"client_registry": client_registry, "collector": collector},
         )
         logger.info(f"Postcondition: {response}")
-        passed, message = execute_assertion(response, session)
+        passed, current_message = execute_assertion(response, session)
         if passed:
             logger.info("Postcondition passed.")
+            logger.info(f"VERIFYING_STEP_{session.step_counter}_PASSED")
             return
         else:
+            message = current_message
             logger.info(f"Postcondition failed: {message}")
             feedback_item = Feedback(response=response, reason=message)
             feedback.append(feedback_item)
 
+    logger.info(f"VERIFYING_STEP_{session.step_counter}_FAILED: {message}")
     raise BugReport(message)

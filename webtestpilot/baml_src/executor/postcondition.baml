@@ -19,36 +19,43 @@ template_string PostconditionIntro() #"
 
     - Write the assertion as a Python block:
         ```python
-        def position(session: Session):
+        def postcondition(session: Session):
             ...
         ```
+
+    # Reminder
+    - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
+    - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
+    - Assertions should have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
+    - Generally, avoid writing hardcoded values as the UI have changes between the time of generation and execution.
+    - Make sure code is executable and does not have type error.
 "#
 
 template_string PostconditionExample() #"
     # Example
     __input__
     History:
-        State (0): 
-            Page: Cart page; 
+        State (0):
+            Page: Cart page;
             Action: User clicks "Continue Shopping"
         ...
-        State (4): 
+        State (4):
             Page: Product detail view
             Action: User adds the item to cart
 
-    Current: Cart page (After action) 
+    Current: Cart page (After action)
     Assert: Cart is correctly updated
 
     __output__
     ```python
     def postcondition(session: Session):
         # Define data models
-        class Product(BaseModel): 
+        class Product(BaseModel):
             title: str = Field(..., description="The name of the product")
             price: float = Field(..., description="The unit price of the product in local currency")
             quantity: Optional[int] = Field(None, "The quantity of this product (used in cart contexts). None indicates unlimited or not specified")
         
-        class Cart(BaseModel): 
+        class Cart(BaseModel):
             items: List[Product] = Field(default_factory=list, description="List of products in the cart with their respective quantities")
 
         # Extract product from latest state
@@ -59,20 +66,20 @@ template_string PostconditionExample() #"
         prior = session.history[0].extract("get cart summary", schema=Cart).items
 
         # Assert cart contains prior items plus the added product
-        assert set(p.title for p in current) == set(p.title for p in prior + [added])
+        assert set(p.title for p in current) == set(p.title for p in prior + [added]) , "Cart items do not match expected items after addition."
+        # ... Additional assertions can be added as needed
     ```
 "#
 
 function GeneratePostcondition(screenshot: image, history: History[], action: string, verify: string, feedback: Feedback[]) -> string {
     client "Base"
     prompt #"
-        {{_.role("user")}}
+        {{_.role("system")}}
         {{ PostconditionIntro() }}
-
         {{ Specification() }}
-
         {{ PostconditionExample() }}
-        
+
+        {{_.role("user")}}
         {{ screenshot }}
 
         {{ FormatHistory(history) }}
