@@ -155,7 +155,7 @@ export class FixtureEditorPanel {
     }
 
     private _getHtmlForWebview(): string {
-        return loadWebviewHtml(this._extensionUri, this._panel.webview, "fixtureEditor");
+        return loadWebviewHtml(this._panel.webview, "fixtureEditor");
     }
 
     public dispose() {

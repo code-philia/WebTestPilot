@@ -11,7 +11,6 @@ export class EnvironmentEditorPanel {
     public static readonly viewType = "environmentEditor";
 
     private readonly _panel: vscode.WebviewPanel;
-    private readonly _extensionUri: vscode.Uri;
     private _disposables: vscode.Disposable[] = [];
     private _environmentItem: EnvironmentItem;
     private _treeDataProvider: WebTestPilotTreeDataProvider;
@@ -23,7 +22,6 @@ export class EnvironmentEditorPanel {
         treeDataProvider: WebTestPilotTreeDataProvider
     ) {
         this._panel = panel;
-        this._extensionUri = extensionUri;
         this._environmentItem = environmentItem;
         this._treeDataProvider = treeDataProvider;
 
@@ -153,7 +151,7 @@ export class EnvironmentEditorPanel {
     }
 
     private _getHtmlForWebview(): string {
-        return loadWebviewHtml(this._extensionUri, this._panel.webview, "environmentEditor");
+        return loadWebviewHtml(this._panel.webview, "environmentEditor");
     }
 
     public dispose() {

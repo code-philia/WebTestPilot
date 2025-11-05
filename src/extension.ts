@@ -223,7 +223,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const runTestCommand = vscode.commands.registerCommand('webtestpilot.runTest', async (testItem: WebTestPilotTreeItem) => {
         console.log('runTestCommand called with:', testItem);
-        await TestRunnerPanel.createOrShow(testItem.item as TestItem, context.extensionUri);
+        await TestRunnerPanel.createOrShow(testItem.item as TestItem);
     });
 
     const createTestRootCommand = vscode.commands.registerCommand('webtestpilot.createTestRoot', () => {

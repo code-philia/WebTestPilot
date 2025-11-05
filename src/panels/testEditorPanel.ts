@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { TestItem, FixtureItem } from "../models";
 import { WebTestPilotTreeDataProvider } from "../treeDataProvider";
 import { loadWebviewHtml } from "../utils/webviewLoader";
+import { TestRunnerPanel } from "./testRunnerPanel";
 
 /**
  * TestEditorPanel provides a webview interface for editing test cases
@@ -11,7 +12,6 @@ export class TestEditorPanel {
     public static readonly viewType = "testEditor";
 
     private readonly _panel: vscode.WebviewPanel;
-    private readonly _extensionUri: vscode.Uri;
     private _disposables: vscode.Disposable[] = [];
     private _testItem: TestItem;
     private _treeDataProvider: WebTestPilotTreeDataProvider;
@@ -19,13 +19,11 @@ export class TestEditorPanel {
 
     private constructor(
         panel: vscode.WebviewPanel,
-        extensionUri: vscode.Uri,
         testItem: TestItem,
         treeDataProvider: WebTestPilotTreeDataProvider,
         fixtureTreeDataProvider: WebTestPilotTreeDataProvider
     ) {
         this._panel = panel;
-        this._extensionUri = extensionUri;
         this._testItem = testItem;
         this._treeDataProvider = treeDataProvider;
         this._fixtureTreeDataProvider = fixtureTreeDataProvider;
@@ -49,7 +47,7 @@ export class TestEditorPanel {
                     return;
                 case "saveAndRun":
                     if (await this._saveTest(message.data)) {
-                        this._runTest();
+                        await this._runTest();
                     }
                     return;
                 case "updateTest":
@@ -107,7 +105,6 @@ export class TestEditorPanel {
 
         TestEditorPanel.currentPanel = new TestEditorPanel(
             panel,
-            extensionUri,
             testItem,
             treeDataProvider,
             fixtureTreeDataProvider
@@ -179,15 +176,15 @@ export class TestEditorPanel {
     }
 
     private _getHtmlForWebview(): string {
-        return loadWebviewHtml(this._extensionUri, this._panel.webview, "testEditor");
+        return loadWebviewHtml(this._panel.webview, "testEditor");
     }
 
-    private _runTest() {
+    private async _runTest() {
         if (!this._testItem.actions || this._testItem.actions.length === 0) {
             vscode.window.showWarningMessage("Cannot run test: No actions defined.");
             return;
         }
-        vscode.commands.executeCommand("webtestpilot.runTest", this._testItem);
+        await TestRunnerPanel.createOrShow(this._testItem);
     }
 
     public dispose() {

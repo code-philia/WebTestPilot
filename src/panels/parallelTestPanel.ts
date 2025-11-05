@@ -56,14 +56,13 @@ export class ParallelTestPanel {
         panel: vscode.WebviewPanel,
         folder: FolderItem,
         cdpEndpoint: string,
-        extensionUri: vscode.Uri,
     ) {
         this._panel = panel;
         this._folder = folder;
         this._outputChannel = vscode.window.createOutputChannel('WebTestPilot Parallel Runner');
 
         // Set the webview's initial html content using React UI
-        this._panel.webview.html = this._getHtmlForWebview(extensionUri);
+        this._panel.webview.html = this._getHtmlForWebview();
 
         // Connect to browser and setup parallel execution
         this._connectToBrowser(cdpEndpoint);
@@ -727,7 +726,7 @@ export class ParallelTestPanel {
         );
 
         const cdpEndpoint = vscode.workspace.getConfiguration('webtestpilot').get<string>('cdpEndpoint') || 'http://localhost:9222';
-        ParallelTestPanel.currentPanel = new ParallelTestPanel(panel, folder, cdpEndpoint, extensionUri);
+        ParallelTestPanel.currentPanel = new ParallelTestPanel(panel, folder, cdpEndpoint);
 
         // Start tests after a short delay to allow UI to initialize
         setTimeout(() => {
@@ -738,8 +737,8 @@ export class ParallelTestPanel {
     /**
      * Gets the HTML content for the webview using React UI
      */
-    private _getHtmlForWebview(extensionUri: vscode.Uri): string {
-        return loadWebviewHtml(extensionUri, this._panel.webview, 'parallelRunner');
+    private _getHtmlForWebview(): string {
+        return loadWebviewHtml(this._panel.webview, 'parallelRunner');
     }
 
     /**

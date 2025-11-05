@@ -48,10 +48,10 @@ export function loadWebviewHtmlFromDist(
  * Load and post-process the built webview HTML using the extensionUri to resolve the dist folder.
  */
 export function loadWebviewHtml(
-    extensionUri: vscode.Uri,
     webview: vscode.Webview,
     page: string
 ): string {
+    const extensionUri = (globalThis as any).extensionUri as vscode.Uri;
     const distUri = vscode.Uri.joinPath(extensionUri, "webview-ui", "dist");
     const distPath = distUri.fsPath;
     return loadWebviewHtmlFromDist(distPath, webview, page);

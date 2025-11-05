@@ -18,7 +18,6 @@ import { loadWebviewHtml } from "../utils/webviewLoader";
 export class TestRunnerPanel {
     public static currentPanel: TestRunnerPanel | undefined;
     private readonly _panel: vscode.WebviewPanel;
-    private readonly _extension_uri: vscode.Uri;
     private _disposables: vscode.Disposable[] = [];
     private _testItem: TestItem;
     private _browser: any;
@@ -37,11 +36,9 @@ export class TestRunnerPanel {
         panel: vscode.WebviewPanel,
         testItem: TestItem,
         cdpEndpoint: string,
-        extension_uri: vscode.Uri
     ) {
         this._panel = panel;
         this._testItem = testItem;
-        this._extension_uri = extension_uri;
         this._panel.webview.html = this._getHtmlForWebview();
 
         // Connect to CDP and start streaming
@@ -212,7 +209,6 @@ export class TestRunnerPanel {
    */
     public static async createOrShow(
         testItem: TestItem,
-        extension_uri: vscode.Uri
     ) {
         try {
             const url = testItem.url;
@@ -257,7 +253,6 @@ export class TestRunnerPanel {
                 panel,
                 testItem,
                 cdpEndpoint,
-                extension_uri
             );
 
             // Show progress notification with cancel button
@@ -539,7 +534,6 @@ export class TestRunnerPanel {
    */
     private _getHtmlForWebview(): string {
         return loadWebviewHtml(
-            this._extension_uri,
             this._panel.webview,
             "singleRunner"
         );
