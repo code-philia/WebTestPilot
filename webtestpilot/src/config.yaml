@@ -45,10 +45,10 @@ logging:
       class: logging.StreamHandler
       formatter: default
       stream: ext://sys.stdout
-    file:
-      class: logging.FileHandler
-      formatter: default
-      filename: "webtestpilot.log"
+    # file:
+    #   class: logging.FileHandler
+    #   formatter: default
+    #   filename: "webtestpilot.log"
 
   root:
     level: INFO
