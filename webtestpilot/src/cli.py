@@ -255,12 +255,6 @@ def main():
     )
 
     parser.add_argument(
-        "--json-output",
-        action="store_true",
-        help="Output results as JSON instead of human-readable format",
-    )
-
-    parser.add_argument(
         "--fixture-file-path",
         type=str,
         default='',
@@ -287,21 +281,7 @@ def main():
         enable_assertions=not args.no_assertions,
     )
 
-    # Output results
-    if args.json_output:
-        print(json.dumps(result, indent=2))
-    else:
-        print(f"\n{'=' * 60}")
-        print(f"Test: {result.get('test_name', 'Unknown')}")
-        print(f"{'=' * 60}")
-
-        if result["success"]:
-            print("✅ Test PASSED")
-            print(f"   Steps executed: {result.get('steps_executed', 0)}")
-        else:
-            print("❌ Test FAILED")
-
-        print(f"{'=' * 60}\n")
+    print(json.dumps(result, indent=2))
 
     # Exit with appropriate code
     logger.debug(f"Exiting with code: {0 if result['success'] else 1}")

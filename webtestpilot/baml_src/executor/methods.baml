@@ -2,6 +2,9 @@ class Output {
     @@dynamic
 }
 
+type Primitives = string | int | float | bool
+type ExtractedData = Output | Primitives | Output[] | Primitives[]
+
 
 function ExtractFromState(screenshot: image, instruction: string) -> Output {
     client "Base"
