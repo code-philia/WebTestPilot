@@ -66,20 +66,6 @@ def load_and_parse_test_file(
     fixture_file_path: str | None,
     environment_file_path: str | None,
 ) -> tuple[dict[str, Any], list[Step]]:
-    """
-    Load and parse a JSON test file
-
-    Args:
-        test_file_path: Path to the test JSON file
-
-    Returns:
-        Tuple of (test_data, test_steps)
-
-    Raises:
-        FileNotFoundError: If test file doesn't exist
-        json.JSONDecodeError: If test file contains invalid JSON
-        ValueError: If no actions are defined in the test file
-    """
     # Order: Load test -> Fixtures -> Parse Test + Fixture -> Merge -> Inject Environment values
     with open(test_file_path, "r") as f:
         test_data = json.load(f)
@@ -107,6 +93,7 @@ def load_and_parse_test_file(
     logger.debug(f"Total steps after merging fixture: {len(merged_steps)}")
 
     # Inject last to ensure all placeholders are replaced.
+    logger.debug(environment_file_path)
     if environment_file_path:
         logger.debug(f"Using environment file: {environment_file_path}")
         with open(environment_file_path, "r") as env_file:
@@ -115,6 +102,16 @@ def load_and_parse_test_file(
                 environment_data=environment_data.get("environmentVariables", {}),
                 test_steps=merged_steps,
             )
+            # Variable templates in the url
+            if test_data["url"]:
+                for var_name, var_value in environment_data.get(
+                    "environmentVariables", {}
+                ).items():
+                    placeholder = f"${{{var_name}}}"
+                    logger.debug(f"Injecting environment variable {var_name} into test URL {placeholder} -> {var_value}")
+                    test_data["url"] = test_data["url"].replace(
+                        placeholder, var_value
+                    )
 
     return test_data, merged_steps
 
