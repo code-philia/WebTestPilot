@@ -183,6 +183,7 @@ class Session:
 
         # Handle empty history — no page to compare
         if not self.history:
+            logger.debug("Abstracting page...")
             page_abstract: PageAbstract = b.AbstractPage(
                 current_img,
                 baml_options={
