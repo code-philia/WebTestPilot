@@ -31,7 +31,7 @@ template_string PostconditionIntro() #"
 
     # Avoid Common Pitfalls
     - Avoid writing hardcoded values.
-    - Avoid checking page titles.
+    - Avoid checking page titles, `page_id` or `url`.
     - Avoid matching exact terms or keywords in assertions, extract and check empty is better.
 "#
 
