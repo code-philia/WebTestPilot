@@ -23,13 +23,16 @@ template_string PostconditionIntro() #"
             ...
         ```
 
-    # Reminder
+    # MUST remember
     - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
-    - Try to write many assertions to fully verify the intended outcome. Think beyond the specified expectation.
-    - Assertions should have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
-    - Generally, avoid writing hardcoded values as the UI have changes between the time of generation and execution.
-    - Make sure code is executable and does not have type error.
+    - Code MUST be executable and does not have type error.
+    - Assertions MUST have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
+    - Distinguish clearly between errors, warnings and reminders, if the request does not mention error, NEVER try to look for it.
+
+    # Avoid Common Pitfalls
+    - Avoid writing hardcoded values.
     - Avoid checking page titles.
+    - Avoid matching exact terms or keywords in assertions, extract and check empty is better.
 "#
 
 template_string PostconditionExample() #"

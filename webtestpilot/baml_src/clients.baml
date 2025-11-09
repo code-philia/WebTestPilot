@@ -85,6 +85,7 @@ client<llm> ZrokLocalModel {
   options {
     base_url "https://llms.zrok.06946099.xyz/v1"
     model "Qwen/Qwen3-VL-30B-A3B-Thinking"
+    temperature 0.0
   }
 }
 
@@ -94,6 +95,7 @@ client<llm> NgrokLocalModel {
   options {
     base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
     model "Qwen/Qwen3-VL-30B-A3B-Thinking"
+    temperature 0.0
   }
 }
 
@@ -114,6 +116,7 @@ client<llm> ZrokUIVenus {
     base_url "https://uivenus.zrok.06946099.xyz/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
+    temperature 0.0
     header {
       "secret" "sjtu-course-cs3604-2025"
     }
@@ -127,6 +130,7 @@ client<llm> NgrokUIVenus {
     base_url "https://8dcd0b9d943d.ngrok-free.app/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
+    temperature 0.0
   }
 }
 
