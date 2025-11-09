@@ -62,6 +62,7 @@ def execute_action(session: Session, action: str, config: Config) -> BamlImagePy
     screenshot_b64 = base64.b64encode(session.page.screenshot(type="png")).decode("utf-8")
     screenshot: BamlImagePy = Image.from_base64("image/png", screenshot_b64)
 
+    logger.debug("Reasoning next action...")
     code = b.ProposeActions(
         screenshot,
         action,
