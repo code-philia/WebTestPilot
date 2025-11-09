@@ -24,7 +24,7 @@ template_string PostconditionIntro() #"
         ```
 
     # MUST remember
-    - `schema` MUST be classes that inherit from `BaseModel` but can NOT be `BaseModel`.
+    - `schema` are classes that inherit from `BaseModel` but MUST MUST MUST NOT be `BaseModel` itself!.
     - Code MUST be executable and does not have type error.
     - Assertions MUST have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
     - Distinguish clearly between errors, warnings and reminders, if the request does not mention error, NEVER try to look for it.
