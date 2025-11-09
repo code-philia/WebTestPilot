@@ -46,6 +46,41 @@ def _get_element(page: Page, x: int, y: int) -> ElementHandle:
       const clickableTags = ['BUTTON','A','INPUT','TEXTAREA','SELECT'];
       const clickableRoles = ['button','link','menuitem'];
 
+      // create a temporary highlight circle at (x,y)
+      try {{
+        const highlightId = '__wpt_highlight_circle';
+        const existing = document.getElementById(highlightId);
+        if (existing) existing.remove();
+
+        const r = 24; // radius in px
+        const div = document.createElement('div');
+        div.id = highlightId;
+        Object.assign(div.style, {{
+          position: 'absolute',
+          left: ({x} - r) + 'px',
+          top: ({y} - r) + 'px',
+          width: (r * 2) + 'px',
+          height: (r * 2) + 'px',
+          borderRadius: '50%',
+          background: 'rgba(255,200,0,0.20)',
+          boxShadow: '0 0 12px 4px rgba(255,200,0,0.6)',
+          border: '2px solid rgba(255,165,0,0.95)',
+          pointerEvents: 'none',
+          zIndex: '2147483647',
+          transition: 'opacity 0.45s ease-out, transform 0.45s ease-out',
+          transform: 'scale(1)'
+        }});
+        document.body.appendChild(div);
+        // fade and remove after a short delay
+        setTimeout(() => {{
+          div.style.opacity = '0';
+          div.style.transform = 'scale(1.4)';
+          setTimeout(() => div.remove(), 450);
+        }}, 600);
+      }} catch (e) {{
+        // ignore highlight errors
+      }}
+
       const els = document.elementsFromPoint({x}, {y});
       for (const el of els) {{
         const style = window.getComputedStyle(el);
