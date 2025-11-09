@@ -193,7 +193,7 @@ def run_test_from_file(
             assert test_url, "Test URL must be specified in the test data"
 
             logger.info(f"Navigating to {test_url}")
-            page.goto(test_url, timeout=5000, wait_until="domcontentloaded")
+            page.goto(test_url, timeout=7000, wait_until="domcontentloaded")
 
             # Create session
             session = Session(page, config)
