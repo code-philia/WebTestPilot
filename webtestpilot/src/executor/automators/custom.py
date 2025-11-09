@@ -135,6 +135,7 @@ def click(cr: ClientRegistry, collector: Collector, target_description: str):
     _require_page()
 
     screenshot = _get_screenshot()
+    logger.debug(f"Locating element to click: {target_description}")
     coordinates = b.LocateUIElement(
         screenshot,
         target_description,
@@ -145,6 +146,7 @@ def click(cr: ClientRegistry, collector: Collector, target_description: str):
     _focus(x, y)
     element: ElementHandle = _get_element(_current_page, x, y)
     xpath = _get_xpath(element)
+    logger.debug(f"Clicking element at ({x}, {y}) with element: {element} and xpath: {xpath}")
     element.click(force=True)
 
     _trace.append({"action": {"name": "click", "args": {"xpath": xpath}}})

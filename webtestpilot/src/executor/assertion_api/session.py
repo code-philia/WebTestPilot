@@ -1,19 +1,21 @@
 import base64
+import logging
 from typing import Any
-
-from baml_py import Image, Collector
-from playwright.sync_api import Page
 from xml.etree.ElementTree import Element as XMLElement
 
-from config import Config
 from baml_client.sync_client import b
-from baml_client.types import PageAbstract, History
-from executor.assertion_api.state import State, StateFactory
+from baml_client.types import History, PageAbstract
+from baml_py import Collector, Image
+from config import Config
+from playwright.sync_api import Page
+
 from executor.assertion_api.element import Element, ElementFactory
-from executor.page_reidentification.accessibility import AccessibilityTree
+from executor.assertion_api.state import State, StateFactory
 from executor.page_reidentification.abstract import to_xml_tree
+from executor.page_reidentification.accessibility import AccessibilityTree
 from executor.page_reidentification.distance import tree_distance
 
+logger = logging.getLogger(__name__)
 
 class Session:
     """
@@ -196,6 +198,7 @@ class Session:
         )
         closest_img = Image.from_base64("image/png", closest_state.screenshot)
 
+        logger.info("Checking page re-identification...")
         if b.IsSameLogicalPage(
             current_img,
             closest_img,
