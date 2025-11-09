@@ -52,7 +52,7 @@ def _get_element(page: Page, x: int, y: int) -> ElementHandle:
         const existing = document.getElementById(highlightId);
         if (existing) existing.remove();
 
-        const r = 24; // radius in px
+        const r = 35; // radius in px
         const div = document.createElement('div');
         div.id = highlightId;
         Object.assign(div.style, {{
