@@ -113,10 +113,9 @@ def execute_assertion(response: str, session: Session) -> tuple[bool, str]:
         "date": date,
     }
 
-    local_vars = {}
+    local_vars: dict = {}
 
     # Execute the dynamic code
-    logger.debug("Executing assertion code:\n" + code)
     exec(code, allowed_globals, local_vars)
 
     # Find the assertion function

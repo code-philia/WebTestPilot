@@ -108,10 +108,7 @@ def load_and_parse_test_file(
                     "environmentVariables", {}
                 ).items():
                     placeholder = f"${{{var_name}}}"
-                    logger.debug(f"Injecting environment variable {var_name} into test URL {placeholder} -> {var_value}")
-                    test_data["url"] = test_data["url"].replace(
-                        placeholder, var_value
-                    )
+                    test_data["url"] = test_data["url"].replace(placeholder, var_value)
 
     return test_data, merged_steps
 
@@ -120,7 +117,7 @@ def run_test_from_file(
     test_file_path: str,
     config_path: str,
     cdp_endpoint: str,
-    target_id: Optional[str],
+    target_id: str,
     fixture_file_path: Optional[str],
     environment_file_path: Optional[str],
     enable_assertions: bool,
@@ -158,25 +155,20 @@ def run_test_from_file(
                 )
             )
 
-            # Get the correct page based on tab_index
+            # Get the correct page based on target_id
             page: Page | None = None
-            if target_id:
-                for tab in context.pages:
-                    cdp = context.new_cdp_session(tab)
-                    info = cdp.send("Target.getTargetInfo")
+            for tab in context.pages:
+                cdp = context.new_cdp_session(tab)
+                info = cdp.send("Target.getTargetInfo")
 
-                    if info["targetInfo"]["targetId"] == target_id:
-                        page = tab
-                        break
+                if info["targetInfo"]["targetId"] == target_id:
+                    page = tab
+                    break
 
-                if not page:
-                    raise ValueError(
-                        f"Tab with target id {target_id} not found in browser context."
-                    )
-            else:
-                # Fallback to original behavior
-                page = context.pages[0] if context.pages else context.new_page()
-                logger.info("Using first available page (no tab index specified)")
+            if not page:
+                raise ValueError(
+                    f"Tab with target id {target_id} not found in browser context."
+                )
 
             assert page
 
@@ -254,14 +246,14 @@ def main():
     parser.add_argument(
         "--fixture-file-path",
         type=str,
-        default='',
+        default="",
         help="Path to fixture file",
     )
 
     parser.add_argument(
         "--environment-file-path",
         type=str,
-        default='',
+        default="",
         help="Path to environment file",
     )
 
@@ -272,7 +264,7 @@ def main():
         test_file_path=args.test_file,
         config_path=args.config,
         cdp_endpoint=args.cdp_endpoint,
-        target_id=getattr(args, "target_id", None),
+        target_id=args.target_id,
         fixture_file_path=args.fixture_file_path,
         environment_file_path=args.environment_file_path,
         enable_assertions=not args.no_assertions,
