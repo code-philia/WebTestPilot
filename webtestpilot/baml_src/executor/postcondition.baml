@@ -29,6 +29,7 @@ template_string PostconditionIntro() #"
     - Assertions should have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
     - Generally, avoid writing hardcoded values as the UI have changes between the time of generation and execution.
     - Make sure code is executable and does not have type error.
+    - Avoid checking page titles.
 "#
 
 template_string PostconditionExample() #"

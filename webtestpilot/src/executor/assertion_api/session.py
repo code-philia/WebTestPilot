@@ -214,6 +214,7 @@ class Session:
                 closest_state.layout,
             )
 
+        logger.debug("Abstracting page...")
         page_abstract: PageAbstract = b.AbstractPage(
             current_img,
             baml_options={
