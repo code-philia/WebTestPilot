@@ -67,7 +67,7 @@ def load_and_parse_test_file(
     environment_file_path: str | None,
 ) -> tuple[dict[str, Any], list[Step]]:
     # Order: Load test -> Fixtures -> Parse Test + Fixture -> Merge -> Inject Environment values
-    with open(test_file_path, "r") as f:
+    with open(test_file_path, "r", encoding="utf-8") as f:
         test_data = json.load(f)
 
     logger.debug(f"Loaded test: {test_data.get('name', 'Unnamed Test')}")
@@ -77,7 +77,7 @@ def load_and_parse_test_file(
     fixture_actions = []
     if fixture_file_path:
         logger.debug(f"Using fixture file: {fixture_file_path}")
-        with open(fixture_file_path, "r") as fixture_file:
+        with open(fixture_file_path, "r", encoding="utf-8") as fixture_file:
             fixture_data: dict = json.load(fixture_file)
             fixture_actions = fixture_data.get("actions", [])
 
@@ -96,7 +96,7 @@ def load_and_parse_test_file(
     logger.debug(environment_file_path)
     if environment_file_path:
         logger.debug(f"Using environment file: {environment_file_path}")
-        with open(environment_file_path, "r") as env_file:
+        with open(environment_file_path, "r", encoding="utf-8") as env_file:
             environment_data: dict = json.load(env_file)
             merged_steps = inject_environment_values(
                 environment_data=environment_data.get("environmentVariables", {}),
