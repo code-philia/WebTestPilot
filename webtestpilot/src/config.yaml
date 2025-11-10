@@ -12,7 +12,7 @@ parser:
 executor:
   llm_clients:
     # Generates pre- and post-conditions using the assertion API
-    assertion_generation: "FallbackLocalModel"
+    assertion_generation: "GPTAssertion"
 
     # Executes assertion API methods (e.g., extract() from state and element)
     assertion_api: "FallbackLocalModel"
