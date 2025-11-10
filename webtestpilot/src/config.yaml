@@ -21,13 +21,13 @@ executor:
     action_proposer: "FallbackLocalModel"
 
     # Locates UI elements (x, y) from a UI description
-    ui_locator: "FallbackUIVenus"
+    ui_locator: "UIVenusRoundRobin"
 
     # For tracking same logical pages across states
     page_reidentification: "FallbackLocalModel"
 
   # How many times in total to try post-condition generation.
-  max_tries: 1
+  max_tries: 2
 
 # Logging dict configs
 logging:

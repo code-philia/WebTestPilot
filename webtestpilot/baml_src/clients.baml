@@ -14,7 +14,7 @@ client<llm> GPT {
   provider openai
   retry_policy Exponential
   options {
-    model "gpt-4.1-mini"
+    model "gpt-4o-mini"
     api_key env.OPENAI_API_KEY
     temperature 0.0
   }
@@ -74,7 +74,7 @@ client<llm> OpenRouter {
   provider "openai-generic"
   options {
     base_url "https://openrouter.ai/api/v1"
-    model "qwen/qwen2.5-vl-32b-instruct:free"
+    model "openai/gpt-oss-120b"
     api_key env.OPENROUTER_API_KEY
   }
 }
@@ -103,6 +103,8 @@ client<llm> FallbackLocalModel {
   provider fallback
   options {
     strategy [
+      GPT
+      OpenRouter
       ZrokLocalModel
       NgrokLocalModel
     ]
@@ -123,6 +125,20 @@ client<llm> ZrokUIVenus {
   }
 }
 
+client<llm> ZrokUIVenus2 {
+  provider "openai-generic"
+  retry_policy Exponential
+  options {
+    base_url "https://uivenus2.zrok.06946099.xyz/v1"
+    api_key "token-abc123"
+    model "inclusionAI/UI-Venus-Ground-7B"
+    temperature 0.0
+    header {
+      "secret" "sjtu-course-cs3604-2025"
+    }
+  }
+}
+
 client<llm> NgrokUIVenus {
   provider "openai-generic"
   retry_policy Exponential
@@ -134,12 +150,34 @@ client<llm> NgrokUIVenus {
   }
 }
 
-client<llm> FallbackUIVenus {
+client<llm> FallbackUIVenus1 {
   provider fallback
   options {
     strategy [
       ZrokUIVenus
+      ZrokUIVenus2
       NgrokUIVenus
+    ]
+  }
+}
+
+client<llm> FallbackUIVenus2 {
+  provider fallback
+  options {
+    strategy [
+      ZrokUIVenus2
+      ZrokUIVenus
+      NgrokUIVenus
+    ]
+  }
+}
+
+client<llm> UIVenusRoundRobin {
+  provider round-robin
+  options {
+    strategy [
+      FallbackUIVenus1
+      FallbackUIVenus2
     ]
   }
 }

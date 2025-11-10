@@ -22,6 +22,9 @@ template_string PostconditionIntro() #"
         def postcondition(session: Session):
             ...
         ```
+    # Good to have
+    - Data models should be concise and sufficient for the assertions, unrelated details should be ignored.
+    - Use descriptive variable names for clarity.
 
     # MUST remember
     - `schema` are classes that inherit from `BaseModel` but MUST MUST MUST NOT be `BaseModel` itself!.
