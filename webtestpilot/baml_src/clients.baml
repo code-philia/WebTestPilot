@@ -104,7 +104,6 @@ client<llm> FallbackLocalModel {
   options {
     strategy [
       GPT
-      OpenRouter
       ZrokLocalModel
       NgrokLocalModel
     ]
@@ -155,6 +154,7 @@ client<llm> FallbackUIVenus1 {
   options {
     strategy [
       ZrokUIVenus
+      ZrokUIVenus2
       NgrokUIVenus
     ]
   }
@@ -164,6 +164,7 @@ client<llm> FallbackUIVenus2 {
   provider fallback
   options {
     strategy [
+      ZrokUIVenus2
       ZrokUIVenus
       NgrokUIVenus
     ]
@@ -181,11 +182,11 @@ client<llm> UIVenusRoundRobin {
 }
 
 retry_policy Exponential {
-  max_retries 5
+  max_retries 3
   strategy {
     type exponential_backoff
     delay_ms 300
     multiplier 1.5
-    max_delay_ms 50000
+    max_delay_ms 30000
   }
 }

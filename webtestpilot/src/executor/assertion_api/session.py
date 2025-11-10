@@ -35,7 +35,7 @@ class Session:
         assert isinstance(page, Page) and not page.is_closed()
 
         self.trace: list[dict] = []
-        self.page = page
+        self.page: Page = page
         self.config = config
         self.collector = Collector()
         self.state_factory = StateFactory(self)
