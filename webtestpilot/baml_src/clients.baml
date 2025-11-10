@@ -15,6 +15,17 @@ client<llm> GPT {
   retry_policy Exponential
   options {
     model "gpt-4o-mini"
+    base_url "https://tapi.nyc.mn/v1"
+    api_key env.OPENAI_TAPI_API_KEY
+    temperature 0.0
+  }
+}
+
+client<llm> GPTOfficial {
+  provider openai
+  retry_policy Exponential
+  options {
+    model "gpt-4o-mini"
     api_key env.OPENAI_API_KEY
     temperature 0.0
   }
@@ -104,6 +115,7 @@ client<llm> FallbackLocalModel {
   options {
     strategy [
       GPT
+      GPTOfficial
       ZrokLocalModel
       NgrokLocalModel
     ]
