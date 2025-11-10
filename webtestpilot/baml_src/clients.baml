@@ -155,7 +155,6 @@ client<llm> FallbackUIVenus1 {
   options {
     strategy [
       ZrokUIVenus
-      ZrokUIVenus2
       NgrokUIVenus
     ]
   }
@@ -165,7 +164,6 @@ client<llm> FallbackUIVenus2 {
   provider fallback
   options {
     strategy [
-      ZrokUIVenus2
       ZrokUIVenus
       NgrokUIVenus
     ]
