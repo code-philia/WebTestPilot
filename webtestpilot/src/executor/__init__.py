@@ -115,6 +115,7 @@ def verify_postcondition(
             baml_options={"client_registry": client_registry, "collector": collector},
         )
         logger.info(f"Postcondition: {response}")
+        logger.info("Executing assertions...")
         passed, current_message = execute_assertion(response, session)
         if passed:
             logger.info("Postcondition passed.")

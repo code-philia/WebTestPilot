@@ -27,7 +27,7 @@ executor:
     page_reidentification: "FallbackLocalModel"
 
   # How many times in total to try post-condition generation.
-  max_tries: 2
+  max_tries: 1
 
 # Logging dict configs
 logging:
