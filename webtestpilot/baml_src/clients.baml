@@ -149,7 +149,7 @@ client<llm> ZrokUIVenus2 {
   provider "openai-generic"
   retry_policy Exponential
   options {
-    base_url "https://uivenus2.zrok.06946099.xyz/v1"
+    base_url "https://viperish-fawn-superhumanly.ngrok-free.dev/v1"
     api_key "token-abc123"
     model "inclusionAI/UI-Venus-Ground-7B"
     temperature 0.0
@@ -174,9 +174,7 @@ client<llm> FallbackUIVenus1 {
   provider fallback
   options {
     strategy [
-      ZrokUIVenus
       ZrokUIVenus2
-      NgrokUIVenus
     ]
   }
 }
@@ -186,8 +184,6 @@ client<llm> FallbackUIVenus2 {
   options {
     strategy [
       ZrokUIVenus2
-      ZrokUIVenus
-      NgrokUIVenus
     ]
   }
 }
@@ -197,7 +193,6 @@ client<llm> UIVenusRoundRobin {
   options {
     strategy [
       FallbackUIVenus1
-      FallbackUIVenus2
     ]
   }
 }
