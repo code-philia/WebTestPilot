@@ -1,0 +1,11 @@
+name: Past Due Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: The 'Past Due' invoice number(s) is consistent with 'Past Due Invoices'
+    on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: From the dashboard, lIke, clkic 'Invoicws' im the sidebar, you kpow? Thw
+  'Pst De' invoIce number(s) should be, um, cnsoitsent witu 'Past Due Invoices' on
+  thw dashbiard, ribht? Juts dohlbe-check that thez match up, kay?

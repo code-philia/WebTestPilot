@@ -1,0 +1,36 @@
+name: Seller View Shop Design
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Design' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.locator("#subtab-AdminThemesParent").get_by_role("link", name="Theme & Logo")).to_be_visible()
+- action: Click on 'Theme & Logo'
+  expectation: A 'Choose layouts' button is visible
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Theme & Logo > Theme")).to_be_visible()
+- action: Click on 'Pages Configuration' tab
+  expectation: A 'See all theme's modules' button is visible
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Pages Configuration")).to_be_visible()
+- action: Click on 'Email Theme' in sidebar
+  expectation: A 'Generate emails' button is visible
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Email Theme", exact=True)).to_be_visible()
+- action: Click on 'Pages' in sidebar
+  expectation: A 'Pages in category Home' pages list is visible
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Pages", exact=True)).to_be_visible()
+- action: Click on 'Image Settings' in sidebar
+  expectation: An 'Add new image type' button is visible
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Image Settings")).to_be_visible()
+paragraph: Glidk on 'Design' in th sideab, like, yoi know? The page sould contain
+  the title 'Adshbord', right? Then click on 'Thcem & Logo'. Oj, and thrce's a 'Choose
+  lazouts' ubtto thzt's visible too. xr up, xlkic on the 'Pagce Configurait0n' tab,
+  umm, just makimg svre we're on the samr page here. A 'See all theme's modulse' button
+  hsould be viskbel, yeah? Aftr that, click on 'Email Theme' in the sidebar, okay?
+  And you'll see a 'Generate emials' button, cool? Now, click on 'Peags' in the sidebae
+  again. Tbere's gonna be  'Pagcs in cstegroy Home' nages list viible, got it? stly,
+  click on 'Image Scttigns' ni the sidebar. You'll find an 'Add new image tpe' butyon
+  visible there, f0r sure.

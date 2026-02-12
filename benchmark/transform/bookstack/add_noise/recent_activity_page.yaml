@@ -1,0 +1,11 @@
+name: Recent Activity Page
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page1' link
+  expectation: The 'Recent Activity' (user, activity, timestamp data) consistent with
+    the previous dashboard's 'Recent Activity' list
+  ground_truth: expect(page.get_by_role("heading", name="Details")).to_be_visible()
+paragraph: Fr0m the dashboard, like, click in the 'Page1' link, uu know? And then,
+  uh, check if the 'Recent Activity' stuff, which incudes user, acitviyf, an timestamp
+  daat, is al consistent with what was 0n the previous dahborad's 'Rwcent Activiyt'
+  list. Mzke sure cverything msches vp, okay?

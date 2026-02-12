@@ -1,0 +1,32 @@
+name: Buyer Add Product to Cart
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Cart' button
+  expectation: A list of products in cart is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+
+- action: Click on 'Accessories' tab in navigation bar
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Accessories", exact=True)).to_be_visible()
+
+- action: Scroll down
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Mug The adventure begins")).to_be_visible()
+
+- action: Click on the 'Mug The Adventure Begins' product
+  expectation: A product page with title 'Mug The Adventure Begins', price, description, and comments section (no comments) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Mug The adventure begins")).to_be_visible()
+
+- action: Click 'Add to Cart' button
+  expectation: A dialog with title 'Product successfully added to your shopping cart' is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Continue shopping")).to_be_visible()
+
+- action: Click on 'Proceed to Checkout'
+  expectation: After adding a product, the shopping cart contains all previous items plus exactly one additional item
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()

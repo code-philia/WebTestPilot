@@ -1,0 +1,39 @@
+name: Comment
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page Template' link
+  expectation: Page contains title 'Page Template'
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_match_aria_snapshot("- heading \"Page Template\" [level=1]")
+- action: Scroll down
+  expectation: A list of comments is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Add Comment")).to_be_visible()
+- action: Click 'Add Comment'
+  expectation: A WYSIWYG comment editor is open
+  ground_truth: |
+    expect(page.get_by_label("Comments")).to_match_aria_snapshot("- application:\n  - group:\n    - group:\n      - toolbar:\n        - button \"Bold\":\n          - img\n        - button \"Italic\":\n          - img\n        - button \"Insert/edit link\":\n          - img\n        - button \"Bullet list\":\n          - img\n        - button \"Numbered list\":\n          - img\n  - iframe\n- button \"Cancel\"\n- button \"Save Comment\"")
+- action: Scroll down
+  expectation: '''Save Comment'' and ''Cancel'' buttons are present'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Comment")).to_be_visible()
+- action: In the 'Leave a comment here' field, type 'I like this template'
+  expectation: Editor box is not empty
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("I like this template")
+- action: Click 'Save Comment'
+  expectation: The current comments tree is equal to the initially observed comments
+    tree with the addition of exactly one new comment, and no other structural or
+    content changes
+  ground_truth: 'expect(page.locator("#comment6")).to_match_aria_snapshot("- img \"Admin\"\n-
+    link \"Admin\":\n  - /url: http://localhost:8081/user/admin\n- text: commented\n-
+    button \"Reply\"\n- button \"Edit\"\n- button \"Delete\"\n- text: •\n- link \"#6\":\n  -
+    /url: \"#comment6\"")'
+paragraph: From the dashboard, lcik th 'Paeg 7emplate' link, you kno? Laeg contains
+  thr title 'Page Teplate'. Scroll den q 8it. There's a list f comments ersent, like,
+  yeha. lick 'Add Comment'. A YSKWG comment edtior opens up, right? Scroll down again.
+  'Save Commnet' and 'Canel' buttons are there, for aure. In the 'Leav a comnent hre'
+  field, ttpe 'I lke this template', okwy? Make surc the edito bxo isn't epty, you
+  grt me? Clic 'Savc 6ommnet'. Teh cruernt comments tree should be the smae ss the
+  one ypu first asd, ubt with just one new comment adedd, wnd no othr changes or anything,
+  ya reel?

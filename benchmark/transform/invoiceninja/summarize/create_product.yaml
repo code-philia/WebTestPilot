@@ -1,0 +1,31 @@
+name: Create Product
+setup_function: login_to_invoiceninja
+steps:
+- action: Click 'Products' in the sidebar
+  expectation: A table of products is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Products")).to_be_visible()
+- action: Click on 'New Product' button
+  expectation: A form with title 'New Product' is shown (no need to check fields)
+  ground_truth: |
+    expect(page.get_by_role("link", name="New Product")).to_be_visible()
+- action: Type 'New Product' in 'Item' field
+  expectation: Item field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox").first).to_have_value("New Product")
+- action: Type '120' in 'Price' field
+  expectation: Price field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox").nth(2)).to_have_value("120")
+- action: Type '1' in 'Default Quantity' field
+  expectation: Default quantity field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox").nth(3)).to_have_value("1")
+- action: Click on 'Save'
+  expectation: A new 'Status' field appears in form with 'Active' tag. Tax field is
+    consistent with previous form.
+  ground_truth: expect(page.get_by_text("Active")).to_be_visible()
+paragraph: Click 'Prod' in sidebar -> prod tbl shown. Click 'New Prod' btn -> 'New
+  Prod' frm shown. Type 'New Prod' in 'Item' fld -> item fld has txt. Type '120' in
+  'Price' fld -> price fld has txt. Type '1' in 'Def Qty' fld -> def qty fld has txt.
+  Click 'Save' -> new 'Status' fld w/ 'Active' tag appears. Tax fld cons w/ prev frm.

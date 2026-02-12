@@ -1,0 +1,32 @@
+name: Delete Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book2'
+  expectation: Page contains title 'Book2'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on 'Delete''
+  expectation: Delete confirmation page is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Delete Book")).to_be_visible()
+- action: Click on 'Confirm''
+  expectation: The books list before deletion equals the books list after deletion
+    plus exactly the deleted book (title, description).
+  ground_truth: |
+    expect(page.get_by_role("main")).not_to_contain_text("Book2")
+paragraph: 'To begin, you''ll want to navigate from the dashboard by clicking the
+  ''Books'' link found within the navigation menu. Imagine yourself embarking on a
+  journey where your first stop is the Books listing page, which magically appears
+  before your eyes. For technical reference, ensure that the book titled ''Book2''
+  is selected by clicking directly on its title. If you''re wondering what comes next,
+  it''s quite simple: the page should now display the title ''Book2'', confirming
+  you''re in the right place. Should you encounter any issues, remember that clicking
+  the ''Delete'' button will lead you to a confirmation page, a crucial step in the
+  process. Proceed with caution and click on ''Confirm'' to finalize the action. Once
+  upon a time, there was a list of books; after the deletion of ''Book2'', this list
+  would be identical to the one before, save for the absence of the exact book that
+  was removed, including its title and description.'

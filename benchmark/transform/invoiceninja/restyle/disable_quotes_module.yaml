@@ -1,0 +1,45 @@
+name: Disable Quotes Module
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' in top bar is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Enabled Modules' tab
+  expectation: Enabled Modules section with toggle buttons is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Enabled Modules")).to_be_visible()
+- action: Click on the third toggle button ('Quotes') in 'Enabled Modules'
+  expectation: The 'Quotes' toggle button is untoggled
+  ground_truth: |
+    expect(page.locator("form")).to_match_aria_snapshot("- term: Quotes\n- definition:\n  - switch")
+- action: Click on 'Save' button
+  expectation: The 'Quotes' option is no longer in the sidebar
+  ground_truth: |
+    expect(page.get_by_role("link", name="Quotes", exact=True)).not_to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Upcoming Quotes' and 'Expired Quotes' panel are no longer visible
+    in the dashboard
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: To begin, you'll want to focus your attention on the company logo located
+  at the top left corner of the dashboard. Next, a dropdown menu appears, revealing
+  an array of options including 'Account Management'; this is where you should direct
+  your cursor next. For those seeking detailed instructions, simply click on the 'Account
+  Management' option to proceed. Imagine a page materializing before your eyes, proudly
+  displaying 'Account Management' in its top bar, guiding you further into the system's
+  intricacies. Now, if you're feeling adventurous, venture towards the 'Enabled Modules'
+  tab and give it a click. Suddenly, a section brimming with toggle buttons for various
+  modules comes into view, each one a gateway to different functionalities. In case
+  you're wondering how to disable a specific feature, locate the third toggle button
+  labeled 'Quotes' within the 'Enabled Modules' area and click it; this action will
+  untoggle the 'Quotes' option. After ensuring the 'Quotes' toggle is indeed untoggled,
+  press the 'Save' button to commit your changes. If you encounter any issues with
+  the sidebar not reflecting these updates, rest assured that clicking the 'Save'
+  button should resolve the problem, effectively removing the 'Quotes' option from
+  the sidebar. Finally, take a leisurely stroll through your dashboard by clicking
+  on the 'Dashboard' link in the sidebar, only to find that the 'Upcoming Quotes'
+  and 'Expired Quotes' panels have vanished, leaving behind a cleaner interface.

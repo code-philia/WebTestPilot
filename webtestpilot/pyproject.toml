@@ -1,0 +1,52 @@
+[project]
+name = "webtestpilot"
+version = "0.1.5"
+description = "WebTestPilot is an LLM-driven automated web testing framework for end-to-end browser testing."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "baml-py==0.216.0",
+    "openai>=1.95.1",
+    "pillow>=11.3.0",
+    "playwright>=1.53.0",
+    "pydantic>=2.11.7",
+    "pytest>=9.0.2",
+    "python-dotenv>=1.1.1",
+    "python-levenshtein>=0.27.1",
+    "pyyaml>=6.0.2",
+    "rich>=14.2.0",
+    "typer>=0.21.1",
+    "zss>=1.2.0",
+]
+
+[dependency-groups]
+dev = [
+    "aider-install>=0.2.0",
+    "ruff>=0.12.3",
+]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv_build]
+src-layout = true
+package-data = {"webtestpilot" = ["**/*.yaml", "**/*.yml", "**/*.json", "**/*.js"]}
+
+[tool.uv.build-backend]
+source-include = ["**/*.yaml", "**/*.yml", "**/*.json", "**/*.js"]
+
+[tool.setuptools.package-data]
+webtestpilot = ["**/*.yaml", "**/*.yml", "**/*.json", "**/*.js"]

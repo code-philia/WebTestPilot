@@ -1,0 +1,42 @@
+name: Edit Meeting
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'PhD Research Group Monthly Meeting'
+  expectation: The details of the meeting (date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading")).to_contain_text("PhD Research Group Monthly Meeting")
+- action: In the top navigation bar, click the pen icon to switch to the event's management
+    area
+  expectation: A sidebar with 'Advanced Options' tab is shown
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+- action: Click on the edit icon at the end of title
+  expectation: Event title and description become editable fields
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Event title")).to_be_visible()
+- action: Type 'Updated Meeting 1' in 'Event title' field
+  expectation: Event title field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Event title")).to_have_value("Updated Meeting 1")
+- action: Scroll down
+  expectation: Save button is visible
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save")).to_be_visible()
+- action: Click 'Save' button
+  expectation: The 'Title' field contains 'Updated Meeting 1'
+  ground_truth: |
+    expect(page.locator("#event-settings-data")).to_contain_text("Updated Meeting 1")
+- action: Scroll up
+  expectation: Home button is visible in top navigation bar
+  ground_truth: |
+    expect(page.locator("#global-menu").get_by_role("link", name="Home")).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events are preserved and unchanged except for the title change
+    of one event from 'PhD Research Group Monthly Meeting' to 'Updated Meeting 1'
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: From 'All Evnts', clk 'PhD RG MM'. Dets (date, venu) shwn. Top nav bar,
+  clk pen icn -> mgmt area. Sidebar w/ 'Adv Optns' tab. Clk edit icn @ end of title.
+  Title & desc -> edbl flds. Typ 'Updtd Mtg 1' in 'Evt ttl' fld. Ttl fld cntns txt.
+  Scrl dwn. Save btn vis. Clk 'Save' btn. 'Ttl' fld cntns 'Updtd Mtg 1'. Scrl up.
+  Home btn vis in top nav bar. Clk 'Home' in top nav bar. All evnts prsvd & unchngd
+  xcept ttl chng fr 1 evt frm 'PhD RG MM' to 'Updtd Mtg 1'

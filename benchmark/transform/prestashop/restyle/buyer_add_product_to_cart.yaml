@@ -1,0 +1,48 @@
+name: Buyer Add Product to Cart
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Cart' button
+  expectation: A list of products in cart is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+- action: Click on 'Accessories' tab in navigation bar
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Accessories", exact=True)).to_be_visible()
+- action: Scroll down
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Mug The adventure begins")).to_be_visible()
+- action: Click on the 'Mug The Adventure Begins' product
+  expectation: A product page with title 'Mug The Adventure Begins', price, description,
+    and comments section (no comments) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Mug The adventure begins")).to_be_visible()
+- action: Click 'Add to Cart' button
+  expectation: A dialog with title 'Product successfully added to your shopping cart'
+    is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Continue shopping")).to_be_visible()
+- action: Click on 'Proceed to Checkout'
+  expectation: After adding a product, the shopping cart contains all previous items
+    plus exactly one additional item
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+paragraph: 'To begin, you should click the ''Cart'' button, as it''s the first step
+  in our journey through the online store. A list of products in your cart will appear;
+  rest assured, there''s no need to delve into the specifics at this point. For those
+  seeking technical guidance, navigate to the ''Accessories'' tab located within the
+  navigation bar for an updated product display. Imagine yourself scrolling down the
+  page, where yet another list of products awaits, though again, the details are not
+  our focus here. Now, let’s dive into a bit of storytelling: envision selecting the
+  ''Mug The Adventure Begins'' product, as if embarking on a new chapter of your shopping
+  tale. Upon clicking, you''ll be greeted with a product page featuring the title
+  ''Mug The Adventure Begins'', its price, a brief description, and a comments section
+  that remains untouched by any remarks. If you encounter any issues, remember that
+  clicking the ''Add to Cart'' button should resolve them by adding the item to your
+  collection. A confirmation dialog will pop up, proudly declaring ''Product successfully
+  added to your shopping cart'', marking your success thus far. Proceed to Checkout
+  by clicking the designated button, ensuring your transition from browsing to purchasing.
+  Finally, in a casual note to self, after adding a product, always double-check that
+  the shopping cart now holds all prior items plus precisely one more, completing
+  your digital shopping spree.'

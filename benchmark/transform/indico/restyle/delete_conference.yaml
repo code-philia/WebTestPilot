@@ -1,0 +1,50 @@
+name: Delete Conference
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Conference 1'
+  expectation: The details of the conference (date, venue) is shown
+  ground_truth: |
+    expect(page.locator("#main-content").get_by_text("Registration", exact=True)).to_be_visible()
+- action: In the top navigation bar, click the pen icon to switch to the event's management
+    area
+  expectation: The text 'Advanced options' is visible on the left of the page
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+- action: Click on the gear icon to the right of 'Clone'
+  expectation: A dropdown containing 'Delete' action is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Delete", exact=False)).to_be_visible()
+- action: Click on 'Delete' in the dropdown
+  expectation: A delete confirmation dialog with title starting with 'You are about
+    to delete the whole event' is shown
+  ground_truth: |
+    expect(page.get_by_text("I understand what this means")).to_be_visible()
+- action: Click on 'I understand what this means. Please go ahead.' checkbox
+  expectation: Delete event button is enabled
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="I understand what this means")).to_be_checked()
+- action: Click 'Delete event'
+  expectation: After deleting an event, the remaining event titles should match the
+    initial “All Events” list with the deleted event removed; for comparison, each
+    title must be normalized by removing an optional organizer prefix followed by
+    a comma and quotation marks if present (i.e., titles may be in the form Organizer,
+    "Event" or just Event), then truncating the resulting title to the first 30 characters.
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Events")).to_be_visible()
+paragraph: In the 'All Events' section, you'll find a list where you should select
+  'Conference 1', embarking on a journey through its specifics. To access the event's
+  management area, proceed by clicking the pen icon located in the top navigation
+  bar—a straightforward step for any user navigating this interface. Note that upon
+  entering the management area, the phrase 'Advanced options' will appear on the left
+  side of your screen, serving as a beacon for further actions. If you're looking
+  to clone or modify the event, look for the gear icon next to 'Clone'; it reveals
+  a dropdown menu including the 'Delete' option, a critical feature for event management.
+  Once the 'Delete' option is selected from the dropdown, a confirmation dialog emerges,
+  warning you with a title that hints at the irreversible action about to unfold.
+  Before the system allows the deletion, ensure the checkbox stating 'I understand
+  what this means. Please go ahead.' is checked, a necessary affirmation of your decision.
+  With the checkbox ticked, the 'Delete event' button becomes active—press it to initiate
+  the removal process. Post-deletion, verify that the list of events aligns with the
+  original 'All Events' list minus the one you've just erased; for accuracy, normalize
+  each event title by stripping out any organizer prefixes and quotes, then shorten
+  them to the first 30 characters, ensuring consistency across the board.

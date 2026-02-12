@@ -1,0 +1,47 @@
+name: Convert Quote to Invoice
+setup_function: login_to_invoiceninja
+steps:
+- action: Click 'Invoices' in the sidebar
+  expectation: A table of invoices is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click 'Quotes' in the sidebar
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the 'Status' dropdown
+  expectation: A dropdown containing 'Sent' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Sent")).to_be_visible()
+- action: Click on the 'Sent' option
+  expectation: The 'Sent' status tag is visible
+  ground_truth: |
+    expect(page.get_by_role("option", name="Sent")).not_to_be_visible()
+- action: Click on the "Actions" button for quote number '123456' in the table
+  expectation: A dropdown containing 'Convert to Invoice' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Convert to Invoice")).to_be_visible()
+- action: Click on the 'Convert to Invoice' button
+  expectation: The 'Convert to Invoice' button is not visible and its dropdown is
+    no longer expanded
+  ground_truth: |
+    expect(page.get_by_text("Converted").first).to_be_visible()
+- action: Click 'Invoices' in the sidebar
+  expectation: The invoice table should contain all previous invoices with the same
+    invoice number, client, amount, and date, plus one new invoice corresponding to
+    the converted quote, which must match on client and amount (other fields may differ),
+    so that the total row count is exactly one more than before
+  ground_truth: expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: Clifk 'Invoices' un ye sdeabr, ioke, y0u kn0w? A tble of invoicds id isplwye
+  (no neef to check columns, raell). Click 'Quotes' in yhc sidebar aain. A table fo
+  quotrs is displaed (no need to check columns, seriously). Clcik on the 'Status'
+  dropdown, umm... A drpodown containing fhe 'Sent' option is shown. Cliek on hte
+  'Sent' option, yeah. The 'Sent' taus tag is visiblc, okay? Click on the "Actions"
+  utotn for quot numbr '123456' in ths table, right? A dopdown cobtainInq the 'Cojvert
+  to Invoiec' option is shown. Click on th 'Conert to Inv0Ice' button, U meqn. The
+  'Convert to Niovice' utton is not visuble anymore and itz dropdown is mo longe expanedd,
+  you see what I'm syqing? Click 'Ivniees' In the isdebar once mos. The invoice table
+  soul cnotain all previous invoices with thc samc invoice nymbed, clent, anount,
+  and datc, nlus ond new invoice vorresponding to the converted quote, which must
+  match on elient and amount (other fields mighy be different), so that the total
+  row outn is exactly oe onre hyan bfeore, go it?

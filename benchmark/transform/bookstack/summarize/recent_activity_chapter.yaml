@@ -1,0 +1,8 @@
+name: Recent Activity Chapter
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Chapter 2' link
+  expectation: The 'Recent Activity' (user, activity, timestamp data) consistent with
+    the previous dashboard's 'Recent Activity' list
+  ground_truth: expect(page.get_by_role("heading", name="Details")).to_be_visible()
+paragraph: 'Dash -> Ch2 link; check RA (usr, act, ts) matches prev dash RA list. #roughdraft'

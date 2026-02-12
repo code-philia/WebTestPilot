@@ -1,0 +1,12 @@
+name: Recently Viewed Page Template
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page Template'
+  expectation: Page template details appear
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page Template")
+
+- action: Click on the Bookstack logo top left of navbar
+  expectation: The 'Page Template' item appears at the top of the "My Recently Viewed" list, whether it was already present or newly added. All other items retain their previous order
+  ground_truth: |
+    expect(page.locator("#recently-viewed")).to_contain_text("Page Template")

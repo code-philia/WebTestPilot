@@ -1,0 +1,54 @@
+name: Seller Cancel Order
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Orders' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+- action: Click on 'Orders' subsection under 'Orders'
+  expectation: A list of orders is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Orders", exact=True)).to_be_visible()
+- action: Click on the order ID '5' with reference 'KHWLILZLL'
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("body")).to_contain_text("€27.30")
+- action: Click on 'Awaiting bank wire payment' dropdown button
+  expectation: A dropdown containing 'Cancelled' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Canceled")).to_be_visible()
+- action: Click on 'Cancelled' option
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.get_by_role("option", name="Canceled")).not_to_be_visible()
+- action: Click on 'Update status' button
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Canceled")).to_be_visible()
+- action: Wait
+  expectation: All status records on the page align with the update
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Canceled")).to_be_visible()
+paragraph: To begin your journey through the system's interface, you'll want to focus
+  your attention on the 'Orders' section nestled within the sidebar. Next, ensure
+  that the page you've navigated to proudly displays the title 'Dashboard', serving
+  as your beacon of confirmation. Now, proceed to click on the 'Orders' subsection,
+  which is tucked neatly under its parent category, following the clear instructions
+  laid out before you. Imagine a scene where a list of orders materializes before
+  your eyes, though for our purposes today, we won't delve into the specifics of these
+  entries. With a keen eye, locate the order bearing the ID '5' and the cryptic reference
+  'KHWLILZLL', then click it, as if selecting a chapter in an unfolding story. Upon
+  arrival at the order details page, you should find the numerical subtotal hovering
+  around '27.30', give or take a smidgen, a testament to the system's precision. Should
+  you encounter any issues, remember that clicking on the 'Awaiting bank wire payment'
+  dropdown button will reveal a menu including the 'Cancelled' option, ready to be
+  selected. Once the 'Cancelled' option is clicked, the order details page remains
+  steadfast, still displaying the numerical subtotal near '27.30', within acceptable
+  limits. After pressing the 'Update status' button, take a moment to appreciate how
+  the numerical subtotal on the order details page continues to hover around '27.30',
+  a constant amidst the changes. Finally, take a breath and wait, allowing the system
+  to process the updates. As the dust settles, all status records on the page should
+  now harmoniously align with the recent update, completing the cycle.

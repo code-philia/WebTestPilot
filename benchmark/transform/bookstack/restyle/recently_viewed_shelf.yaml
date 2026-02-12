@@ -1,0 +1,28 @@
+name: Recently Viewed Shelf
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click "Shelves" link in navigation
+  expectation: Shelf listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on shelf title "Shelf"
+  expectation: Shelf detail page opens
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelf")).to_be_visible()
+- action: Click on the Bookstack logo top left of navbar
+  expectation: The 'Shelf' item appears at the top of the "My Recently Viewed" list,
+    whether it was already present or newly added. All other items retain their previous
+    order
+  ground_truth: |
+    expect(page.locator("#recently-viewed")).to_contain_text("Shelf")
+paragraph: To access the shelf listings, one must navigate from the dashboard by selecting
+  the "Shelves" link found within the navigation menu. Next, you should observe the
+  appearance of the shelf listing page, which is a critical step in this process.
+  For technical reference, ensure that upon clicking the shelf title labeled "Shelf",
+  the system redirects to the shelf detail page without any delay. If you're puzzled
+  about how to return to the main interface, simply click on the Bookstack logo located
+  at the top left corner of the navigation bar for a seamless experience. Once back,
+  a magical transformation occurs where the 'Shelf' item magically pops up at the
+  pinnacle of your "My Recently Viewed" list, regardless of its prior existence there.
+  In a casual chat, folks might say all other items just chill in their spots, maintaining
+  the order they had before like nothing ever changed.

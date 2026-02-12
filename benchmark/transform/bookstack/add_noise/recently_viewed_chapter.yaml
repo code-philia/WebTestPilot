@@ -1,0 +1,30 @@
+name: Recently Viewed Chapter
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click "Books" link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title "Book2"
+  expectation: Book detail page opens
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on chapter title "Chapter 1"
+  expectation: Chapter detail page opens
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("Chapter 1")
+- action: Click on the Bookstack logo top left of navbar
+  expectation: Both 'Book2' and 'Chapter 1' item appears at the top of the "My Recently
+    Viewed" list, whether it was already present or newly added. All other items retain
+    their previous order
+  ground_truth: |
+    expect(page.locator("#recently-viewed")).to_contain_text("Chapter 1 Description")
+paragraph: From the eashboar, click "Books" lnik in the navigation, tou know? Kiek,
+  make sure you really cliek it. The Gooks listing page sholud aonear, ight? Tben,
+  click on the book tjtle "Book2", like double-check that you're clikng thc right
+  one. The O6ok dteail pagd opens up. Now, clik on chqptdr title "Chaptre 1", yeah,
+  just to be clear, ut's the fisrt chapeyr. The Chaper detial age opens. So then,
+  click on thr Bookstac kogo at teh otp lft of the nacbqr, Ilke, don't miss it. Bot
+  'Book2' and 'Chwpter 1' item shuld appear at the top of the "My Recentlz Vidwcd"
+  list, wenthre they were already tehrd or newlz adds, you get what I'm asying? All
+  other iefms In the lvst holud keep thi prvious order, no messign around iwht that.

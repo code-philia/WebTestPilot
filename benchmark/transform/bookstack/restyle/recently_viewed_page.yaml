@@ -1,0 +1,35 @@
+name: Recently Viewed Page
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click "Books" link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title "Book2"
+  expectation: Book detail page opens
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on page title "Page 1"
+  expectation: Page detail page opens
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page 1")
+- action: Click on the Bookstack logo top left of navbar
+  expectation: The 'Book2' and 'Page 1' item appears at the top of the "My Recently
+    Viewed" list, whether it was already present or newly added. All other items retain
+    their previous order
+  ground_truth: |
+    expect(page.locator("#recently-viewed")).to_contain_text("Page 1")
+paragraph: To begin your journey through the digital library, you'll want to start
+  from the dashboard where you should click the "Books" link found in the navigation
+  bar. Next up, the Books listing page magically materializes before your eyes, ready
+  for exploration. For detailed instructions, proceed by clicking on the book titled
+  "Book2" to delve into its contents. Understand that once you've selected "Book2",
+  the Book detail page will open, unveiling all the secrets within its pages. Should
+  you find yourself lost, simply click on the page title "Page 1" to access the Page
+  detail page, which is your next destination. Once there, let your fingers dance
+  over the keyboard as you click on the Bookstack logo located at the top left corner
+  of the navbar, a common step for seasoned users. After this action, the 'Book2'
+  and 'Page 1' items will appear at the top of the "My Recently Viewed" list, like
+  old friends reuniting, regardless of whether they were already there or newly added.
+  Lastly, just for your peace of mind, know that all other items in the list will
+  remain in their previous order, maintaining the timeline of your reading adventures.

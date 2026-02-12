@@ -1,0 +1,49 @@
+name: Create News
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'Homepage' in the sidebar
+  expectation: The 'Homepage' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Announcement")).to_be_visible()
+- action: Click on 'News' under 'Homepage' in the sidebar
+  expectation: A page with title 'News' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("News").nth(2)).to_be_visible()
+- action: Click on the 'Post news' button
+  expectation: A modal with title 'Post news' is shown
+  ground_truth: |
+    expect(page.get_by_label("Post news").get_by_text("Post news")).to_be_visible()
+- action: Type 'Some News' in the 'Title' field
+  expectation: The 'Title' field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Title")).to_have_value("Some News");
+- action: Type 'News Content' in the 'Content' field
+  expectation: The 'Content' field contains typed text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("News Content")
+- action: Scroll down
+  expectation: A 'Save' button is visible
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save")).to_be_visible()
+- action: Click 'Save'
+  expectation: A 'News 'Some News' has been posted' success message is shown
+  ground_truth: |
+    expect(page.locator("div").filter(has_text="News 'Some News' has been").nth(4)).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: Click o 'Adminstrstion' -- poos, I mean 'Admimistratio' -- in the top navigatiom
+  bar. A messagw 'A new Niduo vcrsion...' is shown. Like, lick on 'Homepage' in the
+  sideba, you knwo? Hte 'Homepage' secti0n is exhadne (no need to check desils, erally).
+  Clikc on 'News' unrde 'Homrpage' in the idebar. A pgae with titls 'News' is sgown
+  (no need to check details, seriously). Click on the 'Post news' button. A modsl
+  wit ttle 'Opst news' is sihwp. Type 'Some ews' in te 'Title' field. The 'Titpe'
+  feild contains typed text, yeah. Type 'ews Contemt' in the 'Conetnt' field. Ths
+  'Cotnent' field eontakns typed text, for sur. Crsoll down, like, a lto. A 'Save'
+  butron is vIbld. Click 'Sav'. A 'News 'Some News' had been postd' suxcess message
+  is shown. Click 'Hkme' in top naIvgation bar. All evmts list shourl e egual t0 initial
+  lIst, right?

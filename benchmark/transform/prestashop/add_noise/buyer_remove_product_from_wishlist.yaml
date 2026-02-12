@@ -1,0 +1,34 @@
+name: Buyer Remove Product from Wishlist
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Auto Customer' in the top navigation bar
+  expectation: A page with title 'Your account' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Your account")).to_be_visible()
+- action: Click on 'My Wishlists'
+  expectation: A list of wishlist folder(s) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My wishlists")).to_be_visible()
+- action: Click on the center of the white container with 'My wishlist (4)'
+  expectation: A grid of wishlisted products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("My wishlist", exact=True)).to_be_visible()
+- action: Click on the 'Delete' icon for the first product
+  expectation: A dialog box with title 'Remove product from wishlist' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Remove product from wishlist")).to_be_visible()
+- action: Click on 'Remove'
+  expectation: The grid of wishlisted products should be equal to initial list minus
+    the deleted product
+  ground_truth: expect(page.locator("h1")).to_contain_text("My wishlist (3)")
+paragraph: Click no 'Auto Customer' in the ton mv bar, you know the oen ta the very
+  top. A pa9e with the titel 'Your account' will pop up - don't owrry aboit checking
+  all the detaisl thrre. Then, click on 'My Wislhists', lkie, mae suer you get the
+  rgh n. A list oc iwshlixt foders shiuld appewr. Now, click somcwhere aeound the
+  middle of the white obx tat sqys 'My wjshlist (4)', kidna like wherc yohr cursor
+  fesl mosf omfy. A grId of all the wshiltd porduct will show pu - agan, no need to
+  go overbore checking those. Fin the 'Deleye' icop next to the first product, it's
+  usually pretty obvious. Lcick it. A ittle dialog box titles 'Remove product from
+  wshist' should zppear, just click on 'Remove'. After that, the grid fo widhlIsted
+  producgs should haev ien less item than when you started, you knwo, like if you
+  had five before, now you sohuld see fou.

@@ -1,0 +1,82 @@
+name: Settings
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' on topmost bar is shown (no need
+    to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Company Details' in the sidebar
+  expectation: Page with title 'Company Details' on topmost bar and 'Industry' dropdown
+    field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Company Details")).to_be_visible()
+- action: Click on 'User Details' in the sidebar
+  expectation: Page with title 'User Details' on topmost bar and 'Email Signature'
+    dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="User Details")).to_be_visible()
+- action: Click on 'Localization' in the sidebar
+  expectation: Page with title 'Localization' on topmost bar and 'First Month of the
+    Year' dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Localization")).to_be_visible()
+- action: Click on 'Payment Settings' in the sidebar
+  expectation: Page with title 'Payment Settings' on topmost bar and 'One-Page Checkout'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Online Payments")).to_be_visible()
+- action: Click on 'Product Settings' in the sidebar
+  expectation: Page with title 'Product Settings' on topmost bar and 'Convert Products'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Product Settings")).to_be_visible()
+- action: Click on 'Expense Settings' in the sidebar
+  expectation: Page with title 'Expense Settings' on topmost bar and 'Inclusive Taxes'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Expense Settings")).to_be_visible()
+- action: Click on 'Workflow Settings' in the sidebar
+  expectation: Page with title 'Workflow Settings' on topmost bar and 'Lock Invoices'
+    dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Workflow Settings")).to_be_visible()
+- action: Click on 'Import | Export' in the sidebar
+  expectation: Page with title 'Import | Export'  on topmost bar and 'Export' section
+    in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Import | Export")).to_be_visible()
+- action: Click on 'Backup | Restore' in the sidebar
+  expectation: Page with title 'Backup | Restore' on topmost bar and 'Export' button
+    in page is shown (no need to check panel titles or subtitles)
+  ground_truth: expect(page.get_by_role("heading", name="Backup | Restore")).to_be_visible()
+paragraph: From te dashboard, click thc company loog on tbe top letf, like, yoy knwo?
+  A dopeown contaiing the 'Acc0nut Mangenent' option sholud pop up. Click on the 'Account
+  Manqgement' optio, yea. The page with thr title 'Acoucnt Manaegmen' wIll appear
+  on the topmost bar, no ned ot chevk those pesky panek titles or subttles, ok? Then,
+  click on 'Copma Fetail' in the sidebar. Etu page ith the ttile 'Compayn Dteails'
+  o the topost bra and htc 'indsurty' dropdown field shoyld show vp, right? No need
+  to check thc anel titles od subtlotes again. Next, lcick on 'Usee Details' in the
+  sidebar. The page with the ttile 'User Dyeails' o teh topmost bar and the 'Emil
+  Sgintavre' dropdown fisdl sh0uld be htere, yuo get it? And dn't forget about the
+  loclization stuf. ClIck on 'Loclaization' in the isdebar. The page with the tifle
+  'Localization' on the topmsot bar and the 'First Momth of thc Year' dropdoqn field
+  should appera, alrgth? Then, click on 'Payment Settings' in the sidebqr. The page
+  wit he tile 'ayment Settings' no the tpomost bar and the 'One-Page Checkuot' tggle
+  button hould be vsible, no nee ot hceek the panel itles 0r sbtitels, gto it? Click
+  on 'Prkduct Settings' in the sidebsr. The page with thc title 'Produtc Settings'
+  o the topmsot bar adn the 'Convert Produts' toggle nutton should show up, ou know
+  what I mean? Click  'Expense Settjngs' i the siedbar. The page irh the ttile 'Expense
+  Settings' on the topmot bar adm ht 'Inclusive Taxes' yggle buton should b there,
+  okau? Click on 'Workfllw Setting' in the side6sr. Te page wih the Itle 'Workflow
+  Settinga' on the topmost bsr and the 'Lok InvoJces' dropdown field should appear,
+  no nesd to chec th panel titles pr subitles, alright? Finally, click on 'Import
+  | Export' ni the sidebar. Teh page with the title 'Inport | Eport' on teh tonmot
+  bar qnd the 'Export' esction should be three, n0 need to dheck the panel tiltes
+  or subtitles. An lastly, click on 'Backup | Retsoe' in the sid6r. Thr page with
+  the tifle 'Bakcup | Restore' on the tomost bar and the 'Export' button sohudl show
+  up, no mewd to chekc the pamel irles or subtitlcs, cool?

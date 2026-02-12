@@ -1,0 +1,17 @@
+name: Upcoming Quotes
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: The 'Sent' quote number(s) is consistent with 'Upcoming Quotes' on
+    the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+paragraph: 'To begin, navigate to the ''Quotes'' section by clicking its icon within
+  the sidebar menu on your dashboard. Note that the quantity of ''Sent'' quotes should
+  match the count listed under ''Upcoming Quotes''—a critical point for verification
+  purposes. If you encounter discrepancies between these two figures, ensure that
+  all recent updates have been applied correctly. Once upon a time, a user found that
+  keeping an eye on these numbers helped maintain smooth operations. Just a heads-up,
+  folks: always double-check those ''Sent'' and ''Upcoming Quotes'' counts for accuracy!
+  For more detailed information, refer to Section 3.2 of our User Manual where this
+  process is thoroughly explained.'

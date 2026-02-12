@@ -1,0 +1,26 @@
+name: Count Recently Created Chapters
+setup_function: login_to_bookstack
+steps:
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'View Profile' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="View Profile")).to_be_visible()
+- action: Click on 'View Profile' option
+  expectation: There exists a 'Recently Created Chapters' section that is consistent
+    with 'Created Content' counts
+  ground_truth: |
+    expect(page.get_by_text("Created Content")).to_be_visible()
+paragraph: To access your personal settings, you should click on the profile icon
+  located at the top right corner of the screen. Next, a dropdown menu will emerge,
+  revealing various profile options; among these, you'll find the 'View Profile' button.
+  For those seeking to navigate their account details, simply select the 'View Profile'
+  option from the list provided. It's important to note that within the profile page,
+  there is a specific area labeled 'Recently Created Chapters,' which should align
+  perfectly with the 'Created Content' statistics for accuracy verification purposes.
+  If you encounter any discrepancies between the chapters listed and the content count,
+  ensure that all recent updates have been saved correctly and try refreshing the
+  page. Once upon a time, a user decided to explore their profile and was delighted
+  to discover a neatly organized section showcasing their creative journey through
+  recently penned chapters. Hey there! Just wanted to drop a quick reminder that checking
+  out your 'Recently Created Chapters' can be super fun and it’s right there when
+  you view your profile!

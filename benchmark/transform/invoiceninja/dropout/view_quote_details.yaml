@@ -1,0 +1,13 @@
+name: View Quote Details
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: A table of quotes is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the quote number '123456'
+  expectation: The quoted products calculation is consistent with subtotal
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Edit Quote")).to_be_visible()
+paragraph: A table of quotes is shown. Click on the quote number '123456'. The quoted
+  products calculation is consistent with subtotal.

@@ -1,0 +1,53 @@
+name: Favourite Page Template
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book'
+  expectation: Page contains title 'Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book")).to_be_visible()
+- action: Click on page template title 'Page Template'
+  expectation: Page contains title 'Page Template'
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page Template")
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one
+    newly favourited item, 'Page Template', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Page Template")
+paragraph: Click 'Shelves' link in navigation. The shelves list is shown. Click on
+  my profile icon. A dropdown with profile options with 'My Favourites' appears. Click
+  on My Favourites option. The favourites list is shown. Click 'Books' link in navigation.
+  Books listing page appears. Click on book title 'Book'. Page contains title 'Book'.
+  Click on page template title 'Page Template'. Page contains title 'Page Template'.
+  Click on the Favourite button. The 'Unfavourite' button is present. Click 'Shelves'
+  link in navigation. The shelves list is shown. A dropdown with profile options with
+  'My Favourites' appears. The favourites list is equal to the previous list with
+  exactly one newly favourited item, 'Page Template', added.

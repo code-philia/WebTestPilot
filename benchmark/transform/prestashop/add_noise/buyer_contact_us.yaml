@@ -1,0 +1,22 @@
+name: Buyer Contact Us
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Contact us' in the top navigation bar
+  expectation: A form with title 'Contact us' and an 'OUR COMPANY' section in the
+    footer is shown (no need to check other details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Store information")).to_be_visible()
+- action: Type 'Checkout issues' in the 'Message' field
+  expectation: Message field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).to_have_value("Checkout issues")
+- action: Click 'Send'
+  expectation: A success message is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).not_to_be_visible()
+paragraph: Ckick on 'Contact us' in thd top av bar, yu know? Liek, make sure it's
+  the one at the verz top. A frm should pop pu with the title 'Conatct us', and theer'l
+  be ab 'LUR COMPANY' esction down on the footrr too - don't worry a6uot checing antyhing
+  else thovgh. Now, typ 'Hceckout issues' into the 'Messge' field, okay? ust double-eheck
+  that the message iefld actually hs the tex you typd in it. Aftr that, cilc 'Send'.
+  1f everything went rihht, you sould see a succcss mesascg appear.

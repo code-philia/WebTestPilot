@@ -1,0 +1,16 @@
+name: Count Recently Created Shelves
+setup_function: login_to_bookstack
+steps:
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'View Profile' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="View Profile")).to_be_visible()
+- action: Click on 'View Profile' option
+  expectation: There exists a 'Recently Created Shelves' section that is consistent
+    with 'Created Content' counts
+  ground_truth: expect(page.get_by_text("Created Content")).to_be_visible()
+paragraph: Clivk on my profie icon, like, you know? A dropdown with rpofie optiojs
+  an stuff will lop up, and there shoupd be a 'Ivew Pfofile' button there. Click o
+  hte 'View Prifle' otpion, okay? Now, thre's supposed to ge a 'Recently Created Shelvew'
+  section, whic, um, should maht up with the 'Crcated Cbotent' couts, you see wbat
+  I mean?

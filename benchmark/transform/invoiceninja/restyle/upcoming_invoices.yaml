@@ -1,0 +1,18 @@
+name: Upcoming Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: The 'Sent' invoice number(s) is consistent with 'Upcoming Invoices'
+    on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: To access the invoices, simply tap on the 'Invoices' option nestled within
+  the sidebar of your dashboard. Note that the 'Sent' invoice numbers should match
+  those listed under 'Upcoming Invoices' on your main screen; this is a critical point
+  for verification. For technical accuracy, ensure the consistency between the 'Sent'
+  and 'Upcoming Invoices' sections to avoid any discrepancies. If you find the numbers
+  don't align, double-check your entries and settings for potential errors. Once upon
+  a time, a user navigated through their dashboard and was delighted to see the 'Sent'
+  invoices perfectly mirroring the 'Upcoming Invoices,' confirming everything was
+  in order. Hey there! Just wanted to give you a heads up—make sure the invoice numbers
+  are synced across the board!

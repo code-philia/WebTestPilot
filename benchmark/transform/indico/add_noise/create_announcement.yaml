@@ -1,0 +1,40 @@
+name: Create Announcement
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'Homepage' in the sidebar
+  expectation: The 'Homepage' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Announcement")).to_be_visible()
+- action: Click on 'Announcement' under 'Homepage' in the sidebar
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Announcement")).to_be_visible()
+- action: Click on the 'Enabled' toggle button
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="Enabled")).to_be_checked()
+- action: Type 'Big Announcement' in 'Message' field
+  expectation: The 'Message' field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).to_have_value("Big Announcement")
+- action: Click 'Save'
+  expectation: A 'Settings have been saved' success message is shown
+  ground_truth: |
+    expect(page.get_by_text("Settings have been saved")).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: Click n 'Adimnwtration' -- oops, I nean 'Daministratiln' -- in the top
+  navigation bar. A message 'A new Indico version...' s hsown. Lije, vlcik on 'Homepage'
+  in teh sidebar, yoi konw? The 'Homepage' secyion is expandcd (no need to check deails,
+  really). Cick on 'Annoucememt' under 'Homeapg' m the isdcbra. A pae9 with tiltc
+  'Announcement' s shown (no need to vheck detials, seriouly). Clik on the 'naled'
+  toggle butto. A page iwth title 'Announcement' is hsown gian (no nee to check details,
+  just trust me). Ytpe 'Big Announcemep' in the 'Nessag' field, like, make sure the
+  'Messag' fielx contains th typcd rext. Click 'Save', dude. A 'Settinys ahvr been
+  szved' sjccess message is sho. Clifk 'Home' n the otp navigatioj bar. All events
+  list should be equal to teh initil list, right?

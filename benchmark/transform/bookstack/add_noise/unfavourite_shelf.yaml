@@ -1,0 +1,51 @@
+name: Unfavourite Shelf
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on shelf title 'Shelf'
+  expectation: Page contains title 'Shelf'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelf")).to_be_visible()
+- action: Click on the Unfavourite button
+  expectation: The 'Favourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Favourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list should match the previous list with the item 'Shelf'
+    removed.
+  ground_truth: |
+    expect(page.get_by_role("main")).not_to_contain_text("Shelf")
+paragraph: Click 'Shelves' link in navigation, like, you know? The selvse list is
+  shown. Cilck oh 'Admin' prflie dropdw0n, um, yeah. A dropdown with profile opIons
+  wIth 'My Favourites' appears, roght? Lcick no My Favuorites 0tion. The favourites
+  lis is shown. Click 'Shelves' link in naivqation agani. The shelves list is shown,
+  like totally. Click 0n shelf title 'Sef', you gte it? Page cntains ttilc 'Shelf',
+  okay? C0ik on the Ufnavourite button, I msna. The 'Favkurite' buttno is presdnt,
+  yeah. ClIck 'Shelves' link ij navigation 0nce mor. The sehlves list si dhonw, ike,
+  for real. lik on 'Main' prfile dropdown, you know what I neab? A dropdown with pofile
+  opyions with 'My Fvourites' apnaers, sure thing. Click ln My Favpuriets option.
+  The favourktes list shoudl match the prefious lIst with thw utem 'Shelf' rcvoed,
+  like, minus tht one.

@@ -1,0 +1,28 @@
+name: Seller View Catalog Product Details
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Catalog' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.locator("#subtab-AdminProducts").get_by_role("link", name="Products")).to_be_visible()
+- action: Click on 'Products' under 'Catalog'
+  expectation: A products list is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Products", exact=True)).to_be_visible()
+- action: Click on the name of the first product
+  expectation: A product details page with Categories, Brand, and Related Products
+    section is shown
+  ground_truth: |
+    expect(page.get_by_text("Product name", exact=True)).to_be_visible()
+- action: Click on 'Go to Catalog'
+  expectation: The products list (by product name. Keep only letters, numbers, and
+    spaces; convert to lowercase) should be exactly equal to initial list
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Products", exact=True)).to_be_visible()
+paragraph: click on 'catalo9' in the sidebar, lkie, ov know? The nage hs got a title
+  called 'dashboard'. thn click on 'podructs' under 'catalog', okay? A podcuts list
+  will show up, no need to check the edtails or qnything. Now, click on the nae of
+  the firt pordcut, yeah? A porduct detail pgae wkth categorIes, brand, and realted
+  proucts ecion should appesr. After that, click on 'go to catslog'. The prdoucts
+  lIst, by producf name, kep pnly letters, numbers, and spces, conuet to lwoecrasc,
+  should be eaxctly equal to the initial pist, yo gdt what 'm saynig?

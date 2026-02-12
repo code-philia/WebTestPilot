@@ -1,0 +1,20 @@
+name: Recent Payments
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Payments' in the sidebar
+  expectation: The 'Completed' payment number(s) in the Payments table exactly matches
+    the 'Completed' payments shown in the Recent Payments panel on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payments")).to_be_visible()
+paragraph: To access the Payments section, simply tap on 'Payments' located within
+  the sidebar of your dashboard. Note that the 'Completed' payment numbers listed
+  in the Payments table should correspond precisely with those displayed in the Recent
+  Payments panel on your dashboard; any discrepancy indicates an issue. For technical
+  reference, ensure both the Payments table and Recent Payments panel reflect identical
+  'Completed' payment counts for accurate record-keeping. If you're puzzled by mismatched
+  numbers, first verify that all transactions have been fully processed and are correctly
+  categorized as 'Completed'. Once upon a time, a user noticed that clicking 'Payments'
+  from the dashboard sidebar led to a magical revelation of perfectly aligned payment
+  records. Just a heads-up, folks, make sure when you glance at your dashboard's sidebar
+  and select 'Payments', the 'Completed' tally is spot-on with what's in the Recent
+  Payments area.

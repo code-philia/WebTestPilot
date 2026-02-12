@@ -1,0 +1,22 @@
+name: Settings
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Settings' in navigation
+  expectation: Page with 'Save Settings' button appear
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Features & Security")).to_be_visible()
+
+- action: Click on 'Customization' in sidebar
+  expectation: Page with title 'Customization' and 'Save Settings' button appear
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Customization")).to_be_visible()
+
+- action: Click on 'Registration' in sidebar
+  expectation: Page with title 'Registration' and 'Save Settings' button appear
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Registration")).to_be_visible()
+
+- action: Click on 'Sorting' in sidebar
+  expectation: Page with title 'Sorting' and 'Create Sort Rule' button appear
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Sorting")).to_be_visible()

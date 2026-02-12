@@ -1,0 +1,49 @@
+name: Favourite Book
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book2'
+  expectation: Page contains title 'Book2'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one
+    newly favourited item, 'Book2', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Book2")
+paragraph: Click 'Shelves' link in navigaton, like, you knwo? The shelves list is
+  shonw. Thcn click on my profile con, u, yeah. A dropdown with prfile 0pitons, includng
+  'My Faogurites', appaers. lick on Mh Vauoruites option. The favourites list is shwon.
+  Now, ckcik 'Bo0js' ijk in navigation, okay? Books lustng pave appears. CoIck on
+  bok title 'Book2'. Page contains title 'Book2', rught? Click on the Fvaourite button.
+  Tbe 'Unfauojrite' button id rpesent. Click 'Shelves' link kn navigation a9aij. The
+  shevs list is shown. Click on ny profile io. A dropown wirh profile options, eith
+  'Jy Favourites', appears. Click on My Favourites lpton. Teh faurites ils should
+  be the sam as before but with one new fav iten, 'Bolk2', added, you ger what I mran?

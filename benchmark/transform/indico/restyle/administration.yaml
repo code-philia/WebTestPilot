@@ -1,0 +1,49 @@
+name: Administration
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'User Management' in the sidebar
+  expectation: The 'User Management' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Users")).to_be_visible()
+- action: Click on 'Users' under 'User Management' in the sidebar
+  expectation: A panel with title 'Manage users' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Manage users")).to_be_visible()
+- action: Click on 'Customisation' in the sidebar
+  expectation: The 'Customisation' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Document Templates")).to_be_visible()
+- action: Click on 'Document Templates' under 'Customisation' in the sidebar
+  expectation: A red warning message with 'Danger zone' is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Document Templates")).to_be_visible()
+- action: Click on 'Payment' under 'Customisation' in the sidebar
+  expectation: A page with title 'Payment' and 'Save' button is shown (no need to
+    check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payment")).to_be_visible()
+- action: Click on 'Unlisted events' under 'Customisation' in the sidebar
+  expectation: A page with title 'Unlisted events' and an 'Enabled' toggle button
+    with 'Save' button is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Unlisted events")).to_be_visible()
+paragraph: To begin, you should locate and click on 'Administration' within the top
+  navigation bar, setting the stage for our administrative tasks ahead. A notification
+  will appear, stating 'A new Indico version...', which confirms your successful navigation.
+  Next, proceed to the sidebar and select 'User Management', ensuring the section
+  expands as expected. For those familiar with system navigation, expanding the 'User
+  Management' section is a straightforward step without needing to delve into specifics.
+  Imagine yourself as a character in a story where clicking on 'Users' under 'User
+  Management' leads you to a mysterious panel titled 'Manage users'. If you're looking
+  for technical guidance, simply click on 'Customisation' in the sidebar to expand
+  its contents. Should you encounter any issues, remember that clicking on 'Document
+  Templates' under 'Customisation' should reveal a red warning message labeled 'Danger
+  zone'. Moving along, the 'Payment' option under 'Customisation' will take you to
+  a page featuring a 'Payment' title and a 'Save' button, no further action required.
+  Lastly, for a casual stroll through settings, click on 'Unlisted events' under 'Customisation',
+  leading to a page with an 'Enabled' toggle and a 'Save' button, completing our journey.

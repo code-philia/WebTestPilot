@@ -1,0 +1,42 @@
+name: Buyer Add Product to Cart
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Cart' button
+  expectation: A list of products in cart is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+- action: Click on 'Accessories' tab in navigation bar
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Accessories", exact=True)).to_be_visible()
+- action: Scroll down
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Mug The adventure begins")).to_be_visible()
+- action: Click on the 'Mug The Adventure Begins' product
+  expectation: A product page with title 'Mug The Adventure Begins', price, description,
+    and comments section (no comments) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Mug The adventure begins")).to_be_visible()
+- action: Click 'Add to Cart' button
+  expectation: A dialog with title 'Product successfully added to your shopping cart'
+    is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Continue shopping")).to_be_visible()
+- action: Click on 'Proceed to Checkout'
+  expectation: After adding a product, the shopping cart contains all previous items
+    plus exactly one additional item
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+paragraph: Clicl 'Cart' buton, ike, oyy kone? A ilst o products n ar is shown (no
+  eed t check details, really). ilck on 'Accessories' tab in the navigation bar, um,
+  jvst make srue gou'rc clicking hte riqht onc. A lus f produtcs is shown agani (no
+  need to check detais, it's kinda obvious). Srcoll down, you know, kep gionq till
+  yku see more ztuff. A list of proudts is show once m0re (no need to chck details,
+  seriously). Click on htc 'Mug Teh Adevnture Begins' peoduc, yeah, that'w the one.  prodcut
+  page with title 'Mug The Advneturw Begins', pice, dexcripton, adn ocmmnets section
+  (po cmoments, nada) is hsown. Cpick 'Dad to Carg' bytton, like, don't forget ti!
+  A dialog wih itl 'Product usccessfully added to youd hsoppin9 cart' is whown, you'l
+  swe it pop up. Clcik on 'Proceed to Checkovt', you're almost done. Afte adsing a
+  product, the sholpkng earg contaisn all prsvious Items plus exactly one additional
+  itme, ilke, double-chekc that part.

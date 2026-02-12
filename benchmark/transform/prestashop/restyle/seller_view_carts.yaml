@@ -1,0 +1,16 @@
+name: Seller View Carts
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Active Shopping Carts' link in dashboard
+  expectation: The shopping cart table (excluding abandoned carts) is consistent with
+    active cart numbers in dashboard
+  ground_truth: expect(page.get_by_role("heading", name="Shopping Carts")).to_be_visible()
+paragraph: To proceed, you should click on the 'Active Shopping Carts' link located
+  within the dashboard area. Note that the shopping cart table does not include any
+  abandoned carts—a key point for accurate data representation. For your reference,
+  ensure the displayed cart numbers match those listed under the active section of
+  the dashboard. If discrepancies arise between the table and dashboard figures, check
+  for any updates or refresh the page to resolve inconsistencies. Once upon a time,
+  a user navigated through their dashboard and was delighted to find that the active
+  shopping carts were perfectly in sync with the dashboard's summary. Just a heads-up,
+  folks, make sure everything lines up neatly when you're eyeballing those cart stats!

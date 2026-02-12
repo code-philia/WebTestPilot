@@ -1,0 +1,26 @@
+name: Localization
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Localization' in the sidebar
+  expectation: The currency three-letter code and the date format (in Python strftime)
+    are consistent with the dashboard
+  ground_truth: expect(page.get_by_role("heading", name="Localization")).to_be_visible()
+paragraph: To begin, you'll want to focus your attention on the company logo located
+  at the top left corner of the dashboard. Next, proceed to interact with the interface
+  by clicking the logo, which will reveal a dropdown menu. For those seeking detailed
+  instructions, ensure you select the 'Account Management' option from the list provided.
+  Understand that upon successful selection, a new page titled 'Account Management'
+  should appear before your eyes. Now, let's dive into the narrative where our protagonist
+  clicks on 'Localization' within the sidebar, setting the stage for further exploration.
+  If you encounter any issues, remember that the currency code and date format must
+  match what's displayed on the dashboard, adhering to Python strftime conventions.
+  Lastly, just to keep things light and casual, make sure everything looks good and
+  feels right as you wrap up this little adventure.

@@ -1,0 +1,47 @@
+name: Clonet Event
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Lecture 1'
+  expectation: The details of the lecture (lecturer, date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Lecture 1")).to_be_visible()
+
+- action: In the top navigation bar, click the pen icon to switch to the event's management area
+  expectation: A sidebar with 'Advanced Options' tab is shown
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+
+- action: Click 'Clone' button
+  expectation: A modal with title 'Clone Event is shown'
+  ground_truth: |
+    expect(page.get_by_label("Clone Event").get_by_text("Clone Event")).to_be_visible()
+
+- action: Click 'Clone Once'
+  expectation: The 'Clone Once' radio button is selected 
+  ground_truth: |
+    expect(page.get_by_label("Clone Event").get_by_text("Clone Event")).to_be_visible()
+
+- action: Click 'Next'
+  expectation: The text 'What should be cloned?' is visible
+  ground_truth: |
+    expect(page.get_by_text("What should be cloned?")).to_be_visible()
+
+- action: Click 'Next'
+  expectation: The text 'Where should the events be placed?' is visible
+  ground_truth: |
+    expect(page.get_by_text("Where should the events be")).to_be_visible()
+
+- action: Click 'Next'
+  expectation: The text 'Clone Once' is visible
+  ground_truth: |
+    expect(page.get_by_text("Clone Once")).to_be_visible()
+
+- action: Click 'Clone'
+  expectation: A success message 'Welcome to your cloned event!' is shown
+  ground_truth: |
+    expect(page.locator("div").filter(has_text="Welcome to your cloned event!").nth(5)).to_be_visible()
+
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list plus the cloned event
+  ground_truth: |
+    expect(page.get_by_role("heading", name="All events")).to_be_visible()

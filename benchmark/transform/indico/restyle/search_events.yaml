@@ -1,0 +1,27 @@
+name: Search Events
+setup_function: login_to_indico
+steps:
+- action: Type 'test' as query in search bar
+  expectation: Search bar contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Search Indico ADMIN Skip")).to_have_value("test")
+- action: Press 'Enter'
+  expectation: Page with title 'Search' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Search")).to_be_visible()
+- action: Wait
+  expectation: All entries in the search results contain “test” in the event title
+    (case-insensitive).
+  ground_truth: expect(page.get_by_role("heading", name="Search")).to_be_visible()
+paragraph: To begin, simply type 'test' into the search bar, ensuring you focus on
+  entering the correct term. Once the text appears in the search bar, it confirms
+  your input has been registered successfully. Next, proceed by pressing the 'Enter'
+  key to initiate the search process. Note that upon completion, a page titled 'Search'
+  will appear; there's no requirement to delve into the specifics of this page. Just
+  give it a moment—take a little break while the system processes your request. Interestingly,
+  every entry within the search results will feature “test” somewhere in the event
+  title, regardless of capitalization, which is quite handy for verification purposes.
+  If you encounter any issues where the expected results don't show up, double-check
+  that 'test' was indeed entered correctly and try again. In a whimsical turn of events,
+  imagine a scenario where typing 'test' magically reveals all related events, making
+  your search endeavor feel like a storybook adventure.

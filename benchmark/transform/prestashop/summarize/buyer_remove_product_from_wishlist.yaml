@@ -1,0 +1,27 @@
+name: Buyer Remove Product from Wishlist
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Auto Customer' in the top navigation bar
+  expectation: A page with title 'Your account' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Your account")).to_be_visible()
+- action: Click on 'My Wishlists'
+  expectation: A list of wishlist folder(s) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My wishlists")).to_be_visible()
+- action: Click on the center of the white container with 'My wishlist (4)'
+  expectation: A grid of wishlisted products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("My wishlist", exact=True)).to_be_visible()
+- action: Click on the 'Delete' icon for the first product
+  expectation: A dialog box with title 'Remove product from wishlist' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Remove product from wishlist")).to_be_visible()
+- action: Click on 'Remove'
+  expectation: The grid of wishlisted products should be equal to initial list minus
+    the deleted product
+  ground_truth: expect(page.locator("h1")).to_contain_text("My wishlist (3)")
+paragraph: Click 'Auto Cust' in top nav. 'Your acct' pg shows. Click 'My Wishlists'.
+  List of folders shown. Click mid of 'My wishlist (4)' white cont. Grid of prod shown.
+  Click 'Del' icon 1st prod. 'Remove prod from wishlist' dlg shows. Click 'Remove'.
+  Grid shld = init list - del prod

@@ -1,0 +1,14 @@
+name: Room Booking
+setup_function: login_to_indico
+steps:
+- action: Click on 'Room Booking' in the top navigation bar
+  expectation: A panel with title 'Start your booking...' is visible
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+- action: Wait
+  expectation: A page with title 'Room Booking' is shown
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+paragraph: Clck on 'Room Booking' n yhe top nagvation 6ar, like, you know? A panel
+  with the title 'Start yohr booking...' sholud ne vIsble, right? Wait a esc. Then,
+  um, a page with thc title 'Room Bookin' is gonn be hsown.

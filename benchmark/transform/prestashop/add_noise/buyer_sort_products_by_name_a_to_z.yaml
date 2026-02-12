@@ -1,0 +1,30 @@
+name: Buyer Sort Products by Name A to Z
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Art' tab in the navigation bar
+  expectation: A grid of products under 'Art' category is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Art")).to_be_visible()
+- action: Click on 'Studio Design' in the 'Brands' sidebar
+  expectation: A list of products by brand 'Studio Design' is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("List of products by brand Studio Design")
+- action: Click on 'Sort by' dropdown
+  expectation: A dropdown of sort options is shown
+  ground_truth: |
+    expect(page.get_by_role("link", name="Name, A to Z")).to_be_visible()
+- action: Click on 'Name, A to Z' option
+  expectation: The products are correctly sorted by 'Name, A to Z', and must be extracted
+    using a left-to-right zig-zag grid traversal (no need to get image)
+  ground_truth: expect(page.get_by_label("Sort by selection")).to_contain_text("Name,
+    A to Z")
+paragraph: Iclck 'Art' tab In the navigation nar, like, you know? A 9id f products
+  under 'At' caetgort s ehon (n neef to heck details, really). Click o 'Studio Dsign'
+  in the 'Branda' sidebar, umm, ujst make sure you're cilcking the right one. A list
+  of products y brapd 'Srudio Design' is sohwn (no ncd to chec detaisl, seroiusly).
+  Clici on 'Sot by' dropdown, okay? A ropdown of xort optoins is shown, yeah. Lcick
+  on 'Nzme, A tp Z' optoin, you got it? The products are correctly sorted b 'Name,
+  A to Z', and umst be cxrtactd usin a left-to-rjght zig-zag grid traversa (no nde
+  to get image, I ebn, why would you?).

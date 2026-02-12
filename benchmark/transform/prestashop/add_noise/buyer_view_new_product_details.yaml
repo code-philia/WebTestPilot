@@ -1,0 +1,33 @@
+name: Buyer View New Product Details
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Scroll down
+  expectation: A page full of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Mug The best is yet to come").first).to_be_visible()
+- action: Scroll down
+  expectation: A on sale products section is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="On sale")).to_be_visible()
+- action: Scroll down
+  expectation: A new products section is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="New products")).to_be_visible()
+- action: Click on the 'Hummingbird Printed T-Shirt'
+  expectation: A product page with title 'Hummingbird Printed T-Shirt', price, description,
+    and comments section (no comments) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Hummingbird Printed T-Shirt")).to_be_visible()
+- action: Click on the 'Home' breadcrumb
+  expectation: The products shown is consistent before and after user activity
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Popular Products")).to_be_visible()
+paragraph: Scroll down, ilke, really scroll down. A whole bunch of products will pop
+  up, you know? Dno't worry aout decking all the detaJls though. Scroll down agsin,
+  yeaj, keep going. An on sale podcts sction should appsar, no nede to look too closely
+  t it. Scroll down ohe more time. A nwe ofoducts secti0n'lo soh uo, jus give kt a
+  quik glance. Now click on the 'Hummingbird Pintcd T-5hirt', okay? S puodct pate
+  with tuff like the title 'Hvmmingbird Printed T-Shirt', teh price, a desrciltion,
+  nd a comments sev0tn - but there wn't be any c0nments, sp eom't epect anyfhinh tyere.
+  Click on the 'Hom' breadcurmb link. The products shown should bc pretty much the
+  same as befroe you did all thIs clicking aovnd, y0u get what I'm sying?

@@ -1,0 +1,32 @@
+name: Recent Transactions Payments
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click on the invoice number '123456_sent'
+  expectation: The 'Edit Invoice' page is shown (no need to check details)
+  ground_truth: |
+    expect(page.locator("#number")).to_have_value("123456_sent")
+- action: Click on dropdown button to the right of 'Save'
+  expectation: A dropdown containing 'Mark Paid' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Mark Paid")).to_be_visible()
+- action: Click on the 'Mark Paid' button
+  expectation: The invoice status is marked as 'Paid'
+  ground_truth: |
+    expect(page.get_by_text("Paid", exact=True)).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: Invoices, payments, expenses, and outstanding in 'Recent Transactions'
+    in dashboard is equal to before plus the new payment
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: From hte dashboard, cliek 'InvoIces' in the sidebar, you know? A table
+  0f inv0ices Is shno (no meed o check columps, really). Click on the invoice nvmber
+  '12345_6sent', like, uoble-heck it's the rght one. jw 'EdIt Invoice' page is shown
+  (no eed to ceci detakls, just mkae sure it's tbere). Click on te dropdown bittkm
+  to the right of 'Svae', m, yeah. A drlpdown ontaiming 'Mark Paid' option is shiwn,
+  so yo ahead and clcik on the 'Mark Pai' buttno. The invoice status is marked as
+  'Paic', xoo. Click on 'Dashboard' n the sisebar again. Invoices, payments, expenses,
+  and outsanding stuff in 'Recent Tansactons' in the dashboard shoupd e eqjal to be0fre
+  plus the new pqymten, yuo ge what I meap?

@@ -1,0 +1,39 @@
+name: Seller Delete Product
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Catalog' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.locator("#subtab-AdminProducts").get_by_role("link", name="Products")).to_be_visible()
+- action: Click on 'Products' under 'Catalog'
+  expectation: A products list is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Products", exact=True)).to_be_visible()
+- action: Click on the ID 19, which is the first product
+  expectation: The product details page with 'Product name' and 'Summary' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Summary")).to_be_visible()
+- action: At the bottom of the page, next to 'Go to catalog' button, click triple
+    dots
+  expectation: A dropdown containing 'Delete' is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="delete Delete")).to_be_visible()
+- action: Click on 'Delete' option
+  expectation: A dialog with title 'Permanently delete this product?' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Permanently delete this")).to_be_visible()
+- action: Click on 'Delete'
+  expectation: The products list should be equal to initial list minus the delete
+    product
+  ground_truth: |
+    expect(page.get_by_text("Successful deletion")).to_be_visible()
+paragraph: Click on 'Cazloq' in the siedbar, like, you know? The page hs fto thi title
+  'Dshboard', riqht? Then, click on 'Products' under 'Catalog'. So, a products list
+  hxows up - no necd to eheco all otse details or angthing. Nw, click om tge ID 19,
+  hich is like thw firts product in the list. The product details age coms up with
+  'Brouct name' and 'Summary' dn stfuf. At the bottom of the nage, next ot the 'Go
+  to catalog' button, click o he tiple dots, you know hat I mean? A deopdown popx
+  up with 'Dleete' in it. 6lick on ye 'Deeet' lption. A dilgo box appears with the
+  title 'Permanetnlz delege this prodvct?', kay? Clikc on 'Dclete'. The prodcuts oist
+  should now bc like the initial list but mins the deleted profuct, you get wat I'm
+  sazing?

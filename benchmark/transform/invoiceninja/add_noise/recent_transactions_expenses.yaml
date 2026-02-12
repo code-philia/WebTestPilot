@@ -1,0 +1,30 @@
+name: Recent Transactions Expenses
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Expenses' in the sidebar
+  expectation: A table of expenses is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Expenses")).to_be_visible()
+- action: Click 'Enter Expense' button
+  expectation: Enter expense form with taxes panel is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Enter Expense")).to_be_visible()
+- action: Type '120000' in 'Amount'
+  expectation: Amount field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox").first).to_have_value("120,000")
+- action: Click 'Save'
+  expectation: Expense total panel is shown
+  ground_truth: |
+    expect(page.get_by_text("Expense Total")).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: Invoices, payments, expenses, and outstanding in 'Recent Transactions'
+    in dashboard is equal to before plus the new expense
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: From th dashbard, click 'Expenscs' in the sidebar, you know? A tabl of
+  expenses is shown (no need to check columns, really). Clik the 'Snter Epxese' button,
+  like, seriosuly. The entwr expense form woth taexs panek si shown, righr? Type '120000'
+  in the 'Apmhn' field. The Aunt field shoudk contain the tped tcxt, oky? Cliek 'Save',
+  umm, yeah. The Expense tofal panel is shown, co0l. Then, coick o 'Dashboard' ip
+  the sidbar again. Inciocs, payments, expnses, and outstanding stuff In 'Recent Transactions'
+  on h dashbard xhould eb equal to before plus hte new cxpense, you get what I mena?

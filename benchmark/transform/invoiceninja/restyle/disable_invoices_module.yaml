@@ -1,0 +1,56 @@
+name: Disable Invoices Module
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' in top bar is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Enabled Modules' tab
+  expectation: Enabled Modules section with toggle buttons is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Enabled Modules")).to_be_visible()
+- action: Click on the first and second toggle buttons ('Invoices', 'Recurring Invoices')
+    in 'Enabled Modules'
+  expectation: Both 'Invoices' and 'Recurring Invoices' toggle button are untoggled
+  ground_truth: |
+    def expect_switch(label_text, expected_state: bool):
+        dt = page.locator(f"dt:has-text('{label_text}')")
+        button = dt.locator("xpath=following-sibling::dd//button[@role='switch']")
+        expect(button).to_have_attribute("aria-checked", str(expected_state).lower())
+
+    expect_switch("Invoices", False)
+    expect_switch("Recurring Invoices", False)
+- action: Click on 'Save' button
+  expectation: The 'Invoices' and 'Recurring Invoices' options are no longer in the
+    sidebar
+  ground_truth: |
+    [
+      expect(page.get_by_role("link", name="Invoices", exact=True)).not_to_be_visible(),
+      expect(page.get_by_role("link", name="Recurring Invoices")).not_to_be_visible()
+    ]
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Upcoming Invoices', 'Past Due Invoices', and 'Upcoming Recurring
+    Invoices' are no longer visible in the dashboard
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: To begin your journey through the system's interface, start by navigating
+  to the dashboard and tapping the company logo nestled at the top left corner. Next,
+  you will encounter a dropdown menu, which magically reveals an 'Account Management'
+  option for your selection. For those seeking precise instructions, simply click
+  on the 'Account Management' option to proceed. Understand that upon successful navigation,
+  a page titled 'Account Management' will elegantly appear in the top bar, guiding
+  you further. Now, direct your attention to the 'Enabled Modules' tab and give it
+  a gentle click. As if by some digital alchemy, the Enabled Modules section materializes
+  before your eyes, complete with toggle buttons. If you're looking to troubleshoot
+  any issues, ensure you click on the first and second toggle buttons, labeled 'Invoices'
+  and 'Recurring Invoices', within the 'Enabled Modules' area. Suddenly, both 'Invoices'
+  and 'Recurring Invoices' toggle buttons will be untoggled, as if they've been set
+  free from their constraints. With a sense of finality, press the 'Save' button to
+  cement your changes. Presto! The 'Invoices' and 'Recurring Invoices' options vanish
+  from the sidebar like ghosts in the night. Feeling adventurous? Click on 'Dashboard'
+  in the sidebar to see what unfolds. And there you have it, the 'Upcoming Invoices',
+  'Past Due Invoices', and 'Upcoming Recurring Invoices' sections have disappeared
+  from the dashboard, leaving behind a cleaner view.

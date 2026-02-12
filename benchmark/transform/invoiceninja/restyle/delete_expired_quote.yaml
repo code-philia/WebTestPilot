@@ -1,0 +1,48 @@
+name: Delete Expired Quote
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the 'Status' dropdown
+  expectation: A dropdown containing 'Expired' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Expired")).to_be_visible()
+- action: Click on the 'Expired' option
+  expectation: The 'Status' field contains 'Expired' tag
+  ground_truth: |
+    expect(page.get_by_role("option", name="Expired")).not_to_be_visible()
+- action: Check the checkbox of quote number '123456_expired' in the table
+  expectation: The checkbox becomes checked, 'Actions' dropdown button becomes enabled
+  ground_truth: |
+    expect(page.get_by_role("button", name="Actions").first).to_be_enabled()
+- action: Click on the 'Actions' dropdown button
+  expectation: A dropdown containing 'Delete' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Delete")).to_be_visible()
+- action: Click on the 'Delete' button
+  expectation: The quote is no longer present
+  ground_truth: |
+    expect(page.get_by_role("link", name="123456_expired")).not_to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Expired Quotes' in dashboard should equal to previous list minus
+    the deleted quote
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: 'To begin your journey through the system''s interface, you''ll want to
+  navigate from the dashboard and select ''Quotes'' nestled within the sidebar menu.
+  Next up, you''re instructed to interact with the ''Status'' dropdown, ensuring it
+  reveals its contents including the ''Expired'' option for your selection. For those
+  seeking technical details, a dropdown menu appears upon interaction, featuring an
+  ''Expired'' choice among its options. Imagine now, the ''Status'' field magically
+  transforms to display an ''Expired'' tag, signifying a change in state. In a twist
+  of events, our protagonist, the user, must locate and check the checkbox beside
+  the enigmatic quote numbered ''123456_expired'', which triggers a cascade of effects.
+  Suddenly, as if by magic, the checkbox is marked, and the ''Actions'' dropdown button
+  springs to life, ready for engagement. With a sense of purpose, the user clicks
+  the ''Actions'' dropdown, unveiling a hidden world where the ''Delete'' option awaits.
+  Troubleshooting tip: If the ''Delete'' button seems unresponsive, ensure all preceding
+  steps were followed accurately. Poof! The quote vanishes into thin air, leaving
+  no trace behind. Lastly, venture back to the ''Dashboard'' via the sidebar, a familiar
+  path well-trodden. Here, the ''Expired Quotes'' section should reflect the updated
+  count, mirroring the previous list but with one less entry due to the recent deletion.'

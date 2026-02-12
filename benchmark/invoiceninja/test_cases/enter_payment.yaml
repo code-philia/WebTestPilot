@@ -1,0 +1,42 @@
+name: Enter Payment
+setup_function: login_to_invoiceninja
+steps:
+- action: Click 'Payments' in the sidebar
+  expectation: A table of payments is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payments")).to_be_visible()
+
+- action: Click 'Enter Payment'
+  expectation: A form with title 'Enter Payment' is shown (no need to check fields)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Create Payment")).to_be_visible()
+
+- action: Click 'company_name' in client dropdown
+  expectation: Client field contains clicked option
+  ground_truth: |
+    expect(page.locator("form")).to_match_aria_snapshot("- term: Client\n- definition:\n  - combobox: company_name\n  - button")
+
+- action: Type '60000' in 'Amount Received'
+  expectation: Amount received field contained typed value
+  ground_truth: |
+    expect(page.get_by_role("textbox").first).to_have_value("60,000")
+
+- action: Scroll down
+  expectation: The 'Payment Type' field with 'Select...' placeholder is present
+  ground_truth: |
+    expect(page.get_by_text("Payment Type")).to_be_visible()
+
+- action: Click on 'Payment Type' dropdown field
+  expectation: A list of payment types is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="American Express")).to_be_visible()
+
+- action: Select 'American Express' as payment type
+  expectation: Payment type field contains selected option
+  ground_truth: |
+    expect(page.locator("form")).to_contain_text("American Express")
+
+- action: Click 'Save'
+  expectation: The payment type should be what was selected earlier
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Edit Payment")).to_be_visible()

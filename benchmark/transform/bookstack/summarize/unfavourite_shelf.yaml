@@ -1,0 +1,44 @@
+name: Unfavourite Shelf
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on shelf title 'Shelf'
+  expectation: Page contains title 'Shelf'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelf")).to_be_visible()
+- action: Click on the Unfavourite button
+  expectation: The 'Favourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Favourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list should match the previous list with the item 'Shelf'
+    removed.
+  ground_truth: |
+    expect(page.get_by_role("main")).not_to_contain_text("Shelf")
+paragraph: Click Shelves nav -> List shown. Click Admin dd -> My Favs opt -> Fav list
+  shown. Click Shelves nav -> List shown. Click Shelf title 'Shelf' -> Page has 'Shelf'
+  title. Click Unfav btn -> Fav btn appears. Click Shelves nav -> List shown. Click
+  Admin dd -> My Favs opt -> Fav list shown w/o 'Shelf'.

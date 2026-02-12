@@ -1,0 +1,42 @@
+name: Seller Refund Order
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Orders' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+
+- action: Click on 'Orders' subsection under 'Orders'
+  expectation: A list of orders is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Orders", exact=True)).to_be_visible()
+
+- action: Click on the order ID '5' with reference 'KHWLILZLL'
+  expectation: The order details page displays the numerical subtotal as '27.30' within tolerance
+  ground_truth: |
+    expect(page.locator("body")).to_contain_text("€27.30")
+
+- action: Click on 'Awaiting bank wire payment' dropdown button
+  expectation: A dropdown containing 'Delivered' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Delivered")).to_be_visible()
+
+- action: Type 'Refunded' in the search box above dropdown
+  expectation: A dropdown containing 'Refunded' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Refunded")).to_be_visible()
+
+- action: Click on 'Refunded' option
+  expectation: The order details page displays the numerical subtotal as '27.30' within tolerance
+  ground_truth: |
+    expect(page.get_by_role("option", name="Refunded")).not_to_be_visible()
+
+- action: Click on 'Update status' button
+  expectation: The order details page displays the numerical subtotal as '27.30' within tolerance
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Refunded")).to_be_visible()
+
+- action: Wait
+  expectation: All status records on the page align with the update
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Refunded")).to_be_visible()

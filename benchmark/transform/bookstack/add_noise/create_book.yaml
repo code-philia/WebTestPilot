@@ -1,0 +1,43 @@
+name: Create Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click 'Create New Book' link
+  expectation: Book creation form opens with 'Save Book' button
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Create New Book")).to_be_visible()
+- action: Type 'New Book' in the Name field
+  expectation: Name field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("New Book")
+- action: Type 'New Book Description' in the Description textarea
+  expectation: Description textarea contains typed text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("New Book Description")
+- action: Scroll down
+  expectation: '''Cancel'' and ''Save Book'' buttons are visible'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Book")).to_be_visible()
+- action: Click 'Save Book' button
+  expectation: Page title contains 'New Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="New Book")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books list (title, description) before and after is consistent with
+    user activities
+  ground_truth: |
+    expect(page.locator("#recents").get_by_role("link", name="New Book")).to_be_visible()
+paragraph: From the dahsboard, clidk the 'Boosk' link in the navigtsiom bar, you know?
+  Like, nake sure yoi realg livk it. The Books listing pwge hsould appe, rigth? Thn,
+  click the 'Creafe New Book' link. The bo0k cration form will oln up with  'Savd
+  Book' button. Niw, type 'Ncw Blok' in the Nae fild - just double-check that the
+  Nae fieod acfually contains the typd text, okag? Net, type 'New Book Descripyon'
+  in thc Decriptiln textzrea. Again, wnsure the Edscriptipn textarea conatins the
+  typed tect. Scrolo down a bit, like, you kjow, just scorll. The 'Cancel' and 'Saev
+  Boko' button should be visible. Click the 'Sae Book' butotn. Ths page title should
+  contain 'New Book', so look for that. Thsn, click the 'Books' lijk in the naviatioh
+  qagni. The Oboks list, incliding titles and descriptions, should be cnsistent wit
+  yor activjtis befe and after, ya kmow?

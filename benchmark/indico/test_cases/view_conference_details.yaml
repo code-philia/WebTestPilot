@@ -1,0 +1,12 @@
+name: View Conference Details
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Conference 1'
+  expectation: The details of the conference (date, venue) is shown
+  ground_truth: |
+    expect(page.locator("#main-content").get_by_text("Registration", exact=True)).to_be_visible()
+
+- action: Click on the 'Home' icon
+  expectation: The event titles (normalized and without newlines) in 'All Events' (past, present, and future) are currently exactly the same as they were initially
+  ground_truth: |
+    expect(page.get_by_role("heading", name="All events")).to_be_visible()

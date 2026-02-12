@@ -1,0 +1,53 @@
+name: Favourite Chapter
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+
+- action: Click on book title 'Book2'
+  expectation: Page contains title 'Book2'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+
+- action: Click on chapter title 'Chapter 1'
+  expectation: Page contains title 'Chapter 1'
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("Chapter 1")
+
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one newly favourited item, 'Chapter 1', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Chapter 1")
+

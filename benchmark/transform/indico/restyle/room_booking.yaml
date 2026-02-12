@@ -1,0 +1,19 @@
+name: Room Booking
+setup_function: login_to_indico
+steps:
+- action: Click on 'Room Booking' in the top navigation bar
+  expectation: A panel with title 'Start your booking...' is visible
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+- action: Wait
+  expectation: A page with title 'Room Booking' is shown
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+paragraph: To proceed, you should click on 'Room Booking' located in the top navigation
+  bar. Once clicked, a panel will appear; it's titled 'Start your booking...', indicating
+  the next steps for users. If you're wondering what comes next, just wait a moment
+  as the system processes your request. Technically speaking, after the waiting period,
+  a new page will be displayed, featuring the title 'Room Booking'. Imagine you're
+  on an adventure, and suddenly, like magic, the 'Room Booking' page appears before
+  your eyes. In case you encounter any issues, ensure that you've followed these steps
+  correctly and that your internet connection is stable.

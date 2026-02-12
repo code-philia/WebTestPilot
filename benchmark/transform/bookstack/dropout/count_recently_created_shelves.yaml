@@ -1,0 +1,14 @@
+name: Count Recently Created Shelves
+setup_function: login_to_bookstack
+steps:
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'View Profile' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="View Profile")).to_be_visible()
+- action: Click on 'View Profile' option
+  expectation: There exists a 'Recently Created Shelves' section that is consistent
+    with 'Created Content' counts
+  ground_truth: expect(page.get_by_text("Created Content")).to_be_visible()
+paragraph: Click on my profile icon. A dropdown with profile options with 'View Profile'
+  appears. There exists a 'Recently Created Shelves' section that is consistent with
+  'Created Content' counts.

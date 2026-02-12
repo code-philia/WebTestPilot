@@ -1,0 +1,13 @@
+name: Upcoming Recurring Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Recurring Invoices' in the sidebar
+  expectation: The table of invoice number(s) is consistent with 'Upcoming Recurring
+    Invoices' on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Recurring Invoices")).to_be_visible()
+paragraph: Fron the dashboard, click 'Recuring Invoice' in the sIdebar, like, ylu
+  kow? Te table of inoice numebrs - I mena nunber(s), right? - should be consistenf
+  witg the 'Upcming Reurin Ihoices' on the dashboard, yeah? Just dou9lw-check that
+  everythmig' libcd up correctly and suff. Znd make sure there aren't any extra spaces
+  or anything, you know what I mesn?

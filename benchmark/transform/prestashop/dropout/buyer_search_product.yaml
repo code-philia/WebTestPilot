@@ -1,0 +1,12 @@
+name: Buyer Search Product
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Type 'Mug' in 'Search our catalog' search box
+  expectation: A list of search suggestions in a dropdown is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Search")).to_have_value("Mug")
+- action: Press 'Enter'
+  expectation: Search results contains search query as substring (case-insensitive)
+  ground_truth: expect(page.get_by_role("heading", name="Search results")).to_be_visible()
+paragraph: Type 'Mug' in 'Search our catalog' search box. Press 'Enter'. Search results
+  contains search query as substring (case-insensitive).

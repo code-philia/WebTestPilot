@@ -1,0 +1,18 @@
+name: Upcoming Recurring Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Recurring Invoices' in the sidebar
+  expectation: The table of invoice number(s) is consistent with 'Upcoming Recurring
+    Invoices' on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Recurring Invoices")).to_be_visible()
+paragraph: To access the recurring invoices, simply tap on 'Recurring Invoices' from
+  your dashboard's sidebar menu. Note that the array of invoice numbers you'll encounter
+  should mirror those listed under 'Upcoming Recurring Invoices' on your main dashboard
+  screen. For technical accuracy, ensure the data set in the table corresponds precisely
+  with the entries labeled 'Upcoming Recurring Invoices'. If you find discrepancies
+  between the invoice numbers in the table and those on the dashboard, refer to our
+  troubleshooting guide for common issues. Once upon a time, a user navigated through
+  their dashboard and was delighted to see the invoice numbers align perfectly with
+  the upcoming list. Hey there! Just wanted to drop a quick reminder to double-check
+  that all your invoice numbers are matching up as expected.

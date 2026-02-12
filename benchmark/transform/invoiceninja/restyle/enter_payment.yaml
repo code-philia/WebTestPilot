@@ -1,0 +1,53 @@
+name: Enter Payment
+setup_function: login_to_invoiceninja
+steps:
+- action: Click 'Payments' in the sidebar
+  expectation: A table of payments is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payments")).to_be_visible()
+- action: Click 'Enter Payment'
+  expectation: A form with title 'Enter Payment' is shown (no need to check fields)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Create Payment")).to_be_visible()
+- action: Click 'company_name' in client dropdown
+  expectation: Client field contains clicked option
+  ground_truth: |
+    expect(page.locator("form")).to_match_aria_snapshot("- term: Client\n- definition:\n  - combobox: company_name\n  - button")
+- action: Type '60000' in 'Amount Received'
+  expectation: Amount received field contained typed value
+  ground_truth: |
+    expect(page.get_by_role("textbox").first).to_have_value("60,000")
+- action: Scroll down
+  expectation: The 'Payment Type' field with 'Select...' placeholder is present
+  ground_truth: |
+    expect(page.get_by_text("Payment Type")).to_be_visible()
+- action: Click on 'Payment Type' dropdown field
+  expectation: A list of payment types is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="American Express")).to_be_visible()
+- action: Select 'American Express' as payment type
+  expectation: Payment type field contains selected option
+  ground_truth: |
+    expect(page.locator("form")).to_contain_text("American Express")
+- action: Click 'Save'
+  expectation: The payment type should be what was selected earlier
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Edit Payment")).to_be_visible()
+paragraph: 'To begin, you''ll want to focus your attention on the sidebar where you
+  should click the ''Payments'' button. Next up, a table of payments will appear before
+  your eyes—don''t worry about verifying the columns just yet. For those looking for
+  step-by-step guidance, proceed to click the ''Enter Payment'' button now. Consider
+  this: when you do, a form titled ''Enter Payment'' will materialize, and there''s
+  no need to inspect the fields at this moment. If you''re having trouble locating
+  the right client, simply click on ''company_name'' within the client dropdown menu;
+  the Client field will then display the option you''ve chosen. Now, let''s get a
+  bit casual: go ahead and type ''60000'' into the ''Amount Received'' field—it''s
+  like filling out a quick note to yourself. Remember, the amount you just entered
+  should now be visible in the ''Amount Received'' field. Scroll down the page, and
+  you''ll spot the ''Payment Type'' field, which comes with a ''Select...'' placeholder,
+  waiting for your interaction. When you click on the ''Payment Type'' dropdown field,
+  a list of various payment types will unfold before you. To ensure everything is
+  set correctly, select ''American Express'' from the list as your payment type. After
+  making your selection, the Payment Type field should reflect the option you picked.
+  Finally, click the ''Save'' button, and rest assured that the payment type will
+  match the one you selected previously.'

@@ -1,0 +1,46 @@
+name: Delete Lecture
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Lecture 1'
+  expectation: The details of the lecture (lecturer, date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Lecture 1")).to_be_visible()
+- action: In the top navigation bar, click the pen icon to switch to the event's management
+    area
+  expectation: The text 'Advanced options' is visible on the left of the page
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+- action: Click on the gear icon to the right of 'Clone'
+  expectation: A dropdown containing 'Delete' action is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Delete", exact=False)).to_be_visible()
+- action: Click on 'Delete' in the dropdown
+  expectation: A delete confirmation dialog with title starting with 'You are about
+    to delete the whole event' is shown
+  ground_truth: |
+    expect(page.get_by_text("I understand what this means")).to_be_visible()
+- action: Click on 'I understand what this means. Please go ahead.' checkbox
+  expectation: Delete event button is enabled
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="I understand what this means")).to_be_checked()
+- action: Click 'Delete event'
+  expectation: After deleting an event, the remaining event titles should match the
+    initial “All Events” list with the deleted event removed; for comparison, each
+    title must be normalized by removing an optional organizer prefix followed by
+    a comma and quotation marks if present (i.e., titles may be in the form Organizer,
+    "Event" or just Event), then truncating the resulting title to the first 30 characters.
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Events")).to_be_visible()
+paragraph: Frm 'All Events', click 'Lecture 1'. The detail 0f he lectvre (pecturer,
+  dae, venue) is shown. In the otp navigatin bar, click the pen icon bo saithc to
+  the event's manasment area, you know? Ihe tect 'Avdamced opIons' is visibld on the
+  let of the page. Click n hte gear con t0 the rjght of 'Clone'.  dropdown otnaining
+  'Dwlwte' action is show, like, wow. Click on 'Delete' in e dropdown. A delte cofmirmatino
+  dialog with title starting with 'You rae about to delete the whole event' is shown.
+  Click in 'I ubderstand what thid means. Please go ahead.' checkbox. Ihe deete veent
+  button is rnabled. Click 'Delte event'. After deleting an event, the reminung event
+  tiles should match the nitial “Aol Events” pist with the releted evrnt remvled;
+  for comparison, each gitl mjst be onrmoaised by reumoing an optiona organizer prefix
+  followed by a comm nd quotation atks f present (I.e., titles maz be in the form
+  Otganizer, "Event" or juts Evnet), then truncating the resulting ttle to teh first
+  80 cysracters, okay?

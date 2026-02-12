@@ -1,0 +1,29 @@
+name: Profile Settings
+setup_function: login_to_indico
+steps:
+- action: Click on 'My profile' in top navigation bar
+  expectation: A page with title 'Dashboard' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Admin User")).to_be_visible()
+- action: Click on 'Settings' button
+  expectation: My profile settings form with 'Email address' field is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="First name *")).to_have_value("Admin")
+- action: Click on 'Preferences' in the sidebar
+  expectation: My preferences form with 'Save' button is shown
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Preferences")
+- action: Click on 'Data export' in the sidebar
+  expectation: An 'Export my data' button is shown
+  ground_truth: |
+    expect(page.locator("#data-export-container")).to_contain_text("Data export")
+- action: Click on 'Favourites' in the sidebar
+  expectation: An 'Add Indico user' button is shown
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Favorite Users")
+paragraph: Click on 'My profile' in top navigation bar. A page with title 'Dashboard'
+  is shown (no need to check details). My profile settings form with 'Email address'
+  field is shown. Click on 'Preferences' in the sidebar. My preferences form with
+  'Save' button is shown. Click on 'Data export' in the sidebar. An 'Export my data'
+  button is shown. Click on 'Favourites' in the sidebar. An 'Add Indico user' button
+  is shown.

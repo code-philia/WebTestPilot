@@ -1,0 +1,78 @@
+name: Settings
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' on topmost bar is shown (no need
+    to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Company Details' in the sidebar
+  expectation: Page with title 'Company Details' on topmost bar and 'Industry' dropdown
+    field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Company Details")).to_be_visible()
+- action: Click on 'User Details' in the sidebar
+  expectation: Page with title 'User Details' on topmost bar and 'Email Signature'
+    dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="User Details")).to_be_visible()
+- action: Click on 'Localization' in the sidebar
+  expectation: Page with title 'Localization' on topmost bar and 'First Month of the
+    Year' dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Localization")).to_be_visible()
+- action: Click on 'Payment Settings' in the sidebar
+  expectation: Page with title 'Payment Settings' on topmost bar and 'One-Page Checkout'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Online Payments")).to_be_visible()
+- action: Click on 'Product Settings' in the sidebar
+  expectation: Page with title 'Product Settings' on topmost bar and 'Convert Products'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Product Settings")).to_be_visible()
+- action: Click on 'Expense Settings' in the sidebar
+  expectation: Page with title 'Expense Settings' on topmost bar and 'Inclusive Taxes'
+    toggle button in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Expense Settings")).to_be_visible()
+- action: Click on 'Workflow Settings' in the sidebar
+  expectation: Page with title 'Workflow Settings' on topmost bar and 'Lock Invoices'
+    dropdown field in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Workflow Settings")).to_be_visible()
+- action: Click on 'Import | Export' in the sidebar
+  expectation: Page with title 'Import | Export'  on topmost bar and 'Export' section
+    in page is shown (no need to check panel titles or subtitles)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Import | Export")).to_be_visible()
+- action: Click on 'Backup | Restore' in the sidebar
+  expectation: Page with title 'Backup | Restore' on topmost bar and 'Export' button
+    in page is shown (no need to check panel titles or subtitles)
+  ground_truth: expect(page.get_by_role("heading", name="Backup | Restore")).to_be_visible()
+paragraph: From the dashboard click the company logo on the top left. A dropdown containing
+  'Account Management' option is shown. Click on 'Account Management' option. Page
+  with title 'Account Management' on topmost bar is shown (no need to check panel
+  titles or subtitles). Click on 'Company Details' in the sidebar. Click on 'User
+  Details' in the sidebar. Page with title 'User Details' on topmost bar and 'Email
+  Signature' dropdown field in page is shown (no need to check panel titles or subtitles).
+  Click on 'Localization' in the sidebar. Page with title 'Localization' on topmost
+  bar and 'First Month of the Year' dropdown field in page is shown (no need to check
+  panel titles or subtitles). Click on 'Payment Settings' in the sidebar. Page with
+  title 'Payment Settings' on topmost bar and 'One-Page Checkout' toggle button in
+  page is shown (no need to check panel titles or subtitles). Click on 'Product Settings'
+  in the sidebar. Page with title 'Product Settings' on topmost bar and 'Convert Products'
+  toggle button in page is shown (no need to check panel titles or subtitles). Click
+  on 'Expense Settings' in the sidebar. Page with title 'Expense Settings' on topmost
+  bar and 'Inclusive Taxes' toggle button in page is shown (no need to check panel
+  titles or subtitles). Click on 'Workflow Settings' in the sidebar. Page with title
+  'Workflow Settings' on topmost bar and 'Lock Invoices' dropdown field in page is
+  shown (no need to check panel titles or subtitles). Page with title 'Import | Export'  on
+  topmost bar and 'Export' section in page is shown (no need to check panel titles
+  or subtitles). Click on 'Backup | Restore' in the sidebar. Page with title 'Backup
+  | Restore' on topmost bar and 'Export' button in page is shown (no need to check
+  panel titles or subtitles).

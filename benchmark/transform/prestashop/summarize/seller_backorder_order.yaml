@@ -1,0 +1,40 @@
+name: Seller Backorder Order
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Orders' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+- action: Click on 'Orders' subsection under 'Orders'
+  expectation: A list of orders is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Orders", exact=True)).to_be_visible()
+- action: Click on the order ID '5' with reference 'KHWLILZLL'
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("body")).to_contain_text("€27.30")
+- action: Click on 'Awaiting bank wire payment' dropdown button
+  expectation: A dropdown containing 'On backorder (not paid)' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="On backorder (not paid)")).to_be_visible()
+- action: Click on 'On backorder (not paid)' option
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.get_by_role("option", name="On backorder (not paid)")).not_to_be_visible()
+- action: Click on 'Update status' button
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="On backorder (not paid)")).to_be_visible()
+- action: Wait
+  expectation: All status records on the page align with the update
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="On backorder (not paid)")).to_be_visible()
+paragraph: Click 'Orders' in sidebar. Page shows 'Dashboard'. Click 'Orders' subsec.
+  List of orders appears. Click order ID '5', ref 'KHWLILZLL'. Order details pg shows
+  subtotal '27.30' +/- tol. Click 'Awaiting bank wire payment' dropdn. 'On backorder
+  (not paid)' opt shown. Click 'On backorder (not paid)'. Subtotal still '27.30' +/-
+  tol. Click 'Update status'. Subtotal remains '27.30' +/- tol. Wait. Status recs
+  align w/ update.

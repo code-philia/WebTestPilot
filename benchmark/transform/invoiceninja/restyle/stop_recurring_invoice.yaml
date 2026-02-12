@@ -1,0 +1,36 @@
+name: Stop Recurring Invoice
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Recurring Invoices' in the sidebar
+  expectation: A table of recurring invoices is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Recurring Invoices")).to_be_visible()
+- action: Check the checkbox of recurring invoice number '123456' in the table
+  expectation: The checkbox becomes checked, 'Actions' dropdown button becomes enabled
+  ground_truth: |
+    expect(page.get_by_role("button", name="Actions").first).to_be_enabled()
+- action: Click on the 'Actions' dropdown button
+  expectation: A dropdown containing 'Stop' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Stop")).to_be_visible()
+- action: Click on the 'Stop' button
+  expectation: The status of the invoice changes to 'Paused'
+  ground_truth: |
+    expect(page.get_by_text("Paused")).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Upcoming Recurring Invoices' panel no longer contains invoices
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: 'To begin, you''ll want to navigate from your dashboard by selecting ''Recurring
+  Invoices'' located within the sidebar menu. Once selected, a comprehensive table
+  of all recurring invoices will appear before your eyes. If you''re looking for a
+  specific task, simply locate the checkbox next to the invoice numbered ''123456''
+  and give it a tap. After checking the box, you''ll notice an immediate change: the
+  ''Actions'' dropdown button will spring to life, ready for interaction. Should you
+  find yourself puzzled about what comes next, just remember to tap the ''Actions''
+  dropdown button to reveal your options. A magical dropdown will materialize, presenting
+  you with the ''Stop'' option among its choices. With a firm decision, press the
+  ''Stop'' button, and watch as the invoice''s status gracefully transitions to ''Paused''.
+  Embark on a journey back to the ''Dashboard'' by clicking its name in the sidebar,
+  like a traveler returning home. Upon arrival at the ''Dashboard'', you''ll discover
+  that the ''Upcoming Recurring Invoices'' panel has been updated; it no longer lists
+  any invoices, reflecting the changes you''ve made.'

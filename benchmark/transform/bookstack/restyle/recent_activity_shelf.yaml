@@ -1,0 +1,20 @@
+name: Recent Activity Shelf
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Shelf' link in 'Recent Activity'
+  expectation: The details of the 'Shelf' item in the current 'Recent Activity' list
+    (user, action, and timestamp) are identical to those recorded in the previous
+    dashboard's 'Recent Activity' list
+  ground_truth: expect(page.get_by_role("heading", name="Details")).to_be_visible()
+paragraph: 'To begin, navigate from the dashboard and select the ''Shelf'' link found
+  within the ''Recent Activity'' section. Note carefully: the ''Shelf'' item''s specifics—user
+  involved, action taken, and exact time stamp—in today’s ''Recent Activity'' lineup
+  should mirror what was documented in the prior dashboard''s equivalent list. If
+  you''re puzzled about discrepancies, compare the user, action, and timestamp data
+  points between the two dashboards for consistency. Once upon a time, a user noticed
+  that the ''Shelf'' activity on their dashboard matched perfectly with the historical
+  record, ensuring no data loss. Just a heads up, folks, make sure everything lines
+  up correctly when you check the ''Shelf'' details against past records! For technical
+  reference, verify that all parameters (user, action, timestamp) of the ''Shelf''
+  entry in the current ''Recent Activity'' match those from the previous dashboard''s
+  log.'

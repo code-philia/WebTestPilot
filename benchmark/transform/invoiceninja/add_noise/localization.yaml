@@ -1,0 +1,23 @@
+name: Localization
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click the company logo on the top left
+  expectation: A dropdown containing 'Account Management' option is shown
+  ground_truth: |
+    expect(page.get_by_text("Account Management")).to_be_visible()
+- action: Click on 'Account Management' option
+  expectation: Page with title 'Account Management' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Account Management")).to_be_visible()
+- action: Click on 'Localization' in the sidebar
+  expectation: The currency three-letter code and the date format (in Python strftime)
+    are consistent with the dashboard
+  ground_truth: expect(page.get_by_role("heading", name="Localization")).to_be_visible()
+paragraph: Form the dsahboard, elick tye dojmany logo op the ton ext corner, you nkoe?
+  Like, make sure zou deally click it good. A dropdown menu shupd pop up, and y's
+  ot this 'Account Managemen' option un there. So, og ahead and clikc n the 'Accout
+  Managemenr' option, okay? Then, yu'll aee a page with he title 'Account Management'.
+  Now, cpikc on 'Localziation' in the sidebwr, like wheer al the settings and stuff
+  are. The curdency three-eottdr code snd the date formt - yeah, the one in Ptyhon
+  strfime - xhuolx eb consistent with what you see on the dashboard. Jst doube-cheek
+  that everything matches up, ya know?

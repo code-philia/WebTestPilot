@@ -1,0 +1,15 @@
+name: View Lecture Details
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Lecture 2 w/ Survey'
+  expectation: The details of the lecture (lecturer, date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Lecture 2 w/ Survey")).to_be_visible()
+- action: Click on the 'Home' icon
+  expectation: The event titles (normalized and without newlines) in 'All Events'
+    (past, present, and future) are currently exactly the same as they were initially
+  ground_truth: |
+    expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: From All Evts, click 'Lect 2 w/ Survey'. Show lect det (lectr, date, venu).
+  Click Home icon. Verify all evnt ttls in All Evts (past/pres/fut) r same as init
+  (normd, no nl). Rough draft.

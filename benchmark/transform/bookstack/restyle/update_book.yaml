@@ -1,0 +1,57 @@
+name: Update Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book'
+  expectation: Page contains title 'Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book")).to_be_visible()
+- action: Click on 'Edit' link
+  expectation: Edit book form is present with 'Book' in name field
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("Book")
+- action: Replace Name field with 'Updated Book'
+  expectation: Name field contains replaced text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("Updated Book")
+- action: Replace Description field with 'Updated Book Description'
+  expectation: Description textarea contains replaced text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("Updated Book Description")
+- action: Scroll down
+  expectation: '''Cancel'' and ''Save Book'' buttons are visible'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Book")).to_be_visible()
+- action: Click 'Save Book' button
+  expectation: Page title contains 'Updated Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Updated Book")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books list before and after is consistent with user activities
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Updated Book")
+paragraph: 'To begin your journey through the digital library, you''ll want to start
+  from the dashboard where you should click the ''Books'' link nestled within the
+  navigation menu. Next up, you''re greeted by the Books listing page, a treasure
+  trove of literary delights waiting for your perusal. Now, here''s what you do: find
+  the book titled ''Book'' and give it a click, like you''re choosing a story to dive
+  into. The page that greets you proudly displays the title ''Book'', confirming you''ve
+  made the right choice. If you''re looking to make some changes, look no further
+  than the ''Edit'' link; once clicked, an edit book form magically appears, with
+  ''Book'' already filled in the name field, ready for your creative touch. Here’s
+  a tip for those who might be stuck: if you need to update the book''s name, simply
+  replace the text in the Name field with ''Updated Book'', and voila! The Name field
+  now mirrors your new creation, holding the replaced text with pride. Let your imagination
+  flow as you replace the Description field with ''Updated Book Description'', transforming
+  the old into something fresh and exciting. Scroll down the page, as if turning the
+  pages of a physical book, until you spot the ''Cancel'' and ''Save Book'' buttons,
+  standing at attention for your final decision. With a sense of accomplishment, click
+  the ''Save Book'' button, sealing your edits in digital ink. The page title now
+  proudly displays ''Updated Book'', a testament to your hard work. Embark on a new
+  adventure by clicking the ''Books'' link in the navigation once more, revisiting
+  the list of books. Finally, take a moment to appreciate the consistency between
+  the books list before and after your edits, a harmonious reflection of your user
+  activities.'

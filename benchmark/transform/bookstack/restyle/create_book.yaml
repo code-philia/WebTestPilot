@@ -1,0 +1,50 @@
+name: Create Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click 'Create New Book' link
+  expectation: Book creation form opens with 'Save Book' button
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Create New Book")).to_be_visible()
+- action: Type 'New Book' in the Name field
+  expectation: Name field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("New Book")
+- action: Type 'New Book Description' in the Description textarea
+  expectation: Description textarea contains typed text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("New Book Description")
+- action: Scroll down
+  expectation: '''Cancel'' and ''Save Book'' buttons are visible'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Book")).to_be_visible()
+- action: Click 'Save Book' button
+  expectation: Page title contains 'New Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="New Book")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books list (title, description) before and after is consistent with
+    user activities
+  ground_truth: |
+    expect(page.locator("#recents").get_by_role("link", name="New Book")).to_be_visible()
+paragraph: To begin your journey into the world of book management, start by navigating
+  to the 'Books' link from the dashboard's navigation menu. Next, you should observe
+  the Books listing page appearing before your eyes, ready for interaction. Now, proceed
+  to click on the 'Create New Book' link, which will trigger the opening of the book
+  creation form, complete with a prominent 'Save Book' button. Understand that once
+  the form is open, you must type 'New Book' into the Name field, ensuring it captures
+  your input accurately. Verify that the Name field indeed holds the text you just
+  entered, confirming its functionality. With the Name field confirmed, move on to
+  fill the Description textarea with 'New Book Description', making sure every character
+  is captured correctly. After typing, check that the Description textarea mirrors
+  the text you've just inputted, maintaining data integrity. Scroll down the page
+  to reveal more options, like a treasure hunt for the next steps. At the bottom,
+  you'll find both 'Cancel' and 'Save Book' buttons, standing out like beacons in
+  the night. Press the 'Save Book' button to solidify your creation, and watch as
+  the page title transforms to display 'New Book'. Return to the 'Books' link in the
+  navigation bar, embarking on a new quest. Finally, ensure that the Books list, showcasing
+  titles and descriptions, remains consistent with all your previous actions, like
+  a well-told story that loops back to its beginning.

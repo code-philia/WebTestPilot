@@ -1,0 +1,7 @@
+name: Recent Payments
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Payments' in the sidebar
+  expectation: The 'Completed' payment number(s) in the Payments table exactly matches the 'Completed' payments shown in the Recent Payments panel on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payments")).to_be_visible()

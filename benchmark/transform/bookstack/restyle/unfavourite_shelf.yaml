@@ -1,0 +1,59 @@
+name: Unfavourite Shelf
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on shelf title 'Shelf'
+  expectation: Page contains title 'Shelf'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelf")).to_be_visible()
+- action: Click on the Unfavourite button
+  expectation: The 'Favourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Favourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on 'Admin' profile dropdown
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list should match the previous list with the item 'Shelf'
+    removed.
+  ground_truth: |
+    expect(page.get_by_role("main")).not_to_contain_text("Shelf")
+paragraph: To begin your journey through the interface, you'll want to click the 'Shelves'
+  link found within the navigation bar. Next up, you're presented with the shelves
+  list, a comprehensive display of all available shelves. For those seeking detailed
+  instructions, proceed by clicking on the 'Admin' profile dropdown, ensuring you
+  access the correct user settings. Understandably, a dropdown menu will emerge, showcasing
+  various profile options including the coveted 'My Favourites' choice. Once 'My Favourites'
+  is selected, the system reveals the personalized favourites list, tailored just
+  for you. Now, let's return to the beginning; click the 'Shelves' link in the navigation
+  once more. As expected, the shelves list reappears, ready for further exploration.
+  If you encounter any issues, try clicking on the shelf titled 'Shelf', which should
+  lead you to a page where the title 'Shelf' is clearly visible. In an effort to streamline
+  your collection, click on the Unfavourite button associated with the item. Voila!
+  The 'Favourite' button now stands in its place, indicating a successful action.
+  To wrap things up, head back to the 'Shelves' link in the navigation bar. From there,
+  click on the 'Admin' profile dropdown again, like a familiar dance we've performed
+  before. A dropdown menu will appear, complete with profile options, among them 'My
+  Favourites'. Selecting 'My Favourites' one last time, you'll find the favourites
+  list has been updated, matching the previous version but with the 'Shelf' item neatly
+  removed.

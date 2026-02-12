@@ -1,0 +1,30 @@
+# config.yaml
+# See `baml_src/clients` for available clients
+
+parser:
+  # Semantic parsing of text descriptions into (condition, action, expectation) test steps
+  llm_client: "Local"
+
+  # Automatically infer <unknown> placeholders in parsed test steps
+  # If false, throw exception and inform user
+  infer_missing_steps: true
+
+executor:
+  llm_clients:
+    # Generates pre- and post-conditions using the assertion API
+    assertion_generation: "Local"
+
+    # Executes assertion API methods (e.g., extract() from state and element)
+    assertion_api: "Local"
+
+    # Proposes actions given a natural language action description
+    action_proposer: "Local"
+
+    # Locates UI elements (x, y) from a UI description
+    ui_locator: "GUI_Grounding_Model"
+
+    # For tracking same logical pages across states
+    page_reidentification: "Local"
+
+  # How many times in total to try post-condition generation.
+  max_tries: 1

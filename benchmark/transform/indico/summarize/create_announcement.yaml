@@ -1,0 +1,35 @@
+name: Create Announcement
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'Homepage' in the sidebar
+  expectation: The 'Homepage' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Announcement")).to_be_visible()
+- action: Click on 'Announcement' under 'Homepage' in the sidebar
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Announcement")).to_be_visible()
+- action: Click on the 'Enabled' toggle button
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="Enabled")).to_be_checked()
+- action: Type 'Big Announcement' in 'Message' field
+  expectation: The 'Message' field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).to_have_value("Big Announcement")
+- action: Click 'Save'
+  expectation: A 'Settings have been saved' success message is shown
+  ground_truth: |
+    expect(page.get_by_text("Settings have been saved")).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: Click Admin in top nav. Msg 'New Indico ver...' shows. Click Homepage in
+  sidebar. Sec expands. Click Announce under Homepage. Page w/ title 'Announce' shows.
+  Click 'Enabled' toggle. Page w/ title 'Announce' shows again. Type 'Big Announce'
+  in Msg fld. Text appears in fld. Click Save. 'Settings saved' msg shows. Click Home
+  in top nav. Events list = initial list.

@@ -1,0 +1,38 @@
+name: Create Invoice
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click 'New Invoice'
+  expectation: A 'New Invoice' form with 'Create' tab is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="New Invoice")).to_be_visible()
+- action: Click 'company_name' in 'Client' dropdown
+  expectation: The contacts for client is shown
+  ground_truth: |
+    expect(page.get_by_text("Contacts")).to_be_visible()
+- action: Click '+ Add Item'
+  expectation: A line with quantity 1 is present
+  ground_truth: |
+    expect(page.get_by_role("cell").first).to_be_visible()
+- action: Type '200' in 'Unit Cost'
+  expectation: The unit cost is updated as 200
+  ground_truth: |
+    expect(page.locator('input[value="200"]')).to_be_visible()
+- action: Click 'Save'
+  expectation: Saved invoice has subtotal of 200
+  ground_truth: |
+    expect(page.get_by_text("Draft")).to_be_visible()
+paragraph: 'From the dashboard, you''ll find the ''Invoices'' option nestled within
+  the sidebar—give it a click. Next up, proceed to tap on ''New Invoice'', ensuring
+  the ''New Invoice'' form pops up with the ''Create'' tab front and center. For your
+  reference, selecting ''company_name'' from the ''Client'' dropdown will reveal the
+  associated contacts list. If you''re puzzled about what''s next, fear not; simply
+  click the ''+ Add Item'' button to see a line item with a default quantity of 1
+  appear like magic. Let me tell you a little story: once upon a time, someone typed
+  ''200'' into the ''Unit Cost'' field, and voila! The unit cost was instantly updated
+  to 200. Now, for those who prefer a more hands-on approach, go ahead and click ''Save''
+  to finalize everything. Lastly, in plain terms, the saved invoice should reflect
+  a subtotal of 200, confirming all entries were successful.'

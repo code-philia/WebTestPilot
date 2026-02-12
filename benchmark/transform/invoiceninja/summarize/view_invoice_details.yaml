@@ -1,0 +1,13 @@
+name: View Invoice Details
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click the invoice number '123456'
+  expectation: The invoiced products calculation is consistent with subtotal
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Edit Invoice")).to_be_visible()
+paragraph: 'Dshbrd -> click ''Invs'' in sbdr. Tbl of invs shwn. Click inv # ''123456''.
+  Chk if prod calc matches subtl.'

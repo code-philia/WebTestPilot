@@ -1,0 +1,54 @@
+name: Fill Out Survey
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Lecture 2 w/ Survey'
+  expectation: The details of the lecture (lecturer, date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Lecture 2 w/ Survey")).to_be_visible()
+- action: Click on 'Fill out' survey
+  expectation: Survey form with number, multi-choice, single-choice, text, yes/no,
+    multiline text questions is shown
+  ground_truth: |
+    expect(page.get_by_role("link", name="Lecture 2 w/ Survey")).to_be_visible()
+- action: Fill in '33' in 'Number Question' field
+  expectation: Number Question field contained filled value
+  ground_truth: |
+    expect(page.get_by_role("spinbutton", name="Number Question")).to_have_value("33")
+- action: Select Options 1-3 in Multiple Choice Question
+  expectation: Selected options are checked
+  ground_truth: |
+    [expect(page.get_by_role("checkbox", name=n)).to_be_checked() for n in ["Option 1", "Option 2", "Option 3"]]
+- action: Scroll down
+  expectation: The 'Submit' button is visible
+  ground_truth: |
+    expect(page.get_by_role("button", name="Submit")).to_be_visible()
+- action: Select 'Yes' in 'Yes/No Question'
+  expectation: The 'Submit' button is visible
+  ground_truth: |
+    expect(page.locator("#question_6-0")).to_be_checked()
+- action: Type 'The quick brown fox jumps over the lazy dog' in 'Multiline Text Question'
+    field
+  expectation: The 'Multiline Text Question' textarea contains text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Multiline Text Question")).to_have_value("The quick brown fox jumps over the lazy dog")
+- action: Click 'Submit'
+  expectation: A message indicating 'The survey has been submitted' is visible
+  ground_truth: expect(page.get_by_role("link", name="Back to the event")).to_be_visible()
+paragraph: 'To begin your journey through the lecture series, navigate to ''All Events''
+  and select ''Lecture 2 w/ Survey'', embarking on an educational adventure. Next,
+  you must follow these instructions carefully: after clicking ''Fill out'', ensure
+  the survey form appears before you, brimming with various question types like numbers,
+  multiple choices, and text fields. For those seeking technical guidance, note that
+  the ''Number Question'' field should be populated with the digit ''33'', a step
+  crucial for data validation processes. Imagine a scenario where you''re troubleshooting
+  an issue; you''d check if the ''Number Question'' field indeed holds the entered
+  value, confirming the system''s accuracy. Once you''ve selected Options 1 through
+  3 in the Multiple Choice Question, these selections will be visibly checked, marking
+  your progress. As the narrative unfolds, scroll down the page, revealing the ''Submit''
+  button like a hidden treasure at the end of a quest. In a straightforward yes-or-no
+  affair, choose ''Yes'' for the ''Yes/No Question'', making sure the ''Submit'' button
+  remains in sight, a beacon guiding you forward. With a casual flair, type ''The
+  quick brown fox jumps over the lazy dog'' into the ''Multiline Text Question'' field,
+  unleashing your creativity within the confines of the text area. Finally, upon clicking
+  ''Submit'', a confirmation message will appear, stating ''The survey has been submitted'',
+  bringing closure to this interactive experience.'

@@ -1,0 +1,22 @@
+This is for an agent which is part of a multi-agent system. Its role will be to orchestrate workers, with the overall objective of performing manual test cases, written in natural language, on web applications. 
+The orchestrator receive the test case in its entirety, the test step we are at, potentially the list of accomplished test steps and history of browser commands.
+A test step consists of an action part, and optionally an assertion / expected result part. 
+The role of the orchestrator is to analyze the test step, consider what's been done before, and then convert the test step into a sequence of Act / Assert statements. Act and Assert take a string as parameter. They are supposed to be rather atomic. 
+Example:
+If the step step is action: select english as preferred language and login as user/pass123 / assertion: a dashboard loaded with a menu bar on the left, and indication that we are logged in as admin.
+The orchestrator should convert to the following list:
+assert("we are on a login page, an input allow users to set their language")
+act("set 'english' as preferred language")
+act("type 'user' in the username field")
+act("type 'pass123' in the password field")
+act("click the submit button")
+assert("a dashboard appeared")
+assert("user logged in as admin")
+
+The orchestrator should also be aware whether the sequence it proposed is "full", meaning that if achieved, the test step is considered done, or if it is "partial", meaning it is anticipated that the current available information does not allow for complete planning, because a UI change or a complete change page will occurs and what will appear next is unknown. 
+
+The act and assert are performed by worker agents. They return their actions to the orchestrator, and whether they were able to complete their act/assert task.
+
+If the sequence was "full" and was successfully completed, the orchestrator should consider the test step as DONE.
+If the sequence was "partial" and was successfully completed, the orchestrator issues a new act/assert sequence to pursue the test step.
+If one of the worker agent failed, the orchestrator should consider the test step as FAIL.

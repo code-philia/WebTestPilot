@@ -1,0 +1,50 @@
+name: Create Sort Rule
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Settings' in navigation
+  expectation: '''Features & Security'' is active in sidebar.'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Features & Security")).to_be_visible()
+- action: Click on 'Sorting' in sidebar
+  expectation: Sidebar has 'Sorting' as active. Page with title 'Sorting' and 'Create
+    Sort Rule' button appear
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Sorting")).to_be_visible()
+- action: Click on 'Create Sort Rule' button
+  expectation: Page with title 'Create Sort Rule' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Create Sort Rule")).to_be_visible()
+- action: Type 'New Sort Rule' in sort rule name input field
+  expectation: Input field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("New Sort Rule")
+- action: Scroll down
+  expectation: A 'Save' button appears
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save")).to_be_visible()
+- action: Click on the plus button for 'Name - Alphabetical (Asc)'
+  expectation: Sort operation moved to 'Configured Operations' list
+  ground_truth: |
+    expect(page.get_by_label("Configured Operations").get_by_role("listitem")).to_contain_text("Name - Alphabetical (Asc)")
+- action: Click 'Save'
+  expectation: Sort rules list before and after is consistent with user's newly created
+    sort rule
+  ground_truth: expect(page.get_by_role("link", name="New Sort Rule")).to_be_visible()
+paragraph: To begin, you'll want to navigate from the dashboard by clicking 'Settings'
+  in the navigation menu, ensuring you're heading into the right section. Next up,
+  make sure 'Features & Security' is highlighted in your sidebar; it’s crucial for
+  accessing further options. Now, proceed to click on 'Sorting' within the sidebar,
+  as this will lead you to the next step in our process. Note that once you've clicked,
+  'Sorting' should be visibly active in the sidebar, confirming your selection. Suddenly,
+  a page titled 'Sorting' emerges, accompanied by a 'Create Sort Rule' button, ready
+  for interaction. After locating the 'Create Sort Rule' button, give it a click to
+  reveal the subsequent page. Here we are, on the 'Create Sort Rule' page, where you
+  need to enter 'New Sort Rule' into the designated input field for naming your sort
+  rule. Once the text is entered, the input field will display 'New Sort Rule', confirming
+  your action. Scroll down the page until you spot the 'Save' button, which is your
+  next target. Don’t forget to click the plus button beside 'Name - Alphabetical (Asc)'
+  to add this sorting operation to your configuration. The sort operation you just
+  selected should now gracefully move over to the 'Configured Operations' list, indicating
+  progress. Finally, press 'Save' to lock in your changes. To wrap things up, compare
+  the sort rules list before and after your adjustments, ensuring consistency with
+  the new rule you’ve just added.

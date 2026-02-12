@@ -1,0 +1,40 @@
+name: Convert Quote to Invoice
+setup_function: login_to_invoiceninja
+steps:
+- action: Click 'Invoices' in the sidebar
+  expectation: A table of invoices is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click 'Quotes' in the sidebar
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the 'Status' dropdown
+  expectation: A dropdown containing 'Sent' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Sent")).to_be_visible()
+- action: Click on the 'Sent' option
+  expectation: The 'Sent' status tag is visible
+  ground_truth: |
+    expect(page.get_by_role("option", name="Sent")).not_to_be_visible()
+- action: Click on the "Actions" button for quote number '123456' in the table
+  expectation: A dropdown containing 'Convert to Invoice' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Convert to Invoice")).to_be_visible()
+- action: Click on the 'Convert to Invoice' button
+  expectation: The 'Convert to Invoice' button is not visible and its dropdown is
+    no longer expanded
+  ground_truth: |
+    expect(page.get_by_text("Converted").first).to_be_visible()
+- action: Click 'Invoices' in the sidebar
+  expectation: The invoice table should contain all previous invoices with the same
+    invoice number, client, amount, and date, plus one new invoice corresponding to
+    the converted quote, which must match on client and amount (other fields may differ),
+    so that the total row count is exactly one more than before
+  ground_truth: expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: 'Click ''Invs'' in sb. Table of invs shown. No col chk. Click ''Qts'' in
+  sb. Qt table shown. No col chk. Click ''Stat'' dd. ''Sent'' opt shown. Click ''Sent''.
+  ''Sent'' tag vis. Click ''Acts'' btn for qt #123456. ''Conv to Inv'' opt shown.
+  Click ''Conv to Inv''. ''Conv to Inv'' btn & dd gone. Click ''Invs'' in sb. Inv
+  tbl shld have prev invs + 1 new inv from conv qt. New inv matches client & amt.
+  Row cnt = prev + 1.'

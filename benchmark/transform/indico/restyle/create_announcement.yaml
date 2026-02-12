@@ -1,0 +1,51 @@
+name: Create Announcement
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'Homepage' in the sidebar
+  expectation: The 'Homepage' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Announcement")).to_be_visible()
+- action: Click on 'Announcement' under 'Homepage' in the sidebar
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Announcement")).to_be_visible()
+- action: Click on the 'Enabled' toggle button
+  expectation: A page with title 'Announcement' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="Enabled")).to_be_checked()
+- action: Type 'Big Announcement' in 'Message' field
+  expectation: The 'Message' field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).to_have_value("Big Announcement")
+- action: Click 'Save'
+  expectation: A 'Settings have been saved' success message is shown
+  ground_truth: |
+    expect(page.get_by_text("Settings have been saved")).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: 'To begin, you''ll want to focus your attention on the top navigation bar
+  where you should locate and click on the ''Administration'' option. A notification
+  will appear, stating ''A new Indico version...'', which indicates that the system
+  is up-to-date. Next, follow these instructions carefully: navigate to the sidebar
+  and select ''Homepage''. For those seeking a technical understanding, it''s worth
+  noting that upon clicking ''Homepage'', the corresponding section will expand automatically,
+  eliminating the need for further verification of its contents. Imagine a scenario
+  where you''re exploring the features of this platform; you would then proceed to
+  click on ''Announcement'' listed under ''Homepage'' within the sidebar. Once you''ve
+  navigated there, you''ll encounter a page titled ''Announcement''; feel free to
+  bypass any detailed examination at this stage. Now, if you''re looking to enable
+  a feature, simply interact with the ''Enabled'' toggle button available on the screen.
+  After enabling, you might notice that the page refreshes, still displaying the title
+  ''Announcement'', confirming the action was successful. Let''s say you''re tasked
+  with entering an important update; type ''Big Announcement'' into the ''Message''
+  field provided. Confirm that the ''Message'' field accurately reflects the text
+  you''ve just entered, ensuring no discrepancies. To finalize your changes, hit the
+  ''Save'' button, which triggers a confirmation message: ''Settings have been saved'',
+  assuring you that everything has been updated correctly. Finally, to return to the
+  main view, click on ''Home'' located in the top navigation bar, where you should
+  observe that the list of all events remains unchanged from when you started.'

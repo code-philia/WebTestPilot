@@ -1,0 +1,58 @@
+name: Favourite Page
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book2'
+  expectation: Page contains title 'Book2'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on chapter title 'Page 1'
+  expectation: Page contains title 'Page 1'
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page 1")
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one
+    newly favourited item, 'Page 1', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Page 1")
+paragraph: 'To begin your journey through the digital library, you should first click
+  the ''Shelves'' link found within the navigation bar. Next up, the system will display
+  the shelves list for your perusal. Now, direct your attention to the profile icon
+  located at the top corner; give it a click. As expected, a dropdown menu will emerge,
+  presenting various profile options including the ''My Favourites'' choice. Proceed
+  by selecting the ''My Favourites'' option from the list. Suddenly, the screen transitions
+  to reveal the favourites list, a personal collection of your cherished items. For
+  the next step, navigate back to the main menu and click on the ''Books'' link. Magically,
+  the books listing page materializes before your eyes. Among the titles, locate and
+  click on ''Book2''. Upon arrival at the new page, you''ll find the title ''Book2''
+  prominently displayed. Keep exploring by clicking on the chapter titled ''Page 1''.
+  Behold, the page now showcases the title ''Page 1''. To add this page to your favourites,
+  simply click the Favourite button. If everything goes according to plan, the ''Unfavourite''
+  button should now be visible. Return once more to the profile icon and click it.
+  A dropdown menu reappears, offering the same profile options as before, including
+  ''My Favourites''. Select ''My Favourites'' again, and voila! The favourites list
+  has been updated, mirroring the previous version but with an exciting addition:
+  ''Page 1'' has joined the ranks as your latest favourite.'

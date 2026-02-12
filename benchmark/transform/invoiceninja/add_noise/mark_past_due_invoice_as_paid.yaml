@@ -1,0 +1,30 @@
+name: Mark Past Due Invoice as Paid
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click on the invoice number '123456_past_due'
+  expectation: The 'Edit Invoice' page is shown
+  ground_truth: |
+    expect(page.locator("#number")).to_have_value("123456_past_due")
+- action: Click on dropdown button to the right of 'Save'
+  expectation: A dropdown containing 'Mark Paid' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Mark Paid")).to_be_visible()
+- action: Click on the 'Mark Paid' button
+  expectation: The invoice status is marked as 'Paid'
+  ground_truth: |
+    expect(page.get_by_text("Paid", exact=True)).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Past Due Invoices' panel no longer contains any invoices
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: From tye adshboard, click 'Nivoices' n the issebar, yuo know? A tablc of
+  invoIces is sh0wn, like, n need to chce the columns 0r anythigj. Then, clk no the
+  Invoice bumber '128456_past_due', okay? Teh 'Edif Ijvoice' pagw should p0p up. Now,
+  clock on the rcopxown button next tl '8ave' - it's knda small so loik closely. A
+  dropdon with the 'Mak Baid' opton ppaars, so go ahead and click on the 'Mark Paid'
+  button. The nvoiee starsu gets marked as 'Paid', co! Atfer yhat, click on 'Dahboard'
+  in the sidebar again. The 'Past Due Invices' panel shouldn't have any Invoices left
+  in ig anymore.

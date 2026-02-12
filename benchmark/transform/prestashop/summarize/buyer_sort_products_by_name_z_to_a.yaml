@@ -1,0 +1,26 @@
+name: Buyer Sort Products by Name Z to A
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Art' tab in the navigation bar
+  expectation: A grid of products under 'Art' category is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Art")).to_be_visible()
+- action: Click on 'Studio Design' in the 'Brands' sidebar
+  expectation: A list of products by brand 'Studio Design' is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("List of products by brand Studio Design")
+- action: Click on 'Sort by' dropdown
+  expectation: A dropdown of sort options is shown
+  ground_truth: |
+    expect(page.get_by_role("link", name="Name, Z to A")).to_be_visible()
+- action: Click on 'Name, Z to A' option
+  expectation: The products are correctly sorted by 'Name, Z to A', and must be extracted
+    using a left-to-right zig-zag grid traversal (no need to get image)
+  ground_truth: expect(page.get_by_label("Sort by selection")).to_contain_text("Name,
+    Z to A")
+paragraph: Click Art tab -> Grid of Art prod shown. Click Studio Design in Brands
+  sidebar -> List of Studio Design prod shown. Click Sort by dropdown -> Dropdown
+  of sort opts shown. Click Name, Z to A opt -> Prod sorted Name, Z to A. Extract
+  names L-R zig-zag grid (no img needed).

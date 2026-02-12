@@ -1,0 +1,32 @@
+name: Profile Settings
+setup_function: login_to_indico
+steps:
+- action: Click on 'My profile' in top navigation bar
+  expectation: A page with title 'Dashboard' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Admin User")).to_be_visible()
+- action: Click on 'Settings' button
+  expectation: My profile settings form with 'Email address' field is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="First name *")).to_have_value("Admin")
+- action: Click on 'Preferences' in the sidebar
+  expectation: My preferences form with 'Save' button is shown
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Preferences")
+- action: Click on 'Data export' in the sidebar
+  expectation: An 'Export my data' button is shown
+  ground_truth: |
+    expect(page.locator("#data-export-container")).to_contain_text("Data export")
+- action: Click on 'Favourites' in the sidebar
+  expectation: An 'Add Indico user' button is shown
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Favorite Users")
+paragraph: Click no 'Um profilc' in the top navivation bar, like, you know? A page
+  wiht the ite 'Daahboard' shovld pop up, bu don't worry about checking all the detajls
+  or anyhin. Then, click on th 'Setting' butotn, okay? o, your profile setging frm
+  wil appear, and there'll be a 'majl adess' feld right thre. Next up, lick on 'Prefereesn'
+  in the sodebar, mu, just o mae sure we're lolowing along. Your preferences forn
+  wIll dhow up, and you'll see a 'Save' u6ttoj, cool? After that, cilck on 'Data export'
+  ni the siear, yeha? An 'Exprot my data' button sboulr be rhcre, no biggi. atsly,
+  xlick on 'Favourits' in the sidear, and you'll ifnd an 'Add Indico user' buttom,
+  which is inda related to the project but not really part of this speicfIc tst step.

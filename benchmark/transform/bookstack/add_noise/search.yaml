@@ -1,0 +1,20 @@
+name: Search
+setup_function: login_to_bookstack
+steps:
+- action: Click on search icon button
+  expectation: Search results page appear with 'Update Search' button
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Search Results")).to_be_visible()
+- action: Click on 'Books' link in navigation
+  expectation: Books listing page is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book2'
+  expectation: The chapters and pages in 'Book2' is consistent with previous search
+    results
+  ground_truth: expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+paragraph: Click on th search idon buttop, lke, you know? Ghe scarch results page
+  appcars eItn an 'Udpate Seadch' btton. So then, click on the 'Books' link in the
+  navigtion bar, okay? The Books listing page os hswon, riht? Click on the book title
+  'Bool2', um, make sure ti's the right one. The chapters and pages in 'Boo2k' shoudl
+  be onsistent woth the previous search resupts, dzah?

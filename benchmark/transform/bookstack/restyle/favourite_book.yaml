@@ -1,0 +1,61 @@
+name: Favourite Book
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book2'
+  expectation: Page contains title 'Book2'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one
+    newly favourited item, 'Book2', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Book2")
+paragraph: 'To begin your journey through the library interface, you should first
+  navigate by clicking the ''Shelves'' link found within the navigation menu. Once
+  you''ve done that, behold! The shelves list magically materializes before your eyes.
+  Next up, follow these instructions carefully: locate and click on your profile icon.
+  For those seeking detailed guidance, know that upon clicking your profile icon,
+  a dropdown menu will emerge, revealing various profile options including the coveted
+  ''My Favourites''. Imagine yourself now, reaching out to select the ''My Favourites''
+  option from this dropdown, as if choosing a treasure from a chest. Suddenly, the
+  screen refreshes, and lo and behold, the favourites list is displayed for your viewing
+  pleasure. Now, direct your attention to the navigation bar once more and click the
+  ''Books'' link, which will transport you to the Books listing page. As you arrive
+  at this new destination, click on the book titled ''Book2'', ensuring that the page
+  you land on indeed features the title ''Book2''. With the page open, find and click
+  the Favourite button, transforming it into an ''Unfavourite'' button right before
+  your eyes. Return to the navigation bar, and this time, click the ''Shelves'' link
+  again, like a seasoned traveler retracing their steps. The shelves list reappears,
+  a familiar sight to those who have been here before. Once more, interact with your
+  profile icon, and watch as the dropdown menu descends, offering the ''My Favourites''
+  option among others. Select ''My Favourites'', and you''ll see the list of your
+  cherished items, now updated with ''Book2'' joining the ranks, making sure the list
+  matches the previous one but with this single addition.'

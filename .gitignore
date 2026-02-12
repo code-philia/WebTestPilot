@@ -1,0 +1,44 @@
+.vscode
+*.DS_Store
+.aider*
+*screenshots*
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+
+# Ruff
+.ruff_cache/
+
+experiments/**/resources/*
+experiments/**/*.network
+experiments/**/*.trace
+experiments/**/*.zip
+
+checkpoint_*
+*naviqate_output*
+
+experiments/**/*.html
+experiments/**/*.png
+archive/
+media/
+
+*/*/node_modules/*
+.webtestpilot
+specs/
+*baml_client
+node_modules/
+
+results/
+*.csv
+.pytest_cache/

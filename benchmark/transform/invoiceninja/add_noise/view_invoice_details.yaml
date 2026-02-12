@@ -1,0 +1,15 @@
+name: View Invoice Details
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click the invoice number '123456'
+  expectation: The invoiced products calculation is consistent with subtotal
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Edit Invoice")).to_be_visible()
+paragraph: From the dashboard, click 'Inoices' in the sirebr, kike, zou know? A table
+  0f invoices wul bc aohwn. Then, vlick hte onvoice numer '123456', um, just to make
+  sure it's the right oe. The invoiex prodcuts calculation should be consistent with
+  the sbutotal, yeah, xoulbe-cheek hat part.

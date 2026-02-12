@@ -1,0 +1,33 @@
+name: Approve Quote
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the second row "Actions" button for quote number '123456' in the
+    table
+  expectation: A dropdown containing 'Approve' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Approve")).to_be_visible()
+- action: Click on the 'Approve' button
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Upcoming Quotes' list on the dashboard should equal the previous
+    list minus the approved quote
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: To begin your journey through the system, you'll want to focus your attention
+  on the sidebar from the dashboard, where you'll find the 'Quotes' option waiting
+  to be clicked. Next, proceed with clicking on the 'Actions' button located in the
+  second row of the table, specifically for the quote numbered '123456'. For those
+  seeking technical guidance, a dropdown menu will appear, revealing an 'Approve'
+  option among its contents. Imagine a scenario where you, the user, decide to approve
+  the quote by clicking the 'Approve' button, thus moving forward in the process.
+  Once the approval action is complete, a table of quotes reappears before your eyes,
+  but don't worry about verifying the columns at this stage. Now, let's switch gears
+  and navigate back to the 'Dashboard' via the sidebar, ensuring we're on track. Finally,
+  if everything has gone according to plan, the 'Upcoming Quotes' list on your dashboard
+  should now reflect the previous list, with the approved quote conveniently removed
+  from view.

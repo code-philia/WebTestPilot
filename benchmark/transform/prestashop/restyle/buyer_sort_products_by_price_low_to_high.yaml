@@ -1,0 +1,34 @@
+name: Buyer Sort Products by Price Low to High
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Art' tab in the navigation bar
+  expectation: A grid of products under 'Art' category is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Art")).to_be_visible()
+- action: Click on 'Studio Design' in the 'Brands' sidebar
+  expectation: A list of products by brand 'Studio Design' is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("List of products by brand Studio Design")
+- action: Click on 'Sort by' dropdown
+  expectation: A dropdown of sort options is shown
+  ground_truth: |
+    expect(page.get_by_role("link", name="Price, low to high")).to_be_visible()
+- action: Click on 'Price, low to high' option
+  expectation: The products are correctly sorted by 'Price, low to high', and must
+    be extracted using a left-to-right zig-zag grid traversal (no need to get image)
+  ground_truth: expect(page.get_by_label("Sort by selection")).to_contain_text("Price,
+    low to high")
+paragraph: To begin your artistic journey, simply click the 'Art' tab located in the
+  navigation bar. Next, you will observe a grid of products falling under the 'Art'
+  category; however, there's no requirement to delve into the specifics at this stage.
+  For those seeking precision, refer to the 'Brands' sidebar and select 'Studio Design,'
+  which will subsequently display a list of products associated with this particular
+  brand, without the necessity of examining further details. If you encounter any
+  issues while sorting, ensure you've clicked on the 'Sort by' dropdown menu to reveal
+  the available sort options. Once upon a time, a user decided to organize their collection
+  by clicking on the 'Price, low to high' option within the dropdown. In a technical
+  sense, the system should now present the products accurately sorted by price from
+  low to high, necessitating extraction via a methodical left-to-right zig-zag grid
+  traversal, though images are not required for this task.

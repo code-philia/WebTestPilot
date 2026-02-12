@@ -1,0 +1,18 @@
+name: Past Due Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: The 'Past Due' invoice number(s) is consistent with 'Past Due Invoices'
+    on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: To access the invoices, simply tap on the 'Invoices' option nestled within
+  the sidebar of your dashboard. Note that the 'Past Due' invoice numbers you encounter
+  should match those listed under 'Past Due Invoices' on your main dashboard screen.
+  For technical reference, ensure the data synchronization between the sidebar and
+  dashboard sections for 'Past Due' invoices is correctly configured. If you find
+  discrepancies, first check if all updates have been applied across both the sidebar
+  and dashboard interfaces. Once upon a time, a user navigated through their dashboard
+  and was delighted to see the 'Past Due' invoices align perfectly with the dashboard's
+  summary. Just a heads-up, folks, make sure when you're eyeballing those 'Past Due'
+  invoices, they're jiving with what the dashboard's telling you!

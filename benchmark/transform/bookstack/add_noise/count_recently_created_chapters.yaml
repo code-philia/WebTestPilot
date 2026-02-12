@@ -1,0 +1,17 @@
+name: Count Recently Created Chapters
+setup_function: login_to_bookstack
+steps:
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'View Profile' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="View Profile")).to_be_visible()
+- action: Click on 'View Profile' option
+  expectation: There exists a 'Recently Created Chapters' section that is consistent
+    with 'Created Content' counts
+  ground_truth: |
+    expect(page.get_by_text("Created Content")).to_be_visible()
+paragraph: Click on my profile icon, like, yho know? A dropdown with profile option
+  and studf will pop up, amd thre sh0uld be a 'View Profile' button there. Clikc on
+  tn 'View Prfie' otipn, okzy? Nw, there's supopsrx p be a 'Recebtly Created Chapters'
+  esction, whihc, um, shuold mtach up with hte 'Crered Content' counts, you get what
+  I mnea?

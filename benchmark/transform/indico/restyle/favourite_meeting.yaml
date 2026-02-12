@@ -1,0 +1,27 @@
+name: Favourite Meeting
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'PhD Research Group Monthly Meeting'
+  expectation: The details of the meeting (date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading")).to_contain_text("PhD Research Group Monthly Meeting")
+- action: Click 'Add event to favourites' (star) icon
+  expectation: The details of the conference (date, venue) is shown
+  ground_truth: |
+    expect(page.locator("#favorite-link > button.i-button")).to_have_attribute("title", "Delete event from favorites")
+- action: Click on the 'Home' icon
+  expectation: Only the 'Conference 1' is favourited (indicated by a star next to
+    the title or a red title text) in event list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: 'In the ''All Events'' section, you will find an entry for the ''PhD Research
+  Group Monthly Meeting''; it''s like a treasure hunt through your schedule. Next,
+  follow these steps carefully: locate and tap the ''Add event to favourites'' button,
+  which is cleverly disguised as a star icon. For those seeking technical precision,
+  the meeting details—such as the date and venue—are displayed adjacent to the event
+  name, ensuring no detail is overlooked. If you''re puzzled about why the conference
+  details are also visible, it’s simply because they share the same format for clarity
+  and ease of access. Once you''ve added the meeting to your favourites, narrate your
+  journey back to the beginning by clicking the ''Home'' icon, as if retracing your
+  steps in a story. In a casual glance at your event list, you''ll notice ''Conference
+  1'' proudly standing out with either a star badge or a bold red title, marking its
+  special status among the others.'

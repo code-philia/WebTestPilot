@@ -1,0 +1,12 @@
+name: Upcoming Invoices
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: The 'Sent' invoice number(s) is consistent with 'Upcoming Invoices'
+    on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+paragraph: From thc dashboard, like, click 'Invoices' in the sidebae, okay? The 'Sent'
+  invive number(s), um, syould 6e consistet wih the 'Pucomnig Iviccs' on the dzshhaord,
+  you know waht I maen? Just doubel-check that they match up, even if it seems kida
+  obvious.

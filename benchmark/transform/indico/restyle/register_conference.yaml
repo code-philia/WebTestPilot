@@ -1,0 +1,54 @@
+name: Register Conference
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Conference 1'
+  expectation: The details of the conference (date, venue) is shown
+  ground_truth: |
+    expect(page.locator("#main-content").get_by_text("Registration", exact=True)).to_be_visible()
+- action: Click on 'Participant List'
+  expectation: The list of participants is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Participant List")).to_be_visible()
+- action: Click on 'Registration'
+  expectation: A registration form with 'Register' button is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Registration", exact=True)).to_be_visible()
+- action: Scroll down
+  expectation: A field titled 'Participant list' with 'Select a choice' dropdown is
+    shown
+  ground_truth: |
+    expect(page.get_by_text("Participant list", exact=True)).to_be_visible()
+- action: Click on 'Select a choice'
+  expectation: A dropdown for displaying participation is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Display my participation to")).to_be_visible()
+- action: Click on 'Display my participation to everyone who can see this event'
+  expectation: Participant list dropdown contains selected option
+  ground_truth: |
+    expect(page.locator("#input-consent-to-publish")).to_contain_text("Display my participation to everyone who can see this event")
+- action: Click on 'Register'
+  expectation: A success message 'Your registration has been completed' is shown
+  ground_truth: |
+    expect(page.locator("#confSectionsBox")).to_contain_text("Your registration has been completed")
+- action: Click on 'Participant List'
+  expectation: The list of participants should be equal to initial list plus the new
+    registration
+  ground_truth: expect(page.get_by_role("heading", name="Participant List")).to_be_visible()
+paragraph: To begin, navigate through the 'All Events' section and select 'Conference
+  1', ensuring you're accessing the correct event. Once there, you'll find all the
+  necessary information about the conference, including its date and venue, neatly
+  presented for your convenience. Next up, proceed to click on 'Participant List',
+  which will reveal the names of those attending the event. A registration form appears
+  when you click on 'Registration', featuring a prominent 'Register' button for your
+  action. Scroll down the page to uncover more options available to you. Here, you'll
+  encounter a field labeled 'Participant list', accompanied by a 'Select a choice'
+  dropdown menu, a technical detail worth noting for accurate data entry. If you're
+  having trouble locating the right option, just click on 'Select a choice' to expand
+  the dropdown and display the participation choices available. For transparency,
+  choose 'Display my participation to everyone who can see this event', making sure
+  your presence is acknowledged. After selecting from the participant list dropdown,
+  confirm your choice by clicking 'Register'. Upon successful submission, a message
+  will pop up saying, 'Your registration has been completed', bringing a sense of
+  accomplishment to the process. Lastly, revisit the 'Participant List' to verify
+  that it now includes your name, reflecting the addition of one more eager attendee
+  to the initial roster.

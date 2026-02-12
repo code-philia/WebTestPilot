@@ -1,0 +1,38 @@
+name: Recent Transactions Expenses
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Expenses' in the sidebar
+  expectation: A table of expenses is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Expenses")).to_be_visible()
+- action: Click 'Enter Expense' button
+  expectation: Enter expense form with taxes panel is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Enter Expense")).to_be_visible()
+- action: Type '120000' in 'Amount'
+  expectation: Amount field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox").first).to_have_value("120,000")
+- action: Click 'Save'
+  expectation: Expense total panel is shown
+  ground_truth: |
+    expect(page.get_by_text("Expense Total")).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: Invoices, payments, expenses, and outstanding in 'Recent Transactions'
+    in dashboard is equal to before plus the new expense
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: 'To begin, you''ll want to navigate from the dashboard by selecting the
+  ''Expenses'' option located in the sidebar menu. Once you''ve done that, a table
+  of expenses will appear before your eyes—don''t worry about verifying the columns
+  just yet. Next up, make sure you locate and press the ''Enter Expense'' button,
+  which should trigger the appearance of an expense entry form complete with a taxes
+  section. Now, let''s focus on inputting ''120000'' into the ''Amount'' field; it''s
+  crucial that the amount field accurately reflects the number you''ve just entered.
+  After confirming the amount is correct, proceed by clicking the ''Save'' button
+  to finalize the entry. With the expense now saved, the total expense panel should
+  become visible, indicating the successful addition. Let’s switch gears and head
+  back to the ''Dashboard'' via the sidebar for our next step. Here''s where things
+  get interesting: the ''Recent Transactions'' section on the dashboard should now
+  display updated figures for invoices, payments, expenses, and outstanding amounts,
+  all of which should reflect the newly added expense seamlessly integrated into the
+  totals.'

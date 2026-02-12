@@ -1,0 +1,37 @@
+name: Buyer View New Product Details
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Scroll down
+  expectation: A page full of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Mug The best is yet to come").first).to_be_visible()
+- action: Scroll down
+  expectation: A on sale products section is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="On sale")).to_be_visible()
+- action: Scroll down
+  expectation: A new products section is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="New products")).to_be_visible()
+- action: Click on the 'Hummingbird Printed T-Shirt'
+  expectation: A product page with title 'Hummingbird Printed T-Shirt', price, description,
+    and comments section (no comments) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Hummingbird Printed T-Shirt")).to_be_visible()
+- action: Click on the 'Home' breadcrumb
+  expectation: The products shown is consistent before and after user activity
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Popular Products")).to_be_visible()
+paragraph: 'Let''s begin our journey through the digital storefront by scrolling down
+  the webpage. To locate the next section, follow these simple instructions: scroll
+  down until you see a vibrant display of on-sale products; there’s no need to delve
+  into the specifics here. For your reference, after another scroll down, you will
+  encounter an area dedicated to showcasing new products—details are not required
+  for this step. Imagine a scenario where you, the curious shopper, decide to click
+  on the intriguing ''Hummingbird Printed T-Shirt,'' leading you to a detailed product
+  page that includes its title, pricing information, a brief description, and an empty
+  comments section. If you find yourself lost or confused about the layout, simply
+  click on the ''Home'' breadcrumb link to return to the main page, ensuring that
+  the array of products remains unchanged from your initial visit. Once upon a time,
+  a user embarked on a quest through an online store, noticing that the products displayed
+  were consistently the same, both before and after their exploration.'

@@ -1,0 +1,69 @@
+name: Favourite Page Template
+setup_function: login_to_bookstack
+steps:
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My Favourites")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book'
+  expectation: Page contains title 'Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book")).to_be_visible()
+- action: Click on page template title 'Page Template'
+  expectation: Page contains title 'Page Template'
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page Template")
+- action: Click on the Favourite button
+  expectation: The 'Unfavourite' button is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Unfavourite")).to_be_visible()
+- action: Click 'Shelves' link in navigation
+  expectation: The shelves list is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shelves", exact=True)).to_be_visible()
+- action: Click on my profile icon
+  expectation: A dropdown with profile options with 'My Favourites' appears
+  ground_truth: |
+    expect(page.get_by_role("link", name="My Favourites")).to_be_visible()
+- action: Click on My Favourites option
+  expectation: The favourites list is equal to the previous list with exactly one
+    newly favourited item, 'Page Template', added
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Page Template")
+paragraph: 'To begin your journey through the digital library, you should first navigate
+  by clicking the ''Shelves'' link found within the navigation bar. Next up, you''ll
+  observe the shelves list materializing right before your eyes, a testament to the
+  system''s efficiency. Now, for a bit of personalization, proceed to click on your
+  profile icon, which is typically located at the top corner of your screen. As if
+  by magic, a dropdown menu will reveal itself, showcasing various profile options
+  including the coveted ''My Favourites'' choice. Let’s dive into the realm of preferences;
+  click on the ''My Favourites'' option to unveil your curated collection. Moving
+  along, direct your cursor towards the ''Books'' link in the navigation and give
+  it a firm click. Suddenly, the Books listing page springs to life, ready for exploration.
+  In this next step, you are to click on the book titled simply ''Book'', an intriguing
+  choice indeed. Upon arrival at the book''s dedicated page, you will find the title
+  ''Book'' prominently displayed, confirming your successful navigation. Keep your
+  eyes peeled for the ''Page Template'' title, and once spotted, click on it to delve
+  deeper. The page that greets you will proudly display the title ''Page Template'',
+  marking another milestone in your digital adventure. With excitement building, locate
+  and click the Favourite button, adding this page to your personal collection. If
+  all has gone according to plan, the ''Unfavourite'' button should now be visible,
+  indicating your successful addition. To double-check your progress, revisit the
+  ''Shelves'' link in the navigation bar. The shelves list reappears, a familiar sight
+  that brings comfort. Once more, interact with your profile icon, summoning the dropdown
+  menu filled with profile options. Among these choices, select ''My Favourites''
+  to review your updated collection. In the end, you’ll find that the favourites list
+  mirrors the previous iteration but with a delightful twist: the addition of exactly
+  one new favourite, ''Page Template'', completing your digital library experience.'

@@ -1,0 +1,39 @@
+name: Delete Expired Quote
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: A table of quotes is displayed (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+- action: Click on the 'Status' dropdown
+  expectation: A dropdown containing 'Expired' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Expired")).to_be_visible()
+- action: Click on the 'Expired' option
+  expectation: The 'Status' field contains 'Expired' tag
+  ground_truth: |
+    expect(page.get_by_role("option", name="Expired")).not_to_be_visible()
+- action: Check the checkbox of quote number '123456_expired' in the table
+  expectation: The checkbox becomes checked, 'Actions' dropdown button becomes enabled
+  ground_truth: |
+    expect(page.get_by_role("button", name="Actions").first).to_be_enabled()
+- action: Click on the 'Actions' dropdown button
+  expectation: A dropdown containing 'Delete' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Delete")).to_be_visible()
+- action: Click on the 'Delete' button
+  expectation: The quote is no longer present
+  ground_truth: |
+    expect(page.get_by_role("link", name="123456_expired")).not_to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: The 'Expired Quotes' in dashboard should equal to previous list minus
+    the deleted quote
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: From the dashboard click 'Quotes' in the sidebar. A table of quotes is
+  displayed (no need to check columns). Click on the 'Status' dropdown. A dropdown
+  containing 'Expired' option is shown. Click on the 'Expired' option. The 'Status'
+  field contains 'Expired' tag. Check the checkbox of quote number '123456_expired'
+  in the table. The checkbox becomes checked, 'Actions' dropdown button becomes enabled.
+  Click on the 'Actions' dropdown button. A dropdown containing 'Delete' option is
+  shown. The quote is no longer present. Click on 'Dashboard' in the sidebar. The
+  'Expired Quotes' in dashboard should equal to previous list minus the deleted quote.

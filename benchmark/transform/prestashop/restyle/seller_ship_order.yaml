@@ -1,0 +1,57 @@
+name: Seller Ship Order
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Orders' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+- action: Click on 'Orders' subsection under 'Orders'
+  expectation: A list of orders is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Orders", exact=True)).to_be_visible()
+- action: Click on the order ID '5' with reference 'KHWLILZLL'
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("body")).to_contain_text("€27.30")
+- action: Click on 'Awaiting bank wire payment' dropdown button
+  expectation: A dropdown containing 'Delivered' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Delivered")).to_be_visible()
+- action: Type 'Shipped' in the search box above dropdown
+  expectation: A dropdown containing 'Shipped' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Shipped")).to_be_visible()
+- action: Click on 'Shipped' option
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.get_by_role("option", name="Shipped")).not_to_be_visible()
+- action: Click on 'Update status' button
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Shipped")).to_be_visible()
+- action: Wait
+  expectation: All status records on the page align with the update
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Shipped")).to_be_visible()
+paragraph: 'In the sidebar, you''ll find an ''Orders'' link—click it to proceed. To
+  ensure you''re on the right track, the page should prominently display the title
+  ''Dashboard''. Next up, follow these instructions carefully: click on the ''Orders''
+  subsection nestled under the main ''Orders'' section. Imagine a scenario where a
+  list of orders magically appears before your eyes; no need to scrutinize the details
+  just yet. Now, focus your attention on the order ID ''5'', which carries the unique
+  reference ''KHWLILZLL''; give it a click. Here''s a technical tip for you: the order
+  details page should reveal a numerical subtotal of ''27.30'', give or take a little.
+  If you''re stuck, try clicking on the ''Awaiting bank wire payment'' dropdown button—it''s
+  your gateway to more options. Suddenly, a dropdown menu unfurls, revealing the ''Delivered''
+  option among its choices. In the search box perched atop the dropdown, type ''Shipped''
+  and watch what unfolds. Lo and behold, another dropdown emerges, this time featuring
+  the ''Shipped'' option. With a steady hand, click on the ''Shipped'' option to continue
+  the journey. Remember, the order details page must still show the numerical subtotal
+  as ''27.30'', within a reasonable margin. Ready for the next step? Click the ''Update
+  status'' button and hold your breath. Once again, the order details page confirms
+  the numerical subtotal as ''27.30'', within acceptable limits. Just a moment, please—take
+  a deep breath and wait. Finally, all status records on the page should now be in
+  perfect harmony with the recent update.'

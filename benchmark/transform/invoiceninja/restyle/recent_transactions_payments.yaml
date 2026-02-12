@@ -1,0 +1,36 @@
+name: Recent Transactions Payments
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Invoices' in the sidebar
+  expectation: A table of invoices is shown (no need to check columns)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Invoices")).to_be_visible()
+- action: Click on the invoice number '123456_sent'
+  expectation: The 'Edit Invoice' page is shown (no need to check details)
+  ground_truth: |
+    expect(page.locator("#number")).to_have_value("123456_sent")
+- action: Click on dropdown button to the right of 'Save'
+  expectation: A dropdown containing 'Mark Paid' option is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Mark Paid")).to_be_visible()
+- action: Click on the 'Mark Paid' button
+  expectation: The invoice status is marked as 'Paid'
+  ground_truth: |
+    expect(page.get_by_text("Paid", exact=True)).to_be_visible()
+- action: Click on 'Dashboard' in the sidebar
+  expectation: Invoices, payments, expenses, and outstanding in 'Recent Transactions'
+    in dashboard is equal to before plus the new payment
+  ground_truth: expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+paragraph: 'To begin, you''ll want to navigate from the dashboard by selecting ''Invoices''
+  located within the sidebar menu. Once there, a grid of invoices appears before your
+  eyes—don''t worry about inspecting the column headers just yet. Next up, focus your
+  attention on the invoice labeled ''123456_sent'' and give it a good click. The ''Edit
+  Invoice'' interface should now be visible; feel free to bypass any detailed checks
+  at this stage. If you''re looking for the next step, simply locate the dropdown
+  button adjacent to the ''Save'' option and tap it gently. Voila! A dropdown menu
+  emerges, revealing the ''Mark Paid'' choice among its options. Select the ''Mark
+  Paid'' action with confidence, knowing that this will update the invoice''s status
+  to ''Paid''. Now, let''s return to the ''Dashboard'' via the sidebar, shall we?
+  Here’s the kicker: the ''Recent Transactions'' section on the dashboard should reflect
+  an updated tally of invoices, payments, expenses, and outstanding amounts, all equating
+  to the previous total plus the newly added payment.'

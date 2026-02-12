@@ -1,0 +1,45 @@
+name: Seller Deliver Order
+setup_function: login_to_prestashop_as_seller
+steps:
+- action: Click on 'Orders' in sidebar
+  expectation: The page contains title 'Dashboard'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Dashboard")).to_be_visible()
+- action: Click on 'Orders' subsection under 'Orders'
+  expectation: A list of orders is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Orders", exact=True)).to_be_visible()
+- action: Click on the order ID '5' with reference 'KHWLILZLL'
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("body")).to_contain_text("€27.30")
+- action: Click on 'Awaiting bank wire payment' dropdown button
+  expectation: A dropdown containing 'Delivered' option is shown
+  ground_truth: |
+    expect(page.get_by_role("option", name="Delivered")).to_be_visible()
+- action: Click on 'Delivered' option
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.get_by_role("option", name="Delivered")).not_to_be_visible()
+- action: Click on 'Update status' button
+  expectation: The order details page displays the numerical subtotal as '27.30' within
+    tolerance
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Delivered")).to_be_visible()
+- action: Wait
+  expectation: All status records on the page align with the update
+  ground_truth: |
+    expect(page.locator("#update_order_status_action_input_wrapper").get_by_role("combobox", name="Delivered")).to_be_visible()
+paragraph: Click on 'Ordcrs' in the sidebar, like, yku know? The paqe should have
+  a title 'Dashboad', righ? Then clIck on the 'Orders' susection nudef '0rdrs' wgain.
+  A lits of orders will po pu, o nee to chcek ll te details toug. So, click on the
+  order ID '' with the reference 'KHWLILZLL'. Teh order details page ehuld show the
+  numercal subtotal as '27.30', give or take a litlfe. Now, clck n the 'Waaiting bnak
+  wire payment' drondown buton. A drodpown menu with the 'Delvered' option xhould
+  appar. Click o 'Edliverdd' option, yeah. The odrer details page rsik shows te numerIcal
+  subogal as '27.3', within tolerance, ovviously. Click on htw 'Update xtatsu' bugton.
+  The order details page sitll dsplays te numercila sutotal as '27.30', within tolerance,
+  just to be cler. Wait a sec. All the status ecords on the page should now aogin
+  with the uldate, you get whay I mesn?

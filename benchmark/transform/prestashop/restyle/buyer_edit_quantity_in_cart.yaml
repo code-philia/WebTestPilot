@@ -1,0 +1,22 @@
+name: Buyer Edit Quantity in Cart
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Cart' button
+  expectation: A list of products in cart is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+- action: Increment quantity of first product by one
+  expectation: The shopping cart before and after editing quantity is consistent
+  ground_truth: |
+    expect(page.locator("#cart-subtotal-products")).to_contain_text("5 items")
+paragraph: To proceed with your online shopping experience, kindly click the 'Cart'
+  button now. Once you've clicked it, a comprehensive list of products currently residing
+  in your cart will be displayed for your review. For technical reference, increment
+  the quantity of the initial item by selecting the plus icon adjacent to its count
+  field. If you're wondering how this works, think of it as adding another unit of
+  the same product to your order seamlessly. Should you encounter any discrepancies,
+  ensure that the shopping cart's contents remain unchanged except for the quantity
+  adjustment made. Imagine a scenario where you're preparing for a grand feast; increasing
+  the quantity of your favorite dish would be akin to this step. Just a heads-up,
+  folks, make sure everything looks good and nothing seems off after you've bumped
+  up that number!

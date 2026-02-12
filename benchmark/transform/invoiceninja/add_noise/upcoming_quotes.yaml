@@ -1,0 +1,11 @@
+name: Upcoming Quotes
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Quotes' in the sidebar
+  expectation: The 'Sent' quote number(s) is consistent with 'Upcoming Quotes' on
+    the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Quotes")).to_be_visible()
+paragraph: rom the dashobadr, like, lcick 'Quotes' in the sidebar, you know? The 'Sent'
+  quoet nmber(s) shpukd be, um, cnsistent with the 'Jpcoming Auotes' on the dashorad,
+  right? Just double-check thta tgey match up, okay?

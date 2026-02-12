@@ -1,0 +1,22 @@
+name: Buyer Search Product
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Type 'Mug' in 'Search our catalog' search box
+  expectation: A list of search suggestions in a dropdown is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Search")).to_have_value("Mug")
+- action: Press 'Enter'
+  expectation: Search results contains search query as substring (case-insensitive)
+  ground_truth: expect(page.get_by_role("heading", name="Search results")).to_be_visible()
+paragraph: 'To begin, simply type ''Mug'' into the ''Search our catalog'' search box,
+  as if you''re on a quest for your favorite beverage companion. Next, you''ll observe
+  a list of search suggestions appearing in a dropdown menu, like magic unfolding
+  before your eyes. For the next step, follow these instructions carefully: press
+  the ''Enter'' key to proceed. It''s important to note that the search results will
+  contain the search query as a substring, disregarding case sensitivity, ensuring
+  a comprehensive match. If you encounter any issues where the expected results aren''t
+  displayed, double-check that the query was entered correctly and try again. Once
+  upon a time, a user typed ''Mug'' into the search bar, and lo and behold, a list
+  of suggestions appeared as if by enchantment. Lastly, just to clarify, make sure
+  everything is set up right and you should see your search terms popping up in the
+  results, no matter if they''re in uppercase or lowercase.'

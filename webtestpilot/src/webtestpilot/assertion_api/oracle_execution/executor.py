@@ -1,0 +1,169 @@
+import logging
+import pprint
+import re
+import sys
+import types
+from datetime import date, datetime
+from enum import Enum
+from typing import Any, Callable, Dict, List, Literal, Optional, Set, Union
+from uuid import UUID
+
+from pydantic import BaseModel, EmailStr, HttpUrl, Field, confloat, conint, constr
+
+from webtestpilot.data_models import Session
+from webtestpilot.assertion_api.oracle_execution.symbol import Symbol
+
+PRIMITIVE_TYPES = (int, float, str, bool, type(None))
+logger = logging.getLogger(__name__)
+
+
+def _compute_delta(old: dict, new: dict) -> dict:
+    """
+    Compute insert/update/delete deltas between two dicts.
+    Returns a dict of form:
+      {'insert': {k: v}, 'update': {k: v}, 'delete': [k, ...]}
+    """
+    delta: dict[str, dict | list] = {}
+
+    old_keys = set(old.keys())
+    new_keys = set(new.keys())
+
+    # insertions
+    inserts = {k: new[k] for k in new_keys - old_keys}
+    if inserts:
+        delta["insert"] = inserts
+
+    # deletions
+    deletes = [k for k in old_keys - new_keys]
+    if deletes:
+        delta["delete"] = deletes
+
+    # updates
+    updates = {k: new[k] for k in old_keys & new_keys if old[k] != new[k]}
+    if updates:
+        delta["update"] = updates
+
+    return delta
+
+
+def _run_assertion_with_trace(
+    assertion_func: Callable[[Session], Any], session: Session
+) -> tuple[bool, str]:
+    """
+    Executes a given assertion function and captures variable traces
+    (only primitives, dicts, lists, or BaseModel instances).
+    """
+    def is_engine_object(v):
+        return type(v).__module__.startswith("webtestpilot.data_models")
+
+    captured_deltas = []
+    last_snapshot: dict = {}
+
+    def filter_locals(locals_dict: dict):
+        filtered = {}
+        for k, v in locals_dict.items():
+            if isinstance(v, PRIMITIVE_TYPES):
+                filtered[k] = v
+            elif isinstance(v, (dict, list)):
+                filtered[k] = v
+            elif is_engine_object(v):
+                filtered[k] = f"<{type(v).__name__}>"
+            elif isinstance(v, BaseModel):
+                filtered[k] = v.model_dump()
+        return filtered
+
+    def tracer(frame: types.FrameType, event: str, arg: Any) -> Callable | None:
+        nonlocal last_snapshot
+
+        if event == "line" and frame.f_code.co_name == assertion_func.__name__:
+            snapshot = filter_locals(frame.f_locals.copy())
+            delta = _compute_delta(last_snapshot, snapshot)
+            if delta.get("insert") or delta.get("update") or delta.get("delete"):
+                captured_deltas.append((f"line {frame.f_lineno}", delta))
+                last_snapshot = snapshot
+
+        return tracer
+
+    try:
+        sys.settrace(tracer)
+        result = assertion_func(session)
+        sys.settrace(None)
+
+        if result is True or result is None:
+            return True, "Success."
+
+        if isinstance(result, str) and result.strip():
+            return False, result
+
+        return (
+            False,
+            f"Assertion failed without message.\nVariable trace:\n{pprint.pformat(captured_deltas)}",
+        )
+
+    except AssertionError as ae:
+        sys.settrace(None)
+        msg = str(ae) if str(ae).strip() else "AssertionError raised without message."
+        return False, f"{msg}\nVariable trace:\n{pprint.pformat(captured_deltas)}"
+
+    except Exception:
+        sys.settrace(None)
+        raise
+
+
+def execute(response: str, session: Session) -> tuple[bool, str]:
+    """
+    Executes assertion code blocks extracted from response.
+
+    Looks for code blocks formatted as ```python ... ``` and expects
+    either `precondition(session)` or `postcondition(session)`.
+
+    Returns (success, message). On failure, includes variable trace for debugging.
+    """
+    # Extract python code blocks
+    pattern = r"```python\s+([\s\S]*?)```"
+    code_blocks = re.findall(pattern, response, re.MULTILINE)
+    code = "\n\n".join(code_blocks)
+
+    # Prepare safe globals for exec
+    allowed_globals = {
+        "__builtins__": __builtins__,
+        "Session": Session,
+        # Pydantic
+        "BaseModel": Symbol,
+        "Field": Field,
+        "EmailStr": EmailStr,
+        "HttpUrl": HttpUrl,
+        "constr": constr,
+        "conint": conint,
+        "confloat": confloat,
+        # Typing
+        "Any": Any,
+        "Union": Union,
+        "Literal": Literal,
+        "Optional": Optional,
+        "List": List,
+        "Set": Set,
+        "Dict": Dict,
+        # Enum
+        "Enum": Enum,
+        # Common value types
+        "UUID": UUID,
+        "datetime": datetime,
+        "date": date,
+    }
+
+    local_vars: dict = {}
+
+    # Execute the dynamic code
+    exec(code, allowed_globals, local_vars)
+
+    # Find the assertion function
+    assertion_func = local_vars.get("precondition") or local_vars.get("postcondition")
+    if assertion_func is None or not callable(assertion_func):
+        return (
+            False,
+            "No callable 'precondition' or 'postcondition' function found in generated code.",
+        )
+
+    # Run the assertion with variable tracing
+    return _run_assertion_with_trace(assertion_func, session)

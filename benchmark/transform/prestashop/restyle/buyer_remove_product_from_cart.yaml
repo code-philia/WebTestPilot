@@ -1,0 +1,21 @@
+name: Buyer Remove Product from Cart
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Cart' button
+  expectation: A list of products in cart is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+- action: Click on the 'Delete' icon of the first product
+  expectation: The list of cart products should be equal to initial list minus the
+    deleted product
+  ground_truth: |
+    expect(page.locator("#cart-subtotal-products")).to_contain_text("3 items")
+paragraph: To proceed with the task, you must click the 'Cart' button now. Note that
+  once you do this, a list of products in your cart will magically appear before your
+  eyes. For technical reference, ensure interaction with the 'Delete' icon adjacent
+  to the first item listed. If you're wondering how to confirm success, simply observe
+  that the updated list of cart products matches the original list, excluding the
+  item you just removed. Once upon a time, a user faced an issue where their cart
+  didn't update correctly after deleting an item, but following these steps should
+  resolve any similar problems. Lastly, don't forget to check that everything looks
+  good and feels right, like when you tidy up your room and it just feels better.

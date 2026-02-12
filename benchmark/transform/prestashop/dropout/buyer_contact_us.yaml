@@ -1,0 +1,20 @@
+name: Buyer Contact Us
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Contact us' in the top navigation bar
+  expectation: A form with title 'Contact us' and an 'OUR COMPANY' section in the
+    footer is shown (no need to check other details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Store information")).to_be_visible()
+- action: Type 'Checkout issues' in the 'Message' field
+  expectation: Message field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).to_have_value("Checkout issues")
+- action: Click 'Send'
+  expectation: A success message is shown
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Message")).not_to_be_visible()
+paragraph: Click on 'Contact us' in the top navigation bar. A form with title 'Contact
+  us' and an 'OUR COMPANY' section in the footer is shown (no need to check other
+  details). Type 'Checkout issues' in the 'Message' field. Click 'Send'. A success
+  message is shown.

@@ -1,0 +1,13 @@
+name: Room Booking
+setup_function: login_to_indico
+steps:
+- action: Click on 'Room Booking' in the top navigation bar
+  expectation: A panel with title 'Start your booking...' is visible
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+- action: Wait
+  expectation: A page with title 'Room Booking' is shown
+  ground_truth: |
+    expect(page.get_by_text("Start your booking...")).to_be_visible()
+paragraph: Click 'Room Booking' in top nav bar -> Panel w/ 'Start ur booking...' appears
+  -> Wait -> 'Room Booking' pg shows up

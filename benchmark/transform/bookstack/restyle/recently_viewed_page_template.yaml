@@ -1,0 +1,23 @@
+name: Recently Viewed Page Template
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page Template'
+  expectation: Page template details appear
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_contain_text("Page Template")
+- action: Click on the Bookstack logo top left of navbar
+  expectation: The 'Page Template' item appears at the top of the "My Recently Viewed"
+    list, whether it was already present or newly added. All other items retain their
+    previous order
+  ground_truth: expect(page.locator("#recently-viewed")).to_contain_text("Page Template")
+paragraph: To access the page template settings, navigate from the dashboard to the
+  'Page Template' option. Once you do this, expect the page template details to magically
+  materialize before your eyes. For technical guidance, refer to section 3.2.1 where
+  it specifies clicking the Bookstack logo located at the top left corner of the navigation
+  bar. If you're wondering what happens next, the 'Page Template' entry will conveniently
+  pop up at the pinnacle of your "My Recently Viewed" list, regardless of its prior
+  existence there. Imagine a story where all other items in the list decide to stay
+  put, maintaining their original positions like loyal old friends. If you encounter
+  any issues with the list not updating correctly, try refreshing the page or clearing
+  your cache for a smoother experience. Just a heads-up, folks, everything else in
+  the list should remain unchanged, keeping the order as it was.

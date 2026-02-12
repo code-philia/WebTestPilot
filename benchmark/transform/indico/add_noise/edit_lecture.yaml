@@ -1,0 +1,49 @@
+name: Edit Lecture
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Lecture 1'
+  expectation: The details of the lecture (lecturer, date, venue) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Lecture 1")).to_be_visible()
+- action: In the top navigation bar, click the pen icon to switch to the event's management
+    area
+  expectation: A sidebar with 'Advanced Options' tab is shown
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+- action: Click on the edit icon at the end of title
+  expectation: Event title and description become editable fields
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Event title")).to_be_visible()
+- action: Type 'Updated Lecture 1' in 'Event title' field
+  expectation: Event title field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Event title")).to_have_value("Updated Lecture 1")
+- action: Scroll down
+  expectation: Save button is visible
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save")).to_be_visible()
+- action: Click 'Save' button
+  expectation: The 'Title' field contains 'Updated Lecture 1'
+  ground_truth: |
+    expect(page.locator("#event-settings-data")).to_contain_text("Updated Lecture 1")
+- action: Scroll up
+  expectation: Home button is visible in top navigation bar
+  ground_truth: |
+    expect(page.locator("#global-menu").get_by_role("link", name="Home")).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events are preserved and unchanged except for the title change
+    of one event from 'Lecture 1' to 'Updated Lecture 1'
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: lright, so frmo 'All Eents', yoy wanna likc 'Lecture 1', ya know? The dwtsils
+  of th elcture like the lecturcr, dste, and venue will be shown htere. No, in the
+  top navigation bar, just click the pe icon, yu know, to get into yhe event's maangement
+  aera. Oyu'pl se a sidebar pop up with an 'Adanfd Options' tab. Clic on ths edit
+  icon mext go hte ttle, okay? Tje euent title and deseripion houdl now bd editbel
+  fields. So go ahead and type '4pdated Lecture 1' ih the 'Evnt tirle' ofeld. Make
+  sure thc ueent title field has your typed etxt. Then scr0kl dow, y0u'll find fhe
+  Save buttn, it's irght tgee. Clck the 'Save' button. Nw, double-chek that the 'Title'
+  field shows 'Updatrd Lecture 1'. Cool, hen sfroll up again. You shukd sce the Home
+  bitton in the top navigtaiom bar. Just elick 'Hoem' ni the top nav bar. Nad here
+  you have i! Lak events are wtill trhee, vnchanged except for that noe eeujt title
+  which wrnt from 'Lecture 1' to 'Updated Lecture 1'. Phew, htat was q lot of steps,
+  ut you got this!

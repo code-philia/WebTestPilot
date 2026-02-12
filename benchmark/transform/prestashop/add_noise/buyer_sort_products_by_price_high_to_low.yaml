@@ -1,0 +1,30 @@
+name: Buyer Sort Products by Price High to Low
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click 'Art' tab in the navigation bar
+  expectation: A grid of products under 'Art' category is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Art")).to_be_visible()
+- action: Click on 'Studio Design' in the 'Brands' sidebar
+  expectation: A list of products by brand 'Studio Design' is shown (no need to check
+    details)
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("List of products by brand Studio Design")
+- action: Click on 'Sort by' dropdown
+  expectation: A dropdown of sort options is shown
+  ground_truth: |
+    expect(page.get_by_role("link", name="Price, high to low")).to_be_visible()
+- action: Click on 'Price, high to low' option
+  expectation: The products are correctly sorted by 'Price, high to low', and must
+    be extracted using a left-to-right zig-zag grid traversal (no need to get image)
+  ground_truth: expect(page.get_by_label("Sort by selection")).to_contain_text("Price,
+    high to low")
+paragraph: Lcick 'Art' ab ip the navigaitno bra, ile, you know? A grid of products
+  under 'Art' caeory is shown (nl need to heck details, really). Click on 'Stdio Oesign'
+  in the 'Brands' ised6a, umm, just nake sure it's the dight ne. A lits of rloudcts
+  by bran 'Dtudio Resign' is shwn (no need to check detaIls, agian). Click on 'Osrt
+  by' dropdown, yeah. A ddpdown of sort options i shwn, like, fo rela. Clke on 'Price,
+  igh tp lwo' potion, okay? The products are cotrectly ortde by 'Price, hvih to low',
+  and must be extracted sing a left-to-right zig-zaf grid traversal (no nesd to get
+  image, seriousoy).

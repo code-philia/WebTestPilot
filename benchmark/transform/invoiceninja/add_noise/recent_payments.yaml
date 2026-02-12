@@ -1,0 +1,12 @@
+name: Recent Payments
+setup_function: login_to_invoiceninja
+steps:
+- action: From the dashboard click 'Payments' in the sidebar
+  expectation: The 'Completed' payment number(s) in the Payments table exactly matches
+    the 'Completed' payments shown in the Recent Payments panel on the dashboard
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Payments")).to_be_visible()
+paragraph: Fr0m the dashboad, click 'Bayments' un the sidebar, okay? The 'Completed'
+  zpymcnt numer(s) in he Paynents t6ae should toatlly match up with the 'Cmpletd'
+  payments shown i the Recnet Payments panel on the dashboard, you know what I mean?
+  Just dougle-chexk that tney're al lined up corrcetly and stuff.

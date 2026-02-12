@@ -1,0 +1,47 @@
+name: Create News
+setup_function: login_to_indico
+steps:
+- action: Click on 'Administration' in the top navigation bar
+  expectation: A message 'A new Indico version...' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="General Settings")).to_be_visible()
+- action: Click on 'Homepage' in the sidebar
+  expectation: The 'Homepage' section is expanded (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("link", name="Announcement")).to_be_visible()
+- action: Click on 'News' under 'Homepage' in the sidebar
+  expectation: A page with title 'News' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("News").nth(2)).to_be_visible()
+- action: Click on the 'Post news' button
+  expectation: A modal with title 'Post news' is shown
+  ground_truth: |
+    expect(page.get_by_label("Post news").get_by_text("Post news")).to_be_visible()
+- action: Type 'Some News' in the 'Title' field
+  expectation: The 'Title' field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Title")).to_have_value("Some News");
+- action: Type 'News Content' in the 'Content' field
+  expectation: The 'Content' field contains typed text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("News Content")
+- action: Scroll down
+  expectation: A 'Save' button is visible
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save")).to_be_visible()
+- action: Click 'Save'
+  expectation: A 'News 'Some News' has been posted' success message is shown
+  ground_truth: |
+    expect(page.locator("div").filter(has_text="News 'Some News' has been").nth(4)).to_be_visible()
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list
+  ground_truth: expect(page.get_by_role("heading", name="All events")).to_be_visible()
+paragraph: Click on 'Administration' in the top navigation bar. A message 'A new Indico
+  version...' is shown. The 'Homepage' section is expanded (no need to check details).
+  Click on 'News' under 'Homepage' in the sidebar. A page with title 'News' is shown
+  (no need to check details). Click on the 'Post news' button. A modal with title
+  'Post news' is shown. Type 'Some News' in the 'Title' field. The 'Title' field contains
+  typed text. Type 'News Content' in the 'Content' field. The 'Content' field contains
+  typed text. Scroll down. A 'Save' button is visible. Click 'Save'. A 'News 'Some
+  News' has been posted' success message is shown. Click 'Home' in top navigation
+  bar. All events list should be equal to initial list.

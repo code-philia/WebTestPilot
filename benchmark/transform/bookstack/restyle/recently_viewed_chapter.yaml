@@ -1,0 +1,33 @@
+name: Recently Viewed Chapter
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click "Books" link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title "Book2"
+  expectation: Book detail page opens
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on chapter title "Chapter 1"
+  expectation: Chapter detail page opens
+  ground_truth: |
+    expect(page.locator("h1")).to_contain_text("Chapter 1")
+- action: Click on the Bookstack logo top left of navbar
+  expectation: Both 'Book2' and 'Chapter 1' item appears at the top of the "My Recently
+    Viewed" list, whether it was already present or newly added. All other items retain
+    their previous order
+  ground_truth: |
+    expect(page.locator("#recently-viewed")).to_contain_text("Chapter 1 Description")
+paragraph: 'To begin your journey through the digital library, you''ll want to start
+  from the dashboard where you should click the "Books" link found in the navigation
+  bar. Next up, the Books listing page magically materializes before your eyes, ready
+  for exploration. For detailed instructions, proceed to click on the book titled
+  "Book2", which will lead you to its dedicated detail page. Imagine yourself diving
+  into the world of literature as you select the chapter titled "Chapter 1", opening
+  the door to its contents. If you''re ever lost, just click on the Bookstack logo
+  located at the top left corner of the navigation bar to return home. Here''s a tip:
+  After your adventure, both ''Book2'' and ''Chapter 1'' will be prominently displayed
+  at the top of the "My Recently Viewed" list, regardless of their prior presence.
+  The rest of the items in the list remain untouched, maintaining their original sequence
+  like old friends.'

@@ -1,0 +1,49 @@
+name: Comment
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page Template' link
+  expectation: Page contains title 'Page Template'
+  ground_truth: |
+    expect(page.locator("#bkmrk-page-title")).to_match_aria_snapshot("- heading \"Page Template\" [level=1]")
+- action: Scroll down
+  expectation: A list of comments is present
+  ground_truth: |
+    expect(page.get_by_role("button", name="Add Comment")).to_be_visible()
+- action: Click 'Add Comment'
+  expectation: A WYSIWYG comment editor is open
+  ground_truth: |
+    expect(page.get_by_label("Comments")).to_match_aria_snapshot("- application:\n  - group:\n    - group:\n      - toolbar:\n        - button \"Bold\":\n          - img\n        - button \"Italic\":\n          - img\n        - button \"Insert/edit link\":\n          - img\n        - button \"Bullet list\":\n          - img\n        - button \"Numbered list\":\n          - img\n  - iframe\n- button \"Cancel\"\n- button \"Save Comment\"")
+- action: Scroll down
+  expectation: '''Save Comment'' and ''Cancel'' buttons are present'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Comment")).to_be_visible()
+- action: In the 'Leave a comment here' field, type 'I like this template'
+  expectation: Editor box is not empty
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("I like this template")
+- action: Click 'Save Comment'
+  expectation: The current comments tree is equal to the initially observed comments
+    tree with the addition of exactly one new comment, and no other structural or
+    content changes
+  ground_truth: 'expect(page.locator("#comment6")).to_match_aria_snapshot("- img \"Admin\"\n-
+    link \"Admin\":\n  - /url: http://localhost:8081/user/admin\n- text: commented\n-
+    button \"Reply\"\n- button \"Edit\"\n- button \"Delete\"\n- text: •\n- link \"#6\":\n  -
+    /url: \"#comment6\"")'
+paragraph: To begin your journey, navigate from the dashboard and tap on the 'Page
+  Template' link, as if you're embarking on an adventure into the world of web design.
+  Next, ensure that the page you've landed on proudly displays the title 'Page Template',
+  serving as your beacon in the digital landscape. Scroll down the page, following
+  the path laid out before you, until you encounter a list of comments, like finding
+  hidden treasures along your route. Should you wish to contribute to this community,
+  proceed to click the 'Add Comment' button, which acts as the gateway to sharing
+  your thoughts. Upon doing so, a WYSIWYG comment editor will appear, ready for you
+  to craft your message with ease and precision. Scroll down once more, keeping your
+  eyes peeled for the 'Save Comment' and 'Cancel' buttons, which are your tools for
+  either committing your words to the digital ether or retreating back to safety.
+  In the inviting 'Leave a comment here' field, type the phrase 'I like this template',
+  as if you're leaving a note in a guestbook for future visitors to read. Verify that
+  the editor box is not empty, ensuring your voice has been heard amidst the digital
+  silence. Finally, click 'Save Comment' and observe how the current comments tree
+  mirrors the initially observed structure, but now enriched by the addition of exactly
+  one new comment, standing as a testament to your contribution without altering the
+  existing framework.

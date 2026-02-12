@@ -1,0 +1,17 @@
+name: Buyer View Store Information
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Contact us' in the top navigation bar
+  expectation: The store information display is consistent with the store information
+    at the homepage footer
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Store information")).to_be_visible()
+paragraph: To proceed, simply click on 'Contact us' located within the top navigation
+  bar. Note that the store information shown here must match exactly what you find
+  at the bottom of the homepage's footer, ensuring consistency across the site. If
+  you're wondering how to verify this, just compare the details side by side for any
+  discrepancies. Once upon a time, a curious user decided to check if clicking 'Contact
+  us' would lead them to the same store info as seen elsewhere on the site. Hey there!
+  Make sure the contact details up top are a mirror image of those down below, okay?
+  For technical accuracy, confirm that the data fields in both sections are identical
+  without any variations.

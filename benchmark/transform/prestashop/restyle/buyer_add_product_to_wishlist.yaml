@@ -1,0 +1,72 @@
+name: Buyer Add Product to Wishlist
+setup_function: login_to_prestashop_as_buyer
+steps:
+- action: Click on 'Auto Customer' in the top navigation bar
+  expectation: A page with title 'Your account' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Your account")).to_be_visible()
+- action: Click on 'My Wishlists'
+  expectation: A list of wishlist folder(s) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My wishlists")).to_be_visible()
+- action: Click on the center of the white container with 'My wishlist (4)'
+  expectation: A grid of wishlisted products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("My wishlist", exact=True)).to_be_visible()
+- action: Click on 'Clothes' tab in navigation bar
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Clothes")).to_be_visible()
+- action: Scroll down
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Hummingbird printed t-shirt")).to_be_visible()
+- action: Click on the heart icon for 'Hummingbird printed t-shirt' product
+  expectation: A dialog box with title 'My wishlists' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("listitem").filter(has_text="My wishlist")).to_be_visible()
+- action: Click on 'My wishlist' list item under 'My wishlists'
+  expectation: The dialog box with title 'My wishlists' is no longer visible
+  ground_truth: |
+    product = page.locator(".js-product").nth(0)  # or your specific product
+    icon = product.locator("button.wishlist-button-add i.material-icons")
+    expect(icon).to_have_text("favorite")
+- action: Scroll Up
+  expectation: A list of products is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Clothes")).to_be_visible()
+- action: Click on 'Auto Customer' in the top navigation bar
+  expectation: A page with title 'Your account' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Your account")).to_be_visible()
+- action: Click on 'My Wishlists'
+  expectation: A list of wishlist folder(s) is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="My wishlists")).to_be_visible()
+- action: Click on the center of the white container with 'My wishlist (4)'
+  expectation: The grid of wishlisted products should be equal to initial list plus
+    the new wishlisted product
+  ground_truth: expect(page.get_by_text("My wishlist", exact=True)).to_be_visible()
+paragraph: 'To begin your journey through the customer interface, you''ll want to
+  start by clicking on ''Auto Customer'' located in the top navigation bar. Next up,
+  a page titled ''Your account'' will appear before your eyes; however, there''s no
+  need to delve into its specifics at this moment. For those seeking precise instructions,
+  proceed to click on ''My Wishlists'' without delay. Reference material indicates
+  that upon successful execution of the previous step, a display of wishlist folders
+  shall manifest itself. Imagine yourself embarking on an adventure where you must
+  tap the center of the white container labeled ''My wishlist (4)'', and voila! A
+  grid of wishlisted products magically appears. Now, if you''re looking for a straightforward
+  guide, simply click on the ''Clothes'' tab within the navigation bar. As you scroll
+  down, a list of products will come into view, but again, no need to scrutinize them
+  closely. In case you encounter any issues, remember that clicking the heart icon
+  next to the ''Hummingbird printed t-shirt'' product should trigger a dialog box
+  titled ''My wishlists''. Once you''ve clicked on ''My wishlist'' under the ''My
+  wishlists'' section, the dialog box should vanish like a ghost in the night. Scroll
+  up, and just like magic, another list of products will appear, though their details
+  remain unimportant for now. Let''s get casual for a moment: you know what to do—click
+  on ''Auto Customer'' in the top nav bar once more. A page with the title ''Your
+  account'' greets you again, but let’s not linger too long. Click on ''My Wishlists'',
+  and watch as the list of wishlist folders unfolds before you. Finally, click on
+  the center of the white container marked ''My wishlist (4)'', ensuring that the
+  grid of wishlisted products matches the initial list with the addition of the newly
+  wishlisted product.'

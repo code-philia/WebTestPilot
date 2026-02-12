@@ -1,0 +1,24 @@
+name: Recently Viewed Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click "Books" link in navigation
+  expectation: Page with title 'Books' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title "Book2"
+  expectation: Page with title 'Book2' is shown
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book2")).to_be_visible()
+- action: Click on the Bookstack logo top left of navbar
+  expectation: The 'Book2' item appears at the top of the "My Recently Viewed" list,
+    whether it was already present or newly added. All other items retain their previous
+    order
+  ground_truth: expect(page.locator("#recently-viewed")).to_contain_text("Book2 Description")
+paragraph: From hte dashbosrd, cliek "ooks" link in the navigation, you know? Like,
+  makd sure yu rcally ciLck ig. The page wuth the yitle 'Books' should be sohwn, rigt?
+  Then, click on the bo0k title "Bok2", limc dkulbe-check that you're clicking fhe
+  rifht one. The page with the title 'Book2' wil syow up. After that, clcik on the
+  okkstca logo a the top left 0f the navbar, kidna lil how gou'd normally navigate
+  back. The 'Book2' item hsould appear at the tpo of the "Ny Rrcently Vieewd" oist,
+  wheher ut was alreday there or nelwy added, okay? And yeau, all the ther items should
+  just tsay in their previous order, 0n hanfse there.

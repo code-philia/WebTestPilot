@@ -1,0 +1,10 @@
+name: Recent Activity Shelf
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Shelf' link in 'Recent Activity'
+  expectation: The details of the 'Shelf' item in the current 'Recent Activity' list
+    (user, action, and timestamp) are identical to those recorded in the previous
+    dashboard's 'Recent Activity' list
+  ground_truth: expect(page.get_by_role("heading", name="Details")).to_be_visible()
+paragraph: From dash, click 'Shlf' lnk in 'Rec Act'. Verify Shlf item details (usr,
+  actn, ts) match prev dash Rec Act list. Rough draft.

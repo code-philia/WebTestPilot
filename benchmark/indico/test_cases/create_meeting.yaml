@@ -1,0 +1,32 @@
+name: Create Meeting
+setup_function: login_to_indico
+steps:
+- action: Click 'Create event' in the top navigation bar
+  expectation: A dropdown is shown with three options for creating a lecture, a meeting, or a conference
+  ground_truth: |
+    expect(page.get_by_role("link", name="Create meeting").or_(page.get_by_role("link", name="Meeting", exact=True))).to_be_visible()
+
+- action: Click option to create meeting in dropdown
+  expectation: A dialog form with title 'Create new meeting' is shown (no need to check details)
+  ground_truth: |
+    expect(page.get_by_text("Create new meeting")).to_be_visible()
+
+- action: Type 'New Meeting' in 'Event title'
+  expectation: Event title field contains typed text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Event title")).to_have_value("New Meeting")
+
+- action: Set 'Protection mode' to 'Public'
+  expectation: A dialog form with title 'Create new conference' is shown (no need to check details)
+  ground_truth: |
+    expect(page.locator("#form-group-event-creation-protection_mode")).to_contain_text("The event will be publicly accessible since it is set as public.")
+
+- action: Click 'Create event'
+  expectation: An event settings page for the created event is shown
+  ground_truth: |
+    expect(page.locator(".title-with-actions")).to_be_visible()
+
+- action: Click 'Home' in top navigation bar
+  expectation: All events list should be equal to initial list plus the created event
+  ground_truth: |
+    expect(page.get_by_role("heading", name="All events")).to_be_visible()

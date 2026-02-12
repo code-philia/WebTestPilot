@@ -1,0 +1,17 @@
+name: Recent Activity Page Template
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Page Template' link
+  expectation: The (created user, timestamp data) for 'Page Template' in 'Details'
+    is consistent with the previous dashboard's 'Recent Activity' (user, timestamp)
+    data
+  ground_truth: expect(page.get_by_role("heading", name="Details")).to_be_visible()
+paragraph: 'To begin, navigate from the dashboard and select the ''Page Template''
+  link. Note: The ''Page Template'' section contains critical information including
+  created user and timestamp data, which should match the details found in the ''Recent
+  Activity'' log on the dashboard. If you''re wondering how to verify consistency,
+  simply compare the user and timestamp data in ''Details'' with what''s listed under
+  ''Recent Activity''. Once upon a time, a user followed these steps and was amazed
+  to find everything aligned perfectly! Just a heads-up, if the data doesn’t match,
+  check your network connection or refresh the page. Lastly, don''t forget to ensure
+  all the information is up-to-date and accurate for a smooth experience.'

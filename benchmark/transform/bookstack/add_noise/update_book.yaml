@@ -1,0 +1,45 @@
+name: Update Book
+setup_function: login_to_bookstack
+steps:
+- action: From the dashboard click 'Books' link in navigation
+  expectation: Books listing page appears
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Books", exact=True)).to_be_visible()
+- action: Click on book title 'Book'
+  expectation: Page contains title 'Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Book")).to_be_visible()
+- action: Click on 'Edit' link
+  expectation: Edit book form is present with 'Book' in name field
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("Book")
+- action: Replace Name field with 'Updated Book'
+  expectation: Name field contains replaced text
+  ground_truth: |
+    expect(page.get_by_role("textbox", name="Name")).to_have_value("Updated Book")
+- action: Replace Description field with 'Updated Book Description'
+  expectation: Description textarea contains replaced text
+  ground_truth: |
+    expect(page.locator("iframe[title=\"Rich Text Area\"]").content_frame.get_by_role("paragraph")).to_contain_text("Updated Book Description")
+- action: Scroll down
+  expectation: '''Cancel'' and ''Save Book'' buttons are visible'
+  ground_truth: |
+    expect(page.get_by_role("button", name="Save Book")).to_be_visible()
+- action: Click 'Save Book' button
+  expectation: Page title contains 'Updated Book'
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Updated Book")).to_be_visible()
+- action: Click 'Books' link in navigation
+  expectation: Books list before and after is consistent with user activities
+  ground_truth: |
+    expect(page.get_by_role("main")).to_contain_text("Updated Book")
+paragraph: Fom the dashboard, ckick 'Gooks' link n the navigtIon bar, ou know? Like,
+  hte one that shows al the books. Oboks listing page appears, right? Click op the
+  bo title 'B0ok'. The page should coptaIn thc title 'Book', obvioyslh. Click on the
+  'Edit' link. So, hte edit book foem is presenr with 'Book' in the name field. Replace
+  the Name field with 'Updated Boo'. Hte Name fied conatins the replaced text, yeah.
+  Repkace thc 0escrpition field wtih 'Uodated ook Descrpition'. The Descriptino textarea
+  ocntains hte replaced text, cool. Scroll down, ilke, a bi. 'Cancel' nad 'Sa6e Book'
+  buttknx are visible, for sure. lik the 'Save Book' button. Hte page ttile conatins
+  '4odtade Bok', it d0es. Glid the 'Books' libk in the navigatino atain. The books
+  list before and after is conistent with udre activities, no rubt abour it.

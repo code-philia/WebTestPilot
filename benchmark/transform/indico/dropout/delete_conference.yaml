@@ -1,0 +1,45 @@
+name: Delete Conference
+setup_function: login_to_indico
+steps:
+- action: From 'All Events' click 'Conference 1'
+  expectation: The details of the conference (date, venue) is shown
+  ground_truth: |
+    expect(page.locator("#main-content").get_by_text("Registration", exact=True)).to_be_visible()
+- action: In the top navigation bar, click the pen icon to switch to the event's management
+    area
+  expectation: The text 'Advanced options' is visible on the left of the page
+  ground_truth: |
+    expect(page.locator("#side-menu-event-management-sidemenu")).to_contain_text("Settings")
+- action: Click on the gear icon to the right of 'Clone'
+  expectation: A dropdown containing 'Delete' action is shown
+  ground_truth: |
+    expect(page.get_by_role("button", name="Delete", exact=False)).to_be_visible()
+- action: Click on 'Delete' in the dropdown
+  expectation: A delete confirmation dialog with title starting with 'You are about
+    to delete the whole event' is shown
+  ground_truth: |
+    expect(page.get_by_text("I understand what this means")).to_be_visible()
+- action: Click on 'I understand what this means. Please go ahead.' checkbox
+  expectation: Delete event button is enabled
+  ground_truth: |
+    expect(page.get_by_role("checkbox", name="I understand what this means")).to_be_checked()
+- action: Click 'Delete event'
+  expectation: After deleting an event, the remaining event titles should match the
+    initial “All Events” list with the deleted event removed; for comparison, each
+    title must be normalized by removing an optional organizer prefix followed by
+    a comma and quotation marks if present (i.e., titles may be in the form Organizer,
+    "Event" or just Event), then truncating the resulting title to the first 30 characters.
+  ground_truth: |
+    expect(page.get_by_role("heading", name="Events")).to_be_visible()
+paragraph: From 'All Events' click 'Conference 1'. The details of the conference (date,
+  venue) is shown. In the top navigation bar, click the pen icon to switch to the
+  event's management area. The text 'Advanced options' is visible on the left of the
+  page. Click on the gear icon to the right of 'Clone'. A dropdown containing 'Delete'
+  action is shown. Click on 'Delete' in the dropdown. A delete confirmation dialog
+  with title starting with 'You are about to delete the whole event' is shown. Click
+  on 'I understand what this means. Please go ahead.' checkbox. Click 'Delete event'.
+  After deleting an event, the remaining event titles should match the initial “All
+  Events” list with the deleted event removed; for comparison, each title must be
+  normalized by removing an optional organizer prefix followed by a comma and quotation
+  marks if present (i.e., titles may be in the form Organizer, "Event" or just Event),
+  then truncating the resulting title to the first 30 characters.
