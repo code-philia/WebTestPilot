@@ -1,17 +1,26 @@
 # WebTestPilot
 
+<p align="left">
+  <a href="https://arxiv.org/">
+    <img src="https://img.shields.io/badge/arXiv-Paper-red.svg" alt="arXiv">
+  </a>
+    <a href="https://sites.google.com/view/webtestpilot">
+    <img src="https://img.shields.io/badge/Project-Page-green.svg" alt="Project Page">
+  </a>
+</p>
+
 This is the official repository for the paper *"WebTestPilot: Agentic End-to-End Web Testing against Natural Language Specification by Inferring Oracles with Symbolized GUI Elements"*.
 
-WebTestPilot is an agentic framework for automated web testing that leverages natural language specifications, GUI element grounding, and inference of oracles.
+**TL;DR:** WebTestPilot turns what a multimodal agent sees on the web into symbolic representations that can be asserted in automated end-to-end testing.
 
 ## 📂 Structure
 
 ```graphql
-/baselines        # Implementations of baselines (LaVague, NaviQAte, PinATA) and their test runners
-/experiments      # Scripts for running experiments (RQ1–RQ4) from the paper
-/benchmark        # Benchmark test cases and injected bugs used in experiments
-/webapps          # Containerized deployment and seeding scripts for target web applications
-/webtestpilot     # WebTestPilot implementation
+/baselines    # Implementations of baselines (LaVague, NaviQAte, PinATA) and test runners (baselines + WebTestPilot)
+/experiments  # Scripts for running experiments (RQ1–RQ4) in the paper
+/benchmark    # Test cases and their injected bugs in the benchmark
+/webapps      # Containerized deployment scripts for web applications in the benchmark
+/webtestpilot # Implementation of WebTestPilot 
 ```
 
 ## ⚙️ Setup
@@ -56,7 +65,7 @@ WebTestPilot is an agentic framework for automated web testing that leverages na
 
 Go to `./experiments` folder and follow the `README.md` instructions provided in each section.
 
-## 🖥 Running WebTestPilot Standalone
+## 🖥 Running WebTestPilot
 
 You can run WebTestPilot outside of experiments by installing it as an editable package:
 
@@ -95,4 +104,22 @@ session = Session(page, config)
 
 # Run WebTestPilot
 WebTestPilot.run(session, steps, assertion=True, hooks=[hook])
+```
+
+## 📝 Citation
+
+If you find WebTestPilot useful for your research, please consider citing the following work:
+
+```bibtex
+@article{teoh2026webtestpilot,
+  title   = {WebTestPilot: Agentic End-to-End Web Testing against Natural Language Specification by Inferring Oracles with Symbolized GUI Elements},
+  author  = {Teoh, Xiwen and Lin, Yun and Nguyen, Duc-Minh and Ren, Ruofei and Zhang, Wenjie and Dong, Jin Song},
+  journal = {Proceedings of the ACM on Software Engineering},
+  volume  = {3},
+  number  = {FSE},
+  article = {FSE087},
+  year    = {2026},
+  month   = {7},
+  doi     = {10.1145/3797115}
+}
 ```
