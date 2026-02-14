@@ -13,6 +13,10 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 **TL;DR:** WebTestPilot turns what a multimodal agent sees on the web into symbolic representations that can be asserted in automated end-to-end testing.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hJhcSvN2KwU" target="_blank">
+ <img src="http://img.youtube.com/vi/hJhcSvN2KwU/mqdefault.jpg" alt="Watch the video" width="360" border="10" />
+</a>
+
 ## 📂 Structure
 
 ```graphql
