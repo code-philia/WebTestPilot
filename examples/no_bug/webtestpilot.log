@@ -1,0 +1,403 @@
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Run Input                                                                                                                                         │
+│ Configuration                                                                                                                                     │
+│ ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                        │
+│ ┃ Key         ┃ Value                                                                                                    ┃                        │
+│ ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩                        │
+│ │ Method      │ webtestpilot                                                                                             │                        │
+│ │ Application │ bookstack                                                                                                │                        │
+│ │ Output      │ /home/xiwen/webtestpilot-camera-ready/experiments/rq1/results/webtestpilot_bookstack/run_20260206_222617 │                        │
+│ │ Headless    │ True                                                                                                     │                        │
+│ │ Inject bug  │ False                                                                                                    │                        │
+│ └─────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────┘                        │
+│ Test Cases                                                                                                                                        │
+│ ┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓                                                                                              │
+│ ┃ No. ┃ Test Case                       ┃ Bug Name ┃                                                                                              │
+│ ┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩                                                                                              │
+│ │ 1   │ comment                         │ -        │                                                                                              │
+│ └─────┴─────────────────────────────────┴──────────┘                                                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[22:26:17] INFO     Initializing webtestpilot test runner.                                                                            evaluate.py:143
+           INFO     Starting test execution.                                                                                          evaluate.py:146
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Test Case 1/27: Comment                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+           INFO     Restarting webapp: bookstack                                                                                   base_runner.py:112
+[22:26:39] INFO     Webapp restarted successfully                                                                                  base_runner.py:121
+[22:26:48] INFO     Abstracted Page                                                                                                    __init__.py:55
+           INFO     Name: 'Personal Knowledge Dashboard'                                                                               __init__.py:56
+           INFO     Description: 'Displays recent activity, favorites, and updates in a clean, card-based layout.'                     __init__.py:57
+           INFO     <?xml version="1.0" ?><Page>                                                                                       __init__.py:58
+                        <Header appName="BookStack" role="navigation" contains="logo,search,navLinks,userMenu"/>                                     
+                        <Toolbar>                                                                                                                    
+                            <ToggleDetailsButton/>                                                                                                   
+                            <DarkModeSwitch/>                                                                                                        
+                        </Toolbar>                                                                                                                   
+                        <MainContent layout="threeColumn">                                                                                           
+                            <Card title="My Recently Viewed" type="list" itemType="document"/>                                                       
+                            <Column>                                                                                                                 
+                                <Card title="My Most Viewed Favourites" type="list" itemType="document" hasViewAll="true"/>                          
+                                <Card title="Recently Updated Pages" type="list" itemType="document"/>                                               
+                            </Column>                                                                                                                
+                            <Card title="Recent Activity" type="activityFeed" itemType="event" userContext="currentUser"/>                           
+                        </MainContent>                                                                                                               
+                    </Page>                                                                                                                          
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 1/6                                                                                                                                          │
+│ Action: From the dashboard click 'Page Template' link                                                                                             │
+│ Expected Result: Page contains title 'Page Template'                                                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:26:50] INFO     Proposed location: (134, 491)                                                                                        utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [39]: /div/a/div | text='Book'                                                                                                   
+                    [43]: /div/a/div | text='Page Template'                                                                                          
+                    [44]: /a/div/h4 | text='Page Template'                                                                                           
+                    [47]: /div/a/div | text='Page 1'                                                                                                 
+                    [48]: /a/div/h4 | text='Page 1'                                                                                                  
+[22:26:53] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 39 -> Book (likely navigates to the Book section)                                                                              
+                    # 43 -> Page Template (likely navigates to the Page Template section)                                                            
+                    # 44 -> Page Template (likely a heading or link for Page Template)                                                               
+                    # 47 -> Page 1 (likely navigates to Page 1)                                                                                      
+                    # 48 -> Page 1 (likely a heading or link for Page 1)                                                                             
+                                                                                                                                                     
+                    click_by_label(label="43")                                                                                                       
+                    ```                                                                                                                              
+           INFO     Clicking element with label: [43] and xpath: /html/body/div[4]/div/div/div/div[2]/div/div[1]/div/div/div/a[7]/div automator.py:52
+[22:27:04] INFO     Abstracted Page                                                                                                    __init__.py:55
+           INFO     Name: 'Book Documentation Page'                                                                                    __init__.py:56
+           INFO     Description: 'Displays book page details, actions, and navigation in a clean, editable layout.'                    __init__.py:57
+           INFO     <?xml version="1.0" ?><Page>                                                                                       __init__.py:58
+                        <Header appName="BookStack" role="navigation" contains="search,mainMenu,userMenu"/>                                          
+                        <Sidebar position="left" contains="details,actions" detailsVisible="true"                                                    
+                    actionsList="edit,copy,move,revisions,permissions,delete,watch,favourite,export"/>                                               
+                        <Breadcrumb visible="true" path="Books &gt; Book &gt; Page Template"/>                                                       
+                        <MainContent>                                                                                                                
+                            <Title type="h1" text="Page Template"/>                                                                                  
+                            <Description text="Page Description Template"/>                                                                          
+                        </MainContent>                                                                                                               
+                        <Footer role="navigation" contains="previous,next" previousType="chapter" nextType="page"/>                                  
+                    </Page>                                                                                                                          
+           INFO     Expectation: Page contains title 'Page Template'                                                                       main.py:51
+[22:27:10] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from pydantic import BaseModel, Field                                                                                        
+                                                                                                                                                     
+                        class PageTitle(BaseModel):                                                                                                  
+                            text: str = Field(..., description="The main title of the page")                                                         
+                                                                                                                                                     
+                        # Extract the title from the current state                                                                                   
+                        title_data = session.history[-1].extract("get main page title", schema=PageTitle)                                            
+                                                                                                                                                     
+                        # Assert the title is exactly 'Page Template'                                                                                
+                        assert title_data.text == "Page Template", f"Page title is not 'Page Template', got                                          
+                    '{title_data.text}'"                                                                                                             
+                    ```                                                                                                                              
+[22:27:11] INFO     Extracted data: text='Page Template'                                                                                  state.py:94
+           INFO     Assertion passed                                                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 2/6                                                                                                                                          │
+│ Action: Scroll down                                                                                                                               │
+│ Expected Result: A list of comments is present                                                                                                    │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:27:13] INFO     Proposed location: (639, 532)                                                                                        utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [52]: /div/div/a | text='Previous Chapter'                                                                                       
+                    [53]: /div/a/div | text='Previous'                                                                                               
+                    [54]: /div/a/div | text='Chapter'                                                                                                
+                    [55]: /a/div/div | text='Chapter'                                                                                                
+                    [57]: /div/div/span | text='Chapter'                                                                                             
+[22:27:15] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 52 -> Previous Chapter button/link                                                                                             
+                    # 53 -> Previous button/link                                                                                                     
+                    # 54 -> Chapter button/link                                                                                                      
+                    # 55 -> Chapter button/link                                                                                                      
+                    # 57 -> Chapter label/span                                                                                                       
+                                                                                                                                                     
+                    scroll_down()                                                                                                                    
+                    ```                                                                                                                              
+[22:27:18] INFO     Expectation: A list of comments is present                                                                             main.py:51
+[22:27:25] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from pydantic import BaseModel, Field                                                                                        
+                        from typing import List                                                                                                      
+                                                                                                                                                     
+                        # Define a schema for a comment                                                                                              
+                        class Comment(BaseModel):                                                                                                    
+                            author: str = Field(..., description="The name of the comment author")                                                   
+                            content: str = Field(..., description="The text content of the comment")                                                 
+                            id: int = Field(..., description="Unique identifier for the comment")                                                    
+                                                                                                                                                     
+                        class CommentList(BaseModel):                                                                                                
+                            comments: List[Comment] = Field(..., description="List of comments on the page")                                         
+                                                                                                                                                     
+                        # Extract the list of comments from the current state                                                                        
+                        comment_list = session.history[-1].extract("get all comments on the page", schema=CommentList)                               
+                                                                                                                                                     
+                        # Assert that there is at least one comment present                                                                          
+                        assert len(comment_list.comments) > 0, "No comments are present on the page after scrolling; expected                        
+                    at least one comment to be visible."                                                                                             
+                    ```                                                                                                                              
+[22:27:31] INFO     Extracted data: comments=[Comment(author='Admin', content='Comment', id=1), Comment(author='Admin',                   state.py:94
+                    content='Comment', id=2), Comment(author='Admin', content='Reply', id=3), Comment(author='Admin', content='Reply',               
+                    id=4), Comment(author='Admin', content='Reply', id=5)]                                                                           
+           INFO     Assertion passed                                                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 3/6                                                                                                                                          │
+│ Action: Click 'Add Comment'                                                                                                                       │
+│ Expected Result: A WYSIWYG comment editor is open                                                                                                 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:27:32] INFO     Proposed location: (1130, 672)                                                                                       utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [52]: /div/div/button | text='Edit'                                                                                              
+                    [53]: /div/div/button | text='Delete'                                                                                            
+                    [54]: /div/div/a | text='#2'                                                                                                     
+                    [55]: /section/div/button | text='Add Comment'                                                                                   
+                    [56]: /div | text='Back to top'                                                                                                  
+[22:27:36] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 52 -> Edit button, likely allows editing an item.                                                                              
+                    # 53 -> Delete button, likely allows deleting an item.                                                                           
+                    # 54 -> Link labeled '#2', likely navigates to item #2.                                                                          
+                    # 55 -> Add Comment button, likely adds a new comment.                                                                           
+                    # 56 -> Back to top, likely scrolls the page to the top.                                                                         
+                                                                                                                                                     
+                    click_by_label(label="55")                                                                                                       
+                    ```                                                                                                                              
+           INFO     Clicking element with label: [55] and xpath: /html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[4]/button     automator.py:52
+[22:27:40] INFO     Expectation: A WYSIWYG comment editor is open                                                                          main.py:51
+[22:27:51] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from pydantic import BaseModel, Field                                                                                        
+                        from typing import Optional                                                                                                  
+                                                                                                                                                     
+                        # Define schema for the comment editor                                                                                       
+                        class CommentEditor(BaseModel):                                                                                              
+                            is_visible: bool = Field(..., description="Whether the WYSIWYG comment editor is visible")                               
+                            has_toolbar: bool = Field(..., description="Whether the editor toolbar (B, I, etc.) is present")                         
+                            placeholder: Optional[str] = Field(None, description="Placeholder text in the editor input area")                        
+                                                                                                                                                     
+                        # Extract the comment editor state from the current page                                                                     
+                        editor = session.history[-1].extract(                                                                                        
+                            "extract the state of the WYSIWYG comment editor for adding a new comment",                                              
+                            schema=CommentEditor                                                                                                     
+                        )                                                                                                                            
+                                                                                                                                                     
+                        # Assert that the WYSIWYG comment editor is open and visible                                                                 
+                        assert editor.is_visible, "WYSIWYG comment editor is not visible after clicking 'Add Comment'."                              
+                        assert editor.has_toolbar, "WYSIWYG comment editor toolbar is not present."                                                  
+                        assert editor.placeholder is not None and len(editor.placeholder.strip()) > 0, "WYSIWYG comment editor                       
+                    placeholder is missing or empty."                                                                                                
+                    ```                                                                                                                              
+[22:27:53] INFO     Extracted data: is_visible=True has_toolbar=True placeholder='Leave a comment here'                                   state.py:94
+           INFO     Assertion passed                                                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 4/6                                                                                                                                          │
+│ Action: Scroll down                                                                                                                               │
+│ Expected Result: 'Save Comment' and 'Cancel' buttons are present                                                                                  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:27:54] INFO     Proposed location: (639, 373)                                                                                        utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [35]: /div/div/a | text='Admin'                                                                                                  
+                    [40]: /div/div/a | text='Admin'                                                                                                  
+                    [45]: /div/div/a | text='Admin'                                                                                                  
+                    [55]: /*[@id="tinymce"] | text=''                                                                                                
+                    [56]: /p | text=''                                                                                                               
+[22:27:58] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 35 -> Link labeled 'Admin' (likely navigates to an admin page)                                                                 
+                    # 40 -> Link labeled 'Admin' (likely navigates to an admin page)                                                                 
+                    # 45 -> Link labeled 'Admin' (likely navigates to an admin page)                                                                 
+                    # 55 -> Rich text editor (input area)                                                                                            
+                    # 56 -> Paragraph (possibly an input or display area)                                                                            
+                                                                                                                                                     
+                    scroll_down()                                                                                                                    
+                    ```                                                                                                                              
+[22:28:01] INFO     Expectation: 'Save Comment' and 'Cancel' buttons are present                                                           main.py:51
+[22:28:10] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from pydantic import BaseModel, Field                                                                                        
+                        from typing import List                                                                                                      
+                                                                                                                                                     
+                        class Button(BaseModel):                                                                                                     
+                            text: str = Field(..., description="Visible label of the button")                                                        
+                            enabled: bool = Field(..., description="Whether the button is enabled and clickable")                                    
+                                                                                                                                                     
+                        class CommentForm(BaseModel):                                                                                                
+                            buttons: List[Button] = Field(..., description="List of buttons in the comment form")                                    
+                                                                                                                                                     
+                        # Extract the comment form from the current state                                                                            
+                        comment_form = session.history[-1].extract("get new comment form", schema=CommentForm)                                       
+                                                                                                                                                     
+                        button_texts = [btn.text.strip().lower() for btn in comment_form.buttons]                                                    
+                                                                                                                                                     
+                        assert "save comment" in button_texts, "'Save Comment' button is not present in the comment form."                           
+                        assert "cancel" in button_texts, "'Cancel' button is not present in the comment form."                                       
+                    ```                                                                                                                              
+[22:28:13] INFO     Extracted data: buttons=[Button(text='Cancel', enabled=True), Button(text='Save Comment', enabled=True)]              state.py:94
+           INFO     Assertion passed                                                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 5/6                                                                                                                                          │
+│ Action: In the 'Leave a comment here' field, type 'I like this template'                                                                          │
+│ Expected Result: Editor box is not empty                                                                                                          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:28:14] INFO     Proposed location: (518, 483)                                                                                        utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [20]: /div/a/span | text='Delete'                                                                                                
+                    [35]: /div/div/a | text='Admin'                                                                                                  
+                    [40]: /div/div/a | text='Admin'                                                                                                  
+                    [50]: /*[@id="tinymce"] | text=''                                                                                                
+                    [51]: /p | text=''                                                                                                               
+[22:28:18] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 20 -> Delete button (likely deletes a comment or item)                                                                         
+                    # 35 -> Admin link (likely navigates to an admin profile or dashboard)                                                           
+                    # 40 -> Admin link (duplicate, likely same as 35)                                                                                
+                    # 50 -> Comment input area (rich text editor, where you leave a comment)                                                         
+                    # 51 -> Paragraph inside the comment input (editable area for comment text)                                                      
+                                                                                                                                                     
+                    type(label="50", content="I like this template")                                                                                 
+                    ```                                                                                                                              
+[22:28:22] INFO     Expectation: Editor box is not empty                                                                                   main.py:51
+[22:28:28] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from pydantic import BaseModel, Field                                                                                        
+                                                                                                                                                     
+                        class CommentEditor(BaseModel):                                                                                              
+                            content: str = Field(..., description="Current text content in the new comment editor box")                              
+                                                                                                                                                     
+                        # Extract the current content of the new comment editor box                                                                  
+                        editor = session.history[-1].extract(                                                                                        
+                            "get the current content of the new comment editor box",                                                                 
+                            schema=CommentEditor                                                                                                     
+                        )                                                                                                                            
+                                                                                                                                                     
+                        # Assert that the editor box is not empty after typing                                                                       
+                        assert editor.content.strip() != "", "Editor box is empty after typing; expected non-empty content."                         
+                    ```                                                                                                                              
+[22:28:30] INFO     Extracted data: content='Like this template\nhere'                                                                    state.py:94
+           INFO     Assertion passed                                                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 6/6                                                                                                                                          │
+│ Action: Click 'Save Comment'                                                                                                                      │
+│ Expected Result: The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no  │
+│ other structural or content changes                                                                                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[22:28:31] INFO     Proposed location: (1128, 638)                                                                                       utils.py:111
+           INFO     SoM candidates:                                                                                                      utils.py:202
+                    [48]: /div/div/button | text=''                                                                                                  
+                    [49]: /div/div/button | text=''                                                                                                  
+                    [52]: /form/div/button | text='Cancel'                                                                                           
+                    [53]: /form/div/button | text='Save Comment'                                                                                     
+                    [54]: /div | text='Back to top'                                                                                                  
+[22:28:35] INFO     Proposed action:                                                                                                      utils.py:69
+                    ```python                                                                                                                        
+                    # Active elements:                                                                                                               
+                    # 48 -> Unlabeled button (possibly generic or navigation)                                                                        
+                    # 49 -> Unlabeled button (possibly generic or navigation)                                                                        
+                    # 52 -> Cancel button (likely cancels the comment action)                                                                        
+                    # 53 -> Save Comment button (saves the comment)                                                                                  
+                    # 54 -> Back to top (scrolls to top of the page)                                                                                 
+                                                                                                                                                     
+                    click_by_label(label="53")                                                                                                       
+                    ```                                                                                                                              
+           INFO     Clicking element with label: [53] and xpath:                                                                      automator.py:52
+                    /html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[3]/div/div[3]/form/div[2]/button[2]                                       
+[22:28:40] INFO     Expectation: The current comments tree is equal to the initially observed comments tree with the addition of exactly   main.py:51
+                    one new comment, and no other structural or content changes                                                                      
+[22:29:04] INFO     Assertion: ```python                                                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                                                             
+                        from typing import List, Optional                                                                                            
+                        from pydantic import BaseModel, Field                                                                                        
+                                                                                                                                                     
+                        # Define schema for a comment node (supports nested replies)                                                                 
+                        class Comment(BaseModel):                                                                                                    
+                            id: int = Field(..., description="Unique identifier for the comment")                                                    
+                            author: str = Field(..., description="Author of the comment")                                                            
+                            content: str = Field(..., description="Text content of the comment")                                                     
+                            replies: Optional[List["Comment"]] = Field(default_factory=list, description="List of reply                              
+                    comments")                                                                                                                       
+                                                                                                                                                     
+                        Comment.update_forward_refs()                                                                                                
+                                                                                                                                                     
+                        class CommentsTree(BaseModel):                                                                                               
+                            comments: List[Comment] = Field(default_factory=list, description="Top-level comments (with nested                       
+                    replies)")                                                                                                                       
+                                                                                                                                                     
+                        # Extract initial and current comments tree                                                                                  
+                        initial_comments = session.history[1].extract("extract all comments as tree",                                                
+                    schema=CommentsTree).comments                                                                                                    
+                        current_comments = session.history[-1].extract("extract all comments as tree",                                               
+                    schema=CommentsTree).comments                                                                                                    
+                                                                                                                                                     
+                        def flatten_comments(comments: List[Comment]) -> List[Comment]:                                                              
+                            """Flatten the comment tree into a list (preorder traversal)."""                                                         
+                            result = []                                                                                                              
+                            for c in comments:                                                                                                       
+                                result.append(c)                                                                                                     
+                                if c.replies:                                                                                                        
+                                    result.extend(flatten_comments(c.replies))                                                                       
+                            return result                                                                                                            
+                                                                                                                                                     
+                        initial_flat = flatten_comments(initial_comments)                                                                            
+                        current_flat = flatten_comments(current_comments)                                                                            
+                                                                                                                                                     
+                        # There should be exactly one new comment                                                                                    
+                        assert len(current_flat) == len(initial_flat) + 1, (                                                                         
+                            f"Expected exactly one new comment, but found {len(current_flat) - len(initial_flat)} new                                
+                    comments."                                                                                                                       
+                        )                                                                                                                            
+                                                                                                                                                     
+                        # Find the new comment by id (assuming ids are unique and new one is not in initial)                                         
+                        initial_ids = {c.id for c in initial_flat}                                                                                   
+                        new_comments = [c for c in current_flat if c.id not in initial_ids]                                                          
+                        assert len(new_comments) == 1, "There should be exactly one new comment node."                                               
+                                                                                                                                                     
+                        new_comment = new_comments[0]                                                                                                
+                        # Check that the new comment content matches what was entered                                                                
+                        assert new_comment.content == "I like this template", (                                                                      
+                            f"New comment content mismatch: expected 'I like this template', got '{new_comment.content}'"                            
+                        )                                                                                                                            
+                                                                                                                                                     
+                        # Check that all other comments (by id) are unchanged in content and structure                                               
+                        initial_by_id = {c.id: c for c in initial_flat}                                                                              
+                        for c in current_flat:                                                                                                       
+                            if c.id in initial_by_id:                                                                                                
+                                orig = initial_by_id[c.id]                                                                                           
+                                assert c.content == orig.content, f"Comment content changed for id {c.id}."                                          
+                                assert c.author == orig.author, f"Comment author changed for id {c.id}."                                             
+                                assert len(c.replies) == len(orig.replies), f"Replies count changed for comment id {c.id}."                          
+                                                                                                                                                     
+                        # Optionally, check that the new comment is appended at the end (as per UI)                                                  
+                        assert current_flat[-1].id == new_comment.id, "New comment is not the last in the comments list as                           
+                    expected."                                                                                                                       
+                    ```                                                                                                                              
+[22:29:10] INFO     Extracted data: comments=[Comment(id=1, author='Admin', content='Comment', replies=[Comment(id=3, author='Admin',     state.py:94
+                    content='Reply', replies=[Comment(id=4, author='Admin', content='Reply', replies=[Comment(id=5, author='Admin',                  
+                    content='Reply', replies=[])])])]), Comment(id=2, author='Admin', content='Comment', replies=[])]                                
+[22:29:22] INFO     Extracted data: comments=[Comment(id=1, author='Admin', content='Comment', replies=[Comment(id=3, author='Admin',     state.py:94
+                    content='Reply', replies=[Comment(id=4, author='Admin', content='Reply', replies=[Comment(id=5, author='Admin',                  
+                    content='Reply', replies=[])])])]), Comment(id=2, author='Admin', content='Comment', replies=[]), Comment(id=6,                  
+                    author='Admin', content='I like this template', replies=[])]                                                                     
+           INFO     Assertion passed      

@@ -1,0 +1,26 @@
+[
+    {
+        "url": "http://localhost:8081/books/book/page/page-template",
+        "element": "<a href=\"http://localhost:8081/books/book/page/page-template\" class=\"page   entity-list-item\" data-entity-type=\"page\" data-entity-id=\"5\">\n    <span role=\"presentation\" class=\"icon text-page\"></span>\n    <div class=\"content\">\n            <h4 class=\"entity-l>",
+        "xpath": "/html/body/div[4]/div/div/div/div[2]/div/div[1]/div/div/div/a[7]",
+        "action": "click"
+    },
+    {
+        "url": "http://localhost:8081/books/book/page/page",
+        "element": "<a href=\"http://localhost:8081/books/book/page/page\" data-shortcut=\"next\" class=\"outline-hover no-link-style block rounded text-xs-right\">\n                <div class=\"px-m pt-xs text-muted text-xs-right\">Next</div>\n                <div class=\"inline block\">",
+        "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[2]/div[2]/a",
+        "action": "click"
+    },
+    {
+        "url": "http://localhost:8081/books/book/page/page",
+        "element": "<button type=\"button\" refs=\"page-comments@add-comment-button\" class=\"button outline\">Add Comment</button>",
+        "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[1]/div/button",
+        "action": "click"
+    },
+    {
+        "url": "http://localhost:8081/books/book/page/page",
+        "element": "<a href=\"http://localhost:8081/books/book/page/page\" class=\"page  selected entity-list-item\" data-entity-type=\"page\" data-entity-id=\"6\" >\n    <span role=\"presentation\" class=\"icon text-page\"></span>\n    <div class=\"content\">\n            <h4 class=\"entity-l>",
+        "xpath": "/html/body/div[4]/div[2]/div[1]/div/div[2]/aside/nav/ul/li[4]/a",
+        "action": "click"
+    }
+]

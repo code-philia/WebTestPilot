@@ -1,0 +1,863 @@
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Run Input                                                                                                         │
+│ Configuration                                                                                                     │
+│ ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ │
+│ ┃ Key         ┃ Value                                                                                           ┃ │
+│ ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩ │
+│ │ Method      │ webtestpilot                                                                                    │ │
+│ │ Application │ bookstack                                                                                       │ │
+│ │ Output      │ /home/xiwen/webtestpilot-camera-ready/experiments/rq2/results/webtestpilot_bookstack/run_20260… │ │
+│ │ Headless    │ True                                                                                            │ │
+│ │ Inject bug  │ True                                                                                            │ │
+│ └─────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────┘ │
+│ Test Cases                                                                                                        │
+│ ┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                                       │
+│ ┃ No. ┃ Test Case                       ┃ Bug Name                        ┃                                       │
+│ ┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩                                       │
+│ │ 1   │ comment                         │ comment                         │                                       │
+│ └─────┴─────────────────────────────────┴─────────────────────────────────┘                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[04:16:40] INFO     Initializing webtestpilot test runner.                                            evaluate.py:143
+           INFO     Starting test execution.                                                          evaluate.py:146
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Test Case 1/27: Comment                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+           INFO     Restarting webapp: bookstack                                                   base_runner.py:112
+[04:17:02] INFO     Webapp restarted successfully                                                  base_runner.py:121
+[04:17:10] INFO     Abstracted Page                                                                    __init__.py:55
+           INFO     Name: 'Knowledge Dashboard'                                                        __init__.py:56
+           INFO     Description: 'Displays recent activity, favorites, and updates in a clean,         __init__.py:57
+                    card-based layout.'                                                                              
+           INFO     <?xml version="1.0" ?><Page>                                                       __init__.py:58
+                        <Header role="banner" contains="logo,search,mainNav,profileMenu"/>                           
+                        <Toolbar contains="toggleDetails,darkModeSwitch"/>                                           
+                        <MainContent layout="threeColumn">                                                           
+                            <Column position="left">                                                                 
+                                <Card title="My Recently Viewed" type="list" itemType="document"/>                   
+                            </Column>                                                                                
+                            <Column position="center">                                                               
+                                <Card title="My Most Viewed Favourites" type="list"                                  
+                    itemType="document" hasViewAll="true"/>                                                          
+                                <Card title="Recently Updated Pages" type="list" itemType="document"/>               
+                            </Column>                                                                                
+                            <Column position="right">                                                                
+                                <Card title="Recent Activity" type="activityFeed"                                    
+                    itemType="userAction"/>                                                                          
+                            </Column>                                                                                
+                        </MainContent>                                                                               
+                    </Page>                                                                                          
+[04:17:11] INFO     Injecting bug:                                                                 base_runner.py:144
+                    /home/xiwen/webtestpilot-camera-ready/benchmark/bookstack/bugs/comment.js                        
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 1/6                                                                                                          │
+│ Action: From the dashboard click 'Page Template' link                                                             │
+│ Expected Result: Page contains title 'Page Template'                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:17:12] INFO     Proposed location: (134, 491)                                                        utils.py:111
+           INFO     SoM candidates:                                                                      utils.py:202
+                    [39]: /div/a/div | text='Book'                                                                   
+                    [43]: /div/a/div | text='Page Template'                                                          
+                    [44]: /a/div/h4 | text='Page Template'                                                           
+                    [47]: /div/a/div | text='Page 1'                                                                 
+                    [48]: /a/div/h4 | text='Page 1'                                                                  
+[04:17:17] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 39 -> Book (likely navigates to a "Book" section)                                              
+                    # 43 -> Page Template (likely navigates to a "Page Template" section)                            
+                    # 44 -> Page Template (likely a heading or link for "Page Template")                             
+                    # 47 -> Page 1 (likely navigates to a "Page 1" section)                                          
+                    # 48 -> Page 1 (likely a heading or link for "Page 1")                                           
+                                                                                                                     
+                    click_by_label(label="43")                                                                       
+                    ```                                                                                              
+           INFO     Clicking element with label: [43] and xpath:                                      automator.py:52
+                    /html/body/div[4]/div/div/div/div[2]/div/div[1]/div/div/div/a[7]/div                             
+[04:17:26] INFO     Abstracted Page                                                                    __init__.py:55
+           INFO     Name: 'Document Management Page'                                                   __init__.py:56
+           INFO     Description: 'Displays document details, actions, and navigation in a clean,       __init__.py:57
+                    editable layout.'                                                                                
+           INFO     <?xml version="1.0" ?><Page>                                                       __init__.py:58
+                        <Header role="navigation" contains="logo,search,mainMenu,userMenu"/>                         
+                        <Sidebar role="complementary" section="Actions"                                              
+                    contains="edit,copy,move,revisions,permissions,delete,watch,favourite,export"/>                  
+                        <DetailsPanel visible="true" contains="revisionInfo,createdBy,updatedBy"/>                   
+                        <Breadcrumb hasPath="true" currentPage="true"/>                                              
+                        <MainContent>                                                                                
+                            <DocumentTitle editable="true"/>                                                         
+                            <DocumentDescription editable="true"/>                                                   
+                        </MainContent>                                                                               
+                        <Footer role="navigation" contains="previous,next"/>                                         
+                    </Page>                                                                                          
+           INFO     Expectation: Page contains title 'Page Template'                                       main.py:51
+[04:17:32] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from pydantic import BaseModel, Field                                                        
+                                                                                                                     
+                        class DocumentTitle(BaseModel):                                                              
+                            title: str = Field(..., description="The main title of the                               
+                    document/page")                                                                                  
+                                                                                                                     
+                        # Extract the document title from the current state                                          
+                        doc_title = session.history[-1].extract("get document title",                                
+                    schema=DocumentTitle).title                                                                      
+                                                                                                                     
+                        # Assert that the title is 'Page Template'                                                   
+                        assert doc_title == "Page Template", f"Document title is not 'Page                           
+                    Template', found '{doc_title}' instead."                                                         
+                    ```                                                                                              
+[04:17:33] INFO     Extracted data: title='Page Template'                                                 state.py:94
+           INFO     Assertion passed                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 2/6                                                                                                          │
+│ Action: Scroll down                                                                                               │
+│ Expected Result: A list of comments is present                                                                    │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:17:34] INFO     Proposed location: (639, 532)                                                        utils.py:111
+[04:17:35] INFO     SoM candidates:                                                                      utils.py:202
+                    [52]: /div/div/a | text='Previous Chapter'                                                       
+                    [53]: /div/a/div | text='Previous'                                                               
+                    [54]: /div/a/div | text='Chapter'                                                                
+                    [55]: /a/div/div | text='Chapter'                                                                
+                    [57]: /div/div/span | text='Chapter'                                                             
+[04:17:36] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 52 -> Previous Chapter button/link                                                             
+                    # 53 -> Previous button/link                                                                     
+                    # 54 -> Chapter button/link                                                                      
+                    # 55 -> Chapter button/link                                                                      
+                    # 57 -> Chapter label/span                                                                       
+                                                                                                                     
+                    scroll_down()                                                                                    
+                    ```                                                                                              
+[04:17:39] INFO     Expectation: A list of comments is present                                             main.py:51
+[04:17:45] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from pydantic import BaseModel, Field                                                        
+                        from typing import List                                                                      
+                                                                                                                     
+                        # Define a schema for a single comment                                                       
+                        class Comment(BaseModel):                                                                    
+                            author: str = Field(..., description="The name of the comment                            
+                    author")                                                                                         
+                            content: str = Field(..., description="The text content of the                           
+                    comment")                                                                                        
+                            id: int = Field(..., description="Unique identifier for the                              
+                    comment")                                                                                        
+                                                                                                                     
+                        # Define a schema for the comment list                                                       
+                        class CommentSection(BaseModel):                                                             
+                            comments: List[Comment] = Field(..., description="List of comments                       
+                    visible on the page")                                                                            
+                                                                                                                     
+                        # Extract the comment section from the current state                                         
+                        comment_section = session.history[-1].extract("extract all visible                           
+                    comments", schema=CommentSection)                                                                
+                                                                                                                     
+                        # Assert that there is at least one comment present                                          
+                        assert len(comment_section.comments) > 0, "No comments are present                           
+                    after scrolling down; expected at least one comment to be visible."                              
+                    ```                                                                                              
+[04:17:49] INFO     Extracted data: comments=[Comment(author='Admin', content='Comment', id=1),           state.py:94
+                    Comment(author='Admin', content='Reply', id=3), Comment(author='Admin',                          
+                    content='Reply', id=4), Comment(author='Admin', content='Reply', id=5),                          
+                    Comment(author='Admin', content='Comment', id=2)]                                                
+           INFO     Assertion passed                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 3/6                                                                                                          │
+│ Action: Click 'Add Comment'                                                                                       │
+│ Expected Result: A WYSIWYG comment editor is open                                                                 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:17:51] INFO     Proposed location: (1130, 672)                                                       utils.py:111
+           INFO     SoM candidates:                                                                      utils.py:202
+                    [52]: /div/div/button | text='Edit'                                                              
+                    [53]: /div/div/button | text='Delete'                                                            
+                    [54]: /div/div/a | text='#2'                                                                     
+                    [55]: /section/div/button | text='Add Comment'                                                   
+                    [56]: /div | text='Back to top'                                                                  
+[04:17:55] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 52 -> Edit button, likely allows editing an item.                                              
+                    # 53 -> Delete button, likely allows deleting an item.                                           
+                    # 54 -> Link labeled '#2', likely navigates to item #2.                                          
+                    # 55 -> Add Comment button, likely opens a form or modal to add a comment.                       
+                    # 56 -> Back to top, likely scrolls the page to the top.                                         
+                                                                                                                     
+                    click_by_label(label="55")                                                                       
+                    ```                                                                                              
+           INFO     Clicking element with label: [55] and xpath:                                      automator.py:52
+                    /html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[4]/button                                 
+[04:17:58] INFO     Expectation: A WYSIWYG comment editor is open                                          main.py:51
+[04:18:06] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from pydantic import BaseModel, Field                                                        
+                        from typing import Optional                                                                  
+                                                                                                                     
+                        # Define schema for the comment editor                                                       
+                        class CommentEditor(BaseModel):                                                              
+                            is_visible: bool = Field(..., description="Whether the WYSIWYG                           
+                    comment editor is currently visible")                                                            
+                            has_toolbar: bool = Field(..., description="Whether the editor                           
+                    toolbar (B, I, link, list) is present")                                                          
+                            placeholder: Optional[str] = Field(None, description="Placeholder                        
+                    text in the editor input area")                                                                  
+                                                                                                                     
+                        # Extract the comment editor state from the current page                                     
+                        editor = session.history[-1].extract(                                                        
+                            "get new comment editor state (WYSIWYG)", schema=CommentEditor                           
+                        )                                                                                            
+                                                                                                                     
+                        # Assert the WYSIWYG comment editor is open and visible                                      
+                        assert editor.is_visible, "WYSIWYG comment editor is not visible after                       
+                    clicking 'Add Comment'."                                                                         
+                        assert editor.has_toolbar, "WYSIWYG editor toolbar is not present."                          
+                        assert editor.placeholder is not None and                                                    
+                    len(editor.placeholder.strip()) > 0, "Editor placeholder text is missing                         
+                    or empty."                                                                                       
+                    ```                                                                                              
+[04:18:08] INFO     Extracted data: is_visible=True has_toolbar=True placeholder='Leave a comment here'   state.py:94
+           INFO     Assertion passed                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 4/6                                                                                                          │
+│ Action: Scroll down                                                                                               │
+│ Expected Result: 'Save Comment' and 'Cancel' buttons are present                                                  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:18:09] INFO     Proposed location: (639, 360)                                                        utils.py:111
+           INFO     SoM candidates:                                                                      utils.py:202
+                    [30]: /div/div/a | text='Admin'                                                                  
+                    [35]: /div/div/a | text='Admin'                                                                  
+                    [40]: /div/div/a | text='Admin'                                                                  
+                    [45]: /div/div/a | text='Admin'                                                                  
+                    [56]: /p | text=''                                                                               
+[04:18:13] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 30 -> Link or button labeled 'Admin' (likely navigates to an Admin page or section)            
+                    # 35 -> Link or button labeled 'Admin' (likely navigates to an Admin page or section)            
+                    # 40 -> Link or button labeled 'Admin' (likely navigates to an Admin page or section)            
+                    # 45 -> Link or button labeled 'Admin' (likely navigates to an Admin page or section)            
+                    # 56 -> Paragraph element (possibly a comment or content area, but no visible text)              
+                                                                                                                     
+                    scroll_down()                                                                                    
+                    ```                                                                                              
+[04:18:16] INFO     Expectation: 'Save Comment' and 'Cancel' buttons are present                           main.py:51
+[04:18:23] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from pydantic import BaseModel, Field                                                        
+                        from typing import List                                                                      
+                                                                                                                     
+                        class Button(BaseModel):                                                                     
+                            text: str = Field(..., description="Visible label of the button")                        
+                            enabled: bool = Field(..., description="Whether the button is                            
+                    enabled and clickable")                                                                          
+                                                                                                                     
+                        class CommentFormActions(BaseModel):                                                         
+                            buttons: List[Button] = Field(..., description="List of action                           
+                    buttons in the comment form")                                                                    
+                                                                                                                     
+                        # Extract the comment form action buttons from the current state                             
+                        actions = session.history[-1].extract(                                                       
+                            "get visible action buttons in the new comment form",                                    
+                    schema=CommentFormActions                                                                        
+                        )                                                                                            
+                                                                                                                     
+                        button_texts = [btn.text.strip().lower() for btn in actions.buttons]                         
+                                                                                                                     
+                        assert "save comment" in button_texts, "'Save Comment' button is not                         
+                    present in the comment form actions."                                                            
+                        assert "cancel" in button_texts, "'Cancel' button is not present in                          
+                    the comment form actions."                                                                       
+                    ```                                                                                              
+[04:18:26] INFO     Extracted data: buttons=[Button(text='Cancel', enabled=True), Button(text='Save       state.py:94
+                    Comment', enabled=True)]                                                                         
+           INFO     Assertion passed                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 5/6                                                                                                          │
+│ Action: In the 'Leave a comment here' field, type 'I like this template'                                          │
+│ Expected Result: Editor box is not empty                                                                          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:18:27] INFO     Proposed location: (496, 484)                                                        utils.py:111
+           INFO     SoM candidates:                                                                      utils.py:202
+                    [20]: /div/a/span | text='Delete'                                                                
+                    [23]: /form/button/span | text='Watch'                                                           
+                    [40]: /div/div/a | text='Admin'                                                                  
+                    [50]: /*[@id="tinymce"] | text=''                                                                
+                    [51]: /p | text=''                                                                               
+[04:18:31] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 20 -> Delete button (likely deletes something)                                                 
+                    # 23 -> Watch button (likely subscribes or follows)                                              
+                    # 40 -> Admin link (likely navigates to admin page)                                              
+                    # 50 -> Comment input field (for typing a comment, matches 'Leave a comment here')               
+                    # 51 -> Paragraph (likely displays text, not interactive)                                        
+                                                                                                                     
+                    type(label="50", content="I like this template")                                                 
+                    ```                                                                                              
+[04:18:34] INFO     Expectation: Editor box is not empty                                                   main.py:51
+[04:18:40] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from pydantic import BaseModel, Field                                                        
+                                                                                                                     
+                        class CommentEditor(BaseModel):                                                              
+                            content: str = Field(..., description="Current text content in the                       
+                    new comment editor box")                                                                         
+                                                                                                                     
+                        # Extract the current content of the new comment editor box                                  
+                        editor = session.history[-1].extract(                                                        
+                            "get the current content of the new comment editor box",                                 
+                            schema=CommentEditor                                                                     
+                        )                                                                                            
+                                                                                                                     
+                        # Assert that the editor box is not empty after typing                                       
+                        assert editor.content.strip() != "", "Editor box is empty after                              
+                    typing; expected non-empty content."                                                             
+                    ```                                                                                              
+[04:18:41] INFO     Extracted data: content='Like this template\nhere'                                    state.py:94
+           INFO     Assertion passed                                                           oracle_inference.py:55
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 6/6                                                                                                          │
+│ Action: Click 'Save Comment'                                                                                      │
+│ Expected Result: The current comments tree is equal to the initially observed comments tree with the addition of  │
+│ exactly one new comment, and no other structural or content changes                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04:18:42] INFO     Proposed location: (1128, 638)                                                       utils.py:111
+[04:18:43] INFO     SoM candidates:                                                                      utils.py:202
+                    [48]: /div/div/button | text=''                                                                  
+                    [49]: /div/div/button | text=''                                                                  
+                    [52]: /form/div/button | text='Cancel'                                                           
+                    [53]: /form/div/button | text='Save Comment'                                                     
+                    [54]: /div | text='Back to top'                                                                  
+[04:18:46] INFO     Proposed action:                                                                      utils.py:69
+                    ```python                                                                                        
+                    # Active elements:                                                                               
+                    # 48 -> Unlabeled button (possibly generic or navigation)                                        
+                    # 49 -> Unlabeled button (possibly generic or navigation)                                        
+                    # 52 -> Cancel button (likely cancels the comment action)                                        
+                    # 53 -> Save Comment button (saves the comment)                                                  
+                    # 54 -> Back to top (scrolls to top of page)                                                     
+                                                                                                                     
+                    click_by_label(label="53")                                                                       
+                    ```                                                                                              
+           INFO     Clicking element with label: [53] and xpath:                                      automator.py:52
+                    /html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[3]/div/div[3]/form/div[2]/                
+                    button[2]                                                                                        
+[04:18:50] INFO     Expectation: The current comments tree is equal to the initially observed comments     main.py:51
+                    tree with the addition of exactly one new comment, and no other structural or content            
+                    changes                                                                                          
+[04:19:12] INFO     Assertion: ```python                                                       oracle_inference.py:50
+                    def postcondition(session: Session):                                                             
+                        from typing import List, Optional                                                            
+                        from pydantic import BaseModel, Field                                                        
+                                                                                                                     
+                        # Define the comment schema                                                                  
+                        class Comment(BaseModel):                                                                    
+                            id: int = Field(..., description="Unique identifier for the                              
+                    comment")                                                                                        
+                            author: str = Field(..., description="Author of the comment")                            
+                            content: str = Field(..., description="Text content of the                               
+                    comment")                                                                                        
+                            replies: Optional[List["Comment"]] = Field(default_factory=list,                         
+                    description="List of replies to this comment")                                                   
+                                                                                                                     
+                        Comment.update_forward_refs()                                                                
+                                                                                                                     
+                        class CommentsTree(BaseModel):                                                               
+                            comments: List[Comment] = Field(default_factory=list,                                    
+                    description="Top-level comments with nested replies")                                            
+                                                                                                                     
+                        # Extract initial and current comments tree                                                  
+                        initial_comments = session.history[1].extract("extract all comments as                       
+                    tree", schema=CommentsTree).comments                                                             
+                        current_comments = session.history[-1].extract("extract all comments                         
+                    as tree", schema=CommentsTree).comments                                                          
+                                                                                                                     
+                        def flatten_comments(comments: List[Comment]) -> List[Comment]:                              
+                            """Flatten the comment tree into a list of all comments (including                       
+                    replies)."""                                                                                     
+                            flat = []                                                                                
+                            for c in comments:                                                                       
+                                flat.append(c)                                                                       
+                                if c.replies:                                                                        
+                                    flat.extend(flatten_comments(c.replies))                                         
+                            return flat                                                                              
+                                                                                                                     
+                        initial_flat = flatten_comments(initial_comments)                                            
+                        current_flat = flatten_comments(current_comments)                                            
+                                                                                                                     
+                        # There should be exactly one new comment                                                    
+                        assert len(current_flat) == len(initial_flat) + 1, (                                         
+                            f"Expected exactly one new comment, but found {len(current_flat) -                       
+                    len(initial_flat)} new comments."                                                                
+                        )                                                                                            
+                                                                                                                     
+                        # Find the new comment(s)                                                                    
+                        initial_ids = {c.id for c in initial_flat}                                                   
+                        new_comments = [c for c in current_flat if c.id not in initial_ids]                          
+                                                                                                                     
+                        assert len(new_comments) == 1, "There should be exactly one new                              
+                    comment added."                                                                                  
+                                                                                                                     
+                        # The new comment should have the expected content                                           
+                        new_comment = new_comments[0]                                                                
+                        assert "I like this template" in new_comment.content, (                                      
+                            f"New comment content mismatch. Expected 'I like this template',                         
+                    got '{new_comment.content}'."                                                                    
+                        )                                                                                            
+                                                                                                                     
+                        # All other comments (by id) should be structurally and content-wise                         
+                    identical                                                                                        
+                        def comment_dict(c: Comment):                                                                
+                            # Exclude id and content for the new comment, compare all else for                       
+                    existing                                                                                         
+                            return {                                                                                 
+                                "id": c.id,                                                                          
+                                "author": c.author,                                                                  
+                                "content": c.content,                                                                
+                                "replies": [comment_dict(r) for r in c.replies] if c.replies                         
+                    else [],                                                                                         
+                            }                                                                                        
+                                                                                                                     
+                        # Remove the new comment from the current tree for comparison                                
+                        def remove_new_comment(comments: List[Comment], new_id: int) ->                              
+                    List[Comment]:                                                                                   
+                            result = []                                                                              
+                            for c in comments:                                                                       
+                                if c.id == new_id:                                                                   
+                                    continue                                                                         
+                                c_copy = Comment(**c.dict())                                                         
+                                if c_copy.replies:                                                                   
+                                    c_copy.replies = remove_new_comment(c_copy.replies,                              
+                    new_id)                                                                                          
+                                result.append(c_copy)                                                                
+                            return result                                                                            
+                                                                                                                     
+                        current_without_new = remove_new_comment(current_comments,                                   
+                    new_comment.id)                                                                                  
+                                                                                                                     
+                        assert [comment_dict(c) for c in current_without_new] ==                                     
+                    [comment_dict(c) for c in initial_comments], (                                                   
+                            "Other comments or their structure have changed unexpectedly after                       
+                    adding the new comment."                                                                         
+                        )                                                                                            
+                    ```                                                                                              
+[04:19:18] INFO     Extracted data: comments=[Comment(id=1, author='Admin', content='Comment',            state.py:94
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=4,                   
+                    author='Admin', content='Reply', replies=[Comment(id=5, author='Admin',                          
+                    content='Reply', replies=[])])])]), Comment(id=2, author='Admin', content='Comment',             
+                    replies=[])]                                                                                     
+[04:19:26] INFO     Extracted data: comments=[Comment(id=1, author='Admin', content='Comment',            state.py:94
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=5,                   
+                    author='Admin', content='Reply', replies=[])]), Comment(id=4, author='Admin',                    
+                    content='Reply', replies=[])]), Comment(id=2, author='Admin', content='Comment',                 
+                    replies=[]), Comment(id=6, author='Admin', content='I like this template',                       
+                    replies=[])]                                                                                     
+           ERROR    Assertion failed: Other comments or their structure have changed           oracle_inference.py:59
+                    unexpectedly after adding the new comment.                                                       
+                    Variable trace:                                                                                  
+                    [('line 2', {'insert': {'session': '<Session>'}}),                                               
+                     ('line 19',                                                                                     
+                      {'insert': {'initial_comments': [Comment(id=1, author='Admin',                                 
+                    content='Comment', replies=[Comment(id=3, author='Admin', content='Reply',                       
+                    replies=[Comment(id=4, author='Admin', content='Reply',                                          
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])])])]),                       
+                                                       Comment(id=2, author='Admin',                                 
+                    content='Comment', replies=[])]}}),                                                              
+                     ('line 21',                                                                                     
+                      {'insert': {'current_comments': [Comment(id=1, author='Admin',                                 
+                    content='Comment', replies=[Comment(id=3, author='Admin', content='Reply',                       
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]),                           
+                    Comment(id=4, author='Admin', content='Reply', replies=[])]),                                    
+                                                       Comment(id=2, author='Admin',                                 
+                    content='Comment', replies=[]),                                                                  
+                                                       Comment(id=6, author='Admin',                                 
+                    content='I like this template', replies=[])]}}),                                                 
+                     ('line 31',                                                                                     
+                      {'insert': {'initial_flat': [Comment(id=1, author='Admin',                                     
+                    content='Comment', replies=[Comment(id=3, author='Admin', content='Reply',                       
+                    replies=[Comment(id=4, author='Admin', content='Reply',                                          
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])])])]),                       
+                                                   Comment(id=3, author='Admin',                                     
+                    content='Reply', replies=[Comment(id=4, author='Admin', content='Reply',                         
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])])]),                         
+                                                   Comment(id=4, author='Admin',                                     
+                    content='Reply', replies=[Comment(id=5, author='Admin', content='Reply',                         
+                    replies=[])]),                                                                                   
+                                                   Comment(id=5, author='Admin',                                     
+                    content='Reply', replies=[]),                                                                    
+                                                   Comment(id=2, author='Admin',                                     
+                    content='Comment', replies=[])]}}),                                                              
+                     ('line 34',                                                                                     
+                      {'insert': {'current_flat': [Comment(id=1, author='Admin',                                     
+                    content='Comment', replies=[Comment(id=3, author='Admin', content='Reply',                       
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]),                           
+                    Comment(id=4, author='Admin', content='Reply', replies=[])]),                                    
+                                                   Comment(id=3, author='Admin',                                     
+                    content='Reply', replies=[Comment(id=5, author='Admin', content='Reply',                         
+                    replies=[])]),                                                                                   
+                                                   Comment(id=5, author='Admin',                                     
+                    content='Reply', replies=[]),                                                                    
+                                                   Comment(id=4, author='Admin',                                     
+                    content='Reply', replies=[]),                                                                    
+                                                   Comment(id=2, author='Admin',                                     
+                    content='Comment', replies=[]),                                                                  
+                                                   Comment(id=6, author='Admin', content='I                          
+                    like this template', replies=[])]}}),                                                            
+                     ('line 39',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 4,                                           
+                                                                  'replies': [{'author':                             
+                    'Admin',                                                                                         
+                                                                               'content':                            
+                    'Reply',                                                                                         
+                                                                               'id': 5,                              
+                                                                               'replies':                            
+                    []}]}]}]}}}),                                                                                    
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 3,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]}]}}}),                             
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 4,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 5,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 5,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40', {'delete': ['c']}),                                                                 
+                     ('line 40',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]},                                  
+                                                    {'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 3,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 5,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 5,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 4,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'I like this template',                                           
+                                        'id': 6,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 42',                                                                                     
+                      {'delete': ['c'],                                                                              
+                       'insert': {'new_comments': [Comment(id=6, author='Admin', content='I                          
+                    like this template', replies=[])]}}),                                                            
+                     ('line 46',                                                                                     
+                      {'insert': {'new_comment': {'author': 'Admin',                                                 
+                                                  'content': 'I like this template',                                 
+                                                  'id': 6,                                                           
+                                                  'replies': []}}}),                                                 
+                     ('line 74',                                                                                     
+                      {'insert': {'current_without_new': [Comment(id=1, author='Admin',                              
+                    content='Comment', replies=[Comment(id=3, author='Admin', content='Reply',                       
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]),                           
+                    Comment(id=4, author='Admin', content='Reply', replies=[])]),                                    
+                                                          Comment(id=2, author='Admin',                              
+                    content='Comment', replies=[])]}}),                                                              
+                     ('line 74',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]},                                  
+                                                    {'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 4,                                           
+                                                                  'replies': [{'author':                             
+                    'Admin',                                                                                         
+                                                                               'content':                            
+                    'Reply',                                                                                         
+                                                                               'id': 5,                              
+                                                                               'replies':                            
+                    []}]}]}]}}}),                                                                                    
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 75', {'delete': ['c']})]                                                                 
+           ERROR    Assertion failed after all retries, raising bug report                     oracle_inference.py:64
+           ERROR    Bug reported: Other comments or their structure have changed unexpectedly after adding main.py:55
+                    the new comment.                                                                                 
+                    Variable trace:                                                                                  
+                    [('line 2', {'insert': {'session': '<Session>'}}),                                               
+                     ('line 19',                                                                                     
+                      {'insert': {'initial_comments': [Comment(id=1, author='Admin', content='Comment',              
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=4,                   
+                    author='Admin', content='Reply', replies=[Comment(id=5, author='Admin',                          
+                    content='Reply', replies=[])])])]),                                                              
+                                                       Comment(id=2, author='Admin', content='Comment',              
+                    replies=[])]}}),                                                                                 
+                     ('line 21',                                                                                     
+                      {'insert': {'current_comments': [Comment(id=1, author='Admin', content='Comment',              
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=5,                   
+                    author='Admin', content='Reply', replies=[])]), Comment(id=4, author='Admin',                    
+                    content='Reply', replies=[])]),                                                                  
+                                                       Comment(id=2, author='Admin', content='Comment',              
+                    replies=[]),                                                                                     
+                                                       Comment(id=6, author='Admin', content='I like this            
+                    template', replies=[])]}}),                                                                      
+                     ('line 31',                                                                                     
+                      {'insert': {'initial_flat': [Comment(id=1, author='Admin', content='Comment',                  
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=4,                   
+                    author='Admin', content='Reply', replies=[Comment(id=5, author='Admin',                          
+                    content='Reply', replies=[])])])]),                                                              
+                                                   Comment(id=3, author='Admin', content='Reply',                    
+                    replies=[Comment(id=4, author='Admin', content='Reply', replies=[Comment(id=5,                   
+                    author='Admin', content='Reply', replies=[])])]),                                                
+                                                   Comment(id=4, author='Admin', content='Reply',                    
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]),                           
+                                                   Comment(id=5, author='Admin', content='Reply',                    
+                    replies=[]),                                                                                     
+                                                   Comment(id=2, author='Admin', content='Comment',                  
+                    replies=[])]}}),                                                                                 
+                     ('line 34',                                                                                     
+                      {'insert': {'current_flat': [Comment(id=1, author='Admin', content='Comment',                  
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=5,                   
+                    author='Admin', content='Reply', replies=[])]), Comment(id=4, author='Admin',                    
+                    content='Reply', replies=[])]),                                                                  
+                                                   Comment(id=3, author='Admin', content='Reply',                    
+                    replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]),                           
+                                                   Comment(id=5, author='Admin', content='Reply',                    
+                    replies=[]),                                                                                     
+                                                   Comment(id=4, author='Admin', content='Reply',                    
+                    replies=[]),                                                                                     
+                                                   Comment(id=2, author='Admin', content='Comment',                  
+                    replies=[]),                                                                                     
+                                                   Comment(id=6, author='Admin', content='I like this                
+                    template', replies=[])]}}),                                                                      
+                     ('line 39',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 4,                                           
+                                                                  'replies': [{'author': 'Admin',                    
+                                                                               'content': 'Reply',                   
+                                                                               'id': 5,                              
+                                                                               'replies': []}]}]}]}}}),              
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 3,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]}]}}}),                             
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 4,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 5,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 5,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 39',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40', {'delete': ['c']}),                                                                 
+                     ('line 40',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]},                                  
+                                                    {'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 3,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 5,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 5,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Reply',                                                          
+                                        'id': 4,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 40',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'I like this template',                                           
+                                        'id': 6,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 42',                                                                                     
+                      {'delete': ['c'],                                                                              
+                       'insert': {'new_comments': [Comment(id=6, author='Admin', content='I like this                
+                    template', replies=[])]}}),                                                                      
+                     ('line 46',                                                                                     
+                      {'insert': {'new_comment': {'author': 'Admin',                                                 
+                                                  'content': 'I like this template',                                 
+                                                  'id': 6,                                                           
+                                                  'replies': []}}}),                                                 
+                     ('line 74',                                                                                     
+                      {'insert': {'current_without_new': [Comment(id=1, author='Admin', content='Comment',           
+                    replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=5,                   
+                    author='Admin', content='Reply', replies=[])]), Comment(id=4, author='Admin',                    
+                    content='Reply', replies=[])]),                                                                  
+                                                          Comment(id=2, author='Admin', content='Comment',           
+                    replies=[])]}}),                                                                                 
+                     ('line 74',                                                                                     
+                      {'insert': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 5,                                           
+                                                                  'replies': []}]},                                  
+                                                    {'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 4,                                                        
+                                                     'replies': []}]}}}),                                            
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 1,                                                                     
+                                        'replies': [{'author': 'Admin',                                              
+                                                     'content': 'Reply',                                             
+                                                     'id': 3,                                                        
+                                                     'replies': [{'author': 'Admin',                                 
+                                                                  'content': 'Reply',                                
+                                                                  'id': 4,                                           
+                                                                  'replies': [{'author': 'Admin',                    
+                                                                               'content': 'Reply',                   
+                                                                               'id': 5,                              
+                                                                               'replies': []}]}]}]}}}),              
+                     ('line 74',                                                                                     
+                      {'update': {'c': {'author': 'Admin',                                                           
+                                        'content': 'Comment',                                                        
+                                        'id': 2,                                                                     
+                                        'replies': []}}}),                                                           
+                     ('line 75', {'delete': ['c']})]         

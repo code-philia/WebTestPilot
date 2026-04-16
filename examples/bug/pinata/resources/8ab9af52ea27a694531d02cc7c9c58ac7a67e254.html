@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-GB"
+      dir="ltr"
+      class="">
+<head>
+    <title>BookStack</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="token" content="wKo2kPORh4nLBM2i2DLdVH95qNWzcidhebVwrK0q">
+    <meta name="base-url" content="http://localhost:8081">
+    <meta name="theme-color" content="#206ea7"/>
+
+    <!-- Social Cards Meta -->
+    <meta property="og:title" content="BookStack">
+    <meta property="og:url" content="http://localhost:8081/login">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="http://localhost:8081/dist/styles.css?version=v25.02.1">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="256x256" href="http://localhost:8081/icon.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="http://localhost:8081/icon-180.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:8081/icon-180.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="http://localhost:8081/icon-128.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="http://localhost:8081/icon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8081/icon-32.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="http://localhost:8081/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- OpenSearch -->
+    <link rel="search" type="application/opensearchdescription+xml" title="BookStack" href="http://localhost:8081/opensearch.xml">
+
+    <!-- Custom Styles & Head Content -->
+    <style>
+    :root {
+        --color-primary: #206ea7;
+        --color-primary-light: rgba(32,110,167,0.15);
+        --color-link: #206ea7;
+        --color-bookshelf: #a94747;
+        --color-book: #077b70;
+        --color-chapter: #af4d0d;
+        --color-page: #206ea7;
+        --color-page-draft: #7e50b1;
+    }
+</style>
+    
+    
+    <!-- Translations for JS -->
+    </head>
+<body
+          class="">
+
+        <a class="px-m py-s skip-to-content-link print-hidden" href="#main-content">Skip to main content</a>    <div component="notification"
+     option:notification:type="success"
+     option:notification:auto-hide="true"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification pos"
+     role="alert">
+    <svg class="svg-icon" data-icon="check-circle" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>
+
+<div component="notification"
+     option:notification:type="warning"
+     option:notification:auto-hide="false"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification warning"
+     role="alert">
+    <svg class="svg-icon" data-icon="info" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 17h2v-6h-2zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8M11 9h2V7h-2z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>
+
+<div component="notification"
+     option:notification:type="error"
+     option:notification:auto-hide="false"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification neg"
+     role="alert">
+    <svg class="svg-icon" data-icon="danger" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27zM12 17.3c-.72 0-1.3-.58-1.3-1.3s.58-1.3 1.3-1.3 1.3.58 1.3 1.3-.58 1.3-1.3 1.3m1-4.3h-2V7h2z"/><path fill="none" d="M0 0h24v24H0z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>    <header id="header" component="header-mobile-toggle" class="primary-background px-xl grid print-hidden">
+    <div class="flex-container-row justify-space-between gap-s items-center">
+        <a href="http://localhost:8081" data-shortcut="home_view" class="logo">
+            <img class="logo-image" src="http://localhost:8081/logo.png" alt="Logo">
+                <span class="logo-text">BookStack</span>
+    </a>        <div class="hide-over-l py-s">
+            <button type="button"
+                    refs="header-mobile-toggle@toggle"
+                    title="Expand Header Menu"
+                    aria-expanded="false"
+                    class="mobile-menu-toggle"><svg class="svg-icon" data-icon="more" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"/></svg></button>
+        </div>
+    </div>
+
+    <div class="flex-container-column items-center justify-center hide-under-l">
+        </div>
+
+    <nav refs="header-mobile-toggle@menu" class="header-links">
+        <div class="links text-center">
+            <a href="http://localhost:8081/login"><svg class="svg-icon" data-icon="login" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 3.01H3c-1.1 0-2 .9-2 2V9h2V4.99h18v14.03H3V15H1v4.01c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98v-14a2 2 0 0 0-2-2M11 16l4-4-4-4v3H1v2h10z"/></svg>Log in</a>
+        </div>
+            </nav>
+</header>
+
+    <div id="content" components="" class="block">
+        
+    <div class="container very-small">
+
+        <div class="my-l">&nbsp;</div>
+
+        <div class="card content-wrap auto-height">
+            <h1 class="list-heading">Log In</h1>
+
+            
+            <form action="http://localhost:8081/login" method="POST" id="login-form" class="mt-l">
+    <input type="hidden" name="_token" value="wKo2kPORh4nLBM2i2DLdVH95qNWzcidhebVwrK0q" autocomplete="off">
+
+    <div class="stretch-inputs">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email"
+                      autofocus                      >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                            >
+            <div class="small mt-s">
+                <a href="http://localhost:8081/password/email">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid half collapse-xs gap-xl v-center">
+        <div class="text-left ml-xxs">
+            <label component="custom-checkbox" class="toggle-switch ">
+    <input type="checkbox" name="remember" value="on"  >
+    <span tabindex="0" role="checkbox"
+          aria-checked="false"
+          class="custom-checkbox text-primary"><svg class="svg-icon" data-icon="check" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18.86 4.118-9.733 9.609-3.951-3.995-2.98 2.966 6.93 7.184L21.805 7.217z"/></svg></span>
+    <span class="label">Remember Me</span>
+</label>        </div>
+
+        <div class="text-right">
+            <button class="button">Log In</button>
+        </div>
+    </div>
+
+</form>
+
+
+
+            
+                    </div>
+    </div>
+
+    </div>
+
+    
+    <div component="back-to-top" class="back-to-top print-hidden">
+        <div class="inner">
+            <svg class="svg-icon" data-icon="chevron-up" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path fill="none" d="M0 0h24v24H0z"/></svg> <span>Back to top</span>
+        </div>
+    </div>
+
+            <script src="http://localhost:8081/dist/app.js?version=v25.02.1" type="module" nonce="Z97ANJQ34fKm0pCz1kZLcHCf"></script>
+        
+    </body>
+</html>

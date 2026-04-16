@@ -1,0 +1,17 @@
+1. From the dashboard click 'Page Template' link -> Page contains title 'Page Template'
+ ----- 
+type: business_item
+value: The 'Page Template' page was accessed from the 'My Recently Viewed' section of the dashboard, where it was listed as item 26.
+ ----- 
+type: previous_content
+value: The main content area of the 'Page Template' page contains a large heading: 'Page Template', and below it, smaller text: 'Page Description Template'. The left sidebar under 'Actions' includes options such as Edit, Copy, Move, Revisions, Permissions (highlighted), Delete, Watch, Favourite, and Export. Breadcrumb navigation shows: Books > Book > Page Template.
+
+2. Scroll down -> A list of comments is present
+3. Click 'Add Comment' -> A WYSIWYG comment editor is open
+4. Scroll down -> 'Save Comment' and 'Cancel' buttons are present
+5. In the 'Leave a comment here' field, type 'I like this template' -> Editor box is not empty
+ ----- 
+type: previous_content
+value: The '5 Comments' section contains five comments made by an admin user, each with Reply, Edit, and Delete buttons. No WYSIWYG editor or input field is currently open; the comment boxes only display existing content.
+
+6. Click 'Save Comment' -> The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes

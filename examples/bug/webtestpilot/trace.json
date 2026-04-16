@@ -1,0 +1,124 @@
+[
+  {
+    "action": "From the dashboard click 'Page Template' link",
+    "action_code": "```python\n# Active elements:\n# 39 -> Book (likely navigates to a \"Book\" section)\n# 43 -> Page Template (likely navigates to the \"Page Template\" section)\n# 44 -> Page Template (likely a heading or link for \"Page Template\")\n# 47 -> Page 1 (likely navigates to \"Page 1\")\n# 48 -> Page 1 (likely a heading or link for \"Page 1\")\n\nclick_by_label(label=\"43\")\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 39 -> Book (likely navigates to a \"Book\" section)\n# 43 -> Page Template (likely navigates to the \"Page Template\" section)\n# 44 -> Page Template (likely a heading or link for \"Page Template\")\n# 47 -> Page 1 (likely navigates to \"Page 1\")\n# 48 -> Page 1 (likely a heading or link for \"Page 1\")\n\nclick_by_label(label=\"43\")"
+  },
+  {
+    "action": "click",
+    "label": 43,
+    "xpath": "/html/body/div[4]/div/div/div/div[2]/div/div[1]/div/div/div/a[7]/div",
+    "coordinates": [
+      119.21875,
+      491.5546875
+    ]
+  },
+  {
+    "assertion": "Page contains title 'Page Template'",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n\n    # Define a schema for extracting the page title\n    class PageTitle(BaseModel):\n        title: str = Field(..., description=\"The main title of the page\")\n\n    # Extract the title from the current state\n    page_title = session.history[-1].extract(\"get main page title\", schema=PageTitle)\n\n    # Assert that the title is exactly 'Page Template'\n    assert page_title.title == \"Page Template\", f\"Page title is not 'Page Template', got '{page_title.title}'\"\n```",
+    "passed": true
+  },
+  {
+    "action": "Scroll down",
+    "action_code": "```python\n# Active elements:\n# 47 -> Book (likely navigates to a \"Book\" section or page)\n# 48 -> (no visible text, possibly a menu or container)\n# 49 -> Page Template (likely navigates to a \"Page Template\" section or page)\n# 50 -> (no visible text, possibly a menu or container)\n# 53 -> Previous (likely navigates to the previous page or step)\n\nscroll_down()\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 47 -> Book (likely navigates to a \"Book\" section or page)\n# 48 -> (no visible text, possibly a menu or container)\n# 49 -> Page Template (likely navigates to a \"Page Template\" section or page)\n# 50 -> (no visible text, possibly a menu or container)\n# 53 -> Previous (likely navigates to the previous page or step)\n\nscroll_down()"
+  },
+  {
+    "action": "scroll_down"
+  },
+  {
+    "assertion": "A list of comments is present",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n    from typing import List\n\n    # Define a schema for a single comment\n    class Comment(BaseModel):\n        author: str = Field(..., description=\"The name of the comment author\")\n        content: str = Field(..., description=\"The text content of the comment\")\n        id: int = Field(..., description=\"Unique identifier for the comment\")\n\n    # Define a schema for the comment list\n    class CommentList(BaseModel):\n        comments: List[Comment] = Field(..., description=\"List of comments on the page\")\n\n    # Extract the list of comments from the current state\n    comment_list = session.history[-1].extract(\"get all comments on the page\", schema=CommentList)\n\n    # Assert that there is at least one comment present\n    assert len(comment_list.comments) > 0, \"No comments are present on the page after scrolling; expected at least one comment to be visible.\"\n```",
+    "passed": true
+  },
+  {
+    "action": "Click 'Add Comment'",
+    "action_code": "```python\n# Active elements:\n# 52 -> Edit button, likely allows editing an item.\n# 53 -> Delete button, likely allows deleting an item.\n# 54 -> Link labeled '#2', likely navigates to item #2.\n# 55 -> Add Comment button, likely opens a form or modal to add a comment.\n# 56 -> Back to top, likely scrolls the page to the top.\n\nclick_by_label(label=\"55\")\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 52 -> Edit button, likely allows editing an item.\n# 53 -> Delete button, likely allows deleting an item.\n# 54 -> Link labeled '#2', likely navigates to item #2.\n# 55 -> Add Comment button, likely opens a form or modal to add a comment.\n# 56 -> Back to top, likely scrolls the page to the top.\n\nclick_by_label(label=\"55\")"
+  },
+  {
+    "action": "click",
+    "label": 55,
+    "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[4]/button",
+    "coordinates": [
+      1130.7421875,
+      672.0234375
+    ]
+  },
+  {
+    "assertion": "A WYSIWYG comment editor is open",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n    from typing import Optional, List\n\n    # Schema for the comment editor\n    class CommentEditor(BaseModel):\n        is_visible: bool = Field(..., description=\"Whether the WYSIWYG comment editor is visible\")\n        placeholder: Optional[str] = Field(None, description=\"Placeholder text in the editor\")\n        toolbar_buttons: List[str] = Field(default_factory=list, description=\"List of formatting buttons available in the editor\")\n\n    # Extract the comment editor state from the latest state\n    editor = session.history[-1].extract(\n        \"get new comment editor (WYSIWYG) state\", schema=CommentEditor\n    )\n\n    # Assert the WYSIWYG comment editor is visible\n    assert editor.is_visible, \"WYSIWYG comment editor should be visible after clicking 'Add Comment'.\"\n    # Assert there is a placeholder (optional, but helpful for user guidance)\n    assert editor.placeholder is not None and len(editor.placeholder.strip()) > 0, \"Comment editor should display a placeholder.\"\n    # Assert there are formatting buttons (WYSIWYG)\n    assert len(editor.toolbar_buttons) > 0, \"WYSIWYG editor toolbar should be present with formatting options.\"\n```",
+    "passed": true
+  },
+  {
+    "action": "Scroll down",
+    "action_code": "```python\n# Active elements:\n# 35 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 40 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 45 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 55 -> Rich text editor (input area)\n# 56 -> Paragraph (possibly inside the editor, could be an input area or display)\n\nscroll_down()\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 35 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 40 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 45 -> Link labeled 'Admin' (likely navigates to an admin page)\n# 55 -> Rich text editor (input area)\n# 56 -> Paragraph (possibly inside the editor, could be an input area or display)\n\nscroll_down()"
+  },
+  {
+    "action": "scroll_down"
+  },
+  {
+    "assertion": "'Save Comment' and 'Cancel' buttons are present",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n    from typing import List\n\n    # Define schema for the comment form buttons\n    class CommentFormButtons(BaseModel):\n        buttons: List[str] = Field(..., description=\"List of visible button labels in the new comment form\")\n\n    # Extract the list of buttons from the current state\n    buttons = session.history[-1].extract(\n        \"get visible button labels in the new comment form\", \n        schema=CommentFormButtons\n    ).buttons\n\n    # Assert both 'Save Comment' and 'Cancel' are present\n    assert \"Save Comment\" in buttons, \"'Save Comment' button is not present in the new comment form.\"\n    assert \"Cancel\" in buttons, \"'Cancel' button is not present in the new comment form.\"\n```",
+    "passed": true
+  },
+  {
+    "action": "In the 'Leave a comment here' field, type 'I like this template'",
+    "action_code": "```python\n# Active elements:\n# 20 -> Delete button (likely deletes something)\n# 23 -> Watch button (likely subscribes or follows)\n# 40 -> Admin link (likely navigates to admin page)\n# 50 -> Comment input field (where you can type a comment)\n# 51 -> Paragraph (possibly displays a comment or message)\n\ntype(label=\"50\", content=\"I like this template\")\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 20 -> Delete button (likely deletes something)\n# 23 -> Watch button (likely subscribes or follows)\n# 40 -> Admin link (likely navigates to admin page)\n# 50 -> Comment input field (where you can type a comment)\n# 51 -> Paragraph (possibly displays a comment or message)\n\ntype(label=\"50\", content=\"I like this template\")"
+  },
+  {
+    "action": "type",
+    "label": 50,
+    "xpath": "//*[@id=\"tinymce\"]",
+    "coordinates": [
+      1177.0,
+      949.1015625
+    ],
+    "content": "I like this template"
+  },
+  {
+    "assertion": "Editor box is not empty",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n\n    # Define schema for the comment editor\n    class CommentEditor(BaseModel):\n        content: str = Field(..., description=\"Current text in the new comment editor box\")\n\n    # Extract the comment editor content from the latest state\n    editor = session.history[-1].extract(\n        \"get the content of the new comment editor box\", schema=CommentEditor\n    )\n\n    # Assert that the editor box is not empty after typing\n    assert editor.content.strip() != \"\", \"Editor box is empty after typing; expected non-empty content.\"\n```",
+    "passed": true
+  },
+  {
+    "action": "Click 'Save Comment'",
+    "action_code": "```python\n# Active elements:\n# 48 -> Unlabeled button, function unknown\n# 49 -> Unlabeled button, function unknown\n# 52 -> Cancel button, likely cancels the comment action\n# 53 -> Save Comment button, likely saves the comment\n# 54 -> Back to top, scrolls to the top of the page\n\nclick_by_label(label=\"53\")\n```"
+  },
+  {
+    "action_code": "# Active elements:\n# 48 -> Unlabeled button, function unknown\n# 49 -> Unlabeled button, function unknown\n# 52 -> Cancel button, likely cancels the comment action\n# 53 -> Save Comment button, likely saves the comment\n# 54 -> Back to top, scrolls to the top of the page\n\nclick_by_label(label=\"53\")"
+  },
+  {
+    "action": "click",
+    "label": 53,
+    "xpath": "/html/body/div[4]/div[2]/div[2]/div/div[4]/section/div[3]/div/div[3]/form/div[2]/button[2]",
+    "coordinates": [
+      1115.9921875,
+      636.4140625
+    ]
+  },
+  {
+    "assertion": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes",
+    "trial": 1,
+    "code": "```python\ndef postcondition(session: Session):\n    from pydantic import BaseModel, Field\n    from typing import List, Optional\n\n    # Define a schema for a comment (with possible replies)\n    class Comment(BaseModel):\n        id: int = Field(..., description=\"Unique identifier for the comment\")\n        author: str = Field(..., description=\"Author of the comment\")\n        content: str = Field(..., description=\"Text content of the comment\")\n        replies: Optional[List[\"Comment\"]] = Field(default_factory=list, description=\"List of replies to this comment\")\n\n    Comment.update_forward_refs()\n\n    class CommentsTree(BaseModel):\n        comments: List[Comment] = Field(default_factory=list, description=\"Top-level comments (with nested replies)\")\n\n    # Extract the initial and current comments tree\n    initial_comments = session.history[2].extract(\"get all comments as tree\", schema=CommentsTree).comments\n    current_comments = session.history[-1].extract(\"get all comments as tree\", schema=CommentsTree).comments\n\n    # Flatten comments tree to a list of (id, author, content) for comparison\n    def flatten_comments(comments):\n        flat = []\n        for c in comments:\n            flat.append((c.id, c.author, c.content))\n            if c.replies:\n                flat.extend(flatten_comments(c.replies))\n        return flat\n\n    initial_flat = flatten_comments(initial_comments)\n    current_flat = flatten_comments(current_comments)\n\n    # The new comment content\n    new_comment_content = \"I like this template\"\n\n    # Find the difference between current and initial\n    initial_set = set(initial_flat)\n    current_set = set(current_flat)\n    added = list(current_set - initial_set)\n\n    # There must be exactly one new comment\n    assert len(added) == 1, f\"Expected exactly one new comment, but found {len(added)} new comments.\"\n\n    # The new comment must have the expected content\n    _, _, added_content = added[0]\n    assert added_content == new_comment_content, f\"New comment content mismatch: expected '{new_comment_content}', got '{added_content}'.\"\n\n    # The rest of the comments tree structure and content must be unchanged\n    # Remove the new comment from current_flat and compare to initial_flat\n    current_flat_minus_new = [c for c in current_flat if c != added[0]]\n    assert current_flat_minus_new == initial_flat, \"Other comments have changed unexpectedly after adding a new comment.\"\n```",
+    "passed": false,
+    "message": "Other comments have changed unexpectedly after adding a new comment.\nVariable trace:\n[('line 2', {'insert': {'session': '<Session>'}}),\n ('line 19',\n  {'insert': {'initial_comments': [Comment(id=1, author='Admin', content='Comment', replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=4, author='Admin', content='Reply', replies=[Comment(id=5, author='Admin', content='Reply', replies=[])])])]),\n                                   Comment(id=2, author='Admin', content='Comment', replies=[])]}}),\n ('line 22',\n  {'insert': {'current_comments': [Comment(id=1, author='Admin', content='Comment', replies=[Comment(id=3, author='Admin', content='Reply', replies=[Comment(id=5, author='Admin', content='Reply', replies=[])]), Comment(id=4, author='Admin', content='Reply', replies=[])]),\n                                   Comment(id=2, author='Admin', content='Comment', replies=[]),\n                                   Comment(id=6, author='Admin', content='I like this template', replies=[])]}}),\n ('line 31',\n  {'insert': {'initial_flat': [(1, 'Admin', 'Comment'),\n                               (3, 'Admin', 'Reply'),\n                               (4, 'Admin', 'Reply'),\n                               (5, 'Admin', 'Reply'),\n                               (2, 'Admin', 'Comment')]}}),\n ('line 34',\n  {'insert': {'current_flat': [(1, 'Admin', 'Comment'),\n                               (3, 'Admin', 'Reply'),\n                               (5, 'Admin', 'Reply'),\n                               (4, 'Admin', 'Reply'),\n                               (2, 'Admin', 'Comment'),\n                               (6, 'Admin', 'I like this template')]}}),\n ('line 37', {'insert': {'new_comment_content': 'I like this template'}}),\n ('line 42', {'insert': {'added': [(6, 'Admin', 'I like this template')]}}),\n ('line 46',\n  {'insert': {'_': 'Admin', 'added_content': 'I like this template'}}),\n ('line 51',\n  {'insert': {'current_flat_minus_new': [(1, 'Admin', 'Comment'),\n                                         (3, 'Admin', 'Reply'),\n                                         (5, 'Admin', 'Reply'),\n                                         (4, 'Admin', 'Reply'),\n                                         (2, 'Admin', 'Comment')]}})]"
+  }
+]

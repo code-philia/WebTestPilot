@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en-GB"
+      dir="ltr"
+      class="">
+<head>
+    <title>Page Template | BookStack</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="token" content="7NVajkKtVfFY9RgAZVFnTfd4o3MHS55X9U5AgRok">
+    <meta name="base-url" content="http://localhost:8081">
+    <meta name="theme-color" content="#206ea7"/>
+
+    <!-- Social Cards Meta -->
+    <meta property="og:title" content="Page Template | BookStack">
+    <meta property="og:url" content="http://localhost:8081/books/book/page/page-template">
+        <meta property="og:description" content="Page Description Template">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="http://localhost:8081/dist/styles.css?version=v25.02.1">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="256x256" href="http://localhost:8081/icon.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="http://localhost:8081/icon-180.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:8081/icon-180.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="http://localhost:8081/icon-128.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="http://localhost:8081/icon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8081/icon-32.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="http://localhost:8081/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- OpenSearch -->
+    <link rel="search" type="application/opensearchdescription+xml" title="BookStack" href="http://localhost:8081/opensearch.xml">
+
+    <!-- Custom Styles & Head Content -->
+    <style>
+    :root {
+        --color-primary: #206ea7;
+        --color-primary-light: rgba(32,110,167,0.15);
+        --color-link: #206ea7;
+        --color-bookshelf: #a94747;
+        --color-book: #077b70;
+        --color-chapter: #af4d0d;
+        --color-page: #206ea7;
+        --color-page-draft: #7e50b1;
+    }
+</style>
+    
+    
+    <!-- Translations for JS -->
+    </head>
+<body
+          class=" tri-layout ">
+
+        <a class="px-m py-s skip-to-content-link print-hidden" href="#main-content">Skip to main content</a>    <div component="notification"
+     option:notification:type="success"
+     option:notification:auto-hide="true"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification pos"
+     role="alert">
+    <svg class="svg-icon" data-icon="check-circle" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>
+
+<div component="notification"
+     option:notification:type="warning"
+     option:notification:auto-hide="false"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification warning"
+     role="alert">
+    <svg class="svg-icon" data-icon="info" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 17h2v-6h-2zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8M11 9h2V7h-2z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>
+
+<div component="notification"
+     option:notification:type="error"
+     option:notification:auto-hide="false"
+     option:notification:show="false"
+     style="display: none;"
+     class="notification neg"
+     role="alert">
+    <svg class="svg-icon" data-icon="danger" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27zM12 17.3c-.72 0-1.3-.58-1.3-1.3s.58-1.3 1.3-1.3 1.3.58 1.3 1.3-.58 1.3-1.3 1.3m1-4.3h-2V7h2z"/><path fill="none" d="M0 0h24v24H0z"/></svg> <span></span><div class="dismiss"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+</div>    <header id="header" component="header-mobile-toggle" class="primary-background px-xl grid print-hidden">
+    <div class="flex-container-row justify-space-between gap-s items-center">
+        <a href="http://localhost:8081" data-shortcut="home_view" class="logo">
+            <img class="logo-image" src="http://localhost:8081/logo.png" alt="Logo">
+                <span class="logo-text">BookStack</span>
+    </a>        <div class="hide-over-l py-s">
+            <button type="button"
+                    refs="header-mobile-toggle@toggle"
+                    title="Expand Header Menu"
+                    aria-expanded="false"
+                    class="mobile-menu-toggle"><svg class="svg-icon" data-icon="more" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"/></svg></button>
+        </div>
+    </div>
+
+    <div class="flex-container-column items-center justify-center hide-under-l">
+            <form component="global-search" action="http://localhost:8081/search" method="GET" class="search-box" role="search" tabindex="0">
+    <button id="header-search-box-button"
+            refs="global-search@button"
+            type="submit"
+            aria-label="Search"
+            tabindex="-1"><svg class="svg-icon" data-icon="search" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/><path fill="none" d="M0 0h24v24H0z"/></svg></button>
+    <input id="header-search-box-input"
+           refs="global-search@input"
+           type="text"
+           name="term"
+           data-shortcut="global_search"
+           autocomplete="off"
+           aria-label="Search" placeholder="Search"
+           value="">
+    <div refs="global-search@suggestions" class="global-search-suggestions card">
+        <div refs="global-search@loading" class="text-center px-m global-search-loading"><div class="loading-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    </div></div>
+        <div refs="global-search@suggestion-results" class="px-m"></div>
+        <button class="text-button card-footer-link" type="submit">View All</button>
+    </div>
+</form>        </div>
+
+    <nav refs="header-mobile-toggle@menu" class="header-links">
+        <div class="links text-center">
+            <a class="hide-over-l" href="http://localhost:8081/search"><svg class="svg-icon" data-icon="search" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/><path fill="none" d="M0 0h24v24H0z"/></svg>Search</a>
+            <a href="http://localhost:8081/shelves"
+           data-shortcut="shelves_view"><svg class="svg-icon" data-icon="bookshelf" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path fill="none" d="M1.088 2.566h17.42v17.42H1.088z"/><path d="M4 20.058h15.892V22H4z"/><path fill="none" d="M2.902 1.477h17.42v17.42H2.903z"/><path d="M6.658 3.643V18h-2.38V3.643zm4.668 0V18H8.947V3.643zm3.396.213 5.613 13.214-2.19.93-5.613-13.214z"/></svg>Shelves</a>
+        <a href="http://localhost:8081/books" data-shortcut="books_view"><svg class="svg-icon" data-icon="books" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.252 1.708H8.663a1.77 1.77 0 0 0-1.765 1.764v14.12c0 .97.794 1.764 1.765 1.764h10.59a1.77 1.77 0 0 0 1.764-1.765V3.472a1.77 1.77 0 0 0-1.765-1.764M8.663 3.472h4.412v7.06L10.87 9.208l-2.206 1.324z"/><path fill="none" d="M30.61 3.203h24v24h-24z"/><path d="M2.966 6.61v14c0 1.1.9 2 2 2h14v-2h-14v-14z"/></svg>Books</a>
+            <a href="http://localhost:8081/settings"
+           data-shortcut="settings_view"><svg class="svg-icon" data-icon="settings" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5"/></svg>Settings</a>
+        
+        </div>
+                    <div class="dropdown-container" component="dropdown" option:dropdown:bubble-escapes="true">
+    <span class="user-name py-s hide-under-l" refs="dropdown@toggle"
+          aria-haspopup="true" aria-expanded="false" aria-label="Profile Menu" tabindex="0">
+        <img class="avatar" src="http://localhost:8081/user_avatar.png" alt="Admin">
+        <span class="name">Admin</span> <svg class="svg-icon" data-icon="caret-down" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5z"/><path fill="none" d="M0 0h24v24H0z"/></svg>    </span>
+    <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+        <li>
+            <a href="http://localhost:8081/favourites" data-shortcut="favourites_view" class="icon-item">
+                <svg class="svg-icon" data-icon="star" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                <div>My Favourites</div>
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:8081/user/admin" data-shortcut="profile_view" class="icon-item">
+                <svg class="svg-icon" data-icon="user" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4m0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4"/><path fill="none" d="M0 0h24v24H0z"/></svg>                <div>View Profile</div>
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:8081/my-account" class="icon-item">
+                <svg class="svg-icon" data-icon="user-preferences" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M10.67 13.02c-.22-.01-.44-.02-.67-.02-2.42 0-4.68.67-6.61 1.82-.88.52-1.39 1.5-1.39 2.53V20h9.26a6.96 6.96 0 0 1-.59-6.98M20.75 16c0-.22-.03-.42-.06-.63l1.14-1.01-1-1.73-1.45.49q-.48-.405-1.08-.63L18 11h-2l-.3 1.49q-.6.225-1.08.63l-1.45-.49-1 1.73 1.14 1.01c-.03.21-.06.41-.06.63s.03.42.06.63l-1.14 1.01 1 1.73 1.45-.49q.48.405 1.08.63L16 21h2l.3-1.49q.6-.225 1.08-.63l1.45.49 1-1.73-1.14-1.01c.03-.21.06-.41.06-.63M17 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/></svg>                <div>My Account</div>
+            </a>
+        </li>
+        <li><hr></li>
+        <li>
+            <form action="http://localhost:8081/preferences/toggle-dark-mode" method="post">
+    <input type="hidden" name="_token" value="7NVajkKtVfFY9RgAZVFnTfd4o3MHS55X9U5AgRok" autocomplete="off">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="_return" value="http://localhost:8081/books/book/page/page-template">
+            <button class="icon-item"><span><svg class="svg-icon" data-icon="dark-mode" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2"/></svg></span><span>Dark Mode</span></button>
+    </form>        </li>
+        <li><hr></li>
+        <li>
+                        <form action="http://localhost:8081/logout" method="post">
+                <input type="hidden" name="_token" value="7NVajkKtVfFY9RgAZVFnTfd4o3MHS55X9U5AgRok" autocomplete="off">
+                <button class="icon-item" data-shortcut="logout">
+                    <svg class="svg-icon" data-icon="logout" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="m14.29 8.207 1.41-1.41 5 5-5 5-1.41-1.41 2.58-2.59H7.2v-2h9.67zM5 3h14a2 2 0 0 1 2 2v4h-2V5H5v14h14v-4h2v4a2 2 0 0 1-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2"/></svg>                    <div>Logout</div>
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>            </nav>
+</header>
+
+    <div id="content" components="tri-layout" class="block">
+        
+    <div class="tri-layout-mobile-tabs print-hidden">
+        <div class="grid half no-break no-gap">
+            <button type="button"
+                    refs="tri-layout@tab"
+                    data-tab="info"
+                    aria-label="Tab: Show Secondary Information"
+                    class="tri-layout-mobile-tab px-m py-m text-link">
+                Info
+            </button>
+            <button type="button"
+                    refs="tri-layout@tab"
+                    data-tab="content"
+                    aria-label="Tab: Show Primary Content"
+                    aria-selected="true"
+                    class="tri-layout-mobile-tab px-m py-m text-link active">
+                Content
+            </button>
+        </div>
+    </div>
+
+    <div refs="tri-layout@container" class="tri-layout-container"  >
+
+        <div class="tri-layout-sides print-hidden">
+            <div class="tri-layout-sides-content">
+                <div class="tri-layout-right print-hidden">
+                    <aside class="tri-layout-right-contents">
+                            <div id="page-details" class="entity-details mb-xl">
+        <h5>Details</h5>
+        <div class="blended-links">
+            <div class="entity-meta">
+    
+            <a href="http://localhost:8081/books/book/page/page-template/revisions" class="entity-meta-item">
+            <svg class="svg-icon" data-icon="history" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.95 8.95 0 0 0 13 21a9 9 0 0 0 0-18m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"/></svg>Revision #1
+        </a>
+    
+    
+            <div class="entity-meta-item">
+            <svg class="svg-icon" data-icon="star" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/><path fill="none" d="M0 0h24v24H0z"/></svg>            <div>
+                Created <span title="Fri, Feb 6, 2026 1:18 PM">6 hours ago</span> by <a href='http://localhost:8081/user/admin'>Admin</a>
+            </div>
+        </div>
+    
+            <div class="entity-meta-item">
+            <svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg>            <div>
+                Updated <span title="Fri, Feb 6, 2026 1:18 PM">6 hours ago</span> by <a href='http://localhost:8081/user/admin'>Admin</a>
+            </div>
+        </div>
+    
+    
+                </div>
+            
+            
+            
+                    </div>
+    </div>
+
+    <div class="actions mb-xl">
+        <h5>Actions</h5>
+
+        <div class="icon-list text-link">
+
+            
+                            <a href="http://localhost:8081/books/book/page/page-template/edit" data-shortcut="edit" class="icon-list-item">
+                    <span><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg></span>
+                    <span>Edit</span>
+                </a>
+                                        <a href="http://localhost:8081/books/book/page/page-template/copy" data-shortcut="copy" class="icon-list-item">
+                    <span><svg class="svg-icon" data-icon="copy" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"/></svg></span>
+                    <span>Copy</span>
+                </a>
+                                        	                <a href="http://localhost:8081/books/book/page/page-template/move" data-shortcut="move" class="icon-list-item">
+	                    <span><svg class="svg-icon" data-icon="folder" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8z"/><path fill="none" d="M0 0h24v24H0z"/></svg></span>
+	                    <span>Move</span>
+	                </a>
+                                        <a href="http://localhost:8081/books/book/page/page-template/revisions" data-shortcut="revisions" class="icon-list-item">
+                <span><svg class="svg-icon" data-icon="history" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.95 8.95 0 0 0 13 21a9 9 0 0 0 0-18m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"/></svg></span>
+                <span>Revisions</span>
+            </a>
+                            <a href="http://localhost:8081/books/book/page/page-template/permissions" data-shortcut="permissions" class="icon-list-item">
+                    <span><svg class="svg-icon" data-icon="lock" role="presentation"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><defs><path id="a" d="M0 0h24v24H0z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2M8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9zM18 20H6V10h12z" clip-path="url(#b)"/></svg></span>
+                    <span>Permissions</span>
+                </a>
+                                        <a href="http://localhost:8081/books/book/page/page-template/delete" data-shortcut="delete" class="icon-list-item">
+                    <span><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg></span>
+                    <span>Delete</span>
+                </a>
+            
+            <hr class="primary-background"/>
+
+                            <form action="http://localhost:8081/watching/update" method="POST">
+    <input type="hidden" name="_token" value="7NVajkKtVfFY9RgAZVFnTfd4o3MHS55X9U5AgRok" autocomplete="off">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="type" value="page">
+    <input type="hidden" name="id" value="5">
+    <button type="submit"
+            name="level"
+            value="updates"
+            class="icon-list-item text-link">
+        <span><svg class="svg-icon" data-icon="watch" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg></span>
+        <span>Watch</span>
+    </button>
+</form>                                        <form action="http://localhost:8081/favourites/add" method="POST">
+    <input type="hidden" name="_token" value="7NVajkKtVfFY9RgAZVFnTfd4o3MHS55X9U5AgRok" autocomplete="off">
+    <input type="hidden" name="type" value="page">
+    <input type="hidden" name="id" value="5">
+    <button type="submit" data-shortcut="favourite" class="icon-list-item text-link">
+        <span><svg class="svg-icon" data-icon="star-outline" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28z"/></svg></span>
+        <span>Favourite</span>
+    </button>
+</form>                                        <div component="dropdown"
+     class="dropdown-container"
+     id="export-menu">
+
+    <div refs="dropdown@toggle"
+         class="icon-list-item"
+         aria-haspopup="true"
+         aria-expanded="false"
+         aria-label="Export"
+         data-shortcut="export"
+         tabindex="0">
+        <span><svg class="svg-icon" data-icon="export" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3z"/></svg></span>
+        <span>Export</span>
+    </div>
+
+    <ul refs="dropdown@menu" class="wide dropdown-menu" role="menu">
+        <li><a href="http://localhost:8081/books/book/page/page-template/export/html" target="_blank" class="label-item"><span>Contained Web File</span><span>.html</span></a></li>
+        <li><a href="http://localhost:8081/books/book/page/page-template/export/pdf" target="_blank" class="label-item"><span>PDF File</span><span>.pdf</span></a></li>
+        <li><a href="http://localhost:8081/books/book/page/page-template/export/plaintext" target="_blank" class="label-item"><span>Plain Text File</span><span>.txt</span></a></li>
+        <li><a href="http://localhost:8081/books/book/page/page-template/export/markdown" target="_blank" class="label-item"><span>Markdown File</span><span>.md</span></a></li>
+        <li><a href="http://localhost:8081/books/book/page/page-template/export/zip" target="_blank" class="label-item"><span>Portable ZIP</span><span>.zip</span></a></li>
+    </ul>
+
+</div>
+                    </div>
+
+    </div>
+                    </aside>
+                </div>
+
+                <div class="tri-layout-left print-hidden" id="sidebar">
+                    <aside class="tri-layout-left-contents">
+                        
+    
+    
+    
+    <nav id="book-tree"
+     class="book-tree mb-xl"
+     aria-label="Book Navigation">
+
+    <h5>Book Navigation</h5>
+
+    <ul class="sidebar-page-list mt-xs menu entity-list">
+                    <li class="list-item-book book">
+                <a href="http://localhost:8081/books/book" class="book   entity-list-item" data-entity-type="book" data-entity-id="3">
+    <span role="presentation" class="icon text-book"><svg class="svg-icon" data-icon="book" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2M6 4h5v8l-2.5-1.5L6 12z"/></svg></span>
+    <div class="content">
+            <h4 class="entity-list-item-name break-text">Book</h4>
+            
+    </div>
+</a>            </li>
+        
+                    <li class="list-item-chapter chapter ">
+                <a href="http://localhost:8081/books/book/chapter/chapter" class="chapter   entity-list-item" data-entity-type="chapter" data-entity-id="1">
+    <span role="presentation" class="icon text-chapter"><svg class="svg-icon" data-icon="chapter" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-1 9H9V9h10zm-4 4H9v-2h6zm4-8H9V5h10z"/></svg></span>
+    <div class="content">
+            <h4 class="entity-list-item-name break-text">Chapter</h4>
+            
+    </div>
+</a>
+                
+            </li>
+                    <li class="list-item-page page ">
+                <a href="http://localhost:8081/books/book/page/page-template" class="page  selected entity-list-item" data-entity-type="page" data-entity-id="5">
+    <span role="presentation" class="icon text-page"><svg class="svg-icon" data-icon="page" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z"/></svg></span>
+    <div class="content">
+            <h4 class="entity-list-item-name break-text">Page Template</h4>
+            
+    </div>
+</a>
+                
+            </li>
+                    <li class="list-item-page page ">
+                <a href="http://localhost:8081/books/book/page/page" class="page   entity-list-item" data-entity-type="page" data-entity-id="6">
+    <span role="presentation" class="icon text-page"><svg class="svg-icon" data-icon="page" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z"/></svg></span>
+    <div class="content">
+            <h4 class="entity-list-item-name break-text">Page</h4>
+            
+    </div>
+</a>
+                
+            </li>
+            </ul>
+</nav>                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <div class=" tri-layout-middle">
+            <div id="main-content" class="tri-layout-middle-contents">
+                
+    <div class="mb-m print-hidden">
+        <nav class="breadcrumbs text-center" aria-label="Breadcrumb">
+    
+    
+            <a href="http://localhost:8081/books" class="text-book icon-list-item outline-hover">
+            <span><svg class="svg-icon" data-icon="books" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.252 1.708H8.663a1.77 1.77 0 0 0-1.765 1.764v14.12c0 .97.794 1.764 1.765 1.764h10.59a1.77 1.77 0 0 0 1.764-1.765V3.472a1.77 1.77 0 0 0-1.765-1.764M8.663 3.472h4.412v7.06L10.87 9.208l-2.206 1.324z"/><path fill="none" d="M30.61 3.203h24v24h-24z"/><path d="M2.966 6.61v14c0 1.1.9 2 2 2h14v-2h-14v-14z"/></svg></span>
+            <span>Books</span>
+        </a>
+            
+    
+    
+            
+                
+                                    <div components="dropdown dropdown-search"
+     option:dropdown-search:url="/search/entity/siblings?entity_type=book&entity_id=3"
+     option:dropdown-search:local-search-selector=".entity-list-item"
+     class="dropdown-search">
+    <div class="dropdown-search-toggle-breadcrumb" refs="dropdown@toggle"
+         aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="separator"><svg class="svg-icon" data-icon="chevron-right" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg></div>
+    </div>
+    <div refs="dropdown@menu" class="dropdown-search-dropdown card" role="menu">
+        <div class="dropdown-search-search">
+            <svg class="svg-icon" data-icon="search" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/><path fill="none" d="M0 0h24v24H0z"/></svg>            <input refs="dropdown-search@searchInput"
+                   aria-label="Search"
+                   autocomplete="off"
+                   placeholder="Search"
+                   type="text">
+        </div>
+        <div refs="dropdown-search@loading">
+            <div class="loading-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>        </div>
+        <div refs="dropdown-search@listContainer" class="dropdown-search-list px-m" tabindex="-1"></div>
+    </div>
+</div>                        <a href="http://localhost:8081/books/book" class="text-book icon-list-item outline-hover">
+                <span><svg class="svg-icon" data-icon="book" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2M6 4h5v8l-2.5-1.5L6 12z"/></svg></span>
+                <span>
+                    Book
+                </span>
+            </a>
+                            
+                            
+                
+                                    <div components="dropdown dropdown-search"
+     option:dropdown-search:url="/search/entity/siblings?entity_type=page&entity_id=5"
+     option:dropdown-search:local-search-selector=".entity-list-item"
+     class="dropdown-search">
+    <div class="dropdown-search-toggle-breadcrumb" refs="dropdown@toggle"
+         aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="separator"><svg class="svg-icon" data-icon="chevron-right" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg></div>
+    </div>
+    <div refs="dropdown@menu" class="dropdown-search-dropdown card" role="menu">
+        <div class="dropdown-search-search">
+            <svg class="svg-icon" data-icon="search" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/><path fill="none" d="M0 0h24v24H0z"/></svg>            <input refs="dropdown-search@searchInput"
+                   aria-label="Search"
+                   autocomplete="off"
+                   placeholder="Search"
+                   type="text">
+        </div>
+        <div refs="dropdown-search@loading">
+            <div class="loading-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>        </div>
+        <div refs="dropdown-search@listContainer" class="dropdown-search-list px-m" tabindex="-1"></div>
+    </div>
+</div>                        <a href="http://localhost:8081/books/book/page/page-template" class="text-page icon-list-item outline-hover">
+                <span><svg class="svg-icon" data-icon="page" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z"/></svg></span>
+                <span>
+                    Page Template
+                </span>
+            </a>
+                    </nav>    </div>
+
+    <main class="content-wrap card">
+        <div component="page-display"
+             option:page-display:page-id="5"
+             class="page-content clearfix">
+            <div dir="auto">
+
+    <h1 class="break-text" id="bkmrk-page-title">Page Template</h1>
+
+    <div style="clear:left;"></div>
+
+            <p id="bkmrk-page-description-tem">Page Description Template</p>
+    </div>        </div>
+        <div component="pointer"
+      option:pointer:page-id="5">
+    <div id="pointer"
+         refs="pointer@pointer"
+         tabindex="-1"
+         aria-label="Page Section Options"
+         class="pointer-container">
+        <div class="pointer flex-container-row items-center justify-space-between p-s anim is-page-editable" >
+            <div refs="pointer@mode-section" class="flex-container-row items-center gap-s">
+                <button refs="pointer@mode-toggle"
+                        title="Permalink mode, Press to show include tag"
+                        class="text-button icon px-xs"><svg class="svg-icon" data-icon="link" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5"/></svg></button>
+                <div class="input-group">
+                    <input refs="pointer@link-input" aria-label="Page Section Permalink" readonly="readonly" type="text" id="pointer-url" placeholder="url">
+                    <button refs="pointer@link-button" class="button outline icon" type="button" title="Copy Link"><svg class="svg-icon" data-icon="copy" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"/></svg></button>
+                </div>
+            </div>
+            <div refs="pointer@mode-section" hidden class="flex-container-row items-center gap-s">
+                <button refs="pointer@mode-toggle"
+                        title="Include tag mode, Press to show permalink"
+                        class="text-button icon px-xs"><svg class="svg-icon" data-icon="include" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 .5h24v24H0z"/><path d="m12 16.5 4-4h-3v-9h-2v9H8zm9-13h-6v1.99h6v14.03H3V5.49h6V3.5H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2"/></svg></button>
+                <div class="input-group">
+                    <input refs="pointer@include-input" aria-label="Page Section Include Tag" readonly="readonly" type="text" id="pointer-include" placeholder="include">
+                    <button refs="pointer@include-button" class="button outline icon" type="button" title="Copy Link"><svg class="svg-icon" data-icon="copy" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"/></svg></button>
+                </div>
+            </div>
+                            <a href="http://localhost:8081/books/book/page/page-template/edit" id="pointer-edit" data-edit-href="http://localhost:8081/books/book/page/page-template/edit"
+                   class="button primary outline icon heading-edit-icon ml-s px-s" title="Jump to section in editor"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg></a>
+                    </div>
+    </div>
+
+    <button refs="pointer@section-mode-button" class="screen-reader-only">Enter section select mode</button>
+</div>
+    </main>
+
+    <div id="sibling-navigation" class="grid half collapse-xs items-center mb-m px-m no-row-gap fade-in-when-active print-hidden">
+    <div>
+                    <a href="http://localhost:8081/books/book/chapter/chapter" data-shortcut="previous" class="outline-hover no-link-style block rounded">
+                <div class="px-m pt-xs text-muted">Previous</div>
+                <div class="inline-block">
+                    <div class="icon-list-item no-hover">
+                        <span class="text-chapter "><svg class="svg-icon" data-icon="chapter" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-1 9H9V9h10zm-4 4H9v-2h6zm4-8H9V5h10z"/></svg></span>
+                        <span>Chapter</span>
+                    </div>
+                </div>
+            </a>
+            </div>
+    <div>
+                    <a href="http://localhost:8081/books/book/page/page" data-shortcut="next" class="outline-hover no-link-style block rounded text-xs-right">
+                <div class="px-m pt-xs text-muted text-xs-right">Next</div>
+                <div class="inline block">
+                    <div class="icon-list-item no-hover">
+                        <span class="text-page "><svg class="svg-icon" data-icon="page" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z"/></svg></span>
+                        <span>Page</span>
+                    </div>
+                </div>
+            </a>
+            </div>
+</div>
+                        <div class="px-xl print-hidden">
+                <hr class="darker">
+            </div>
+        
+        <div class="comments-container mb-l print-hidden">
+            <section component="page-comments"
+         option:page-comments:page-id="5"
+         option:page-comments:created-text="Comment added"
+         option:page-comments:count-text="{0} No Comments|{1} 1 Comment|[2,*] :count Comments"
+         option:page-comments:wysiwyg-language="en-GB"
+         option:page-comments:wysiwyg-text-direction="ltr"
+         class="comments-list"
+         aria-label="Comments">
+
+    <div refs="page-comments@comment-count-bar" class="grid half left-focus v-center no-row-gap">
+        <h5 refs="page-comments@comments-title">5 Comments</h5>
+            </div>
+
+    <div refs="page-comments@commentContainer" class="comment-container">
+                    <div class="comment-branch">
+    <div class="mb-m">
+        <div component="page-comment"
+     option:page-comment:comment-id="1"
+     option:page-comment:comment-local-id="1"
+     option:page-comment:comment-parent-id=""
+     option:page-comment:updated-text="Comment updated"
+     option:page-comment:deleted-text="Comment deleted"
+     option:page-comment:wysiwyg-language="en-GB"
+     option:page-comment:wysiwyg-text-direction="ltr"
+     id="comment1"
+     class="comment-box">
+    <div class="header">
+        <div class="flex-container-row wrap items-center gap-x-xs">
+                            <div>
+                    <img width="50" src="http://localhost:8081/user_avatar.png" class="avatar block mr-xs" alt="Admin">
+                </div>
+                        <div class="meta text-muted flex-container-row wrap items-center flex text-small">
+                                    <a href="http://localhost:8081/user/admin">Admin</a>
+                                <span title="2026-02-06 03:35:55">&nbsp;commented </span>
+                            </div>
+            <div class="right-meta flex-container-row justify-flex-end items-center px-s">
+                                <div class="actions mr-s">
+                                            <button refs="page-comment@reply-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg> Reply</button>
+                                                                <button refs="page-comment@edit-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Edit</button>
+                                                                <div component="dropdown" class="dropdown-container">
+                            <button type="button" refs="dropdown@toggle" aria-haspopup="true" aria-expanded="false" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Delete</button>
+                            <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+                                <li class="px-m text-small text-muted pb-s">Are you sure you want to delete this comment?</li>
+                                <li>
+                                    <button refs="page-comment@delete-button" type="button" class="text-button text-neg icon-item">
+                                        <svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                                        <div>Delete</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        <span class="text-muted">
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                </div>
+                                <div>
+                    <a class="bold text-muted text-small" href="#comment1">#1</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div refs="page-comment@content-container" class="content">
+                <p>Comment</p>
+    </div>
+
+            <form novalidate refs="page-comment@form" hidden class="content pt-s px-s block">
+            <div class="form-group description-input">
+                <textarea refs="page-comment@input" name="html" rows="3" placeholder="Leave a comment here">&lt;p&gt;Comment&lt;/p&gt;</textarea>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="button outline" refs="page-comment@form-cancel">Cancel</button>
+                <button type="submit" class="button">Save Comment</button>
+            </div>
+        </form>
+    
+</div>    </div>
+    <div class="flex-container-row">
+        <div class="comment-thread-indicator-parent">
+            <div class="comment-thread-indicator"></div>
+        </div>
+        <div class="comment-branch-children flex">
+                            <div class="comment-branch">
+    <div class="mb-m">
+        <div component="page-comment"
+     option:page-comment:comment-id="3"
+     option:page-comment:comment-local-id="3"
+     option:page-comment:comment-parent-id="1"
+     option:page-comment:updated-text="Comment updated"
+     option:page-comment:deleted-text="Comment deleted"
+     option:page-comment:wysiwyg-language="en-GB"
+     option:page-comment:wysiwyg-text-direction="ltr"
+     id="comment3"
+     class="comment-box">
+    <div class="header">
+        <div class="flex-container-row wrap items-center gap-x-xs">
+                            <div>
+                    <img width="50" src="http://localhost:8081/user_avatar.png" class="avatar block mr-xs" alt="Admin">
+                </div>
+                        <div class="meta text-muted flex-container-row wrap items-center flex text-small">
+                                    <a href="http://localhost:8081/user/admin">Admin</a>
+                                <span title="2026-02-06 03:36:07">&nbsp;commented </span>
+                            </div>
+            <div class="right-meta flex-container-row justify-flex-end items-center px-s">
+                                <div class="actions mr-s">
+                                            <button refs="page-comment@reply-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg> Reply</button>
+                                                                <button refs="page-comment@edit-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Edit</button>
+                                                                <div component="dropdown" class="dropdown-container">
+                            <button type="button" refs="dropdown@toggle" aria-haspopup="true" aria-expanded="false" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Delete</button>
+                            <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+                                <li class="px-m text-small text-muted pb-s">Are you sure you want to delete this comment?</li>
+                                <li>
+                                    <button refs="page-comment@delete-button" type="button" class="text-button text-neg icon-item">
+                                        <svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                                        <div>Delete</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        <span class="text-muted">
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                </div>
+                                <div>
+                    <a class="bold text-muted text-small" href="#comment3">#3</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div refs="page-comment@content-container" class="content">
+                    <p class="comment-reply">
+                <a class="text-muted text-small" href="#comment1"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg>In reply to #1</a>
+            </p>
+                <p>Reply</p>
+    </div>
+
+            <form novalidate refs="page-comment@form" hidden class="content pt-s px-s block">
+            <div class="form-group description-input">
+                <textarea refs="page-comment@input" name="html" rows="3" placeholder="Leave a comment here">&lt;p&gt;Reply&lt;/p&gt;</textarea>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="button outline" refs="page-comment@form-cancel">Cancel</button>
+                <button type="submit" class="button">Save Comment</button>
+            </div>
+        </form>
+    
+</div>    </div>
+    <div class="flex-container-row">
+        <div class="comment-thread-indicator-parent">
+            <div class="comment-thread-indicator"></div>
+        </div>
+        <div class="comment-branch-children flex">
+                            <div class="comment-branch">
+    <div class="mb-m">
+        <div component="page-comment"
+     option:page-comment:comment-id="4"
+     option:page-comment:comment-local-id="4"
+     option:page-comment:comment-parent-id="3"
+     option:page-comment:updated-text="Comment updated"
+     option:page-comment:deleted-text="Comment deleted"
+     option:page-comment:wysiwyg-language="en-GB"
+     option:page-comment:wysiwyg-text-direction="ltr"
+     id="comment4"
+     class="comment-box">
+    <div class="header">
+        <div class="flex-container-row wrap items-center gap-x-xs">
+                            <div>
+                    <img width="50" src="http://localhost:8081/user_avatar.png" class="avatar block mr-xs" alt="Admin">
+                </div>
+                        <div class="meta text-muted flex-container-row wrap items-center flex text-small">
+                                    <a href="http://localhost:8081/user/admin">Admin</a>
+                                <span title="2026-02-06 03:36:13">&nbsp;commented </span>
+                            </div>
+            <div class="right-meta flex-container-row justify-flex-end items-center px-s">
+                                <div class="actions mr-s">
+                                            <button refs="page-comment@reply-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg> Reply</button>
+                                                                <button refs="page-comment@edit-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Edit</button>
+                                                                <div component="dropdown" class="dropdown-container">
+                            <button type="button" refs="dropdown@toggle" aria-haspopup="true" aria-expanded="false" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Delete</button>
+                            <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+                                <li class="px-m text-small text-muted pb-s">Are you sure you want to delete this comment?</li>
+                                <li>
+                                    <button refs="page-comment@delete-button" type="button" class="text-button text-neg icon-item">
+                                        <svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                                        <div>Delete</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        <span class="text-muted">
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                </div>
+                                <div>
+                    <a class="bold text-muted text-small" href="#comment4">#4</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div refs="page-comment@content-container" class="content">
+                    <p class="comment-reply">
+                <a class="text-muted text-small" href="#comment3"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg>In reply to #3</a>
+            </p>
+                <p>Reply</p>
+    </div>
+
+            <form novalidate refs="page-comment@form" hidden class="content pt-s px-s block">
+            <div class="form-group description-input">
+                <textarea refs="page-comment@input" name="html" rows="3" placeholder="Leave a comment here">&lt;p&gt;Reply&lt;/p&gt;</textarea>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="button outline" refs="page-comment@form-cancel">Cancel</button>
+                <button type="submit" class="button">Save Comment</button>
+            </div>
+        </form>
+    
+</div>    </div>
+    <div class="flex-container-row">
+        <div class="comment-thread-indicator-parent">
+            <div class="comment-thread-indicator"></div>
+        </div>
+        <div class="comment-branch-children flex">
+                    </div>
+    </div>
+</div>                            <div class="comment-branch">
+    <div class="mb-m">
+        <div component="page-comment"
+     option:page-comment:comment-id="5"
+     option:page-comment:comment-local-id="5"
+     option:page-comment:comment-parent-id="3"
+     option:page-comment:updated-text="Comment updated"
+     option:page-comment:deleted-text="Comment deleted"
+     option:page-comment:wysiwyg-language="en-GB"
+     option:page-comment:wysiwyg-text-direction="ltr"
+     id="comment5"
+     class="comment-box">
+    <div class="header">
+        <div class="flex-container-row wrap items-center gap-x-xs">
+                            <div>
+                    <img width="50" src="http://localhost:8081/user_avatar.png" class="avatar block mr-xs" alt="Admin">
+                </div>
+                        <div class="meta text-muted flex-container-row wrap items-center flex text-small">
+                                    <a href="http://localhost:8081/user/admin">Admin</a>
+                                <span title="2026-02-06 03:36:22">&nbsp;commented </span>
+                            </div>
+            <div class="right-meta flex-container-row justify-flex-end items-center px-s">
+                                <div class="actions mr-s">
+                                            <button refs="page-comment@reply-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg> Reply</button>
+                                                                <button refs="page-comment@edit-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Edit</button>
+                                                                <div component="dropdown" class="dropdown-container">
+                            <button type="button" refs="dropdown@toggle" aria-haspopup="true" aria-expanded="false" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Delete</button>
+                            <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+                                <li class="px-m text-small text-muted pb-s">Are you sure you want to delete this comment?</li>
+                                <li>
+                                    <button refs="page-comment@delete-button" type="button" class="text-button text-neg icon-item">
+                                        <svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                                        <div>Delete</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        <span class="text-muted">
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                </div>
+                                <div>
+                    <a class="bold text-muted text-small" href="#comment5">#5</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div refs="page-comment@content-container" class="content">
+                    <p class="comment-reply">
+                <a class="text-muted text-small" href="#comment3"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg>In reply to #3</a>
+            </p>
+                <p>Reply</p>
+    </div>
+
+            <form novalidate refs="page-comment@form" hidden class="content pt-s px-s block">
+            <div class="form-group description-input">
+                <textarea refs="page-comment@input" name="html" rows="3" placeholder="Leave a comment here">&lt;p&gt;Reply&lt;/p&gt;</textarea>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="button outline" refs="page-comment@form-cancel">Cancel</button>
+                <button type="submit" class="button">Save Comment</button>
+            </div>
+        </form>
+    
+</div>    </div>
+    <div class="flex-container-row">
+        <div class="comment-thread-indicator-parent">
+            <div class="comment-thread-indicator"></div>
+        </div>
+        <div class="comment-branch-children flex">
+                    </div>
+    </div>
+</div>                    </div>
+    </div>
+</div>                    </div>
+    </div>
+</div>                    <div class="comment-branch">
+    <div class="mb-m">
+        <div component="page-comment"
+     option:page-comment:comment-id="2"
+     option:page-comment:comment-local-id="2"
+     option:page-comment:comment-parent-id=""
+     option:page-comment:updated-text="Comment updated"
+     option:page-comment:deleted-text="Comment deleted"
+     option:page-comment:wysiwyg-language="en-GB"
+     option:page-comment:wysiwyg-text-direction="ltr"
+     id="comment2"
+     class="comment-box">
+    <div class="header">
+        <div class="flex-container-row wrap items-center gap-x-xs">
+                            <div>
+                    <img width="50" src="http://localhost:8081/user_avatar.png" class="avatar block mr-xs" alt="Admin">
+                </div>
+                        <div class="meta text-muted flex-container-row wrap items-center flex text-small">
+                                    <a href="http://localhost:8081/user/admin">Admin</a>
+                                <span title="2026-02-06 03:36:01">&nbsp;commented </span>
+                            </div>
+            <div class="right-meta flex-container-row justify-flex-end items-center px-s">
+                                <div class="actions mr-s">
+                                            <button refs="page-comment@reply-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="reply" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 8V5l-7 7 7 7v-3l-4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11"/><path fill="none" d="M0 0h24v24H0z"/></svg> Reply</button>
+                                                                <button refs="page-comment@edit-button" type="button" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="edit" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Edit</button>
+                                                                <div component="dropdown" class="dropdown-container">
+                            <button type="button" refs="dropdown@toggle" aria-haspopup="true" aria-expanded="false" class="text-button text-muted hover-underline text-small p-xs"><svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg> Delete</button>
+                            <ul refs="dropdown@menu" class="dropdown-menu" role="menu">
+                                <li class="px-m text-small text-muted pb-s">Are you sure you want to delete this comment?</li>
+                                <li>
+                                    <button refs="page-comment@delete-button" type="button" class="text-button text-neg icon-item">
+                                        <svg class="svg-icon" data-icon="delete" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/><path fill="none" d="M0 0h24v24H0z"/></svg>                                        <div>Delete</div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        <span class="text-muted">
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                </div>
+                                <div>
+                    <a class="bold text-muted text-small" href="#comment2">#2</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div refs="page-comment@content-container" class="content">
+                <p>Comment</p>
+    </div>
+
+            <form novalidate refs="page-comment@form" hidden class="content pt-s px-s block">
+            <div class="form-group description-input">
+                <textarea refs="page-comment@input" name="html" rows="3" placeholder="Leave a comment here">&lt;p&gt;Comment&lt;/p&gt;</textarea>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="button outline" refs="page-comment@form-cancel">Cancel</button>
+                <button type="submit" class="button">Save Comment</button>
+            </div>
+        </form>
+    
+</div>    </div>
+    <div class="flex-container-row">
+        <div class="comment-thread-indicator-parent">
+            <div class="comment-thread-indicator"></div>
+        </div>
+        <div class="comment-branch-children flex">
+                    </div>
+    </div>
+</div>            </div>
+
+            <div refs="page-comments@form-container" hidden class="comment-branch mb-m">
+    <div class="comment-box">
+
+        <div class="header p-s">New Comment</div>
+        <div refs="page-comments@reply-to-row" hidden class="primary-background-light text-muted px-s py-xs">
+            <div class="grid left-focus v-center">
+                <div>
+                    <a refs="page-comments@form-reply-link" href="#">In reply to 1234</a>
+                </div>
+                <div class="text-right">
+                    <button refs="page-comments@remove-reply-to-button" class="text-button">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content px-s pt-s">
+            <form refs="page-comments@form" novalidate>
+                <div class="form-group description-input">
+                <textarea refs="page-comments@form-input" name="html"
+                          rows="3"
+                          placeholder="Leave a comment here"></textarea>
+                </div>
+                <div class="form-group text-right">
+                    <button type="button" class="button outline"
+                            refs="page-comments@hide-form-button">Cancel</button>
+                    <button type="submit" class="button">Save Comment</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>                    <div refs="page-comments@addButtonContainer" class="text-right">
+                <button type="button"
+                        refs="page-comments@add-comment-button"
+                        class="button outline">Add Comment</button>
+            </div>
+            
+                
+</section>            <div class="clearfix"></div>
+        </div>
+                </div>
+        </div>
+    </div>
+
+    </div>
+
+    
+    <div component="back-to-top" class="back-to-top print-hidden">
+        <div class="inner">
+            <svg class="svg-icon" data-icon="chevron-up" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path fill="none" d="M0 0h24v24H0z"/></svg> <span>Back to top</span>
+        </div>
+    </div>
+
+            <script src="http://localhost:8081/dist/app.js?version=v25.02.1" type="module" nonce="pclhqriP2fs7dAI0vtFg6w29"></script>
+                    <script src="http://localhost:8081/libs/tinymce/tinymce.min.js?version=v25.02.1" nonce="pclhqriP2fs7dAI0vtFg6w29" defer></script>
+            <script nonce="pclhqriP2fs7dAI0vtFg6w29">
+    window.editor_translations = {"General":"General","Advanced":"Advanced","None":"None","Cancel":"Cancel","Save":"Save","Close":"Close","Apply":"Apply","Undo":"Undo","Redo":"Redo","Left":"Left","Center":"Center","Right":"Right","Top":"Top","Middle":"Middle","Bottom":"Bottom","Width":"Width","Height":"Height","More":"More","Select...":"Select...","Formats":"Formats","Large Header":"Large Header","Medium Header":"Medium Header","Small Header":"Small Header","Tiny Header":"Tiny Header","Paragraph":"Paragraph","Blockquote":"Blockquote","Inline code":"Inline code","Callouts":"Callouts","Information":"Information","Success":"Success","Warning":"Warning","Danger":"Danger","Bold":"Bold","Italic":"Italic","Underline":"Underline","Strikethrough":"Strikethrough","Superscript":"Superscript","Subscript":"Subscript","Text color":"Text color","Custom color":"Custom color","Remove color":"Remove color","Background color":"Background color","Align left":"Align left","Align center":"Align center","Align right":"Align right","Justify":"Justify","Bullet list":"Bullet list","Numbered list":"Numbered list","Task list":"Task list","Increase indent":"Increase indent","Decrease indent":"Decrease indent","Table":"Table","Insert image":"Insert image","Insert\/Edit Image":"Insert\/Edit Image","Insert\/edit link":"Insert\/edit link","Insert\/Edit Link":"Insert\/Edit Link","Insert horizontal line":"Insert horizontal line","Insert code block":"Insert code block","Edit code block":"Edit code block","Insert\/edit drawing":"Insert\/edit drawing","Drawing manager":"Drawing manager","Insert\/edit media":"Insert\/edit media","Insert\/Edit Media":"Insert\/Edit Media","Clear formatting":"Clear formatting","Source code":"Source code","Source Code":"Source Code","Fullscreen":"Fullscreen","Image options":"Image options","Table properties":"Table properties","Table Properties":"Table Properties","Delete table":"Delete table","Clear table formatting":"Clear table formatting","Resize to contents":"Resize to contents","Row header":"Row header","Insert row before":"Insert row before","Insert row after":"Insert row after","Delete row":"Delete row","Insert column before":"Insert column before","Insert column after":"Insert column after","Delete column":"Delete column","Cell":"Cell","Row":"Row","Column":"Column","Cell properties":"Cell properties","Cell Properties":"Cell Properties","Cell type":"Cell type","Scope":"Scope","Header cell":"Header cell","Merge cells":"Merge cells","Split cell":"Split cell","Row Group":"Row Group","Column Group":"Column Group","Horizontal align":"Horizontal align","Vertical align":"Vertical align","Border width":"Border width","Border style":"Border style","Border color":"Border color","Row properties":"Row properties","Row Properties":"Row Properties","Cut row":"Cut row","Copy row":"Copy row","Paste row before":"Paste row before","Paste row after":"Paste row after","Row type":"Row type","Header":"Header","Body":"Body","Footer":"Footer","Alignment":"Alignment","Cut column":"Cut column","Copy column":"Copy column","Paste column before":"Paste column before","Paste column after":"Paste column after","Cell padding":"Cell padding","Cell spacing":"Cell spacing","Caption":"Caption","Show caption":"Show caption","Constrain proportions":"Constrain proportions","Solid":"Solid","Dotted":"Dotted","Dashed":"Dashed","Double":"Double","Groove":"Groove","Ridge":"Ridge","Inset":"Inset","Outset":"Outset","Hidden":"Hidden","Source":"Source","Alternative description":"Alternative description","Embed":"Embed","Paste your embed code below:":"Paste your embed code below:","URL":"URL","Text to display":"Text to display","Title":"Title","Browse links":"Browse links","Open link":"Open link","Open link in...":"Open link in...","Current window":"Current window","New window":"New window","Remove link":"Remove link","Insert collapsible block":"Insert collapsible block","Unwrap":"Unwrap","Edit label":"Edit label","Toggle open\/closed":"Toggle open\/closed","Edit collapsible block":"Edit collapsible block","Toggle label":"Toggle label","About the editor":"About the editor","About the WYSIWYG Editor":"About the WYSIWYG Editor","Editor License \u0026 Copyright":"Editor License \u0026 Copyright","This editor is built as a fork of :lexicalLink which is distributed under the MIT license.":"This editor is built as a fork of :lexicalLink which is distributed under the MIT license.","Full license details can be found here.":"Full license details can be found here.","This editor is built using :tinyLink which is provided under the MIT license.":"This editor is built using :tinyLink which is provided under the MIT license.","The copyright and license details of TinyMCE can be found here.":"The copyright and license details of TinyMCE can be found here.","Save Page \u0026 Continue":"Save Page \u0026 Continue","(Keep pressing to toggle through types)":"(Keep pressing to toggle through types)","Link to content":"Link to content","Shortcuts":"Shortcuts","Shortcut":"Shortcut","The following shortcuts are available in the editor:":"The following shortcuts are available in the editor:","(Windows\/Linux)":"(Windows\/Linux)","(Mac)":"(Mac)","Description":"Description"};
+</script>            <div id="entity-selector-wrap">
+    <div components="popup entity-selector-popup" class="popup-background">
+        <div class="popup-body small" tabindex="-1">
+            <div class="popup-header primary-background">
+                <div class="popup-title">Entity Select</div>
+                <button refs="popup@hide" type="button" class="popup-header-close"><svg class="svg-icon" data-icon="close" role="presentation"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+            </div>
+            <div class="form-group entity-selector-container">
+    <div component="entity-selector"
+         refs="entity-selector-popup@selector"
+         class="entity-selector "
+         option:entity-selector:entity-types="book,chapter,page"
+         option:entity-selector:entity-permission="view"
+         option:entity-selector:search-endpoint="">
+        <input refs="entity-selector@input" type="hidden" name="entity-selector" value="">
+        <input refs="entity-selector@search" type="text" placeholder="Search" >
+        <div class="text-center loading" refs="entity-selector@loading"><div class="loading-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    </div></div>
+        <div refs="entity-selector@results"></div>
+    </div>
+</div>            <div class="popup-footer">
+                <button refs="entity-selector-popup@select" type="button" disabled class="button">Select</button>
+            </div>
+        </div>
+    </div>
+</div>        
+    </body>
+</html>

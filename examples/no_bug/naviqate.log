@@ -1,0 +1,724 @@
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Run Input                                                                                                                                         │
+│ Configuration                                                                                                                                     │
+│ ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                            │
+│ ┃ Key         ┃ Value                                                                                                ┃                            │
+│ ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩                            │
+│ │ Method      │ naviqate                                                                                             │                            │
+│ │ Application │ bookstack                                                                                            │                            │
+│ │ Output      │ /home/xiwen/webtestpilot-camera-ready/experiments/rq1/results/naviqate_bookstack/run_20260207_152923 │                            │
+│ │ Headless    │ True                                                                                                 │                            │
+│ │ Inject bug  │ False                                                                                                │                            │
+│ └─────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────┘                            │
+│ Test Cases                                                                                                                                        │
+│ ┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓                                                                                              │
+│ ┃ No. ┃ Test Case                       ┃ Bug Name ┃                                                                                              │
+│ ┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩                                                                                              │
+│ │ 1   │ comment                         │ -        │                                                                                              │
+│ └─────┴─────────────────────────────────┴──────────┘                                                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[15:29:27] INFO     Initializing naviqate test runner.                                                                                evaluate.py:143
+           INFO     Starting test execution.                                                                                          evaluate.py:146
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Test Case 1/27: Comment                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+           INFO     Restarting webapp: bookstack                                                                                   base_runner.py:112
+[15:29:49] INFO     Webapp restarted successfully                                                                                  base_runner.py:121
+[15:29:51] INFO     ====== WebDriver manager ======                                                                                      logger.py:11
+[15:29:52] INFO     Get LATEST chromedriver version for google-chrome                                                                    logger.py:11
+           INFO     Get LATEST chromedriver version for google-chrome                                                                    logger.py:11
+           INFO     Driver [/home/xiwen/.wdm/drivers/chromedriver/linux64/125.0.6422.141/chromedriver-linux64/chromedriver] found in     logger.py:11
+                    cache                                                                                                                            
+           INFO     Use pytorch device_name: cuda:0                                                                        SentenceTransformer.py:219
+           INFO     Load pretrained SentenceTransformer: all-MiniLM-L6-v2                                                  SentenceTransformer.py:227
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 1/6                                                                                                                                          │
+│ Action: From the dashboard click 'Page Template' link                                                                                             │
+│ Expected Result: Page contains title 'Page Template'                                                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[15:30:06] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "context": "This page serves as a dashboard for a knowledge management or documentation platform.",                      
+                            "sub_functionalities": [                                                                                                 
+                                    "users can view their recently accessed items",                                                                  
+                                    "users can see their most viewed favorite items",                                                                
+                                    "users can check recently updated content",                                                                      
+                                    "users can monitor recent activity by different users",                                                          
+                                    "users can navigate to different sections such as shelves, books, and settings",                                 
+                                    "users can search for content within the platform",                                                              
+                                    "users can toggle between light and dark mode"                                                                   
+                            ]                                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+[15:30:08] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     Click the "Page Template" link on the dashboard.                                                              llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+[15:30:12] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:30:18] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:30:20] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:30:23] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO                                                                                                                        crawler.py:538
+                    0. This anchor element links to a specific page template and is associated with a page entity., a                                
+                    1. This anchor element links to a specific page template and is associated with a page entity., a                                
+                    2. This anchor element provides a link to a page template., a                                                                    
+                    3. This anchor element links to a specific page and is associated with a page entity., a                                         
+                    4. This anchor element links to a specific page and is associated with a page entity., a                                         
+                    5. This anchor element links to a specific page and is associated with a page entity., a                                         
+                    6. This anchor element links to a specific page and is associated with a page entity., a                                         
+                    7. This anchor element provides a link to a page., a                                                                             
+                    8. This anchor element provides a link to a page., a                                                                             
+                    9. This anchor element links to a specific page and is associated with a page entity., a                                         
+                    10. This anchor element links to the second page of a specific book, providing navigation to that page., a                       
+                    11. This anchor element serves as a link to Page 2 of a book, allowing users to access that page directly., a                    
+                    12. This anchor element links to Page 1 of another book, facilitating navigation to that specific page., a                       
+                    13. This anchor element provides a link to Page 1 of the current book, enabling users to return to the first                     
+                    page., a                                                                                                                         
+                    14. This anchor element links to Page 1 of a book and includes additional data attributes for entity                             
+                    identification., a                                                                                                               
+                    15. This anchor element links to Page 1 of another book and contains data attributes for entity identification., a               
+                    16. This anchor element links to Page 1 of a book and includes data attributes for entity identification, similar                
+                    to item 4., a                                                                                                                    
+                    17. This anchor element links to Page 1 of another book and contains data attributes for entity identification,                  
+                    similar to item 5., a                                                                                                            
+                    18. This anchor element provides a link to view all favorite items, allowing users to access their favorites., a                 
+                    19. This anchor element links to a page displaying recently updated items, enabling users to view the latest                     
+                    changes., a                                                                                                                      
+                    20. This anchor element provides a link to the settings page., a                                                                 
+                    21. This button is designed to submit a search query when clicked., button                                                       
+                    22. This button toggles the visibility of additional details in the user interface., button                                      
+                    23. This hidden input stores a return URL for form submission., input                                                            
+                    24. This hidden input also stores a return URL for form submission., input                                                       
+                    25. This input field allows users to enter search terms., input                                                                  
+                    26. This hidden input holds a security token for form validation., input                                                         
+                    27. This hidden input contains a security token for form validation., input                                                      
+                    28. This hidden input includes a security token for form validation., input                                                      
+                    29. This hidden input specifies the HTTP method to be used for the form submission., input                                       
+                    30. This hidden input element is used to specify the HTTP method for form submission, indicating a 'patch'                       
+                    request., input                                                                                                                  
+                    31. This dropdown container allows users to access a profile menu that can be toggled open or closed., div                       
+                    32. This span element displays the user's name and avatar, serving as a clickable trigger for the profile menu                   
+                    dropdown., span                                                                                                                  
+                    33. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    34. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    35. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    36. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    37. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    38. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+                    39. This anchor element links to the admin user's profile page, allowing navigation to their account., a                         
+[15:30:30] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "index": 0,                                                                                                              
+                            "action": "click"                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+           INFO     Selected element: This anchor element links to a specific page template and is associated with a page entity.      crawler.py:637
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 2/6                                                                                                                                          │
+│ Action: Scroll down                                                                                                                               │
+│ Expected Result: A list of comments is present                                                                                                    │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[15:30:45] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "context": "This page displays the details and content of a specific document within a documentation                     
+                    or knowledge management system.",                                                                                                
+                            "sub_functionalities": [                                                                                                 
+                                    "users can view the content and metadata of the document",                                                       
+                                    "users can edit, copy, move, or delete the document",                                                            
+                                    "users can review previous versions and manage permissions",                                                     
+                                    "users can mark the document as a favorite or watch for updates",                                                
+                                    "users can export the document",                                                                                 
+                                    "users can navigate to related documents or sections"                                                            
+                            ]                                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+[15:30:46] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     Click the scroll bar and drag it downward to scroll down the page.                                            llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+[15:30:50] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:30:54] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:30:57] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:01] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:02] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:03] INFO                                                                                                                        crawler.py:538
+                    0. This anchor element links to a specific page and displays an icon and title for the page entity., a                           
+                    1. This anchor element serves as a navigation link to the next page in a sequence., a                                            
+                    2. This anchor element links to a page template and indicates the selected state with an icon and title., a                      
+                    3. This anchor element provides a link to a page template with an icon and text label., a                                        
+                    4. This hidden input element stores the type of entity as 'page' for form submission., input                                     
+                    5. This hidden input element also stores the type of entity as 'page' for form submission., input                                
+                    6. This hidden input element stores a return URL for navigation after form submission., input                                    
+                    7. This div element acts as a toggle for a dropdown search feature, indicating its expandable state., div                        
+                    8. This div element serves as another toggle for a dropdown search feature, indicating its expandable state., div                
+                    9. This anchor element provides a link to the settings page, with a keyboard shortcut for quick access., a                       
+                    10. This dropdown component allows users to search for sibling entities related to a specific page., div                         
+                    11. This button submits the search query entered in the search box., button                                                      
+                    12. This dropdown component enables users to search for sibling entities related to a specific book., div                        
+                    13. This input field displays a read-only permalink for the current page section., input                                         
+                    14. This input field allows users to type in a search query for the dropdown search functionality., input                        
+                    15. This input field provides another option for users to enter a search query for the dropdown search., input                   
+                    16. This hidden input field stores a CSRF token for secure form submissions., input                                              
+                    17. This hidden input field also stores a CSRF token for secure form submissions., input                                         
+                    18. This hidden input field contains a CSRF token to ensure secure interactions with the server., input                          
+                    19. This hidden input field is used to maintain a CSRF token for secure form processing., input                                  
+                    20. This input field allows users to include a specific tag in a page section, but it is read-only., input                       
+                    21. This hidden input stores the ID value of a specific item, which is not visible to the user., input                           
+                    22. This hidden input also stores the ID value of a specific item, serving the same purpose as the previous one.,                
+                    input                                                                                                                            
+                    23. This link navigates the user to the previous chapter in a book, enhancing navigation through the content., a                 
+                    24. This input field enables users to perform a global search by entering search terms., input                                   
+                    25. This hidden input specifies the HTTP method to be used for the form submission, indicating a PUT request.,                   
+                    input                                                                                                                            
+                    26. This button allows users to add a comment to the page, facilitating user interaction., button                                
+                    27. This link provides a way to delete the current page template, allowing for content management., a                            
+                    28. This link enables users to edit the current page template, facilitating content updates., a                                  
+                    29. This link directs users to the revisions page of the current template, allowing them to view changes made over               
+                    time., a                                                                                                                         
+                    30. This hidden input field is used to specify the HTTP method for the form submission, indicating a 'patch'                     
+                    request., input                                                                                                                  
+                    31. This hidden input field is designed to hold the value for an entity selector, which is likely used for                       
+                    selecting an entity in the form., input                                                                                          
+                    32. This link allows users to navigate to a page for copying the current book page template., a                                  
+                    33. This dropdown container is intended to manage the visibility and functionality of an export menu., div                       
+                    34. This element serves as a toggle for the export dropdown, allowing users to initiate an export action., div                   
+                    35. This submit button is configured to trigger a form submission with the value 'updates' when clicked,                         
+                    indicating a watch action., button                                                                                               
+                    36. This link directs users to the shelves view, providing access to a collection of shelves., a                                 
+                    37. This dropdown container is designed to manage a profile menu, allowing users to access their profile options.,               
+                    div                                                                                                                              
+                    38. This span element displays the user's name and avatar, serving as a toggle for the profile menu dropdown.,                   
+                    span                                                                                                                             
+                    39. This link navigates to the admin user profile page, providing access to admin functionalities., a                            
+                    40. The input element allows users to enter text for searching entities within the application., input                           
+[15:31:07] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {"index": 1, "action": "click"}                                                                               llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+           INFO     Selected element: This anchor element serves as a navigation link to the next page in a sequence.                  crawler.py:637
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 3/6                                                                                                                                          │
+│ Action: Click 'Add Comment'                                                                                                                       │
+│ Expected Result: A WYSIWYG comment editor is open                                                                                                 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[15:31:21] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "context": "This page displays the details and content of a single document within a documentation or                    
+                    knowledge management system.",                                                                                                   
+                            "sub_functionalities": [                                                                                                 
+                                    "users can view the content and description of the document",                                                    
+                                    "users can edit, copy, move, or delete the document",                                                            
+                                    "users can view revision history and manage permissions for the document",                                       
+                                    "users can export, watch, or mark the document as a favorite",                                                   
+                                    "users can navigate to related documents or sections using breadcrumbs and navigation links"                     
+                            ]                                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+[15:31:23] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     Click the "Add Comment" button or link on the document details page.                                          llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+[15:31:27] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:30] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:34] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:31:37] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO                                                                                                                        crawler.py:538
+                    0. This button triggers the action to add a new comment when clicked., button                                                    
+                    1. This input field displays a read-only tag for including a page section., input                                                
+                    2. This input field shows a read-only permalink for the page section., input                                                     
+                    3. This hidden input stores the return URL for form submission., input                                                           
+                    4. This link navigates to a specific page within the book structure., a                                                          
+                    5. This link provides access to a page, displaying its title and icon., a                                                        
+                    6. This hidden input indicates the type of content being submitted as 'page'., input                                             
+                    7. This hidden input also specifies the type of content as 'page'., input                                                        
+                    8. This link directs the user to the settings page when clicked., a                                                              
+                    9. This hidden input specifies the HTTP method to be used for the form submission as 'PUT'., input                               
+                    10. This hidden input element stores a CSRF token for secure form submissions., input                                            
+                    11. This hidden input element stores a CSRF token for secure form submissions., input                                            
+                    12. This hidden input element stores a CSRF token for secure form submissions., input                                            
+                    13. This hidden input element stores a CSRF token for secure form submissions., input                                            
+                    14. This button submits the search query when clicked., button                                                                   
+                    15. This link navigates to the previous page in the book template., a                                                            
+                    16. This div acts as a toggle for a dropdown search feature, indicating its expandable state., div                               
+                    17. This div acts as a toggle for a dropdown search feature, indicating its expandable state., div                               
+                    18. This link navigates to the revisions page of the current book., a                                                            
+                    19. This hidden input element specifies the HTTP method for the form submission as 'patch'., input                               
+                    20. This hidden input stores the value for the entity selector., input                                                           
+                    21. This hidden input holds the ID value of the entity being referenced., input                                                  
+                    22. This hidden input also holds the ID value of the entity being referenced., input                                             
+                    23. This text input allows users to search for entities with autocomplete functionality., input                                  
+                    24. This text input provides a search field for users to find entities with autocomplete support., input                         
+                    25. This anchor link navigates to a page for copying the current book page., a                                                   
+                    26. This div component serves as a dropdown for searching entities related to books., div                                        
+                    27. This div component acts as a dropdown for searching entities related to pages., div                                          
+                    28. This text input enables users to search for entities with a placeholder prompt., input                                       
+                    29. This anchor link directs users to the revisions page for the current entity., a                                              
+                    30. This input field allows users to enter search terms for global searches., input                                              
+                    31. This dropdown container serves as a toggle for exporting options., div                                                       
+                    32. This element acts as a toggle button for the export dropdown, indicating its functionality with an export                    
+                    label., div                                                                                                                      
+                    33. This link navigates to a specific chapter within a book., a                                                                  
+                    34. This link directs users to a specific page template within a book., a                                                        
+                    35. This link serves as the logo for the site, redirecting users to the homepage., a                                             
+                    36. This link provides access to the permissions settings for a specific page., a                                                
+                    37. This link allows users to edit the current page., a                                                                          
+                    38. This button submits a request to watch updates for a specific item., button                                                  
+                    39. This link navigates to a specific book, allowing users to view its content., a                                               
+[15:31:42] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "index": 0,                                                                                                              
+                            "action": "click"                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+           INFO     Selected element: This button triggers the action to add a new comment when clicked.                               crawler.py:637
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 4/6                                                                                                                                          │
+│ Action: Scroll down                                                                                                                               │
+│ Expected Result: 'Save Comment' and 'Cancel' buttons are present                                                                                  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[15:31:56] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "context": "This page displays the details and actions for a specific content item within a                              
+                    documentation or knowledge management system.",                                                                                  
+                            "sub_functionalities": [                                                                                                 
+                                    "users can view metadata and revision history for the content item",                                             
+                                    "users can perform actions such as editing, copying, moving, deleting, and exporting the                         
+                    content item",                                                                                                                   
+                                    "users can manage permissions and watch or favorite the content item",                                           
+                                    "users can navigate to related or previous content items",                                                       
+                                    "users can add and view comments on the content item"                                                            
+                            ]                                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+[15:31:57] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     Click the scroll bar and drag it downward to scroll the page.                                                 llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+[15:32:01] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:32:06] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:32:10] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:32:14] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:32:16] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO                                                                                                                        crawler.py:538
+                    0. This link navigates to a specific page within a book, indicating it is a selected entity list item., a                        
+                    1. This link serves as a clickable item that displays the text 'Page' and may represent a page in a list., a                     
+                    2. This link allows users to navigate to the previous page template, enhancing navigation through the book., a                   
+                    3. This link directs users to a specific page template, marked as an entity list item., a                                        
+                    4. This hidden input field stores the type of entity as 'page' for form submission purposes., input                              
+                    5. This hidden input field also stores the type of entity as 'page', serving the same function as the previous                   
+                    item., input                                                                                                                     
+                    6. This div serves as a container for a rich text editor, enabling users to create and edit content., div                        
+                    7. This hidden input field stores the return URL for navigation after form submission., input                                    
+                    8. This link navigates to the settings page, providing access to configuration options., a                                       
+                    9. This link allows users to skip directly to the main content of the page, improving accessibility., a                          
+                    10. This element serves as a toggle for a dropdown search feature, indicating its current state with a breadcrumb                
+                    display., div                                                                                                                    
+                    11. Similar to the previous element, this dropdown search toggle indicates its state with a breadcrumb and allows                
+                    for interaction., div                                                                                                            
+                    12. This button is designed to submit a search query when clicked, providing a labeled action for users., button                 
+                    13. This button allows users to create a bullet list in a text editor, enhancing text formatting options., button                
+                    14. This button enables users to apply bold formatting to selected text in a text editor., button                                
+                    15. This dropdown component facilitates a search functionality, allowing users to find entities related to a                     
+                    specific context., div                                                                                                           
+                    16. This input field displays a read-only permalink for a page section, allowing users to copy the URL easily.,                  
+                    input                                                                                                                            
+                    17. This button allows users to apply italic formatting to selected text in a text editor., button                               
+                    18. This button enables users to create a numbered list in a text editor, enhancing text organization., button                   
+                    19. This button provides functionality for inserting or editing hyperlinks within a text editor., button                         
+                    20. This input field allows users to include a specific tag in a page section, but it is read-only., input                       
+                    21. This div serves as a dropdown component that enables searching for sibling entities related to a book., div                  
+                    22. This input field is designed for users to enter search queries, with autocomplete disabled., input                           
+                    23. This input field is another instance for entering search queries, also with autocomplete disabled., input                    
+                    24. This hidden input stores the ID value of an entity, which is not visible to users., input                                    
+                    25. This hidden input also stores the ID value of an entity, similar to the previous one., input                                 
+                    26. This input field is for global search, allowing users to enter search terms with a keyboard shortcut., input                 
+                    27. This hidden input contains a CSRF token for secure form submissions, which is not visible to users., input                   
+                    28. This hidden input also contains a CSRF token for secure form submissions, similar to the previous one., input                
+                    29. This hidden input contains yet another CSRF token for secure form submissions, ensuring data integrity., input               
+                    30. This hidden input stores a CSRF token for form submission security., input                                                   
+                    31. This hidden input specifies the HTTP method to be used for the form submission, in this case, PUT., input                    
+                    32. This button cancels the current action and hides the comment form., button                                                   
+                    33. This button submits the form to save a new comment., button                                                                  
+                    34. This link navigates to the edit page for the current book page., a                                                           
+                    35. This link navigates to the delete action for the current book page., a                                                       
+                    36. This link navigates to the copy action for the current book page., a                                                         
+                    37. This dropdown container is designed to hold export options for the current page., div                                        
+                    38. This dropdown toggle allows users to open the export options menu., div                                                      
+                    39. This link navigates to the revisions page for the current book page., a                                                      
+                    40. This hidden input field is used to specify the HTTP method for the form submission, indicating that it should                
+                    be treated as a 'patch' request., input                                                                                          
+                    41. This hidden input field is designed to store the value of the entity selector, which is likely used for                      
+                    referencing a specific entity in the application., input                                                                         
+                    42. This text input field allows users to enter search queries to filter or find specific entities within the                    
+                    application., input                                                                                                              
+[15:32:26] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {"index": 0, "action": "click"}                                                                               llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+           INFO     Selected element: This link navigates to a specific page within a book, indicating it is a selected entity list    crawler.py:637
+                    item.                                                                                                                            
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Step 5/6                                                                                                                                          │
+│ Action: In the 'Leave a comment here' field, type 'I like this template'                                                                          │
+│ Expected Result: Editor box is not empty                                                                                                          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[15:32:47] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "context": "This page displays the content and details of a specific document within a collection.",                     
+                            "sub_functionalities": [                                                                                                 
+                                    "users can view the document's content and description",                                                         
+                                    "users can edit, copy, move, or delete the document",                                                            
+                                    "users can review previous versions and manage permissions",                                                     
+                                    "users can mark the document as a favorite or watch for updates",                                                
+                                    "users can export the document",                                                                                 
+                                    "users can navigate to related documents or collections"                                                         
+                            ]                                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+[15:32:50] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     Type "I like this template" into the "Leave a comment here" field.                                            llm_prompting.py:83
+           INFO                                                                                                                   llm_prompting.py:84
+[15:32:55] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:33:00] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:33:04] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+[15:33:07] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO                                                                                                                        crawler.py:538
+                    0. This anchor element serves as a link to the previous page in the book, providing navigation functionality., a                 
+                    1. This button allows users to add a comment to the current page., button                                                        
+                    2. This anchor element links to the current page, enabling users to access it directly., a                                       
+                    3. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    4. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    5. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    6. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    7. This hidden input field indicates the HTTP method to be used for the form submission, specifically a PUT                      
+                    request., input                                                                                                                  
+                    8. This readonly input field displays a placeholder for including a page section, allowing users to reference it                 
+                    without editing., input                                                                                                          
+                    9. This anchor element links to a specific page entity, providing access to its content and details., a                          
+                    10. This input field displays a read-only URL for the page section permalink., input                                             
+                    11. This hidden input specifies the HTTP method to be used for the form submission as 'patch'., input                            
+                    12. This hidden input indicates the type of the entity being processed, set to 'page'., input                                    
+                    13. This hidden input also indicates the type of the entity being processed, set to 'page'., input                               
+                    14. This button submits the search query when clicked, initiating a search action., button                                       
+                    15. This hidden input stores the return URL to redirect to after form submission., input                                         
+                    16. This div acts as a toggle for a dropdown search feature, indicating its expanded or collapsed state., div                    
+                    17. This div serves as another toggle for a dropdown search feature, similar to the previous one., div                           
+                    18. This hidden input is used to store the value of the selected entity in the entity selector., input                           
+                    19. This anchor link navigates the user to the settings page when clicked., a                                                    
+                    20. This hidden input element stores the unique identifier of a page., input                                                     
+                    21. This hidden input element stores the unique identifier of a page., input                                                     
+                    22. This link allows the user to delete the current page., a                                                                     
+                    23. This link navigates to the selected page's main content., a                                                                  
+                    24. This link provides access to the revision history of the page., a                                                            
+                    25. This link allows the user to view the revisions of the current page., a                                                      
+                    26. This link enables the user to edit the current page., a                                                                      
+                    27. This text input allows users to search for content within the application., input                                            
+                    28. This text input allows users to search for content within the application., input                                            
+                    29. This link allows the user to create a copy of the current page., a                                                           
+                    30. This button submits a form to mark an item as a favourite., button                                                           
+                    31. This button submits a form to set the notification level to updates., button                                                 
+                    32. This div acts as a toggle for a dropdown menu related to exporting options., div                                             
+                    33. This div serves as a toggle for a dropdown menu that allows users to export data., div                                       
+                    34. This input field allows users to enter search terms for global searching., input                                             
+                    35. This div serves as a toggle for a dropdown menu that displays the user's profile options., div                               
+                    36. This span displays the user's name and serves as a toggle for the profile menu dropdown., span                               
+                    37. This anchor link navigates to the admin user's profile page., a                                                              
+                    38. This anchor link navigates to the admin user's profile page., a                                                              
+                    39. This input field allows users to search for entities within the application., input                                          
+[15:33:11] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "index": 8,                                                                                                              
+                            "action": "type",                                                                                                        
+                            "arg": "I like this template"                                                                                            
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+           INFO     Selected element: This readonly input field displays a placeholder for including a page section, allowing users to crawler.py:637
+                    reference it without editing.                                                                                                    
+[15:33:13] ERROR    Message: element not interactable                                                                                  crawler.py:384
+                      (Session info: chrome=125.0.6422.60); For documentation on this error, please visit:                                           
+                    https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception                          
+                    Stacktrace:                                                                                                                      
+                    #0 0x55cdfedfde3a <unknown>                                                                                                      
+                    #1 0x55cdfeae72a1 <unknown>                                                                                                      
+                    #2 0x55cdfeb3470f <unknown>                                                                                                      
+                    #3 0x55cdfeb280ff <unknown>                                                                                                      
+                    #4 0x55cdfeb564b2 <unknown>                                                                                                      
+                    #5 0x55cdfeb27a79 <unknown>                                                                                                      
+                    #6 0x55cdfeb5667e <unknown>                                                                                                      
+                    #7 0x55cdfeb752cc <unknown>                                                                                                      
+                    #8 0x55cdfeb56253 <unknown>                                                                                                      
+                    #9 0x55cdfeb261c7 <unknown>                                                                                                      
+                    #10 0x55cdfeb26b3e <unknown>                                                                                                     
+                    #11 0x55cdfedc427b <unknown>                                                                                                     
+                    #12 0x55cdfedc8327 <unknown>                                                                                                     
+                    #13 0x55cdfedb0dae <unknown>                                                                                                     
+                    #14 0x55cdfedc8df2 <unknown>                                                                                                     
+                    #15 0x55cdfed9574f <unknown>                                                                                                     
+                    #16 0x55cdfeded128 <unknown>                                                                                                     
+                    #17 0x55cdfeded2fb <unknown>                                                                                                     
+                    #18 0x55cdfedfcf6c <unknown>                                                                                                     
+                    #19 0x7efdd99b0609 start_thread                                                                                                  
+                    Traceback (most recent call last):                                                                                               
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/method/crawler/crawler.py", line 361, in                        
+                    do_action                                                                                                                        
+                        element.clear()                                                                                                              
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 155, in clear                                                                                          
+                        self._execute(Command.CLEAR_ELEMENT)                                                                                         
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 573, in _execute                                                                                       
+                        return self._parent.execute(command, params)                                                                                 
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                                                 
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webdriver.py", line 458, in execute                                                                                         
+                        self.error_handler.check_response(response)                                                                                  
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/errorhandler.py", line 232, in check_response                                                                               
+                        raise exception_class(message, screen, stacktrace)                                                                           
+                    selenium.common.exceptions.InvalidElementStateException: Message: invalid element state                                          
+                      (Session info: chrome=125.0.6422.60)                                                                                           
+                    Stacktrace:                                                                                                                      
+                    #0 0x55cdfedfde3a <unknown>                                                                                                      
+                    #1 0x55cdfeae72a1 <unknown>                                                                                                      
+                    #2 0x55cdfeb29a93 <unknown>                                                                                                      
+                    #3 0x55cdfeb564b2 <unknown>                                                                                                      
+                    #4 0x55cdfeb27a79 <unknown>                                                                                                      
+                    #5 0x55cdfeb5667e <unknown>                                                                                                      
+                    #6 0x55cdfeb752cc <unknown>                                                                                                      
+                    #7 0x55cdfeb56253 <unknown>                                                                                                      
+                    #8 0x55cdfeb261c7 <unknown>                                                                                                      
+                    #9 0x55cdfeb26b3e <unknown>                                                                                                      
+                    #10 0x55cdfedc427b <unknown>                                                                                                     
+                    #11 0x55cdfedc8327 <unknown>                                                                                                     
+                    #12 0x55cdfedb0dae <unknown>                                                                                                     
+                    #13 0x55cdfedc8df2 <unknown>                                                                                                     
+                    #14 0x55cdfed9574f <unknown>                                                                                                     
+                    #15 0x55cdfeded128 <unknown>                                                                                                     
+                    #16 0x55cdfeded2fb <unknown>                                                                                                     
+                    #17 0x55cdfedfcf6c <unknown>                                                                                                     
+                    #18 0x7efdd99b0609 start_thread                                                                                                  
+                                                                                                                                                     
+                                                                                                                                                     
+                    During handling of the above exception, another exception occurred:                                                              
+                                                                                                                                                     
+                    Traceback (most recent call last):                                                                                               
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/method/crawler/crawler.py", line 373, in                        
+                    do_action                                                                                                                        
+                        element.send_keys(text)                                                                                                      
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 304, in send_keys                                                                                      
+                        self._execute(                                                                                                               
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 573, in _execute                                                                                       
+                        return self._parent.execute(command, params)                                                                                 
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                                                 
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webdriver.py", line 458, in execute                                                                                         
+                        self.error_handler.check_response(response)                                                                                  
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/errorhandler.py", line 232, in check_response                                                                               
+                        raise exception_class(message, screen, stacktrace)                                                                           
+                    selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable                                    
+                      (Session info: chrome=125.0.6422.60); For documentation on this error, please visit:                                           
+                    https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception                          
+                    Stacktrace:                                                                                                                      
+                    #0 0x55cdfedfde3a <unknown>                                                                                                      
+                    #1 0x55cdfeae72a1 <unknown>                                                                                                      
+                    #2 0x55cdfeb2d3e8 <unknown>                                                                                                      
+                    #3 0x55cdfeb2b7cf <unknown>                                                                                                      
+                    #4 0x55cdfeb564b2 <unknown>                                                                                                      
+                    #5 0x55cdfeb27a79 <unknown>                                                                                                      
+                    #6 0x55cdfeb5667e <unknown>                                                                                                      
+                    #7 0x55cdfeb752cc <unknown>                                                                                                      
+                    #8 0x55cdfeb56253 <unknown>                                                                                                      
+                    #9 0x55cdfeb261c7 <unknown>                                                                                                      
+                    #10 0x55cdfeb26b3e <unknown>                                                                                                     
+                    #11 0x55cdfedc427b <unknown>                                                                                                     
+                    #12 0x55cdfedc8327 <unknown>                                                                                                     
+                    #13 0x55cdfedb0dae <unknown>                                                                                                     
+                    #14 0x55cdfedc8df2 <unknown>                                                                                                     
+                    #15 0x55cdfed9574f <unknown>                                                                                                     
+                    #16 0x55cdfeded128 <unknown>                                                                                                     
+                    #17 0x55cdfeded2fb <unknown>                                                                                                     
+                    #18 0x55cdfedfcf6c <unknown>                                                                                                     
+                    #19 0x7efdd99b0609 start_thread                                                                                                  
+                                                                                                                                                     
+                                                                                                                                                     
+                    During handling of the above exception, another exception occurred:                                                              
+                                                                                                                                                     
+                    Traceback (most recent call last):                                                                                               
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/method/crawler/crawler.py", line 382, in                        
+                    do_action                                                                                                                        
+                        parent_element.click()                                                                                                       
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 120, in click                                                                                          
+                        self._execute(Command.CLICK_ELEMENT)                                                                                         
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webelement.py", line 573, in _execute                                                                                       
+                        return self._parent.execute(command, params)                                                                                 
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                                                 
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/webdriver.py", line 458, in execute                                                                                         
+                        self.error_handler.check_response(response)                                                                                  
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/selenium/webdriver/re               
+                    mote/errorhandler.py", line 232, in check_response                                                                               
+                        raise exception_class(message, screen, stacktrace)                                                                           
+                    selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable                                    
+                      (Session info: chrome=125.0.6422.60); For documentation on this error, please visit:                                           
+                    https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception                          
+                    Stacktrace:                                                                                                                      
+                    #0 0x55cdfedfde3a <unknown>                                                                                                      
+                    #1 0x55cdfeae72a1 <unknown>                                                                                                      
+                    #2 0x55cdfeb3470f <unknown>                                                                                                      
+                    #3 0x55cdfeb280ff <unknown>                                                                                                      
+                    #4 0x55cdfeb564b2 <unknown>                                                                                                      
+                    #5 0x55cdfeb27a79 <unknown>                                                                                                      
+                    #6 0x55cdfeb5667e <unknown>                                                                                                      
+                    #7 0x55cdfeb752cc <unknown>                                                                                                      
+                    #8 0x55cdfeb56253 <unknown>                                                                                                      
+                    #9 0x55cdfeb261c7 <unknown>                                                                                                      
+                    #10 0x55cdfeb26b3e <unknown>                                                                                                     
+                    #11 0x55cdfedc427b <unknown>                                                                                                     
+                    #12 0x55cdfedc8327 <unknown>                                                                                                     
+                    #13 0x55cdfedb0dae <unknown>                                                                                                     
+                    #14 0x55cdfedc8df2 <unknown>                                                                                                     
+                    #15 0x55cdfed9574f <unknown>                                                                                                     
+                    #16 0x55cdfeded128 <unknown>                                                                                                     
+                    #17 0x55cdfeded2fb <unknown>                                                                                                     
+                    #18 0x55cdfedfcf6c <unknown>                                                                                                     
+                    #19 0x7efdd99b0609 start_thread                                                                                                  
+                                                                                                                                                     
+           INFO                                                                                                                        crawler.py:538
+                    0. This anchor element serves as a link to the previous page in the book, providing navigation functionality., a                 
+                    1. This button allows users to add a comment to the current page., button                                                        
+                    2. This anchor element links to the current page, enabling users to access it directly., a                                       
+                    3. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    4. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    5. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    6. This hidden input field stores a CSRF token for secure form submissions., input                                               
+                    7. This hidden input field indicates the HTTP method to be used for the form submission, specifically a PUT                      
+                    request., input                                                                                                                  
+                    8. This anchor element links to a specific page entity, providing access to its content and details., a                          
+                    9. This input field displays a read-only URL for the page section permalink., input                                              
+                    10. This hidden input specifies the HTTP method to be used for the form submission as 'patch'., input                            
+                    11. This hidden input indicates the type of the entity being processed, set to 'page'., input                                    
+                    12. This hidden input also indicates the type of the entity being processed, set to 'page'., input                               
+                    13. This button submits the search query when clicked, initiating a search action., button                                       
+                    14. This hidden input stores the return URL to redirect to after form submission., input                                         
+                    15. This div acts as a toggle for a dropdown search feature, indicating its expanded or collapsed state., div                    
+                    16. This div serves as another toggle for a dropdown search feature, similar to the previous one., div                           
+                    17. This hidden input is used to store the value of the selected entity in the entity selector., input                           
+                    18. This anchor link navigates the user to the settings page when clicked., a                                                    
+                    19. This hidden input element stores the unique identifier of a page., input                                                     
+                    20. This hidden input element stores the unique identifier of a page., input                                                     
+                    21. This link allows the user to delete the current page., a                                                                     
+                    22. This link navigates to the selected page's main content., a                                                                  
+                    23. This link provides access to the revision history of the page., a                                                            
+                    24. This link allows the user to view the revisions of the current page., a                                                      
+                    25. This link enables the user to edit the current page., a                                                                      
+                    26. This text input allows users to search for content within the application., input                                            
+                    27. This text input allows users to search for content within the application., input                                            
+                    28. This link allows the user to create a copy of the current page., a                                                           
+                    29. This button submits a form to mark an item as a favourite., button                                                           
+                    30. This button submits a form to set the notification level to updates., button                                                 
+                    31. This div acts as a toggle for a dropdown menu related to exporting options., div                                             
+                    32. This div serves as a toggle for a dropdown menu that allows users to export data., div                                       
+                    33. This input field allows users to enter search terms for global searching., input                                             
+                    34. This div serves as a toggle for a dropdown menu that displays the user's profile options., div                               
+                    35. This span displays the user's name and serves as a toggle for the profile menu dropdown., span                               
+                    36. This anchor link navigates to the admin user's profile page., a                                                              
+                    37. This anchor link navigates to the admin user's profile page., a                                                              
+                    38. This input field allows users to search for entities within the application., input                                          
+[15:33:18] INFO     HTTP Request: POST https://api.key77qiqi.com/v1/chat/completions "HTTP/1.1 200 OK"                                _client.py:1025
+           INFO     Response:                                                                                                     llm_prompting.py:82
+           INFO     {                                                                                                             llm_prompting.py:83
+                            "index": 1,                                                                                                              
+                            "action": "click"                                                                                                        
+                    }                                                                                                                                
+           INFO                                                                                                                   llm_prompting.py:84
+           ERROR    Error when running test case: not all arguments converted during string formatting                             base_runner.py:154
+                    Traceback (most recent call last):                                                                                               
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/base_runner.py", line 150, in _run_test_case                             
+                        step_result = self._step(test_step, test_context)                                                                            
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                                            
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/runner.py", line 118, in _step                                  
+                        crawler.loop(MAX_STEPS=self.max_steps)                                                                                       
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/method/crawler/crawler.py", line 830, in loop                   
+                        if self.step() == 1:                                                                                                         
+                           ^^^^^^^^^^^                                                                                                               
+                      File "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/method/crawler/crawler.py", line 659, in step                   
+                        logger.info("Selected element: ", descriptions[index])                                                                       
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    1539, in info                                                                                                                    
+                        self._log(INFO, msg, args, **kwargs)                                                                                         
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    1684, in _log                                                                                                                    
+                        self.handle(record)                                                                                                          
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    1700, in handle                                                                                                                  
+                        self.callHandlers(record)                                                                                                    
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    1762, in callHandlers                                                                                                            
+                        hdlr.handle(record)                                                                                                          
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    1028, in handle                                                                                                                  
+                        self.emit(record)                                                                                                            
+                      File                                                                                                                           
+                    "/home/xiwen/webtestpilot-camera-ready/baselines/naviqate/.venv/lib/python3.12/site-packages/rich/logging.py",                   
+                    line 134, in emit                                                                                                                
+                        message = self.format(record)                                                                                                
+                                  ^^^^^^^^^^^^^^^^^^^                                                                                                
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    999, in format                                                                                                                   
+                        return fmt.format(record)                                                                                                    
+                               ^^^^^^^^^^^^^^^^^^                                                                                                    
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    703, in format                                                                                                                   
+                        record.message = record.getMessage()                                                                                         
+                                         ^^^^^^^^^^^^^^^^^^^                                                                                         
+                      File                                                                                                                           
+                    "/home/xiwen/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/lib/python3.12/logging/__init__.py", line                    
+                    392, in getMessage                                                                                                               
+                        msg = msg % self.args                                                                                                        
+                              ~~~~^~~~~~~~~~~                                                                                                        
+                    TypeError: not all arguments converted during string formatting                                                                  

@@ -1,0 +1,32 @@
+1. From the dashboard click 'Page Template' link -> Page contains title 'Page Template'
+ ----- 
+type: previous_content
+value: The main content area of the 'Page Template' page displays a section titled '5 Comments', listing several comments by Admin. The very top portion of the main content area is mostly blank; no explicit page title is visible in this viewport.
+ ----- 
+type: previous_content
+value: The left sidebar on the 'Page Template' detail view contains details (revision info, creation/update times), actions (edit, copy, move, revisions, permissions, delete), and book navigation options.
+
+2. Scroll down -> A list of comments is present
+ ----- 
+type: previous_content
+value: The 'Page Template' detail page contains a section titled '5 Comments' in the main content area. Under this heading, there is a visible list of at least five comment entries: two top-level comments labeled 'Comment' and three nested replies labeled 'Reply'. Each entry displays an avatar icon and the text 'Admin commented', indicating all comments are by the Admin user. An 'Add Comment' button is present at the bottom right of this section.
+
+3. Click 'Add Comment' -> A WYSIWYG comment editor is open
+ ----- 
+type: previous_content
+value: The 'New Comment' box at the bottom of the comments section contains a WYSIWYG editor with formatting controls (bold, italic, link, lists) and a placeholder text 'Leave a comment here'. The input area is currently empty before any new comment is typed.
+
+4. Scroll down -> 'Save Comment' and 'Cancel' buttons are present
+5. In the 'Leave a comment here' field, type 'I like this template' -> Editor box is not empty
+ ----- 
+type: previous_content
+value: The WYSIWYG editor input field for the new comment is currently empty before typing 'I like this template'.
+
+6. Click 'Save Comment' -> The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes
+ ----- 
+type: previous_content
+value: The WYSIWYG editor input area under 'New Comment' is labeled as 41 and uses an iframe-based rich text editor with formatting controls above and Save/Cancel buttons below.
+ ----- 
+type: previous_content
+value: The placeholder text in the WYSIWYG editor input area is 'Leave a comment here'.
+

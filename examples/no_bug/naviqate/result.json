@@ -1,0 +1,80 @@
+{
+  "test_case": {
+    "test_path": "/home/xiwen/webtestpilot-camera-ready/benchmark/bookstack/test_cases/comment.yaml",
+    "bug_path": null,
+    "name": "Comment",
+    "setup_function": "login_to_bookstack",
+    "steps": [
+      {
+        "action": "From the dashboard click 'Page Template' link",
+        "expectation": "Page contains title 'Page Template'"
+      },
+      {
+        "action": "Scroll down",
+        "expectation": "A list of comments is present"
+      },
+      {
+        "action": "Click 'Add Comment'",
+        "expectation": "A WYSIWYG comment editor is open"
+      },
+      {
+        "action": "Scroll down",
+        "expectation": "'Save Comment' and 'Cancel' buttons are present"
+      },
+      {
+        "action": "In the 'Leave a comment here' field, type 'I like this template'",
+        "expectation": "Editor box is not empty"
+      },
+      {
+        "action": "Click 'Save Comment'",
+        "expectation": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "step": {
+        "action": "From the dashboard click 'Page Template' link",
+        "expectation": "Page contains title 'Page Template'"
+      },
+      "is_action_correct": true,
+      "is_bug_reported": false,
+      "start_time": 5293086.668785138,
+      "end_time": 5293124.35983514,
+      "tokens": 8689
+    },
+    {
+      "step": {
+        "action": "Scroll down",
+        "expectation": "A list of comments is present"
+      },
+      "is_action_correct": true,
+      "is_bug_reported": false,
+      "start_time": 5293124.437605046,
+      "end_time": 5293161.364537068,
+      "tokens": 9560
+    },
+    {
+      "step": {
+        "action": "Click 'Add Comment'",
+        "expectation": "A WYSIWYG comment editor is open"
+      },
+      "is_action_correct": true,
+      "is_bug_reported": false,
+      "start_time": 5293161.42391786,
+      "end_time": 5293196.811418357,
+      "tokens": 9278
+    },
+    {
+      "step": {
+        "action": "Scroll down",
+        "expectation": "'Save Comment' and 'Cancel' buttons are present"
+      },
+      "is_action_correct": false,
+      "is_bug_reported": false,
+      "start_time": 5293196.846281991,
+      "end_time": 5293241.006852835,
+      "tokens": 9868
+    }
+  ]
+}

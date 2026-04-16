@@ -7,22 +7,29 @@
   <a href="https://sites.google.com/view/webtestpilot">
     <img src="https://img.shields.io/badge/Project-Page-green.svg" alt="Project Page">
   </a>
+  <a href="./examples">
+    <img src="https://img.shields.io/badge/Examples-Visual%20Walkthrough-blue.svg" alt="Examples">
+  </a>
 </p>
 
 This is the official repository for the paper *"WebTestPilot: Agentic End-to-End Web Testing against Natural Language Specification by Inferring Oracles with Symbolized GUI Elements"*.
 
 **TL;DR:** WebTestPilot converts what a multimodal agent sees on the web into symbolic representations that can be asserted in automated end-to-end tests.
 
+**New here?** Start with [`examples/`](./examples) for step-by-step executions with screenshots, traces, and bug demonstrations.
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=hJhcSvN2KwU" target="_blank">
  <img src="http://img.youtube.com/vi/hJhcSvN2KwU/mqdefault.jpg" alt="Watch the video" width="360" border="10" />
 </a>
+
 
 ## 📂 Structure
 
 ```graphql
 /baselines    # Baseline implementations + test runners
-/experiments  # Scripts for RQ1–RQ4 experiments
 /benchmark    # Test cases and injected bugs
+/examples     # Visual walkthroughs with screenshots, traces, and logs
+/experiments  # Scripts for RQ1–RQ4 experiments
 /webapps      # Containerized benchmark applications
 /webtestpilot # Core implementation
 ```
@@ -45,15 +52,6 @@ This checks required tools (`uv`, `docker`, `docker-compose`) and guides you int
 cp .env.example .env
 ```
 
-Required for the default **browser-use** mode:
-
-* `ANTHROPIC_API_KEY` + `ANTHROPIC_MODEL_NAME` — or the equivalent for your chosen provider (`OPENAI_API_KEY`, `GOOGLEAI_API_KEY`, etc.)
-
-Required for **SoM** mode (and `/experiments`):
-
-* `GUI_GROUNDING_MODEL_BASE_URL` — endpoint of the local GUI grounding model (see [SoM mode](#%EF%B8%8F-som-mode-optional) below)
-* `OPENAI_API_KEY`
-
 ### 3. Configure runtime settings
 
 Set the provider and execution mode in:
@@ -64,10 +62,10 @@ Set the provider and execution mode in:
 
 Supported providers:
 
-* `Claude` (Anthropic) — default
+* `Claude` (Anthropic)
 * `GPT` (OpenAI)
 * `Gemini` (Google)
-* `Local` (self-hosted via OpenAI-compatible API)
+* `OpenRouter` (self-hosted via OpenAI-compatible API)
 
 > **Notes**
 >
@@ -124,34 +122,38 @@ WebTestPilot.run(session, steps, assertion=True, hooks=[hook])
 
 ## ⚙️ SoM Mode (Optional)
 
-The **SoM** (Set-of-Mark) mode uses a two-stage pipeline: a local GUI grounding model proposes element coordinates, then a multimodal LLM selects the exact element from annotated candidates. This is the mode used in the paper's experiments.
+SoM (Set-of-Mark) mode uses a two-stage grounding pipeline with a local vision model for element localization. This is the configuration used in the paper’s experiments.
+
+<details>
+<summary><b>Show SoM setup and configuration</b></summary>
 
 To switch to SoM mode, set in `config.yaml`:
 
 ```yaml
 executor:
   mode: "som"
-```
+````
 
-SoM mode requires deploying `inclusionAI/UI-Venus-Ground-7B` as a local model server. Install and configure [vLLM](https://docs.vllm.ai/en/latest/getting_started/quickstart/) with:
+SoM mode requires deploying `inclusionAI/UI-Venus-Ground-7B` as a local model server. Install and configure vLLM with:
 
 * `vllm==0.19.0`
-* `torch==2.10.0` *(pinned for vLLM ABI compatibility)*
-* `transformers` *(custom git revision `21fac7ab` from Hugging Face)*
+* `torch==2.10.0` (pinned for ABI compatibility)
+* `transformers` (custom revision `21fac7ab`)
 * `accelerate>=1.10.0`, `openai>=1.99.9`, `pillow>=11.3.0`
 
 Then run:
 
 ```bash
-HF_HOME=$(HF_HOME) \
 vllm serve inclusionAI/UI-Venus-Ground-7B \
---max_model_len 4K \
---max_num_seqs 8 \
---trust-remote-code \
---limit-mm-per-prompt '{"image": 1, "video": 0}'
+  --max_model_len 4K \
+  --max_num_seqs 8 \
+  --trust-remote-code \
+  --limit-mm-per-prompt '{"image": 1, "video": 0}'
 ```
 
 SoM mode does **not** require `--remote-debugging-port`.
+
+</details>
 
 ## 📝 Citation
 

@@ -1,0 +1,44 @@
+[
+  {
+    "page_id": "Knowledge Dashboard Page",
+    "layout": "<?xml version=\"1.0\" ?>\n<Page>\n  \n  \n  <Header role=\"banner\" contains=\"logo,search,nav,profileMenu\" sticky=\"true\"/>\n  \n  \n  <Toolbar>\n    \n    \n    <ToggleDetailsButton/>\n    \n    \n    <DarkModeSwitch/>\n    \n  \n  </Toolbar>\n  \n  \n  <MainContent layout=\"threeColumn\">\n    \n    \n    <Column position=\"left\">\n      \n      \n      <Card title=\"My Recently Viewed\" type=\"list\" itemType=\"document\"/>\n      \n    \n    </Column>\n    \n    \n    <Column position=\"center\">\n      \n      \n      <Card title=\"My Most Viewed Favourites\" type=\"list\" itemType=\"document\" hasViewAll=\"true\"/>\n      \n      \n      <Card title=\"Recently Updated Pages\" type=\"list\" itemType=\"document\"/>\n      \n    \n    </Column>\n    \n    \n    <Column position=\"right\">\n      \n      \n      <Card title=\"Recent Activity\" type=\"activityFeed\" itemType=\"userAction\"/>\n      \n    \n    </Column>\n    \n  \n  </MainContent>\n  \n\n</Page>\n",
+    "description": "Displays recent activity, favorites, and updates for knowledge management. Clean, card-based layout.",
+    "prev_action": null
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": "<?xml version=\"1.0\" ?>\n<Page>\n  \n  \n  <Header appName=\"BookStack\" role=\"navigation\" contains=\"search,mainMenu,userMenu\"/>\n  \n  \n  <Sidebar position=\"left\" contains=\"details,actions\" visible=\"true\">\n    \n    \n    <DetailsPanel shows=\"revision,created,updated\"/>\n    \n    \n    <ActionsList items=\"edit,copy,move,revisions,permissions,delete,watch,favourite,export\"/>\n    \n  \n  </Sidebar>\n  \n  \n  <Breadcrumb visible=\"true\" path=\"Books &gt; Book &gt; Page Template\"/>\n  \n  \n  <MainContent>\n    \n    \n    <Title text=\"Page Template\"/>\n    \n    \n    <Description text=\"Page Description Template\"/>\n    \n  \n  </MainContent>\n  \n  \n  <FooterNavigation type=\"pager\" previous=\"Chapter\" next=\"Page\"/>\n  \n\n</Page>\n",
+    "description": "Displays book page details, actions, and navigation in a clean, minimal layout.",
+    "prev_action": "From the dashboard click 'Page Template' link"
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": null,
+    "description": null,
+    "prev_action": "Scroll down"
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": null,
+    "description": null,
+    "prev_action": "Click 'Add Comment'"
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": null,
+    "description": null,
+    "prev_action": "Scroll down"
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": null,
+    "description": null,
+    "prev_action": "In the 'Leave a comment here' field, type 'I like this template'"
+  },
+  {
+    "page_id": "Book Page Details Page",
+    "layout": null,
+    "description": null,
+    "prev_action": "Click 'Save Comment'"
+  }
+]

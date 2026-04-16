@@ -1,0 +1,102 @@
+{
+  "test_case": {
+    "test_path": "/home/xiwen/webtestpilot-camera-ready/benchmark/bookstack/test_cases/comment.yaml",
+    "bug_path": "/home/xiwen/webtestpilot-camera-ready/benchmark/bookstack/bugs/comment.js",
+    "name": "Comment",
+    "setup_function": "login_to_bookstack",
+    "steps": [
+      {
+        "action": "From the dashboard click 'Page Template' link",
+        "expectation": "Page contains title 'Page Template'"
+      },
+      {
+        "action": "Scroll down",
+        "expectation": "A list of comments is present"
+      },
+      {
+        "action": "Click 'Add Comment'",
+        "expectation": "A WYSIWYG comment editor is open"
+      },
+      {
+        "action": "Scroll down",
+        "expectation": "'Save Comment' and 'Cancel' buttons are present"
+      },
+      {
+        "action": "In the 'Leave a comment here' field, type 'I like this template'",
+        "expectation": "Editor box is not empty"
+      },
+      {
+        "action": "Click 'Save Comment'",
+        "expectation": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "step": {
+        "action": "From the dashboard click 'Page Template' link",
+        "expectation": "Page contains title 'Page Template'"
+      },
+      "is_action_correct": true,
+      "is_bug_reported": false,
+      "start_time": 5290713.303640839,
+      "end_time": 5290740.851974354,
+      "tokens": 17214
+    },
+    {
+      "step": {
+        "action": "Scroll down",
+        "expectation": "A list of comments is present"
+      },
+      "is_action_correct": true,
+      "is_bug_reported": false,
+      "start_time": 5290740.879904228,
+      "end_time": 5290763.358442377,
+      "tokens": 12605
+    },
+    {
+      "step": {
+        "action": "Click 'Add Comment'",
+        "expectation": "A WYSIWYG comment editor is open"
+      },
+      "is_action_correct": false,
+      "is_bug_reported": false,
+      "start_time": 5290763.375433833,
+      "end_time": 5290816.567267096,
+      "tokens": 37233
+    },
+    {
+      "step": {
+        "action": "Scroll down",
+        "expectation": "'Save Comment' and 'Cancel' buttons are present"
+      },
+      "is_action_correct": false,
+      "is_bug_reported": false,
+      "start_time": 5290821.577320995,
+      "end_time": 5290842.977267335,
+      "tokens": 12698
+    },
+    {
+      "step": {
+        "action": "In the 'Leave a comment here' field, type 'I like this template'",
+        "expectation": "Editor box is not empty"
+      },
+      "is_action_correct": false,
+      "is_bug_reported": true,
+      "start_time": 5290847.985666783,
+      "end_time": 5290883.169527388,
+      "tokens": 25276
+    },
+    {
+      "step": {
+        "action": "Click 'Save Comment'",
+        "expectation": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes"
+      },
+      "is_action_correct": false,
+      "is_bug_reported": true,
+      "start_time": 5290888.178665459,
+      "end_time": 5290911.444838908,
+      "tokens": 13646
+    }
+  ]
+}

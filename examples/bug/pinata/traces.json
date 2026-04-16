@@ -1,0 +1,106 @@
+[
+  {
+    "action": {
+      "name": "click",
+      "args": {
+        "label": "26",
+        "xpath": "/html/body/div[4]/div/div/div/div[2]/div/div[1]/div/div/div/a[7]/div/h4"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "finish",
+      "args": {
+        "status": "success",
+        "reason": "The 'Page Template' link in the 'My Recently Viewed' section of the dashboard was clicked, and the browser navigated to the corresponding Page Template detail page. The task is complete."
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "finish",
+      "args": {
+        "status": "unknown",
+        "reason": "The current viewport shows the top and middle of the 'Page Template' page, including the title, description, actions sidebar, and navigation elements. There is no visible comment section or list of comments in this view. To fulfill the act query (revealing any comment section or list of comments below the fold), I need to scroll down. However, since my only available commands are for interacting with labeled elements and scrolling is allowed, my next action should be to scroll down to reveal more content that may include a comment section."
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "goto",
+      "args": {
+        "url": "http://localhost:8081/books/book/page/page-template#comments"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "goto",
+      "args": {
+        "url": "http://localhost:8081/books/book/page/page-template"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "select",
+      "args": {
+        "label": "42",
+        "options": "down",
+        "xpath": "/html/body/div[5]"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "scroll",
+      "args": {
+        "direction": "down"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "finish",
+      "args": {
+        "status": "unknown",
+        "reason": "The WYSIWYG comment editor or commenting buttons are not visible in the current viewport. Scrolling down is required to locate these elements as per the act query."
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "scroll",
+      "args": {
+        "direction": "down"
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "goto",
+      "args": {
+        "url": ""
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "finish",
+      "args": {
+        "status": "success",
+        "reason": "The task is complete: all comment section elements and related buttons are now visible after scrolling to the bottom of the page."
+      }
+    }
+  },
+  {
+    "action": {
+      "name": "finish",
+      "args": {
+        "status": "fail",
+        "reason": "The 'Save Comment' button below the WYSIWYG editor is not visible in the current viewport. Only comment actions (Reply, Edit, Delete) are present for existing comments. There is a grounding issue as the required element is not labeled or visible."
+      }
+    }
+  }
+]
