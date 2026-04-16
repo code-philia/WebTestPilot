@@ -36,41 +36,41 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 ## ⚙️ Setup
 
-### 1. Clone and initialize
+1. **Clone and initialize**
 
-Run the setup script:
+    Run the setup script:
 
-```bash
-./setup.sh
-```
+    ```bash
+    ./setup.sh
+    ```
 
-This checks required tools (`uv`, `docker`, `docker-compose`) and guides you interactively.
+    This checks required tools (`uv`, `docker`, `docker-compose`) and guides you interactively.
 
-### 2. Configure environment variables
+2. **Configure environment variables**
 
-```bash
-cp .env.example .env
-```
+    ```bash
+    cp .env.example .env
+    ```
 
-### 3. Configure runtime settings
+3. **Configure runtime settings**
 
-Set the provider and execution mode in:
+    Set the provider and execution mode in:
 
-```
-/webtestpilot/src/webtestpilot/config.yaml
-```
+    ```
+    /webtestpilot/src/webtestpilot/config.yaml
+    ```
 
-Supported providers:
+    Supported providers:
 
-* `Claude` (Anthropic)
-* `GPT` (OpenAI)
-* `Gemini` (Google)
-* `OpenRouter` (self-hosted via OpenAI-compatible API)
+    * `Claude` (Anthropic)
+    * `GPT` (OpenAI)
+    * `Gemini` (Google)
+    * `OpenRouter` (self-hosted via OpenAI-compatible API)
 
-> [!NOTE]
-> 1. Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).  
-> 2. `/experiments` uses this config by default (see `/baselines/config.py` to override).  
-> 3. For standalone usage, you can provide a custom config path (see example below).
+    > [!NOTE]
+    > 1. Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).  
+    > 2. `/experiments` uses this config by default (see `/baselines/config.py` to override).  
+    > 3. For standalone usage, you can provide a custom config path (see example below).
 
 ## 🚀 Running Experiments
 
