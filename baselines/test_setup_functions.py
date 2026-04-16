@@ -42,6 +42,7 @@ def login_to_bookstack(page: Page) -> Page:
     page.get_by_role("textbox", name="Email").fill(Bookstack.USERNAME)
     page.get_by_role("textbox", name="Password").fill(Bookstack.PASSWORD)
     page.get_by_role("button", name="Log In").click()
+    page.wait_for_load_state("domcontentloaded")
     return page
 
 

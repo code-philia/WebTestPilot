@@ -10,6 +10,35 @@ parser:
   infer_missing_steps: false
 
 executor:
+  # Action execution mode: "som" (default) or "browser-use"
+  # "som"          - two-stage pipeline: GUI grounding model → Set-of-Mark annotation → action proposer
+  # "browser-use"  - one-shot LLM agent via browser-use (no GUI grounding model required)
+  mode: "browser-use"
+
+  # browser-use settings (only used when mode is "browser-use")
+  browser_use:
+    # LLM client for the browser-use agent (see baml_src/clients.baml for available clients)
+    llm_client: "OpenRouter"
+
+    # Maximum number of steps the browser-use agent may take per action.
+    # Note: minimum 2 steps, agent needs to call done(), which counts as 1 step.
+    max_steps: 3
+
+    # CDP endpoint of the browser to connect to.
+    # browser-use connects via Chrome DevTools Protocol to reuse the existing browser session
+    # (cookies, auth state, current page).
+    #
+    # How to expose the CDP endpoint from your Playwright browser:
+    #   browser = playwright.chromium.launch(args=["--remote-debugging-port=9222"])
+    #
+    # Then set this to: "http://localhost:9222"
+    cdp_url: "http://localhost:9222"
+
+  # SoM (Set-of-Mark) settings (only used when mode is "som")
+  som:
+    # Locates UI elements (x, y) from a UI description
+    ui_locator: "GUI_Grounding_Model"
+
   llm_clients:
     # Generates pre- and post-conditions using the assertion API
     assertion_generation: "GPT"
@@ -19,9 +48,6 @@ executor:
 
     # Proposes actions given a natural language action description
     action_proposer: "GPT"
-
-    # Locates UI elements (x, y) from a UI description
-    ui_locator: "GUI_Grounding_Model"
 
     # For tracking same logical pages across states
     page_reidentification: "GPT"
