@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/badge/Project-Page-green.svg" alt="Project Page">
   </a>
   <a href="./examples">
-    <img src="https://img.shields.io/badge/Examples-Visual%20Walkthrough-blue.svg" alt="Examples">
+    <img src="https://img.shields.io/badge/Examples-Step%20by%20Step-blue.svg" alt="Examples">
   </a>
 </p>
 
@@ -67,10 +67,9 @@ Supported providers:
 * `Gemini` (Google)
 * `OpenRouter` (self-hosted via OpenAI-compatible API)
 
-> **Notes**
->
-> 1. Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).
-> 2. `/experiments` uses this config by default (see `/baselines/config.py` to override).
+> [!NOTE]
+> 1. Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).  
+> 2. `/experiments` uses this config by default (see `/baselines/config.py` to override).  
 > 3. For standalone usage, you can provide a custom config path (see example below).
 
 ## 🚀 Running Experiments

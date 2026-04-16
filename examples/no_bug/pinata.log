@@ -15,32 +15,6 @@
 │ ┃ No. ┃ Test Case                       ┃ Bug Name ┃                                                              │
 │ ┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩                                                              │
 │ │ 1   │ comment                         │ -        │                                                              │
-│ │ 2   │ count_recently_created_books    │ -        │                                                              │
-│ │ 3   │ count_recently_created_chapters │ -        │                                                              │
-│ │ 4   │ count_recently_created_pages    │ -        │                                                              │
-│ │ 5   │ count_recently_created_shelves  │ -        │                                                              │
-│ │ 6   │ create_book                     │ -        │                                                              │
-│ │ 7   │ create_page                     │ -        │                                                              │
-│ │ 8   │ create_sort_rule                │ -        │                                                              │
-│ │ 9   │ delete_book                     │ -        │                                                              │
-│ │ 10  │ favourite_book                  │ -        │                                                              │
-│ │ 11  │ favourite_chapter               │ -        │                                                              │
-│ │ 12  │ favourite_page                  │ -        │                                                              │
-│ │ 13  │ favourite_page_template         │ -        │                                                              │
-│ │ 14  │ recent_activity_all             │ -        │                                                              │
-│ │ 15  │ recent_activity_chapter         │ -        │                                                              │
-│ │ 16  │ recent_activity_page            │ -        │                                                              │
-│ │ 17  │ recent_activity_page_template   │ -        │                                                              │
-│ │ 18  │ recent_activity_shelf           │ -        │                                                              │
-│ │ 19  │ recently_viewed_book            │ -        │                                                              │
-│ │ 20  │ recently_viewed_chapter         │ -        │                                                              │
-│ │ 21  │ recently_viewed_page            │ -        │                                                              │
-│ │ 22  │ recently_viewed_page_template   │ -        │                                                              │
-│ │ 23  │ recently_viewed_shelf           │ -        │                                                              │
-│ │ 24  │ search                          │ -        │                                                              │
-│ │ 25  │ settings                        │ -        │                                                              │
-│ │ 26  │ unfavourite_shelf               │ -        │                                                              │
-│ │ 27  │ update_book                     │ -        │                                                              │
 │ └─────┴─────────────────────────────────┴──────────┘                                                              │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 [03:52:02] INFO     Initializing pinata test runner.                                                  evaluate.py:143
