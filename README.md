@@ -67,10 +67,10 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
     * `Gemini` (Google)
     * `OpenRouter` (self-hosted via OpenAI-compatible API)
 
-    > [!NOTE]
-    > 1. Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).  
-    > 2. `/experiments` uses this config by default (see `/baselines/config.py` to override).  
-    > 3. For standalone usage, you can provide a custom config path (see example below).
+    Notes:
+    * Ensure corresponding API keys/endpoints for your provider are set in `.env` (Step 2).  
+    * `/experiments` uses this config by default (see `/baselines/config.py` to override).  
+    * For standalone usage, you can provide a custom config path (see example below).
 
 ## 🚀 Running Experiments
 
