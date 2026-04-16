@@ -38,6 +38,9 @@ class Session:
         self.page: Page = page
         self.config: Config = config
         self.collector: Collector = Collector()
+        # Cumulative token counts from browser-use LLM calls (tracked separately from BAML).
+        self.browser_use_input_tokens: int = 0
+        self.browser_use_output_tokens: int = 0
 
         self._history: list[State] = []
         self.capture_state(prev_action=None)

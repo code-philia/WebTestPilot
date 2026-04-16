@@ -38,6 +38,9 @@ class Config:
     # Empty string means browser-use mode is not fully configured.
     browser_use_cdp_url: str
 
+    # Maximum steps the browser-use agent may take per action.
+    browser_use_max_steps: int
+
     @staticmethod
     def load(path: Path | str) -> "Config":
         # Load environment variables
@@ -79,6 +82,7 @@ class Config:
         browser_use_cfg = yaml_data["executor"].get("browser_use", {})
         browser_use_agent = browser_use_cfg.get("llm_client", "Claude")
         browser_use_cdp_url = browser_use_cfg.get("cdp_url", "") or ""
+        browser_use_max_steps = int(browser_use_cfg.get("max_steps", 1))
 
         return Config(
             parser=parser,
@@ -92,4 +96,5 @@ class Config:
             mode=mode,
             browser_use_agent=browser_use_agent,
             browser_use_cdp_url=browser_use_cdp_url,
+            browser_use_max_steps=browser_use_max_steps,
         )

@@ -1,13 +1,59 @@
 import asyncio
-import concurrent.futures
 import logging
 import os
+import threading
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from webtestpilot.data_models import Session
 
 logger = logging.getLogger(__name__)
+
+# Each CDP URL gets a dedicated event loop running in a daemon thread and a
+# BrowserSession kept alive across action calls.  Using a persistent loop
+# (instead of asyncio.run()) means the loop is never torn down between actions,
+# so bubus's internal asyncio queue stays live and BrowserSession can be reused.
+_loops: dict[str, asyncio.AbstractEventLoop] = {}
+_browser_sessions: dict[str, object] = {}
+_lock = threading.Lock()
+
+
+def _get_loop(cdp_url: str) -> asyncio.AbstractEventLoop:
+    with _lock:
+        if cdp_url not in _loops:
+            loop = asyncio.new_event_loop()
+            threading.Thread(
+                target=loop.run_forever,
+                daemon=True,
+                name=f"bu-loop-{cdp_url}",
+            ).start()
+            _loops[cdp_url] = loop
+    return _loops[cdp_url]
+
+
+def _get_browser_session(cdp_url: str):
+    with _lock:
+        if cdp_url not in _browser_sessions:
+            from browser_use.browser.session import BrowserSession
+            _browser_sessions[cdp_url] = BrowserSession(cdp_url=cdp_url, keep_alive=True)
+            logger.debug("Created new BrowserSession for %s", cdp_url)
+    return _browser_sessions[cdp_url]
+
+
+def teardown_browser_session(cdp_url: str) -> None:
+    """
+    Stop the persistent event loop and remove the BrowserSession for a CDP URL.
+
+    Call this when the Playwright browser is about to be closed (e.g. at test-case
+    teardown) so the cached session does not attempt to reconnect to a dead endpoint.
+    """
+    with _lock:
+        loop = _loops.pop(cdp_url, None)
+        _browser_sessions.pop(cdp_url, None)
+
+    if loop is not None:
+        loop.call_soon_threadsafe(loop.stop)
+        logger.debug("Stopped browser-use event loop for %s", cdp_url)
 
 
 def _build_llm(client_name: str):
@@ -46,26 +92,16 @@ def _build_llm(client_name: str):
             )
 
 
-async def _run_agent(action: str, llm, cdp_url: str) -> str:
+async def _run_agent(action: str, llm, browser_session, max_steps: int) -> tuple[str, int, int]:
     from browser_use import Agent
-    from browser_use.browser.session import BrowserSession
 
-    # httpx connection-pool teardown schedules tasks that fire after asyncio.run()
-    # closes the loop, producing noisy "Event loop is closed" RuntimeErrors.
-    # Suppress that specific error; everything else propagates normally.
-    loop = asyncio.get_running_loop()
-    _default = loop.get_exception_handler() or loop.default_exception_handler
-    def _handler(loop, context):
-        if isinstance(context.get("exception"), RuntimeError) and \
-                "Event loop is closed" in str(context.get("exception", "")):
-            return
-        _default(loop, context)
-    loop.set_exception_handler(_handler)
-
-    browser_session = BrowserSession(cdp_url=cdp_url)
     agent = Agent(task=action, llm=llm, browser=browser_session)
-    result = await agent.run()
-    return str(result)
+    history = await agent.run(max_steps=max_steps)
+
+    input_tokens = sum(e.usage.prompt_tokens for e in agent.token_cost_service.usage_history)
+    output_tokens = sum(e.usage.completion_tokens for e in agent.token_cost_service.usage_history)
+
+    return str(history), input_tokens, output_tokens
 
 
 def execute_action_browser_use(session: "Session", action: str) -> None:
@@ -81,12 +117,20 @@ def execute_action_browser_use(session: "Session", action: str) -> None:
     from webtestpilot.utils import wait_for_dom_stability
 
     cdp_url = session.config.browser_use_cdp_url
-
+    loop = _get_loop(cdp_url)
+    browser_session = _get_browser_session(cdp_url)
     llm = _build_llm(session.config.browser_use_agent)
     logger.info("browser-use executing: %r", action)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
-        result = pool.submit(asyncio.run, _run_agent(action=action, llm=llm, cdp_url=cdp_url)).result()
+    future = asyncio.run_coroutine_threadsafe(
+        _run_agent(action=action, llm=llm, browser_session=browser_session, max_steps=session.config.browser_use_max_steps),
+        loop,
+    )
+    result, input_tokens, output_tokens = future.result()
+
+    session.browser_use_input_tokens += input_tokens
+    session.browser_use_output_tokens += output_tokens
+    logger.debug("browser-use tokens: input=%d output=%d", input_tokens, output_tokens)
     session.trace.append({"action": action, "action_code": f"[browser-use] {result}"})
 
     session.page.wait_for_load_state()

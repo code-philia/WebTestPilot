@@ -20,6 +20,10 @@ executor:
     # LLM client for the browser-use agent (see baml_src/clients.baml for available clients)
     llm_client: "OpenRouter"
 
+    # Maximum number of steps the browser-use agent may take per action.
+    # Note: minimum 2 steps, agent needs to call done(), which counts as 1 step.
+    max_steps: 3
+
     # CDP endpoint of the browser to connect to.
     # browser-use connects via Chrome DevTools Protocol to reuse the existing browser session
     # (cookies, auth state, current page).

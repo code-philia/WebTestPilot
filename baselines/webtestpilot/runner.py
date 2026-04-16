@@ -18,6 +18,7 @@ from baselines.base_runner import BaseTestRunner
 from webtestpilot import WebTestPilot, Config, BugReport, Session, Step as WebTestPilotStep
 from webtestpilot.assertion_api import serialize_history
 from webtestpilot.parser import parse
+from webtestpilot.action_api.browser_use import teardown_browser_session
 
 
 os.environ['BAML_LOG'] = "OFF"
@@ -91,12 +92,18 @@ class WebTestPilotTestRunner(BaseTestRunner):
     def _teardown_test_case(self, test_context: WebTestPilotTestContext) -> None:
         playwright_trace_path = test_context.test_output_dir / "trace.zip"
 
+        # Shut down the browser-use persistent loop before closing the browser so
+        # the cached BrowserSession does not attempt to reconnect to a dead endpoint.
+        cdp_url = test_context.session.config.browser_use_cdp_url
+        if cdp_url:
+            teardown_browser_session(cdp_url)
+
         for item in test_context.model_dump().values():
             try:
                 if isinstance(item, Page): item.close()
                 elif isinstance(item, Browser): item.close()
                 elif isinstance(item, Playwright): item.stop()
-                elif isinstance(item, BrowserContext): 
+                elif isinstance(item, BrowserContext):
                     item.tracing.stop(path=playwright_trace_path)
                     item.close()
             except Exception as e:
@@ -112,7 +119,10 @@ class WebTestPilotTestRunner(BaseTestRunner):
             bugs.append(report)
         
         start_usage = session.collector.usage
-        start_tokens = start_usage.input_tokens + start_usage.output_tokens
+        start_tokens = (
+            start_usage.input_tokens + start_usage.output_tokens
+            + session.browser_use_input_tokens + session.browser_use_output_tokens
+        )
 
         if self.parser:
             wtp_step = next(test_context.parsed_steps)
@@ -125,7 +135,10 @@ class WebTestPilotTestRunner(BaseTestRunner):
         end_time = time.perf_counter()
         
         end_usage = session.collector.usage
-        end_tokens = end_usage.input_tokens + end_usage.output_tokens
+        end_tokens = (
+            end_usage.input_tokens + end_usage.output_tokens
+            + session.browser_use_input_tokens + session.browser_use_output_tokens
+        )
         tokens = end_tokens - start_tokens
 
         # Save trace
