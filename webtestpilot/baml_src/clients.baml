@@ -11,7 +11,7 @@ client<llm> Base {
 }
 
 client<llm> GPT {
-  provider openai
+  provider "openai-generic"
   retry_policy Exponential
   options {
     base_url env.OPENAI_BASE_URL
@@ -41,14 +41,17 @@ client<llm> Claude {
   }
 }
 
-client<llm> Local {
+client<llm> OpenRouter {
   provider "openai-generic"
+  retry_policy Exponential
   options {
-    base_url env.LOCAL_MODEL_BASE_URL
-    model env.LOCAL_MODEL_NAME
+    base_url "https://openrouter.ai/api/v1"
+    model env.OPENROUTER_MODEL_NAME
+    api_key env.OPENROUTER_API_KEY
     temperature 0.0
   }
 }
+
 
 client<llm> GUI_Grounding_Model {
   provider "openai-generic"

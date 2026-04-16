@@ -1,4 +1,6 @@
+import dataclasses
 import os
+import socket
 import time
 import json
 import logging
@@ -22,6 +24,13 @@ os.environ['BAML_LOG'] = "OFF"
 logger = logging.getLogger(__name__)
 
 
+def _free_port() -> int:
+    """Return an OS-assigned free TCP port."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("", 0))
+        return s.getsockname()[1]
+
+
 class WebTestPilotTestContext(TestContext):
     test_output_dir: Path
     session: Session
@@ -43,12 +52,20 @@ class WebTestPilotTestRunner(BaseTestRunner):
 
     def _setup_test_case(self, test_case: TestCase, test_output_dir: Path) -> WebTestPilotTestContext:
         playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=self.headless)
+
+        config = self.config
+        launch_args = []
+        if config.mode == "browser-use":
+            port = _free_port()
+            launch_args.append(f"--remote-debugging-port={port}")
+            config = dataclasses.replace(config, browser_use_cdp_url=f"http://localhost:{port}")
+
+        browser = playwright.chromium.launch(headless=self.headless, args=launch_args)
         browser_context = browser.new_context(viewport={"width": Viewport.WIDTH, "height": Viewport.HEIGHT})
         browser_context.tracing.start(screenshots=True, snapshots=True)
         page = browser_context.new_page()
         page = setup_page_state(self.application, page, test_case.setup_function)
-        session = Session(page, self.config)
+        session = Session(page, config)
 
         parsed_steps = None
         if self.parser:

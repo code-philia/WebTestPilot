@@ -28,6 +28,16 @@ class Config:
 
     max_tries: int
 
+    # Action execution mode: "som" (default) or "browser-use"
+    mode: str
+
+    # Client name (from config.yaml) used as the LLM for the browser-use agent
+    browser_use_agent: str
+
+    # CDP endpoint for browser-use to connect to the existing browser session.
+    # Empty string means browser-use mode is not fully configured.
+    browser_use_cdp_url: str
+
     @staticmethod
     def load(path: Path | str) -> "Config":
         # Load environment variables
@@ -56,13 +66,19 @@ class Config:
         action_proposer = ClientRegistry()
         action_proposer.set_primary(executor_clients["action_proposer"])
 
+        som_cfg = yaml_data["executor"].get("som", {})
         ui_locator = ClientRegistry()
-        ui_locator.set_primary(executor_clients["ui_locator"])
+        ui_locator.set_primary(som_cfg.get("ui_locator", "GUI_Grounding_Model"))
 
         page_reidentification = ClientRegistry()
         page_reidentification.set_primary(executor_clients["page_reidentification"])
 
         max_tries = yaml_data["executor"]["max_tries"]
+
+        mode = yaml_data["executor"].get("mode", "browser-use")
+        browser_use_cfg = yaml_data["executor"].get("browser_use", {})
+        browser_use_agent = browser_use_cfg.get("llm_client", "Claude")
+        browser_use_cdp_url = browser_use_cfg.get("cdp_url", "") or ""
 
         return Config(
             parser=parser,
@@ -73,4 +89,7 @@ class Config:
             page_reidentification=page_reidentification,
             infer_missing_steps=infer_missing_steps,
             max_tries=max_tries,
+            mode=mode,
+            browser_use_agent=browser_use_agent,
+            browser_use_cdp_url=browser_use_cdp_url,
         )

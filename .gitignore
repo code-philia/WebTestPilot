@@ -16,6 +16,10 @@ wheels/
 
 # Environment variables
 .env
+!/webapps/bookstack/.env
+!/webapps/indico/.env
+!/webapps/invoiceninja/.env
+!/webapps/prestashop/.env
 
 # Ruff
 .ruff_cache/
