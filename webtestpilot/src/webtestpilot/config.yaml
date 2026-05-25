@@ -10,10 +10,22 @@ parser:
   infer_missing_steps: false
 
 executor:
-  # Action execution mode: "som" (default) or "browser-use"
+  # Action execution mode: "som" (default), "browser-use", or "playwright-code-gen"
   # "som"          - two-stage pipeline: GUI grounding model → Set-of-Mark annotation → action proposer
   # "browser-use"  - one-shot LLM agent via browser-use (no GUI grounding model required)
+  # "playwright-code-gen" - one-shot LLM/VLM code generator that executes sync Playwright code
   mode: "browser-use"
+
+  # playwright-code-gen settings (only used when mode is "playwright-code-gen")
+  playwright_codegen:
+    # LLM client for generating Playwright code (see baml_src/clients.baml for available clients)
+    llm_client: "OpenRouter"
+
+    # Number of repair generations after executing generated code fails.
+    max_revisions: 1
+
+    # Timeout budget for post-action browser load waits.
+    timeout_ms: 5000
 
   # browser-use settings (only used when mode is "browser-use")
   browser_use:

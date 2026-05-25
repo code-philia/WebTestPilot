@@ -28,8 +28,17 @@ class Config:
 
     max_tries: int
 
-    # Action execution mode: "som" (default) or "browser-use"
+    # Action execution mode: "som" (default), "browser-use", or "playwright-code-gen"
     mode: str
+
+    # Client registry used by the Playwright code generation action executor.
+    playwright_codegen: ClientRegistry
+
+    # Maximum number of repair generations after a generated Playwright snippet fails.
+    playwright_codegen_max_revisions: int
+
+    # Timeout budget passed to post-action page load waits.
+    playwright_codegen_timeout_ms: int
 
     # Client name (from config.yaml) used as the LLM for the browser-use agent
     browser_use_agent: str
@@ -79,6 +88,22 @@ class Config:
         max_tries = yaml_data["executor"]["max_tries"]
 
         mode = yaml_data["executor"].get("mode", "browser-use")
+
+        playwright_codegen_cfg = yaml_data["executor"].get("playwright_codegen", {})
+        playwright_codegen = ClientRegistry()
+        playwright_codegen.set_primary(
+            playwright_codegen_cfg.get(
+                "llm_client",
+                executor_clients.get("action_proposer", "GPT"),
+            )
+        )
+        playwright_codegen_max_revisions = int(
+            playwright_codegen_cfg.get("max_revisions", 1)
+        )
+        playwright_codegen_timeout_ms = int(
+            playwright_codegen_cfg.get("timeout_ms", 5000)
+        )
+
         browser_use_cfg = yaml_data["executor"].get("browser_use", {})
         browser_use_agent = browser_use_cfg.get("llm_client", "Claude")
         browser_use_cdp_url = browser_use_cfg.get("cdp_url", "") or ""
@@ -94,6 +119,9 @@ class Config:
             infer_missing_steps=infer_missing_steps,
             max_tries=max_tries,
             mode=mode,
+            playwright_codegen=playwright_codegen,
+            playwright_codegen_max_revisions=playwright_codegen_max_revisions,
+            playwright_codegen_timeout_ms=playwright_codegen_timeout_ms,
             browser_use_agent=browser_use_agent,
             browser_use_cdp_url=browser_use_cdp_url,
             browser_use_max_steps=browser_use_max_steps,
