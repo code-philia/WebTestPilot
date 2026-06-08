@@ -37,6 +37,9 @@ class Config:
     # Maximum number of repair generations after a generated Playwright snippet fails.
     playwright_codegen_max_revisions: int
 
+    # Number of snapshot-based attempts before falling back to the legacy DOM summary.
+    playwright_codegen_snapshot_fallback_after_attempts: int
+
     # Timeout budget passed to post-action page load waits.
     playwright_codegen_timeout_ms: int
 
@@ -98,7 +101,10 @@ class Config:
             )
         )
         playwright_codegen_max_revisions = int(
-            playwright_codegen_cfg.get("max_revisions", 1)
+            playwright_codegen_cfg.get("max_revisions", 3)
+        )
+        playwright_codegen_snapshot_fallback_after_attempts = int(
+            playwright_codegen_cfg.get("snapshot_fallback_after_attempts", 3)
         )
         playwright_codegen_timeout_ms = int(
             playwright_codegen_cfg.get("timeout_ms", 5000)
@@ -121,6 +127,9 @@ class Config:
             mode=mode,
             playwright_codegen=playwright_codegen,
             playwright_codegen_max_revisions=playwright_codegen_max_revisions,
+            playwright_codegen_snapshot_fallback_after_attempts=(
+                playwright_codegen_snapshot_fallback_after_attempts
+            ),
             playwright_codegen_timeout_ms=playwright_codegen_timeout_ms,
             browser_use_agent=browser_use_agent,
             browser_use_cdp_url=browser_use_cdp_url,

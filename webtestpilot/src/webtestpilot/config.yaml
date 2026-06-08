@@ -22,7 +22,12 @@ executor:
     llm_client: "OpenRouter"
 
     # Number of repair generations after executing generated code fails.
-    max_revisions: 1
+    # With the default value, attempts 0-2 use Playwright AI snapshots and
+    # attempt 3 falls back to the legacy DOM summary.
+    max_revisions: 3
+
+    # Number of Playwright AI snapshot attempts before falling back to DOM summary.
+    snapshot_fallback_after_attempts: 3
 
     # Timeout budget for post-action browser load waits.
     timeout_ms: 5000

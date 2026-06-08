@@ -2,7 +2,7 @@ function GeneratePlaywrightCode(
   screenshot: image,
   task: string,
   page_context: string,
-  dom_context: string,
+  page_observation: string,
   previous_failure: string,
   attempt: int
 ) -> string {
@@ -14,7 +14,7 @@ function GeneratePlaywrightCode(
     You are provided with:
     1. A screenshot of the current web application state.
     2. A short page context containing the current URL, title, and viewport.
-    3. A compact list of visible interactive DOM elements.
+    3. A page observation. It is normally a Playwright ARIA snapshot in AI mode, including element refs for interaction. On later retries or unsupported Playwright versions, it may be a fallback DOM summary.
     4. The previous execution failure, if this is a retry.
 
     Please generate a short Python Playwright sync action body that performs exactly the requested task on the current page.
@@ -46,12 +46,15 @@ function GeneratePlaywrightCode(
 
     Please follow these rules:
     - Generate synchronous Python Playwright code. Do not use await.
-    - Do not use imports, file access, shell commands, environment variables, network clients, eval, exec, loops, or browser creation.
-    - Prefer role, label, placeholder, text, visible locator, or stable DOM attributes from the DOM context.
-    - Every Playwright action must use a short timeout, normally 3000 to 5000 ms.
+    - Do not use imports, file access, shell commands, environment variables, network clients, eval, exec, loops, comprehensions, JavaScript injection, direct navigation, long sleeps, or browser/context creation.
+    - Prefer Python locators such as get_by_role(), get_by_label(), get_by_placeholder(), and get_by_text() using roles, names, states, and text shown in the page observation.
+    - If the observation source is playwright-ai-snapshot, treat refs like [ref=e2] as evidence that the element exists in the current observation; do not use ref strings as CSS selectors.
+    - If the observation source is fallback-dom-summary, use selector_hint only when role, label, placeholder, or text locators are not enough.
+    - Every Playwright action call such as click(), fill(), press(), type(), select_option(), check(), or hover() must include a short literal integer timeout, normally 3000 to 5000 ms and never above 10000 ms.
+    - Do not call page.wait_for_timeout(); use helpers.wait_for_stable(500) or helpers.wait_for_stable(1000) after page-changing actions.
     - Do not use coordinates unless the DOM evidence is not enough and the screenshot clearly identifies the target.
     - Do not force-click disabled controls.
-    - Do not invent selectors or labels not supported by page_context, dom_context, or screenshot.
+    - Do not invent selectors or labels not supported by page_context, page_observation, or screenshot.
     - If a prior attempt failed, revise the locator or action instead of repeating the same code.
     - The code should perform the current task only. Do not add final business assertions; WebTestPilot's assertion API verifies postconditions separately.
     - After a page-changing action, call helpers.wait_for_stable(500) or helpers.wait_for_stable(1000).
@@ -80,8 +83,8 @@ function GeneratePlaywrightCode(
     Page context:
     {{ page_context }}
 
-    Visible interactive DOM context:
-    {{ dom_context }}
+    Page observation:
+    {{ page_observation }}
 
     Previous failure, if any:
     {{ previous_failure }}
