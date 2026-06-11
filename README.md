@@ -92,6 +92,14 @@ pip install -e ./webtestpilot
 uv pip install -e ./webtestpilot
 ```
 
+Generate the BAML Python client before importing `webtestpilot`:
+
+```bash
+cd webtestpilot
+uv run baml-cli generate
+cd ..
+```
+
 ### Minimal example
 
 The default mode is **browser-use**: a one-shot LLM agent navigates the browser directly with no GUI grounding model required. The browser must expose a CDP endpoint so browser-use can connect to the existing session.
