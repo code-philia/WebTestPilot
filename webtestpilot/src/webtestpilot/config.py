@@ -53,6 +53,17 @@ class Config:
     # Maximum steps the browser-use agent may take per action.
     browser_use_max_steps: int
 
+    # DOM-RAG executor settings.
+    dom_rag_top_k: int
+    dom_rag_max_candidates: int
+    dom_rag_dual_top_k: int
+    dom_rag_cross_top_k: int
+    dom_rag_dual_encoder_model: str
+    dom_rag_cross_encoder_model: str
+    dom_rag_enable_dual_encoder: bool
+    dom_rag_enable_cross_encoder: bool
+    dom_rag_ranker_device: str | None
+
     @staticmethod
     def load(path: Path | str) -> "Config":
         # Load environment variables
@@ -111,6 +122,30 @@ class Config:
         )
 
         browser_use_cfg = yaml_data["executor"].get("browser_use", {})
+
+        # DOM-RAG settings
+        dom_rag_cfg = yaml_data["executor"].get("dom_rag", {})
+
+        def _dom_rag_value(short_name: str, default: Any) -> Any:
+            return dom_rag_cfg.get(short_name, dom_rag_cfg.get(f"dom_rag_{short_name}", default))
+
+        dom_rag_top_k = int(_dom_rag_value("top_k", 10))
+        dom_rag_max_candidates = int(_dom_rag_value("max_candidates", 500))
+        dom_rag_dual_top_k = int(_dom_rag_value("dual_top_k", 80))
+        dom_rag_cross_top_k = int(_dom_rag_value("cross_top_k", dom_rag_top_k))
+
+        dom_rag_dual_encoder_model = _dom_rag_value("dual_encoder_model", "McGill-NLP/MiniLM-L6-dmr")
+        dom_rag_cross_encoder_model = _dom_rag_value(
+            "cross_encoder_model",
+            "osunlp/MindAct_CandidateGeneration_deberta-v3-base",
+        )
+
+        dom_rag_enable_dual_encoder = bool(dom_rag_cfg.get("enable_dual_encoder", True))
+        dom_rag_enable_cross_encoder = bool(dom_rag_cfg.get("enable_cross_encoder", True))
+
+        ranker_device = _dom_rag_value("ranker_device", None)
+        dom_rag_ranker_device = ranker_device or None
+
         browser_use_agent = browser_use_cfg.get("llm_client", "Claude")
         browser_use_cdp_url = browser_use_cfg.get("cdp_url", "") or ""
         browser_use_max_steps = int(browser_use_cfg.get("max_steps", 1))
@@ -134,4 +169,14 @@ class Config:
             browser_use_agent=browser_use_agent,
             browser_use_cdp_url=browser_use_cdp_url,
             browser_use_max_steps=browser_use_max_steps,
+            # DOM-RAG settings
+            dom_rag_top_k=dom_rag_top_k,
+            dom_rag_max_candidates=dom_rag_max_candidates,
+            dom_rag_dual_top_k=dom_rag_dual_top_k,
+            dom_rag_cross_top_k=dom_rag_cross_top_k,
+            dom_rag_dual_encoder_model=dom_rag_dual_encoder_model,
+            dom_rag_cross_encoder_model=dom_rag_cross_encoder_model,
+            dom_rag_enable_dual_encoder=dom_rag_enable_dual_encoder,
+            dom_rag_enable_cross_encoder=dom_rag_enable_cross_encoder,
+            dom_rag_ranker_device=dom_rag_ranker_device,
         )

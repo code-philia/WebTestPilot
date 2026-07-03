@@ -3,7 +3,7 @@
 
 parser:
   # Semantic parsing of text descriptions into (condition, action, expectation) test steps
-  llm_client: "GPT"
+  llm_client: "OpenRouter"
 
   # Automatically infer <unknown> placeholders in parsed test steps
   # If false, throw exception and inform user
@@ -14,7 +14,8 @@ executor:
   # "som"          - two-stage pipeline: GUI grounding model → Set-of-Mark annotation → action proposer
   # "browser-use"  - one-shot LLM agent via browser-use (no GUI grounding model required)
   # "playwright-code-gen" - one-shot LLM/VLM code generator that executes sync Playwright code
-  mode: "browser-use"
+  # "dom-rag" - retrieves and reranks actionable DOM elements before asking the LLM to select the final target, reducing coordinate-grounding instability.
+  mode: "dom_rag"
 
   # playwright-code-gen settings (only used when mode is "playwright-code-gen")
   playwright_codegen:
@@ -58,16 +59,34 @@ executor:
 
   llm_clients:
     # Generates pre- and post-conditions using the assertion API
-    assertion_generation: "GPT"
+    assertion_generation: "OpenRouter"
 
     # Executes assertion API methods (e.g., extract() from state and element)
-    assertion_api: "GPT"
+    assertion_api: "OpenRouter"
 
     # Proposes actions given a natural language action description
-    action_proposer: "GPT"
+    action_proposer: "OpenRouter"
 
     # For tracking same logical pages across states
-    page_reidentification: "GPT"
+    page_reidentification: "OpenRouter"
 
   # How many times in total to try post-condition generation.
   max_tries: 1
+
+  # DOM-RAG settings.
+  # Pipeline: DOM candidate collection -> DMR dual encoder retrieval -> MindAct cross encoder reranking -> structured LLM decision.
+  dom_rag:
+    dom_rag_top_k: 100
+    dom_rag_max_candidates: 500
+
+    dom_rag_dual_top_k: 80
+    dom_rag_cross_top_k: 500
+
+    enable_dual_encoder: false
+    enable_cross_encoder: true
+
+    dom_rag_dual_encoder_model: "McGill-NLP/MiniLM-L6-dmr"
+    dom_rag_cross_encoder_model: "osunlp/MindAct_CandidateGeneration_deberta-v3-base"
+
+    # Use null for CPU. Use "cuda" on GPU. Use "mps" on Apple Silicon only if stable.
+    dom_rag_ranker_device: mps

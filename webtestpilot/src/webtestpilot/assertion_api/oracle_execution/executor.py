@@ -105,9 +105,13 @@ def _run_assertion_with_trace(
         msg = str(ae) if str(ae).strip() else "AssertionError raised without message."
         return False, f"{msg}\nVariable trace:\n{pprint.pformat(captured_deltas)}"
 
-    except Exception:
+    except Exception as exc:
         sys.settrace(None)
-        raise
+        return (
+            False,
+            f"Exception while running generated assertion: {type(exc).__name__}: {exc}\n"
+            f"Variable trace:\n{pprint.pformat(captured_deltas)}",
+        )
 
 
 def execute(response: str, session: Session) -> tuple[bool, str]:
