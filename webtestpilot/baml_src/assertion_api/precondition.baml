@@ -34,6 +34,12 @@ template_string Precondition_Guidelines #"
     ### MUST remember
     - `schema` are classes that inherit from `BaseModel` but MUST MUST MUST NOT be `BaseModel` itself!.
     - Code MUST be executable and does not have type error.
+    - `State.title` is the browser tab title, not the visible page heading. For assertions like "page with title X is shown", extract visible page heading/content from the state instead.
+    - If extracting multiple items, define a container model with a list field and iterate over that field. Do not pass a singular item model to `extract()` and then iterate over the model itself.
+    - Do not use `dict`, `List[dict]`, or untyped mappings in extraction schemas. Define a nested `BaseModel` for structured list items.
+    - Only access attributes that are declared on that exact model. If `quantity` is declared on `Product`, use `item.product.quantity`; if you want `item.quantity`, declare it on `CartItem`.
+    - Use `Optional[...] = None` for dialog/message fields that may be absent. Then assert the value explicitly.
+    - Normalize whitespace and case when comparing visible titles/headings/labels unless the expectation explicitly requires exact capitalization.
     - Assertions MUST have insightful, helpful messages with it, i.e. "Message shown is not ...", ...
     - Data models should be concise and sufficient for the assertions, unrelated details should be ignored.
     - Use descriptive variable names for clarity.

@@ -38,6 +38,13 @@ def execute_action(session: Session, action: str) -> None:
         execute_action_playwright_codegen(session, action)
         return
 
+    # DOM-RAG mode
+    if session.config.mode in {"dom-rag", "dom_rag"}:
+        from webtestpilot.action_api.dom_rag import execute_action_dom_rag
+
+        execute_action_dom_rag(session, action)
+        return
+
     from webtestpilot.action_api.som import execute_action_som
 
     execute_action_som(session, action)
