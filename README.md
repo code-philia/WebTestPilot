@@ -22,6 +22,9 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
  <img src="http://img.youtube.com/vi/hJhcSvN2KwU/mqdefault.jpg" alt="Watch the video" width="360" border="10" />
 </a>
 
+## 📖 Sharing
+
+- [14 July 2026] [DSLs Enable Reliable use of LLMs](https://martinfowler.com/articles/llm-and-dsls.html)
 
 ## 📂 Structure
 
