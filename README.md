@@ -46,19 +46,17 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
     git clone --recurse-submodules https://github.com/code-philia/WebTestPilot.git
     ```
 
-    Then run the setup script:
+    Then set everything up with [`just`](https://github.com/casey/just):
 
     ```bash
-    ./setup.sh
+    just setup
     ```
 
-    This checks required tools (`uv`, `docker`, `docker-compose`) and guides you interactively.
+    This checks required tools (`uv`, `docker`, `docker compose`), creates `.env`, fetches the benchmark, and installs WebTestPilot and the baselines. Use `just setup-webtestpilot` or `just setup-baselines` to install only one of them, and `just` to list all recipes.
 
 2. **Configure environment variables**
 
-    ```bash
-    cp .env.example .env
-    ```
+    `just setup` creates `.env` from `.env.example` (or run `just setup-env`); fill in your API keys there.
 
 3. **Configure runtime settings**
 
@@ -94,21 +92,13 @@ Each test case runs against a fresh Docker Compose stack assembled from the benc
 
 ## 🖥 Running WebTestPilot (Standalone)
 
-Install as editable package:
+Install as an editable package into your active Python environment; this also generates the BAML Python client required before importing `webtestpilot`:
 
 ```bash
-pip install -e ./webtestpilot
-# or
-uv pip install -e ./webtestpilot
+just install-webtestpilot
 ```
 
-Generate the BAML Python client before importing `webtestpilot`:
-
-```bash
-cd webtestpilot
-uv run baml-cli generate
-cd ..
-```
+If you change WebTestPilot's BAML sources, regenerate the client with `just generate-baml`.
 
 ### Minimal example
 
@@ -158,14 +148,10 @@ SoM mode requires deploying `inclusionAI/UI-Venus-Ground-7B` as a local model se
 * `transformers` (custom revision `21fac7ab`)
 * `accelerate>=1.10.0`, `openai>=1.99.9`, `pillow>=11.3.0`
 
-Then run:
+Then run (extra arguments, e.g. `--port 8001`, are passed through to `vllm serve`):
 
 ```bash
-vllm serve inclusionAI/UI-Venus-Ground-7B \
-  --max_model_len 4K \
-  --max_num_seqs 8 \
-  --trust-remote-code \
-  --limit-mm-per-prompt '{"image": 1, "video": 0}'
+just serve-grounding-model
 ```
 
 SoM mode does **not** require `--remote-debugging-port`.
