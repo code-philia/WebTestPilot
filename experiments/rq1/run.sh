@@ -59,7 +59,6 @@ run_python_module() {
         "$method" \
         "$application" \
         --output-dir "$output_dir" \
-        --headless \
         --test-paths "$benchmark_dir/test_cases" \
         2>&1 | tee "$LOG_FILE"
 }

@@ -59,7 +59,6 @@ run_python_module() {
         "$method" \
         "$application" \
         --output-dir "$output_dir" \
-        --headless \
         --inject-bug \
         --test-paths "$benchmark_dir/test_cases" \
         --bug-paths "$benchmark_dir/bugs" \

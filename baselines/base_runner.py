@@ -1,15 +1,13 @@
-import subprocess
 import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
 
 from baselines.test_model import TestCase, TestStep, TestContext, TestResult, StepResult
 from baselines.config import MethodConfig
-from baselines.bug_injector import prepare_bug_script 
+from baselines.environment import TaskEnvironment
 from baselines.utils import iter_test_cases, iter_test_steps
 
-PROJECT_DIR = Path(__file__).parent.parent
-WEBAPPS_DIR = PROJECT_DIR / "webapps"
+MAX_ENVIRONMENT_ATTEMPTS = 3
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +18,6 @@ class BaseTestRunner(ABC):
     def __init__(self, config: MethodConfig):
         self.run_output_dir = config.run_output_dir
         self.application = config.application
-        self.headless = config.headless
         self.inject_bug = config.inject_bug
 
 
@@ -37,30 +34,20 @@ class BaseTestRunner(ABC):
 
 
     @abstractmethod
-    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path) -> TestContext:
+    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path, cdp_url: str) -> TestContext:
         """
         This method is called **automatically before each test case** and should set up
-        everything required for the test to run correctly, such as logging in, navigating
-        to the starting page, or initializing page objects.
+        everything the agent needs, such as attaching to the browser and initializing
+        page objects.
+
+        The browser at `cdp_url` runs in the test case's environment and is already
+        logged in via the test case's setup function, with the bug (if any) injected.
+        Use `baselines.environment.connect_to_environment` to attach with Playwright.
 
         Returns:
             Any object representing the context (`test_context`) of the test case.
             It is automatically passed to `_run` when executing the test case.
             Users are free to extend from TestContext.
-        """
-        pass
-
-
-    @abstractmethod
-    def _inject_bug(self, bug_script: str, test_context: TestContext) -> None:
-        """
-        This method is called **automatically after setup test case and before the test
-        case is executed**, and is responsible for injecting a bug or modification into
-        the system under test.
-
-        Args:
-            bug_script: A JavaScript snippet representing the bug to inject into the webpage.
-            test_context: The current test context containing data and resources shared across steps.
         """
         pass
 
@@ -97,55 +84,22 @@ class BaseTestRunner(ABC):
         Run a single test case step by step.
 
         Lifecycle. For each test case:
-            1. Restart the application with `_restart_app`.
+            1. Start a fresh environment with `_start_environment`.
             2. Setup test case with `_setup_test_case`.
-            3. Inject bug into system under test with `_inject_bug`.
-            4. Execute each step with `_step`.
-            5. Tear down the test case with `_teardown_test_case`.
+            3. Execute each step with `_step`.
+            4. Tear down the test case with `_teardown_test_case`, then the environment.
         """
+        test_output_dir = self.run_output_dir / str(test_case.test_path.stem)
+        test_output_dir.mkdir()
 
-        def _restart_app():
-            app_name = self.application.value
-            cmd = ["bash", str(WEBAPPS_DIR / "start_app.sh"), app_name]
+        environment = None
+        test_context = None
+        step_results = []
 
-            while True:
-                logger.info(f"Restarting webapp: {app_name}")
-                result = subprocess.run(
-                    cmd,
-                    text=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE
-                )
-
-                if result.returncode == 0:
-                    logger.info(f"Webapp restarted successfully")
-                    break
-                else:
-                    logger.error(
-                        f"Failed to start webapp '{app_name}' (returncode={result.returncode}).\n"
-                        f"STDOUT:\n{result.stdout}\n"
-                        f"STDERR:\n{result.stderr}\n"
-                        f"Retrying"
-                    )
-
-        def _create_test_output_dir():
-            test_output_dir = self.run_output_dir / str(test_case.test_path.stem)
-            test_output_dir.mkdir()
-            return test_output_dir
-
-        
         try:
-            _restart_app()
-            test_output_dir = _create_test_output_dir()
-            test_context = self._setup_test_case(test_case, test_output_dir)
+            environment, cdp_url = self._start_environment(test_case, test_output_dir)
+            test_context = self._setup_test_case(test_case, test_output_dir, cdp_url)
 
-            if self.inject_bug:
-                bug_path = test_case.bug_path
-                logger.info(f"Injecting bug: {bug_path}")
-                bug_script = prepare_bug_script(bug_path)
-                self._inject_bug(bug_script, test_context)
-
-            step_results = []
             for test_step in iter_test_steps(test_case):
                 step_result = self._step(test_step, test_context)
                 step_results.append(step_result)
@@ -156,12 +110,16 @@ class BaseTestRunner(ABC):
             )
 
         finally:
-            self._teardown_test_case(test_context)
-            
-            test_result = TestResult(
-                test_case=test_case, 
-                steps=step_results if step_results else []
-            )
+            try:
+                if test_context is not None:
+                    self._teardown_test_case(test_context)
+            except Exception as e:
+                logger.error("Error when tearing down test case: %s", e, exc_info=True)
+            finally:
+                if environment is not None:
+                    environment.stop()
+
+            test_result = TestResult(test_case=test_case, steps=step_results)
             test_result_path = test_output_dir / "result.json"
             test_result_path.write_text(
                 test_result.model_dump_json(indent=2),
@@ -169,3 +127,24 @@ class BaseTestRunner(ABC):
             )
 
             return test_result
+
+
+    def _start_environment(self, test_case: TestCase, test_output_dir: Path) -> tuple[TaskEnvironment, str]:
+        """Start the test case's environment, retrying on failure."""
+        if self.inject_bug:
+            logger.info(f"Injecting bug: {test_case.bug_path}")
+
+        for attempt in range(1, MAX_ENVIRONMENT_ATTEMPTS + 1):
+            environment = TaskEnvironment(
+                application=self.application,
+                setup_function=test_case.setup_function,
+                bug_path=test_case.bug_path if self.inject_bug else None,
+                log_path=test_output_dir / "environment.log",
+            )
+            try:
+                return environment, environment.start()
+            except Exception as e:
+                environment.stop()
+                if attempt == MAX_ENVIRONMENT_ATTEMPTS:
+                    raise
+                logger.error(f"Failed to start environment (attempt {attempt}/{MAX_ENVIRONMENT_ATTEMPTS}): {e}. Retrying")

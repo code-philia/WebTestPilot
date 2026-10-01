@@ -12,7 +12,6 @@ from baselines.pinata.src.VTAAS.orchestrator.orchestrator import Orchestrator, T
 
 from baselines.config import PinataConfig
 from baselines.base_runner import BaseTestRunner
-from baselines.test_setup_functions import setup_page_state
 from baselines.test_model import TestCase, TestStep, TestContext, StepResult
 
 
@@ -39,20 +38,17 @@ class PinataTestRunner(BaseTestRunner):
         self.max_tries = config.max_tries
 
 
-    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path) -> PinataTestContext:
+    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path, cdp_url: str) -> PinataTestContext:
         pinata_test_name = f"TC-01-P :: {test_case.name}"
         playwright = sync_playwright().start()
         browser = Browser.create(
             id=pinata_test_name,
-            headless=self.headless,
             playwright=playwright,
+            cdp_url=cdp_url,
             save_screenshot=self.save_screenshot,
             tracer=self.tracer,
             trace_folder=str(test_output_dir),
             name=test_case.name,
-        )
-        setup_page_state(
-            self.application, browser.page, test_case.setup_function 
         )
         orchestrator = Orchestrator(
             browser=browser,
@@ -80,11 +76,6 @@ class PinataTestRunner(BaseTestRunner):
             orchestrator=orchestrator
         )
     
-
-    def _inject_bug(self, bug_script: str, test_context: PinataTestContext) -> None:
-        test_context.browser.page.add_init_script(bug_script)
-        test_context.browser.page.evaluate(bug_script)
-        
 
     def _teardown_test_case(self, test_context: PinataTestContext) -> None:
         for item in test_context.model_dump().values():

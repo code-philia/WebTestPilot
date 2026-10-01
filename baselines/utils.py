@@ -129,7 +129,6 @@ def get_method_config(
     *,
     run_output_dir: Path,
     application: ApplicationEnum,
-    headless: bool,
     inject_bug: bool,
 ) -> MethodConfig:
     """
@@ -156,7 +155,6 @@ def get_method_config(
         method_config = config_class(
             run_output_dir=run_output_dir,
             application=application,
-            headless=headless,
             inject_bug=inject_bug,
             **config_dict,
         )
@@ -221,7 +219,6 @@ def display_run_input(method_config: MethodConfig, test_cases: list[TestCase]) -
     t1.add_row("Method", str(method_config.method.value))
     t1.add_row("Application", str(method_config.application.value))
     t1.add_row("Output", str(method_config.run_output_dir))
-    t1.add_row("Headless", str(method_config.headless))
     t1.add_row("Inject bug", str(method_config.inject_bug))
 
     # Second table

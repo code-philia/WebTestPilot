@@ -33,7 +33,6 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 /benchmark    # Test cases and injected bugs (submodule: code-philia/WebTestPilot-benchmark)
 /examples     # Visual walkthroughs with screenshots, traces, and logs
 /experiments  # Scripts for RQ1–RQ4 experiments
-/webapps      # Containerized benchmark applications
 /webtestpilot # Core implementation
 ```
 
@@ -90,6 +89,8 @@ cd experiments
 ```
 
 Follow the `README.md` in each submodule.
+
+Each test case runs against a fresh Docker Compose stack assembled from the benchmark's `<app>/environment/` and `runtime/` files: the app is seeded, the test case's setup function logs in, and the bug (with `--inject-bug`) is registered before the agent attaches to the stack's browser over CDP. The stack is removed afterwards, and its logs are saved as `environment.log` next to each test case's results. The first run of each app builds its images, which can take several minutes.
 
 ## 🖥 Running WebTestPilot (Standalone)
 

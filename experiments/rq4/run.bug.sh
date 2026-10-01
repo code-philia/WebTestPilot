@@ -46,7 +46,6 @@ run_python_module() {
         webtestpilot \
         "$application" \
         --output-dir "$output_dir" \
-        --headless \
         --inject-bug \
         --method-config-path "$method_config_path" \
         --test-paths "$benchmark_dir" \
