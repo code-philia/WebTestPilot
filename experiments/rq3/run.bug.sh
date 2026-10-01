@@ -91,11 +91,12 @@ source "$ACTIVATE_SCRIPT"
 
 METHOD_CONFIG_PATH="$SCRIPT_DIR/method_config.bug.yaml"
 OUTPUT_DIR="$SCRIPT_DIR/results/bug_${MODEL}_${APPLICATION}_${TRANSFORMATION}"
-BENCHMARK_DIR="$BASE_PATH/benchmark/transform/$APPLICATION/$TRANSFORMATION"
+BENCHMARK_DIR="$SCRIPT_DIR/transform/$APPLICATION/$TRANSFORMATION"
 BUGS_DIR="$BASE_PATH/benchmark/$APPLICATION/bugs"
 
 if [[ ! -d "$BENCHMARK_DIR" ]]; then
     echo "❌ Benchmark directory not found: $BENCHMARK_DIR"
+    echo "   Generate it first: (cd \"$SCRIPT_DIR/transform\" && uv run transform.py $APPLICATION)"
     exit 1
 fi
 

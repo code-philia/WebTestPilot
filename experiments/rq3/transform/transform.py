@@ -101,7 +101,7 @@ TRANSFORMATIONS = {
 
 def main(application: str):
     script_dir = Path(__file__).parent
-    benchmark_dir = script_dir.parent.parent / "benchmark" / application / "test_cases"
+    benchmark_dir = script_dir.parent.parent.parent / "benchmark" / application / "test_cases"
 
     yaml_files = list(benchmark_dir.glob("*.yaml"))
     if not yaml_files:

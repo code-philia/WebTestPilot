@@ -2,6 +2,27 @@
 
 This experiment evaluates the robustness of WebTestPilot against different types of natural language test descriptions as input.
 
+## Generating Transformed Test Cases
+
+Transformed test cases are not checked in; generate them from the benchmark before running the experiment.
+
+1. Set the LLM used for the `summarize` and `restyle` transformations (OpenAI-compatible endpoint) in `transform/.env` or your shell:
+
+    ```bash
+    TRANSFORM_MODEL_BASE_URL=...
+    TRANSFORM_MODEL_NAME=...
+    ```
+
+2. Generate the BAML client and run the transformation for each application:
+
+    ```bash
+    cd transform
+    uv run baml-cli generate
+    uv run transform.py APPLICATION
+    ```
+
+    Outputs are written to `transform/APPLICATION/TRANSFORMATION/`.
+
 ## Running the Experiment
 
 1. Modify `method_config.yaml` so that `config_path` points to the `config.yaml` in this directory
