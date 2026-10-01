@@ -46,3 +46,6 @@ node_modules/
 results/
 *.csv
 .pytest_cache/
+# RQ3 transformed test cases (regenerate with experiments/rq3/transform/transform.py)
+experiments/rq3/transform/*/
+!experiments/rq3/transform/baml_src/
