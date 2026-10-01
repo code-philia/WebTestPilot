@@ -1,8 +1,11 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
+# Experiments: `just run <recipe> ...` (see `just --list run`)
+mod run "experiments/run.just"
+
 # List available recipes
 default:
-    @just --list --unsorted
+    @just --list --unsorted --list-submodules
 
 # ============================================
 # Setup
