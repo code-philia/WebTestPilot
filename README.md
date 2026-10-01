@@ -30,7 +30,7 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 ```graphql
 /baselines    # Baseline implementations + test runners
-/benchmark    # Test cases and injected bugs
+/benchmark    # Test cases and injected bugs (submodule: code-philia/WebTestPilot-benchmark)
 /examples     # Visual walkthroughs with screenshots, traces, and logs
 /experiments  # Scripts for RQ1–RQ4 experiments
 /webapps      # Containerized benchmark applications
@@ -41,7 +41,13 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 1. **Clone and initialize**
 
-    Run the setup script:
+    Clone with the benchmark submodule (or run `git submodule update --init` in an existing clone):
+
+    ```bash
+    git clone --recurse-submodules https://github.com/code-philia/WebTestPilot.git
+    ```
+
+    Then run the setup script:
 
     ```bash
     ./setup.sh
