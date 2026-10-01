@@ -27,6 +27,10 @@ if ! command -v docker-compose >/dev/null 2>&1 && ! docker compose version >/dev
     exit 1
 fi
 
+# ---- benchmark submodule ----
+echo "Fetching benchmark submodule..."
+git submodule update --init benchmark
+
 # ---- helper function ----
 ask_yes_no() {
     local prompt="$1"
