@@ -30,10 +30,9 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 ```graphql
 /baselines    # Baseline implementations + test runners
-/benchmark    # Test cases and injected bugs
+/benchmark    # Test cases and injected bugs (submodule: code-philia/WebTestPilot-benchmark)
 /examples     # Visual walkthroughs with screenshots, traces, and logs
 /experiments  # Scripts for RQ1–RQ4 experiments
-/webapps      # Containerized benchmark applications
 /webtestpilot # Core implementation
 ```
 
@@ -41,19 +40,23 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 1. **Clone and initialize**
 
-    Run the setup script:
+    Clone with the benchmark submodule (or run `git submodule update --init` in an existing clone):
 
     ```bash
-    ./setup.sh
+    git clone --recurse-submodules https://github.com/code-philia/WebTestPilot.git
     ```
 
-    This checks required tools (`uv`, `docker`, `docker-compose`) and guides you interactively.
+    Then set everything up with [`just`](https://github.com/casey/just):
+
+    ```bash
+    just setup
+    ```
+
+    This checks required tools (`uv`, `docker`, `docker compose`), creates `.env`, fetches the benchmark, and installs WebTestPilot and the baselines. Use `just setup-webtestpilot` or `just setup-baselines` to install only one of them, and `just` to list all recipes.
 
 2. **Configure environment variables**
 
-    ```bash
-    cp .env.example .env
-    ```
+    `just setup` creates `.env` from `.env.example` (or run `just setup-env`); fill in your API keys there.
 
 3. **Configure runtime settings**
 
@@ -77,31 +80,19 @@ This is the official repository for the paper *"WebTestPilot: Agentic End-to-End
 
 ## 🚀 Running Experiments
 
-Navigate to:
+Experiments are recipes in the `run` module (`experiments/run.just`), run from anywhere in the repository, e.g. `just run rq1 webtestpilot bookstack`; `just --list run` lists them. See the `README.md` in each `experiments/rqN` directory for details.
 
-```bash
-cd experiments
-```
-
-Follow the `README.md` in each submodule.
+Each test case runs against a fresh Docker Compose stack assembled from the benchmark's `<app>/environment/` and `runtime/` files: the app is seeded, the test case's setup function logs in, and the bug (with `--inject-bug`) is registered before the agent attaches to the stack's browser over CDP. The stack is removed afterwards, and its logs are saved as `environment.log` next to each test case's results. The first run of each app builds its images, which can take several minutes.
 
 ## 🖥 Running WebTestPilot (Standalone)
 
-Install as editable package:
+Install as an editable package into your active Python environment; this also generates the BAML Python client required before importing `webtestpilot`:
 
 ```bash
-pip install -e ./webtestpilot
-# or
-uv pip install -e ./webtestpilot
+just install-webtestpilot
 ```
 
-Generate the BAML Python client before importing `webtestpilot`:
-
-```bash
-cd webtestpilot
-uv run baml-cli generate
-cd ..
-```
+If you change WebTestPilot's BAML sources, regenerate the client with `just generate-baml`.
 
 ### Minimal example
 
@@ -151,14 +142,10 @@ SoM mode requires deploying `inclusionAI/UI-Venus-Ground-7B` as a local model se
 * `transformers` (custom revision `21fac7ab`)
 * `accelerate>=1.10.0`, `openai>=1.99.9`, `pillow>=11.3.0`
 
-Then run:
+Then run (extra arguments, e.g. `--port 8001`, are passed through to `vllm serve`):
 
 ```bash
-vllm serve inclusionAI/UI-Venus-Ground-7B \
-  --max_model_len 4K \
-  --max_num_seqs 8 \
-  --trust-remote-code \
-  --limit-mm-per-prompt '{"image": 1, "video": 0}'
+just serve-grounding-model
 ```
 
 SoM mode does **not** require `--remote-debugging-port`.

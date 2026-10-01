@@ -16,9 +16,8 @@ from playwright.sync_api import Page, Browser, BrowserContext, Playwright, sync_
 
 from baselines.base_runner import BaseTestRunner
 from baselines.test_model import TestCase, TestContext, TestStep, StepResult
-from baselines.const import Viewport
 from baselines.config import LavagueConfig
-from baselines.test_setup_functions import setup_page_state
+from baselines.environment import connect_to_environment
 
 from lavague.core.agents import logging_print as lp1
 from lavague.core.navigation import logging_print as lp2
@@ -48,14 +47,11 @@ class LavagueTestRunner(BaseTestRunner):
         self.model = config.model
 
     
-    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path) -> LaVagueTestContext:
-        # Get initial page with setup
+    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path, cdp_url: str) -> LaVagueTestContext:
+        # Attach to the environment's set-up page
         playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=self.headless)
-        browser_context = browser.new_context(viewport={"width": Viewport.WIDTH, "height": Viewport.HEIGHT})
+        browser, browser_context, page = connect_to_environment(playwright, cdp_url)
         browser_context.tracing.start(screenshots=True, snapshots=True)
-        page = browser_context.new_page()
-        page = setup_page_state(self.application, page, test_case.setup_function)
 
         # Create PlaywrightDriver with the setup page
         def _get_page():
@@ -83,22 +79,20 @@ class LavagueTestRunner(BaseTestRunner):
         )
     
 
-    def _inject_bug(self, bug_script: str, test_context: LaVagueTestContext) -> None:
-        test_context.page.add_init_script(bug_script)
-        test_context.page.evaluate(bug_script)
-
-    
     def _teardown_test_case(self, test_context: LaVagueTestContext) -> None:
         playwright_trace_path = test_context.test_output_dir / "trace.zip"
 
-        for item in test_context.model_dump().values():
+        # The page and context belong to the environment's browser, which is removed with
+        # the environment, so only stop tracing and disconnect.
+        try:
+            test_context.browser_context.tracing.stop(path=playwright_trace_path)
+        except Exception as e:
+            logger.warning("Failed to save Playwright trace: %s", e)
+
+        for item in (test_context.browser, test_context.playwright):
             try:
-                if isinstance(item, Page): item.close()
-                elif isinstance(item, Browser): item.close()
+                if isinstance(item, Browser): item.close()
                 elif isinstance(item, Playwright): item.stop()
-                elif isinstance(item, BrowserContext):
-                    item.tracing.stop(path=playwright_trace_path)
-                    item.close()
             except Exception as e:
                 logger.warning("Failed to close resource %s: %s", type(item).__name__, e)
 

@@ -43,6 +43,7 @@ class BrowserParams(TypedDict, total=False):
     start_time: float
     tracer: bool
     trace_folder: str
+    cdp_url: str | None
 
 
 class Mark(TypedDict):
@@ -70,6 +71,7 @@ class Browser:
             "start_time": time.time(),
             "tracer": False,
             "trace_folder": ".",
+            "cdp_url": None,
         }
         custom_params = kwargs
         if custom_params and set(custom_params.keys()).issubset(
@@ -98,20 +100,36 @@ class Browser:
         """Initialize the browser instance"""
         if not self._params["playwright"]:
             self._params["playwright"] = pw.async_playwright().start()
-        self._browser = self._params["playwright"].chromium.launch(
-            headless=self._params["headless"], traces_dir=self._params["trace_folder"]
-        )
-        self._context = self._browser.new_context(bypass_csp=True)
+        if self._params["cdp_url"]:
+            # Attach to an existing, already set-up page instead of launching a browser
+            self._browser = self._params["playwright"].chromium.connect_over_cdp(
+                self._params["cdp_url"]
+            )
+            self._context = self._browser.contexts[0]
+            self._page = self._context.pages[0]
+            self._page.set_viewport_size({"width": 1280, "height": 720})
+        else:
+            self._browser = self._params["playwright"].chromium.launch(
+                headless=self._params["headless"], traces_dir=self._params["trace_folder"]
+            )
+            self._context = self._browser.new_context(bypass_csp=True)
+            self._page = self._context.new_page()
         self._context.set_default_timeout(self._params["timeout"])
         if self._params["tracer"]:
             self.logger.info(
                 f"Setting Playwright tracing ON: {self._params['trace_folder']}"
             )
             self._context.tracing.start(screenshots=True, snapshots=True)
-        self._page = self._context.new_page()
+        if self._params["cdp_url"]:
+            # An existing context cannot be given bypass_csp, so set it on the page and
+            # reload for it to take effect (load_js injects script tags).
+            cdp_session = self._context.new_cdp_session(self._page)
+            cdp_session.send("Page.setBypassCSP", {"enabled": True})
 
         self._page.on("load", lambda load: self.load_js())
         self._page.on("framenavigated", lambda load: self.load_js())
+        if self._params["cdp_url"]:
+            self._page.reload()
         self.logger.info(f"Browser {self.id} started")
 
     def set_event_for_page(self):
@@ -444,10 +462,12 @@ class Browser:
         if self._params["tracer"]:
             self.logger.info(f"Saving trace to {output_path}")
             self.context.tracing.stop(path=output_path)
-        if self.page:
-            self.page.close()
-        if self.context:
-            self.context.close()
+        # An attached browser's page and context are owned by whoever started it
+        if not self._params["cdp_url"]:
+            if self.page:
+                self.page.close()
+            if self.context:
+                self.context.close()
         if self._browser:
             self._browser.close()
         self.logger.handlers.clear()

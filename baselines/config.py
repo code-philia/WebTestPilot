@@ -11,8 +11,6 @@ class MethodConfig(BaseModel):
     application: ApplicationEnum
     # Result output dir for all test cases in the run
     run_output_dir: Path
-    # Run browser in headless mode
-    headless: bool
     # Inject bug from bug path for all test cases in the run
     inject_bug: bool
 
@@ -39,8 +37,6 @@ class NaviqateConfig(MethodConfig):
     max_steps: int = 1
     # Use abstracted action representation
     abstracted: bool = False
-    # Remote chrome browser debugging port
-    browser_script_path: Path = Path(__file__).parent / "naviqate" / "browser.sh"
 
 
 class LavagueConfig(MethodConfig):

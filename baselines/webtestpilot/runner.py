@@ -1,6 +1,5 @@
 import dataclasses
 import os
-import socket
 import time
 import json
 import logging
@@ -11,9 +10,8 @@ from pydantic import BaseModel
 from playwright.sync_api import Page, Browser, BrowserContext, Playwright, sync_playwright
 
 from baselines.config import WebTestPilotConfig
-from baselines.const import Viewport
 from baselines.test_model import TestCase, TestStep, TestContext, StepResult
-from baselines.test_setup_functions import setup_page_state
+from baselines.environment import connect_to_environment
 from baselines.base_runner import BaseTestRunner
 from webtestpilot import WebTestPilot, Config, BugReport, Session, Step as WebTestPilotStep
 from webtestpilot.assertion_api import serialize_history
@@ -23,13 +21,6 @@ from webtestpilot.action_api.browser_use import teardown_browser_session
 
 os.environ['BAML_LOG'] = "OFF"
 logger = logging.getLogger(__name__)
-
-
-def _free_port() -> int:
-    """Return an OS-assigned free TCP port."""
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind(("", 0))
-        return s.getsockname()[1]
 
 
 class WebTestPilotTestContext(TestContext):
@@ -51,21 +42,15 @@ class WebTestPilotTestRunner(BaseTestRunner):
         self.config = Config.load(config.config_path)
 
 
-    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path) -> WebTestPilotTestContext:
+    def _setup_test_case(self, test_case: TestCase, test_output_dir: Path, cdp_url: str) -> WebTestPilotTestContext:
         playwright = sync_playwright().start()
 
         config = self.config
-        launch_args = []
         if config.mode == "browser-use":
-            port = _free_port()
-            launch_args.append(f"--remote-debugging-port={port}")
-            config = dataclasses.replace(config, browser_use_cdp_url=f"http://localhost:{port}")
+            config = dataclasses.replace(config, browser_use_cdp_url=cdp_url)
 
-        browser = playwright.chromium.launch(headless=self.headless, args=launch_args)
-        browser_context = browser.new_context(viewport={"width": Viewport.WIDTH, "height": Viewport.HEIGHT})
+        browser, browser_context, page = connect_to_environment(playwright, cdp_url)
         browser_context.tracing.start(screenshots=True, snapshots=True)
-        page = browser_context.new_page()
-        page = setup_page_state(self.application, page, test_case.setup_function)
         session = Session(page, config)
 
         parsed_steps = None
@@ -84,11 +69,6 @@ class WebTestPilotTestRunner(BaseTestRunner):
         )
     
 
-    def _inject_bug(self, bug_script: str, test_context: WebTestPilotTestContext) -> None:
-        test_context.page.add_init_script(bug_script)
-        test_context.page.evaluate(bug_script)
-
-
     def _teardown_test_case(self, test_context: WebTestPilotTestContext) -> None:
         playwright_trace_path = test_context.test_output_dir / "trace.zip"
 
@@ -98,14 +78,17 @@ class WebTestPilotTestRunner(BaseTestRunner):
         if cdp_url:
             teardown_browser_session(cdp_url)
 
-        for item in test_context.model_dump().values():
+        # The page and context belong to the environment's browser, which is removed with
+        # the environment, so only stop tracing and disconnect.
+        try:
+            test_context.browser_context.tracing.stop(path=playwright_trace_path)
+        except Exception as e:
+            logger.warning("Failed to save Playwright trace: %s", e)
+
+        for item in (test_context.browser, test_context.playwright):
             try:
-                if isinstance(item, Page): item.close()
-                elif isinstance(item, Browser): item.close()
+                if isinstance(item, Browser): item.close()
                 elif isinstance(item, Playwright): item.stop()
-                elif isinstance(item, BrowserContext):
-                    item.tracing.stop(path=playwright_trace_path)
-                    item.close()
             except Exception as e:
                 logger.warning("Failed to close resource %s: %s", type(item).__name__, e)
     

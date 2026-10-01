@@ -60,13 +60,6 @@ def main(
             exists=False
         ),
     ],
-    headless: Annotated[
-        bool,
-        typer.Option(
-            "--headless",
-            help="Run browser in headless mode"
-        ),
-    ] = False,
     inject_bug: Annotated[
         bool,
         typer.Option(
@@ -128,7 +121,6 @@ def main(
             method_config_path,
             run_output_dir=run_output_dir,
             application=application,
-            headless=headless,
             inject_bug=inject_bug
         )
         

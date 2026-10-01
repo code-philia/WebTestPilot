@@ -4,10 +4,16 @@ This experiment evaluates the ability of different test methods to complete norm
 
 ## Running the Experiment
 
-1. Execute the `run.sh` script with the desired **METHOD** and **APPLICATION** as arguments:
+1. Run the `rq1` recipe with the desired **METHOD** and **APPLICATION**:
 
     ```bash
-    ./run.sh METHOD APPLICATION
+    just run rq1 METHOD APPLICATION
+    ```
+
+    Or run every method on every application in sequence (failed combinations are listed at the end):
+
+    ```bash
+    just run rq1-all
     ```
 
 2. Allowed values:
@@ -23,7 +29,7 @@ This experiment evaluates the ability of different test methods to complete norm
     ./results/METHOD_APPLICATION
     ```
 
-    relative to the script location.
+    relative to `experiments/rq1`. A log of the run is saved alongside the results.
     For example:
 
     ```bash
